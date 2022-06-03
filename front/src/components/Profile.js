@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import PFP from '../img/profile1.png';
 
 const ProfileContainer = styled.div`
-  float: right;
-  /* background-color: red; */
+  position: absolute;
+  right: 10px;
+  top: 15%;
   width: 300px;
   height: 400px;
   border: 2px solid black;
-  margin-right: 10px;
   display: flex;
   justify-content: center;
 `
@@ -32,7 +32,7 @@ const Profile = () => {
   return (
       <ProfileContainer>
         <div>
-          <PFPContainer src={PFP}/>
+        <PFPContainer src={PFP} />
           <PFPDescription >
             <div>name: 박승재</div>
             <div>age: 30</div>
