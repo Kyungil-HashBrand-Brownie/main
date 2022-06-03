@@ -32,7 +32,7 @@ const Profile = () => {
   return (
       <ProfileContainer>
         <div>
-          <PFPContainer src={PFP}/>
+        <PFPContainer src={PFP} />
           <PFPDescription >
             <div>name: 박승재</div>
             <div>age: 30</div>
