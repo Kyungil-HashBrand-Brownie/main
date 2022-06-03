@@ -13,8 +13,8 @@ const MintCard = () => {
      {/* <Container className='MintCard'> */}
      <Container  className='MintCard'>
         <Row>
-          <Col className='FreeSale'> <FreeSale /> </Col>
-          <Col className='WhiteSale'> <WhiteSale/> </Col>
+            <Col className='FreeSale'> <FreeSale /> </Col>
+            <Col className='WhiteSale'> <WhiteSale/> </Col>
         </Row>
     </Container>
     </div>

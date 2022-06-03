@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {WhiteImg} from './img'
+import {WhiteImg} from '../img'
 import styled from "styled-components";
 import { useDispatch } from 'react-redux';
 import {Container,Row , Col , Button} from 'react-bootstrap'

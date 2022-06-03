@@ -3,3 +3,12 @@
   width: 100%;
   display: flex;
 }
+
+.MintCard {
+  margin-top: 100px;
+  /* background-color: brown; */
+}
+
+.FreeSale {
+  /* background-color: blue; */
+}

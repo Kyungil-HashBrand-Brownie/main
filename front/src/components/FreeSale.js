@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {FreeImg} from './img'
+import {FreeImg} from '../img'
 import styled from "styled-components";
 import {Container,Row , Col , Button} from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
