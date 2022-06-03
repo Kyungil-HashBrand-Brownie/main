@@ -6,7 +6,7 @@ import Profile from '../components/Profile';
 const Mint = () => {
   return (
     <>
-        This is Minting page!
+        This is Minting page!!
         <Header />
         <MintCard />
         <Profile />
