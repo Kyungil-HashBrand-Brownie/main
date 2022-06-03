@@ -1,10 +1,11 @@
 import './App.css';
+import Mint from './page/Mint';
 
 function App() {
   return (
-    <div className="App">
-  
-    </div>
+    <>
+      <Mint />
+    </>
   );
 }
 
