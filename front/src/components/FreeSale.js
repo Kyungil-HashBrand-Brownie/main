@@ -51,6 +51,26 @@ const StyledBar = styled.div`
 
 const FreeSale = () => {
 
+
+    const onClick = async () => {
+        const accounts = await window.klaytn.enable()
+        console.log(accounts)
+        const balance = await window.caver.klay.getBalance(accounts[0])
+        console.log(balance)
+      }
+      const onClick2 = async () => {
+        await window.caver.klay.sendTransaction({
+          type: 'VALUE_TRANSFER',
+          from: window.klaytn.selectedAddress,
+          to: '0x0000000000000000000000000000000000000000',
+          value: window.caver.utils.toPeb('1', 'KLAY'),
+          gas: 8000000
+        })
+
+        alert("송금 성공")
+
+      }
+      
     const [count, setCount] = useState(1)
 
 
@@ -89,7 +109,8 @@ const FreeSale = () => {
                     <ProgressBar animated now={45} />
             </StyledBar>
             <br/>
-            <Button variant="success">지갑 연결하기</Button>{' '}
+            <Button variant="success" onClick={onClick}>지갑 연결하기</Button>{' '}
+            <Button variant="success" onClick={onClick2}>000으로 1송금</Button>{' '}
             
         </StyledMain>
     </div>
