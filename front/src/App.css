@@ -4,10 +4,27 @@
   display: flex;
 }
 
-.MintCard{
+.MintCard {
+  margin-top: 100px;
+  /* background-color: brown; */
+}
+
+.FreeSale {
+  /* background-color: blue; */
+}
+
+.profile-inner {
+  width: 80%;
+}
+
+.mint-wal-connect-btn {
+  margin: 10px 0;
+}
+
+.whitelist {
   display: flex;
-  margin: auto;
   justify-content: center;
+<<<<<<< HEAD
   height: 100vh;
   flex-direction: column;
 }
@@ -35,6 +52,11 @@
   height: 100%;
   background: rgb(172, 237, 144);
   padding: 10px 0px;
+=======
+  width: 100%;
+  height: 100%;
+  background: rgb(172, 237, 144);
+>>>>>>> 9c11df1 (add mint page css work)
 }
 
 .freelist {
@@ -43,6 +65,7 @@
   background-color: rgb(161, 191, 236);
   width: 100%;
   height: 100%;
+<<<<<<< HEAD
   padding: 10px 0px;
 }
 
@@ -74,4 +97,6 @@
 .modal-open {
   width: 100%;
   height: 8%;
+=======
+>>>>>>> 9c11df1 (add mint page css work)
 }
