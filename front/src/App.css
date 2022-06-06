@@ -4,10 +4,17 @@
   display: flex;
 }
 
-.MintCard {
-  margin-top: 100px;
-  /* background-color: brown; */
+.MintCard{
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
 }
+
+/* .MintCard {
+  margin-top: 100px;
+} */
 
 .FreeSale {
   /* background-color: blue; */
