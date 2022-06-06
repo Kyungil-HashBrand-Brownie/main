@@ -12,3 +12,27 @@
 .FreeSale {
   /* background-color: blue; */
 }
+
+.profile-inner {
+  width: 80%;
+}
+
+.mint-wal-connect-btn {
+  margin: 10px 0;
+}
+
+.whitelist {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgb(172, 237, 144);
+}
+
+.freelist {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(161, 191, 236);
+  width: 100%;
+  height: 100%;
+}
