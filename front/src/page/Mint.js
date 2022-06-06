@@ -4,8 +4,11 @@ import MintCard from '../components/MintCard';
 import Profile from '../components/Profile';
 
 const Mint = () => {
+  
   return (
     <>
+        {/* This is Minting page!! */}
+        <Header />
         <MintCard />
         <Profile />
     </>
