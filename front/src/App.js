@@ -5,6 +5,7 @@ import Mint from './page/Mint';
 import Header from './components/Header';
 import WhiteList from './page/WhiteList';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import MintPage from './page/MintPage';
 
 function App() {
   return (

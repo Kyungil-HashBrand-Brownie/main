@@ -53,7 +53,7 @@ const StyledBar = styled.div`
 
 const FreeSale = () => {
 
-    const dispatch = useDispatch(state => state.nft)
+    // const dispatch = useDispatch(state => state.nft)
 
     const [count, setCount] = useState(1)
 
@@ -66,9 +66,9 @@ const FreeSale = () => {
         setCount(count - 1);
     }
 
-    useEffect(() => {
-        dispatch(countAdd())
-    })
+    // useEffect(() => {
+    //     dispatch(countAdd())
+    // })
 
   return (
     <div className="freelist">
