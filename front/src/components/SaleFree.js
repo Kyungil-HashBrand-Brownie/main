@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {FreeImg} from '../img'
 import styled from "styled-components";
 import {Container,Row , Col , Button} from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
+import { useDispatch } from 'react-redux';
 
 
 const StyledMain = styled.div`
@@ -52,6 +53,8 @@ const StyledBar = styled.div`
 
 const FreeSale = () => {
 
+    // const dispatch = useDispatch(state => state.nft)
+
     const [count, setCount] = useState(1)
 
 
@@ -62,6 +65,10 @@ const FreeSale = () => {
     const countMinus = () => {
         setCount(count - 1);
     }
+
+    // useEffect(() => {
+    //     dispatch(countAdd())
+    // })
 
   return (
     <div className="freelist">

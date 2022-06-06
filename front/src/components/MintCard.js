@@ -1,8 +1,8 @@
 import React from 'react'
 import {Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
-import FreeSale from './FreeSale'
-import WhiteSale from './WhiteSale'
+import FreeSale from './SaleFree'
+import WhiteSale from './SaleWhite'
 
 
 

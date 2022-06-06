@@ -3,6 +3,7 @@ import { ToggleButton, Nav, Form, FormControl, Button, Navbar, Container } from 
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../img/logo.png';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBox = styled.div`
     background-color: rgb(26, 126, 213);
@@ -42,6 +43,12 @@ const ButtonContainer = styled.div`
 
 const Header = () => {
     const [checked, setChecked] = useState(false);
+
+    const navigate = useNavigate();
+
+    const moveToMint = () => {
+        navigate('/mintpage')
+    }
 
     return (
         <Navbar className="nav" bg="dark" variant="dark" expand="lg">

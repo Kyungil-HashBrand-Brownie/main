@@ -4,17 +4,30 @@
   display: flex;
 }
 
-.MintCard{
+.MintCard {
+  margin-top: 100px;
+  /* background-color: brown; */
+}
+
+.FreeSale {
+  /* background-color: blue; */
+}
+
+.profile-inner {
+  width: 80%;
+}
+
+.mint-wal-connect-btn {
+  margin: 10px 0;
+}
+
+.whitelist {
   display: flex;
-  margin: auto;
   justify-content: center;
   height: 100vh;
   flex-direction: column;
 }
 
-/* .MintCard {
-  margin-top: 100px;
-} */
 
 .FreeSale {
   /* background-color: blue; */
