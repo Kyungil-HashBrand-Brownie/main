@@ -1,5 +1,6 @@
 let initialState = {
     nft : {},
+    counter : {},
 }
 
 function nftReducer(state=initialState, action) {
