@@ -40,6 +40,7 @@ const StyledButton = styled.button`
     border: 1px solid lightgray;
     color: white;
     background-color: blue;
+    margin: 0 6px;
 `;
 
 const StyledBar = styled.div`
@@ -63,7 +64,7 @@ const FreeSale = () => {
     }
 
   return (
-    <div className="FreeDiv">
+    <div className="freelist">
         <StyledMain >
             <h2>FreeSale</h2>
             <StyledDiv >
@@ -89,7 +90,7 @@ const FreeSale = () => {
                     <ProgressBar animated now={45} />
             </StyledBar>
             <br/>
-            <Button variant="success">지갑 연결하기</Button>{' '}
+            <Button className="mint-wal-connect-btn" variant="success">지갑 연결하기</Button>{' '}
             
         </StyledMain>
     </div>

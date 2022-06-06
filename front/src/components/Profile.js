@@ -5,24 +5,28 @@ import PFP from '../img/profile1.png';
 const ProfileContainer = styled.div`
   position: absolute;
   right: 10px;
-  top: 15%;
-  width: 300px;
-  height: 400px;
+  top: 120px;
+  width: 250px;
+  height: 360px;
   border: 2px solid black;
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 1830px) {
+    display: none;
+  }
 `
 const PFPContainer = styled.img`
   margin-top: 10px;
-  width: 280px;
-  height: 280px;
+  margin-left: 1px;
+  width: 220px;
+  height: 240px;
   border: 3px solid brown;
   border-radius: 20%;
 `
 const PFPDescription = styled.div`
-  margin-left: 40px;
+  margin-left: 31px;
   margin-top: 25px;
-  width: 200px;
+  width: 160px;
   height: 60px;
   border: 1px solid brown;
   text-align: center;

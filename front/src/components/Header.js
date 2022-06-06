@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { ToggleButton, Nav, Form, FormControl, Button, Navbar, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../img/logo.png';
 
@@ -55,8 +56,9 @@ const Header = () => {
                     style={{ maxHeight: '100px' }}
                     navbarScroll
                 >
-                    <Nav.Link href="#action1">Home</Nav.Link>
-                    <Nav.Link href="#action2">Mint</Nav.Link>
+                    <Link className='nav-item' to="/">Home</Link>
+                    <Link className='nav-item' to="/mint">Mint</Link>
+                    <Link className='nav-item' to="/whitelist">Whitelist</Link>
                 </Nav>
                 <SearchBox>
                     <SearchInput 
