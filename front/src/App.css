@@ -88,3 +88,15 @@
   width: 100%;
   height: 8%;
 }
+
+.ButtonGroup{
+  /* padding: 10px; */
+  padding: auto;
+  margin: 10px;
+}
+
+.button-group{
+  padding: auto;
+  margin: 10px;
+
+}
