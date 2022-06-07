@@ -61,7 +61,7 @@ contract BrownieNft is ERC721, Whitelist {
     function safeMint(address to) public  {
         // require(msg.value == 1 * 10 ** 18 , "Please check minting cost");
         // uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
+        // _tokenIdCounter.increment();
         uint256 randomNum = randNum();
         _safeMint(to, randomNum);
     }
@@ -85,6 +85,7 @@ contract BrownieNft is ERC721, Whitelist {
         require(tokenId + amount <= 30,"Total NFT for whitelist users is only thirty");
         for (uint i = 0; i < amount; i++) {
             safeMint(to);
+            _tokenIdCounter.increment();
         }
     }
 
