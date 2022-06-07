@@ -7,8 +7,6 @@ const Mint = () => {
   
   return (
     <>
-        {/* This is Minting page!! */}
-        <Header />
         <MintCard />
         <Profile />
     </>
