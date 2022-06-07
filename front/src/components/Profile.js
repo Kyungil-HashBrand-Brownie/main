@@ -54,7 +54,7 @@ const Profile = () => {
     setAddress(accounts[0]);
     console.log(address)
     const balance = await window.caver.klay.getBalance(window.klaytn.selectedAddress)
-    setBalance(balance)
+    setBalance(window.caver.utils.fromWei(balance))
   })
   
 
