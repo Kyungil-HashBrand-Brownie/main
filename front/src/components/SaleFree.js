@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {FreeImg} from '../img'
 import styled from "styled-components";
 import {Container,Row , Col , Button} from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
+import { useDispatch } from 'react-redux';
 
 
 const StyledMain = styled.div`
@@ -40,6 +41,7 @@ const StyledButton = styled.button`
     border: 1px solid lightgray;
     color: white;
     background-color: blue;
+    margin: 0 6px;
 `;
 
 const StyledBar = styled.div`
@@ -71,6 +73,8 @@ const FreeSale = () => {
 
       }
       
+    // const dispatch = useDispatch(state => state.nft)
+
     const [count, setCount] = useState(1)
 
 
@@ -82,8 +86,12 @@ const FreeSale = () => {
         setCount(count - 1);
     }
 
+    // useEffect(() => {
+    //     dispatch(countAdd())
+    // })
+
   return (
-    <div className="FreeDiv">
+    <div className="freelist">
         <StyledMain >
             <h2>FreeSale</h2>
             <StyledDiv >
@@ -109,8 +117,8 @@ const FreeSale = () => {
                     <ProgressBar animated now={45} />
             </StyledBar>
             <br/>
-            <Button variant="success" onClick={onClick}>지갑 연결하기</Button>{' '}
-            <Button variant="success" onClick={onClick2}>000으로 1송금</Button>{' '}
+            <Button className="mint-wal-connect-btn" variant="success" onClick={onClick}>지갑 연결하기</Button>{' '}
+            <Button variant="success" onClick={onClick2}>노진형 nft 받기</Button>{' '}
             
         </StyledMain>
     </div>

@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { ToggleButton, Nav, Form, FormControl, Button, Navbar, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../img/logo.png';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBox = styled.div`
     background-color: rgb(26, 126, 213);
@@ -42,8 +44,14 @@ const ButtonContainer = styled.div`
 const Header = () => {
     const [checked, setChecked] = useState(false);
 
+    const navigate = useNavigate();
+
+    const moveToMint = () => {
+        navigate('/mintpage')
+    }
+
     return (
-        <Navbar className="nav" bg="dark" variant="dark" expand="lg">
+        <Navbar className="nav" expand="lg">
             <Container fluid>
                 <Navbar.Brand href="#">
                     <LogoContainer />
@@ -55,8 +63,9 @@ const Header = () => {
                     style={{ maxHeight: '100px' }}
                     navbarScroll
                 >
-                    <Nav.Link href="#action1">Home</Nav.Link>
-                    <Nav.Link href="#action2">Mint</Nav.Link>
+                    <Link className='nav-item' to="/">Home</Link>
+                    <Link className='nav-item' to="/mint">Mint</Link>
+                    <Link className='nav-item' to="/whitelist">Whitelist</Link>
                 </Nav>
                 <SearchBox>
                     <SearchInput 

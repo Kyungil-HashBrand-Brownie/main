@@ -17,7 +17,7 @@ const StyledMain = styled.div`
     text-align: center;
     display:flex ;
     flex-wrap: wrap;
-    justify-content:center ;
+    justify-content:center;
 `;
 
 const StyledDiv = styled.div`
@@ -40,6 +40,7 @@ const StyledButton = styled.button`
     border: 1px solid lightgray;
     color: white;
     background-color: blue;
+    margin: 0 6px ;
 `;
 
 const StyledBar = styled.div`
@@ -47,7 +48,6 @@ const StyledBar = styled.div`
     height: 20px;
     text-align: center;
 `;
-
 
 const WhiteSale = () => {
 
@@ -64,7 +64,7 @@ const WhiteSale = () => {
     }
 
   return (
-    <div>
+    <div className='whitelist'>
         <StyledMain >
             <h2>WhiteSale</h2>
             <StyledDiv >
@@ -89,7 +89,7 @@ const WhiteSale = () => {
                     <ProgressBar animated now={45} />
             </StyledBar>
             <br />
-            <Button variant="primary">지갑 연결하기 </Button>{' '}
+            <Button className="mint-wal-connect-btn" variant="primary">지갑 연결하기 </Button>{' '}
 
         </StyledMain>
     </div>
