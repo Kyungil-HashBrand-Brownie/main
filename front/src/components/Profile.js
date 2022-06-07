@@ -11,8 +11,10 @@ const ProfileContainer = styled.div`
   border: 2px solid black;
   display: flex;
   justify-content: center;
+  background: white;
   @media screen and (max-width: 1830px) {
-    display: none;
+    position: absolute;
+    top: 20%;
   }
 `
 const PFPContainer = styled.img`
