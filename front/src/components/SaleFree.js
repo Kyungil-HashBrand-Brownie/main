@@ -70,7 +70,7 @@ const FreeSale = () => {
         // })
 
         const myContract = new window.caver.klay.Contract(contractAbi.abi ,"0xb2dd960c8de37a5eeae785957410d58ea7ed1579")
-        await myContract.methods.batchMint(window.klaytn.selectedAddress,"1").send({from:window.klaytn.selectedAddress, gas: 300000 ,value: window.caver.utils.toPeb('1', 'KLAY')})
+        await myContract.methods.batchMint(window.klaytn.selectedAddress,count).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: window.caver.utils.toPeb(count, 'KLAY')})
         // alert("송금 성공")
 
       }
