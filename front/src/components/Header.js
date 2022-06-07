@@ -44,14 +44,8 @@ const ButtonContainer = styled.div`
 const Header = () => {
     const [checked, setChecked] = useState(false);
 
-    const navigate = useNavigate();
-
-    const moveToMint = () => {
-        navigate('/mintpage')
-    }
-
     return (
-        <Navbar className="nav" bg="dark" variant="dark" expand="lg">
+        <Navbar className="nav" expand="lg">
             <Container fluid>
                 <Navbar.Brand href="#">
                     <LogoContainer />
@@ -66,6 +60,7 @@ const Header = () => {
                     <Link className='nav-item' to="/">Home</Link>
                     <Link className='nav-item' to="/mint">Mint</Link>
                     <Link className='nav-item' to="/whitelist">Whitelist</Link>
+                    <Link className='nav-item' to="/admin">admin</Link>
                 </Nav>
                 <SearchBox>
                     <SearchInput 

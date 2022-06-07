@@ -1,8 +1,8 @@
 import React from 'react'
 import {Container, Row, Col } from 'react-bootstrap'
 import styled from 'styled-components'
-import FreeSale from './SaleFree'
-import WhiteSale from './SaleWhite'
+import SaleFree from './SaleFree'
+import SaleWhite from './SaleWhite'
 
 
 
@@ -13,8 +13,8 @@ const MintCard = () => {
      {/* <Container className='MintCard'> */}
      <Container  className='MintCard'>
         <Row>
-            <Col className='FreeSale'> <FreeSale /> </Col>
-            <Col className='WhiteSale'> <WhiteSale/> </Col>
+            <Col className='FreeSale'> <SaleFree /> </Col>
+            <Col className='WhiteSale'> <SaleWhite/> </Col>
         </Row>
     </Container>
     </div>
