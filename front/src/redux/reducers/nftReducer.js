@@ -20,11 +20,11 @@ function nftReducer(state=initialState, action) {
                 countTotal: state.countTotal + 1,
             };
 
-        case "VOTE_INCREMENT2":
-            console.log(Object.keys(payload)[0])
-            return {...state,
-                countKid : state.countKid +1,
-            };
+        // case "VOTE_INCREMENT2":
+        //     console.log(Object.keys(payload)[0])
+        //     return {...state,
+        //         countKid : state.countKid +1,
+        //     };
 
         default:
             return {...state}
