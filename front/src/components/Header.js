@@ -45,7 +45,7 @@ const Header = () => {
     const [checked, setChecked] = useState(false);
 
     return (
-        <Navbar className="nav" bg="dark" variant="dark" expand="lg">
+        <Navbar className="nav" expand="lg">
             <Container fluid>
                 <Navbar.Brand href="#">
                     <LogoContainer />
