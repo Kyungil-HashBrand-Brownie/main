@@ -6,6 +6,7 @@ import Header from './components/Header';
 import WhiteList from './page/WhiteList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MintPage from './page/MintPage';
+import AdminPage from './page/AdminPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<HomPage/>} /> 
           <Route path="/mint" element={<Mint/>} /> 
           <Route path="/whitelist" element={<WhiteList/>} /> 
+          <Route path="/admin" element={<AdminPage/>} /> 
         </Routes>
     </div>
   );
