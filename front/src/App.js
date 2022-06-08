@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} /> 
           <Route path="/mint" element={<Mint/>} /> 
-          <Route path="/whitelist" element={<WhiteList/>} /> 
+          {/* <Route path="/whitelist" element={<WhiteList/>} />  */}
           <Route path="/admin" element={<AdminPage/>} /> 
         </Routes>
     </>

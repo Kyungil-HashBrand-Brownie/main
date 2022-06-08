@@ -4,33 +4,40 @@ import styled from "styled-components";
 import {Container,Row , Col , Button} from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import { useDispatch } from 'react-redux';
-import contractAbi from "../abi.json"
+import contractAbi from "../abi.json";
+import { useNavigate } from 'react-router-dom';
+import Browny from '../img/browny8.png';
 
-
+// 리팩터링 - 코드를 단순화하는 작업 불필요한 중복요소들을 제거
 const StyledMain = styled.div`
-    width: 280px;
+    width: 320px;
     font-size: 1rem;
     line-height: 1.5;
-    /* color: pink; */
     border-radius: 0.25rem;
     background-color: white;
-    border: 1px solid lightgray;
+    opacity: 95%;
+    border: 3px solid black;
+    border-radius: 6px;
     text-align: center;
-    display:flex ;
+    display: flex ;
     flex-wrap: wrap;
-    justify-content:center ;
+    justify-content:center;
+    background: rgb(243, 224, 224);
 `;
-
 
 const StyledDiv = styled.div`
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     color: green;
     line-height: 1.5;
-    background-color: white;
+    background-color: rgb(144, 214, 32);
+    /* margin-top: 20px; */
+    margin-bottom: 30px;
+    margin-left: 20px;
+    border-radius: 8px;
+    
+    /* background: blue; */
 `;
-
-
 
 const StyledButton = styled.button`
     width: 40px;
@@ -46,34 +53,35 @@ const StyledButton = styled.button`
 `;
 
 const StyledBar = styled.div`
+    margin-bottom: 20px;
     width: 200px;
     height: 20px;
     text-align: center;
 `;
 
-
 const FreeSale = () => {
-
+    const navigate = useNavigate();
     const onClick = async () => {
         const accounts = await window.klaytn.enable()
         console.log(accounts)
         const balance = await window.caver.klay.getBalance(accounts[0])
         console.log(balance)
-      }
-      const onClick2 = async () => {
-        // await window.caver.klay.sendTransaction({
-        //   type: 'VALUE_TRANSFER',
-        //   from: window.klaytn.selectedAddress,
-        //   to: '0x0000000000000000000000000000000000000000',
-        //   value: window.caver.utils.toPeb('1', 'KLAY'),
-        //   gas: 8000000
-        // })
+    }
 
-        const myContract = new window.caver.klay.Contract(contractAbi.abi ,"0xb2dd960c8de37a5eeae785957410d58ea7ed1579")
-        await myContract.methods.batchMint(window.klaytn.selectedAddress,count).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: window.caver.utils.toPeb(count, 'KLAY')})
-        // alert("송금 성공")
+    const onClick2 = async () => {
+    // await window.caver.klay.sendTransaction({
+    //   type: 'VALUE_TRANSFER',
+    //   from: window.klaytn.selectedAddress,
+    //   to: '0x0000000000000000000000000000000000000000',
+    //   value: window.caver.utils.toPeb('1', 'KLAY'),
+    //   gas: 8000000
+    // })
 
-      }
+    const myContract = new window.caver.klay.Contract(contractAbi.abi ,"0xb2dd960c8de37a5eeae785957410d58ea7ed1579")
+    await myContract.methods.batchMint(window.klaytn.selectedAddress,count).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: window.caver.utils.toPeb(count, 'KLAY')})
+    alert("해당 지갑 주소로 민팅되었습니다!");
+    navigate('/');
+    }
       
     // const dispatch = useDispatch(state => state.nft)
 
@@ -82,7 +90,7 @@ const FreeSale = () => {
 
     const countAdd = () => {
         if (count < 5) setCount(count + 1);
-        else alert("최대 5개까지 민팅 가능");
+        else alert("최대 5개까지 민팅 가능합니다.");
     }
 
     const countMinus = () => {
@@ -96,31 +104,36 @@ const FreeSale = () => {
   return (
     <div className="freelist">
         <StyledMain >
-            <h2>Pre-Sale</h2>
-            <StyledDiv >
-                <img src={FreeImg} />
-            </StyledDiv>
-            <StyledButton onClick={() => countMinus()}>  - </StyledButton>
-            <span>Mint : {count}</span>
-            <StyledButton onClick={()=> countAdd()}> +</StyledButton>
-            <Container>
-                <Row>
-                    <Col>price</Col>
-                    <Col>Per transaction</Col>
-                    <Col>Per 서기영</Col>
-                </Row>
-                <Row>
-                    <Col>60 KLAY</Col>
-                    <Col>최대 5 개</Col>
-                    <Col>limited</Col>
-                </Row>
-
-            </Container>
+            <h2 className="mint-title">Pre-Sale</h2>
+            <div className='mint-img-container'>
+                <StyledDiv >
+                    <img src={Browny} style={{width: 187, height: 220}}/>
+                </StyledDiv>
+            </div>
             <StyledBar >
-                    <ProgressBar animated now={45} />
+                <ProgressBar animated now={65} />
             </StyledBar>
+            <div className='mint-count-box'>
+                <StyledButton onClick={() => countMinus()}>  - </StyledButton>
+                <span>Mint : {count}</span>
+                <StyledButton onClick={()=> countAdd()}> +</StyledButton>
+            </div>
+            <Container className="mint-info-box">
+            <Row>
+                <Col>Price</Col>
+                <Col>60 KLAY</Col>
+            </Row>
+            <Row>
+                <Col>Per transaction</Col>
+                <Col>최대 5 개</Col>
+            </Row>
+            <Row>
+                <Col>Amount</Col>
+                <Col>limited</Col>
+            </Row>
+            </Container>
             <br/>
-            <Button className="mint-wal-connect-btn" variant="success" onClick={onClick}>지갑 연결하기</Button>{' '}
+            {/* <Button className="mint-wal-connect-btn" variant="success" onClick={onClick}>지갑 연결하기</Button>{' '} */}
             <Button className="mint-wal-connect-btn" variant="success" onClick={onClick2}>노진형 nft 받기</Button>{' '}
             
         </StyledMain>
