@@ -90,7 +90,6 @@ const WhiteSale = () => {
             </StyledBar>
             <br />
             <Button className="mint-wal-connect-btn" variant="primary">지갑 연결하기 </Button>{' '}
-
         </StyledMain>
     </div>
   )

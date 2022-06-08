@@ -13,7 +13,7 @@ function Vote() {
         { name: '멸종위기 동물 구조단체', value: '1' },
         { name: '기아 구조단체', value: '2' },
         { name: '소수민족', value: '3' },
-        { name: '서기영', value: '4' },
+        // { name: '서기영', value: '4' },
     ];
 
 
