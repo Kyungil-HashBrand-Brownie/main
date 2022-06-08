@@ -61,6 +61,8 @@ const FreeSale = () => {
         console.log(balance)
       }
       const onClick2 = async () => {
+        const myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3")
+        await myContract.methods.batchMint(window.klaytn.selectedAddress,count).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: window.caver.utils.toPeb(2*count, 'KLAY')}) // 가격이 2클레이
         // await window.caver.klay.sendTransaction({
         //   type: 'VALUE_TRANSFER',
         //   from: window.klaytn.selectedAddress,
@@ -68,9 +70,6 @@ const FreeSale = () => {
         //   value: window.caver.utils.toPeb('1', 'KLAY'),
         //   gas: 8000000
         // })
-
-        const myContract = new window.caver.klay.Contract(contractAbi.abi ,"0xb2dd960c8de37a5eeae785957410d58ea7ed1579")
-        await myContract.methods.batchMint(window.klaytn.selectedAddress,count).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: window.caver.utils.toPeb(count, 'KLAY')})
         // alert("송금 성공")
 
       }
