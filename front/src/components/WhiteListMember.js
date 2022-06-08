@@ -14,6 +14,8 @@ const WhiteList = () => {
 
     const {accounts} = useSelector(state => state.nft)
 
+    console.log("account s~~~#@" , accounts)
+
     const [list, setList] = useState(WhiteList)
     const [clickState, setClickState] = useState(false)
     const [valueId, setValueId] = useState('')
@@ -30,6 +32,7 @@ const WhiteList = () => {
             if(/* valueId == "" ||  */valueKey == ""){
                 alert("입력해주세요")
             }else {
+                // publickey = div 에 있는 초기값 publickey 이름 넣어주기 
                 setList(list.concat([{publicKey : valueKey}]));
                 setClickState(!clickState)
                 setValueKey("")
@@ -38,9 +41,10 @@ const WhiteList = () => {
     }
     console.log(list)
 
+    
   return (
     <div>
-        <h2>민트</h2>
+        <h2>White List key</h2>
         <Table striped>
             <thead>
                 <tr>
@@ -60,7 +64,7 @@ const WhiteList = () => {
                 }
                 <tr>
                     <td>*</td>
-                    <td>{accounts ? accounts : null}</td>
+                    <td>{accounts} </td>
                 </tr>
             </tbody>
         </Table>
