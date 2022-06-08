@@ -64,17 +64,15 @@ const Profile = () => {
 
 
   return (
-      // <ProfileContainer>
-        <>
+      <ProfileContainer>
         <PFPContainer src={PFP} />
-          {/* <PFPDescription >
+          <PFPDescription >
             <div>name: 박승재</div>
             <div>age: 30</div>
             <div>{address}</div>
             <div>{balance}</div>
-          </PFPDescription> */}
-        </>
-      // </ProfileContainer>
+          </PFPDescription>
+      </ProfileContainer>
   )
 }
 

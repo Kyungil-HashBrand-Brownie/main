@@ -81,7 +81,8 @@ const FreeSale = () => {
 
 
     const countAdd = () => {
-        setCount(count + 1);
+        if (count < 5) setCount(count + 1);
+        else alert("최대 5개까지 민팅 가능");
     }
 
     const countMinus = () => {
