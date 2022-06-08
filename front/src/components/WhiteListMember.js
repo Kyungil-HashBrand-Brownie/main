@@ -1,7 +1,7 @@
-import React, {useState , useRef} from 'react'
+import React, {useState } from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const WhiteList = () => {
 
@@ -18,18 +18,15 @@ const WhiteList = () => {
 
     const [list, setList] = useState(WhiteList)
     const [clickState, setClickState] = useState(false)
-    const [valueId, setValueId] = useState('')
-    // props 가 없어서?
+    // const [valueId, setValueId] = useState('')
     const [valueKey, setValueKey] = useState('')
 
-    const tdHandler = () => {
 
-    }
 
     const clickHandler = () => {
         if (!clickState) setClickState(true)
         else {
-            if(/* valueId == "" ||  */valueKey == ""){
+            if(/* valueId == "" ||  */valueKey === ""){
                 alert("입력해주세요")
             }else {
                 // publickey = div 에 있는 초기값 publickey 이름 넣어주기 
