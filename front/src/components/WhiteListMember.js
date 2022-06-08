@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState , useRef} from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import { useDispatch, useSelector } from 'react-redux'
 
 const WhiteList = () => {
 
+    
 
     let WhiteList = [{
         id: "초기값 ",
@@ -12,28 +13,30 @@ const WhiteList = () => {
     }];
 
     const {accounts} = useSelector(state => state.nft)
-    // const 
 
-    const [List, setList] = useState(WhiteList)
+    const [list, setList] = useState(WhiteList)
     const [clickState, setClickState] = useState(false)
     const [valueId, setValueId] = useState('')
+    // props 가 없어서?
     const [valueKey, setValueKey] = useState('')
-
-
 
     const tdHandler = () => {
 
     }
 
     const clickHandler = () => {
-        if (!clickState) 
-            setClickState(true)
+        if (!clickState) setClickState(true)
         else {
-            if(valueId == "" || valueKey == ""){
+            if(/* valueId == "" ||  */valueKey == ""){
                 alert("입력해주세요")
+            }else {
+                setList(list.concat([{publicKey : valueKey}]));
+                setClickState(!clickState)
+                setValueKey("")
             }
         }
     }
+    console.log(list)
 
   return (
     <div>
@@ -43,31 +46,27 @@ const WhiteList = () => {
                 <tr>
                     {/* 주소를 입력해서 추가  */}
                     <th>#</th>
-                    <th>화이트 리스트 명단</th>
                     <th>public key</th>
                 </tr>
             </thead>
             <tbody>
-                    {
-                        WhiteList.map((item) => { 
-                            return <tr>
-                                        <td> 1</td>
-                                        <td>{item.id} </td>
-                                        <td>{item.publicKey}</td>
-                                    </tr>
-                        })
-                    }
+                {
+                    list.map((item, index) => {
+                        return <tr key={index}>
+                                    <td> *</td>
+                                    <td>{item.publicKey}</td>
+                                </tr>
+                    })
+                }
                 <tr>
-                    <td>2</td>
-                    <td>박승재</td>
+                    <td>*</td>
                     <td>{accounts ? accounts : null}</td>
                 </tr>
             </tbody>
         </Table>
         { clickState &&
             <div className="addInfo">
-                <input placeholder='id' value={valueId} type='text' onChange={(e) => setValueId(e.target.value)}/> 
-                <input placeholder='publicKey' value={valueKey} type='' onChange={(e) => setValueKey(e.target.value)}/> 
+                <input placeholder='publicKey' value={valueKey}  onChange={(e) => setValueKey(e.target.value)}/> 
             </div>
         }
 
