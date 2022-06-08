@@ -95,7 +95,6 @@ const FreeSale = () => {
     // useEffect(() => {
     //     dispatch(countAdd())
     // })
-    console.log(window.klaytn)
 
   return (
     <div className="freelist">
