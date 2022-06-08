@@ -1,4 +1,4 @@
-import React , {useState ,useEffect} from 'react';
+import React , {useState , useEffect} from 'react';
 import styled from 'styled-components';
 import PFP from '../img/profile1.png';
 import contractABI from "./VoteContract.json"
@@ -43,35 +43,35 @@ const Profile = () => {
   const [address, setAddress] = useState("")
   const [balance, setBalance] = useState(0)
 
-  const test = async () => {
-    console.log(window.klaytn._kaikas.isEnabled())
-    console.log(await window.klaytn._kaikas.isUnlocked())
-    console.log(await window.klaytn._kaikas.isApproved())
+  // const test = async () => {
+  //   console.log(window.klaytn._kaikas.isEnabled())
+  //   console.log(await window.klaytn._kaikas.isUnlocked())
+  //   console.log(await window.klaytn._kaikas.isApproved())
 
-  }
+  // }
   
-  test()
+  // test()
 
+  // window.klaytn.on('accountsChanged', async function(accounts) {
+  //   // Your code
+  //   setAddress(accounts[0]);
+  //   console.log(address)
+  //   const balance = await window.caver.klay.getBalance(window.klaytn.selectedAddress)
+  //   setBalance(window.caver.utils.fromWei(balance))
+  // })
 
-  window.klaytn.on('accountsChanged', async function(accounts) {
-    // Your code
-    setAddress(accounts[0]);
-    console.log("address" , address)
-    const balance = await window.caver.klay.getBalance(window.klaytn.selectedAddress)
-    setBalance(window.caver.utils.fromWei(balance))
-  })
+  useEffect(() => {
+  }, [])
   
-
-
   return (
       <ProfileContainer>
-        <PFPContainer src={PFP} />
+        {/* <PFPContainer src={PFP} />
           <PFPDescription >
             <div>name: 박승재</div>
             <div>age: 30</div>
             <div>{address}</div>
             <div>{balance}</div>
-          </PFPDescription>
+          </PFPDescription> */}
       </ProfileContainer>
   )
 }
