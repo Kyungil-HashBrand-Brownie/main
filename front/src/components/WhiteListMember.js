@@ -44,15 +44,15 @@ const WhiteList = () => {
 
     const clickInput1 = async () => {
         const myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3")
-        console.log(await myContract.methods.add("0xAc45689e82aE9F93ED325b9254fe42BB77bA7849").send({from:"0xAc45689e82aE9F93ED325b9254fe42BB77bA7849", gas: 300000 ,value: 0}))
+        console.log(await myContract.methods.add(input1.current).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: 0}))
     }
     const clickInput2 = async () => {
         const myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3")
-        console.log(await myContract.methods.remove("0xAc45689e82aE9F93ED325b9254fe42BB77bA7849").send({from:"0xAc45689e82aE9F93ED325b9254fe42BB77bA7849", gas: 300000 ,value: 0}))
+        console.log(await myContract.methods.remove(input2.current).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: 0}))
     }
     const clickInput3 = async () => {
         const myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3")
-        console.log(await myContract.methods.isWhitelisted("0xAc45689e82aE9F93ED325b9254fe42BB77bA7849").call())
+        console.log(await myContract.methods.isWhitelisted(input3.current).call())
     }
     
   return (
@@ -94,7 +94,7 @@ const WhiteList = () => {
         </Button> */}
         <input onChange={(e)=>input1.current= e.target.value}></input><button onClick={clickInput1}>화리 등록</button>
         <input onChange={(e)=>input2.current= e.target.value}></input><button onClick={clickInput2}>화리 삭제</button>
-        <input onChange={(e)=>input2.current= e.target.value}></input><button onClick={clickInput3}>화리 확인</button>
+        <input onChange={(e)=>input3.current= e.target.value}></input><button onClick={clickInput3}>화리 확인</button>
     </div>
   )
 }
