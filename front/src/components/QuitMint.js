@@ -44,3 +44,9 @@ const QuitMint = () => {
 }
 
 export default QuitMint
+
+
+
+/* 
+    컨트랙트에 주소밸류
+*/

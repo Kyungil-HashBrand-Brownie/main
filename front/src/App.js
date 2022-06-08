@@ -5,7 +5,6 @@ import Home from './page/HomPage';
 import Mint from './page/Mint';
 import Header from './components/Header';
 import WhiteList from './page/WhiteList';
-import MintPage from './page/MintPage';
 import AdminPage from './page/AdminPage';
 
 function App() {
