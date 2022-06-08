@@ -1,24 +1,27 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 
 const QuitVote = () => {
-
-    const dispatch = useDispatch();
-
+    
+    // const dispatch = useDispatch();
     const {countAnimal , countKid, countMinority, countTotal} = useSelector(state =>state.nft);
 
-    const voteHandlerAni = () => {
-        dispatch({type: "VOTE_INCREMENT" , payload: {countAnimal: countAnimal +1 } });
-    }
+    // const voteHandlerAni = () => {
+    //     dispatch({type: "VOTE_INCREMENT" , payload: {countAnimal: countAnimal +1 } });
+    // }
 
-    const voteHandlerKid = () => {
-        dispatch({type: "VOTE_INCREMENT" , payload: {countKid: countKid + 1 }});
-    }
+    // const voteHandlerKid = () => {
+    //     dispatch({type: "VOTE_INCREMENT" , payload: {countKid: countKid +1 }});
+    // }
 
-    
+    // const voteHandlerMin = () => {
+    //     dispatch({type: "VOTE_INCREMENT" , payload: {countMinority: countMinority +1 }});
+    // }
+
+
 
     const beforeArr = ["countAnimal", "countKid", "countMin"];
     const sortArr = [["countAnimal", countAnimal], ["countKid", countKid], ["countMin", countMinority]].sort((a,b) => b[1] - a[1]) // [["countKid, 4], 2, 0]   
@@ -29,15 +32,17 @@ const QuitVote = () => {
     )
     
 
-    const percentArr = () => {
-        // countTotal % 3 +"" 
-    }
+    const percentlArr = [countAnimal, countKid, countMinority].map((ele) =>
+        ele / countTotal * 100
+    )
+
 
   return (
     <div>
         <div>
-            <button onClick={voteHandlerAni} > Animal click</button>
+            {/* <button onClick={voteHandlerAni} > Animal click</button>
             <button onClick={voteHandlerKid} > Kid click</button>
+            <button onClick={voteHandlerMin} > countMinority click</button> */}
             <h2>투표 현황 </h2>
             <Table striped>
                 <thead>
