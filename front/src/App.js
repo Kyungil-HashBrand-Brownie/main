@@ -16,6 +16,7 @@ function App() {
           <Route path="/mint" element={<Mint/>} /> 
           {/* <Route path="/whitelist" element={<WhiteList/>} />  */}
           <Route path="/admin" element={<AdminPage/>} /> 
+          <Route path="/test" element={<AdminPage/>} /> 
         </Routes>
     </>
   );

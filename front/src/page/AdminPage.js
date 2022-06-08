@@ -1,7 +1,7 @@
 import React from 'react'
 import QuitMint from '../components/QuitMint'
 import QuitVote from '../components/QuitVote'
-import Vote from '../components/Vote'
+import EarthVote from '../components/EarthVote'
 import WhiteListMember from '../components/WhiteListMember'
 
 
@@ -10,7 +10,7 @@ const AdminPage = () => {
     <div>
         <WhiteListMember />
         <QuitMint />
-        <Vote />
+        <EarthVote />
         <QuitVote />
     </div>
   )
