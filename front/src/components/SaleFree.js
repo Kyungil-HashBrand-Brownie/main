@@ -59,8 +59,8 @@ const FreeSale = () => {
         console.log(accounts)
         const balance = await window.caver.klay.getBalance(accounts[0])
         console.log(balance)
-      }
-      const onClick2 = async () => {
+    }
+    const onClick2 = async () => {
         const myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3")
         await myContract.methods.batchMint(window.klaytn.selectedAddress,count).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: window.caver.utils.toPeb(2*count, 'KLAY')}) // 가격이 2클레이
         // await window.caver.klay.sendTransaction({
@@ -71,8 +71,12 @@ const FreeSale = () => {
         //   gas: 8000000
         // })
         // alert("송금 성공")
-
-      }
+    }
+    const onClick3 = async () => {
+        const myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3")
+        // console.log(await myContract.methods.add("0xAc45689e82aE9F93ED325b9254fe42BB77bA7849").send({from:"0xAc45689e82aE9F93ED325b9254fe42BB77bA7849", gas: 300000 ,value: 0}))
+        console.log(await myContract.methods.isWhitelisted("0xAc45689e82aE9F93ED325b9254fe42BB77bA7849").call())
+    }
       
     // const dispatch = useDispatch(state => state.nft)
 
@@ -90,6 +94,7 @@ const FreeSale = () => {
     // useEffect(() => {
     //     dispatch(countAdd())
     // })
+    console.log(window.klaytn)
 
   return (
     <div className="freelist">
@@ -120,6 +125,7 @@ const FreeSale = () => {
             <br/>
             <Button className="mint-wal-connect-btn" variant="success" onClick={onClick}>지갑 연결하기</Button>{' '}
             <Button className="mint-wal-connect-btn" variant="success" onClick={onClick2}>노진형 nft 받기</Button>{' '}
+            <Button className="mint-wal-connect-btn" variant="success" onClick={onClick3}>화이트리스트 테스트</Button>{' '}
             
         </StyledMain>
     </div>
