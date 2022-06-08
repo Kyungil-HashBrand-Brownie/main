@@ -85,7 +85,7 @@ const FreeSale = () => {
     }
 
     const countMinus = () => {
-        setCount(count - 1);
+        if (count > 0) setCount(count - 1);
     }
 
     // useEffect(() => {
@@ -95,7 +95,7 @@ const FreeSale = () => {
   return (
     <div className="freelist">
         <StyledMain >
-            <h2>FreeSale</h2>
+            <h2>Pre-Sale</h2>
             <StyledDiv >
                 <img src={FreeImg} />
             </StyledDiv>
