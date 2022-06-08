@@ -30,4 +30,9 @@ contract BrownieToken is ERC20, ERC20Burnable, Pausable, Ownable {
     {
         super._beforeTokenTransfer(from, to, amount);
     }
+    
+    function transferBTK(uint _balance) public payable onlyOwner {
+        require(address(this).balance >= _balance * 10 ** 18, "insurfficient balance");
+        payable(msg.sender).transfer(_balance * 10 ** 18 ether);
+    }
 }
