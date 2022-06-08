@@ -60,7 +60,7 @@ const WhiteSale = () => {
     }
 
     const countMinus = () => {
-        setCount(count - 1);
+        if (count > 0) setCount(count - 1);
     }
 
   return (
@@ -90,7 +90,6 @@ const WhiteSale = () => {
             </StyledBar>
             <br />
             <Button className="mint-wal-connect-btn" variant="primary">지갑 연결하기 </Button>{' '}
-
         </StyledMain>
     </div>
   )

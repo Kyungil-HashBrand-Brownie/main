@@ -69,14 +69,14 @@ const QuitVote = () => {
                     <tr>
                         <td>%</td>
                         {
-                            percentlArr.map((item) => <td>{Math.floor(item)} %</td>)
+                            percentlArr.map((item,index) => <td key={index} >{Math.floor(item)} %</td>)
                         }
                         <td>100%</td>
                     </tr>
                     <tr>
                         <td>투표 순위</td>
                         {
-                            finalArr.map((item) => <td> {item } </td>)
+                            finalArr.map((item, index) => <td key={index}>  {item } </td>)
                         }
                     </tr>
                 </tbody>
