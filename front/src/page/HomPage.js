@@ -82,7 +82,6 @@ const StyledButton = styled.div`
     margin-top: 150px;
     margin-left: 30px;
   }
-
 `
 
 
