@@ -7,6 +7,8 @@ import Browny4 from '../img/browny4.jpg';
 import Browny5 from '../img/browny5.jpg';
 import Browny6 from '../img/browny6.jpg';
 import Browny7 from '../img/browny7.png';
+import Browny8 from '../img/browny8.png';
+import Browny9 from '../img/browny9.png';
 import Arrow from '../img/arrow.png';
 import Ellipse from '../img/Ellipse1.png';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -22,6 +24,10 @@ const StyledMainText = styled.div`
   color: white;
   /* font-family: 'Poppins'; */
   /* font-style: normal; */
+
+  @media (max-width: 970px) {
+    margin-top: 50px;
+  }
 `
 
 const StyledSubText = styled.div`
@@ -31,18 +37,27 @@ const StyledSubText = styled.div`
   height: 105px;
   color: white;
   font-size: 43px;
+
+  @media (max-width: 970px) {
+    margin-top: 60px;
+  }
 `
 const StyledBrownyAbove = styled.img`
-  /* position: relative; */
-  top: 5%;
-  width: 400px;
+  position: relative;
+  top: 6%;
+  width: 350px;
+  margin: 0px 50px;
   z-index: -1;
 `
 
 const StyledBrownyDown = styled.img`
   /* position: relative; */
-  margin-top: 20px;
-  width: 400px;
+  margin-top: 40px;
+  width: 350px;
+
+  @media (max-width: 970px) {
+    margin-left: 50px;
+  }
   /* border: 1px solid black; */
 `
 
@@ -51,7 +66,7 @@ const StyledButton = styled.div`
   justify-content: center;
   align-items: center; 
   position: relative;
-  width: 70%;
+  width: 400px;
   height: 100px;
   background: white;
   border-radius: 30px;
@@ -61,6 +76,11 @@ const StyledButton = styled.div`
   cursor: pointer;
   &:hover{  
     transform: scale(1.1);
+  }
+
+  @media (max-width: 970px) {
+    margin-top: 150px;
+    margin-left: 30px;
   }
 `
 
@@ -75,10 +95,12 @@ const StyledEllipse = styled.img`
   left: 0;
   bottom: 0%;
   z-index: -1;
+  
 `
 
 const HomePage = () => {
   return (
+    <>
     <Container className='main-container'>
         <Col className="main-col">
             <StyledMainText>Brownie</StyledMainText>
@@ -90,13 +112,26 @@ const HomePage = () => {
               </div>
             </StyledButton>
         </Col>
-        <Col className="main-col">
-          <StyledBrownyAbove src={Browny6} alt="browny-above" />
-          <StyledBrownyDown src={Browny7} alt="browny-down" />
+        <Col className="main-img-col">
+          <StyledBrownyAbove src={Browny8} alt="browny-above" />
+          <StyledBrownyDown src={Browny9} alt="browny-down" />
         </Col>
         
         <StyledEllipse src={Ellipse} alt="ellipse"/>
     </Container>
+    {/* <div className='main-team-container'> */}
+      <Container className='main-team-container'>
+        <StyledMainText>Team</StyledMainText>
+        <Container className='main-team-img-box'>
+          <Col></Col>
+          <Col></Col>
+          <Col></Col>
+          <Col></Col>
+          <Col></Col>
+        </Container>
+      </Container>
+    {/* </div> */}
+    </>
   )
 }
 

@@ -3,7 +3,7 @@ body {
   height: 100%;
   overflow-x: hidden;
   /* background: linear-gradient(to right, black, transparent); */
-  background: linear-gradient(90deg, #deb38d 0.51%, #deb38d 0.52%, #deb38d 37.46%, #deb38d 37.47%, #9DD2B0 100%);
+  background: linear-gradient(90deg, #deb38d 0.51%, #deb38d 0.52%, #deb38d 37.46%, #deb38d 53.47%, #f6f698 100%);
 }
 
 .mint-container {
@@ -29,6 +29,10 @@ body {
   margin: 10px 0;
 }
 
+.main-team-img-box {
+  display: flex;
+}
+
 /* .whitelist {
   display: flex;
   justify-content: center;
@@ -36,16 +40,68 @@ body {
   flex-direction: column;
 } */
 
+.copy-icon {
+  margin-left: 10px;
+}
+
+.copy-icon:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 .main-container {
   display: flex;
   /* flex-wrap: wrap; */
 }
 
+.main-team-container {
+  margin-top: 200px;
+  /* display: flex; */
+  /* background-color: red; */
+}
+
 .main-col {
   /* background: blue; */
   /* position: relative; */
-  margin-right: 30%;
+  /* margin-right: 30%; */
 }
+
+.main-img-col {
+  display: flex;
+  flex-direction: row;
+  padding-top: 130px;
+  margin-left: 30px;
+}
+
+
+@media (max-width: 1300px) {
+  .main-img-col {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 970px) {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-img-col {
+    margin-top: 120px;
+  }
+
+  .info-box {
+    display: flex;
+    padding: 90px 10px;
+    /* background-color: yellow; */
+    /* flex-direction: row; */
+  }
+  /* body {
+    background: red;
+  } */
+}
+
 
 .FreeSale {
   /* background-color: blue; */
@@ -53,10 +109,21 @@ body {
 
 .profile-inner {
   width: 80%;
+  /* color: rgb(236, 236, 115); */
 }
 
 .mint-wal-connect-btn {
   margin: 10px 0;
+}
+
+.info-box {
+  display: flex;
+  padding: 10px 10px;
+  /* flex-direction: row; */
+}
+
+.mint-title {
+  font-weight: 700;
 }
 
 .whitelist {
@@ -64,14 +131,45 @@ body {
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: rgb(172, 237, 144);
+  /* background: rgb(243, 224, 224); */
+  
+  /* background: rgb(172, 237, 144); */
   padding: 10px 0px;
+}
+.mint-count-box {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  /* border-bottom: 2px black solid; */
+  /* background-color: rgb(144, 214, 32); */
+}
+.mint-img-container{
+  width: 220px;
+  height: 232px;
+  background-color: rgb(144, 214, 32);
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+.mint-info-box {
+  margin: 0px 15px;
+  font-weight: 600;
+  background: white;
+  border-radius: 30px;
+  border: 1px solid black;
+  padding: 10px 10px;
+  font-size: 16px;
+}
+
+.mint-count {
+  /* padding-top: */
 }
 
 .freelist {
   display: flex;
   justify-content: center;
-  background-color: rgb(161, 191, 236);
+  /* background-color: rgb(161, 191, 236); */
   width: 100%;
   height: 100%;
   padding: 10px 0px;
@@ -123,5 +221,14 @@ body {
 .button-group{
   padding: auto;
   margin: 10px;
+
+}
+
+.cardclass{
+  margin: 10px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
 
 }

@@ -6,6 +6,7 @@ import Mint from './page/Mint';
 import Header from './components/Header';
 import WhiteList from './page/WhiteList';
 import AdminPage from './page/AdminPage';
+import Testpage from './page/Testpage';
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} /> 
           <Route path="/mint" element={<Mint/>} /> 
-          <Route path="/whitelist" element={<WhiteList/>} /> 
+          {/* <Route path="/whitelist" element={<WhiteList/>} />  */}
           <Route path="/admin" element={<AdminPage/>} /> 
+          <Route path="/test" element={<Testpage/>} /> 
         </Routes>
     </>
   );

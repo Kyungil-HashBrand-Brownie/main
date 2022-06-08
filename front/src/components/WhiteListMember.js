@@ -20,6 +20,9 @@ const WhiteList = () => {
     const [clickState, setClickState] = useState(false)
     // const [valueId, setValueId] = useState('')
     const [valueKey, setValueKey] = useState('')
+    const [valueKey1, setValueKey1] = useState('')
+    const [valueKey2, setValueKey2] = useState('')
+
 
     const input1 = useRef("")
     const input2 = useRef("")
@@ -57,10 +60,10 @@ const WhiteList = () => {
     
   return (
     <div>
-        <h2>White List key</h2>
+        <h2>White List key</h2>                          
         <Table striped>
             <thead>
-                <tr>
+                <tr>      
                     {/* 주소를 입력해서 추가  */}
                     <th>#</th>
                     <th>public key</th>

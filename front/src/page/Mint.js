@@ -8,7 +8,7 @@ const Mint = () => {
   return (
     <>
         <MintCard />
-        {/* <Profile /> */}
+        <Profile />
     </>
   )
 }

@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ToggleButton, Nav, Form, FormControl, Button, Navbar, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Logo from '../img/logo.png';
+import Logo from '../img/brownyLogo.png';
 import { useNavigate } from 'react-router-dom';
 import PFP from '../img/profile1.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCopy } from '@fortawesome/free-solid-svg-icons'
 
 const SearchBox = styled.div`
     background-color: rgb(26, 126, 213);
@@ -26,7 +28,7 @@ const SearchInput = styled.input`
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
-    width: 65px;
+    width: 130px;
     height: 70px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -54,19 +56,63 @@ const PFPContainer = styled.img`
   border: 3px solid brown;
   border-radius: 100%;
   cursor: pointer;
+  /* position: fixed; */
   &:hover{  
     transform: scale(1.1);
   }
 `
+const StyledInfo = styled.div`
+    /* background: red; */
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 1px 10px;
+    font-weight: bold;
+    margin-right: 20px;
+    background: rgb(236, 236, 115);
+`
 
 const Header = () => {
     const [checked, setChecked] = useState(false);
+    const [address, setAddress] = useState(null);
+    const [balance, setBalance] = useState(null);
+    const [infoState, setInfoState] = useState(false);
+
+    const onClick = async () => {
+        const accounts = await window.klaytn.enable()
+        console.log(accounts)
+        const balance = await window.caver.klay.getBalance(accounts[0])
+        setAddress(accounts);
+        setBalance(balance);
+        console.log(balance)
+    }
+
+    window.klaytn.on('accountsChanged', async function(accounts) {
+        console.log(accounts[0])
+        sessionStorage.setItem('id', accounts[0]);
+        setAddress(accounts[0]);
+        const balance = await window.caver.klay.getBalance(window.klaytn.selectedAddress)
+        setBalance(balance);
+        console.log(window.caver.utils.fromWei(balance))
+    })
+
+    const copyAddress = () => {
+        navigator.clipboard.writeText(address)
+    }
+
+    const showInfo = () => {
+        console.log('show');
+        setInfoState(!infoState)
+    }
+
+    useEffect(() => {
+        console.log(address);
+    }, [address])
 
     return (
         <Navbar className="nav" expand="lg">
             <Container fluid>
-                <Navbar.Brand href="#">
-                    <LogoContainer />
+                <Navbar.Brand>
+                    <Link to="/"><LogoContainer /></Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
@@ -77,8 +123,9 @@ const Header = () => {
                 >
                     <Link className='nav-item' to="/">Home</Link>
                     <Link className='nav-item' to="/mint">Mint</Link>
-                    <Link className='nav-item' to="/whitelist">Whitelist</Link>
+                    {/* <Link className='nav-item' to="/whitelist">Whitelist</Link> */}
                     <Link className='nav-item' to="/admin">admin</Link>
+                    <Link className='nav-item' to="/test">testpage</Link>
                 </Nav>
                 {/* <SearchBox>
                     <SearchInput 
@@ -101,16 +148,30 @@ const Header = () => {
                         Search
                     </ToggleButton>
                 </ButtonContainer> */}
-                <PFPContainer src={PFP}/>
-                {/* <Form className="d-flex">
-                    <FormControl
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
+                {
+                // sessionStorage.getItem('id')
+                address != null
+                ? 
+                <div className="info-box">  
+                    {infoState && 
+                        <StyledInfo>
+                        WHITELIST<br/>
+                        {address.toString().slice(0,7)+'...'+address.toString().slice(-7)}
+                        <FontAwesomeIcon 
+                            className='copy-icon'
+                            icon={faCopy} 
+                            onClick={copyAddress}    
+                        />
+                        <br />
+                        {/* {balance.slice(0,3)+'.'+balance.slice(3,5) + " KLAYS"} */}
+                        </StyledInfo>
+                    }
+                    <PFPContainer src={PFP}
+                        onClick={showInfo}
                     />
-                    <Button variant="outline-success">Search</Button>
-                </Form> */}
+                </div>
+                : <><Button className="mint-wal-connect-btn" variant="success" onClick={onClick}>지갑 연결하기</Button>{' '}</>
+                }
                 </Navbar.Collapse>
             </Container>
         </Navbar>
