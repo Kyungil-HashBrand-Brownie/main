@@ -4,8 +4,7 @@ let initialState = {
     countKid : 0,
     countMinority : 0,
     countTotal : 0,
-    accounts : {},
-
+    accounts : "",
 }
 
 function nftReducer(state=initialState, action) {
@@ -13,7 +12,7 @@ function nftReducer(state=initialState, action) {
 
     // const result = Object.keys(payload)[0] || null;
 
-    console.log("action", action )
+    console.log("action", action)
     console.log("payload", payload)
     switch (type) {
         case "VOTE_INCREMENT":
