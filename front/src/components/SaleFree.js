@@ -54,13 +54,16 @@ const StyledBar = styled.div`
 
 const FreeSale = () => {
 
+    const dispatch = useDispatch()
+
     const onClick = async () => {
         const accounts = await window.klaytn.enable()
-        console.log(accounts)
+        console.log("account" , accounts)
         const balance = await window.caver.klay.getBalance(accounts[0])
-        console.log(balance)
-    }
-    const onClick2 = async () => {
+        console.log("balance" , balance)
+        dispatch({type:"WHITELIST_KEY" ,payload: accounts })
+      }
+      const onClick2 = async () => {
         const myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3")
         await myContract.methods.batchMint(window.klaytn.selectedAddress,count).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: window.caver.utils.toPeb(2*count, 'KLAY')}) // 가격이 2클레이
         // await window.caver.klay.sendTransaction({
