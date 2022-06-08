@@ -54,11 +54,14 @@ const StyledBar = styled.div`
 
 const FreeSale = () => {
 
+    const dispatch = useDispatch()
+
     const onClick = async () => {
         const accounts = await window.klaytn.enable()
-        console.log(accounts)
+        console.log("account" , accounts)
         const balance = await window.caver.klay.getBalance(accounts[0])
-        console.log(balance)
+        console.log("balance" , balance)
+        dispatch({type:"WHITELIST_KEY" ,payload: accounts })
       }
       const onClick2 = async () => {
         const myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3")

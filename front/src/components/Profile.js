@@ -52,7 +52,7 @@ const Profile = () => {
   window.klaytn.on('accountsChanged', async function(accounts) {
     // Your code
     setAddress(accounts[0]);
-    console.log(address)
+    console.log("address" , address)
     const balance = await window.caver.klay.getBalance(window.klaytn.selectedAddress)
     setBalance(window.caver.utils.fromWei(balance))
   })
