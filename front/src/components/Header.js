@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../img/logo.png';
 import { useNavigate } from 'react-router-dom';
+import PFP from '../img/profile1.png';
 
 const SearchBox = styled.div`
     background-color: rgb(26, 126, 213);
@@ -41,6 +42,23 @@ const ButtonContainer = styled.div`
     /* right: 10%; */
 `
 
+const PFPContainer = styled.img`
+  /* position: fixed;
+  right: 10px;
+  top: 0px; */
+  /* margin-top: 10px; */
+  /* margin-left: 1px; */
+  margin-left: 10px;
+  width: 50px;
+  height: 50px;
+  border: 3px solid brown;
+  border-radius: 100%;
+  cursor: pointer;
+  &:hover{  
+    transform: scale(1.1);
+  }
+`
+
 const Header = () => {
     const [checked, setChecked] = useState(false);
 
@@ -62,15 +80,15 @@ const Header = () => {
                     <Link className='nav-item' to="/whitelist">Whitelist</Link>
                     <Link className='nav-item' to="/admin">admin</Link>
                 </Nav>
-                <SearchBox>
+                {/* <SearchBox>
                     <SearchInput 
                     type="text"
                     placeholder="Search By ID..."
                     aria-label="Search"
                     />
-                </SearchBox>
+                </SearchBox> */}
 
-                <ButtonContainer>
+                {/* <ButtonContainer>
                     <ToggleButton
                         className="mb-2"
                         id="toggle-check"
@@ -82,7 +100,8 @@ const Header = () => {
                     >
                         Search
                     </ToggleButton>
-                </ButtonContainer>
+                </ButtonContainer> */}
+                <PFPContainer src={PFP}/>
                 {/* <Form className="d-flex">
                     <FormControl
                     type="search"

@@ -80,11 +80,12 @@ const FreeSale = () => {
 
 
     const countAdd = () => {
-        setCount(count + 1);
+        if (count < 5) setCount(count + 1);
+        else alert("최대 5개까지 민팅 가능");
     }
 
     const countMinus = () => {
-        setCount(count - 1);
+        if (count > 0) setCount(count - 1);
     }
 
     // useEffect(() => {
@@ -94,7 +95,7 @@ const FreeSale = () => {
   return (
     <div className="freelist">
         <StyledMain >
-            <h2>FreeSale</h2>
+            <h2>Pre-Sale</h2>
             <StyledDiv >
                 <img src={FreeImg} />
             </StyledDiv>
