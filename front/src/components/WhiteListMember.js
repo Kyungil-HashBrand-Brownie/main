@@ -12,16 +12,19 @@ const WhiteList = () => {
                 <tr>
                   <th>#</th>
                   <th>화이트 리스트 명단</th>
+                  <th>public key</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1</td>
                     <td>서기영</td>
+                    <td>abcd</td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>박승재</td>
+                    <td>efgh</td>
                 </tr>
             </tbody>
         </Table>
