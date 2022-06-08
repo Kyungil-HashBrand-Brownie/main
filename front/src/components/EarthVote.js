@@ -288,7 +288,7 @@ function EarthVote() {
         </ToggleButton> */}
 
 
-        <ButtonGroup className='button-group'>
+        {/* <ButtonGroup className='button-group'>
         {radios.map((radio, idx) => (
             <ToggleButton
                 className="ButtonGroup"
@@ -304,12 +304,12 @@ function EarthVote() {
             {radio.name}
             </ToggleButton>
         ))}
-        </ButtonGroup>
+        </ButtonGroup> */}
         <br />
 
-        <button onClick={voteHandlerAni} > Animal click</button>
-        <button onClick={voteHandlerKid} > Kid click</button>
-        <button onClick={voteHandlerMin} > countMinority click</button>
+        <button onClick={voteHandlerAni} > Animal click vote </button>
+        <button onClick={voteHandlerKid} > Kid click vote</button>
+        <button onClick={voteHandlerMin} > countMinority click vote </button>
         </>
     );
 }

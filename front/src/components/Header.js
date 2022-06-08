@@ -125,6 +125,7 @@ const Header = () => {
                     <Link className='nav-item' to="/mint">Mint</Link>
                     {/* <Link className='nav-item' to="/whitelist">Whitelist</Link> */}
                     <Link className='nav-item' to="/admin">admin</Link>
+                    <Link className='nav-item' to="/test">testpage</Link>
                 </Nav>
                 {/* <SearchBox>
                     <SearchInput 

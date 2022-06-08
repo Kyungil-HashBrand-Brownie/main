@@ -10,7 +10,7 @@ const AdminPage = () => {
     <div>
         <WhiteListMember />
         <QuitMint />
-        <EarthVote />
+        {/* <EarthVote /> */}
         <QuitVote />
     </div>
   )
