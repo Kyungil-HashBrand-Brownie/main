@@ -21,6 +21,20 @@ const WhiteList = () => {
     const input2 = useRef("")
     const input3 = useRef("")
 
+    const getWhiteList = async () => {
+        try{
+            const {data} = await axios.get("http://localhost:4000/admin")
+            setList(data)
+        }
+        catch(e){
+            console.log(e)
+        }
+        
+    }
+
+    useEffect(()=>{
+        getWhiteList()
+    },[])
 
     const clickInput1 = async () => {
         if (await myContract.methods.isWhitelisted(input1.current).call() == true) {
@@ -43,6 +57,7 @@ const WhiteList = () => {
                     if (result === "Success!") {
                         alert("화이트리스트 설정 완료되었습니다!");
                     }
+                    getWhiteList()
                 })
         }
     }
@@ -64,6 +79,7 @@ const WhiteList = () => {
                     if (result === "Success!") {
                         alert("화이트리스트 제거 완료되었습니다!");
                     }
+                    getWhiteList()
                 })
         }
     }
