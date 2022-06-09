@@ -234,6 +234,30 @@ body {
   text-align: center;
   justify-content: center;
   align-items: center;
+}
 
+.Input_Gruop {
+  height: 100px;
+}
+
+.mb-3{
+  width: 50%;
+}
+.Cont{
+  text-align: center;
+  margin: 10px;
+}
+
+.cardnft{
+  margin: 20px;
+  background-color: green;
+  width: 100px;
+  height: 400px;
+  
+}
+
+.father{
+  display: flex;
+  justify-content: center;
 
 }

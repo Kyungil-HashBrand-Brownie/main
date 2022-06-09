@@ -2,6 +2,9 @@ import React from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
+import Card from 'react-bootstrap/Card'
+
+
 
 
 const QuitVote = () => {
