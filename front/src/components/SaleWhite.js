@@ -3,8 +3,6 @@ import { WhiteImg } from '../img'
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 import {Container,Row , Col , Button} from 'react-bootstrap'
-import { useDispatch } from 'react-redux';
-import { Container, Row, Col, Button } from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import contractAbi from "../abi.json"
 import Browny from '../img/browny9.png'
