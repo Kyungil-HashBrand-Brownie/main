@@ -3,16 +3,30 @@ import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import {browny1} from '../img'
-import { FreeImg } from '../img'
-import { WhiteImg } from '../img'
+import { FreeImg , WhiteImg, browny8 , browny9} from '../img'
+import Card from 'react-bootstrap/Card'
+import { Row, Col}from 'react-bootstrap';
+import CardGroup from 'react-bootstrap/CardGroup'
+import styled from 'styled-components'
+
+
 
 const QuitMint = () => {
+
+
+    const Styled = styled.div`
+        width: 600px ;
+        /* height: 50000 ; */
+        text-align: center;
+        margin: auto;
+        color: blue;
+    `
     
   return (
     <div>
 
-        <h2>민트</h2>
-        <Table striped>
+        <h2> Mint 개수 </h2>
+        {/* <Table striped>
             <thead>
                 <tr>
                 <th>#</th>
@@ -35,7 +49,29 @@ const QuitMint = () => {
                     <td>59%</td>
                 </tr>
             </tbody>
-        </Table>
+        </Table> */}
+        <Styled>
+        <CardGroup>
+            <Card className='cardnft'>
+                <Card.Img  variant="top" src={browny8} width="100px"/>
+                <Card.Body>
+                <Card.Title>Nft title </Card.Title>
+                <Card.Text>
+                    남은 개수 : 40 / 100
+                </Card.Text>
+                </Card.Body>
+            </Card>
+            <Card className="cardnft">
+                <Card.Img variant="top" src={browny9} />
+                <Card.Body>
+                <Card.Title>Card title</Card.Title>
+                <Card.Text>
+                    남은 개수 : 40 / 100
+                </Card.Text>
+                </Card.Body>
+            </Card>
+            </CardGroup>
+            </Styled>
         <Button variant="danger" size="lg">
             mint 종료
         </Button>
