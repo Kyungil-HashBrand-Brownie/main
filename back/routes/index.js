@@ -17,7 +17,6 @@ router.post("/whitelist", async (req, res) => {
         console.log('----------------------')
         const [result] = await pool.query(`INSERT INTO users(publicKey)VALUES('${publicKey}')`)
         res.send('Success!')
-
     } else {
         console.log('PublicKey is true')
         console.log('----------------------')

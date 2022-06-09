@@ -48,6 +48,9 @@ const WhiteList = () => {
 
     const clickInput1 = async () => {
         const myContract = new window.caver.klay.Contract(contractAbi.output.abi, "0x6acd751e35553ac4822319c9b670840dd184100a")
+        if (await myContract.methods.isWhitelisted(input1.current).call() == true) {
+            return alert('이미 등록됨')
+        }
         // console.log(await myContract.methods.add(input1.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 }))
         const Sucs = await myContract.methods.add(input1.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 })
         if (Sucs.status === true) {
@@ -59,12 +62,8 @@ const WhiteList = () => {
                     console.log(res);
                     let result = res.data;
                     console.log(result)
-                    if (result === "Success") {
+                    if (result === "Success!") {
                         alert("화이트리스트 설정 완료되었습니다!");
-                    }
-
-                    else {
-                        alert("중복된 값!");
                     }
                 })
         }
