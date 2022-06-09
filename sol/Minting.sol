@@ -16,6 +16,7 @@ contract BrownieNft is ERC721, Ownable {
     }
 
     function add(address _address) public onlyOwner {
+        require(whitelist[_address] == false, "Already whitelist");
         whitelist[_address] = true;
         emit AddedToWhitelist(_address);
     }

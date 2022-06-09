@@ -4,7 +4,6 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract BrownieToken is ERC20Burnable, Pausable, Ownable {
     // ERC20 erc20;
@@ -30,7 +29,6 @@ contract BrownieToken is ERC20Burnable, Pausable, Ownable {
         super._beforeTokenTransfer(from, to, amount);
     }
 
-    // from address to msg.sender amount token양
     function getBtk(uint256 amount) public payable {
         require(msg.value >= amount * 10 ** decimals(), "Please check msg.value");
         _transfer(address(this), msg.sender, amount * 10 ** decimals());

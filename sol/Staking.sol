@@ -3,11 +3,21 @@ pragma solidity ^0.8.4;
 
 import "./minting.sol";
 import "./token.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
 
 contract NFTStaking is BrownieNft {
   uint256 public totalStaked;
-  
-  ERC20 BrownieToken;
+
+  BrownieToken instance = new BrownieToken();
+
+  function instanceGetBtk(uint256 amount) public payable {
+    instance.getBtk(amount);
+  }
+
+  function viewIns() public view returns(address) {
+    return address(instance);
+  }
 
   struct Stake {
     uint256 tokenId;
