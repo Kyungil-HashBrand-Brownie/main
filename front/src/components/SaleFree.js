@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import {FreeImg} from '../img'
+import React, { useEffect, useState } from 'react'
+import { FreeImg } from '../img'
 import styled from "styled-components";
-import {Container,Row , Col , Button} from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import { useDispatch, useSelector } from 'react-redux';
 import contractAbi from "../abi.json";
@@ -66,7 +66,7 @@ const FreeSale = () => {
 
     const onClick = async () => {
         const accounts = await window.klaytn.enable()
-        console.log("account" , accounts)
+        console.log("account", accounts)
         const balance = await window.caver.klay.getBalance(accounts[0])
         console.log("balance" , balance)
         dispatch({type:"WHITELIST_KEY" ,payload: accounts })
@@ -88,7 +88,7 @@ const FreeSale = () => {
     const onClick3 = async () => {
         console.log(await myContract.methods.isWhitelisted("0xAc45689e82aE9F93ED325b9254fe42BB77bA7849").call())
     }
-      
+
     // const dispatch = useDispatch(state => state.nft)
 
     const [count, setCount] = useState(1)
@@ -107,45 +107,45 @@ const FreeSale = () => {
     //     dispatch(countAdd())
     // })
 
-  return (
-    <div className="freelist">
-        <StyledMain >
-            <h2 className="mint-title">Pre-Sale</h2>
-            <div className='mint-img-container'>
-                <StyledDiv >
-                    <img src={Browny} style={{width: 187, height: 220}}/>
-                </StyledDiv>
-            </div>
-            <StyledBar >
-                <ProgressBar animated now={65} />
-            </StyledBar>
-            <div className='mint-count-box'>
-                <StyledButton onClick={() => countMinus()}>  - </StyledButton>
-                <span>Mint : {count}</span>
-                <StyledButton onClick={()=> countAdd()}> +</StyledButton>
-            </div>
-            <Container className="mint-info-box">
-            <Row>
-                <Col>Price</Col>
-                <Col>60 KLAY</Col>
-            </Row>
-            <Row>
-                <Col>Per transaction</Col>
-                <Col>최대 5 개</Col>
-            </Row>
-            <Row>
-                <Col>Amount</Col>
-                <Col>limited</Col>
-            </Row>
-            </Container>
-            <br/>
-            {/* <Button className="mint-wal-connect-btn" variant="success" onClick={onClick}>지갑 연결하기</Button>{' '} */}
-            <Button className="mint-wal-connect-btn" variant="success" onClick={onClick2}>노진형 nft 받기</Button>{' '}
-            <Button className="mint-wal-connect-btn" variant="success" onClick={onClick3}>화이트리스트 테스트</Button>{' '}
-            
-        </StyledMain>
-    </div>
-  )
+    return (
+        <div className="freelist">
+            <StyledMain >
+                <h2 className="mint-title">Pre-Sale</h2>
+                <div className='mint-img-container'>
+                    <StyledDiv >
+                        <img src={Browny} style={{ width: 187, height: 220 }} />
+                    </StyledDiv>
+                </div>
+                <StyledBar >
+                    <ProgressBar animated now={65} />
+                </StyledBar>
+                <div className='mint-count-box'>
+                    <StyledButton onClick={() => countMinus()}>  - </StyledButton>
+                    <span>Mint : {count}</span>
+                    <StyledButton onClick={() => countAdd()}> +</StyledButton>
+                </div>
+                <Container className="mint-info-box">
+                    <Row>
+                        <Col>Price</Col>
+                        <Col>60 KLAY</Col>
+                    </Row>
+                    <Row>
+                        <Col>Per transaction</Col>
+                        <Col>최대 5 개</Col>
+                    </Row>
+                    <Row>
+                        <Col>Amount</Col>
+                        <Col>limited</Col>
+                    </Row>
+                </Container>
+                <br />
+                {/* <Button className="mint-wal-connect-btn" variant="success" onClick={onClick}>지갑 연결하기</Button>{' '} */}
+                <Button className="mint-wal-connect-btn" variant="success" onClick={onClick2}>노진형 nft 받기</Button>{' '}
+                <Button className="mint-wal-connect-btn" variant="success" onClick={onClick3}>화이트리스트 테스트</Button>{' '}
+
+            </StyledMain>
+        </div>
+    )
 }
 
 export default FreeSale
