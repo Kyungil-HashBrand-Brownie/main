@@ -5,8 +5,7 @@ import { useSelector } from 'react-redux'
 import contractAbi from "../abi.json"
 
 const WhiteList = () => {
-
-    
+    const { myContract } = useSelector(state => state.nft);
 
     let WhiteList = [{
         id: "초기값 ",
@@ -38,23 +37,20 @@ const WhiteList = () => {
             }else {
                 // publickey = div 에 있는 초기값 publickey 이름 넣어주기 
                 setList(list.concat([{publicKey : valueKey}]));
-                setClickState(!clickState)
-                setValueKey("")
+                setClickState(!clickState);
+                setValueKey("");
             }
         }
     }
-    console.log(list)
+    console.log(list);
 
     const clickInput1 = async () => {
-        const myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3")
         console.log(await myContract.methods.add(input1.current).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: 0}))
     }
     const clickInput2 = async () => {
-        const myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3")
         console.log(await myContract.methods.remove(input2.current).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: 0}))
     }
     const clickInput3 = async () => {
-        const myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3")
         console.log(await myContract.methods.isWhitelisted(input3.current).call())
     }
     

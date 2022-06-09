@@ -26,7 +26,6 @@ const QuitVote = () => {
     const beforeArr = ["countAnimal", "countKid", "countMin"];
     const sortArr = [["countAnimal", countAnimal], ["countKid", countKid], ["countMin", countMinority]].sort((a,b) => b[1] - a[1]) // [["countKid, 4], 2, 0]   
                     .map((ele) => ele[0]) // ele = ["countKid", 4] => ["countKid", "countAnimal", "countMin"];
-    const percentlArr = [countAnimal, countKid, countMinority].map((ele) => ele * 100 / countTotal );
     const finalArr = beforeArr.map((ele) => 
         sortArr.indexOf(ele) + 1    
     )

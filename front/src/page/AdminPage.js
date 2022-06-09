@@ -7,12 +7,12 @@ import WhiteListMember from '../components/WhiteListMember'
 
 const AdminPage = () => {
   return (
-    <div>
-        <WhiteListMember />
-        <QuitMint />
-        {/* <EarthVote /> */}
-        <QuitVote />
-    </div>
+      <div>
+          <WhiteListMember />
+          <QuitMint />
+          {/* <EarthVote /> */}
+          <QuitVote />
+      </div>
   )
 }
 

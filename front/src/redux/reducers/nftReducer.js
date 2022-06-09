@@ -5,6 +5,7 @@ let initialState = {
     countMinority : 0,
     countTotal : 0,
     accounts : "",
+    myContract: {},
 }
 
 function nftReducer(state=initialState, action) {
@@ -27,6 +28,12 @@ function nftReducer(state=initialState, action) {
                 accounts : payload[0]
             }
         // console.log(ac)
+
+        case "CONTRACT_SUCCESS": 
+            console.log("contract: ", payload);
+            return {...state,
+                myContract: payload,                
+            }
 
         default:
             return {...state}
