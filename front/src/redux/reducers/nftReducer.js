@@ -4,6 +4,8 @@ let initialState = {
     countKid : 0,
     countMinority : 0,
     countTotal : 0,
+    accounts : "",
+    myContract: {},
 }
 
 function nftReducer(state=initialState, action) {
@@ -11,7 +13,7 @@ function nftReducer(state=initialState, action) {
 
     // const result = Object.keys(payload)[0] || null;
 
-    console.log("action", action )
+    console.log("action", action)
     console.log("payload", payload)
     switch (type) {
         case "VOTE_INCREMENT":
@@ -20,11 +22,18 @@ function nftReducer(state=initialState, action) {
                 countTotal: state.countTotal + 1,
             };
 
-        // case "VOTE_INCREMENT2":
-        //     console.log(Object.keys(payload)[0])
-        //     return {...state,
-        //         countKid : state.countKid +1,
-        //     };
+        case "WHITELIST_KEY":
+            console.log("test: ", payload);
+            return {...state,
+                accounts : payload[0]
+            }
+        // console.log(ac)
+
+        case "CONTRACT_SUCCESS": 
+            console.log("contract: ", payload);
+            return {...state,
+                myContract: payload,                
+            }
 
         default:
             return {...state}

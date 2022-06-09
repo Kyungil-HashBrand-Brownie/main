@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract Whitelist is Ownable {
+contract BrownieNft is ERC721, Ownable {
     mapping(address => bool) whitelist;
     event AddedToWhitelist(address indexed account);
     event RemovedFromWhitelist(address indexed account);
@@ -16,6 +16,7 @@ contract Whitelist is Ownable {
     }
 
     function add(address _address) public onlyOwner {
+        require(whitelist[_address] == false, 'already whitelist');
         whitelist[_address] = true;
         emit AddedToWhitelist(_address);
     }
@@ -28,9 +29,7 @@ contract Whitelist is Ownable {
     function isWhitelisted(address _address) public view returns(bool) {
         return whitelist[_address];
     }
-}
 
-contract BrownieNft is ERC721, Whitelist {
     using Counters for Counters.Counter;
     string public fileExtention = ".json";
     using Strings for uint256;
