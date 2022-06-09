@@ -70,6 +70,9 @@ const WhiteList = () => {
     }
     const clickInput2 = async () => {
         const myContract = new window.caver.klay.Contract(contractAbi.output.abi, "0x6acd751e35553ac4822319c9b670840dd184100a")
+        if (await myContract.methods.isWhitelisted(input1.current).call() == false) {
+            return alert('등록되지 않음')
+        }
         console.log(await myContract.methods.remove(input2.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 }))
     }
     const clickInput3 = async () => {

@@ -10,18 +10,37 @@ router.get("/whitelist", async (req, res) => {
 router.post("/whitelist", async (req, res) => {
     //화이트리스트 db에 추가(중복검사할것)
     const publicKey = req.body.data.from
+    const isValid = req.body.data.status
     console.log(publicKey)
-    const publicKeys = await pool.query(`SELECT * FROM users WHERE publicKey = '${publicKey}'`)
+    const publicKeys = await pool.query(`SELECT * FROM users WHERE publicKey, status = '${publicKey}', '${isValid}'`)
     if (publicKeys[0].length === 0) {
         console.log('Not PublicKey!')
         console.log('----------------------')
-        const [result] = await pool.query(`INSERT INTO users(publicKey)VALUES('${publicKey}')`)
+        const [result] = await pool.query(`INSERT INTO users(publicKey, status)VALUES('${publicKey}', '${isValid}')`)
         res.send('Success!')
     } else {
         console.log('PublicKey is true')
         console.log('----------------------')
         res.send('failed')
     }
+})
+
+router.post("/deletelist", async (req, res) => {
+    //화이트리스트 db에서 삭제
+    const publicKey = req.body.data.from
+    const isValid = req.body.data.status
+    const publicKeys = await pool.query(`SELECT * FROM users WHERE publicKey, isValid = '${publicKey}', '${isValid}'`)
+    if (publicKeys)
+        if (publicKeys[0].length === 0) {
+            console.log('Not PublicKey!')
+            console.log('----------------------')
+            const [result] = await pool.query(`INSERT INTO users(publicKey)VALUES('${publicKey}')`)
+            res.send('Success!')
+        } else {
+            console.log('PublicKey is true')
+            console.log('----------------------')
+            res.send('failed')
+        }
 })
 
 module.exports = router;
