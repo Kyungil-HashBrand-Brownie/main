@@ -251,7 +251,7 @@ body {
 .cardnft{
   margin: 20px;
   background-color: green;
-  width: 100px;
+  width: 40%;
   height: 400px;
   
 }
@@ -260,4 +260,8 @@ body {
   display: flex;
   justify-content: center;
 
+}
+
+.CardGroup{
+  width: 100%;
 }

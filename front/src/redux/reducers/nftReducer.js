@@ -13,8 +13,8 @@ function nftReducer(state=initialState, action) {
 
     // const result = Object.keys(payload)[0] || null;
 
-    console.log("action", action)
-    console.log("payload", payload)
+    // console.log("action", action)
+    // console.log("payload", payload)
     switch (type) {
         case "VOTE_INCREMENT":
             return {...state,
