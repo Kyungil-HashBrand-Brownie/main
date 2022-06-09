@@ -3,7 +3,7 @@ import { FreeImg } from '../img'
 import styled from "styled-components";
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import contractAbi from "../abi.json";
 import { useNavigate } from 'react-router-dom';
 import Browny from '../img/browny8.png';
@@ -61,19 +61,19 @@ const StyledBar = styled.div`
 
 const FreeSale = () => {
     const navigate = useNavigate();
-
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const { myContract } = useSelector(state => state.nft);
 
     const onClick = async () => {
         const accounts = await window.klaytn.enable()
         console.log("account", accounts)
         const balance = await window.caver.klay.getBalance(accounts[0])
-        console.log("balance", balance)
-        dispatch({ type: "WHITELIST_KEY", payload: accounts })
-    }
-    const onClick2 = async () => {
-        const myContract = new window.caver.klay.Contract(contractAbi.output.abi, "0x6acd751e35553ac4822319c9b670840dd184100a")
-        await myContract.methods.batchMint(window.klaytn.selectedAddress, count).send({ from: window.klaytn.selectedAddress, gas: 300000, value: window.caver.utils.toPeb(2 * count, 'KLAY') }) // 가격이 2클레이
+        console.log("balance" , balance)
+        dispatch({type:"WHITELIST_KEY" ,payload: accounts })
+      }
+      const onClick2 = async () => {
+        console.log(myContract);
+        await myContract.methods.batchMint(window.klaytn.selectedAddress,count).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: window.caver.utils.toPeb(2*count, 'KLAY')}) // 가격이 2클레이
         // await window.caver.klay.sendTransaction({
         //   type: 'VALUE_TRANSFER',
         //   from: window.klaytn.selectedAddress,
@@ -86,9 +86,7 @@ const FreeSale = () => {
         navigate('/');
     }
     const onClick3 = async () => {
-        const myContract = new window.caver.klay.Contract(contractAbi.output.abi, "0x6acd751e35553ac4822319c9b670840dd184100a")
-        // console.log(await myContract.methods.add("0xAc45689e82aE9F93ED325b9254fe42BB77bA7849").send({from:"0xAc45689e82aE9F93ED325b9254fe42BB77bA7849", gas: 300000 ,value: 0}))
-        console.log(await myContract.methods.isWhitelisted("0x6acd751e35553ac4822319c9b670840dd184100a").call())
+        console.log(await myContract.methods.isWhitelisted("0xAc45689e82aE9F93ED325b9254fe42BB77bA7849").call())
     }
 
     // const dispatch = useDispatch(state => state.nft)

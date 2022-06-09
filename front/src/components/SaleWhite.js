@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { WhiteImg } from '../img'
 import styled from "styled-components";
-import { useDispatch } from 'react-redux';
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux';
+import {Container,Row , Col , Button} from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import contractAbi from "../abi.json"
 import Browny from '../img/browny9.png'
@@ -60,6 +60,7 @@ const StyledBar = styled.div`
 `;
 
 const WhiteSale = () => {
+    const { myContract } = useSelector(state => state.nft);
 
     const [count, setCount] = useState(1)
 
@@ -81,9 +82,8 @@ const WhiteSale = () => {
         //   value: window.caver.utils.toPeb('1', 'KLAY'),
         //   gas: 8000000
         // })
-
-        const myContract = new window.caver.klay.Contract(contractAbi.abi, "0x6acd751e35553ac4822319c9b670840dd184100a")
-        await myContract.methods.whitelistMint(window.klaytn.selectedAddress, count).send({ from: window.klaytn.selectedAddress, gas: 300000, value: window.caver.utils.toPeb(count, 'KLAY') })
+    
+        await myContract.methods.whitelistMint(window.klaytn.selectedAddress,count).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: window.caver.utils.toPeb(count, 'KLAY')})
         // alert("송금 성공")
 
     }
