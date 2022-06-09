@@ -6,8 +6,6 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract BrownieToken is ERC20Burnable, Pausable, Ownable {
-    // ERC20 erc20;
-
     constructor() ERC20("BrownieToken", "BTK") {
         _mint(address(this), 100000 * 10 ** decimals());
     }
@@ -22,11 +20,6 @@ contract BrownieToken is ERC20Burnable, Pausable, Ownable {
 
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount * 10 ** decimals());
-    }
-
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal whenNotPaused override
-    {
-        super._beforeTokenTransfer(from, to, amount);
     }
 
     function getBtk(uint256 amount) public payable {
