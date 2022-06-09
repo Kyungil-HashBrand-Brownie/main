@@ -12,8 +12,6 @@ import Browny9 from '../img/browny9.png';
 import Arrow from '../img/arrow.png';
 import Ellipse from '../img/Ellipse1.png';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import contractAbi from "../abi.json";
 
 const StyledMainText = styled.div`
   /* background: red; */
@@ -111,7 +109,6 @@ const StyledEllipse = styled.img`
   z-index: -1; 
 `
 const HomePage = () => {
-    const dispatch = useDispatch();
     let deadline = useRef(); 
     let deadlineDate = new Date('July 22, 2022 00:00:00').getTime();
     let now = new Date().getTime();
@@ -141,8 +138,6 @@ const HomePage = () => {
     }
 
     useEffect(() => { 
-      let myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3");
-      dispatch({type: "CONTRACT_SUCCESS", payload: myContract});
       deadline = new Date('July 22, 2022 00:00:00').getTime();
       timer.current = setInterval(count, 1000);   
       // timer();   
