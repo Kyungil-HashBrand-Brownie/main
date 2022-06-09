@@ -10,8 +10,17 @@ import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
 
 
-
-
+/* 
+    추가했을때 바로 생긴다
+    axios 로 가져와서
+    똑같이?
+*/
+    const Styled = styled.div`
+        justify-content: center;
+        text-align: center;
+        margin: 10px;
+        align-items: center;
+    `
 
 const WhiteList = () => {
     const { myContract } = useSelector(state => state.nft);
@@ -19,6 +28,14 @@ const WhiteList = () => {
         id: "초기값 ",
         publicKey: "0xzksnj421431ebbf700f436b15c672840asjce32",
     }];
+
+    
+    /* 
+        axios 초기값 설정.
+        추가하기 
+        set list 최신화
+
+    */
 
     const { accounts } = useSelector(state => state.nft)
 
@@ -35,15 +52,6 @@ const WhiteList = () => {
     const input2 = useRef("")
     const input3 = useRef("")
 
-    const Styled = styled.div`
-        justify-content: center;
-        text-align: center;
-        margin: 10px;
-        align-items: center;
-    `
-
-
-
     const clickHandler = () => {
         if (!clickState) setClickState(true)
         else {
@@ -57,7 +65,7 @@ const WhiteList = () => {
             }
         }
     }
-    console.log(list);
+    // console.log(list);
 
     const clickInput1 = async () => {
         if (await myContract.methods.isWhitelisted(input1.current).call() == true) {
@@ -104,6 +112,7 @@ const WhiteList = () => {
                 })
         }
     }
+    
     const clickInput3 = async () => {
         console.log(await myContract.methods.isWhitelisted(input3.current).call())
     }
@@ -129,10 +138,9 @@ const WhiteList = () => {
                         {/* </div> */}
                     </InputGroup>
                 </div>
-
+                <input onChange={(e) => input2.current = e.target.value}></input><button onClick={clickInput2}>화리 삭제</button>
+                <input onChange={(e) => input3.current = e.target.value}></input><button onClick={clickInput3}>화리 확인</button>
             </div>
-            <input onChange={(e) => input2.current = e.target.value}></input><button onClick={clickInput2}>화리 삭제</button>
-            <input onChange={(e) => input3.current = e.target.value}></input><button onClick={clickInput3}>화리 확인</button>
             <Table striped>
                 <thead>
                     <tr>

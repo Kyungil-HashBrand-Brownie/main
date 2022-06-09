@@ -11,8 +11,6 @@ import { Epro, ModalKpro, Apro, ani1, ani2, ani3 , Kproblem , KP1 , KP2, KP3 ,Mo
 import styled from 'styled-components'
 
 
-function EarthVote() {
-
     const MainStyled = styled.div`
         display: flex;
         justify-content: center;
@@ -28,6 +26,10 @@ function EarthVote() {
         padding: 10px;
         margin: 10px ;
     `
+
+function EarthVote() {
+
+
 
     // const [checked, setChecked] = useState(false);
     const [radioValue, setRadioValue] = useState('1');
