@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import {WhiteImg} from '../img'
+import { WhiteImg } from '../img'
 import styled from "styled-components";
 import { useDispatch } from 'react-redux';
-import {Container,Row , Col , Button} from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import contractAbi from "../abi.json"
 import Browny from '../img/browny9.png'
@@ -81,54 +81,54 @@ const WhiteSale = () => {
         //   value: window.caver.utils.toPeb('1', 'KLAY'),
         //   gas: 8000000
         // })
-    
-        const myContract = new window.caver.klay.Contract(contractAbi.abi ,"0xb2dd960c8de37a5eeae785957410d58ea7ed1579")
-        await myContract.methods.whitelistMint(window.klaytn.selectedAddress,count).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: window.caver.utils.toPeb(count, 'KLAY')})
+
+        const myContract = new window.caver.klay.Contract(contractAbi.abi, "0x6acd751e35553ac4822319c9b670840dd184100a")
+        await myContract.methods.whitelistMint(window.klaytn.selectedAddress, count).send({ from: window.klaytn.selectedAddress, gas: 300000, value: window.caver.utils.toPeb(count, 'KLAY') })
         // alert("송금 성공")
-    
+
     }
 
-  return (
-    <div className='whitelist'>
-        <StyledMain >
-            <h2 className="mint-title">WhiteSale</h2>
-            <StyledDiv >
-                <img src={Browny} style={{width: 220, height: 220}}/>
-            </StyledDiv>
-            <StyledBar >
-                <ProgressBar animated now={65} />
-            </StyledBar>
-            <div className="mint-count-box">
-                <StyledButton onClick={() => countMinus()}>  - </StyledButton>
-                <span className="mint-count">Mint : {count}</span>
-                <StyledButton onClick={()=> countAdd()}> +</StyledButton>
-            </div>
-            
-            <Container className="mint-info-box">
-            <Row>
-                <Col>Price</Col>
-                <Col>60 KLAY</Col>
-            </Row>
-            <Row>
-                <Col>Per transaction</Col>
-                <Col>최대 5 개</Col>
-            </Row>
-            <Row>
-                <Col>Amount</Col>
-                <Col>limited</Col>
-            </Row>
-            </Container>
-            <br />
-            {/* <Button className="mint-wal-connect-btn" variant="primary">지갑 연결하기 </Button>{' '} */}
-            <Button 
-                className="mint-wal-connect-btn" 
-                variant="primary"
-                onClick={whiteMint}
+    return (
+        <div className='whitelist'>
+            <StyledMain >
+                <h2 className="mint-title">WhiteSale</h2>
+                <StyledDiv >
+                    <img src={Browny} style={{ width: 220, height: 220 }} />
+                </StyledDiv>
+                <StyledBar >
+                    <ProgressBar animated now={65} />
+                </StyledBar>
+                <div className="mint-count-box">
+                    <StyledButton onClick={() => countMinus()}>  - </StyledButton>
+                    <span className="mint-count">Mint : {count}</span>
+                    <StyledButton onClick={() => countAdd()}> +</StyledButton>
+                </div>
+
+                <Container className="mint-info-box">
+                    <Row>
+                        <Col>Price</Col>
+                        <Col>60 KLAY</Col>
+                    </Row>
+                    <Row>
+                        <Col>Per transaction</Col>
+                        <Col>최대 5 개</Col>
+                    </Row>
+                    <Row>
+                        <Col>Amount</Col>
+                        <Col>limited</Col>
+                    </Row>
+                </Container>
+                <br />
+                {/* <Button className="mint-wal-connect-btn" variant="primary">지갑 연결하기 </Button>{' '} */}
+                <Button
+                    className="mint-wal-connect-btn"
+                    variant="primary"
+                    onClick={whiteMint}
                 >노진형 nft받기 </Button>{' '}
 
-        </StyledMain>
-    </div>
-  )
+            </StyledMain>
+        </div>
+    )
 }
 
 export default WhiteSale
