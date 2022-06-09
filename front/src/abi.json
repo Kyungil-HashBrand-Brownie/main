@@ -614,9 +614,9 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"nojinhyung.sol": "BrownieNft"
+			"minting.sol": "BrownieNft"
 		},
-		"evmVersion": "istanbul",
+		"evmVersion": "london",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -716,12 +716,12 @@
 				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
 			]
 		},
-		"nojinhyung.sol": {
-			"keccak256": "0x7047127393fdbb16a6e1704b86d467f79adbc12100e84a580c716b2a4c6e4ef7",
+		"minting.sol": {
+			"keccak256": "0x05e84f1daea1f72c199adc0ea6338e557c52b8c1d9ece0d83e795202caacc91c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8f3781bd784e1b678824cd80f32a828653bb6e74d326570c4219196cf07fbbbf",
-				"dweb:/ipfs/QmQp6EGqU7P3BR2c2PVLSKSENzYzXabWNuwrm3A8WWnc1V"
+				"bzz-raw://eb0548ba2cc6e6bfdad89f0bd061835d9689281dcb37ce8cb0ce7dc303540a62",
+				"dweb:/ipfs/QmVkb17Nah83snjdFujCocuDfw2m5x8t9WG66pEQXRJkmx"
 			]
 		}
 	},
