@@ -44,9 +44,6 @@ body {
   /* background-color: brown; */
 }
 
-.FreeSale {
-  /* background-color: blue; */
-}
 
 .profile-inner {
   width: 80%;
@@ -87,11 +84,11 @@ body {
   /* background-color: red; */
 }
 
-.main-col {
-  /* background: blue; */
-  /* position: relative; */
-  /* margin-right: 30%; */
-}
+/* .main-col {
+  background: blue;
+  position: relative;
+  margin-right: 30%;
+} */
 
 .main-img-col {
   display: flex;
@@ -137,9 +134,9 @@ body {
 }
 
 
-.FreeSale {
-  /* background-color: blue; */
-}
+/* .FreeSale {
+  background-color: blue;
+} */
 
 .profile-inner {
   width: 80%;
@@ -203,9 +200,9 @@ body {
   font-size: 16px;
 }
 
-.mint-count {
-  /* padding-top: */
-}
+/* .mint-count {
+  padding-top:
+} */
 
 .freelist {
   display: flex;
