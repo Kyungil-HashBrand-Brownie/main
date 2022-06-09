@@ -2,11 +2,13 @@
 pragma solidity ^0.8.4;
 
 import "./minting.sol";
-// import "./token.sol";
+import "./token.sol";
 
 contract NFTStaking is BrownieNft {
   uint256 public totalStaked;
   
+  ERC20 BrownieToken;
+
   struct Stake {
     uint256 tokenId;
     uint256 timestamp;
