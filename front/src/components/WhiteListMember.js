@@ -66,10 +66,12 @@ const WhiteList = () => {
         // console.log(myContract);
         // console.log(await myContract.methods.add(input1.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 }))
         const Sucs = await myContract.methods.add(input1.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 })
+        console.log(Sucs)
+        console.log(input1.current)
         if (Sucs.status === true) {
-            await axios.post('http://34.64.126.221:4000/whitelist',
+            await axios.post('http://localhost:4000/whitelist',
                 {
-                    data: Sucs,
+                    data: { from: input1.current, status: Sucs.status },
                 })
                 .then((res) => {
                     console.log(res);
@@ -85,11 +87,12 @@ const WhiteList = () => {
         if (await myContract.methods.isWhitelisted(input2.current).call() == false) {
             return alert('등록되지 않음')
         }
+        console.log(input2.current)
         const Del = await myContract.methods.remove(input2.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 })
         if (Del.status === true) {
-            await axios.post('http://34.64.126.221:4000/deletelist',
+            await axios.post('http://localhost:4000/deletelist',
                 {
-                    data: Del,
+                    data: { from: input2.current, status: Del.status },
                 })
                 .then((res) => {
                     console.log(res);
