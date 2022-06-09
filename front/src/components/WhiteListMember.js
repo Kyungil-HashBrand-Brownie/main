@@ -7,7 +7,6 @@ import axios from 'axios'
 
 const WhiteList = () => {
     const { myContract } = useSelector(state => state.nft);
-
     let WhiteList = [{
         id: "초기값 ",
         publicKey: "0xzksnj421431ebbf700f436b15c672840asjce32",
