@@ -6,7 +6,7 @@ import contractAbi from "../abi.json"
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import styled from 'styled-components'
-import { Row, Col}from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
 
 
@@ -67,7 +67,7 @@ const WhiteList = () => {
         // console.log(await myContract.methods.add(input1.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 }))
         const Sucs = await myContract.methods.add(input1.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 })
         if (Sucs.status === true) {
-            await axios.post('http://localhost:4000/whitelist',
+            await axios.post('http://34.64.126.221:4000/whitelist',
                 {
                     data: Sucs,
                 })
@@ -87,7 +87,7 @@ const WhiteList = () => {
         }
         const Del = await myContract.methods.remove(input2.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 })
         if (Del.status === true) {
-            await axios.post('http://localhost:4000/deletelist',
+            await axios.post('http://34.64.126.221:4000/deletelist',
                 {
                     data: Del,
                 })
@@ -105,54 +105,54 @@ const WhiteList = () => {
         console.log(await myContract.methods.isWhitelisted(input3.current).call())
     }
 
-  return (
-    <div>
-        <div className="Cont">
-        <h1>White List key</h1>
-        <div className='father'>
-            <InputGroup className="mb-3" >
-                {/* <div width="100%"> */}
-                <FormControl
-                // className="Input_Gruop"
-                placeholder="White List"
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-                // size='lg'
-                onChange={(e)=>input1.current= e.target.value}
-                />
-                <Button variant="outline-secondary" id="button-addon2" onClick={clickInput1}>
-                Add
-                </Button>
-                {/* </div> */}
-            </InputGroup>
-        </div>
+    return (
+        <div>
+            <div className="Cont">
+                <h1>White List key</h1>
+                <div className='father'>
+                    <InputGroup className="mb-3" >
+                        {/* <div width="100%"> */}
+                        <FormControl
+                            // className="Input_Gruop"
+                            placeholder="White List"
+                            aria-label="Recipient's username"
+                            aria-describedby="basic-addon2"
+                            // size='lg'
+                            onChange={(e) => input1.current = e.target.value}
+                        />
+                        <Button variant="outline-secondary" id="button-addon2" onClick={clickInput1}>
+                            Add
+                        </Button>
+                        {/* </div> */}
+                    </InputGroup>
+                </div>
 
-        </div>        
-        <input onChange={(e)=>input2.current= e.target.value}></input><button onClick={clickInput2}>화리 삭제</button>
-        <input onChange={(e)=>input3.current= e.target.value}></input><button onClick={clickInput3}>화리 확인</button>                   
-        <Table striped>
-            <thead>
-                <tr>      
-                    <th>#</th>
-                    <th>public key</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    list.map((item, index) => {
-                        return <tr key={index}>
-                                    <td> *</td>
-                                    <td>{item.publicKey}</td>
-                                </tr>
-                    })
-                }
-                <tr>
-                    <td>*</td>
-                    <td>{accounts} </td>
-                </tr>
-            </tbody>
-        </Table>
-        {/* { clickState &&
+            </div>
+            <input onChange={(e) => input2.current = e.target.value}></input><button onClick={clickInput2}>화리 삭제</button>
+            <input onChange={(e) => input3.current = e.target.value}></input><button onClick={clickInput3}>화리 확인</button>
+            <Table striped>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>public key</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        list.map((item, index) => {
+                            return <tr key={index}>
+                                <td> *</td>
+                                <td>{item.publicKey}</td>
+                            </tr>
+                        })
+                    }
+                    <tr>
+                        <td>*</td>
+                        <td>{accounts} </td>
+                    </tr>
+                </tbody>
+            </Table>
+            {/* { clickState &&
             <div className="addInfo">
                 <input placeholder='publicKey' value={valueKey}  onChange={(e) => setValueKey(e.target.value)}/> 
             </div>
@@ -163,8 +163,8 @@ const WhiteList = () => {
                 !clickState ? "등록하기" : "추가하기" 
             }
         </Button> */}
-    </div>
-  )
+        </div>
+    )
 }
 
 export default WhiteList
