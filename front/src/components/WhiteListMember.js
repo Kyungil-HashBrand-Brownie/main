@@ -68,10 +68,24 @@ const WhiteList = () => {
         }
     }
     const clickInput2 = async () => {
-        if (await myContract.methods.isWhitelisted(input1.current).call() == false) {
+        if (await myContract.methods.isWhitelisted(input2.current).call() == false) {
             return alert('등록되지 않음')
         }
-        console.log(await myContract.methods.remove(input2.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 }))
+        const Del = await myContract.methods.remove(input2.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 })
+        if (Del.status === true) {
+            await axios.post('http://localhost:4000/deletelist',
+                {
+                    data: Del,
+                })
+                .then((res) => {
+                    console.log(res);
+                    let result = res.data;
+                    console.log(result)
+                    if (result === "Success!") {
+                        alert("화이트리스트 제거 완료되었습니다!");
+                    }
+                })
+        }
     }
     const clickInput3 = async () => {
         console.log(await myContract.methods.isWhitelisted(input3.current).call())
