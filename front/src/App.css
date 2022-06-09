@@ -12,6 +12,11 @@ body {
   display: flex;
 }
 
+.mintdate-container {
+  display: flex;
+  justify-content: center;
+}
+
 .MintCard {
   margin-top: 100px;
   /* background-color: brown; */

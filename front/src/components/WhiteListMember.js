@@ -6,8 +6,7 @@ import contractAbi from "../abi.json"
 import axios from 'axios'
 
 const WhiteList = () => {
-
-
+    const { myContract } = useSelector(state => state.nft);
 
     let WhiteList = [{
         id: "초기값 ",
@@ -39,18 +38,18 @@ const WhiteList = () => {
             } else {
                 // publickey = div 에 있는 초기값 publickey 이름 넣어주기 
                 setList(list.concat([{ publicKey: valueKey }]));
-                setClickState(!clickState)
-                setValueKey("")
+                setClickState(!clickState);
+                setValueKey("");
             }
         }
     }
-    console.log(list)
+    console.log(list);
 
     const clickInput1 = async () => {
-        const myContract = new window.caver.klay.Contract(contractAbi.output.abi, "0x6acd751e35553ac4822319c9b670840dd184100a")
         if (await myContract.methods.isWhitelisted(input1.current).call() == true) {
             return alert('이미 등록됨')
         }
+        // console.log(myContract);
         // console.log(await myContract.methods.add(input1.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 }))
         const Sucs = await myContract.methods.add(input1.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 })
         if (Sucs.status === true) {
@@ -69,14 +68,12 @@ const WhiteList = () => {
         }
     }
     const clickInput2 = async () => {
-        const myContract = new window.caver.klay.Contract(contractAbi.output.abi, "0x6acd751e35553ac4822319c9b670840dd184100a")
         if (await myContract.methods.isWhitelisted(input1.current).call() == false) {
             return alert('등록되지 않음')
         }
         console.log(await myContract.methods.remove(input2.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 }))
     }
     const clickInput3 = async () => {
-        const myContract = new window.caver.klay.Contract(contractAbi.output.abi, "0x6acd751e35553ac4822319c9b670840dd184100a")
         console.log(await myContract.methods.isWhitelisted(input3.current).call())
     }
 
