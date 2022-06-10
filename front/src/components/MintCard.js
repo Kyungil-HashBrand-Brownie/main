@@ -10,11 +10,10 @@ import SaleWhite from './SaleWhite'
 const MintCard = () => {
   return (
     <div>
-     {/* <Container className='MintCard'> */}
      <Container  className='MintCard'>
         <Row>
             <Col className='FreeSale'> <SaleFree /> </Col>
-            <Col className='WhiteSale'> <SaleWhite/> </Col>
+            <Col className='WhiteSale'> <SaleWhite /> </Col>
         </Row>
     </Container>
     </div>

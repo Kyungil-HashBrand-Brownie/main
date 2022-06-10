@@ -1,14 +1,42 @@
 body {
   width: 100%;
   height: 100%;
-  /* background: linear-gradient(to right, black, transparent); */
-  background: linear-gradient(90deg, #B15497 0.51%, #B15497 0.52%, #B15497 37.46%, #B15497 37.47%, #9DD2B0 100%);
+  overflow: hidden;
+  /* background-image: url('./img/chocolate/choco1.png'); */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  background: linear-gradient(90deg, #deb38d 0.51%, #deb38d 0.52%, #deb38d 37.46%, #deb38d 53.47%, #f6f698 100%);
+  /* background-blend-mode: multiply; */
 }
+.backG-left-img {
+  position: absolute;
+  width: 15%;
+}
+
+.backG-img {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+/* .main-outer {
+  width: 100%;
+  height: 120%;
+  background-image: url('./img/background/background11.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: red;
+} */
 
 .mint-container {
   background-color: rgb(26, 126, 213);
   width: 100%;
   display: flex;
+}
+
+.mintdate-container {
+  display: flex;
+  justify-content: center;
 }
 
 .MintCard {
@@ -28,12 +56,85 @@ body {
   margin: 10px 0;
 }
 
+.main-team-img-box {
+  display: flex;
+}
+
 /* .whitelist {
   display: flex;
   justify-content: center;
   height: 100vh;
   flex-direction: column;
 } */
+
+.copy-icon {
+  margin-left: 10px;
+}
+
+.copy-icon:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.main-container {
+  display: flex;
+  /* flex-wrap: wrap; */
+}
+
+.main-team-container {
+  margin-top: 200px;
+  /* display: flex; */
+  /* background-color: red; */
+}
+
+.main-col {
+  /* background: blue; */
+  /* position: relative; */
+  /* margin-right: 30%; */
+}
+
+.main-img-col {
+  display: flex;
+  flex-direction: row;
+  padding-top: 130px;
+  margin-left: 30px;
+}
+
+
+@media (max-width: 1300px) {
+  .main-img-col {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 970px) {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-img-col {
+    margin-top: 120px;
+  }
+
+  .info-box {
+    position: absolute;
+    /* left: 10%; */
+    display: flex;
+    flex-direction: column;
+    margin-right: 25%;
+    width: 40%;
+    text-align: center;
+    /* margin-top: 10%; */
+    /* padding: 120px 30px; */
+    /* background-color: yellow; */
+    /* flex-direction: row; */
+  }
+  /* body {
+    background: red;
+  } */
+}
 
 
 .FreeSale {
@@ -42,10 +143,28 @@ body {
 
 .profile-inner {
   width: 80%;
+  /* color: rgb(236, 236, 115); */
 }
 
 .mint-wal-connect-btn {
   margin: 10px 0;
+}
+
+.info-box {
+  position: absolute;
+  right: 1%;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px;
+  /* background-color: red; */
+  padding-top: 30px;
+  height:200px;
+  /* flex-direction: row; */
+}
+
+.mint-title {
+  font-weight: 700;
 }
 
 .whitelist {
@@ -53,14 +172,45 @@ body {
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: rgb(172, 237, 144);
+  /* background: rgb(243, 224, 224); */
+  
+  /* background: rgb(172, 237, 144); */
   padding: 10px 0px;
+}
+.mint-count-box {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  /* border-bottom: 2px black solid; */
+  /* background-color: rgb(144, 214, 32); */
+}
+.mint-img-container{
+  width: 220px;
+  height: 232px;
+  background-color: rgb(144, 214, 32);
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+.mint-info-box {
+  margin: 0px 15px;
+  font-weight: 600;
+  background: white;
+  border-radius: 30px;
+  border: 1px solid black;
+  padding: 10px 10px;
+  font-size: 16px;
+}
+
+.mint-count {
+  /* padding-top: */
 }
 
 .freelist {
   display: flex;
   justify-content: center;
-  background-color: rgb(161, 191, 236);
+  /* background-color: rgb(161, 191, 236); */
   width: 100%;
   height: 100%;
   padding: 10px 0px;
@@ -113,4 +263,41 @@ body {
   padding: auto;
   margin: 10px;
 
+}
+
+.cardclass{
+  margin: 10px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.Input_Gruop {
+  height: 100px;
+}
+
+.mb-3{
+  width: 50%;
+}
+.Cont{
+  text-align: center;
+  margin: 10px;
+}
+
+.cardnft{
+  margin: 20px;
+  background-color: green;
+  width: 40%;
+  height: 400px;
+  
+}
+
+.father{
+  display: flex;
+  justify-content: center;
+
+}
+
+.CardGroup{
+  width: 100%;
 }
