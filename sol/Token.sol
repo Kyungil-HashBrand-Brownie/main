@@ -2,35 +2,26 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract BrownieToken is ERC20Burnable, Pausable, Ownable {
+contract BrownieToken is ERC20Burnable, Ownable {
     constructor() ERC20("BrownieToken", "BTK") {
         _mint(address(this), 100000 * 10 ** decimals());
     }
 
-    function pause() public onlyOwner {
-        _pause();
-    }
-
-    function unpause() public onlyOwner {
-        _unpause();
-    }
-
-    function mint(address to, uint256 amount) public onlyOwner {
+    function mint(address to, uint256 amount) private onlyOwner {
         _mint(to, amount * 10 ** decimals());
     }
 
-    function getBtk(uint256 amount) public payable {
-        require(msg.value >= amount * 10 ** decimals(), "Please check msg.value");
-        _transfer(address(this), msg.sender, amount * 10 ** decimals());
+    function getBtk(address _tokenAddr, address _user, uint256 _amount, uint256 _value) public payable {
+        require(_value >= _amount * 10 ** decimals(), "Please check msg.value");
+        _transfer(_tokenAddr, _user, _amount * 10 ** decimals());
     }
 
-    function sellBtk(uint256 amount) public {
-        require(address(this).balance >= amount * 10 ** decimals(), "Please check msg.value");
-        _transfer(msg.sender, address(this), amount * 10 ** decimals());
-        payable(msg.sender).transfer(address(this).balance);
+    function sellBtk(address _tokenAddr, address _user, uint256 _amount, uint256 _value) public {
+        require(_tokenAddr.balance >= _amount * 10 ** decimals(), "Please check msg.value");
+        _transfer(_user, _tokenAddr, _amount * 10 ** decimals());
+        payable(_user).transfer(_value);
     }
 
     function viewThis() public view returns(address) {

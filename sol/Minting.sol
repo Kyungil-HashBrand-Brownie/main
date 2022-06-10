@@ -4,8 +4,23 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "./token.sol";
 
 contract BrownieNft is ERC721, Ownable {
+    BrownieToken instance = new BrownieToken();
+
+    function instanceGetBtk(uint256 amount) public payable {
+        instance.getBtk(address(instance), msg.sender, amount, msg.value);
+    }
+
+    function instanceSellBtk(uint256 amount) public payable {
+        instance.sellBtk(address(instance), msg.sender, amount, msg.value);
+    }
+
+    function viewIns() public view returns(address) {
+        return address(instance);
+    }
+
     mapping(address => bool) whitelist;
     event AddedToWhitelist(address indexed account);
     event RemovedFromWhitelist(address indexed account);
@@ -36,6 +51,7 @@ contract BrownieNft is ERC721, Ownable {
     mapping(uint256 => bool) mintinglist;
 
     Counters.Counter private _tokenIdCounter;
+    Counters.Counter private _whitelistCounter;
 
     constructor() ERC721("BrownieNft", "BFT") {}
 
@@ -57,10 +73,7 @@ contract BrownieNft is ERC721, Ownable {
         return randomNum;
     }
 
-    function safeMint(address to) public  {
-        // require(msg.value == 1 * 10 ** 18 , "Please check minting cost");
-        // uint256 tokenId = _tokenIdCounter.current();
-        // _tokenIdCounter.increment();
+    function safeMint(address to) private  {
         uint256 randomNum = randNum();
         _safeMint(to, randomNum);
     }
@@ -75,21 +88,28 @@ contract BrownieNft is ERC721, Ownable {
         require(msg.value == amount * 2 * 10 ** 18 , "Please check your balance");
         for (uint i = 0; i < amount; i++) {
             safeMint(to);
+            _tokenIdCounter.increment();
         }
     }
 
     function whitelistMint(address to, uint amount) public payable onlyWhitelisted(to) {
-        uint256 tokenId = _tokenIdCounter.current();
+        uint256 whiteCounter = _whitelistCounter.current();
         require(msg.value == amount * 10 ** 18 , "Please check your balance");
-        require(tokenId + amount <= 30,"Total NFT for whitelist users is only thirty");
+        require(whiteCounter + amount <= 30,"Total NFT for whitelist users is only thirty");
         for (uint i = 0; i < amount; i++) {
             safeMint(to);
             _tokenIdCounter.increment();
+            _whitelistCounter.increment();
         }
     }
 
     function withdrawKLAY(uint _balance) public payable onlyOwner {
         require(address(this).balance >= _balance * 10 ** 18, "insurfficient balance");
         payable(msg.sender).transfer(_balance * 10 ** 18);
+    }
+
+    function nftNum() public view returns(uint256) {
+        uint256 tokenNum = _tokenIdCounter.current();
+        return tokenNum;
     }
 }
