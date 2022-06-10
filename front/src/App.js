@@ -5,6 +5,7 @@ import { Routes , Route} from 'react-router-dom';
 import Home from './page/HomPage';
 import Mint from './page/Mint';
 import Header from './components/Header';
+import Footer from './components/Footer'
 import WhiteList from './page/WhiteList';
 import AdminPage from './page/AdminPage';
 import Testpage from './page/Testpage';
@@ -29,6 +30,7 @@ function App() {
           <Route path="/admin" element={<AdminPage/>} /> 
           <Route path="/test" element={<Testpage/>} /> 
         </Routes>
+        <Footer />
       </>
     );
 }

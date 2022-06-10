@@ -61,7 +61,7 @@ const PFPContainer = styled.div`
   border-radius: 20px;
   background-color: #198754;
   border-color: #198754;
-  letter-spacing: 1px;
+  letter-spacing: -1px;
   padding: 1px 20px;
   cursor: pointer;
   color: white;
