@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
@@ -10,62 +10,31 @@ import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
 
 
-/* 
-    추가했을때 바로 생긴다
-    axios 로 가져와서
-    똑같이?
-*/
-    const Styled = styled.div`
-        justify-content: center;
-        text-align: center;
-        margin: 10px;
-        align-items: center;
-    `
-
+    
 const WhiteList = () => {
     const { myContract } = useSelector(state => state.nft);
-    let WhiteList = [{
-        id: "초기값 ",
-        publicKey: "0xzksnj421431ebbf700f436b15c672840asjce32",
-    }];
-
-    
-    /* 
-        axios 초기값 설정.
-        추가하기 
-        set list 최신화
-
-    */
-
     const { accounts } = useSelector(state => state.nft)
 
-
-    const [list, setList] = useState(WhiteList)
-    const [clickState, setClickState] = useState(false)
-    // const [valueId, setValueId] = useState('')
-    const [valueKey, setValueKey] = useState('')
-    const [valueKey1, setValueKey1] = useState('')
-    const [valueKey2, setValueKey2] = useState('')
-
+    const [list, setList] = useState([])
 
     const input1 = useRef("")
     const input2 = useRef("")
     const input3 = useRef("")
 
-    const clickHandler = () => {
-        if (!clickState) setClickState(true)
-        else {
-            if (/* valueId == "" ||  */valueKey === "") {
-                alert("입력해주세요")
-            } else {
-                // publickey = div 에 있는 초기값 publickey 이름 넣어주기 
-                setList(list.concat([{ publicKey: valueKey }]));
-                setClickState(!clickState);
-                setValueKey("");
-            }
+    const getWhiteList = async () => {
+        try{
+            const {data} = await axios.get("http://localhost:4000/admin")
+            setList(data)
         }
+        catch(e){
+            console.log(e)
+        }
+        
     }
-    // console.log(list);
+
+    useEffect(()=>{
+        getWhiteList()
+    },[])
 
     const clickInput1 = async () => {
         if (await myContract.methods.isWhitelisted(input1.current).call() == true) {
@@ -88,6 +57,7 @@ const WhiteList = () => {
                     if (result === "Success!") {
                         alert("화이트리스트 설정 완료되었습니다!");
                     }
+                    getWhiteList()
                 })
         }
     }
@@ -109,6 +79,7 @@ const WhiteList = () => {
                     if (result === "Success!") {
                         alert("화이트리스트 제거 완료되었습니다!");
                     }
+                    getWhiteList()
                 })
         }
     }
@@ -116,7 +87,7 @@ const WhiteList = () => {
     const clickInput3 = async () => {
         console.log(await myContract.methods.isWhitelisted(input3.current).call())
     }
-
+        
     return (
         <div>
             <div className="Cont">
@@ -135,7 +106,6 @@ const WhiteList = () => {
                         <Button variant="outline-secondary" id="button-addon2" onClick={clickInput1}>
                             Add
                         </Button>
-                        {/* </div> */}
                     </InputGroup>
                 </div>
                 <input onChange={(e) => input2.current = e.target.value}></input><button onClick={clickInput2}>화리 삭제</button>
@@ -163,17 +133,6 @@ const WhiteList = () => {
                     </tr>
                 </tbody>
             </Table>
-            {/* { clickState &&
-            <div className="addInfo">
-                <input placeholder='publicKey' value={valueKey}  onChange={(e) => setValueKey(e.target.value)}/> 
-            </div>
-        }
-
-        <Button variant="info" size="lg" onClick={clickHandler}>
-            {
-                !clickState ? "등록하기" : "추가하기" 
-            }
-        </Button> */}
         </div>
     )
 }
