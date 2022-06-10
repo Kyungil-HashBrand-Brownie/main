@@ -4,9 +4,10 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "./token.sol";
+import "./Token.sol";
+import "./Whitelist.sol";
 
-contract BrownieNft is ERC721, Ownable {
+contract BrownieNft is ERC721, Whitelist {
     BrownieToken instance = new BrownieToken();
 
     function instanceGetBtk(uint256 amount) public payable {
@@ -19,30 +20,6 @@ contract BrownieNft is ERC721, Ownable {
 
     function viewIns() public view returns(address) {
         return address(instance);
-    }
-
-    mapping(address => bool) whitelist;
-    event AddedToWhitelist(address indexed account);
-    event RemovedFromWhitelist(address indexed account);
-
-    modifier onlyWhitelisted(address to) {
-        require(isWhitelisted(to));
-        _;
-    }
-
-    function add(address _address) public onlyOwner {
-        require(whitelist[_address] == false, "Already whitelist");
-        whitelist[_address] = true;
-        emit AddedToWhitelist(_address);
-    }
-
-    function remove(address _address) public onlyOwner {
-        whitelist[_address] = false;
-        emit RemovedFromWhitelist(_address);
-    }
-
-    function isWhitelisted(address _address) public view returns(bool) {
-        return whitelist[_address];
     }
 
     using Counters for Counters.Counter;
