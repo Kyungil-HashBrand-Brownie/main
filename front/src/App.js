@@ -7,10 +7,13 @@ import Header from './components/Header';
 import WhiteList from './page/WhiteList';
 import AdminPage from './page/AdminPage';
 import Testpage from './page/Testpage';
+import styled from 'styled-components';
+import Img from './img/background/background11.png';
+
 
 function App() {
-  return (
-    <>
+    return (
+      <>
         <Header />
         <Routes>
           <Route path="/" element={<Home/>} /> 
@@ -19,8 +22,8 @@ function App() {
           <Route path="/admin" element={<AdminPage/>} /> 
           <Route path="/test" element={<Testpage/>} /> 
         </Routes>
-    </>
-  );
+      </>
+    );
 }
 
 export default App;

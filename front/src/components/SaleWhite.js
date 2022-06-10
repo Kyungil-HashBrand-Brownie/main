@@ -95,9 +95,6 @@ const WhiteSale = () => {
                 <StyledDiv >
                     <img src={Browny} style={{ width: 220, height: 220 }} />
                 </StyledDiv>
-                <StyledBar >
-                    <ProgressBar animated now={65} />
-                </StyledBar>
                 <div className="mint-count-box">
                     <StyledButton onClick={() => countMinus()}>  - </StyledButton>
                     <span className="mint-count">Mint : {count}</span>
@@ -107,7 +104,7 @@ const WhiteSale = () => {
                 <Container className="mint-info-box">
                     <Row>
                         <Col>Price</Col>
-                        <Col>60 KLAY</Col>
+                        <Col>1 KLAY</Col>
                     </Row>
                     <Row>
                         <Col>Per transaction</Col>
