@@ -1,5 +1,5 @@
 # 🥨 BROWNY NFT
-    ![타이틀이미지](docs/images/title.png)
+![타이틀이미지](docs/images/title.png)
 
 ## 🧇 프로젝트 진행 기간
 2022.06.02 ~ 예정 없음
