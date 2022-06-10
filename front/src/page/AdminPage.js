@@ -7,19 +7,19 @@ import { useState } from 'react'
 
 
 const AdminPage = () => {
-  const [click, setClick] = useState(false);
+  const [click, setClick] = useState(0);
 
-  const click1 = () => {
-    setClick(!click)
+  const click1 = (item) => {
+    setClick(item)
   }
 
   return (
       <div>
-        <button onClick={click1}>화이트키</button>
-        <button onClick={click1}>mint</button>
+        <button onClick={()=>click1(0)}>화이트키</button>
+        <button onClick={()=>click1(1)}>mint</button>
 
         {
-          !click ? <WhiteListMember /> : <QuitMint /> 
+          click == 0 ? <WhiteListMember /> : <QuitMint /> 
         }
 
           {/* <EarthVote /> */}

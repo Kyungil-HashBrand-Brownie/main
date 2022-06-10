@@ -17,7 +17,16 @@ import styled from 'styled-components'
     `
 
     const MintCard = styled.div`
-        width: 33%;
+        width: 18%;
+        height: 500px;
+        margin: 15px;
+        display: flex ;
+        justify-content: center;
+        align-items: center;
+    `
+
+    const CardDiv = styled.div`
+        width: 100%;
         height: 500px;
         display: flex ;
         justify-content: center;
@@ -29,67 +38,106 @@ const QuitMint = () => {
 
   return (
     <div>
-        {/* <Table striped>
-            <thead>
-                <tr>
-                <th>#</th>
-                <th>사진</th>
-                <th>남은 개수</th>
-                <th>분포율</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><img src={FreeImg} width="100px"/></td>
-                    <td>1/100</td>
-                    <td>3%</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><img src={WhiteImg} width="100px"/></td>
-                    <td>30/59</td>
-                    <td>59%</td>
-                </tr>
-            </tbody>
-        </Table> */}
         <Styled>
         <h2> Mint 현황 </h2>
         <CardGroup className="CardGroup">
-            <MintCard >
-                <Card className='cardnft'>
-                    <Card.Img  variant="top" src={browny8} width="100px"/>
-                    <Card.Body>
-                    <Card.Title>Nft title </Card.Title>
-                    <Card.Text>
-                        남은 개수 : 40 / 100
-                    </Card.Text>
-                    </Card.Body>
-                </Card>
+            <MintCard className=''>
+                <CardDiv >
+                    <Card className='cardnft'>
+                        <Card.Img  variant="top" src={browny8} width="100%" height="100%" />
+                        <Card.Body>
+                        <Card.Title>Nft title </Card.Title>
+                        <Card.Text>
+                            남은 개수 : 40 / 100
+                        </Card.Text>
+                        </Card.Body>
+                    </Card>
+                </CardDiv>
             </MintCard >
             
             <MintCard>
+                <CardDiv >
                 <Card className="cardnft">
-                    <Card.Img variant="top" src={browny9} />
+                    <Card.Img variant="top" src={browny9} width="100%" height="100%" />
                     <Card.Body>
-                    <Card.Title>Card title</Card.Title>
+                    <Card.Title>Nft title</Card.Title>
                     <Card.Text>
                         남은 개수 : 40 / 100
                     </Card.Text>
                     </Card.Body>
                 </Card>
+                </CardDiv >
+
             </MintCard>
             <MintCard>
+            <CardDiv >
                 <Card className="cardnft">
-                    <Card.Img variant="top" src={browny9} />
+                    <Card.Img variant="top" src={browny9} height="100%" width="100%" />
                     <Card.Body>
-                    <Card.Title>Card title</Card.Title>
+                    <Card.Title>Nft title</Card.Title>
                     <Card.Text>
                         남은 개수 : 40 / 100
                     </Card.Text>
                     </Card.Body>
                 </Card>
+                </CardDiv >
             </MintCard>
+
+            <MintCard>
+            <CardDiv >
+                <Card className="cardnft">
+                    <Card.Img variant="top" src={browny9} height="100%" width="100%" />
+                    <Card.Body>
+                    <Card.Title>Nft title</Card.Title>
+                    <Card.Text>
+                        남은 개수 : 40 / 100
+                    </Card.Text>
+                    </Card.Body>
+                </Card>
+                </CardDiv >
+            </MintCard>
+
+            <MintCard>
+            <CardDiv >
+                <Card className="cardnft">
+                    <Card.Img variant="top" src={browny9} height="100%" width="100%" />
+                    <Card.Body>
+                    <Card.Title>Nft title</Card.Title>
+                    <Card.Text>
+                        남은 개수 : 40 / 100
+                    </Card.Text>
+                    </Card.Body>
+                </Card>
+                </CardDiv >
+            </MintCard>
+
+            <MintCard>
+            <CardDiv >
+                <Card className="cardnft">
+                    <Card.Img variant="top" src={browny9} height="100%" width="100%" />
+                    <Card.Body>
+                    <Card.Title>Nft title</Card.Title>
+                    <Card.Text>
+                        남은 개수 : 40 / 100
+                    </Card.Text>
+                    </Card.Body>
+                </Card>
+                </CardDiv >
+            </MintCard>
+
+            <MintCard>
+                <CardDiv >
+                    <Card className="cardnft">
+                        <Card.Img variant="top" src={browny9} height="100%" width="100%" />
+                        <Card.Body>
+                        <Card.Title>Nft title</Card.Title>
+                        <Card.Text>
+                            남은 개수 : 40 / 100
+                        </Card.Text>
+                        </Card.Body>
+                    </Card>
+                    </CardDiv >
+                </MintCard>
             </CardGroup>
             <Button variant="danger" size="lg">
                 mint 종료
@@ -97,13 +145,7 @@ const QuitMint = () => {
             </Styled>
 
     </div>
-  )
-}
+  );
+};
 
-export default QuitMint
-
-
-
-/* 
-    컨트랙트에 주소밸류
-*/
+export default QuitMint;

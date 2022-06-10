@@ -8,14 +8,21 @@ import FormControl from 'react-bootstrap/FormControl'
 import styled from 'styled-components'
 import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
+import Form from 'react-bootstrap/Form';
+import { trash } from '../img'
+
+
+const Trash = styled.div`
+    width: 50px;
+`
 
 
     
 const WhiteList = () => {
-    const { myContract } = useSelector(state => state.nft);
-    const { accounts } = useSelector(state => state.nft)
+    const { myContract,accounts } = useSelector(state => state.nft);
 
-    const [list, setList] = useState([])
+    const [list, setList] = useState([]);
+    const [checkDelete, setCheckDelete] = useState(false);
 
     const input1 = useRef("")
     const input2 = useRef("")
@@ -30,6 +37,10 @@ const WhiteList = () => {
             console.log(e)
         }
         
+    }
+
+    const buttonDelete = () => {
+        setCheckDelete(!checkDelete)
     }
 
     useEffect(()=>{
@@ -108,8 +119,15 @@ const WhiteList = () => {
                         </Button>
                     </InputGroup>
                 </div>
-                <input onChange={(e) => input2.current = e.target.value}></input><button onClick={clickInput2}>화리 삭제</button>
-                <input onChange={(e) => input3.current = e.target.value}></input><button onClick={clickInput3}>화리 확인</button>
+
+                <div>
+                    <h2>test</h2>
+                    <input onChange={(e) => input2.current = e.target.value}></input><button onClick={clickInput2}>화리 삭제</button>
+                    <input onChange={(e) => input3.current = e.target.value}></input><button onClick={clickInput3}>화리 확인</button>
+                    <Trash >
+                    <img src={trash}  onClick={buttonDelete} width="100%"/>
+                    </Trash>
+                </div>
             </div>
             <Table striped>
                 <thead>
@@ -122,18 +140,26 @@ const WhiteList = () => {
                     {
                         list.map((item, index) => {
                             return <tr key={index}>
-                                <td> *</td>
+                                {/* <td> *</td> */}
+                                <td>
+                                    {
+                                        !checkDelete ?
+                                        <span> *</span>
+                                        : <Form.Check aria-label="option 1" />
+
+                                    }
+                                </td>
                                 <td>{item.publicKey}</td>
                             </tr>
                         })
                     }
                     <tr>
-                        <td>*</td>
                         <td>{accounts} </td>
                     </tr>
                 </tbody>
             </Table>
         </div>
+        
     )
 }
 
