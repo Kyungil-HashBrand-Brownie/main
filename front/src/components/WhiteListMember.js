@@ -107,7 +107,7 @@ const WhiteList = () => {
     const clickInput3 = async () => {
         console.log(await myContract.methods.isWhitelisted(input3.current).call())
     }
-
+        
     return (
         <div>
             <div className="Cont">
