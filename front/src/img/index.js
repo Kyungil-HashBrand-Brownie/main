@@ -17,6 +17,8 @@ import EP2 from './EP2.png'
 import EP3 from './EP3.png'
 import browny8 from './browny8.png'
 import browny9 from './browny9.png'
+import trash from './trash.png'
+import browny10 from './browny10.png'
 
 
-export {FreeImg , WhiteImg , browny1 , Apro , Epro , ModalKpro, ani1 , ani2 , ani3 , ModalAni1, Kproblem ,KP1, KP2, KP3, EP1, EP2, EP3 , browny8, browny9};
+export {FreeImg , WhiteImg , browny1 , Apro , Epro , ModalKpro, ani1 , ani2 , ani3 , ModalAni1, Kproblem ,KP1, KP2, KP3, EP1, EP2, EP3 , browny8, browny9, trash , browny10};

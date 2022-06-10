@@ -47,11 +47,6 @@ body {
   justify-content: center;
 }
 
-.MintCard {
-  margin-top: 100px;
-  /* background-color: brown; */
-}
-
 
 .profile-inner {
   width: 80%;
@@ -298,11 +293,11 @@ body {
 }
 
 .cardnft{
-  margin: 20px;
-  background-color: green;
-  width: 40%;
-  height: 400px;
-  
+  /* display: flex; */
+  /* text-align: center; */
+  /* justify-content: center; */
+  width: 100%;
+  height: 100%;
 }
 
 .father{
@@ -313,4 +308,7 @@ body {
 
 .CardGroup{
   width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }

@@ -9,8 +9,8 @@ import kakao3 from "../img/footer/kakao3.jpg"
 import kakao4 from "../img/footer/kakao4.jpg"
 
 const Outer = styled.div`
-    position: absolute;
-    bottom: 0;
+    /* position: absolute; */
+    margin-top: 200px;
     /* background: blue; */
     width: 100%;
 `
