@@ -29,8 +29,8 @@ function App() {
           <Route path="/admin" element={<AdminPage/>} /> 
           <Route path="/test" element={<Testpage/>} /> 
         </Routes>
-    </>
-  );
+      </>
+    );
 }
 
 export default App;
