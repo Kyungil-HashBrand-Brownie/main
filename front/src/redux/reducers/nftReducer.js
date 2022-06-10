@@ -6,6 +6,8 @@ let initialState = {
     countTotal : 0,
     accounts : "",
     myContract: {},
+    modalState: false,
+    btkInstance: "",
 }
 
 function nftReducer(state=initialState, action) {
@@ -13,9 +15,19 @@ function nftReducer(state=initialState, action) {
 
     // const result = Object.keys(payload)[0] || null;
 
-    console.log("action", action)
-    console.log("payload", payload)
+    // console.log("action", action)
+    // console.log("payload", payload)
     switch (type) {
+        case "MODAL_CLICK": 
+            return {...state,
+                modalState: !state.modalState,
+            };
+
+        case "MODAL_CLOSE":
+            return {...state,
+                modalState: false,
+            };
+            
         case "VOTE_INCREMENT":
             return {...state,
                 [Object.keys(payload)[0]] : Object.values(payload)[0],
@@ -33,6 +45,12 @@ function nftReducer(state=initialState, action) {
             console.log("contract: ", payload);
             return {...state,
                 myContract: payload,                
+            }
+
+        case "BTK_INSTANCE":
+            console.log("btk instance : ", payload);
+            return {...state,
+                btkInstance: payload
             }
 
         default:

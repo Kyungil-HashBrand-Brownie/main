@@ -116,9 +116,6 @@ const FreeSale = () => {
                         <img src={Browny} style={{ width: 187, height: 220 }} />
                     </StyledDiv>
                 </div>
-                <StyledBar >
-                    <ProgressBar animated now={65} />
-                </StyledBar>
                 <div className='mint-count-box'>
                     <StyledButton onClick={() => countMinus()}>  - </StyledButton>
                     <span>Mint : {count}</span>
@@ -127,7 +124,7 @@ const FreeSale = () => {
                 <Container className="mint-info-box">
                     <Row>
                         <Col>Price</Col>
-                        <Col>60 KLAY</Col>
+                        <Col>2 KLAY</Col>
                     </Row>
                     <Row>
                         <Col>Per transaction</Col>
@@ -141,7 +138,7 @@ const FreeSale = () => {
                 <br />
                 {/* <Button className="mint-wal-connect-btn" variant="success" onClick={onClick}>지갑 연결하기</Button>{' '} */}
                 <Button className="mint-wal-connect-btn" variant="success" onClick={onClick2}>노진형 nft 받기</Button>{' '}
-                <Button className="mint-wal-connect-btn" variant="success" onClick={onClick3}>화이트리스트 테스트</Button>{' '}
+                {/* <Button className="mint-wal-connect-btn" variant="success" onClick={onClick3}>화이트리스트 테스트</Button>{' '} */}
 
             </StyledMain>
         </div>
