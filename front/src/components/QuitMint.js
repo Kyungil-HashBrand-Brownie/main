@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import {browny1} from '../img'
-import { FreeImg , WhiteImg, browny8 , browny9} from '../img'
+import { FreeImg , WhiteImg, browny8 , browny9 , browny10 } from '../img'
 import Card from 'react-bootstrap/Card'
 import { Row, Col}from 'react-bootstrap';
 import CardGroup from 'react-bootstrap/CardGroup'
@@ -58,7 +58,7 @@ const QuitMint = () => {
             <MintCard>
                 <CardDiv >
                 <Card className="cardnft">
-                    <Card.Img variant="top" src={browny9} width="100%" height="100%" />
+                    <Card.Img variant="top" src={browny10} width="100%" height="100%" />
                     <Card.Body>
                     <Card.Title>Nft title</Card.Title>
                     <Card.Text>
@@ -72,7 +72,7 @@ const QuitMint = () => {
             <MintCard>
             <CardDiv >
                 <Card className="cardnft">
-                    <Card.Img variant="top" src={browny9} height="100%" width="100%" />
+                    <Card.Img variant="top" src={browny10} height="100%" width="100%" />
                     <Card.Body>
                     <Card.Title>Nft title</Card.Title>
                     <Card.Text>
@@ -86,7 +86,7 @@ const QuitMint = () => {
             <MintCard>
             <CardDiv >
                 <Card className="cardnft">
-                    <Card.Img variant="top" src={browny9} height="100%" width="100%" />
+                    <Card.Img variant="top" src={browny10} height="100%" width="100%" />
                     <Card.Body>
                     <Card.Title>Nft title</Card.Title>
                     <Card.Text>
@@ -100,7 +100,7 @@ const QuitMint = () => {
             <MintCard>
             <CardDiv >
                 <Card className="cardnft">
-                    <Card.Img variant="top" src={browny9} height="100%" width="100%" />
+                    <Card.Img variant="top" src={browny10} height="100%" width="100%" />
                     <Card.Body>
                     <Card.Title>Nft title</Card.Title>
                     <Card.Text>
@@ -114,7 +114,7 @@ const QuitMint = () => {
             <MintCard>
             <CardDiv >
                 <Card className="cardnft">
-                    <Card.Img variant="top" src={browny9} height="100%" width="100%" />
+                    <Card.Img variant="top" src={browny10} height="100%" width="100%" />
                     <Card.Body>
                     <Card.Title>Nft title</Card.Title>
                     <Card.Text>
@@ -128,7 +128,7 @@ const QuitMint = () => {
             <MintCard>
                 <CardDiv >
                     <Card className="cardnft">
-                        <Card.Img variant="top" src={browny9} height="100%" width="100%" />
+                        <Card.Img variant="top" src={browny10} height="100%" width="100%" />
                         <Card.Body>
                         <Card.Title>Nft title</Card.Title>
                         <Card.Text>
