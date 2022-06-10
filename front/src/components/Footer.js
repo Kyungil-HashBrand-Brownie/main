@@ -32,7 +32,8 @@ const Foot = styled.div`
         /* position: absolute; */
         margin-top: 30px;
         /* margin-bottom: 30px; */
-        color: white;
+        color: brown;
+        font-weight: 600;
         font-size: 1vw;
         line-height: 16px;
         font-family: 'Walter Turncoat', cursive;
