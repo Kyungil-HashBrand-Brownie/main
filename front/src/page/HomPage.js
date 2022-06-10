@@ -169,8 +169,6 @@ const HomePage = () => {
     }
 
     useEffect(() => { 
-      let myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3");
-      dispatch({type: "CONTRACT_SUCCESS", payload: myContract});
       deadline = new Date('July 22, 2022 00:00:00').getTime();
       timer.current = setInterval(count, 1000);   
       // timer();   

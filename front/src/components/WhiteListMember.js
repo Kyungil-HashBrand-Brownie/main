@@ -3,15 +3,39 @@ import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
 import contractAbi from "../abi.json"
+import InputGroup from 'react-bootstrap/InputGroup'
+import FormControl from 'react-bootstrap/FormControl'
+import styled from 'styled-components'
+import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
+
+
+/* 
+    추가했을때 바로 생긴다
+    axios 로 가져와서
+    똑같이?
+*/
+    const Styled = styled.div`
+        justify-content: center;
+        text-align: center;
+        margin: 10px;
+        align-items: center;
+    `
 
 const WhiteList = () => {
     const { myContract } = useSelector(state => state.nft);
-
     let WhiteList = [{
         id: "초기값 ",
         publicKey: "0xzksnj421431ebbf700f436b15c672840asjce32",
     }];
+
+    
+    /* 
+        axios 초기값 설정.
+        추가하기 
+        set list 최신화
+
+    */
 
     const { accounts } = useSelector(state => state.nft)
 
@@ -28,8 +52,6 @@ const WhiteList = () => {
     const input2 = useRef("")
     const input3 = useRef("")
 
-
-
     const clickHandler = () => {
         if (!clickState) setClickState(true)
         else {
@@ -37,51 +59,91 @@ const WhiteList = () => {
                 alert("입력해주세요")
             } else {
                 // publickey = div 에 있는 초기값 publickey 이름 넣어주기 
-                setList(list.concat([{publicKey : valueKey}]));
+                setList(list.concat([{ publicKey: valueKey }]));
                 setClickState(!clickState);
                 setValueKey("");
             }
         }
     }
-    console.log(list);
+    // console.log(list);
 
     const clickInput1 = async () => {
+        if (await myContract.methods.isWhitelisted(input1.current).call() == true) {
+            return alert('이미 등록됨')
+        }
         // console.log(myContract);
         // console.log(await myContract.methods.add(input1.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 }))
         const Sucs = await myContract.methods.add(input1.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 })
+        console.log(Sucs)
+        console.log(input1.current)
         if (Sucs.status === true) {
             await axios.post('http://localhost:4000/whitelist',
                 {
-                    data: Sucs,
+                    data: { from: input1.current, status: Sucs.status },
                 })
                 .then((res) => {
                     console.log(res);
                     let result = res.data;
                     console.log(result)
-                    if (result === "Success") {
+                    if (result === "Success!") {
                         alert("화이트리스트 설정 완료되었습니다!");
-                    }
-
-                    else {
-                        alert("중복된 값!");
                     }
                 })
         }
     }
     const clickInput2 = async () => {
-        console.log(await myContract.methods.remove(input2.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 }))
+        if (await myContract.methods.isWhitelisted(input2.current).call() == false) {
+            return alert('등록되지 않음')
+        }
+        console.log(input2.current)
+        const Del = await myContract.methods.remove(input2.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 })
+        if (Del.status === true) {
+            await axios.post('http://localhost:4000/deletelist',
+                {
+                    data: { from: input2.current, status: Del.status },
+                })
+                .then((res) => {
+                    console.log(res);
+                    let result = res.data;
+                    console.log(result)
+                    if (result === "Success!") {
+                        alert("화이트리스트 제거 완료되었습니다!");
+                    }
+                })
+        }
     }
+    
     const clickInput3 = async () => {
         console.log(await myContract.methods.isWhitelisted(input3.current).call())
     }
 
     return (
         <div>
-            <h2>White List key</h2>
+            <div className="Cont">
+                <h1>White List key</h1>
+                <div className='father'>
+                    <InputGroup className="mb-3" >
+                        {/* <div width="100%"> */}
+                        <FormControl
+                            // className="Input_Gruop"
+                            placeholder="White List"
+                            aria-label="Recipient's username"
+                            aria-describedby="basic-addon2"
+                            // size='lg'
+                            onChange={(e) => input1.current = e.target.value}
+                        />
+                        <Button variant="outline-secondary" id="button-addon2" onClick={clickInput1}>
+                            Add
+                        </Button>
+                        {/* </div> */}
+                    </InputGroup>
+                </div>
+                <input onChange={(e) => input2.current = e.target.value}></input><button onClick={clickInput2}>화리 삭제</button>
+                <input onChange={(e) => input3.current = e.target.value}></input><button onClick={clickInput3}>화리 확인</button>
+            </div>
             <Table striped>
                 <thead>
                     <tr>
-                        {/* 주소를 입력해서 추가  */}
                         <th>#</th>
                         <th>public key</th>
                     </tr>
@@ -112,9 +174,6 @@ const WhiteList = () => {
                 !clickState ? "등록하기" : "추가하기" 
             }
         </Button> */}
-            <input onChange={(e) => input1.current = e.target.value}></input><button onClick={clickInput1}>화리 등록</button>
-            <input onChange={(e) => input2.current = e.target.value}></input><button onClick={clickInput2}>화리 삭제</button>
-            <input onChange={(e) => input3.current = e.target.value}></input><button onClick={clickInput3}>화리 확인</button>
         </div>
     )
 }
