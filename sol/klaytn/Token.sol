@@ -5,8 +5,8 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract BrownieToken is ERC20Burnable, Ownable {
-    constructor() ERC20("BrownieToken", "BTK") {
-        _mint(address(this), 100000 * 10 ** decimals());
+    constructor(address conAddr) ERC20("BrownieToken", "BTK") {
+        _mint(conAddr, 100000 * 10 ** decimals());
     }
 
     function mint(address to, uint256 amount) private onlyOwner {
@@ -21,7 +21,6 @@ contract BrownieToken is ERC20Burnable, Ownable {
     function sellBtk(address _tokenAddr, address _user, uint256 _amount) public {
         require(_tokenAddr.balance >= _amount * 10 ** decimals(), "Please check your balance");
         _transfer(_user, _tokenAddr, _amount * 10 ** decimals());
-        payable(_user).transfer(_amount * 10 ** decimals());
     }
 
     function tokenTransfer(address _from, address _to, uint256 _amount) public {
