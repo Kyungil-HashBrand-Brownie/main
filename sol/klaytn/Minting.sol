@@ -14,8 +14,8 @@ contract BrownieNft is ERC721, Whitelist {
         instance.getBtk(address(instance), msg.sender, amount, msg.value);
     }
 
-    function instanceSellBtk(uint256 amount) public payable {
-        instance.sellBtk(address(instance), msg.sender, amount, msg.value);
+    function instanceSellBtk(uint256 amount) public {
+        instance.sellBtk(address(instance), msg.sender, amount);
     }
 
     function viewIns() public view returns(address) {
@@ -50,7 +50,7 @@ contract BrownieNft is ERC721, Whitelist {
         return randomNum;
     }
 
-    function safeMint(address to) private  {
+    function safeMint(address to) private {
         uint256 randomNum = randNum();
         _safeMint(to, randomNum);
     }
@@ -61,26 +61,27 @@ contract BrownieNft is ERC721, Whitelist {
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), fileExtention)) : "";
     }
 
-    function batchMint(address to, uint amount) public payable {
-        require(msg.value == amount * 2 * 10 ** 18 , "Please check your balance");
-        for (uint i = 0; i < amount; i++) {
+    function batchMint(address to, uint256 amount) public {
+        require(instance.balanceOf(to) >= amount * 2 * 10 ** 18 , "Please check your balance");
+        for (uint256 i = 0; i < amount; i++) {
             safeMint(to);
             _tokenIdCounter.increment();
+            instance.tokenTransfer(to, address(instance), 2);
         }
     }
 
-    function whitelistMint(address to, uint amount) public payable onlyWhitelisted(to) {
-        uint256 whiteCounter = _whitelistCounter.current();
-        require(msg.value == amount * 10 ** 18 , "Please check your balance");
-        require(whiteCounter + amount <= 30,"Total NFT for whitelist users is only thirty");
-        for (uint i = 0; i < amount; i++) {
+    function whitelistMint(address to, uint256 amount) public onlyWhitelisted(to) {
+        require(instance.balanceOf(to) >= amount * 10 ** 18 , "Please check your balance");
+        require(_whitelistCounter.current() + amount <= 30,"Total NFT for whitelist users is only thirty");
+        for (uint256 i = 0; i < amount; i++) {
             safeMint(to);
             _tokenIdCounter.increment();
             _whitelistCounter.increment();
+            instance.tokenTransfer(to, address(instance), 1);
         }
     }
 
-    function withdrawKLAY(uint _balance) public payable onlyOwner {
+    function withdrawKLAY(uint _balance) public onlyOwner {
         require(address(this).balance >= _balance * 10 ** 18, "insurfficient balance");
         payable(msg.sender).transfer(_balance * 10 ** 18);
     }
