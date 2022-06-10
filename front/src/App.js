@@ -18,6 +18,8 @@ function App() {
   useEffect(() => { 
     let myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3");
     dispatch({type: "CONTRACT_SUCCESS", payload: myContract});
+    let btkInstance = window.caver.kct.kip7.create("0x1ecaf14bd3cc4cfd69d1f340dd81216c2f045e53")
+    dispatch({type: "BTK_INSTANCE", payload: btkInstance});
   }, [])
   return (
     <>
