@@ -162,6 +162,7 @@ const Header = () => {
                     {/* <Link className='nav-item' to="/whitelist">Whitelist</Link> */}
                     <Link onClick={closeModal} className='nav-item' to="/admin">admin</Link>
                     <Link onClick={closeModal} className='nav-item' to="/test">testpage</Link>
+                    <Link onClick={closeModal} className='nav-item' to="/swap">swap</Link>
                 </Nav>
                 {/* <SearchBox>
                     <SearchInput 

@@ -7,6 +7,11 @@ body {
 .backG-left-img {
   position: absolute;
   width: 15%;
+  z-index: 1;
+}
+
+.admin-outer-box {
+  z-index: 3;
 }
 
 .backG-img {
@@ -311,4 +316,30 @@ body {
   display: flex;
   text-align: center;
   justify-content: center;
+}
+
+.select-box {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10%;
+  border: 4px solid brown;
+  padding: 10px 8px 10px 6px;
+  background-color: white;
+}
+.swap-select, .swap-amount-input {
+  margin-bottom: 10px;
+}
+.swapL-select, .swapR-select {
+  width: 30%;
+}
+.swap-box {
+  display: flex;
+  justify-content: center;
+}
+.swap-submit {
+  /* width: 40%; */
+  /* background-color: red; */
 }
