@@ -14,6 +14,7 @@ import Img from '../img/background/background11.png';
 import LeftImg from '../img/chocolate/choco1.png';
 import LeftImg2 from '../img/chocolate/choco2.png';
 import LeftImg3 from '../img/chocolate/choco3.png';
+import RightImg from '../img/chocolate/choco4.png';
 import Arrow from '../img/arrow.png';
 import Ellipse from '../img/Ellipse1.png';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -183,10 +184,18 @@ const HomePage = () => {
         className='backG-img'
         src={Img}
       />
-      <img 
+      {/* <img 
         className='backG-left-img'
         src={LeftImg3}
+      /> */}
+      <img 
+        className='backG-right-img'
+        src={RightImg}
       />
+      {/* <img 
+        className='backG-right-img2'
+        src={RightImg}
+      /> */}
       <div className='mintdate-container'>
         <StyledMintDate>
           <span>민팅 시작까지 남은 시간</span><br />

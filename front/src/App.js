@@ -11,7 +11,9 @@ import AdminPage from './page/AdminPage';
 import Testpage from './page/Testpage';
 import { useDispatch } from 'react-redux';
 import contractAbi from "./abi.json";
-
+import LeftImg3 from './img/chocolate/choco3.png';
+import RightImg from './img/chocolate/choco4.png';
+import Swap from './page/Swap';
 
 function App() {
   const dispatch = useDispatch();
@@ -25,12 +27,25 @@ function App() {
   return (
     <>
         <Header />
+        <img 
+          className='backG-left-img'
+          src={LeftImg3}
+        />
+        {/* <img 
+          className='backG-right-img'
+          src={RightImg}
+        /> */}
+        <img 
+          className='backG-right-img2'
+          src={RightImg}
+        />
         <Routes>
           <Route path="/" element={<Home/>} /> 
           <Route path="/mint" element={<Mint/>} /> 
           {/* <Route path="/whitelist" element={<WhiteList/>} />  */}
           <Route path="/admin" element={<AdminPage/>} /> 
           <Route path="/test" element={<Testpage/>} /> 
+          <Route path="/swap" element={<Swap/>} /> 
         </Routes>
         <Footer />
       </>
