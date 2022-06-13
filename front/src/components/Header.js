@@ -61,7 +61,7 @@ const PFPContainer = styled.div`
   border-radius: 20px;
   background-color: #198754;
   border-color: #198754;
-  letter-spacing: 1px;
+  letter-spacing: -1px;
   padding: 1px 20px;
   cursor: pointer;
   color: white;
@@ -71,7 +71,7 @@ const PFPContainer = styled.div`
   }
 `
 const StyledInfo = styled.div`
-    /* background: red; */
+    background-color: white;
     width: 105%;
     margin-top: 7px;
     position: relative;
@@ -81,35 +81,54 @@ const StyledInfo = styled.div`
     font-weight: bold;
     line-height: 30px;
     /* margin-right: 20px; */
-    background: white;
+    /* background: white; */
     text-align: center;
+    z-index: 3;
+    opacity: 90%;
 `
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState } = useSelector(state => state.nft);
+    const { modalState, btkInstance } = useSelector(state => state.nft);
 
     const [checked, setChecked] = useState(false);
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(null);
+    const [btkBalance, setBtkBalance] = useState(0);
     const [infoState, setInfoState] = useState(false);
 
-    const onClick = async () => {
+    const weiToFixed = (wei) => {
+        const toKlay = window.caver.utils.convertFromPeb(wei);
+        const fixed = parseFloat(toKlay).toFixed(2);
+        return fixed;
+    }
+
+    const setTokenBalance = async (accounts) => {
+        if(btkInstance){
+            const weiBalance = await window.caver.klay.getBalance(accounts[0])
+            const fixedBalance = weiToFixed(weiBalance)
+            const weibtkBalance = await btkInstance.balanceOf(window.klaytn.selectedAddress) //BigNumber 객체
+            const fixedbtkBalance = weiToFixed(weibtkBalance)
+            
+            setBalance(fixedBalance)
+            setBtkBalance(fixedbtkBalance);
+        }
+        
+    }
+
+    const setUserInfo = async () => {
         const accounts = await window.klaytn.enable()
         console.log(accounts)
-        const balance = await window.caver.klay.getBalance(accounts[0])
-        setAddress(accounts);
-        setBalance(balance);
-        console.log(balance)
+
+        setAddress(accounts[0]);
+        setTokenBalance(accounts)
     }
 
     window.klaytn.on('accountsChanged', async function(accounts) {
         console.log(accounts[0])
         sessionStorage.setItem('id', accounts[0]);
         setAddress(accounts[0]);
-        const balance = await window.caver.klay.getBalance(window.klaytn.selectedAddress)
-        setBalance(balance);
-        console.log(window.caver.utils.fromWei(balance))
+        if(btkInstance) setTokenBalance(accounts)
     })
 
     const copyAddress = () => {
@@ -126,8 +145,8 @@ const Header = () => {
     }
 
     useEffect(() => {
-        console.log(address);
-    }, [address])
+        setUserInfo();
+    }, [btkInstance])
 
     return (
         <Navbar className="nav" expand="lg">
@@ -147,6 +166,7 @@ const Header = () => {
                     {/* <Link className='nav-item' to="/whitelist">Whitelist</Link> */}
                     <Link onClick={closeModal} className='nav-item' to="/admin">admin</Link>
                     <Link onClick={closeModal} className='nav-item' to="/test">testpage</Link>
+                    <Link onClick={closeModal} className='nav-item' to="/swap">swap</Link>
                 </Nav>
                 {/* <SearchBox>
                     <SearchInput 
@@ -189,11 +209,13 @@ const Header = () => {
                             onClick={copyAddress}    
                         />
                         <br />
-                        {balance.slice(0,3)+'.'+balance.slice(3,5) + " KLAYS"}
+                        {balance + " KLAYS"}
+                        <br />
+                        {btkBalance + " BTK"}
                         </StyledInfo>
                     }
                 </div>
-                : <><Button className="mint-wal-connect-btn" variant="success" onClick={onClick}>지갑 연결하기</Button>{' '}</>
+                : <><Button className="mint-wal-connect-btn" variant="success" onClick={setUserInfo}>지갑 연결하기</Button>{' '}</>
                 }
                 </Navbar.Collapse>
             </Container>

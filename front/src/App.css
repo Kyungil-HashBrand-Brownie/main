@@ -1,16 +1,17 @@
 body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  /* background-image: url('./img/chocolate/choco1.png'); */
-  /* background-repeat: no-repeat; */
-  /* background-size: cover; */
+  /* overflow-x: hidden; */
   background: linear-gradient(90deg, #deb38d 0.51%, #deb38d 0.52%, #deb38d 37.46%, #deb38d 53.47%, #f6f698 100%);
-  /* background-blend-mode: multiply; */
 }
 .backG-left-img {
   position: absolute;
   width: 15%;
+  z-index: 1;
+}
+
+.admin-outer-box {
+  z-index: 3;
 }
 
 .backG-img {
@@ -19,6 +20,20 @@ body {
   z-index: -1;
 }
 
+.backG-right-img {
+  position: absolute;
+  right: 13%;
+  top: -4%;
+  z-index: -4;
+}
+.backG-right-img2 {
+  position: absolute;
+  right: -5%;
+  /* opacity: 30%; */
+  /* z-index: -1; */
+  /* top: -4%; */
+  z-index: 1;
+}
 /* .main-outer {
   width: 100%;
   height: 120%;
@@ -39,14 +54,6 @@ body {
   justify-content: center;
 }
 
-.MintCard {
-  margin-top: 100px;
-  /* background-color: brown; */
-}
-
-.FreeSale {
-  /* background-color: blue; */
-}
 
 .profile-inner {
   width: 80%;
@@ -87,13 +94,21 @@ body {
   /* background-color: red; */
 }
 
+.main-button-container {
+  position: relative;
+  /* top: 50%; */
+}
+
 .main-col {
   /* background: blue; */
-  /* position: relative; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  position: relative;
   /* margin-right: 30%; */
 }
 
 .main-img-col {
+  /* background-color: #f6f698; */
   display: flex;
   flex-direction: row;
   padding-top: 130px;
@@ -137,9 +152,9 @@ body {
 }
 
 
-.FreeSale {
-  /* background-color: blue; */
-}
+/* .FreeSale {
+  background-color: blue;
+} */
 
 .profile-inner {
   width: 80%;
@@ -160,6 +175,7 @@ body {
   /* background-color: red; */
   padding-top: 30px;
   height:200px;
+  z-index: 99;
   /* flex-direction: row; */
 }
 
@@ -203,9 +219,9 @@ body {
   font-size: 16px;
 }
 
-.mint-count {
-  /* padding-top: */
-}
+/* .mint-count {
+  padding-top:
+} */
 
 .freelist {
   display: flex;
@@ -218,7 +234,7 @@ body {
 
 .nav {
   background: #ffffff;
-  opacity: 70%;
+  /* opacity: 70%; */
 }
 
 .nav-item {
@@ -285,11 +301,11 @@ body {
 }
 
 .cardnft{
-  margin: 20px;
-  background-color: green;
-  width: 40%;
-  height: 400px;
-  
+  /* display: flex; */
+  /* text-align: center; */
+  /* justify-content: center; */
+  width: 100%;
+  height: 100%;
 }
 
 .father{
@@ -300,4 +316,33 @@ body {
 
 .CardGroup{
   width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.select-box {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10%;
+  border: 4px solid brown;
+  padding: 10px 8px 10px 6px;
+  background-color: white;
+}
+.swap-select, .swap-amount-input {
+  margin-bottom: 10px;
+}
+.swapL-select, .swapR-select {
+  width: 30%;
+}
+.swap-box {
+  display: flex;
+  justify-content: center;
+}
+.swap-submit {
+  /* width: 40%; */
+  /* background-color: red; */
 }

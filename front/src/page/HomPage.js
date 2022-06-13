@@ -9,8 +9,13 @@ import Browny6 from '../img/browny6.jpg';
 import Browny7 from '../img/browny7.png';
 import Browny8 from '../img/browny8.png';
 import Browny9 from '../img/browny9.png';
+import Browny10 from '../img/browny10.png';
+import Eye from '../img/eye/Eye1.png'
 import Img from '../img/background/background11.png';
 import LeftImg from '../img/chocolate/choco1.png';
+import LeftImg2 from '../img/chocolate/choco2.png';
+import LeftImg3 from '../img/chocolate/choco3.png';
+import RightImg from '../img/chocolate/choco4.png';
 import Arrow from '../img/arrow.png';
 import Ellipse from '../img/Ellipse1.png';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -21,7 +26,7 @@ import { useNavigate } from 'react-router-dom';
 const StyledMainText = styled.div`
   /* background: red; */
   position: relative;
-  top: 12%;
+  top: 0%;
   width: 360px;
   height: 120px;
   font-weight: bold;
@@ -37,7 +42,7 @@ const StyledMainText = styled.div`
 `
 const StyledSubText = styled.div`
   position: relative;
-  top: 20%;
+  top: 12%;
   width: 540px;
   height: 105px;
   color: black;
@@ -51,9 +56,9 @@ const StyledSubText = styled.div`
 const StyledMintDate = styled.div`
   position: relative;
   top: 60px;
-  border: 12px solid white;
+  border: 15px solid white;
   border-radius: 10px;
-  padding: 10px 10px;
+  padding: 10px 0px;
   text-align: center;
   font-weight: bolder;
   font-size: larger;
@@ -97,17 +102,17 @@ const StyledBrownyDown = styled.img`
   animation-iteration-count: 1;`
 
 const StyledButton = styled.div`
+  position: relative;
+  top: 40%;
   display: flex;
   justify-content: center;
   align-items: center; 
-  position: relative;
   width: 400px;
   height: 100px;
   background: white;
   border-radius: 30px;
   font-size:30px;
-  top: 70%;
-  left: 5%;
+  /* top: 50%; */
   border: 3px solid black;
   /* left: 240px; */
   cursor: pointer;
@@ -150,7 +155,7 @@ const HomePage = () => {
       // console.log('test');
       let now = new Date().getTime();
       let t = deadline - now;
-      let day = Math.floor((t % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 7));
+      let day = Math.floor((t % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
       let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       let minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
       let seconds = Math.floor((t % (1000 * 60)) / 1000);
@@ -180,10 +185,18 @@ const HomePage = () => {
         className='backG-img'
         src={Img}
       />
-      <img 
+      {/* <img 
         className='backG-left-img'
-        src={LeftImg}
+        src={LeftImg3}
+      /> */}
+      <img 
+        className='backG-right-img'
+        src={RightImg}
       />
+      {/* <img 
+        className='backG-right-img2'
+        src={RightImg}
+      /> */}
       <div className='mintdate-container'>
         <StyledMintDate>
           <span>민팅 시작까지 남은 시간</span><br />
@@ -199,18 +212,20 @@ const HomePage = () => {
           <Col className="main-col">
               <StyledMainText>Browny</StyledMainText>
               <StyledSubText>The Best nft Collections You Can Get</StyledSubText>
-              <StyledButton
-                onClick={moveToMint}
-              >
-                <div>
-                  <StyledArrow src={Arrow} alt="nft-arrows"/>
-                  <span>Explore our nfts</span>
-                </div>
-              </StyledButton>
+              {/* <div className='main-button-container'> */}
+                <StyledButton
+                  onClick={moveToMint}
+                >
+                  <div>
+                    <StyledArrow src={Arrow} alt="nft-arrows"/>
+                    <span>Explore our nfts</span>
+                  </div>
+                </StyledButton>
+              {/* </div> */}
           </Col>
           <Col className="main-img-col">
             <StyledBrownyAbove src={Browny8} alt="browny-above" />
-            <StyledBrownyDown src={Browny9} alt="browny-down" />
+            <StyledBrownyDown src={Browny10} alt="browny-down" />
           </Col>
           
           {/* <StyledEllipse src={Ellipse} alt="ellipse"/> */}
