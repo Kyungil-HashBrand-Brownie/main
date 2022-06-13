@@ -71,7 +71,7 @@ const PFPContainer = styled.div`
   }
 `
 const StyledInfo = styled.div`
-    /* background: red; */
+    background-color: white;
     width: 105%;
     margin-top: 7px;
     position: relative;
@@ -81,8 +81,10 @@ const StyledInfo = styled.div`
     font-weight: bold;
     line-height: 30px;
     /* margin-right: 20px; */
-    background: white;
+    /* background: white; */
     text-align: center;
+    z-index: 3;
+    opacity: 90%;
 `
 
 const Header = () => {

@@ -24,13 +24,15 @@ body {
   position: absolute;
   right: 13%;
   top: -4%;
-  z-index: -4
+  z-index: -4;
 }
 .backG-right-img2 {
   position: absolute;
   right: -5%;
+  /* opacity: 30%; */
+  /* z-index: -1; */
   /* top: -4%; */
-  /* z-index: -4 */
+  z-index: 1;
 }
 /* .main-outer {
   width: 100%;
@@ -173,6 +175,7 @@ body {
   /* background-color: red; */
   padding-top: 30px;
   height:200px;
+  z-index: 99;
   /* flex-direction: row; */
 }
 
@@ -231,7 +234,7 @@ body {
 
 .nav {
   background: #ffffff;
-  opacity: 70%;
+  /* opacity: 70%; */
 }
 
 .nav-item {
