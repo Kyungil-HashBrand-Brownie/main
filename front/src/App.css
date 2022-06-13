@@ -1,10 +1,47 @@
 body {
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
-  /* background: linear-gradient(to right, black, transparent); */
+  /* overflow-x: hidden; */
   background: linear-gradient(90deg, #deb38d 0.51%, #deb38d 0.52%, #deb38d 37.46%, #deb38d 53.47%, #f6f698 100%);
 }
+.backG-left-img {
+  position: absolute;
+  width: 15%;
+  z-index: 1;
+}
+
+.admin-outer-box {
+  z-index: 3;
+}
+
+.backG-img {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+.backG-right-img {
+  position: absolute;
+  right: 13%;
+  top: -4%;
+  z-index: -4;
+}
+.backG-right-img2 {
+  position: absolute;
+  right: -5%;
+  /* opacity: 30%; */
+  /* z-index: -1; */
+  /* top: -4%; */
+  z-index: 1;
+}
+/* .main-outer {
+  width: 100%;
+  height: 120%;
+  background-image: url('./img/background/background11.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: red;
+} */
 
 .mint-container {
   background-color: rgb(26, 126, 213);
@@ -17,14 +54,6 @@ body {
   justify-content: center;
 }
 
-.MintCard {
-  margin-top: 100px;
-  /* background-color: brown; */
-}
-
-.FreeSale {
-  /* background-color: blue; */
-}
 
 .profile-inner {
   width: 80%;
@@ -65,13 +94,21 @@ body {
   /* background-color: red; */
 }
 
+.main-button-container {
+  position: relative;
+  /* top: 50%; */
+}
+
 .main-col {
   /* background: blue; */
-  /* position: relative; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  position: relative;
   /* margin-right: 30%; */
 }
 
 .main-img-col {
+  /* background-color: #f6f698; */
   display: flex;
   flex-direction: row;
   padding-top: 130px;
@@ -97,8 +134,15 @@ body {
   }
 
   .info-box {
+    position: absolute;
+    /* left: 10%; */
     display: flex;
-    padding: 90px 10px;
+    flex-direction: column;
+    margin-right: 25%;
+    width: 40%;
+    text-align: center;
+    /* margin-top: 10%; */
+    /* padding: 120px 30px; */
     /* background-color: yellow; */
     /* flex-direction: row; */
   }
@@ -108,9 +152,9 @@ body {
 }
 
 
-.FreeSale {
-  /* background-color: blue; */
-}
+/* .FreeSale {
+  background-color: blue;
+} */
 
 .profile-inner {
   width: 80%;
@@ -122,8 +166,16 @@ body {
 }
 
 .info-box {
+  position: absolute;
+  right: 1%;
+  top: 0;
   display: flex;
+  flex-direction: column;
   padding: 10px 10px;
+  /* background-color: red; */
+  padding-top: 30px;
+  height:200px;
+  z-index: 99;
   /* flex-direction: row; */
 }
 
@@ -167,9 +219,9 @@ body {
   font-size: 16px;
 }
 
-.mint-count {
-  /* padding-top: */
-}
+/* .mint-count {
+  padding-top:
+} */
 
 .freelist {
   display: flex;
@@ -182,7 +234,7 @@ body {
 
 .nav {
   background: #ffffff;
-  opacity: 70%;
+  /* opacity: 70%; */
 }
 
 .nav-item {
@@ -234,6 +286,63 @@ body {
   text-align: center;
   justify-content: center;
   align-items: center;
+}
 
+.Input_Gruop {
+  height: 100px;
+}
 
+.mb-3{
+  width: 50%;
+}
+.Cont{
+  text-align: center;
+  margin: 10px;
+}
+
+.cardnft{
+  /* display: flex; */
+  /* text-align: center; */
+  /* justify-content: center; */
+  width: 100%;
+  height: 100%;
+}
+
+.father{
+  display: flex;
+  justify-content: center;
+
+}
+
+.CardGroup{
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.select-box {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10%;
+  border: 4px solid brown;
+  padding: 10px 8px 10px 6px;
+  background-color: white;
+}
+.swap-select, .swap-amount-input {
+  margin-bottom: 10px;
+}
+.swapL-select, .swapR-select {
+  width: 30%;
+}
+.swap-box {
+  display: flex;
+  justify-content: center;
+}
+.swap-submit {
+  /* width: 40%; */
+  /* background-color: red; */
 }

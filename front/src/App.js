@@ -1,26 +1,55 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { useEffect } from 'react';
 import { Routes , Route} from 'react-router-dom';
 import Home from './page/HomPage';
 import Mint from './page/Mint';
 import Header from './components/Header';
+import Footer from './components/Footer'
 import WhiteList from './page/WhiteList';
 import AdminPage from './page/AdminPage';
 import Testpage from './page/Testpage';
+import { useDispatch } from 'react-redux';
+import contractAbi from "./abi.json";
+import LeftImg3 from './img/chocolate/choco3.png';
+import RightImg from './img/chocolate/choco4.png';
+import Swap from './page/Swap';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => { 
+    let myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3");
+    dispatch({type: "CONTRACT_SUCCESS", payload: myContract});
+    let btkInstance = window.caver.kct.kip7.create("0x1ecaf14bd3cc4cfd69d1f340dd81216c2f045e53")
+    dispatch({type: "BTK_INSTANCE", payload: btkInstance});
+  }, [])
   return (
     <>
         <Header />
+        <img 
+          className='backG-left-img'
+          src={LeftImg3}
+        />
+        {/* <img 
+          className='backG-right-img'
+          src={RightImg}
+        /> */}
+        <img 
+          className='backG-right-img2'
+          src={RightImg}
+        />
         <Routes>
           <Route path="/" element={<Home/>} /> 
           <Route path="/mint" element={<Mint/>} /> 
           {/* <Route path="/whitelist" element={<WhiteList/>} />  */}
           <Route path="/admin" element={<AdminPage/>} /> 
           <Route path="/test" element={<Testpage/>} /> 
+          <Route path="/swap" element={<Swap/>} /> 
         </Routes>
-    </>
-  );
+        <Footer />
+      </>
+    );
 }
 
 export default App;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Browny1 from '../img/browny1.png';
 import Browny2 from '../img/browny2.png';
 import Browny3 from '../img/browny3.jpg';
@@ -9,21 +9,29 @@ import Browny6 from '../img/browny6.jpg';
 import Browny7 from '../img/browny7.png';
 import Browny8 from '../img/browny8.png';
 import Browny9 from '../img/browny9.png';
+import Browny10 from '../img/browny10.png';
+import Img from '../img/background/background11.png';
+import LeftImg from '../img/chocolate/choco1.png';
+import LeftImg2 from '../img/chocolate/choco2.png';
+import LeftImg3 from '../img/chocolate/choco3.png';
+import RightImg from '../img/chocolate/choco4.png';
 import Arrow from '../img/arrow.png';
 import Ellipse from '../img/Ellipse1.png';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import contractAbi from "../abi.json";
+import { useNavigate } from 'react-router-dom';
 
 const StyledMainText = styled.div`
   /* background: red; */
   position: relative;
-  top: 10%;
+  top: 0%;
   width: 360px;
   height: 120px;
   font-weight: bold;
   font-size: 84px;
-  color: white;
+  color: black;
+  left: 5%;
   /* font-family: 'Poppins'; */
   /* font-style: normal; */
 
@@ -33,11 +41,12 @@ const StyledMainText = styled.div`
 `
 const StyledSubText = styled.div`
   position: relative;
-  top: 20%;
+  top: 12%;
   width: 540px;
   height: 105px;
-  color: white;
+  color: black;
   font-size: 43px;
+  left: 5%;
 
   @media (max-width: 970px) {
     margin-top: 60px;
@@ -45,9 +54,10 @@ const StyledSubText = styled.div`
 `
 const StyledMintDate = styled.div`
   position: relative;
-  top: 10px;
-  border: 10px solid white;
+  top: 60px;
+  border: 15px solid white;
   border-radius: 10px;
+  padding: 10px 0px;
   text-align: center;
   font-weight: bolder;
   font-size: larger;
@@ -56,40 +66,57 @@ const StyledMintDate = styled.div`
   /* justify-content: center; */
 `
 
+const displayAnimation = keyframes`
+ 0% { opacity: 0}
+ 10% { opacity: 0.1; }
+ 15% { opacity: 0.15; }
+ 30% { opacity: 0.3 }
+ 40% { opacity: 0.4; }
+ 65% { opacity: 0.55; }
+ 75% { opacity: 0.7; }
+ 85% { opacity: 0.85; }
+ 90% { opacity: 0.93; }
+ 100% { opacity: 1; }
+`
+
+
 const StyledBrownyAbove = styled.img`
   position: relative;
   top: 6%;
   width: 350px;
   margin: 0px 50px;
-  z-index: -1;
+  z-index: 1;
+  animation-name: ${displayAnimation};
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
 `
 
 const StyledBrownyDown = styled.img`
   /* position: relative; */
   margin-top: 40px;
   width: 350px;
-
-  @media (max-width: 970px) {
-    margin-left: 50px;
-  }
-  /* border: 1px solid black; */
-`
+  z-index: 1;
+  animation-name: ${displayAnimation};
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;`
 
 const StyledButton = styled.div`
+  position: relative;
+  top: 40%;
   display: flex;
   justify-content: center;
   align-items: center; 
-  position: relative;
   width: 400px;
   height: 100px;
   background: white;
   border-radius: 30px;
   font-size:30px;
-  top: 70%;
+  /* top: 50%; */
+  border: 3px solid black;
   /* left: 240px; */
   cursor: pointer;
   &:hover{  
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 
   @media (max-width: 970px) {
@@ -97,7 +124,6 @@ const StyledButton = styled.div`
     margin-left: 30px;
   }
 `
-
 
 const StyledArrow = styled.img`
   width: 60px;
@@ -111,6 +137,7 @@ const StyledEllipse = styled.img`
   z-index: -1; 
 `
 const HomePage = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     let deadline = useRef(); 
     let deadlineDate = new Date('July 22, 2022 00:00:00').getTime();
@@ -140,9 +167,12 @@ const HomePage = () => {
       }
     }
 
+    const moveToMint = () => {
+      navigate('/mint');
+      dispatch({type: 'MODAL_CLOSE'});
+    }
+
     useEffect(() => { 
-      let myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3");
-      dispatch({type: "CONTRACT_SUCCESS", payload: myContract});
       deadline = new Date('July 22, 2022 00:00:00').getTime();
       timer.current = setInterval(count, 1000);   
       // timer();   
@@ -150,13 +180,29 @@ const HomePage = () => {
     
     return (
       <>
+      <img 
+        className='backG-img'
+        src={Img}
+      />
+      {/* <img 
+        className='backG-left-img'
+        src={LeftImg3}
+      /> */}
+      <img 
+        className='backG-right-img'
+        src={RightImg}
+      />
+      {/* <img 
+        className='backG-right-img2'
+        src={RightImg}
+      /> */}
       <div className='mintdate-container'>
         <StyledMintDate>
           <span>민팅 시작까지 남은 시간</span><br />
           <span>
-            {state.day < 10 ? `0${state.day}` : state.day}D :
-            &nbsp;{state.hours < 10 ? `0${state.hours}` : state.hours}h : 
-            &nbsp;{state.minutes < 10 ? `0${state.minutes}` : state.minutes}m:
+            {state.day < 10 ? `0${state.day}` : state.day}D 
+            &nbsp;{state.hours < 10 ? `0${state.hours}` : state.hours}h 
+            &nbsp;{state.minutes < 10 ? `0${state.minutes}` : state.minutes}m
             &nbsp;{state.seconds < 10 ? `0${state.seconds}` : state.seconds}s
           </span>
         </StyledMintDate>
@@ -165,19 +211,23 @@ const HomePage = () => {
           <Col className="main-col">
               <StyledMainText>Browny</StyledMainText>
               <StyledSubText>The Best nft Collections You Can Get</StyledSubText>
-              <StyledButton>
-                <div>
-                  <StyledArrow src={Arrow} alt="nft-arrows"/>
-                  <span>Explore our nfts</span>
-                </div>
-              </StyledButton>
+              {/* <div className='main-button-container'> */}
+                <StyledButton
+                  onClick={moveToMint}
+                >
+                  <div>
+                    <StyledArrow src={Arrow} alt="nft-arrows"/>
+                    <span>Explore our nfts</span>
+                  </div>
+                </StyledButton>
+              {/* </div> */}
           </Col>
           <Col className="main-img-col">
             <StyledBrownyAbove src={Browny8} alt="browny-above" />
-            <StyledBrownyDown src={Browny9} alt="browny-down" />
+            <StyledBrownyDown src={Browny10} alt="browny-down" />
           </Col>
           
-          <StyledEllipse src={Ellipse} alt="ellipse"/>
+          {/* <StyledEllipse src={Ellipse} alt="ellipse"/> */}
       </Container>
       {/* <div className='main-team-container'> */}
         {/* <Container className='main-team-container'>

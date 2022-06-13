@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import PFP from '../img/profile1.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch, useSelector } from 'react-redux';
 
 const SearchBox = styled.div`
     background-color: rgb(26, 126, 213);
@@ -44,55 +45,88 @@ const ButtonContainer = styled.div`
     /* right: 10%; */
 `
 
-const PFPContainer = styled.img`
+const PFPContainer = styled.div`
   /* position: fixed;
   right: 10px;
   top: 0px; */
   /* margin-top: 10px; */
   /* margin-left: 1px; */
   margin-left: 10px;
-  width: 50px;
-  height: 50px;
-  border: 3px solid brown;
-  border-radius: 100%;
+  /* font-weight: bold; */
+  font-size: 20px;
+  /* width: 50px;
+  height: 50px; */
+  padding: 2px 10px;
+  border: 3px solid;
+  border-radius: 20px;
+  background-color: #198754;
+  border-color: #198754;
+  letter-spacing: -1px;
+  padding: 1px 20px;
   cursor: pointer;
+  color: white;
   /* position: fixed; */
   &:hover{  
     transform: scale(1.1);
   }
 `
 const StyledInfo = styled.div`
-    /* background: red; */
-    border: 2px solid black;
+    background-color: white;
+    width: 105%;
+    margin-top: 7px;
+    position: relative;
+    border: 1px solid black;
     border-radius: 8px;
-    padding: 1px 10px;
+    padding: 6px 10px;
     font-weight: bold;
-    margin-right: 20px;
-    background: rgb(236, 236, 115);
+    line-height: 30px;
+    /* margin-right: 20px; */
+    /* background: white; */
+    text-align: center;
+    z-index: 3;
+    opacity: 90%;
 `
 
 const Header = () => {
+    const dispatch = useDispatch();
+    const { modalState, btkInstance } = useSelector(state => state.nft);
+
     const [checked, setChecked] = useState(false);
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(null);
+    const [btkBalance, setBtkBalance] = useState(0);
     const [infoState, setInfoState] = useState(false);
+
+    const weiToFixed = (wei) => {
+        const toKlay = window.caver.utils.convertFromPeb(wei);
+        const fixed = parseFloat(toKlay).toFixed(2);
+        return fixed;
+    }
+
+    const setTokenBalance = async (accounts) => {
+        const weiBalance = await window.caver.klay.getBalance(accounts[0])
+        const fixedBalance = weiToFixed(weiBalance)
+
+        const weibtkBalance = await btkInstance.balanceOf(window.klaytn.selectedAddress) //BigNumber 객체
+        const fixedbtkBalance = weiToFixed(weibtkBalance)
+        
+        setBalance(fixedBalance)
+        setBtkBalance(fixedbtkBalance);
+    }
 
     const onClick = async () => {
         const accounts = await window.klaytn.enable()
         console.log(accounts)
-        const balance = await window.caver.klay.getBalance(accounts[0])
+
         setAddress(accounts);
-        setBalance(balance);
-        console.log(balance)
+        setTokenBalance(accounts)
     }
 
     window.klaytn.on('accountsChanged', async function(accounts) {
         console.log(accounts[0])
         sessionStorage.setItem('id', accounts[0]);
         setAddress(accounts[0]);
-        const balance = await window.caver.klay.getBalance(window.klaytn.selectedAddress)
-        setBalance(balance);
-        console.log(window.caver.utils.fromWei(balance))
+        if(btkInstance) setTokenBalance(accounts)
     })
 
     const copyAddress = () => {
@@ -100,8 +134,12 @@ const Header = () => {
     }
 
     const showInfo = () => {
-        console.log('show');
-        setInfoState(!infoState)
+        // console.log('show');
+        dispatch({type: "MODAL_CLICK"})
+    }
+
+    const closeModal = () => {
+        dispatch({type: "MODAL_CLOSE"})
     }
 
     useEffect(() => {
@@ -121,11 +159,12 @@ const Header = () => {
                     style={{ maxHeight: '100px' }}
                     navbarScroll
                 >
-                    <Link className='nav-item' to="/">Home</Link>
-                    <Link className='nav-item' to="/mint">Mint</Link>
+                    <Link onClick={closeModal} className='nav-item' to="/">Home</Link>
+                    <Link onClick={closeModal} className='nav-item' to="/mint">Mint</Link>
                     {/* <Link className='nav-item' to="/whitelist">Whitelist</Link> */}
-                    <Link className='nav-item' to="/admin">admin</Link>
-                    <Link className='nav-item' to="/test">testpage</Link>
+                    <Link onClick={closeModal} className='nav-item' to="/admin">admin</Link>
+                    <Link onClick={closeModal} className='nav-item' to="/test">testpage</Link>
+                    <Link onClick={closeModal} className='nav-item' to="/swap">swap</Link>
                 </Nav>
                 {/* <SearchBox>
                     <SearchInput 
@@ -153,22 +192,26 @@ const Header = () => {
                 address != null
                 ? 
                 <div className="info-box">  
-                    {infoState && 
+                    <PFPContainer
+                        onClick={showInfo}
+                    >
+                    {address.toString().slice(0,7)+'...'+address.toString().slice(-7)}
+                    </PFPContainer>
+                    {modalState && 
                         <StyledInfo>
                         WHITELIST<br/>
-                        {address.toString().slice(0,7)+'...'+address.toString().slice(-7)}
+                        Copy Address
                         <FontAwesomeIcon 
                             className='copy-icon'
                             icon={faCopy} 
                             onClick={copyAddress}    
                         />
                         <br />
-                        {/* {balance.slice(0,3)+'.'+balance.slice(3,5) + " KLAYS"} */}
+                        {balance + " KLAYS"}
+                        <br />
+                        {btkBalance + " BTK"}
                         </StyledInfo>
                     }
-                    <PFPContainer src={PFP}
-                        onClick={showInfo}
-                    />
                 </div>
                 : <><Button className="mint-wal-connect-btn" variant="success" onClick={onClick}>지갑 연결하기</Button>{' '}</>
                 }

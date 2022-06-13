@@ -11,8 +11,6 @@ import { Epro, ModalKpro, Apro, ani1, ani2, ani3 , Kproblem , KP1 , KP2, KP3 ,Mo
 import styled from 'styled-components'
 
 
-function EarthVote() {
-
     const MainStyled = styled.div`
         display: flex;
         justify-content: center;
@@ -20,6 +18,18 @@ function EarthVote() {
         margin: auto ;
         padding: 10px ;
     `
+
+    const E_Title = styled.div`
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        margin: 10px ;
+    `
+
+function EarthVote() {
+
+
 
     // const [checked, setChecked] = useState(false);
     const [radioValue, setRadioValue] = useState('1');
@@ -54,7 +64,8 @@ function EarthVote() {
     return (
     <>
         <br />
-        <h2> 보내고 싶은 단체를 선책해 주세요</h2>
+        <E_Title> 보내고 싶은 단체를 선택해 주세요</E_Title>
+
         <MainStyled>
             <div>
             <Card style={{ width: '18rem' }} className="cardclass">
@@ -262,54 +273,13 @@ function EarthVote() {
                 </Card.Body>
             </Card>
             </div>
-        </MainStyled>
+        </MainStyled> 
 
-        {/* <ToggleButton
-            className="mb-2"
-            id="toggle-check"
-            type="checkbox"       
-            variant="outline-primary"
-            checked={checked}
-            value="1"
-            onChange={(e) => voteHandlerAni(e.currentTarget.checked)}
-        >
-            선택
-        </ToggleButton>
-        <ToggleButton
-            className="mb-2"
-            id="toggle-check"
-            type="checkbox"       
-            variant="outline-danger"
-            checked={checked}
-            value="1"
-            onChange={(e) => setChecked(e.currentTarget.checked)}
-        >
-            hi
-        </ToggleButton> */}
-
-
-        {/* <ButtonGroup className='button-group'>
-        {radios.map((radio, idx) => (
-            <ToggleButton
-                className="ButtonGroup"
-                key={idx}
-                id={`radio-${idx}`}
-                type="radio"
-                variant={idx % 2 ? 'outline-success' : 'outline-danger'}
-                name="radio"
-                value={radio.value}
-                checked={radioValue === radio.value}
-                onChange={(e) => setRadioValue(e.currentTarget.value)}
-            >
-            {radio.name}
-            </ToggleButton>
-        ))}
-        </ButtonGroup> */}
-        <br />
-
-        <button onClick={voteHandlerAni} > Animal click vote </button>
-        <button onClick={voteHandlerKid} > Kid click vote</button>
-        <button onClick={voteHandlerMin} > countMinority click vote </button>
+        <E_Title>
+            <button onClick={voteHandlerAni} > Animal click vote </button>
+            <button onClick={voteHandlerKid} > Kid click vote</button>
+            <button onClick={voteHandlerMin} > countMinority click vote </button>
+        </E_Title>
         </>
     );
 }
