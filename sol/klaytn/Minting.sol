@@ -121,8 +121,4 @@ contract BrownieNft is ERC721, Whitelist {
         uint256 tokenNum = _tokenIdCounter.current();
         return tokenNum;
     }
-
-    // nft 매매 function 
-    // 1. 매매할 nft 매매권한 contract에 부여 (approve)
-    // 2. contract에서 구매자에게 nft 소유권 양도
 }

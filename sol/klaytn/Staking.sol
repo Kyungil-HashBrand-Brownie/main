@@ -2,8 +2,6 @@
 pragma solidity ^0.8.4;
 
 import "./Minting.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
 
 /**
 * author Kyungil_Team Brownie
