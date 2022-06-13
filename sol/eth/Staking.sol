@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "./minting.sol";
-// import "./token.sol";
+import "./Minting.sol";
+import "./Token.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
 
 contract NFTStaking is BrownieNft {
   uint256 public totalStaked;
-  
+
   struct Stake {
     uint256 tokenId;
     uint256 timestamp;
@@ -22,13 +24,10 @@ contract NFTStaking is BrownieNft {
   function stake(uint256 tokenId) external {
     require(ownerOf(tokenId) == msg.sender, "not your token");
     require(vault[tokenId].tokenId == 0, "already staked");
-
     totalStaked++;
-
     transferFrom(msg.sender, address(this), tokenId);
     _approve(address(this), tokenId);
     emit NFTStaked(msg.sender, tokenId, block.timestamp);
-
     vault[tokenId] = Stake({
         owner: msg.sender,
         tokenId: tokenId,
@@ -41,7 +40,6 @@ contract NFTStaking is BrownieNft {
     require(staked.owner == msg.sender, "not an owner");
     _approve(msg.sender, tokenId);
     totalStaked--;
-
     delete vault[tokenId];
     emit NFTUnstaked(msg.sender, tokenId, block.timestamp);
     transferFrom(address(this), msg.sender, tokenId);
