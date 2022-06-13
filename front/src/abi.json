@@ -162,6 +162,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "balanNFTCon",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -195,7 +208,7 @@
 				],
 				"name": "batchMint",
 				"outputs": [],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -228,6 +241,32 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "instanceGetBtk",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "instanceSellBtk",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -281,6 +320,19 @@
 						"internalType": "string",
 						"name": "",
 						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "nftNum",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -347,19 +399,6 @@
 			{
 				"inputs": [],
 				"name": "renounceOwnership",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					}
-				],
-				"name": "safeMint",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -521,6 +560,32 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "viewIns",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "viewNFTCon",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -535,7 +600,7 @@
 				],
 				"name": "whitelistMint",
 				"outputs": [],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -548,7 +613,7 @@
 				],
 				"name": "withdrawKLAY",
 				"outputs": [],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -614,9 +679,9 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"minting.sol": "BrownieNft"
+			"minting/Minting.sol": "BrownieNft"
 		},
-		"evmVersion": "london",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -634,6 +699,38 @@
 			"urls": [
 				"bzz-raw://e12cbaa7378fd9b62280e4e1d164bedcb4399ce238f5f98fc0eefb7e50577981",
 				"dweb:/ipfs/QmXRoFGUgfsaRkoPT5bxNMtSayKTQ8GZATLPXf69HcRA51"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+			"keccak256": "0xe0c8b625a79bac0fe80f17cfb521e072805cc9cef1c96a5caf45b264e74812fa",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://12fd1efc9ad061ef675bd50fb0c8e3c6f2952a09f8df0e3c688b8d81b8918838",
+				"dweb:/ipfs/QmawN6PjTwy91pU7ANjCSgbsLc8TDA6hwu9GsFFaNSuhb5"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol": {
+			"keccak256": "0x0d19410453cda55960a818e02bd7c18952a5c8fe7a3036e81f0d599f34487a7b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4c0f62d3d5bef22b5ca00cc3903e7de6152cb68d2d22401a463f373cda54c00f",
+				"dweb:/ipfs/QmSfzjZux7LC7NW2f7rjCXTHeFMUCWERqDkhpCTBy7kxTe"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+			"keccak256": "0x8de418a5503946cabe331f35fe242d3201a73f67f77aaeb7110acb1f30423aca",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a376d3dda2cb70536c0a45c208b29b34ac560c4cb4f513a42079f96ba47d2dd",
+				"dweb:/ipfs/QmZQg6gn1sUpM8wHzwNvSnihumUCAhxD119MpXeKp8B9s8"
 			]
 		},
 		"@openzeppelin/contracts/token/ERC721/ERC721.sol": {
@@ -716,12 +813,28 @@
 				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
 			]
 		},
-		"minting.sol": {
-			"keccak256": "0x05e84f1daea1f72c199adc0ea6338e557c52b8c1d9ece0d83e795202caacc91c",
+		"minting/Minting.sol": {
+			"keccak256": "0x8beda95a94bd8e155c74e40ad085358ec1886d4ce65c582f70a65cef471db79f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://eb0548ba2cc6e6bfdad89f0bd061835d9689281dcb37ce8cb0ce7dc303540a62",
-				"dweb:/ipfs/QmVkb17Nah83snjdFujCocuDfw2m5x8t9WG66pEQXRJkmx"
+				"bzz-raw://a6b36ea8a66700958e17a7a21d1ef9fee4f971dcaa85d5706c2d56dc5736f552",
+				"dweb:/ipfs/Qmd5nkGpUteiLfYpMZCedbcCyfVScimHPiS6oPMo2VHFSd"
+			]
+		},
+		"minting/Token.sol": {
+			"keccak256": "0xbc9a89415fba8454e3c3b939961572ad39352abb03475b85fee93586dd2bbbda",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://89734c86381f1432f3178d1fc8b86f53ee38782e296370679289cef3a471de17",
+				"dweb:/ipfs/QmdRSeWq9A6hgNoei1SpmZfHB4eVGYAWzz9U43tx41TUZ3"
+			]
+		},
+		"minting/Whitelist.sol": {
+			"keccak256": "0x6f5554e7fb553ce2a5c67cb13d3c23f695e8a70443a645fbbd1ed605434dc28f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e101611eccf6ab7f6768d07459a56839f033f0a7c316a49ce5a55e853bc63900",
+				"dweb:/ipfs/QmUahwVJgdwVQrEqWYxg2q4R25ZxnPxzhVsE2kfVBGKySN"
 			]
 		}
 	},
