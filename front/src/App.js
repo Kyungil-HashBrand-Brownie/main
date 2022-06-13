@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { useEffect } from 'react';
 import { Routes , Route} from 'react-router-dom';
-import Home from './page/HomPage';
+import Home from './page/HomePage';
 import Mint from './page/Mint';
 import Header from './components/Header';
 import Footer from './components/Footer'

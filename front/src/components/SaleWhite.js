@@ -75,16 +75,12 @@ const WhiteSale = () => {
     }
 
     const whiteMint = async () => {
-        // await window.caver.klay.sendTransaction({
-        //   type: 'VALUE_TRANSFER',
-        //   from: window.klaytn.selectedAddress,
-        //   to: '0x0000000000000000000000000000000000000000',
-        //   value: window.caver.utils.toPeb('1', 'KLAY'),
-        //   gas: 8000000
-        // })
     
-        await myContract.methods.whitelistMint(window.klaytn.selectedAddress,count).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: window.caver.utils.toPeb(count, 'KLAY')})
-        // alert("송금 성공")
+        await myContract.methods.whitelistMint(window.klaytn.selectedAddress,count)
+        .send({
+            from:window.klaytn.selectedAddress,
+            gas: 300000
+            })
 
     }
 
@@ -116,7 +112,6 @@ const WhiteSale = () => {
                     </Row>
                 </Container>
                 <br />
-                {/* <Button className="mint-wal-connect-btn" variant="primary">지갑 연결하기 </Button>{' '} */}
                 <Button
                     className="mint-wal-connect-btn"
                     variant="primary"
