@@ -34,6 +34,8 @@ contract NFTStaking is BrownieNft {
   mapping(uint256 => bool) staked;
   // address owner => uint256 number of staked nft
   mapping(address => uint256) numStaked;
+  // address owner => uint256 owner's staking nfts
+  mapping(address => uint256[]) ownersStakedNFT;
 
   modifier isStaked(uint256 tokenId) {
     require(staked[tokenId], "not staked tokenId");
@@ -55,6 +57,7 @@ contract NFTStaking is BrownieNft {
     });
     staked[tokenId] = true;
     numStaked[msg.sender]++;
+    ownersStakedNFT[msg.sender].push(tokenId);
   }
 
   // unstake function
@@ -67,6 +70,18 @@ contract NFTStaking is BrownieNft {
     transferFrom(address(this), msg.sender, tokenId);
     numStaked[msg.sender]--;
     claimed(tokenId);
+    staked[tokenId] = false;
+    uint256 index;
+    for(uint256 i = 0; i < ownersStakedNFT[msg.sender].length; i++) {
+      if(ownersStakedNFT[msg.sender][i] == tokenId) {
+        index= i;
+        break;
+      }
+    }
+    for (uint256 i = index; i < ownersStakedNFT[msg.sender].length - 1; i++) {
+      ownersStakedNFT[msg.sender][i] = ownersStakedNFT[msg.sender][i+1];
+    }
+    ownersStakedNFT[msg.sender].pop();
   }
 
   // reward claim function
@@ -81,7 +96,12 @@ contract NFTStaking is BrownieNft {
   }
 
   // staking timestamp확인 위한 view 함수 
-  function whenStaked(uint256 tokenId) public view isStaked(tokenId) returns(uint256){
+  function whenStaked(uint256 tokenId) public view isStaked(tokenId) returns(uint256) {
     return vault[tokenId].timestamp;
+  }
+
+  // user가 staking한 nft 목록 확인
+  function checkRewards() public view returns(uint256[] memory) {
+    return ownersStakedNFT[msg.sender];
   }
 }
