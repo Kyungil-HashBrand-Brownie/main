@@ -1,7 +1,11 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
 
 const Swap = () => {
+    const [swap, setSwap] = useState('BTK');
+    const swapChange = (e) => {
+        if (e.target.value == 'KLAY') setSwap('BTK')
+        else setSwap('KLAY')
+    }
     const {myContract} = useSelector(state =>state.nft);
     
     const swapToken = async () => {
@@ -12,30 +16,27 @@ const Swap = () => {
             <div className='select-box'>
                 <h2>SWAP</h2>
                 <div className='swap-select'>
-                    <select className='swapL-select'>
-                        <option>선택</option>
-                        <option>BTK</option>
-                        <option>KLAY</option>
+                    <select
+                    onChange={swapChange} 
+                    className='swapL-select'
+                    >
+                        <option value='KLAY'>KLAY</option>
+                        <option value='BTK'>BTK</option>
                     </select>
-                    to
-                    <select className='swapR-select'>
-                        <option>선택</option>
-                        <option>BTK</option>
-                        <option>KLAY</option>
-                    </select>
+                    to 
+                    {swap}
                 </div>
                 <div className='swap-amount-input'>
-                    금액: <input />
+                    금액: <input /> 
                 </div>
                 <div className='swap-submit'>
-                    <button
-                        // className='swap-submit'
-                        onClick={swapToken}
-                        type='button'>확인</button>
+                    <button 
+                    // className='swap-submit'
+                    type='button'>확인</button>
                 </div>
             </div>
         </div>
-    )
+  )
 }
 
 export default Swap

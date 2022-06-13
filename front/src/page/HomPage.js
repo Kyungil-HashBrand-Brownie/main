@@ -10,6 +10,7 @@ import Browny7 from '../img/browny7.png';
 import Browny8 from '../img/browny8.png';
 import Browny9 from '../img/browny9.png';
 import Browny10 from '../img/browny10.png';
+import Eye from '../img/eye/Eye1.png'
 import Img from '../img/background/background11.png';
 import LeftImg from '../img/chocolate/choco1.png';
 import LeftImg2 from '../img/chocolate/choco2.png';
@@ -154,7 +155,7 @@ const HomePage = () => {
       // console.log('test');
       let now = new Date().getTime();
       let t = deadline - now;
-      let day = Math.floor((t % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 7));
+      let day = Math.floor((t % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
       let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       let minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
       let seconds = Math.floor((t % (1000 * 60)) / 1000);
