@@ -73,15 +73,11 @@ const FreeSale = () => {
       }
       const onClick2 = async () => {
         console.log(myContract);
-        await myContract.methods.batchMint(window.klaytn.selectedAddress,count).send({from:window.klaytn.selectedAddress, gas: 300000 ,value: window.caver.utils.toPeb(2*count, 'KLAY')}) // 가격이 2클레이
-        // await window.caver.klay.sendTransaction({
-        //   type: 'VALUE_TRANSFER',
-        //   from: window.klaytn.selectedAddress,
-        //   to: '0x0000000000000000000000000000000000000000',
-        //   value: window.caver.utils.toPeb('1', 'KLAY'),
-        //   gas: 8000000
-        // })
-        // alert("송금 성공")
+        await myContract.methods.batchMint(window.klaytn.selectedAddress,count)
+        .send({
+            from:window.klaytn.selectedAddress,
+            gas: 300000
+        })
         alert("해당 지갑 주소로 민팅되었습니다!");
         navigate('/');
     }
