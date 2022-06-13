@@ -104,21 +104,23 @@ const Header = () => {
     }
 
     const setTokenBalance = async (accounts) => {
-        const weiBalance = await window.caver.klay.getBalance(accounts[0])
-        const fixedBalance = weiToFixed(weiBalance)
-
-        const weibtkBalance = await btkInstance.balanceOf(window.klaytn.selectedAddress) //BigNumber 객체
-        const fixedbtkBalance = weiToFixed(weibtkBalance)
+        if(btkInstance){
+            const weiBalance = await window.caver.klay.getBalance(accounts[0])
+            const fixedBalance = weiToFixed(weiBalance)
+            const weibtkBalance = await btkInstance.balanceOf(window.klaytn.selectedAddress) //BigNumber 객체
+            const fixedbtkBalance = weiToFixed(weibtkBalance)
+            
+            setBalance(fixedBalance)
+            setBtkBalance(fixedbtkBalance);
+        }
         
-        setBalance(fixedBalance)
-        setBtkBalance(fixedbtkBalance);
     }
 
-    const onClick = async () => {
+    const setUserInfo = async () => {
         const accounts = await window.klaytn.enable()
         console.log(accounts)
 
-        setAddress(accounts);
+        setAddress(accounts[0]);
         setTokenBalance(accounts)
     }
 
@@ -143,8 +145,8 @@ const Header = () => {
     }
 
     useEffect(() => {
-        console.log(address);
-    }, [address])
+        setUserInfo();
+    }, [btkInstance])
 
     return (
         <Navbar className="nav" expand="lg">
@@ -213,7 +215,7 @@ const Header = () => {
                         </StyledInfo>
                     }
                 </div>
-                : <><Button className="mint-wal-connect-btn" variant="success" onClick={onClick}>지갑 연결하기</Button>{' '}</>
+                : <><Button className="mint-wal-connect-btn" variant="success" onClick={setUserInfo}>지갑 연결하기</Button>{' '}</>
                 }
                 </Navbar.Collapse>
             </Container>
