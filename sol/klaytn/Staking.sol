@@ -2,7 +2,6 @@
 pragma solidity ^0.8.4;
 
 import "./Minting.sol";
-import "./Token.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 
@@ -43,5 +42,9 @@ contract NFTStaking is BrownieNft {
     delete vault[tokenId];
     emit NFTUnstaked(msg.sender, tokenId, block.timestamp);
     transferFrom(address(this), msg.sender, tokenId);
+  }
+
+  function reward() external {
+    
   }
 }

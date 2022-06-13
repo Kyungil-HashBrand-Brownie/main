@@ -10,25 +10,14 @@ import "./Whitelist.sol";
 contract BrownieNft is ERC721, Whitelist {
     BrownieToken instance = new BrownieToken(address(this));
 
-    function instanceGetBtk(uint256 amount) public payable {
-        instance.getBtk(address(this), msg.sender, amount, msg.value);
+    function getBtk(uint256 _amount) public payable {
+        require(msg.value >= _amount * 10 ** 18, "Please check your balance");
+        instance.tokenTransfer(address(this), msg.sender, _amount);
     }
 
-    function instanceSellBtk(uint256 amount) public {
-        instance.sellBtk(address(this), payable(msg.sender), amount);
+    function sellBtk(uint256 amount) public {
+        instance.tokenTransfer(address(this), payable(msg.sender), amount);
         payable(msg.sender).transfer(amount * 10 ** 18);
-    }
-
-    function viewIns() public view returns(address) {
-        return address(instance);
-    }
-    
-    function viewNFTCon() public view returns(address) {
-        return address(this);
-    }
-
-    function balanNFTCon() public view returns(uint256) {
-        return address(this).balance;
     }
 
     using Counters for Counters.Counter;
@@ -75,7 +64,7 @@ contract BrownieNft is ERC721, Whitelist {
         for (uint256 i = 0; i < amount; i++) {
             safeMint(msg.sender);
             _tokenIdCounter.increment();
-            instance.tokenTransfer(msg.sender, address(instance), 2);
+            instance.tokenTransfer(msg.sender, address(this), 2);
         }
     }
 
@@ -86,7 +75,7 @@ contract BrownieNft is ERC721, Whitelist {
             safeMint(msg.sender);
             _tokenIdCounter.increment();
             _whitelistCounter.increment();
-            instance.tokenTransfer(msg.sender, address(instance), 1);
+            instance.tokenTransfer(msg.sender, address(this), 1);
         }
     }
 
