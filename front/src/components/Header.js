@@ -61,7 +61,7 @@ const PFPContainer = styled.div`
   border-radius: 20px;
   background-color: #198754;
   border-color: #198754;
-  letter-spacing: 1px;
+  letter-spacing: -1px;
   padding: 1px 20px;
   cursor: pointer;
   color: white;
@@ -87,29 +87,44 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState } = useSelector(state => state.nft);
+    const { modalState, btkInstance } = useSelector(state => state.nft);
 
     const [checked, setChecked] = useState(false);
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(null);
+    const [btkBalance, setBtkBalance] = useState(0);
     const [infoState, setInfoState] = useState(false);
+
+    const weiToFixed = (wei) => {
+        const toKlay = window.caver.utils.convertFromPeb(wei);
+        const fixed = parseFloat(toKlay).toFixed(2);
+        return fixed;
+    }
+
+    const setTokenBalance = async (accounts) => {
+        const weiBalance = await window.caver.klay.getBalance(accounts[0])
+        const fixedBalance = weiToFixed(weiBalance)
+
+        const weibtkBalance = await btkInstance.balanceOf(window.klaytn.selectedAddress) //BigNumber 객체
+        const fixedbtkBalance = weiToFixed(weibtkBalance)
+        
+        setBalance(fixedBalance)
+        setBtkBalance(fixedbtkBalance);
+    }
 
     const onClick = async () => {
         const accounts = await window.klaytn.enable()
         console.log(accounts)
-        const balance = await window.caver.klay.getBalance(accounts[0])
+
         setAddress(accounts);
-        setBalance(balance);
-        console.log(balance)
+        setTokenBalance(accounts)
     }
 
     window.klaytn.on('accountsChanged', async function(accounts) {
         console.log(accounts[0])
         sessionStorage.setItem('id', accounts[0]);
         setAddress(accounts[0]);
-        const balance = await window.caver.klay.getBalance(window.klaytn.selectedAddress)
-        setBalance(balance);
-        console.log(window.caver.utils.fromWei(balance))
+        if(btkInstance) setTokenBalance(accounts)
     })
 
     const copyAddress = () => {
@@ -189,7 +204,9 @@ const Header = () => {
                             onClick={copyAddress}    
                         />
                         <br />
-                        {balance.slice(0,3)+'.'+balance.slice(3,5) + " KLAYS"}
+                        {balance + " KLAYS"}
+                        <br />
+                        {btkBalance + " BTK"}
                         </StyledInfo>
                     }
                 </div>

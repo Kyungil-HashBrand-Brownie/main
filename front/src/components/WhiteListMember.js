@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
@@ -8,64 +8,44 @@ import FormControl from 'react-bootstrap/FormControl'
 import styled from 'styled-components'
 import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
+import Form from 'react-bootstrap/Form';
+import { trash } from '../img'
 
 
-/* 
-    추가했을때 바로 생긴다
-    axios 로 가져와서
-    똑같이?
-*/
-    const Styled = styled.div`
-        justify-content: center;
-        text-align: center;
-        margin: 10px;
-        align-items: center;
-    `
+const Trash = styled.div`
+    width: 50px;
+`
 
-const WhiteList = () => {
-    const { myContract } = useSelector(state => state.nft);
-    let WhiteList = [{
-        id: "초기값 ",
-        publicKey: "0xzksnj421431ebbf700f436b15c672840asjce32",
-    }];
 
     
-    /* 
-        axios 초기값 설정.
-        추가하기 
-        set list 최신화
+const WhiteList = () => {
+    const { myContract,accounts } = useSelector(state => state.nft);
 
-    */
-
-    const { accounts } = useSelector(state => state.nft)
-
-
-    const [list, setList] = useState(WhiteList)
-    const [clickState, setClickState] = useState(false)
-    // const [valueId, setValueId] = useState('')
-    const [valueKey, setValueKey] = useState('')
-    const [valueKey1, setValueKey1] = useState('')
-    const [valueKey2, setValueKey2] = useState('')
-
+    const [list, setList] = useState([]);
+    const [checkDelete, setCheckDelete] = useState(false);
 
     const input1 = useRef("")
     const input2 = useRef("")
     const input3 = useRef("")
 
-    const clickHandler = () => {
-        if (!clickState) setClickState(true)
-        else {
-            if (/* valueId == "" ||  */valueKey === "") {
-                alert("입력해주세요")
-            } else {
-                // publickey = div 에 있는 초기값 publickey 이름 넣어주기 
-                setList(list.concat([{ publicKey: valueKey }]));
-                setClickState(!clickState);
-                setValueKey("");
-            }
+    const getWhiteList = async () => {
+        try{
+            const {data} = await axios.get("http://localhost:4000/admin")
+            setList(data)
         }
+        catch(e){
+            console.log(e)
+        }
+        
     }
-    // console.log(list);
+
+    const buttonDelete = () => {
+        setCheckDelete(!checkDelete)
+    }
+
+    useEffect(()=>{
+        getWhiteList()
+    },[])
 
     const clickInput1 = async () => {
         if (await myContract.methods.isWhitelisted(input1.current).call() == true) {
@@ -88,6 +68,7 @@ const WhiteList = () => {
                     if (result === "Success!") {
                         alert("화이트리스트 설정 완료되었습니다!");
                     }
+                    getWhiteList()
                 })
         }
     }
@@ -109,6 +90,7 @@ const WhiteList = () => {
                     if (result === "Success!") {
                         alert("화이트리스트 제거 완료되었습니다!");
                     }
+                    getWhiteList()
                 })
         }
     }
@@ -116,7 +98,7 @@ const WhiteList = () => {
     const clickInput3 = async () => {
         console.log(await myContract.methods.isWhitelisted(input3.current).call())
     }
-
+        
     return (
         <div>
             <div className="Cont">
@@ -135,11 +117,17 @@ const WhiteList = () => {
                         <Button variant="outline-secondary" id="button-addon2" onClick={clickInput1}>
                             Add
                         </Button>
-                        {/* </div> */}
                     </InputGroup>
                 </div>
-                <input onChange={(e) => input2.current = e.target.value}></input><button onClick={clickInput2}>화리 삭제</button>
-                <input onChange={(e) => input3.current = e.target.value}></input><button onClick={clickInput3}>화리 확인</button>
+
+                <div>
+                    <h2>test</h2>
+                    <input onChange={(e) => input2.current = e.target.value}></input><button onClick={clickInput2}>화리 삭제</button>
+                    <input onChange={(e) => input3.current = e.target.value}></input><button onClick={clickInput3}>화리 확인</button>
+                    <Trash >
+                    <img src={trash}  onClick={buttonDelete} width="100%"/>
+                    </Trash>
+                </div>
             </div>
             <Table striped>
                 <thead>
@@ -152,29 +140,26 @@ const WhiteList = () => {
                     {
                         list.map((item, index) => {
                             return <tr key={index}>
-                                <td> *</td>
+                                {/* <td> *</td> */}
+                                <td>
+                                    {
+                                        !checkDelete ?
+                                        <span> *</span>
+                                        : <Form.Check aria-label="option 1" />
+
+                                    }
+                                </td>
                                 <td>{item.publicKey}</td>
                             </tr>
                         })
                     }
                     <tr>
-                        <td>*</td>
                         <td>{accounts} </td>
                     </tr>
                 </tbody>
             </Table>
-            {/* { clickState &&
-            <div className="addInfo">
-                <input placeholder='publicKey' value={valueKey}  onChange={(e) => setValueKey(e.target.value)}/> 
-            </div>
-        }
-
-        <Button variant="info" size="lg" onClick={clickHandler}>
-            {
-                !clickState ? "등록하기" : "추가하기" 
-            }
-        </Button> */}
         </div>
+        
     )
 }
 
