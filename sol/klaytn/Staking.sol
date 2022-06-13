@@ -28,11 +28,19 @@ contract NFTStaking is BrownieNft {
   // staking, unstaking, claim에 대한 event
   event NFTStaked(address indexed owner, uint256 indexed tokenId, uint256 indexed value);
   event NFTUnstaked(address indexed owner, uint256 indexed tokenId, uint256 indexed value);
-  event Claimed(address indexed owner, uint256 indexed amount);
-
+  event Claimed(address indexed owner, uint256 indexed amount, uint256 indexed timestamp);
 
   // uint256 tokenid => struct Stake 
   mapping(uint256 => Stake) public vault; 
+  // uint256 tokenid => bool staked?
+  mapping(uint256 => bool) staked;
+  // address owner => uint256 number of staked nft
+  mapping(address => uint256) numStaked;
+
+  modifier isStaked(uint256 tokenId) {
+    require(staked[tokenId], "not staked tokenId");
+    _;
+  }
 
   // stake function 
   function stake(uint256 tokenId) external {
@@ -47,21 +55,35 @@ contract NFTStaking is BrownieNft {
         tokenId: tokenId,
         timestamp: uint256(block.timestamp)
     });
+    staked[tokenId] = true;
+    numStaked[msg.sender]++;
   }
 
   // unstake function
-  function unstake(uint256 tokenId) external {
-    Stake memory staked = vault[tokenId];
-    require(staked.owner == msg.sender, "not an owner");
+  function unstake(uint256 tokenId) external isStaked(tokenId) {
+    require(vault[tokenId].owner == msg.sender, "not an owner");
     _approve(msg.sender, tokenId);
     totalStaked--;
     delete vault[tokenId];
     emit NFTUnstaked(msg.sender, tokenId, block.timestamp);
     transferFrom(address(this), msg.sender, tokenId);
+    numStaked[msg.sender]--;
+    claimed(tokenId);
   }
 
   // reward claim function
-  function claimed() external {
-    
+  // 1. timestamp와 현재 시간 확인하여 보상부여
+  // 2. 보상부여 tx block의 timestamp로 struct Stake timestamp 최신화?
+  function claimed(uint256 tokenId) private isStaked(tokenId) {
+    require(vault[tokenId].owner == msg.sender, "not an owner");
+    uint256 reward = (((block.timestamp - vault[tokenId].timestamp) / 1 days) / totalStaked) * 10;
+    instance.rewardMinting(msg.sender, reward);
+    vault[tokenId].timestamp = block.timestamp;
+    emit Claimed(msg.sender, reward, block.timestamp);
+  }
+
+  // staking timestamp확인 위한 view 함수 
+  function whenStaked(uint256 tokenId) public view isStaked(tokenId) returns(uint256){
+    return vault[tokenId].timestamp;
   }
 }

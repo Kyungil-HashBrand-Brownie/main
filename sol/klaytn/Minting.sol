@@ -28,6 +28,11 @@ contract BrownieNft is ERC721, Whitelist {
         payable(msg.sender).transfer(amount * 10 ** 18);
     }
 
+    // instance address 확인용
+    function viewIns() public view returns(address) {
+        return address(instance);
+    }
+
     using Counters for Counters.Counter;
     string public fileExtention = ".json";
     using Strings for uint256;
@@ -116,4 +121,8 @@ contract BrownieNft is ERC721, Whitelist {
         uint256 tokenNum = _tokenIdCounter.current();
         return tokenNum;
     }
+
+    // nft 매매 function 
+    // 1. 매매할 nft 매매권한 contract에 부여 (approve)
+    // 2. contract에서 구매자에게 nft 소유권 양도
 }
