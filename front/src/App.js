@@ -18,12 +18,21 @@ import Swap from './page/Swap';
 function App() {
   const dispatch = useDispatch();
 
-  useEffect(() => { 
-    let myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xe17fafe9ffbacce005f271216e764d86ff1e7bc3");
+
+  const setReducer = async () => {
+    let myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0x7eC0Be3752Ad80B6e5C6b5C49FddcC094975F3c9");
     dispatch({type: "CONTRACT_SUCCESS", payload: myContract});
-    let btkInstance = window.caver.kct.kip7.create("0x1ecaf14bd3cc4cfd69d1f340dd81216c2f045e53")
+
+    // 토큰 인스턴스 주소
+    const btkInstanceAddr = await myContract.methods.viewIns().call()
+    let btkInstance = window.caver.kct.kip7.create(btkInstanceAddr)
     dispatch({type: "BTK_INSTANCE", payload: btkInstance});
+  }
+
+  useEffect(() => { 
+   setReducer()
   }, [])
+
   return (
     <>
         <Header />
