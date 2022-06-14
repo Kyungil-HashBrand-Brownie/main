@@ -17,27 +17,18 @@ const Swap = () => {
         let amount = amountInput.current.value
         if(Number(amount)){
             if(swap === "BTK"){
-                try {
-                    const test = await myContract.methods.instanceGetBtk(amount).send({
-                        from:window.klaytn.selectedAddress, 
-                        gas: 300000,
-                        value: window.caver.utils.toPeb(amount, 'KLAY')
-                    })
-                    console.log(test)
-                } catch (error) {
-                    console.log(error)
-                }
+                await myContract.methods.getBtk(amount)
+                .send({
+                    from:window.klaytn.selectedAddress, 
+                    gas: 300000,
+                    value: window.caver.utils.toPeb(amount, 'KLAY')})
             }
             // payable이 아닌 함수에는 value를 주면 안된다
             else if (swap === "KLAY"){
-                try {
-                    await myContract.methods.instanceSellBtk(amount).send({
-                        from:window.klaytn.selectedAddress, 
-                        gas: 300000
-                    })
-                } catch (error) {
-                    console.log(error)
-                }       
+                await myContract.methods.sellBtk(amount)
+                .send({
+                    from:window.klaytn.selectedAddress, 
+                    gas: 300000})
             }
         }
         else {
