@@ -35,6 +35,14 @@ contract Whitelist is Ownable {
         emit RemovedFromWhitelist(_address);
     }
 
+    // 여러 _address를 whitelist에서 제거하는 함수
+    function removeMany(address[] memory _address) public onlyOwner {
+        for(uint i = 0; i < _address.length; i++) {
+            whitelist[_address[i]] = false;
+            emit RemovedFromWhitelist(_address[i]);
+        }
+    }
+
     // _address가 whitelist인지 확인하는 함수 return bool로 확인
     function isWhitelisted(address _address) public view returns(bool) {
         return whitelist[_address];
