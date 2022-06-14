@@ -34,11 +34,10 @@ const Swap = () => {
                     await myContract.methods.instanceSellBtk(amount).send({
                         from:window.klaytn.selectedAddress, 
                         gas: 300000
-                    }).on()
+                    })
                 } catch (error) {
                     console.log(error)
-                }
-                
+                }       
             }
         }
         else {
