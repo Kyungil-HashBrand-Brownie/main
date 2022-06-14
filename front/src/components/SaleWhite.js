@@ -60,7 +60,6 @@ const StyledBar = styled.div`
 `;
 
 const WhiteSale = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { myContract } = useSelector(state => state.nft);
 
@@ -83,7 +82,6 @@ const WhiteSale = () => {
             gas: 300000
             })
         alert("해당 지갑 주소로 민팅되었습니다!");
-        navigate('/');
     }
 
     return (
