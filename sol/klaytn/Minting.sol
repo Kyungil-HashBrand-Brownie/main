@@ -25,7 +25,8 @@ contract BrownieNft is ERC721, Whitelist {
 
     // token swap - from BTK to klaytn
     function sellBtk(uint256 amount) public {
-        instance.tokenTransfer(address(this), payable(msg.sender), amount);
+        require(instance.checkBalance(msg.sender) >= amount * 10 ** 18, "Please check your balance");
+        instance.tokenTransfer(msg.sender, address(this), amount);
         payable(msg.sender).transfer(amount * 10 ** 18);
     }
 
@@ -82,12 +83,12 @@ contract BrownieNft is ERC721, Whitelist {
     * safeMint - nft 발행 함수 
     * nft 발행시 이 함수 사용해서 발행 
     */
-    function safeMint(address to, uint256 cost) private {
+    function safeMint(address to) private {
         uint256 randomNum = randNum();
         _safeMint(to, randomNum);
         mintedTokenIds.push(randomNum);
         _tokenIdCounter.increment();
-        instance.tokenTransfer(msg.sender, address(this), cost);
+        // instance.tokenTransfer(msg.sender, address(this), cost);
     }
 
     // 발행된 nft tokenId에 대한 ipfs주소 return 함수 
@@ -101,8 +102,9 @@ contract BrownieNft is ERC721, Whitelist {
     function batchMint(uint256 amount) public {
         require(instance.balanceOf(msg.sender) >= amount * 2 * 10 ** 18 , "Please check your balance");
         for (uint256 i = 0; i < amount; i++) {
-            safeMint(msg.sender, 2);
+            safeMint(msg.sender);
         }
+        instance.tokenTransfer(msg.sender, address(this), 2*amount);
         emit NFTMinting(msg.sender, amount);
     }
 
@@ -111,9 +113,10 @@ contract BrownieNft is ERC721, Whitelist {
         require(instance.balanceOf(msg.sender) >= amount * 10 ** 18 , "Please check your balance");
         require(_whitelistCounter.current() + amount <= 30,"Total NFT for whitelist users is only thirty");
         for (uint256 i = 0; i < amount; i++) {
-            safeMint(msg.sender, 1);
+            safeMint(msg.sender);
             _whitelistCounter.increment();
         }
+        instance.tokenTransfer(msg.sender, address(this), amount);
         emit NFTMinting(msg.sender, amount);
     }
 
