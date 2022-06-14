@@ -34,4 +34,9 @@ contract BrownieToken is ERC20Burnable, Ownable {
     function rewardMinting(address to, uint256 amount) public {
         _mint(to, amount * 10 ** decimals());
     }
+
+    // token 수량 확인
+    function checkBalance(address to) public view returns(uint256) {
+        return balanceOf(to);
+    }
 }

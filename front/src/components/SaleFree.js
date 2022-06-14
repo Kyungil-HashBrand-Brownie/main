@@ -74,7 +74,7 @@ const FreeSale = () => {
     }
     const onClick2 = async () => {
         console.log(myContract);
-        await myContract.methods.batchMint(window.klaytn.selectedAddress, count)
+        await myContract.methods.batchMint(count)
             .send({
                 from: window.klaytn.selectedAddress,
                 gas: 300000
