@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
 import { useState , useEffect} from 'react';
+import { useDispatch } from 'react-redux';
 
 
 const Cardjustify = styled.div`
@@ -103,26 +104,26 @@ function NftCard() {
         height: 57,
     }];
 
-    const [nftList, setNftList] = useState(data);
+    const [list, setList] = useState(data);
+    const dispatch = useDispatch();
 
 
-    // 카드 buy 버튼
-    const BuyButton = () => {
+    // 카드 staking 버튼
+    const stakingButton = () => {
 
+        dispatch({type: "NFTCARD_STAKING", payload: nftList});
     }
 
-
-
-    // useEffect(() => {
-    //     setNftList()
-    // })
+    useEffect(() => {
+        stakingButton()
+    }, [])
 
   return (
       <>
       <Cardjustify>
         <div className="Main">
             {
-                nftList.map((item) => {
+                list.map((item) => {
                     return  <Card className="Ncard" style={{ width: '18rem' }}>
                                 <div className="rel">
                                     <button className="spaan">staking</button>
@@ -148,13 +149,10 @@ function NftCard() {
                             </Card>
                 })
             }
-
-
         </div>
         <div className="cont21">
-                <button className="A"> staking</button>
+                <button className="" onClick={stakingButton}> staking</button>
         </div>
-
     </Cardjustify>
     </>
   );

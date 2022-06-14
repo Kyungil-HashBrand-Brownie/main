@@ -8,6 +8,7 @@ let initialState = {
     brownieContract: {},
     modalState: false,
     btkInstance: "",
+    nftList : "",
 }
 
 function nftReducer(state=initialState, action) {
@@ -44,6 +45,12 @@ function nftReducer(state=initialState, action) {
             console.log("btk instance : ", payload);
             return {...state,
                 btkInstance: payload
+            }
+        
+        case "NFTCARD_STAKING":
+            console.log("NFTLIST_DATA : ", payload);
+            return {...state,
+                nftList: payload
             }
 
         case "ADDRESS_CHANGE_SUCCESS":
