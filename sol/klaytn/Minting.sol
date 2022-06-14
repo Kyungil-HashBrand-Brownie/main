@@ -33,6 +33,10 @@ contract BrownieNft is ERC721, Whitelist {
     function viewIns() public view returns(address) {
         return address(instance);
     }
+    // contract address 확인용
+    function viewCon() public view returns(address) {
+        return address(this);
+    }
 
     using Counters for Counters.Counter;
     string public fileExtention = ".json";
