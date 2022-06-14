@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FreeImg } from '../img'
 import styled from "styled-components";
 import { Container, Row, Col, Button } from 'react-bootstrap'
@@ -60,7 +60,6 @@ const StyledBar = styled.div`
 `;
 
 const FreeSale = () => {
-    const addInput = useRef("")
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { myContract } = useSelector(state => state.nft);
@@ -74,7 +73,7 @@ const FreeSale = () => {
     }
     const onClick2 = async () => {
         console.log(myContract);
-        await myContract.methods.batchMint(count)
+        await myContract.methods.batchMint(window.klaytn.selectedAddress, count)
             .send({
                 from: window.klaytn.selectedAddress,
                 gas: 300000
