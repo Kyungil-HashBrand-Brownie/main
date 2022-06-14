@@ -17,7 +17,7 @@ const Swap = () => {
         let amount = amountInput.current.value
         if(Number(amount)){
             if(swap === "BTK"){
-                await myContract.methods.instanceGetBtk(amount)
+                await myContract.methods.getBtk(amount)
                 .send({
                     from:window.klaytn.selectedAddress, 
                     gas: 300000,
@@ -25,7 +25,7 @@ const Swap = () => {
             }
             // payable이 아닌 함수에는 value를 주면 안된다
             else if (swap === "KLAY"){
-                await myContract.methods.instanceSellBtk(amount)
+                await myContract.methods.sellBtk(amount)
                 .send({
                     from:window.klaytn.selectedAddress, 
                     gas: 300000})

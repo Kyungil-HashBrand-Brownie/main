@@ -79,6 +79,25 @@
 					{
 						"indexed": true,
 						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "NFTMinting",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
 						"name": "previousOwner",
 						"type": "address"
 					},
@@ -162,19 +181,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "balanNFTCon",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -195,11 +201,6 @@
 			},
 			{
 				"inputs": [
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
 					{
 						"internalType": "uint256",
 						"name": "amount",
@@ -247,26 +248,13 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "amount",
+						"name": "_amount",
 						"type": "uint256"
 					}
 				],
-				"name": "instanceGetBtk",
+				"name": "getBtk",
 				"outputs": [],
 				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "instanceSellBtk",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -307,6 +295,19 @@
 						"internalType": "bool",
 						"name": "",
 						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "myNFTs",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
 					}
 				],
 				"stateMutability": "view",
@@ -397,6 +398,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_address",
+						"type": "address[]"
+					}
+				],
+				"name": "removeMany",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "renounceOwnership",
 				"outputs": [],
@@ -450,6 +464,19 @@
 					}
 				],
 				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "sellBtk",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -561,7 +588,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "viewIns",
+				"name": "viewCon",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -574,7 +601,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "viewNFTCon",
+				"name": "viewIns",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -587,11 +614,6 @@
 			},
 			{
 				"inputs": [
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
 					{
 						"internalType": "uint256",
 						"name": "amount",
@@ -674,6 +696,7 @@
 		"userdoc": {
 			"kind": "user",
 			"methods": {},
+			"notice": "author Kyungil_Team Brownie version 1.0 ERC721기반 대체 불가능 토큰 자체 nft",
 			"version": 1
 		}
 	},
@@ -814,27 +837,27 @@
 			]
 		},
 		"minting/Minting.sol": {
-			"keccak256": "0x8beda95a94bd8e155c74e40ad085358ec1886d4ce65c582f70a65cef471db79f",
+			"keccak256": "0xe5c991404b9ba4bac2ec982bbc595f6821f8bbac0cd7967054bbc777a17eab2a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a6b36ea8a66700958e17a7a21d1ef9fee4f971dcaa85d5706c2d56dc5736f552",
-				"dweb:/ipfs/Qmd5nkGpUteiLfYpMZCedbcCyfVScimHPiS6oPMo2VHFSd"
+				"bzz-raw://206cc251b474983eba2959231358ee71cdd5bd8a896b00dc048b0604fec6dc36",
+				"dweb:/ipfs/QmaZvMRNai13aPmGHAYFX1TwH2WQuHwsP7VjiJLpC6mVPp"
 			]
 		},
 		"minting/Token.sol": {
-			"keccak256": "0xbc9a89415fba8454e3c3b939961572ad39352abb03475b85fee93586dd2bbbda",
+			"keccak256": "0xf763417287129ab7bde7c647d4ace2ff1208655ed266267f51c2e7042515db5c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://89734c86381f1432f3178d1fc8b86f53ee38782e296370679289cef3a471de17",
-				"dweb:/ipfs/QmdRSeWq9A6hgNoei1SpmZfHB4eVGYAWzz9U43tx41TUZ3"
+				"bzz-raw://2f32aa246f1725af19bbaabe29a95ae05f0fb41a3fec82fa5d9ed79f1d635030",
+				"dweb:/ipfs/QmR3fGJ3TNo6gtkKvfje6Ud2VXk77xHeEfYQVURbFHeTZb"
 			]
 		},
 		"minting/Whitelist.sol": {
-			"keccak256": "0x6f5554e7fb553ce2a5c67cb13d3c23f695e8a70443a645fbbd1ed605434dc28f",
+			"keccak256": "0x10c6237378847e8484b1981ccbefbfc7a1fcf2c3fe921fa72bfe0dbee2e4f511",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e101611eccf6ab7f6768d07459a56839f033f0a7c316a49ce5a55e853bc63900",
-				"dweb:/ipfs/QmUahwVJgdwVQrEqWYxg2q4R25ZxnPxzhVsE2kfVBGKySN"
+				"bzz-raw://e1ed4f437e0e7fb529071f1aa502d19ee63c38aa621848503aabf4cbb3b10481",
+				"dweb:/ipfs/QmR2R4srPpiJEPXhq9DEwX1HQcMm1gq384M4bxQeVG67zD"
 			]
 		}
 	},
