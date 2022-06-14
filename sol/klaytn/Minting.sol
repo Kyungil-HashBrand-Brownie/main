@@ -15,6 +15,7 @@ import "./Whitelist.sol";
 contract BrownieNft is ERC721, Whitelist {
     // nft 거래 및 staking reward를 위한 BTK instance
     BrownieToken instance = new BrownieToken(address(this));
+    event NFTMinting(address indexed account, uint indexed amount);
 
     // token swap - from klaytn to BTK
     function getBtk(uint256 _amount) public payable {
@@ -24,14 +25,25 @@ contract BrownieNft is ERC721, Whitelist {
 
     // token swap - from BTK to klaytn
     function sellBtk(uint256 amount) public {
-        instance.tokenTransfer(address(this), payable(msg.sender), amount);
+        require(instance.checkBalance(msg.sender) >= amount * 10 ** 18, "Please check your balance");
+        instance.tokenTransfer(msg.sender, address(this), amount);
         payable(msg.sender).transfer(amount * 10 ** 18);
+    }
+
+    // instance address 확인용
+    function viewIns() public view returns(address) {
+        return address(instance);
+    }
+    // contract address 확인용
+    function viewCon() public view returns(address) {
+        return address(this);
     }
 
     using Counters for Counters.Counter;
     string public fileExtention = ".json";
     using Strings for uint256;
     mapping(uint256 => bool) mintinglist;
+    uint[] mintedTokenIds;
 
     /** 
     * _tokenIdCounter - 전체 발행된 nft 수
@@ -74,6 +86,9 @@ contract BrownieNft is ERC721, Whitelist {
     function safeMint(address to) private {
         uint256 randomNum = randNum();
         _safeMint(to, randomNum);
+        mintedTokenIds.push(randomNum);
+        _tokenIdCounter.increment();
+        // instance.tokenTransfer(msg.sender, address(this), cost);
     }
 
     // 발행된 nft tokenId에 대한 ipfs주소 return 함수 
@@ -88,9 +103,9 @@ contract BrownieNft is ERC721, Whitelist {
         require(instance.balanceOf(msg.sender) >= amount * 2 * 10 ** 18 , "Please check your balance");
         for (uint256 i = 0; i < amount; i++) {
             safeMint(msg.sender);
-            _tokenIdCounter.increment();
-            instance.tokenTransfer(msg.sender, address(this), 2);
         }
+        instance.tokenTransfer(msg.sender, address(this), 2*amount);
+        emit NFTMinting(msg.sender, amount);
     }
 
     // whitelist 전용 minting
@@ -99,10 +114,10 @@ contract BrownieNft is ERC721, Whitelist {
         require(_whitelistCounter.current() + amount <= 30,"Total NFT for whitelist users is only thirty");
         for (uint256 i = 0; i < amount; i++) {
             safeMint(msg.sender);
-            _tokenIdCounter.increment();
             _whitelistCounter.increment();
-            instance.tokenTransfer(msg.sender, address(this), 1);
         }
+        instance.tokenTransfer(msg.sender, address(this), amount);
+        emit NFTMinting(msg.sender, amount);
     }
 
     // contract에 있는 klaytn 출금용
@@ -115,5 +130,16 @@ contract BrownieNft is ERC721, Whitelist {
     function nftNum() public view returns(uint256) {
         uint256 tokenNum = _tokenIdCounter.current();
         return tokenNum;
+    }
+
+    // 내가 보유한 nft tokenId들
+    function myNFTs() public view returns(uint256[] memory) {
+        uint256[] memory nfts;
+        for(uint i = 0; i < mintedTokenIds.length; i++) {
+            if(ownerOf(mintedTokenIds[i]) == msg.sender) {
+                nfts[i] = mintedTokenIds[i];
+            }
+        }
+        return nfts;
     }
 }

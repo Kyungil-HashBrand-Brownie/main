@@ -1,7 +1,6 @@
 import React , {useState , useEffect} from 'react';
 import styled from 'styled-components';
 import PFP from '../img/profile1.png';
-import contractABI from "./VoteContract.json"
 
 const ProfileContainer = styled.div`
   position: fixed;
@@ -43,22 +42,6 @@ const Profile = () => {
   const [address, setAddress] = useState("")
   const [balance, setBalance] = useState(0)
 
-  // const test = async () => {
-  //   console.log(window.klaytn._kaikas.isEnabled())
-  //   console.log(await window.klaytn._kaikas.isUnlocked())
-  //   console.log(await window.klaytn._kaikas.isApproved())
-
-  // }
-  
-  // test()
-
-  // window.klaytn.on('accountsChanged', async function(accounts) {
-  //   // Your code
-  //   setAddress(accounts[0]);
-  //   console.log(address)
-  //   const balance = await window.caver.klay.getBalance(window.klaytn.selectedAddress)
-  //   setBalance(window.caver.utils.fromWei(balance))
-  // })
 
   useEffect(() => {
   }, [])

@@ -10,7 +10,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 * ERC20기반 자체 토큰 
 */
 contract BrownieToken is ERC20Burnable, Ownable {
-    // token swap 용 token을 위해 contract address에 100000BTK 선발행
+    // token swap 용 token을 위해 contract addreess에 100000BTK 선발행
     constructor(address conAddr) ERC20("BrownieToken", "BTK") {
         _mint(conAddr, 100000 * 10 ** decimals());
     }
@@ -31,7 +31,12 @@ contract BrownieToken is ERC20Burnable, Ownable {
     }
 
     // nft staking에 대한 보상용 minting function 
-    function rewardMinting(address to, uint256 amount) private {
+    function rewardMinting(address to, uint256 amount) public {
         _mint(to, amount * 10 ** decimals());
+    }
+
+    // token 수량 확인
+    function checkBalance(address to) public view returns(uint256) {
+        return balanceOf(to);
     }
 }
