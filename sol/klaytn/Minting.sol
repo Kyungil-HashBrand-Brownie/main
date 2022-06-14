@@ -43,6 +43,7 @@ contract BrownieNft is ERC721, Whitelist {
     string public fileExtention = ".json";
     using Strings for uint256;
     mapping(uint256 => bool) mintinglist;
+    mapping(address => uint256[]) ownNFTs;
     uint[] mintedTokenIds;
 
     /** 
@@ -83,12 +84,13 @@ contract BrownieNft is ERC721, Whitelist {
     * safeMint - nft 발행 함수 
     * nft 발행시 이 함수 사용해서 발행 
     */
-    function safeMint(address to) private {
+    function safeMint(address to, uint256 cost) private {
         uint256 randomNum = randNum();
         _safeMint(to, randomNum);
         mintedTokenIds.push(randomNum);
         _tokenIdCounter.increment();
-        // instance.tokenTransfer(msg.sender, address(this), cost);
+        ownNFTs[msg.sender].push(randomNum);
+        instance.tokenTransfer(msg.sender, address(this), cost);
     }
 
     // 발행된 nft tokenId에 대한 ipfs주소 return 함수 
@@ -102,9 +104,8 @@ contract BrownieNft is ERC721, Whitelist {
     function batchMint(uint256 amount) public {
         require(instance.balanceOf(msg.sender) >= amount * 2 * 10 ** 18 , "Please check your balance");
         for (uint256 i = 0; i < amount; i++) {
-            safeMint(msg.sender);
+            safeMint(msg.sender, 2);
         }
-        instance.tokenTransfer(msg.sender, address(this), 2*amount);
         emit NFTMinting(msg.sender, amount);
     }
 
@@ -113,10 +114,9 @@ contract BrownieNft is ERC721, Whitelist {
         require(instance.balanceOf(msg.sender) >= amount * 10 ** 18 , "Please check your balance");
         require(_whitelistCounter.current() + amount <= 30,"Total NFT for whitelist users is only thirty");
         for (uint256 i = 0; i < amount; i++) {
-            safeMint(msg.sender);
+            safeMint(msg.sender, 1);
             _whitelistCounter.increment();
         }
-        instance.tokenTransfer(msg.sender, address(this), amount);
         emit NFTMinting(msg.sender, amount);
     }
 
@@ -134,12 +134,6 @@ contract BrownieNft is ERC721, Whitelist {
 
     // 내가 보유한 nft tokenId들
     function myNFTs() public view returns(uint256[] memory) {
-        uint256[] memory nfts;
-        for(uint i = 0; i < mintedTokenIds.length; i++) {
-            if(ownerOf(mintedTokenIds[i]) == msg.sender) {
-                nfts[i] = mintedTokenIds[i];
-            }
-        }
-        return nfts;
+        return ownNFTs[msg.sender];
     }
 }

@@ -103,9 +103,9 @@ const Header = () => {
         return fixed;
     }
 
-    const setTokenBalance = async (accounts) => {
+    const setTokenBalance = async (address) => {
         if(btkInstance){
-            const weiBalance = await window.caver.klay.getBalance(accounts[0])
+            const weiBalance = await window.caver.klay.getBalance(address)
             const fixedBalance = weiToFixed(weiBalance)
             const weibtkBalance = await btkInstance.balanceOf(window.klaytn.selectedAddress) //BigNumber 객체
             const fixedbtkBalance = weiToFixed(weibtkBalance)
@@ -117,18 +117,19 @@ const Header = () => {
     }
 
     const setUserInfo = async () => {
-        const accounts = await window.klaytn.enable()
-        console.log(accounts)
-
-        setAddress(accounts[0]);
-        setTokenBalance(accounts)
+        let address = window.klaytn.selectedAddress
+        if(window.klaytn.selectedAddress){
+            setAddress(address);
+            setTokenBalance(address)
+        }
+        
     }
 
     window.klaytn.on('accountsChanged', async function(accounts) {
         console.log(accounts[0])
         sessionStorage.setItem('id', accounts[0]);
         setAddress(accounts[0]);
-        if(btkInstance) setTokenBalance(accounts)
+        if(btkInstance) setTokenBalance(accounts[0])
     })
 
     const copyAddress = () => {
