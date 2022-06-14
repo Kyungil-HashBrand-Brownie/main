@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 
 const Swap = () => {
     const [swap, setSwap] = useState('BTK');
