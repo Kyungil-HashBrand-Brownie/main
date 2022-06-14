@@ -17,9 +17,9 @@ const Trash = styled.div`
 `
 
 
-    
+
 const WhiteList = () => {
-    const { myContract,accounts } = useSelector(state => state.nft);
+    const { myContract, accounts } = useSelector(state => state.nft);
 
     const [list, setList] = useState([]);
     const [checkDelete, setCheckDelete] = useState(false);
@@ -29,23 +29,23 @@ const WhiteList = () => {
     const checkInput = useRef("")
 
     const getWhiteList = async () => {
-        try{
-            const {data} = await axios.get("http://localhost:4000/admin")
+        try {
+            const { data } = await axios.get("http://localhost:4000/admin")
             setList(data)
         }
-        catch(e){
+        catch (e) {
             console.log(e)
         }
-        
+
     }
 
     const buttonDelete = () => {
         setCheckDelete(!checkDelete)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getWhiteList()
-    },[])
+    }, [])
 
     const addWhitelist = async () => {
         if (await myContract.methods.isWhitelisted(addInput.current).call() == true) {
@@ -92,11 +92,11 @@ const WhiteList = () => {
                 })
         }
     }
-    
+
     const checkWhitelist = async () => {
         console.log(await myContract.methods.isWhitelisted(checkInput.current).call())
     }
-        
+
     return (
         <div>
             <div className="Cont">
@@ -123,7 +123,7 @@ const WhiteList = () => {
                     <input onChange={(e) => delInput.current = e.target.value}></input><button onClick={delWhitelist}>화리 삭제</button>
                     <input onChange={(e) => checkInput.current = e.target.value}></input><button onClick={checkWhitelist}>화리 확인</button>
                     <Trash >
-                    <img src={trash}  onClick={buttonDelete} width="100%"/>
+                        <img src={trash} onClick={buttonDelete} width="100%" />
                     </Trash>
                 </div>
             </div>
@@ -142,8 +142,8 @@ const WhiteList = () => {
                                 <td>
                                     {
                                         !checkDelete ?
-                                        <span> *</span>
-                                        : <Form.Check aria-label="option 1" />
+                                            <span> *</span>
+                                            : <Form.Check aria-label="option 1" />
 
                                     }
                                 </td>
@@ -157,7 +157,7 @@ const WhiteList = () => {
                 </tbody>
             </Table>
         </div>
-        
+
     )
 }
 

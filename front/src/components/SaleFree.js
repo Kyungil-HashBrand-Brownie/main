@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FreeImg } from '../img'
 import styled from "styled-components";
 import { Container, Row, Col, Button } from 'react-bootstrap'
@@ -60,6 +60,7 @@ const StyledBar = styled.div`
 `;
 
 const FreeSale = () => {
+    const addInput = useRef("")
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { myContract } = useSelector(state => state.nft);
@@ -68,20 +69,20 @@ const FreeSale = () => {
         const accounts = await window.klaytn.enable()
         console.log("account", accounts)
         const balance = await window.caver.klay.getBalance(accounts[0])
-        console.log("balance" , balance)
-        dispatch({type:"WHITELIST_KEY" ,payload: accounts })
-      }
-      const onClick2 = async () => {
+        console.log("balance", balance)
+        dispatch({ type: "WHITELIST_KEY", payload: accounts })
+    }
+    const onClick2 = async () => {
         console.log(myContract);
-        await myContract.methods.batchMint(window.klaytn.selectedAddress,count)
-        .send({
-            from:window.klaytn.selectedAddress,
-            gas: 300000
-        })
+        await myContract.methods.batchMint(window.klaytn.selectedAddress, count)
+            .send({
+                from: window.klaytn.selectedAddress,
+                gas: 300000
+            })
         alert("해당 지갑 주소로 민팅되었습니다!");
         navigate('/');
     }
-    
+
     // const dispatch = useDispatch(state => state.nft)
 
     const [count, setCount] = useState(1)
