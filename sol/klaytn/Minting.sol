@@ -25,17 +25,21 @@ contract BrownieNft is ERC721, Whitelist {
 
     // token swap - from BTK to klaytn
     function sellBtk(uint256 amount) public {
-        require(instance.checkBalance(msg.sender) >= amount * 10 ** 18, "Please check your balance");
+        require(
+            instance.checkBalance(msg.sender) >= amount * 10**18,
+            "Please check your balance"
+        );
         instance.tokenTransfer(msg.sender, address(this), amount);
-        payable(msg.sender).transfer(amount * 10 ** 18);
+        payable(msg.sender).transfer(amount * 10**18);
     }
 
     // instance address 확인용
     function viewIns() public view returns (address) {
         return address(instance);
     }
+
     // contract address 확인용
-    function viewCon() public view returns(address) {
+    function viewCon() public view returns (address) {
         return address(this);
     }
 
@@ -86,17 +90,10 @@ contract BrownieNft is ERC721, Whitelist {
     }
 
     /**
-<<<<<<< HEAD
      * safeMint - nft 발행 함수
      * nft 발행시 이 함수 사용해서 발행
      */
-    function safeMint(address to, uint256 cost) private {
-=======
-    * safeMint - nft 발행 함수 
-    * nft 발행시 이 함수 사용해서 발행 
-    */
     function safeMint(address to) private {
->>>>>>> fa7525748e958bf04ee8d0092e648dba46801ba2
         uint256 randomNum = randNum();
         _safeMint(to, randomNum);
         mintedTokenIds.push(randomNum);
@@ -134,7 +131,7 @@ contract BrownieNft is ERC721, Whitelist {
         for (uint256 i = 0; i < amount; i++) {
             safeMint(msg.sender);
         }
-        instance.tokenTransfer(msg.sender, address(this), 2*amount);
+        instance.tokenTransfer(msg.sender, address(this), 2 * amount);
         emit NFTMinting(msg.sender, amount);
     }
 
