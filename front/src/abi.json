@@ -588,6 +588,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "viewCon",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "viewIns",
 				"outputs": [
 					{
@@ -824,19 +837,19 @@
 			]
 		},
 		"minting/Minting.sol": {
-			"keccak256": "0xd27bd6d5f46051977ba1b6c5708a6f9a35933b92e92f9d3b3ba71bed97036c9d",
+			"keccak256": "0xe5c991404b9ba4bac2ec982bbc595f6821f8bbac0cd7967054bbc777a17eab2a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ebec740fd204d0c368519c1cc34d3eafa123fda352025c813bfa49abe7cb3bb6",
-				"dweb:/ipfs/QmT6ow4SQ71Xouazhy2wSiWCCszNK5ktv4tRDu8BZRhrSp"
+				"bzz-raw://206cc251b474983eba2959231358ee71cdd5bd8a896b00dc048b0604fec6dc36",
+				"dweb:/ipfs/QmaZvMRNai13aPmGHAYFX1TwH2WQuHwsP7VjiJLpC6mVPp"
 			]
 		},
 		"minting/Token.sol": {
-			"keccak256": "0x36473af2c8828913f5d935799b53b892341e4ee7d3be0b1ad592d67372bc9f9e",
+			"keccak256": "0xf763417287129ab7bde7c647d4ace2ff1208655ed266267f51c2e7042515db5c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c010d78e8267524ad3a86805f780d48e1a25e5975822ac7439e8d74ffef7efce",
-				"dweb:/ipfs/QmbgPRhRLyYzzkjxTQ7wv4QtvRYHrZDR2CtERWind6Kni2"
+				"bzz-raw://2f32aa246f1725af19bbaabe29a95ae05f0fb41a3fec82fa5d9ed79f1d635030",
+				"dweb:/ipfs/QmR3fGJ3TNo6gtkKvfje6Ud2VXk77xHeEfYQVURbFHeTZb"
 			]
 		},
 		"minting/Whitelist.sol": {
