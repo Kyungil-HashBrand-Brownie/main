@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Swap = () => {
+    const dispatch = useDispatch();
+
     const [swap, setSwap] = useState('BTK');
 
     const amountInput = useRef();
@@ -48,7 +50,8 @@ const Swap = () => {
                 }       
             }
             console.log('test');
-            alert('스왑완료');  
+            alert('스왑완료');
+            dispatch({type: "WALLET_REFRESH"})
         }
         else {
             alert("숫자를 입력해주세요")

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 import {Container,Row , Col , Button} from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
-import contractAbi from "../abi.json"
 import Browny from '../img/browny9.png'
 
 const StyledMain = styled.div`
@@ -76,11 +75,15 @@ const WhiteSale = () => {
     }
 
     const whiteMint = async () => {
-        await brownieContract.methods.whitelistMint(count)
-        .send({
-            from:myAddress,
+        const conData = await brownieContract.methods.whitelistMint(count).encodeABI()
+        const test = await window.caver.klay.sendTransaction({
+            type: 'SMART_CONTRACT_EXECUTION',
+            from:myAddress, 
+            to:'0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
+            data:conData,
             gas: 3000000
-            })
+        })
+        dispatch({type: "WALLET_REFRESH"})
         alert("해당 지갑 주소로 민팅되었습니다!");
     }
 
