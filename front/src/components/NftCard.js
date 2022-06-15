@@ -185,18 +185,16 @@ function NftCard() {
                                 <div className='width1'>
                                     <Card.Title >{item.id}</Card.Title>
                                     </div>
-                                    <Card.Text>
-                                        <Container className="containerCard">
-                                            <Row>
-                                                <Col className="col_1">price</Col>
-                                                <Col className="col_1">highst</Col>
-                                            </Row>
-                                            <Row>
-                                                <Col className="col_2">{item.eth} ETH</Col>
-                                                <Col className="col_2">{item.height}</Col>
-                                            </Row>
-                                        </Container>
-                                    </Card.Text>
+                                    <Container className="containerCard">
+                                        <Row>
+                                            <Col className="col_1">price</Col>
+                                            <Col className="col_1">highst</Col>
+                                        </Row>
+                                        <Row>
+                                            <Col className="col_2">{item.eth} ETH</Col>
+                                            <Col className="col_2">{item.height}</Col>
+                                        </Row>
+                                    </Container>
                                 </div>
                             </Card>
                         </div>
