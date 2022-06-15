@@ -100,7 +100,7 @@ const WhiteSale = () => {
                 <Container className="mint-info-box">
                     <Row>
                         <Col>Price</Col>
-                        <Col>1 KLAY</Col>
+                        <Col>1 BTK</Col>
                     </Row>
                     <Row>
                         <Col>Per transaction</Col>
