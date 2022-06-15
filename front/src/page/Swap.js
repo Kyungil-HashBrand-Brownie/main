@@ -11,14 +11,14 @@ const Swap = () => {
         else setSwap('KLAY')
     }
 
-    const {myContract} = useSelector(state =>state.nft);
+    const {brownieContract} = useSelector(state =>state.nft);
     
     const swapToken = async () => {
         let amount = amountInput.current.value
         if(Number(amount)){
             if(swap === "BTK"){
                 try {
-                    const conData = await myContract.methods.getBtk(amount).encodeABI()
+                    const conData = await brownieContract.methods.getBtk(amount).encodeABI()
                     const con = await window.caver.klay.sendTransaction({
                         type: 'SMART_CONTRACT_EXECUTION',
                         from: window.klaytn.selectedAddress,
@@ -34,7 +34,7 @@ const Swap = () => {
             }
             else if (swap === "KLAY"){
                 try {
-                    const conData = await myContract.methods.sellBtk(amount).encodeABI()
+                    const conData = await brownieContract.methods.sellBtk(amount).encodeABI()
                     const test = await window.caver.klay.sendTransaction({
                         type: 'SMART_CONTRACT_EXECUTION',
                         from:window.klaytn.selectedAddress, 

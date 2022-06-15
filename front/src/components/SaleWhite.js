@@ -61,7 +61,7 @@ const StyledBar = styled.div`
 
 const WhiteSale = () => {
     const dispatch = useDispatch();
-    const { myContract } = useSelector(state => state.nft);
+    const { brownieContract } = useSelector(state => state.nft);
 
     const [count, setCount] = useState(1)
 
@@ -76,7 +76,7 @@ const WhiteSale = () => {
     }
 
     const whiteMint = async () => {
-        await myContract.methods.whitelistMint(count)
+        await brownieContract.methods.whitelistMint(count)
         .send({
             from:window.klaytn.selectedAddress,
             gas: 300000
