@@ -5,7 +5,7 @@ let initialState = {
     countMinority : 0,
     countTotal : 0,
     myAddress : "",
-    myContract: {},
+    brownieContract: {},
     modalState: false,
     btkInstance: "",
 }
@@ -37,7 +37,7 @@ function nftReducer(state=initialState, action) {
         case "CONTRACT_SUCCESS": 
             console.log("contract: ", payload);
             return {...state,
-                myContract: payload,                
+                brownieContract: payload,                
             }
 
         case "BTK_INSTANCE":
