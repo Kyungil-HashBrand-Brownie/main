@@ -30,6 +30,8 @@ const Swap = () => {
                     from:window.klaytn.selectedAddress, 
                     gas: 300000})
             }
+            console.log('test');
+            alert('스왑완료');  
         }
         else {
             alert("숫자를 입력해주세요")
