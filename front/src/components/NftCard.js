@@ -215,6 +215,7 @@ function NftCard() {
         <div className="cont21">
                 <button className="" onClick={stakingButton}> staking</button>
         </div>
+
     </Cardjustify>
     </>
   );
