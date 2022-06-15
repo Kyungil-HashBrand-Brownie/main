@@ -71,6 +71,17 @@ function nftReducer(state=initialState, action) {
                 myAddress: payload,
             }
 
+        case "REMOVE_BOOKMARK_TEST": 
+            let copy = [...state.posts]
+            payload.checkItems.forEach((item) => {
+                let deleteIndex = copy.findIndex((value) => value.id === item)
+                copy.splice(deleteIndex, 1)
+            });
+            return {
+                ...state, posts: copy
+            }
+
+
         default:
             return {...state}
     }

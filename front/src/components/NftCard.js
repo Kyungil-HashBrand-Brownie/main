@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import React, { useState , useEffect , useCallback} from 'react';
 import { useDispatch ,useSelector} from 'react-redux';
 import {Button, Form} from "react-bootstrap";
-import {REMOVE_BOOKMARK_TEST} from '../redux/reducers/testReducer'
+// import {REMOVE_BOOKMARK_TEST} from '../redux/reducers/testReducer'
 
 
 
@@ -114,7 +114,7 @@ function NftCard() {
     const dispatch = useDispatch();
 
     // check
-    const {posts} = useSelector(state => state.testnft)
+    const {posts} = useSelector(state => state.nft)
     const [checkItems, setCheckItems] = useState([])
 
 
@@ -144,7 +144,7 @@ function NftCard() {
     function deleteHandler() {
         dispatch({
             type: "REMOVE_BOOKMARK_TEST"
-            , data: {checkItems: checkItems}
+            , payload: {checkItems: checkItems}
         })
 
         // 초기화
@@ -161,33 +161,24 @@ function NftCard() {
         // dispatch({type: "NFTCARD_STAKING", payload: nftList});
     }
 
-    
-
-
-
   return (
-      <>
+      <div>
       <Cardjustify>
         <div className="Main">
-        <Form.Check
-            type={"checkbox"}
-            label={"전체선택"}
-            onChange={(e) => checkAllHandler(e.target.checked)}
-            // checked={}
-        >
-        </Form.Check>
+
             {
-                list.map((item, index) => {
-                    return <><Form.Check
+                list.map((item, index1) => {
+                    return  <div key={index1}>
+                            <Form.Check
                                 type={"checkbox"}
                                 onChange={(e) => checkHandler(e.target.checked, item.id)}
                                 checked={checkItems.indexOf(item.id) >= 0 ? true : false}
                             >
                             </Form.Check>
 
-                    <Card className="Ncard" key={index} style={{ width: '18rem' }}>
+                            <Card className="Ncard"   style={{ width: '18rem' }}>
                                 <div className="rel">
-                                    <button className="spaan">staking</button>
+                                    {/* <button className="spaan">staking</button> */}
                                 </div>
                                 <div className="button1"  >
                                     <Card.Img variant="top" src={browny4} />
@@ -208,7 +199,7 @@ function NftCard() {
                                     </Card.Text>
                                 </div>
                             </Card>
-                            </>
+                        </div>
                 })
             }
         </div>
@@ -217,7 +208,7 @@ function NftCard() {
         </div>
 
     </Cardjustify>
-    </>
+    </div>
   );
 }
 
