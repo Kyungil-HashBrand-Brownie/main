@@ -1,8 +1,13 @@
 import React from 'react'
+import EarthVote from '../components/EarthVote'
+import QuitVote from '../components/QuitVote'
 
 const Testpage = () => {
   return (
-    <div>Testpage</div>
+    <div>
+        <EarthVote />
+        <QuitVote />
+    </div>
   )
 }
 
