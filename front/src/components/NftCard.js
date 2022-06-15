@@ -16,13 +16,21 @@ import {Button, Form} from "react-bootstrap";
 const Cardjustify = styled.div`
     .Main {
         position: relative;
-        opacity: 1;
         display: flex ;
         justify-content: center ;
         z-index:5;
         margin: 10px;
         border: 1px solid;
     }
+
+    .Ncard {
+        opacity: 0.4;
+    }
+
+    .Ncard:hover {
+        opacity: 1;
+    }
+
 
 
     .card:hover {
@@ -168,7 +176,7 @@ function NftCard() {
 
             {
                 list.map((item, index1) => {
-                    return  <div key={index1}>
+                    return  <div  key={index1}>
                             <Form.Check
                                 type={"checkbox"}
                                 onChange={(e) => checkHandler(e.target.checked, item.id)}
@@ -185,18 +193,16 @@ function NftCard() {
                                 <div className='width1'>
                                     <Card.Title >{item.id}</Card.Title>
                                     </div>
-                                    <Card.Text>
-                                        <Container className="containerCard">
-                                            <Row>
-                                                <Col className="col_1">price</Col>
-                                                <Col className="col_1">highst</Col>
-                                            </Row>
-                                            <Row>
-                                                <Col className="col_2">{item.eth} ETH</Col>
-                                                <Col className="col_2">{item.height}</Col>
-                                            </Row>
-                                        </Container>
-                                    </Card.Text>
+                                    <Container className="containerCard">
+                                        <Row>
+                                            <Col className="col_1">price</Col>
+                                            <Col className="col_1">highst</Col>
+                                        </Row>
+                                        <Row>
+                                            <Col className="col_2">{item.eth} ETH</Col>
+                                            <Col className="col_2">{item.height}</Col>
+                                        </Row>
+                                    </Container>
                                 </div>
                             </Card>
                         </div>
