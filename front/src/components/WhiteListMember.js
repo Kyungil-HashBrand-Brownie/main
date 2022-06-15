@@ -19,7 +19,7 @@ const Trash = styled.div`
 
     
 const WhiteList = () => {
-    const { myContract, myAddress } = useSelector(state => state.nft);
+    const { brownieContract, myAddress } = useSelector(state => state.nft);
 
     const [list, setList] = useState([]);
     const [checkDelete, setCheckDelete] = useState(false);
@@ -48,10 +48,10 @@ const WhiteList = () => {
     },[])
 
     const addWhitelist = async () => {
-        if (await myContract.methods.isWhitelisted(addInput.current).call() == true) {
+        if (await brownieContract.methods.isWhitelisted(addInput.current).call() == true) {
             return alert('이미 등록됨')
         }
-        const Sucs = await myContract.methods.add(addInput.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 })
+        const Sucs = await brownieContract.methods.add(addInput.current).send({ from: myAddress, gas: 300000, value: 0 })
         console.log(Sucs)
         console.log(addInput.current)
         if (Sucs.status === true) {
@@ -71,11 +71,11 @@ const WhiteList = () => {
         }
     }
     const delWhitelist = async () => {
-        if (await myContract.methods.isWhitelisted(delInput.current).call() == false) {
+        if (await brownieContract.methods.isWhitelisted(delInput.current).call() == false) {
             return alert('등록되지 않음')
         }
         console.log(delInput.current)
-        const Del = await myContract.methods.remove(delInput.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 })
+        const Del = await brownieContract.methods.remove(delInput.current).send({ from: myAddress, gas: 300000, value: 0 })
         if (Del.status === true) {
             await axios.post('http://localhost:4000/deletelist',
                 {
@@ -94,7 +94,7 @@ const WhiteList = () => {
     }
     
     const checkWhitelist = async () => {
-        console.log(await myContract.methods.isWhitelisted(checkInput.current).call())
+        console.log(await brownieContract.methods.isWhitelisted(checkInput.current).call())
     }
         
     return (

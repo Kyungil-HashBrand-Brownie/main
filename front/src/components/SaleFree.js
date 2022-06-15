@@ -62,7 +62,7 @@ const StyledBar = styled.div`
 const FreeSale = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { myContract } = useSelector(state => state.nft);
+    const { brownieContract, myAddress } = useSelector(state => state.nft);
 
     const onClick = async () => {
         const accounts = await window.klaytn.enable()
@@ -72,10 +72,10 @@ const FreeSale = () => {
         dispatch({type:"WHITELIST_KEY" ,payload: accounts })
     }
     const onClick2 = async () => {
-        const conData = await myContract.methods.batchMint(count).encodeABI()
+        const conData = await brownieContract.methods.batchMint(count).encodeABI()
         const test = await window.caver.klay.sendTransaction({
             type: 'SMART_CONTRACT_EXECUTION',
-            from:window.klaytn.selectedAddress, 
+            from:myAddress, 
             to:'0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
             data:conData,
             gas: 300000
@@ -139,5 +139,4 @@ const FreeSale = () => {
         </div>
     )
 }
-
 export default FreeSale

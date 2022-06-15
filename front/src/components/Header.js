@@ -107,7 +107,7 @@ const Header = () => {
         if(btkInstance){
             const weiBalance = await window.caver.klay.getBalance(address)
             const fixedBalance = weiToFixed(weiBalance)
-            const weibtkBalance = await btkInstance.balanceOf(window.klaytn.selectedAddress) //BigNumber 객체
+            const weibtkBalance = await btkInstance.balanceOf(myAddress) //BigNumber 객체
             const fixedbtkBalance = weiToFixed(weibtkBalance)
             
             setBalance(fixedBalance)
@@ -117,10 +117,9 @@ const Header = () => {
     }
 
     const setUserInfo = async () => {
-        let address = window.klaytn.selectedAddress
-        if(window.klaytn.selectedAddress){
-            setAddress(address);
-            setTokenBalance(address)
+        if(myAddress){
+            setAddress(myAddress);
+            setTokenBalance(myAddress)
         }
     }
 
@@ -132,7 +131,6 @@ const Header = () => {
         console.log(accounts[0])
         sessionStorage.setItem('id', accounts[0]);
         dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
-        console.log(myAddress);
         setAddress(accounts[0]);
         if(btkInstance) setTokenBalance(accounts[0])
     })
@@ -152,7 +150,7 @@ const Header = () => {
 
     useEffect(() => {
         setUserInfo();
-    }, [btkInstance])
+    }, [btkInstance,myAddress])
 
     return (
         <Navbar className="nav" expand="lg">

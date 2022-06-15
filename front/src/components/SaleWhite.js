@@ -61,7 +61,7 @@ const StyledBar = styled.div`
 
 const WhiteSale = () => {
     const dispatch = useDispatch();
-    const { myContract } = useSelector(state => state.nft);
+    const { brownieContract, myAddress } = useSelector(state => state.nft);
 
     const [count, setCount] = useState(1)
 
@@ -76,9 +76,9 @@ const WhiteSale = () => {
     }
 
     const whiteMint = async () => {
-        await myContract.methods.whitelistMint(count)
+        await brownieContract.methods.whitelistMint(count)
         .send({
-            from:window.klaytn.selectedAddress,
+            from:myAddress,
             gas: 300000
             })
         alert("해당 지갑 주소로 민팅되었습니다!");
