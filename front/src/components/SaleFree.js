@@ -78,7 +78,7 @@ const FreeSale = () => {
             from:myAddress, 
             to:'0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
             data:conData,
-            gas: 300000
+            gas: 3000000
         })
         console.log(test)
         alert("해당 지갑 주소로 민팅되었습니다!");
