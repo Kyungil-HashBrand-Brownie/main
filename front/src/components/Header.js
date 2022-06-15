@@ -89,7 +89,7 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, btkInstance } = useSelector(state => state.nft);
+    const { modalState, btkInstance, myAddress } = useSelector(state => state.nft);
 
     const [checked, setChecked] = useState(false);
     const [address, setAddress] = useState(null);
@@ -128,6 +128,8 @@ const Header = () => {
     window.klaytn.on('accountsChanged', async function(accounts) {
         console.log(accounts[0])
         sessionStorage.setItem('id', accounts[0]);
+        dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
+        console.log(myAddress);
         setAddress(accounts[0]);
         if(btkInstance) setTokenBalance(accounts[0])
     })

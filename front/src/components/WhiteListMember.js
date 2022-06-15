@@ -19,7 +19,7 @@ const Trash = styled.div`
 
     
 const WhiteList = () => {
-    const { myContract,accounts } = useSelector(state => state.nft);
+    const { myContract, myAddress } = useSelector(state => state.nft);
 
     const [list, setList] = useState([]);
     const [checkDelete, setCheckDelete] = useState(false);
@@ -152,7 +152,7 @@ const WhiteList = () => {
                         })
                     }
                     <tr>
-                        <td>{accounts} </td>
+                        <td>{myAddress} </td>
                     </tr>
                 </tbody>
             </Table>

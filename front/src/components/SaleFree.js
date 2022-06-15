@@ -64,22 +64,30 @@ const FreeSale = () => {
     const dispatch = useDispatch();
     const { myContract } = useSelector(state => state.nft);
 
-    const onClick = async () => {
-        const accounts = await window.klaytn.enable()
-        console.log("account", accounts)
-        const balance = await window.caver.klay.getBalance(accounts[0])
-        console.log("balance" , balance)
-        dispatch({type:"WHITELIST_KEY" ,payload: accounts })
-      }
-      const onClick2 = async () => {
-        console.log(myContract);
-        await myContract.methods.batchMint(count)
-        .send({
-            from:window.klaytn.selectedAddress,
-            gas: 300000
+    const onClick2 = async () => {
+    console.log(myContract);
+    try {
+        // console.log(typeof(count));
+        let data = myContract.methods.batchMint(count)
+        console.log(count);
+        // .send({
+            // from: window.klaytn.selectedAddress,
+            // gas: 300000,
+        // })
+        // console.log(window.klaytn.selectedAddress)
+        let test = await data.send({
+            from: window.klaytn.selectedAddress,
+            gas: 300000,
+            value: 0,
         })
-        alert("해당 지갑 주소로 민팅되었습니다!");
-        navigate('/');
+        console.log(data);
+        console.log(test);
+        // if (test.status) alert("해당 지갑 주소로 민팅되었습니다!");
+
+    } catch(e) {
+        console.log(e)
+    }
+    // navigate('/');
     }
     
     // const dispatch = useDispatch(state => state.nft)

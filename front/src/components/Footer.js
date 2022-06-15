@@ -5,8 +5,7 @@ import disc from "../img/footer/disc.png"
 import inst from "../img/footer/inst.png"
 import tele from "../img/footer/tele.png"
 import kakao from "../img/footer/kakao.png"
-import kakao3 from "../img/footer/kakao3.jpg"
-import kakao4 from "../img/footer/kakao4.jpg"
+import kakao2 from "../img/footer/kakao2.png"
 
 const Outer = styled.div`
     /* position: absolute; */
@@ -141,7 +140,7 @@ const Footer = () => (
                             <a href="https://t.me/piratesdao" target="blank"><img alt="tele" className="sns_logo" src={tele}></img></a>
                         </div>
                         <div className="img_box">
-                            <a href="https://open.kakao.com/o/gzAIhHXd" target="blank"><img alt="kakao" className="sns_logo" src={kakao} ></img></a>
+                            <a href="https://open.kakao.com/o/gzAIhHXd" target="blank"><img alt="kakao" className="sns_logo" src={kakao2} ></img></a>
                         </div>
                     </div>
                 </div>
