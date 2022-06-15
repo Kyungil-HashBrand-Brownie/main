@@ -70,14 +70,17 @@ const FreeSale = () => {
         const balance = await window.caver.klay.getBalance(accounts[0])
         console.log("balance" , balance)
         dispatch({type:"WHITELIST_KEY" ,payload: accounts })
-      }
-      const onClick2 = async () => {
-        console.log(myContract);
-        await myContract.methods.batchMint(count)
-        .send({
-            from:window.klaytn.selectedAddress,
+    }
+    const onClick2 = async () => {
+        const conData = await myContract.methods.batchMint(count).encodeABI()
+        const test = await window.caver.klay.sendTransaction({
+            type: 'SMART_CONTRACT_EXECUTION',
+            from:window.klaytn.selectedAddress, 
+            to:'0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
+            data:conData,
             gas: 300000
         })
+        console.log(test)
         alert("해당 지갑 주소로 민팅되었습니다!");
         navigate('/');
     }
