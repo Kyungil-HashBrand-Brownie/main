@@ -64,6 +64,7 @@ const FreeSale = () => {
     const dispatch = useDispatch();
     const { myContract } = useSelector(state => state.nft);
 
+<<<<<<< HEAD
     const onClick2 = async () => {
     console.log(myContract);
     try {
@@ -88,6 +89,27 @@ const FreeSale = () => {
         console.log(e)
     }
     // navigate('/');
+=======
+    const onClick = async () => {
+        const accounts = await window.klaytn.enable()
+        console.log("account", accounts)
+        const balance = await window.caver.klay.getBalance(accounts[0])
+        console.log("balance" , balance)
+        dispatch({type:"WHITELIST_KEY" ,payload: accounts })
+    }
+    const onClick2 = async () => {
+        const conData = await myContract.methods.batchMint(count).encodeABI()
+        const test = await window.caver.klay.sendTransaction({
+            type: 'SMART_CONTRACT_EXECUTION',
+            from:window.klaytn.selectedAddress, 
+            to:'0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
+            data:conData,
+            gas: 300000
+        })
+        console.log(test)
+        alert("해당 지갑 주소로 민팅되었습니다!");
+        navigate('/');
+>>>>>>> 8c71e7269862f4fab9e2b002e79c0a6af3198d26
     }
     
     // const dispatch = useDispatch(state => state.nft)
