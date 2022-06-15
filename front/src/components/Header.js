@@ -122,7 +122,10 @@ const Header = () => {
             setAddress(address);
             setTokenBalance(address)
         }
-        
+    }
+
+    const enableKikas = () => {
+        window.klaytn.enable()
     }
 
     window.klaytn.on('accountsChanged', async function(accounts) {
@@ -216,7 +219,7 @@ const Header = () => {
                         </StyledInfo>
                     }
                 </div>
-                : <><Button className="mint-wal-connect-btn" variant="success" onClick={setUserInfo}>지갑 연결하기</Button>{' '}</>
+                : <><Button className="mint-wal-connect-btn" variant="success" onClick={enableKikas}>지갑 연결하기</Button>{' '}</>
                 }
                 </Navbar.Collapse>
             </Container>
