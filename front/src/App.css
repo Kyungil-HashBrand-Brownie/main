@@ -7,6 +7,11 @@ body {
 .backG-left-img {
   position: absolute;
   width: 15%;
+  z-index: 1;
+}
+
+.admin-outer-box {
+  z-index: 3;
 }
 
 .backG-img {
@@ -15,6 +20,20 @@ body {
   z-index: -1;
 }
 
+.backG-right-img {
+  position: absolute;
+  right: 13%;
+  top: -4%;
+  z-index: -4;
+}
+.backG-right-img2 {
+  position: absolute;
+  right: -5%;
+  /* opacity: 30%; */
+  /* z-index: -1; */
+  /* top: -4%; */
+  z-index: 1;
+}
 /* .main-outer {
   width: 100%;
   height: 120%;
@@ -156,6 +175,7 @@ body {
   /* background-color: red; */
   padding-top: 30px;
   height:200px;
+  z-index: 99;
   /* flex-direction: row; */
 }
 
@@ -214,7 +234,7 @@ body {
 
 .nav {
   background: #ffffff;
-  opacity: 70%;
+  /* opacity: 70%; */
 }
 
 .nav-item {
@@ -299,4 +319,30 @@ body {
   display: flex;
   text-align: center;
   justify-content: center;
+}
+
+.select-box {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10%;
+  border: 4px solid brown;
+  padding: 10px 8px 10px 6px;
+  background-color: white;
+}
+.swap-select, .swap-amount-input {
+  margin-bottom: 10px;
+}
+.swapL-select, .swapR-select {
+  width: 30%;
+}
+.swap-box {
+  display: flex;
+  justify-content: center;
+}
+.swap-submit {
+  /* width: 40%; */
+  /* background-color: red; */
 }

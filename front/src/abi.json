@@ -79,6 +79,25 @@
 					{
 						"indexed": true,
 						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "NFTMinting",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
 						"name": "previousOwner",
 						"type": "address"
 					},
@@ -183,11 +202,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
 						"internalType": "uint256",
 						"name": "amount",
 						"type": "uint256"
@@ -195,7 +209,7 @@
 				],
 				"name": "batchMint",
 				"outputs": [],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -228,6 +242,19 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "getBtk",
+				"outputs": [],
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -275,12 +302,38 @@
 			},
 			{
 				"inputs": [],
+				"name": "myNFTs",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "name",
 				"outputs": [
 					{
 						"internalType": "string",
 						"name": "",
 						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "nftNum",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -345,21 +398,21 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "renounceOwnership",
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_address",
+						"type": "address[]"
+					}
+				],
+				"name": "removeMany",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					}
-				],
-				"name": "safeMint",
+				"inputs": [],
+				"name": "renounceOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -411,6 +464,19 @@
 					}
 				],
 				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "sellBtk",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -521,12 +587,33 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
+				"inputs": [],
+				"name": "viewCon",
+				"outputs": [
 					{
 						"internalType": "address",
-						"name": "to",
+						"name": "",
 						"type": "address"
-					},
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "viewIns",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
 					{
 						"internalType": "uint256",
 						"name": "amount",
@@ -535,7 +622,7 @@
 				],
 				"name": "whitelistMint",
 				"outputs": [],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -548,7 +635,7 @@
 				],
 				"name": "withdrawKLAY",
 				"outputs": [],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -609,14 +696,15 @@
 		"userdoc": {
 			"kind": "user",
 			"methods": {},
+			"notice": "author Kyungil_Team Brownie version 1.0 ERC721기반 대체 불가능 토큰 자체 nft",
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"minting.sol": "BrownieNft"
+			"minting/Minting.sol": "BrownieNft"
 		},
-		"evmVersion": "london",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -634,6 +722,38 @@
 			"urls": [
 				"bzz-raw://e12cbaa7378fd9b62280e4e1d164bedcb4399ce238f5f98fc0eefb7e50577981",
 				"dweb:/ipfs/QmXRoFGUgfsaRkoPT5bxNMtSayKTQ8GZATLPXf69HcRA51"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+			"keccak256": "0xe0c8b625a79bac0fe80f17cfb521e072805cc9cef1c96a5caf45b264e74812fa",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://12fd1efc9ad061ef675bd50fb0c8e3c6f2952a09f8df0e3c688b8d81b8918838",
+				"dweb:/ipfs/QmawN6PjTwy91pU7ANjCSgbsLc8TDA6hwu9GsFFaNSuhb5"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol": {
+			"keccak256": "0x0d19410453cda55960a818e02bd7c18952a5c8fe7a3036e81f0d599f34487a7b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4c0f62d3d5bef22b5ca00cc3903e7de6152cb68d2d22401a463f373cda54c00f",
+				"dweb:/ipfs/QmSfzjZux7LC7NW2f7rjCXTHeFMUCWERqDkhpCTBy7kxTe"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+			"keccak256": "0x8de418a5503946cabe331f35fe242d3201a73f67f77aaeb7110acb1f30423aca",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a376d3dda2cb70536c0a45c208b29b34ac560c4cb4f513a42079f96ba47d2dd",
+				"dweb:/ipfs/QmZQg6gn1sUpM8wHzwNvSnihumUCAhxD119MpXeKp8B9s8"
 			]
 		},
 		"@openzeppelin/contracts/token/ERC721/ERC721.sol": {
@@ -716,12 +836,28 @@
 				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
 			]
 		},
-		"minting.sol": {
-			"keccak256": "0x05e84f1daea1f72c199adc0ea6338e557c52b8c1d9ece0d83e795202caacc91c",
+		"minting/Minting.sol": {
+			"keccak256": "0xe5c991404b9ba4bac2ec982bbc595f6821f8bbac0cd7967054bbc777a17eab2a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://eb0548ba2cc6e6bfdad89f0bd061835d9689281dcb37ce8cb0ce7dc303540a62",
-				"dweb:/ipfs/QmVkb17Nah83snjdFujCocuDfw2m5x8t9WG66pEQXRJkmx"
+				"bzz-raw://206cc251b474983eba2959231358ee71cdd5bd8a896b00dc048b0604fec6dc36",
+				"dweb:/ipfs/QmaZvMRNai13aPmGHAYFX1TwH2WQuHwsP7VjiJLpC6mVPp"
+			]
+		},
+		"minting/Token.sol": {
+			"keccak256": "0xf763417287129ab7bde7c647d4ace2ff1208655ed266267f51c2e7042515db5c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2f32aa246f1725af19bbaabe29a95ae05f0fb41a3fec82fa5d9ed79f1d635030",
+				"dweb:/ipfs/QmR3fGJ3TNo6gtkKvfje6Ud2VXk77xHeEfYQVURbFHeTZb"
+			]
+		},
+		"minting/Whitelist.sol": {
+			"keccak256": "0x10c6237378847e8484b1981ccbefbfc7a1fcf2c3fe921fa72bfe0dbee2e4f511",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e1ed4f437e0e7fb529071f1aa502d19ee63c38aa621848503aabf4cbb3b10481",
+				"dweb:/ipfs/QmR2R4srPpiJEPXhq9DEwX1HQcMm1gq384M4bxQeVG67zD"
 			]
 		}
 	},
