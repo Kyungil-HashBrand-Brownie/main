@@ -125,6 +125,7 @@ const Header = () => {
 
     const enableKikas = () => {
         window.klaytn.enable()
+        dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }
 
     window.klaytn.on('accountsChanged', async function(accounts) {
@@ -171,6 +172,7 @@ const Header = () => {
                     <Link onClick={closeModal} className='nav-item' to="/admin">admin</Link>
                     <Link onClick={closeModal} className='nav-item' to="/test">testpage</Link>
                     <Link onClick={closeModal} className='nav-item' to="/swap">swap</Link>
+                    <Link onClick={closeModal} className='nav-item' to="/nftlist">nftlist</Link>
                 </Nav>
                 {/* <SearchBox>
                     <SearchInput 
