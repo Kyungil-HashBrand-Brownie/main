@@ -62,29 +62,29 @@ const StyledBar = styled.div`
 const FreeSale = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { myContract } = useSelector(state => state.nft);
+    const { brownieContract, myAddress } = useSelector(state => state.nft);
 
     const onClick = async () => {
         const accounts = await window.klaytn.enable()
         console.log("account", accounts)
         const balance = await window.caver.klay.getBalance(accounts[0])
-        console.log("balance" , balance)
-        dispatch({type:"WHITELIST_KEY" ,payload: accounts })
+        console.log("balance", balance)
+        dispatch({ type: "WHITELIST_KEY", payload: accounts })
     }
     const onClick2 = async () => {
-        const conData = await myContract.methods.batchMint(count).encodeABI()
+        const conData = await brownieContract.methods.batchMint(count).encodeABI()
         const test = await window.caver.klay.sendTransaction({
             type: 'SMART_CONTRACT_EXECUTION',
-            from:window.klaytn.selectedAddress, 
+            from:myAddress, 
             to:'0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
             data:conData,
-            gas: 300000
+            gas: 3000000
         })
         console.log(test)
         alert("해당 지갑 주소로 민팅되었습니다!");
         navigate('/');
     }
-    
+
     // const dispatch = useDispatch(state => state.nft)
 
     const [count, setCount] = useState(1)
@@ -120,7 +120,7 @@ const FreeSale = () => {
                 <Container className="mint-info-box">
                     <Row>
                         <Col>Price</Col>
-                        <Col>2 KLAY</Col>
+                        <Col>2 BTK</Col>
                     </Row>
                     <Row>
                         <Col>Per transaction</Col>
@@ -139,5 +139,4 @@ const FreeSale = () => {
         </div>
     )
 }
-
 export default FreeSale

@@ -61,7 +61,7 @@ const StyledBar = styled.div`
 
 const WhiteSale = () => {
     const dispatch = useDispatch();
-    const { myContract } = useSelector(state => state.nft);
+    const { brownieContract, myAddress } = useSelector(state => state.nft);
 
     const [count, setCount] = useState(1)
 
@@ -76,10 +76,10 @@ const WhiteSale = () => {
     }
 
     const whiteMint = async () => {
-        await myContract.methods.whitelistMint(count)
+        await brownieContract.methods.whitelistMint(count)
         .send({
-            from:window.klaytn.selectedAddress,
-            gas: 300000
+            from:myAddress,
+            gas: 3000000
             })
         alert("해당 지갑 주소로 민팅되었습니다!");
     }
@@ -100,7 +100,7 @@ const WhiteSale = () => {
                 <Container className="mint-info-box">
                     <Row>
                         <Col>Price</Col>
-                        <Col>1 KLAY</Col>
+                        <Col>1 BTK</Col>
                     </Row>
                     <Row>
                         <Col>Per transaction</Col>

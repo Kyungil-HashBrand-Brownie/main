@@ -11,17 +11,17 @@ const Swap = () => {
         else setSwap('KLAY')
     }
 
-    const {myContract} = useSelector(state =>state.nft);
+    const {brownieContract, myAddress} = useSelector(state =>state.nft);
     
     const swapToken = async () => {
         let amount = amountInput.current.value
         if(Number(amount)){
             if(swap === "BTK"){
                 try {
-                    const conData = await myContract.methods.getBtk(amount).encodeABI()
+                    const conData = await brownieContract.methods.getBtk(amount).encodeABI()
                     const con = await window.caver.klay.sendTransaction({
                         type: 'SMART_CONTRACT_EXECUTION',
-                        from: window.klaytn.selectedAddress,
+                        from: myAddress,
                         to: '0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
                         gas: 300000,
                         data:conData,
@@ -34,10 +34,10 @@ const Swap = () => {
             }
             else if (swap === "KLAY"){
                 try {
-                    const conData = await myContract.methods.sellBtk(amount).encodeABI()
+                    const conData = await brownieContract.methods.sellBtk(amount).encodeABI()
                     const test = await window.caver.klay.sendTransaction({
                         type: 'SMART_CONTRACT_EXECUTION',
-                        from:window.klaytn.selectedAddress, 
+                        from: myAddress, 
                         to:'0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
                         data:conData,
                         gas: 300000
@@ -47,6 +47,8 @@ const Swap = () => {
                     console.log(error)
                 }       
             }
+            console.log('test');
+            alert('스왑완료');  
         }
         else {
             alert("숫자를 입력해주세요")

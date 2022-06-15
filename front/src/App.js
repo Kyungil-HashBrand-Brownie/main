@@ -14,17 +14,18 @@ import contractAbi from "./abi.json";
 import LeftImg3 from './img/chocolate/choco3.png';
 import RightImg from './img/chocolate/choco4.png';
 import Swap from './page/Swap';
+import NftList from './page/NftList';
 
 function App() {
   const dispatch = useDispatch();
 
 
   const setReducer = async () => {
-    let myContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xB965D7Ba9814BaF32EE004c165288365BA65eCb5");
-    dispatch({type: "CONTRACT_SUCCESS", payload: myContract});
+    let brownieContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xB965D7Ba9814BaF32EE004c165288365BA65eCb5");
+    dispatch({type: "CONTRACT_SUCCESS", payload: brownieContract});
 
     // 토큰 인스턴스 주소
-    const btkInstanceAddr = await myContract.methods.viewIns().call()
+    const btkInstanceAddr = await brownieContract.methods.viewIns().call()
     let btkInstance = window.caver.kct.kip7.create(btkInstanceAddr)
     dispatch({type: "BTK_INSTANCE", payload: btkInstance});
   }
@@ -55,6 +56,7 @@ function App() {
           <Route path="/admin" element={<AdminPage/>} /> 
           <Route path="/test" element={<Testpage/>} /> 
           <Route path="/swap" element={<Swap/>} /> 
+          <Route path="/nftlist" element={<NftList/>} /> 
         </Routes>
         <Footer />
       </>
