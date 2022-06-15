@@ -16,8 +16,6 @@ const Trash = styled.div`
     width: 50px;
 `
 
-
-    
 const WhiteList = () => {
     const { brownieContract, myAddress } = useSelector(state => state.nft);
 
