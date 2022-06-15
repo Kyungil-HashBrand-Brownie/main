@@ -139,5 +139,4 @@ const FreeSale = () => {
         </div>
     )
 }
-
 export default FreeSale
