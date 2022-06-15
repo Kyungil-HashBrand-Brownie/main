@@ -16,13 +16,21 @@ import {Button, Form} from "react-bootstrap";
 const Cardjustify = styled.div`
     .Main {
         position: relative;
-        opacity: 1;
         display: flex ;
         justify-content: center ;
         z-index:5;
         margin: 10px;
         border: 1px solid;
     }
+
+    .Ncard {
+        opacity: 0.4;
+    }
+
+    .Ncard:hover {
+        opacity: 1;
+    }
+
 
 
     .card:hover {
@@ -168,7 +176,7 @@ function NftCard() {
 
             {
                 list.map((item, index1) => {
-                    return  <div key={index1}>
+                    return  <div  key={index1}>
                             <Form.Check
                                 type={"checkbox"}
                                 onChange={(e) => checkHandler(e.target.checked, item.id)}
