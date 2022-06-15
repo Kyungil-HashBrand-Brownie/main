@@ -171,6 +171,7 @@ const Header = () => {
                     <Link onClick={closeModal} className='nav-item' to="/admin">admin</Link>
                     <Link onClick={closeModal} className='nav-item' to="/test">testpage</Link>
                     <Link onClick={closeModal} className='nav-item' to="/swap">swap</Link>
+                    <Link onClick={closeModal} className='nav-item' to="/nftlist">nftlist</Link>
                 </Nav>
                 {/* <SearchBox>
                     <SearchInput 
