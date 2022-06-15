@@ -4,7 +4,7 @@ let initialState = {
     countKid : 0,
     countMinority : 0,
     countTotal : 0,
-    accounts : "",
+    myAddress : "",
     myContract: {},
     modalState: false,
     btkInstance: "",
@@ -34,13 +34,6 @@ function nftReducer(state=initialState, action) {
                 countTotal: state.countTotal + 1,
             };
 
-        case "WHITELIST_KEY":
-            console.log("test: ", payload);
-            return {...state,
-                accounts : payload[0]
-            }
-        // console.log(ac)
-
         case "CONTRACT_SUCCESS": 
             console.log("contract: ", payload);
             return {...state,
@@ -51,6 +44,11 @@ function nftReducer(state=initialState, action) {
             console.log("btk instance : ", payload);
             return {...state,
                 btkInstance: payload
+            }
+
+        case "ADDRESS_CHANGE_SUCCESS":
+            return {...state,
+                myAddress: payload,
             }
 
         default:

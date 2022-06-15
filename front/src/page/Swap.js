@@ -47,6 +47,8 @@ const Swap = () => {
                     console.log(error)
                 }       
             }
+            console.log('test');
+            alert('스왑완료');  
         }
         else {
             alert("숫자를 입력해주세요")
