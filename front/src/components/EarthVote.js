@@ -29,8 +29,6 @@ import styled from 'styled-components'
 
 function EarthVote() {
 
-
-
     // const [checked, setChecked] = useState(false);
     const [radioValue, setRadioValue] = useState('1');
     const dispatch = useDispatch();
