@@ -51,7 +51,7 @@ const WhiteList = () => {
         if (await brownieContract.methods.isWhitelisted(addInput.current).call() == true) {
             return alert('이미 등록됨')
         }
-        const Sucs = await brownieContract.methods.add(addInput.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 })
+        const Sucs = await brownieContract.methods.add(addInput.current).send({ from: myAddress, gas: 300000, value: 0 })
         console.log(Sucs)
         console.log(addInput.current)
         if (Sucs.status === true) {
@@ -75,7 +75,7 @@ const WhiteList = () => {
             return alert('등록되지 않음')
         }
         console.log(delInput.current)
-        const Del = await brownieContract.methods.remove(delInput.current).send({ from: window.klaytn.selectedAddress, gas: 300000, value: 0 })
+        const Del = await brownieContract.methods.remove(delInput.current).send({ from: myAddress, gas: 300000, value: 0 })
         if (Del.status === true) {
             await axios.post('http://localhost:4000/deletelist',
                 {
