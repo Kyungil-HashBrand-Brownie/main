@@ -79,7 +79,7 @@ const WhiteSale = () => {
         await brownieContract.methods.whitelistMint(count)
         .send({
             from:myAddress,
-            gas: 300000
+            gas: 3000000
             })
         alert("해당 지갑 주소로 민팅되었습니다!");
     }
