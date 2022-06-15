@@ -125,6 +125,7 @@ const Header = () => {
 
     const enableKikas = () => {
         window.klaytn.enable()
+        dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }
 
     window.klaytn.on('accountsChanged', async function(accounts) {
