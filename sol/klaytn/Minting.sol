@@ -2,7 +2,6 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "./Token.sol";
 import "./Whitelist.sol";
@@ -44,7 +43,6 @@ contract BrownieNft is ERC721, Whitelist {
     using Strings for uint256;
     mapping(uint256 => bool) mintinglist;
     mapping(address => uint256[]) ownNFTs;
-    uint[] mintedTokenIds;
 
     /** 
     * _tokenIdCounter - 전체 발행된 nft 수
@@ -87,7 +85,6 @@ contract BrownieNft is ERC721, Whitelist {
     function safeMint(address to, uint256 cost) private {
         uint256 randomNum = randNum();
         _safeMint(to, randomNum);
-        mintedTokenIds.push(randomNum);
         _tokenIdCounter.increment();
         ownNFTs[msg.sender].push(randomNum);
         instance.tokenTransfer(msg.sender, address(this), cost);
