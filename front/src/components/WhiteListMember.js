@@ -16,15 +16,17 @@ const Trash = styled.div`
     width: 50px;
 `
 
+
+    
 const WhiteList = () => {
     const { brownieContract, myAddress } = useSelector(state => state.nft);
 
     const [list, setList] = useState([]);
     const [checkDelete, setCheckDelete] = useState(false);
 
-    const input1 = useRef("")
-    const input2 = useRef("")
-    const input3 = useRef("")
+    const addInput = useRef("")
+    const delInput = useRef("")
+    const checkInput = useRef("")
 
     const getWhiteList = async () => {
         try{
@@ -51,11 +53,11 @@ const WhiteList = () => {
         }
         const Sucs = await brownieContract.methods.add(addInput.current).send({ from: myAddress, gas: 300000, value: 0 })
         console.log(Sucs)
-        console.log(input1.current)
+        console.log(addInput.current)
         if (Sucs.status === true) {
             await axios.post('http://localhost:4000/whitelist',
                 {
-                    data: { from: input1.current, status: Sucs.status },
+                    data: { from: addInput.current, status: Sucs.status },
                 })
                 .then((res) => {
                     console.log(res);
@@ -77,10 +79,10 @@ const WhiteList = () => {
         if (Del.status === true) {
             await axios.post('http://localhost:4000/deletelist',
                 {
-                    data: { from: input2.current, status: Del.status },
+                    data: { from: delInput.current, status: Del.status },
                 })
                 .then((res) => {
-                    console.log(res); 
+                    console.log(res);
                     let result = res.data;
                     console.log(result)
                     if (result === "Success!") {
@@ -108,9 +110,9 @@ const WhiteList = () => {
                             aria-label="Recipient's username"
                             aria-describedby="basic-addon2"
                             // size='lg'
-                            onChange={(e) => input1.current = e.target.value}
+                            onChange={(e) => addInput.current = e.target.value}
                         />
-                        <Button variant="outline-secondary" id="button-addon2" onClick={clickInput1}>
+                        <Button variant="outline-secondary" id="button-addon2" onClick={addWhitelist}>
                             Add
                         </Button>
                     </InputGroup>
@@ -118,8 +120,8 @@ const WhiteList = () => {
 
                 <div>
                     <h2>test</h2>
-                    <input onChange={(e) => input2.current = e.target.value}></input><button onClick={clickInput2}>화리 삭제</button>
-                    <input onChange={(e) => input3.current = e.target.value}></input><button onClick={clickInput3}>화리 확인</button>
+                    <input onChange={(e) => delInput.current = e.target.value}></input><button onClick={delWhitelist}>화리 삭제</button>
+                    <input onChange={(e) => checkInput.current = e.target.value}></input><button onClick={checkWhitelist}>화리 확인</button>
                     <Trash >
                     <img src={trash}  onClick={buttonDelete} width="100%"/>
                     </Trash>
