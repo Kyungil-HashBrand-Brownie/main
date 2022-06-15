@@ -18,23 +18,31 @@ const Swap = () => {
         if(Number(amount)){
             if(swap === "BTK"){
                 try {
-                    const test = await myContract.methods.instanceGetBtk(amount).send({
-                        from:window.klaytn.selectedAddress, 
+                    const conData = await myContract.methods.getBtk(amount).encodeABI()
+                    const con = await window.caver.klay.sendTransaction({
+                        type: 'SMART_CONTRACT_EXECUTION',
+                        from: window.klaytn.selectedAddress,
+                        to: '0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
                         gas: 300000,
+                        data:conData,
                         value: window.caver.utils.toPeb(amount, 'KLAY')
                     })
-                    console.log(test)
+                    console.log(con)
                 } catch (error) {
                     console.log(error)
                 }
             }
-            // payable이 아닌 함수에는 value를 주면 안된다
             else if (swap === "KLAY"){
                 try {
-                    await myContract.methods.instanceSellBtk(amount).send({
+                    const conData = await myContract.methods.sellBtk(amount).encodeABI()
+                    const test = await window.caver.klay.sendTransaction({
+                        type: 'SMART_CONTRACT_EXECUTION',
                         from:window.klaytn.selectedAddress, 
+                        to:'0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
+                        data:conData,
                         gas: 300000
                     })
+                    console.log(test)
                 } catch (error) {
                     console.log(error)
                 }       
@@ -44,6 +52,7 @@ const Swap = () => {
             alert("숫자를 입력해주세요")
             amountInput.current.value = ""
         }
+        console.log("end")
     }
     return (
         <div className='swap-box'>

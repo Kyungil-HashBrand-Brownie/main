@@ -76,7 +76,7 @@ const WhiteSale = () => {
     }
 
     const whiteMint = async () => {
-        await myContract.methods.whitelistMint(window.klaytn.selectedAddress,count)
+        await myContract.methods.whitelistMint(count)
         .send({
             from:window.klaytn.selectedAddress,
             gas: 300000
