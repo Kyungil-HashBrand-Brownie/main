@@ -5,7 +5,7 @@ import QuitVote from '../components/QuitVote'
 const Testpage = () => {
   return (
     <div>
-        <EarthVote />
+        {/* <EarthVote /> */}
         <QuitVote />
     </div>
   )
