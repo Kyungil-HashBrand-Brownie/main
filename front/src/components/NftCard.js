@@ -120,13 +120,15 @@ function NftCard() {
         let binaryArr = [];
         // console.log(`ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2}.json`)
         for (let i = 0; i != test2.length; i++) {
-            let data = await axios.get(`https://ipfs.io/ipfs/QmaAYEhbXsrDn7TGgnz9EhZzrrrB8vuHDuzXioPFzjRQBt/${test2[i]}.json`)
-            console.log(data.data.image)
-            let image = await axios.get(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
+            // let data = await axios.get(`https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${test2[i]}.png`);
+            // console.log(data)
+            // console.log(data.data.image)
+            // let image = await axios.get(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
             // document.getElementById("imgPreview").src = "data:image/png;base64," + binarySrc;
             // console.log("image : ", image.data)
             let metajson = {
-                image: `https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`,
+                id: `#${test2[i]}`,
+                image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${test2[i]}.png`,
                 checked: false,
             }
             binaryArr.push(metajson)
@@ -137,21 +139,6 @@ function NftCard() {
         setList(binaryArr)
     }
     // checkNfts()
-
-    let data = [{
-        id: "#4312",
-        eth: 0.056,
-        height: 200,
-    }, {
-        id: "#1223",
-        eth: 0.04,
-        height: 130,
-    }, {
-        id: "#213",
-        eth: 0.302,
-        height: 57,
-    }];
-
 
 
     const [list, setList] = useState([]);
@@ -228,6 +215,7 @@ function NftCard() {
                                     !item.checked ?
                                     null
                                     :<img src={check}
+                                    alt="ca"
                                     id='stake-checkbox'
                                     className="cheked"
                                     // type={"checkbox"}
