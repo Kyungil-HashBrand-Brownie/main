@@ -17,6 +17,7 @@ const Swap = () => {
     
     const swapToken = async () => {
         let amount = amountInput.current.value
+        console.log(brownieContract);
         if(Number(amount)){
             if(swap === "BTK"){
                 try {

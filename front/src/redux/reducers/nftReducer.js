@@ -10,6 +10,8 @@ let initialState = {
     btkInstance: "",
     walletRefresh: 1,
     nftList: "",
+    myNFTs: [],
+    myStakedNFTs: [],
     posts: [{
         id: 1
         , title: "test1"
@@ -24,13 +26,6 @@ let initialState = {
 
 function nftReducer(state = initialState, action) {
     let { type, payload } = action
-
-
-    // const result = Object.keys(payload)[0] || null;
-
-    console.log("action", action)
-    console.log("payload", payload)
-
 
     switch (type) {
         case "MODAL_CLICK":
@@ -73,6 +68,39 @@ function nftReducer(state = initialState, action) {
                 nftList: payload
             }
 
+        case 'NFTCARD_MYNFTS' :
+            return {
+                ...state,
+                myNFTs: payload.myNFTs,
+                myStakedNFTs: payload.myStakedNFTs,
+            }
+
+        case 'NFTCARD_MYNFTS_CLICK' :
+            return {
+                ...state,
+                myNFTs: payload,
+            }
+
+        case 'NFTCARD_STAKE_CLICK' :
+            return {
+                ...state,
+                myStakedNFTs: payload,
+            }
+
+        case 'NFTCARD_STAKE' :
+            return {
+                ...state,
+                myNFTs: payload.myNFTs,
+                myStakedNFTs: payload.myStakedNFTs,
+            }
+
+        case 'NFTCARD_UNSTAKE' :
+            return {
+                ...state,
+                myNFTs: state.myNFTs.concat(payload.myNFTs),
+                myStakedNFTs: payload.myStakedNFTs,
+            }
+
         case "ADDRESS_CHANGE_SUCCESS":
             return {
                 ...state,
@@ -94,7 +122,6 @@ function nftReducer(state = initialState, action) {
                 ...state,
                 walletRefresh: !state.walletRefresh
             }
-
 
         default:
             return { ...state }
