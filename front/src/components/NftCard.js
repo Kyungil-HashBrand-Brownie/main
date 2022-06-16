@@ -11,13 +11,19 @@ import axios from 'axios';
 import { check } from '../img';
 
 const Cardjustify = styled.div`
+    display: flex;
+    justify-content: center;
+    /* width: 50%; */
+
     .Main {
         position: relative;
         display: flex ;
         justify-content: center ;
-        z-index:5;
+        z-index:3;
         margin: 10px;
-        border: 1px solid;
+        border: 3px solid;
+        border-radius: 6px;
+        padding: 10px 10px;
     }
 
     .Ncard {
@@ -107,28 +113,67 @@ const Cardjustify = styled.div`
 
 
 function NftCard() {
+    const dispatch = useDispatch();
+    const { brownieContract, myAddress, myNFTs, myStakedNFTs, reward } = useSelector(state => state.nft);
+    // console.log(brownieContract.methods)
 
-    const { brownieContract, myAddress } = useSelector(state => state.nft);
-    console.log(brownieContract.methods)
+    const checkStakedNFTs = async() => {
+        let stakedNFTs = await brownieContract.methods.checkStakedNFTs().call(
+                {from : myAddress}
+            )
+        console.log('stakedNFTs: ', stakedNFTs)
+        // return new Promise((resolve, reject) => {
+        //     resolve(stakedNFTs);
+        // })
+    } 
+
+    const getCurrentReward = async() => {
+        let reward = 0;
+        for (let i = 0; i < myStakedNFTs.length; i++) {
+            let totalStakedNFTs = await brownieContract.methods.totalStaked().call()
+            let whenStaked = await brownieContract.methods.whenStaked(myStakedNFTs[i].id.slice(1)).call();            
+            let currentTimestamp = parseInt(+ new Date() / 1000);
+            // console.log(totalStakedNFTs, whenStaked, currentTimestamp);
+            reward += ((currentTimestamp - whenStaked) / totalStakedNFTs) * 10;
+        }
+        console.log('reward: ', reward)
+        dispatch({type: 'GET_REWARD', payload: reward});
+
+        // return myStakedNFTs.map(async (NFT) => {
+        //     let totalStakedNFTs = await brownieContract.methods.totalStaked().call()
+        //     let whenStaked = await brownieContract.methods.whenStaked(NFT.id.slice(1)).call();            
+        //     let currentTimestamp = parseInt(+ new Date() / 1000);
+        //     console.log(totalStakedNFTs, whenStaked, currentTimestamp);
+        //     return ((currentTimestamp - whenStaked) / totalStakedNFTs) * 10;
+        // }).reduce((a,b) => a + b, 0)
+    }
+
     const checkNfts = async () => {
-
-        console.log(myAddress)
-        const test2 = await brownieContract.methods.myNFTs().call(
+        // console.log(totalNFTs);
+        // let whenStaked1 = await brownieContract.methods.whenStaked(myStakedNFTs[0].id.slice(1)).call();
+        // let whenStaked2 = await brownieContract.methods.whenStaked(myStakedNFTs[1].id.slice(1)).call();
+        // console.log(whenStaked1);
+        // console.log(whenStaked2);
+        // let currentTimestamp = parseInt(+ new Date() / 1000);
+        // console.log(currentTimestamp);
+        // let reward = getCurrentReward().then((result) => result);
+        getCurrentReward()
+        console.log('reward: ', reward);
+        let myBrownieNFTs = await brownieContract.methods.myNFTs().call(
             { from: myAddress })
 
-        console.log("tst: ", test2)
         let binaryArr = [];
-        // console.log(`ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2}.json`)
-        for (let i = 0; i != test2.length; i++) {
-            // let data = await axios.get(`https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${test2[i]}.png`);
+        // console.log(`ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${myNFT}.json`)
+        for (let i = 0; i != myBrownieNFTs.length; i++) {
+            // let data = await axios.get(`https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${myNFT[i]}.png`);
             // console.log(data)
             // console.log(data.data.image)
             // let image = await axios.get(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
             // document.getElementById("imgPreview").src = "data:image/png;base64," + binarySrc;
             // console.log("image : ", image.data)
             let metajson = {
-                id: `#${test2[i]}`,
-                image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${test2[i]}.png`,
+                id: `#${myBrownieNFTs[i]}`,
+                image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${myBrownieNFTs[i]}.png`,
                 checked: false,
             }
             binaryArr.push(metajson)
@@ -136,52 +181,66 @@ function NftCard() {
             //[,,]
         }
         // console.log(binaryArr)
+
+        let stakedNFTs = await brownieContract.methods.checkStakedNFTs().call(
+            {from : myAddress})
+        let processedStakedNFTs = stakedNFTs.map((NFT) => {
+            let data = {
+                id: `#${NFT}`,
+                image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${NFT}.png`,
+                checked: false,
+            }
+            return data;
+        })
+        // console.log(stakedNFTs);
+        // if (stakedNFTs.length > 0) {
+            myBrownieNFTs = binaryArr.filter((item) => {
+               if (stakedNFTs.indexOf(item.id.slice(1)) < 0) return item 
+           })
+        // }
+        console.log(myBrownieNFTs);
+
+        dispatch({type: "NFTCARD_MYNFTS", payload: {myNFTs: myBrownieNFTs, myStakedNFTs: processedStakedNFTs}})
         setList(binaryArr)
     }
-    // checkNfts()
-
 
     const [list, setList] = useState([]);
 
     // check
     const [checkItems, setCheckItems] = useState([])
 
-
-
     const changeClickState = (id) => {
-        let newArr = list.map((li) => {
+        let newArr = myNFTs.map((li) => {
             if (li.id === id) {
                 li.checked = !li.checked; 
             }
             return li
         })
-        console.log('newarr: ', newArr);
-        setList(newArr)
+        dispatch({type: 'NFTCARD_MYNFTS_CLICK', payload: newArr});
     }
 
-    const checkStakedNFTs = async() => {
-        let stakedNFTs = await brownieContract.methods.checkStakedNFTs().call(
-                {from : myAddress}
-            )
-        console.log('stakedNFTs: ', stakedNFTs)
-    } 
-
-
     useEffect(() => {
-        console.log(checkItems)
+        // console.log("my NFTs: ", myNFTs)
+        // console.log("my stakedNFTs: ", myStakedNFTs)
+        // console.log(checkItems)
+        // console.log(brownieContract.methods.totalStaked().call());
         checkNfts()
-        checkStakedNFTs()
+        // checkStakedNFTs()
     }, [checkItems,brownieContract.defaultAccount,myAddress])
 
     // 카드 staking 버튼
     const stakeNFT = async () => {
-        // dispatch({type: "NFTCARD_STAKING", payload: nftList});
-        let stakeIdArr = list.filter((item) => item.checked);
+        // let stakeIdArr = list.filter((item) => item.checked);
+        let renewMyNFTs = myNFTs.filter((item) => !item.checked)
+        let stakeIdArr = myNFTs.filter((item) => item.checked).map((item) => item.id.slice(1));
+        // dispatch({type: "NFTCARD_STAKING", payload: });
         // console.log(stakeIdArr);
         if (stakeIdArr.length > 0) {
-            let stakeInstanceId = stakeIdArr[0].id.slice(1) //#62
+            // let stakeInstanceId = stakeIdArr[0].id.slice(1) //#62
+            console.log("stakeIdArr: ", stakeIdArr);
             try{
-            const stakeData = await brownieContract.methods.stake(stakeInstanceId).encodeABI()
+            // const stakeData = await brownieContract.methods.stake(stakeInstanceId).encodeABI()
+            const stakeData = await brownieContract.methods.stakeNFTs(stakeIdArr).encodeABI()
             const result = await window.caver.klay.sendTransaction({
                 type: 'SMART_CONTRACT_EXECUTION',
                 from:myAddress, 
@@ -191,7 +250,13 @@ function NftCard() {
             })
             if(result.status){
                 // dispatch({type: "WALLET_REFRESH"})
-                alert("해당 지갑 주소로 민팅되었습니다!");
+                let stakedNFTs = myNFTs.filter((item) => item.checked).map((item) => {
+                    item.checked = false;
+                    return item;
+                })
+
+                dispatch({type: 'NFTCARD_STAKE', payload: {myNFTs: renewMyNFTs, myStakedNFTs: stakedNFTs}})
+                alert("스테이킹 성공");
                 // navigate('/');
             }
             else alert("transaction fail")
@@ -205,11 +270,22 @@ function NftCard() {
 
     return (
         <div>
-                            <h1>aaaaaaaaaaaaaaaaaaaaaAll Nfts</h1>            
+            <div className='nftcard-header'>
+                My NFTs            
+            </div>
+            <div className='reward-box'>
+                {'total reward : ' + (reward/10000).toFixed(2) + ' BTK'}
+                {/* <button 
+                className='reward-button'
+                onClick={getReward}>
+                    보상 받기
+                </button> */}
+            </div>
             <Cardjustify>
+                <div>
                 <div className="Main">
-                    {
-                        list.map((item, index1) => {
+                    {   myNFTs.length > 0 
+                        ? myNFTs.map((item, index1) => {
                             return <div key={index1}>
                                 {
                                     !item.checked ?
@@ -246,10 +322,14 @@ function NftCard() {
                                 </Card>
                             </div>
                         })
+                        : <div>
+                            <h2>Nothing to display</h2>
+                        </div>
                     }
                 </div>
                 <div className="cont21">
-                    <button className="" onClick={stakeNFT}> staking</button>
+                    <button className="" onClick={stakeNFT}> Stake</button>
+                </div>
                 </div>
             </Cardjustify>
         </div>

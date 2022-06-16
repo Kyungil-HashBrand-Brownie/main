@@ -11,13 +11,19 @@ import { check } from '../img';
 
 
 const Cardjustify = styled.div`
+    display: flex;
+    justify-content: center;
+    /* width: 50%; */
+
     .Main {
         position: relative;
         display: flex ;
         justify-content: center ;
         z-index:5;
         margin: 10px;
-        border: 1px solid;
+        border: 3px solid;
+        border-radius: 6px;
+        padding: 10px 10px;
     }
 
     .Ncard {
@@ -110,50 +116,11 @@ const StakingList = () => {
 
     const [list, setList] = useState([]);
 
-    const { brownieContract, myAddress } = useSelector(state => state.nft);
-    console.log(brownieContract.methods)
-    const checkNfts = async () => {
-
-        console.log(myAddress)
-        const test2 = await brownieContract.methods.checkStakedNFTs().call(
-            { from: myAddress })
-
-        console.log("tst: ", test2)
-        let binaryArr = [];
-        // console.log(`ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2}.json`)
-        for (let i = 0; i != test2.length; i++) {
-            // let data = await axios.get(`https://ipfs.io/ipfs/QmaAYEhbXsrDn7TGgnz9EhZzrrrB8vuHDuzXioPFzjRQBt/${test2[i]}.json`)
-            // console.log(data.data.image)
-            // let image = await axios.get(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
-            // document.getElementById("imgPreview").src = "data:image/png;base64," + binarySrc;
-            // console.log("image : ", image.data)
-            let metajson = {
-                id: `#${test2[i]}`,
-                image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${test2[i]}.png`,
-                checked: false,
-            }
-            binaryArr.push(metajson)
-            // console.log(`data:image/png;base64,${binaryArr[1]}`)
-            //[,,]
-        }
-        // console.log(binaryArr)
-        setList(binaryArr)
-    }
+    const { brownieContract, myAddress, myNFTs, myStakedNFTs } = useSelector(state => state.nft);
 
     const {posts} = useSelector(state => state.nft)
     // checked 된 것들
     const [checkItems, setCheckItems] = useState([])
-
-
-    // 개별선택
-    function checkHandler(checked, id) {
-        if(checked) {
-            setCheckItems([...checkItems, id])
-        } else {
-            // 체크해제
-            setCheckItems(checkItems.filter(o=>o!==id))
-        }
-    }
 
     // 전체선택
     function checkAllHandler(checked) {
@@ -166,17 +133,6 @@ const StakingList = () => {
         }
     }
 
-    // 삭제
-    function deleteHandler() {
-        dispatch({
-            type: "REMOVE_BOOKMARK_TEST"
-            , payload: {checkItems: checkItems}
-        })
-
-        // 초기화
-        // setCheckItems([])
-    }
-
     const checkStakedNFTs = async() => {
         let stakedNFTs = await brownieContract.methods.checkStakedNFTs().call(
                 {from : myAddress}
@@ -185,43 +141,49 @@ const StakingList = () => {
     } 
 
     const changeClickState = (id) => {
-        let newArr = list.map((li) => {
+        let newArr = myStakedNFTs.map((li) => {
             if (li.id === id) {
                 li.checked = !li.checked; 
             }
             return li
         })
         console.log('newarr: ', newArr);
-        setList(newArr)
+        dispatch({type: 'NFTCARD_STAKE_CLICK', payload: newArr})
     }
-
-
-
 
     useEffect(() => {
         console.log(checkItems)
-        checkNfts()
     }, [checkItems])
 
 
-    const unStakeNFT = async () => {
+    const unstakeNFT = async () => {
+        // console.log('hi')
         // dispatch({type: "NFTCARD_STAKING", payload: nftList});
-        let stakeIdArr = list.filter((item) => item.checked);
-        // console.log(stakeIdArr);
-        if (stakeIdArr.length > 0) {
-            let stakeInstanceId = stakeIdArr[0].id.slice(1) //#62
+        // let unstakeIdArr = list.filter((item) => item.checked);
+        let stakedNFTs = myStakedNFTs.filter((item) => !item.checked);
+        let unstakedIdArr = myStakedNFTs.filter((item) => item.checked).map((item) => item.id.slice(1));
+        // console.log(unstakeIdArr);
+        console.log(unstakedIdArr)
+        if (unstakedIdArr.length > 0) {
+            // let stakeInstanceId = unstakeIdArr[0].id.slice(1) //#62
             try{
-            const stakeData = await brownieContract.methods.unstake(stakeInstanceId).encodeABI()
+            // const stakeData = await brownieContract.methods.unstake(stakeInstanceId).encodeABI()
+            const unstakeData = await brownieContract.methods.unstakeNFTs(unstakedIdArr).encodeABI()
             const result = await window.caver.klay.sendTransaction({
                 type: 'SMART_CONTRACT_EXECUTION',
-                from:myAddress, 
-                to:'0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
-                data:stakeData,
+                from: myAddress, 
+                to: '0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
+                data: unstakeData,
                 gas: 3000000
             })
             if(result.status){
                 // dispatch({type: "WALLET_REFRESH"})
-                alert("해당 지갑 주소로 민팅되었습니다!");
+                let unstakedNFTs = myStakedNFTs.filter((item) => item.checked).map((item) => {
+                    item.checked = false;
+                    return item;
+                });
+                dispatch({type: 'NFTCARD_UNSTAKE', payload: {myNFTs: unstakedNFTs, myStakedNFTs: stakedNFTs}})
+                alert("선택한 NFT가 정상적으로 unstaking 되었습니다.");
                 // navigate('/');
             }
             else alert("transaction fail")
@@ -237,11 +199,14 @@ const StakingList = () => {
 
     return (
         <div>
-                    <h1>aaaaaaaaaaaaaaaaaaaaa Staking</h1>            
+            <div className='nftcard-header'>
+                Staked NFTs
+            </div>
             <Cardjustify>
+                <div>
             <div className="Main">
-            {
-                list.map((item, index1) => {
+            {   myStakedNFTs.length > 0 
+                ? myStakedNFTs.map((item, index1) => {
                     return <div key={index1}>
                         {
                             !item.checked ?
@@ -279,10 +244,15 @@ const StakingList = () => {
                         </Card>
                     </div>
                 })
+                : 
+                <div>
+                    <h2>Nothing to display</h2>
+                </div>
             }
             </div>
             <div className="cont21">
-                <button className="" onClick={unStakeNFT}> UnStaking</button>
+                <button className="" onClick={unstakeNFT}> UnStake</button>
+            </div>
             </div>
             </Cardjustify>
         </div>

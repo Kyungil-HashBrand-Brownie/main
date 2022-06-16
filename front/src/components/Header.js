@@ -141,7 +141,8 @@ const Header = () => {
     }
 
     const showInfo = () => {
-        // console.log('show');
+        console.log('show');
+        console.log(modalState);
         dispatch({type: "MODAL_CLICK"})
     }
 
