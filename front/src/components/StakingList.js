@@ -4,12 +4,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button, Form} from "react-bootstrap";
 
 
+const Main = styled.div`
+
+`
 
 const StakingList = () => {
 
     const dispatch = useDispatch();
 
-    const {posts} = useSelector(state => state.testnft)
+    const {posts} = useSelector(state => state.nft)
     // checked 된 것들
     const [checkItems, setCheckItems] = useState([])
 
@@ -39,7 +42,7 @@ const StakingList = () => {
     function deleteHandler() {
         dispatch({
             type: "REMOVE_BOOKMARK_TEST"
-            , data: {checkItems: checkItems}
+            , payload: {checkItems: checkItems}
         })
 
         // 초기화
@@ -54,43 +57,45 @@ const StakingList = () => {
 
 
     return (
-        <div style={{padding: "10px"}}>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-            <h1>test</h1>
-            <div>
-                <Form.Check
-                    type={"checkbox"}
-                    label={"전체선택"}
-                    onChange={(e) => checkAllHandler(e.target.checked)}
-                    // checked={}
-                >
-                </Form.Check>
+        <Main>
+            <div style={{padding: "10px"}}>
+                <h1>Staking Test list(전체 선택 및 삭제)</h1>
+                <div>
+                    <Form.Check
+                        type={"checkbox"}
+                        label={"전체선택"}
+                        onChange={(e) => checkAllHandler(e.target.checked)}
+                        component="span"
+                        // checked={}
+                    >
+                    </Form.Check>
 
-                <Button
-                    className={"baseButton"}
-                    variant={"default"}
-                    size={"sm"}
-                    onClick={deleteHandler}>
-                    삭제
-                </Button>
+                    <Button
+                        className={"baseButton"}
+                        variant={"default"}
+                        size={"sm"}
+                        onClick={deleteHandler}>
+                        삭제
+                    </Button>
+                </div>
+                <div>
+                    {posts?.map(o => (
+                        <div key={o.id}>
+                            <span>
+                                <Form.Check
+                                    type={"checkbox"}
+                                    onChange={(e) => checkHandler(e.target.checked, o.id)}
+                                    checked={checkItems.indexOf(o.id) >= 0 ? true : false}
+                                >
+                                </Form.Check>
+                                체크
+                            </span>
+                            <span>, 이미지 항목 ,체크 삭제</span>
+                        </div>
+                    ))}
+                </div>
             </div>
-            <div>
-                {posts?.map(o => (
-                    <div key={o.id}>
-                        <span>
-                            <Form.Check
-                                type={"checkbox"}
-                                onChange={(e) => checkHandler(e.target.checked, o.id)}
-                                checked={checkItems.indexOf(o.id) >= 0 ? true : false}
-                            >
-                            </Form.Check>
-                            체크
-                        </span>
-                        <span>o.title</span>
-                    </div>
-                ))}
-            </div>
-        </div>
+        </Main>
     )
 }
 

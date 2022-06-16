@@ -24,7 +24,7 @@ contract BrownieToken is ERC20Burnable, Ownable {
     * tokenTransfer BTK token transfer 함수 
     * token 거래 함수에 사용하기 위한 용도
     */
-    // tokenTransfer BTK token transfer 함수 - token 거래 함수에 사용하기 위한 용도
+    // tokenTransfer BTK token transfer 함수 - token 거래 함수에 사용하기 위한 용도 -> token
     function tokenTransfer(address _from, address _to, uint256 _amount) public {
         require(_from.balance >= _amount * 10 ** decimals(), "Please check your balance");
         _transfer(_from, _to, _amount * 10 ** decimals());

@@ -89,7 +89,7 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, btkInstance, myAddress } = useSelector(state => state.nft);
+    const { modalState, btkInstance, myAddress, walletRefresh } = useSelector(state => state.nft);
 
     const [checked, setChecked] = useState(false);
     const [address, setAddress] = useState(null);
@@ -152,7 +152,7 @@ const Header = () => {
 
     useEffect(() => {
         setUserInfo();
-    }, [btkInstance,myAddress])
+    }, [btkInstance,myAddress,walletRefresh])
 
     return (
         <Navbar className="nav" expand="lg">
