@@ -5,8 +5,6 @@ import SaleFree from './SaleFree'
 import SaleWhite from './SaleWhite'
 
 
-
-
 const MintCard = () => {
   return (
     <div>
