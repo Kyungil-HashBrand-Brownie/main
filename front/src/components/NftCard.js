@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form } from "react-bootstrap";
+import axios from 'axios';
 
 
 const Cardjustify = styled.div`
@@ -101,14 +102,19 @@ function NftCard() {
     const { brownieContract, myAddress } = useSelector(state => state.nft);
 
     const checkNfts = async () => {
+
         console.log(myAddress)
         console.log(brownieContract)
-        const test2 = await brownieContract.methods.myNFTs().call()
+        const test2 = await brownieContract.methods.myNFTs().call(
+            { from: myAddress })
 
         console.log("tst: ", test2)
-        console.log(`ipfs://QmbX62qQefhBWDYqESn2JHew7qJGEgg1wdEFjM3MX8Q9Qv/${test2}.json`)
+        console.log(`ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2}.json`)
+        let data = await axios.get(`https://ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2[0]}.json`)
+        console.log(data.data.image)
+
     }
-    checkNfts()
+    // checkNfts()
 
     let data = [{
         id: "#4312",
@@ -170,6 +176,7 @@ function NftCard() {
 
     useEffect(() => {
         console.log(checkItems)
+        checkNfts()
     }, [checkItems])
 
     // 카드 staking 버튼
