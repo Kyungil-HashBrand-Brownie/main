@@ -20,6 +20,7 @@ import browny9 from './browny9.png'
 import trash from './trash.png'
 import browny10 from './browny10.png'
 import browny4 from './browny4.jpg'
+import check from './check.png'
 
 
-export {FreeImg , WhiteImg , browny1 , Apro , Epro , ModalKpro, ani1 , ani2 , ani3 , ModalAni1, Kproblem ,KP1, KP2, KP3, EP1, EP2, EP3 , browny8, browny9, trash , browny10 , browny4};
+export {FreeImg , WhiteImg , browny1 , Apro , Epro , ModalKpro, ani1 , ani2 , ani3 , ModalAni1, Kproblem ,KP1, KP2, KP3, EP1, EP2, EP3 , browny8, browny9, trash , browny10 , browny4 , check};

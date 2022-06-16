@@ -17,14 +17,14 @@ body {
 .backG-img {
   position: absolute;
   width: 100%;
-  z-index: -2;
+  z-index: -3;
 }
 
 .backG-right-img {
   position: absolute;
   right: 13%;
   top: -4%;
-  z-index: -4;
+  z-index: -2;
 }
 .backG-right-img2 {
   position: absolute;
@@ -345,4 +345,18 @@ body {
 .swap-submit {
   /* width: 40%; */
   /* background-color: red; */
+}
+
+/*
+NftCard
+*/
+
+#stake-checkbox {
+  position: absolute;
+  /* top: 70px; */
+  /* right: -240px; */
+  width: 40px;
+  height: 40px;
+  z-index: 2;
+  transform: translate(600%, 100%)
 }
