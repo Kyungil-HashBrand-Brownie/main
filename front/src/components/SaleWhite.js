@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 import {Container,Row , Col , Button} from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
-import contractAbi from "../abi.json"
 import Browny from '../img/browny9.png'
 
 const StyledMain = styled.div`
@@ -61,9 +60,10 @@ const StyledBar = styled.div`
 
 const WhiteSale = () => {
     const dispatch = useDispatch();
-    const { myContract } = useSelector(state => state.nft);
+    const { brownieContract, myAddress } = useSelector(state => state.nft);
 
     const [count, setCount] = useState(1)
+    const [isWhite, setIsWhite] = useState(false)
 
     const countAdd = () => {
         // counting 
@@ -76,18 +76,51 @@ const WhiteSale = () => {
     }
 
     const whiteMint = async () => {
-        await myContract.methods.whitelistMint(count)
-        .send({
-            from:window.klaytn.selectedAddress,
-            gas: 300000
+        try{
+            const conData = await brownieContract.methods.whitelistMint(count).encodeABI()
+            const result = await window.caver.klay.sendTransaction({
+                type: 'SMART_CONTRACT_EXECUTION',
+                from:myAddress, 
+                to:'0x2d1fF770579BF83f5Ba0534F3463D90E8e4A5758',
+                data:conData,
+                gas: 3000000
             })
-        alert("해당 지갑 주소로 민팅되었습니다!");
+            if(result.status){
+                dispatch({type: "WALLET_REFRESH"})
+                alert("해당 지갑 주소로 민팅되었습니다!");
+                // navigate('/');
+            }
+            else alert("transaction fail")
+        }
+        catch(e){
+            // alert("카이카스 서명 거부됨")
+        }
     }
+
+    const checkWhitelist = async () => {
+        if(brownieContract){
+            try{
+                const isWhite =  await brownieContract.methods.isWhitelisted(myAddress).call()
+                setIsWhite(isWhite)
+            }
+            catch(e){
+                 throw e
+                }
+        }
+    }
+
+    useEffect(()=>{
+        checkWhitelist()
+    },[isWhite,myAddress])
+    
 
     return (
         <div className='whitelist'>
             <StyledMain >
                 <h2 className="mint-title">WhiteSale</h2>
+                {isWhite 
+                ?
+                <>
                 <StyledDiv >
                     <img src={Browny} style={{ width: 220, height: 220 }} />
                 </StyledDiv>
@@ -100,7 +133,7 @@ const WhiteSale = () => {
                 <Container className="mint-info-box">
                     <Row>
                         <Col>Price</Col>
-                        <Col>1 KLAY</Col>
+                        <Col>1 BTK</Col>
                     </Row>
                     <Row>
                         <Col>Per transaction</Col>
@@ -116,7 +149,16 @@ const WhiteSale = () => {
                     className="mint-wal-connect-btn"
                     variant="primary"
                     onClick={whiteMint}
-                >노진형 nft받기 </Button>{' '}
+                >Mint </Button>{' '}
+                </>
+                :
+                <>
+                <Container className="not-whitelist">
+                    <div>화이트리스트가 아닙니다</div>
+                </Container>
+                </>
+                }
+                
 
             </StyledMain>
         </div>

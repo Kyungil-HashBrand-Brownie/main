@@ -23,19 +23,12 @@ contract NFTStaking is BrownieNft {
     address owner;
   }
 
-  // staking, unstaking, claim에 대한 event
-  event NFTStaked(address indexed owner, uint256 indexed tokenId, uint256 indexed value);
-  event NFTUnstaked(address indexed owner, uint256 indexed tokenId, uint256 indexed value);
-  event Claimed(address indexed owner, uint256 indexed amount, uint256 indexed timestamp);
-
   // uint256 tokenid => struct Stake 
   mapping(uint256 => Stake) public vault; 
   // uint256 tokenid => bool staked?
   mapping(uint256 => bool) staked;
-  // address owner => uint256 number of staked nft
-  mapping(address => uint256) numStaked;
-  // address owner => uint256 owner's staking nfts
-  mapping(address => uint256[]) ownersStakedNFT;
+  // address owner => uint staked nft num
+  mapping(address => uint) numOwnerStakedNFT;
 
   modifier isStaked(uint256 tokenId) {
     require(staked[tokenId], "not staked tokenId");
@@ -49,50 +42,35 @@ contract NFTStaking is BrownieNft {
     totalStaked++;
     transferFrom(msg.sender, address(this), tokenId);
     _approve(address(this), tokenId);
-    emit NFTStaked(msg.sender, tokenId, block.timestamp);
     vault[tokenId] = Stake({
         owner: msg.sender,
         tokenId: tokenId,
         timestamp: uint256(block.timestamp)
     });
     staked[tokenId] = true;
-    numStaked[msg.sender]++;
-    ownersStakedNFT[msg.sender].push(tokenId);
+    numOwnerStakedNFT[msg.sender]++;
   }
 
   // unstake function
   function unstake(uint256 tokenId) external isStaked(tokenId) {
     require(vault[tokenId].owner == msg.sender, "not an owner");
     _approve(msg.sender, tokenId);
+    claimed(tokenId);
     totalStaked--;
     delete vault[tokenId];
-    emit NFTUnstaked(msg.sender, tokenId, block.timestamp);
     transferFrom(address(this), msg.sender, tokenId);
-    numStaked[msg.sender]--;
-    claimed(tokenId);
     staked[tokenId] = false;
-    uint256 index;
-    for(uint256 i = 0; i < ownersStakedNFT[msg.sender].length; i++) {
-      if(ownersStakedNFT[msg.sender][i] == tokenId) {
-        index= i;
-        break;
-      }
-    }
-    for (uint256 i = index; i < ownersStakedNFT[msg.sender].length - 1; i++) {
-      ownersStakedNFT[msg.sender][i] = ownersStakedNFT[msg.sender][i+1];
-    }
-    ownersStakedNFT[msg.sender].pop();
+    numOwnerStakedNFT[msg.sender]--;
   }
 
   // reward claim function
   // 1. timestamp와 현재 시간 확인하여 보상부여
   // 2. 보상부여 tx block의 timestamp로 struct Stake timestamp 최신화?
-  function claimed(uint256 tokenId) private isStaked(tokenId) {
+  function claimed(uint256 tokenId) public isStaked(tokenId) {
     require(vault[tokenId].owner == msg.sender, "not an owner");
-    uint256 reward = (((block.timestamp - vault[tokenId].timestamp) / 1 days) / totalStaked) * 10;
+    uint256 reward = (((block.timestamp - vault[tokenId].timestamp) / 1 hours) / totalStaked) * 10;
     instance.rewardMinting(msg.sender, reward);
     vault[tokenId].timestamp = block.timestamp;
-    emit Claimed(msg.sender, reward, block.timestamp);
   }
 
   // staking timestamp확인 위한 view 함수 
@@ -101,7 +79,15 @@ contract NFTStaking is BrownieNft {
   }
 
   // user가 staking한 nft 목록 확인
-  function checkRewards() public view returns(uint256[] memory) {
-    return ownersStakedNFT[msg.sender];
+  function checkStakedNFTs() public view returns(uint[] memory) {
+    uint[] memory stakingList = new uint[](numOwnerStakedNFT[msg.sender]);
+    uint index = 0;
+    for(uint i = 0; i < ownNFTs[msg.sender].length; i++) {
+      if(staked[ownNFTs[msg.sender][i]] == true) {
+        stakingList[index] = ownNFTs[msg.sender][i];
+        index++;
+      } 
+    }
+    return stakingList;
   }
 }

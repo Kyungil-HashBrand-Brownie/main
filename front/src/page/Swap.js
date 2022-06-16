@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Swap = () => {
+    const dispatch = useDispatch();
+
     const [swap, setSwap] = useState('BTK');
 
     const amountInput = useRef();
@@ -11,18 +13,18 @@ const Swap = () => {
         else setSwap('KLAY')
     }
 
-    const {myContract} = useSelector(state =>state.nft);
+    const {brownieContract, myAddress} = useSelector(state =>state.nft);
     
     const swapToken = async () => {
         let amount = amountInput.current.value
         if(Number(amount)){
             if(swap === "BTK"){
                 try {
-                    const conData = await myContract.methods.getBtk(amount).encodeABI()
+                    const conData = await brownieContract.methods.getBtk(amount).encodeABI()
                     const con = await window.caver.klay.sendTransaction({
                         type: 'SMART_CONTRACT_EXECUTION',
-                        from: window.klaytn.selectedAddress,
-                        to: '0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
+                        from: myAddress,
+                        to: '0x2d1fF770579BF83f5Ba0534F3463D90E8e4A5758',
                         gas: 300000,
                         data:conData,
                         value: window.caver.utils.toPeb(amount, 'KLAY')
@@ -34,11 +36,11 @@ const Swap = () => {
             }
             else if (swap === "KLAY"){
                 try {
-                    const conData = await myContract.methods.sellBtk(amount).encodeABI()
+                    const conData = await brownieContract.methods.sellBtk(amount).encodeABI()
                     const test = await window.caver.klay.sendTransaction({
                         type: 'SMART_CONTRACT_EXECUTION',
-                        from:window.klaytn.selectedAddress, 
-                        to:'0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
+                        from: myAddress, 
+                        to:'0x2d1fF770579BF83f5Ba0534F3463D90E8e4A5758',
                         data:conData,
                         gas: 300000
                     })
@@ -47,6 +49,9 @@ const Swap = () => {
                     console.log(error)
                 }       
             }
+            console.log('test');
+            alert('스왑완료');
+            dispatch({type: "WALLET_REFRESH"})
         }
         else {
             alert("숫자를 입력해주세요")

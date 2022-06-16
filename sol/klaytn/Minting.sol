@@ -2,7 +2,6 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "./Token.sol";
 import "./Whitelist.sol";
@@ -44,7 +43,6 @@ contract BrownieNft is ERC721, Whitelist {
     using Strings for uint256;
     mapping(uint256 => bool) mintinglist;
     mapping(address => uint256[]) ownNFTs;
-    uint[] mintedTokenIds;
 
     /** 
     * _tokenIdCounter - 전체 발행된 nft 수
@@ -62,7 +60,7 @@ contract BrownieNft is ERC721, Whitelist {
 
     // _baseURI - nft 발행시 참조할 ipfs 주소 
     function _baseURI() internal pure override returns (string memory) {
-        return "ipfs://QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/";
+        return "ipfs://QmaAYEhbXsrDn7TGgnz9EhZzrrrB8vuHDuzXioPFzjRQBt/";
     }
 
     // nft random 발행을 위한 난수 생성 함수
@@ -70,7 +68,7 @@ contract BrownieNft is ERC721, Whitelist {
         uint256 randNonce = 0;
         uint256 randomNum;
         while(true) {
-            randomNum = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender, randNonce))) % 1000;
+            randomNum = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender, randNonce))) % 150 + 1;
             if(mintinglist[randomNum] == false) {
                 mintinglist[randomNum] = true;
                 break;
@@ -87,7 +85,6 @@ contract BrownieNft is ERC721, Whitelist {
     function safeMint(address to, uint256 cost) private {
         uint256 randomNum = randNum();
         _safeMint(to, randomNum);
-        mintedTokenIds.push(randomNum);
         _tokenIdCounter.increment();
         ownNFTs[msg.sender].push(randomNum);
         instance.tokenTransfer(msg.sender, address(this), cost);

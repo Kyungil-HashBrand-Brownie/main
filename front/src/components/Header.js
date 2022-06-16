@@ -89,7 +89,7 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, btkInstance } = useSelector(state => state.nft);
+    const { modalState, btkInstance, myAddress, walletRefresh } = useSelector(state => state.nft);
 
     const [checked, setChecked] = useState(false);
     const [address, setAddress] = useState(null);
@@ -107,7 +107,7 @@ const Header = () => {
         if(btkInstance){
             const weiBalance = await window.caver.klay.getBalance(address)
             const fixedBalance = weiToFixed(weiBalance)
-            const weibtkBalance = await btkInstance.balanceOf(window.klaytn.selectedAddress) //BigNumber 객체
+            const weibtkBalance = await btkInstance.balanceOf(myAddress) //BigNumber 객체
             const fixedbtkBalance = weiToFixed(weibtkBalance)
             
             setBalance(fixedBalance)
@@ -117,20 +117,21 @@ const Header = () => {
     }
 
     const setUserInfo = async () => {
-        let address = window.klaytn.selectedAddress
-        if(window.klaytn.selectedAddress){
-            setAddress(address);
-            setTokenBalance(address)
+        if(myAddress){
+            setAddress(myAddress);
+            setTokenBalance(myAddress)
         }
     }
 
     const enableKikas = () => {
         window.klaytn.enable()
+        dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }
 
     window.klaytn.on('accountsChanged', async function(accounts) {
         console.log(accounts[0])
         sessionStorage.setItem('id', accounts[0]);
+        dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
         setAddress(accounts[0]);
         if(btkInstance) setTokenBalance(accounts[0])
     })
@@ -150,7 +151,7 @@ const Header = () => {
 
     useEffect(() => {
         setUserInfo();
-    }, [btkInstance])
+    }, [btkInstance,myAddress,walletRefresh])
 
     return (
         <Navbar className="nav" expand="lg">
@@ -171,6 +172,7 @@ const Header = () => {
                     <Link onClick={closeModal} className='nav-item' to="/admin">admin</Link>
                     <Link onClick={closeModal} className='nav-item' to="/test">testpage</Link>
                     <Link onClick={closeModal} className='nav-item' to="/swap">swap</Link>
+                    <Link onClick={closeModal} className='nav-item' to="/nftlist">nftlist</Link>
                 </Nav>
                 {/* <SearchBox>
                     <SearchInput 

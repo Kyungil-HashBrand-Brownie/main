@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import { useDispatch, useSelector } from 'react-redux';
-import contractAbi from "../abi.json";
 import { useNavigate } from 'react-router-dom';
 import Browny from '../img/browny8.png';
 
@@ -62,26 +61,35 @@ const StyledBar = styled.div`
 const FreeSale = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { myContract } = useSelector(state => state.nft);
+    const { brownieContract, myAddress } = useSelector(state => state.nft);
 
-    const onClick = async () => {
-        const accounts = await window.klaytn.enable()
-        console.log("account", accounts)
-        const balance = await window.caver.klay.getBalance(accounts[0])
-        console.log("balance" , balance)
-        dispatch({type:"WHITELIST_KEY" ,payload: accounts })
-      }
-      const onClick2 = async () => {
-        console.log(myContract);
-        await myContract.methods.batchMint(count)
-        .send({
-            from:window.klaytn.selectedAddress,
-            gas: 300000
-        })
-        alert("해당 지갑 주소로 민팅되었습니다!");
-        navigate('/');
-    }
     
+    const preMint = async () => {
+        if(!myAddress){
+            return alert("지갑을 먼저 연결해주세요")
+        }
+        try{
+            const conData = await brownieContract.methods.batchMint(count).encodeABI()
+            const result = await window.caver.klay.sendTransaction({
+                type: 'SMART_CONTRACT_EXECUTION',
+                from:myAddress, 
+                to:'0x2d1fF770579BF83f5Ba0534F3463D90E8e4A5758',
+                data:conData,
+                gas: 3000000
+            })
+            if(result.status){
+                dispatch({type: "WALLET_REFRESH"})
+                alert("해당 지갑 주소로 민팅되었습니다!");
+                // navigate('/');
+            }
+            else alert("transaction fail")
+        }
+        catch(e){
+            alert("카이카스 서명 거부됨")
+        }
+        
+    }
+
     // const dispatch = useDispatch(state => state.nft)
 
     const [count, setCount] = useState(1)
@@ -117,7 +125,7 @@ const FreeSale = () => {
                 <Container className="mint-info-box">
                     <Row>
                         <Col>Price</Col>
-                        <Col>2 KLAY</Col>
+                        <Col>2 BTK</Col>
                     </Row>
                     <Row>
                         <Col>Per transaction</Col>
@@ -129,12 +137,10 @@ const FreeSale = () => {
                     </Row>
                 </Container>
                 <br />
-                {/* <Button className="mint-wal-connect-btn" variant="success" onClick={onClick}>지갑 연결하기</Button>{' '} */}
-                <Button className="mint-wal-connect-btn" variant="success" onClick={onClick2}>노진형 nft 받기</Button>{' '}
+                <Button className="mint-wal-connect-btn" variant="success" onClick={preMint}>Mint</Button>{' '}
 
             </StyledMain>
         </div>
     )
 }
-
 export default FreeSale
