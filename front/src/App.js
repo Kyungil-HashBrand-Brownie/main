@@ -21,7 +21,7 @@ function App() {
 
 
   const setReducer = async () => {
-    let brownieContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0x2d1fF770579BF83f5Ba0534F3463D90E8e4A5758");
+    let brownieContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xff12ba9A7FBDE091B927863Ba392A4D4D30C1Cbb");
     dispatch({type: "CONTRACT_SUCCESS", payload: brownieContract});
 
     // 토큰 인스턴스 주소
