@@ -6,5 +6,4 @@ import testReducer from "./testReducer";
 export default combineReducers({
     nft:nftReducer,
     testnft:testReducer,
-    
 });

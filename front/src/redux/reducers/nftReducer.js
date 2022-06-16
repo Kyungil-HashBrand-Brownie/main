@@ -8,17 +8,6 @@ let initialState = {
     brownieContract: {},
     modalState: false,
     btkInstance: "",
-    nftList : "",
-    posts: [{
-        id: 1
-        , title: "test1"
-    }, {
-        id: 2
-        , title: "test2"
-    }, {
-        id: 3
-        , title: "test3"
-    }]
 }
 
 function nftReducer(state=initialState, action) {
@@ -27,12 +16,13 @@ function nftReducer(state=initialState, action) {
 
     // const result = Object.keys(payload)[0] || null;
 
-    // console.log("action", action)
-    // console.log("payload", payload)
+    console.log("action", action)
+    console.log("payload", payload)
 
 
-    switch (type,action) {
+    switch (type) {
         case "MODAL_CLICK": 
+            console.log('test');
             return {...state,
                 modalState: !state.modalState,
             };
