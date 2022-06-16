@@ -8,7 +8,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form } from "react-bootstrap";
 import axios from 'axios';
-
+import { check } from '../img';
 
 const Cardjustify = styled.div`
     .Main {
@@ -109,7 +109,7 @@ const Cardjustify = styled.div`
 function NftCard() {
 
     const { brownieContract, myAddress } = useSelector(state => state.nft);
-
+    console.log(brownieContract.methods)
     const checkNfts = async () => {
 
         console.log(myAddress)
@@ -120,8 +120,8 @@ function NftCard() {
         let binaryArr = [];
         // console.log(`ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2}.json`)
         for (let i = 0; i != test2.length; i++) {
-            let data = await axios.get(`https://ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2[i]}.json`)
-            // console.log(data.data.image)
+            let data = await axios.get(`https://ipfs.io/ipfs/QmaAYEhbXsrDn7TGgnz9EhZzrrrB8vuHDuzXioPFzjRQBt/${test2[i]}.json`)
+            console.log(data.data.image)
             let image = await axios.get(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
             // document.getElementById("imgPreview").src = "data:image/png;base64," + binarySrc;
             // console.log("image : ", image.data)
@@ -155,45 +155,11 @@ function NftCard() {
 
 
     const [list, setList] = useState([]);
-    const dispatch = useDispatch();
 
     // check
-    const { posts } = useSelector(state => state.nft)
     const [checkItems, setCheckItems] = useState([])
 
 
-    // 개별선택
-    function checkHandler(checked, id) {
-        if (checked) {
-            setCheckItems([...checkItems, id])
-        } else {
-            // 체크해제
-            setCheckItems(checkItems.filter(o => o !== id))
-        }
-    }
-
-
-    // 전체선택
-    function checkAllHandler(checked) {
-        if (checked) {
-            const ids = []
-            posts.forEach(v => ids.push(v.id))
-            setCheckItems(ids)
-        } else {
-            setCheckItems([])
-        }
-    }
-
-    // 삭제
-    function deleteHandler() {
-        dispatch({
-            type: "REMOVE_BOOKMARK_TEST"
-            , payload: { checkItems: checkItems }
-        })
-
-        // 초기화
-        // setCheckItems([])
-    }
 
     const changeClickState = (id) => {
         let newArr = list.map((li) => {
@@ -206,15 +172,48 @@ function NftCard() {
         setList(newArr)
     }
 
+    const checkStakedNFTs = async() => {
+        let stakedNFTs = await brownieContract.methods.checkStakedNFTs().call(
+                {from : myAddress}
+            )
+        console.log('stakedNFTs: ', stakedNFTs)
+    } 
+
 
     useEffect(() => {
         console.log(checkItems)
         checkNfts()
+        checkStakedNFTs()
     }, [checkItems,brownieContract.defaultAccount,myAddress])
 
     // 카드 staking 버튼
     const stakeNFT = async () => {
         // dispatch({type: "NFTCARD_STAKING", payload: nftList});
+        let stakeIdArr = list.filter((item) => item.checked);
+        // console.log(stakeIdArr);
+        if (stakeIdArr.length > 0) {
+            let stakeInstanceId = stakeIdArr[0].id.slice(1) //#62
+            try{
+            const stakeData = await brownieContract.methods.stake(stakeInstanceId).encodeABI()
+            const result = await window.caver.klay.sendTransaction({
+                type: 'SMART_CONTRACT_EXECUTION',
+                from:myAddress, 
+                to:'0xff12ba9A7FBDE091B927863Ba392A4D4D30C1Cbb',
+                data:stakeData,
+                gas: 3000000
+            })
+            if(result.status){
+                // dispatch({type: "WALLET_REFRESH"})
+                alert("해당 지갑 주소로 민팅되었습니다!");
+                // navigate('/');
+            }
+            else alert("transaction fail")
+            }catch(e) {
+                console.log(e.message)
+            }
+
+        }
+        // brownieContract.methods.stake(id:id)
     }
 
     return (
@@ -228,11 +227,11 @@ function NftCard() {
                                 {
                                     !item.checked ?
                                     null
-                                    :<Form.Check
+                                    :<img src={check}
                                     id='stake-checkbox'
                                     className="cheked"
-                                    type={"checkbox"}
-                                    checked={true}
+                                    // type={"checkbox"}
+                                    // checked={true}
                                 />
                                 }
 
