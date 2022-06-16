@@ -59,7 +59,7 @@ const StakingList = () => {
     return (
         <Main>
             <div style={{padding: "10px"}}>
-                <h1>test</h1>
+                <h1>Staking Test list(전체 선택 및 삭제)</h1>
                 <div>
                     <Form.Check
                         type={"checkbox"}
