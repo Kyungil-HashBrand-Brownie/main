@@ -21,12 +21,21 @@ const Cardjustify = styled.div`
     }
 
     .Ncard {
-        opacity: 0.4;
+        opacity: 0.8;
+        cursor: wait;
     }
 
     .Ncard:hover {
         opacity: 1;
     }
+
+    /* .cheked{
+        opacity: 0;
+    }
+
+    .cheked:hover{
+        opacity: 1;
+    } */
 
 
 
@@ -111,14 +120,20 @@ function NftCard() {
         let binaryArr = [];
         // console.log(`ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2}.json`)
         for (let i = 0; i != test2.length; i++) {
-            let data = await axios.get(`https://ipfs.io/ipfs/QmaAYEhbXsrDn7TGgnz9EhZzrrrB8vuHDuzXioPFzjRQBt/${test2[i]}.json`)
-            console.log(data.data.image)
+            let data = await axios.get(`https://ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2[i]}.json`)
+            // console.log(data.data.image)
             let image = await axios.get(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
             // document.getElementById("imgPreview").src = "data:image/png;base64," + binarySrc;
             // console.log("image : ", image.data)
-            binaryArr.push(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
-            console.log(`data:image/png;base64,${binaryArr[1]}`)
+            let metajson = {
+                image: `https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`,
+                checked: false,
+            }
+            binaryArr.push(metajson)
+            // console.log(`data:image/png;base64,${binaryArr[1]}`)
+            //[,,]
         }
+        // console.log(binaryArr)
         setList(binaryArr)
     }
     // checkNfts()
@@ -180,6 +195,17 @@ function NftCard() {
         // setCheckItems([])
     }
 
+    const changeClickState = (id) => {
+        let newArr = list.map((li) => {
+            if (li.id === id) {
+                li.checked = !li.checked; 
+            }
+            return li
+        })
+        console.log('newarr: ', newArr);
+        setList(newArr)
+    }
+
 
     useEffect(() => {
         console.log(checkItems)
@@ -187,27 +213,39 @@ function NftCard() {
     }, [checkItems,brownieContract.defaultAccount,myAddress])
 
     // 카드 staking 버튼
-    const stakingButton = async () => {
+    const stakeNFT = async () => {
         // dispatch({type: "NFTCARD_STAKING", payload: nftList});
     }
 
     return (
         <div>
+                            <h1>aaaaaaaaaaaaaaaaaaaaaAll Nfts</h1>            
             <Cardjustify>
                 <div className="Main">
-
                     {
                         list.map((item, index1) => {
                             return <div key={index1}>
-                                <Form.Check
+                                {
+                                    !item.checked ?
+                                    null
+                                    :<Form.Check
+                                    id='stake-checkbox'
+                                    className="cheked"
+                                    type={"checkbox"}
+                                    checked={true}
+                                />
+                                }
+
+                                    {/* <Form.Check
+                                    id='stake-checkbox'
+                                    className="cheked"
                                     type={"checkbox"}
                                     onChange={(e) => checkHandler(e.target.checked, item.id)}
                                     checked={checkItems.indexOf(item.id) >= 0 ? true : false}
-                                >
-                                </Form.Check>
+                                    /> */}
                                 <Card className="Ncard" style={{ width: '18rem' }}>
-                                    <Card.Img variant="top" src={item} />
-                                    {/* <Card.Title >{item.id}</Card.Title>
+                                    <Card.Img onClick={()=> changeClickState(item.id)} variant="top" src={item.image} />
+                                    <Card.Title >{item.id}</Card.Title>
                                     <Container className="containerCard">
                                         <Row>
                                             <Col className="col_1">price</Col>
@@ -217,14 +255,14 @@ function NftCard() {
                                             <Col className="col_2">{item.eth} ETH</Col>
                                             <Col className="col_2">{item.height}</Col>
                                         </Row>
-                                    </Container> */}
+                                    </Container>
                                 </Card>
                             </div>
                         })
                     }
                 </div>
                 <div className="cont21">
-                    <button className="" onClick={stakingButton}> staking</button>
+                    <button className="" onClick={stakeNFT}> staking</button>
                 </div>
             </Cardjustify>
         </div>

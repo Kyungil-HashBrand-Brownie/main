@@ -5,7 +5,7 @@ import {Button, Form} from "react-bootstrap";
 
 
 const Main = styled.div`
-
+    background-color: red;
 `
 
 const StakingList = () => {
@@ -59,7 +59,7 @@ const StakingList = () => {
     return (
         <Main>
             <div style={{padding: "10px"}}>
-                <h1>Staking Test list(전체 선택 및 삭제)</h1>
+                <h1>Staking Test list(삭제, t추가 등등)</h1>
                 <div>
                     <Form.Check
                         type={"checkbox"}
@@ -82,6 +82,7 @@ const StakingList = () => {
                     {posts?.map(o => (
                         <div key={o.id}>
                             <span>
+                                
                                 <Form.Check
                                     type={"checkbox"}
                                     onChange={(e) => checkHandler(e.target.checked, o.id)}
