@@ -7,7 +7,7 @@ body {
 .backG-left-img {
   position: absolute;
   width: 15%;
-  z-index: 1;
+  z-index: -1;
 }
 
 .admin-outer-box {
@@ -17,7 +17,7 @@ body {
 .backG-img {
   position: absolute;
   width: 100%;
-  z-index: -1;
+  z-index: -2;
 }
 
 .backG-right-img {
@@ -32,7 +32,7 @@ body {
   /* opacity: 30%; */
   /* z-index: -1; */
   /* top: -4%; */
-  z-index: 1;
+  z-index: -1;
 }
 /* .main-outer {
   width: 100%;

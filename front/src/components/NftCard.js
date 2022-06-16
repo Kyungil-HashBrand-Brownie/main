@@ -4,13 +4,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
-import React, { useState , useEffect , useCallback} from 'react';
+import React, { useState , useEffect } from 'react';
 import { useDispatch ,useSelector} from 'react-redux';
 import {Button, Form} from "react-bootstrap";
-// import {REMOVE_BOOKMARK_TEST} from '../redux/reducers/testReducer'
-
-
-
 
 
 const Cardjustify = styled.div`
@@ -183,27 +179,19 @@ function NftCard() {
                                 checked={checkItems.indexOf(item.id) >= 0 ? true : false}
                             >
                             </Form.Check>
-
                             <Card className="Ncard"   style={{ width: '18rem' }}>
-                                <div className="rel">
-                                    {/* <button className="spaan">staking</button> */}
-                                </div>
-                                <div className="button1"  >
-                                    <Card.Img variant="top" src={browny4} />
-                                <div className='width1'>
-                                    <Card.Title >{item.id}</Card.Title>
-                                    </div>
-                                    <Container className="containerCard">
-                                        <Row>
-                                            <Col className="col_1">price</Col>
-                                            <Col className="col_1">highst</Col>
-                                        </Row>
-                                        <Row>
-                                            <Col className="col_2">{item.eth} ETH</Col>
-                                            <Col className="col_2">{item.height}</Col>
-                                        </Row>
-                                    </Container>
-                                </div>
+                                <Card.Img variant="top" src={browny4} />
+                                <Card.Title >{item.id}</Card.Title>
+                                <Container className="containerCard">
+                                    <Row>
+                                        <Col className="col_1">price</Col>
+                                        <Col className="col_1">highst</Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className="col_2">{item.eth} ETH</Col>
+                                        <Col className="col_2">{item.height}</Col>
+                                    </Row>
+                                </Container>
                             </Card>
                         </div>
                 })
@@ -212,7 +200,6 @@ function NftCard() {
         <div className="cont21">
                 <button className="" onClick={stakingButton}> staking</button>
         </div>
-
     </Cardjustify>
     </div>
   );
