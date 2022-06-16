@@ -69,7 +69,7 @@ const FreeSale = () => {
         const test = await window.caver.klay.sendTransaction({
             type: 'SMART_CONTRACT_EXECUTION',
             from:myAddress, 
-            to:'0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
+            to:'0x2d1fF770579BF83f5Ba0534F3463D90E8e4A5758',
             data:conData,
             gas: 3000000
         })
