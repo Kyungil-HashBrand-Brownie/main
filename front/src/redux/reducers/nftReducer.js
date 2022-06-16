@@ -8,6 +8,7 @@ let initialState = {
     brownieContract: {},
     modalState: false,
     btkInstance: "",
+    walletRefresh: 1,
     nftList: "",
     posts: [{
         id: 1
@@ -86,6 +87,12 @@ function nftReducer(state = initialState, action) {
             });
             return {
                 ...state, posts: copy
+            }
+
+        case "WALLET_REFRESH":
+            return {
+                ...state,
+                walletRefresh: !state.walletRefresh
             }
 
 

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import { useDispatch, useSelector } from 'react-redux';
-import contractAbi from "../abi.json";
 import { useNavigate } from 'react-router-dom';
 import Browny from '../img/browny8.png';
 
@@ -64,24 +63,18 @@ const FreeSale = () => {
     const dispatch = useDispatch();
     const { brownieContract, myAddress } = useSelector(state => state.nft);
 
-    const onClick = async () => {
-        const accounts = await window.klaytn.enable()
-        console.log("account", accounts)
-        const balance = await window.caver.klay.getBalance(accounts[0])
-        console.log("balance", balance)
-        dispatch({ type: "WHITELIST_KEY", payload: accounts })
-    }
-    const onClick2 = async () => {
+    
+    const preMint = async () => {
         const conData = await brownieContract.methods.batchMint(count).encodeABI()
         const test = await window.caver.klay.sendTransaction({
             type: 'SMART_CONTRACT_EXECUTION',
-            from: myAddress,
-            to: '0xB965D7Ba9814BaF32EE004c165288365BA65eCb5',
-            data: conData,
+            from:myAddress, 
+            to:'0x2d1fF770579BF83f5Ba0534F3463D90E8e4A5758',
+            data:conData,
             gas: 3000000
         })
-
-        // console.log(test)
+        console.log(test)
+        dispatch({type: "WALLET_REFRESH"})
         alert("해당 지갑 주소로 민팅되었습니다!");
         navigate('/');
     }
@@ -133,8 +126,7 @@ const FreeSale = () => {
                     </Row>
                 </Container>
                 <br />
-                {/* <Button className="mint-wal-connect-btn" variant="success" onClick={onClick}>지갑 연결하기</Button>{' '} */}
-                <Button className="mint-wal-connect-btn" variant="success" onClick={onClick2}>노진형 nft 받기</Button>{' '}
+                <Button className="mint-wal-connect-btn" variant="success" onClick={preMint}>노진형 nft 받기</Button>{' '}
 
             </StyledMain>
         </div>
