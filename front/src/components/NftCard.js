@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form } from "react-bootstrap";
+import axios from 'axios';
 
 
 const Cardjustify = styled.div`
@@ -100,6 +101,29 @@ function NftCard() {
 
     const { brownieContract, myAddress } = useSelector(state => state.nft);
 
+    const checkNfts = async () => {
+
+        console.log(myAddress)
+        console.log(brownieContract)
+        const test2 = await brownieContract.methods.myNFTs().call(
+            { from: myAddress })
+
+        console.log("tst: ", test2)
+        let binaryArr = [];
+        // console.log(`ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2}.json`)
+        for (let i = 0; i != test2.length; i++) {
+            let data = await axios.get(`https://ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2[i]}.json`)
+            console.log(data.data.image)
+            let image = await axios.get(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
+            // document.getElementById("imgPreview").src = "data:image/png;base64," + binarySrc;
+            console.log("image : ", image.data)
+            binaryArr.push(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
+            console.log(`data:image/png;base64,${binaryArr[1]}`)
+        }
+        setList(binaryArr)
+    }
+    // checkNfts()
+
     let data = [{
         id: "#4312",
         eth: 0.056,
@@ -116,7 +140,7 @@ function NftCard() {
 
 
 
-    const [list, setList] = useState(data);
+    const [list, setList] = useState([]);
     const dispatch = useDispatch();
 
     // check
@@ -145,12 +169,7 @@ function NftCard() {
             setCheckItems([])
         }
     }
-    const myNfts = async () => {
-        const test2 = await brownieContract.methods.myNFTs().call()
-        console.log("tst: ", test2)
-        console.log(`ipfs://QmbX62qQefhBWDYqESn2JHew7qJGEgg1wdEFjM3MX8Q9Qv/${test2}.json`)
-    }
-    myNfts()
+
     // 삭제
     function deleteHandler() {
         dispatch({
@@ -165,6 +184,7 @@ function NftCard() {
 
     useEffect(() => {
         console.log(checkItems)
+        checkNfts()
     }, [checkItems])
 
     // 카드 staking 버튼
@@ -187,8 +207,8 @@ function NftCard() {
                                 >
                                 </Form.Check>
                                 <Card className="Ncard" style={{ width: '18rem' }}>
-                                    <Card.Img variant="top" src={browny4} />
-                                    <Card.Title >{item.id}</Card.Title>
+                                    <Card.Img variant="top" src={item} />
+                                    {/* <Card.Title >{item.id}</Card.Title>
                                     <Container className="containerCard">
                                         <Row>
                                             <Col className="col_1">price</Col>
@@ -198,7 +218,7 @@ function NftCard() {
                                             <Col className="col_2">{item.eth} ETH</Col>
                                             <Col className="col_2">{item.height}</Col>
                                         </Row>
-                                    </Container>
+                                    </Container> */}
                                 </Card>
                             </div>
                         })
