@@ -36,12 +36,12 @@ contract NFTStaking is BrownieNft {
   }
 
   // stake function 
-  function stake(uint256 tokenId) external {
+  function stake(uint256 tokenId) private {
     require(ownerOf(tokenId) == msg.sender, "not your token");
     require(vault[tokenId].tokenId == 0, "already staked");
     totalStaked++;
     transferFrom(msg.sender, address(this), tokenId);
-    _approve(address(this), tokenId);
+    // _approve(address(this), tokenId);
     vault[tokenId] = Stake({
         owner: msg.sender,
         tokenId: tokenId,
@@ -50,9 +50,14 @@ contract NFTStaking is BrownieNft {
     staked[tokenId] = true;
     numOwnerStakedNFT[msg.sender]++;
   }
+  function stakeNFTs(uint256[] memory tokenId) external {
+    for(uint i = 0; i < tokenId.length; i++) {
+      stake(tokenId[i]);
+    }
+  }
 
   // unstake function
-  function unstake(uint256 tokenId) external isStaked(tokenId) {
+  function unstake(uint256 tokenId) private isStaked(tokenId) {
     require(vault[tokenId].owner == msg.sender, "not an owner");
     _approve(msg.sender, tokenId);
     claimed(tokenId);
@@ -61,6 +66,11 @@ contract NFTStaking is BrownieNft {
     transferFrom(address(this), msg.sender, tokenId);
     staked[tokenId] = false;
     numOwnerStakedNFT[msg.sender]--;
+  }
+  function unstakeNFTs(uint256[] memory tokenId) external {
+    for(uint i = 0; i < tokenId.length; i++) {
+      unstake(tokenId[i]);
+    }
   }
 
   // reward claim function

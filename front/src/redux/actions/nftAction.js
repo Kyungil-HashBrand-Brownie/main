@@ -1,19 +1,26 @@
+import api from "../api"
 
-function getNft() {
+const api_key =process.env.REACT_APP_API_KEY
+
+function getNft(id) {
 
     return async(dispatch) => {
 
         try {
 
-            // const 
+            const nft = await api.get(`/movie/popular?api_key=${api_key}&language=en-US&page=1`);
 
-            // let [] = await Promise.all([])
+
+            let [
+                /* 함수 */
+             ] = await Promise.all([/* 함수 */])
+            
 
 
             dispatch({
-                type: 'GET_NFT_SUCCESS',
+                type: "/* '보낼 메세지' */",
                 payload: {
-                    
+                    /* state : let함수.data */
                 }
             })
 

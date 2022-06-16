@@ -523,12 +523,12 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "uint256[]",
 						"name": "tokenId",
-						"type": "uint256"
+						"type": "uint256[]"
 					}
 				],
-				"name": "stake",
+				"name": "stakeNFTs",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -636,12 +636,12 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "uint256[]",
 						"name": "tokenId",
-						"type": "uint256"
+						"type": "uint256[]"
 					}
 				],
-				"name": "unstake",
+				"name": "unstakeNFTs",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -848,14 +848,6 @@
 				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
 			]
 		},
-		"@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol": {
-			"keccak256": "0x0d19410453cda55960a818e02bd7c18952a5c8fe7a3036e81f0d599f34487a7b",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://4c0f62d3d5bef22b5ca00cc3903e7de6152cb68d2d22401a463f373cda54c00f",
-				"dweb:/ipfs/QmSfzjZux7LC7NW2f7rjCXTHeFMUCWERqDkhpCTBy7kxTe"
-			]
-		},
 		"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
 			"keccak256": "0x8de418a5503946cabe331f35fe242d3201a73f67f77aaeb7110acb1f30423aca",
 			"license": "MIT",
@@ -953,19 +945,19 @@
 			]
 		},
 		"minting/Staking.sol": {
-			"keccak256": "0xf904e73abe2f9c3fa3c7f6ca7b300fb1d473e5dfb2cf3eb64c7386d353e21516",
+			"keccak256": "0x3c3b9990f979e6880fe66c4de053dda0e13db2b1d7f9e8f81976a19989cd2c64",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://27737715c289dac72c3b155b28bdd32af40711b7ff50639633b87dad052565cd",
-				"dweb:/ipfs/QmSNMGWA5oKZ98KgczQ9NtKb96V5Mha1v8mZZSAzKb7D2b"
+				"bzz-raw://b3e200fba6cdbfb00de076af3b8d07f559d6a72be9babe317ccd641425aa21db",
+				"dweb:/ipfs/Qmbk1BbRgezGB3KL5kzfZvMB1Utws5cESrNpaShURTqTx9"
 			]
 		},
 		"minting/Token.sol": {
-			"keccak256": "0x99523f31e91b6580de5dfb5417c3498b25792787ed7cd764986e2fbe20869fd3",
+			"keccak256": "0x9dcdd0ece766d0d33c98416bfaa0de4a7931af4d0073037f8ba6b83c02b7863e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f1958e11ff060df62b085edd8546a871ac81f10e4766fe3feaf2cfefaeed5a9f",
-				"dweb:/ipfs/QmWpquVndibaxMJ7xax9FdFwiBane2KfSs4jDXLgE1Epmp"
+				"bzz-raw://9e0af7bad96447b35ff03c5adbfc9438b31571f659dbf8f459e325143c98fa12",
+				"dweb:/ipfs/QmdVYQvVmSo3oy991sJJQuUpSr9YvKUwM432xXG3Fqtfoy"
 			]
 		},
 		"minting/Whitelist.sol": {
