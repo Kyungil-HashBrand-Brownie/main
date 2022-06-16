@@ -109,10 +109,18 @@ function NftCard() {
             { from: myAddress })
 
         console.log("tst: ", test2)
-        console.log(`ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2}.json`)
-        let data = await axios.get(`https://ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2[0]}.json`)
-        console.log(data.data.image)
-
+        let binaryArr = [];
+        // console.log(`ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2}.json`)
+        for (let i = 0; i != test2.length; i++) {
+            let data = await axios.get(`https://ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2[i]}.json`)
+            console.log(data.data.image)
+            let image = await axios.get(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
+            // document.getElementById("imgPreview").src = "data:image/png;base64," + binarySrc;
+            console.log("image : ", image.data)
+            binaryArr.push(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
+            console.log(`data:image/png;base64,${binaryArr[1]}`)
+        }
+        setList(binaryArr)
     }
     // checkNfts()
 
@@ -132,7 +140,7 @@ function NftCard() {
 
 
 
-    const [list, setList] = useState(data);
+    const [list, setList] = useState([]);
     const dispatch = useDispatch();
 
     // check
@@ -199,8 +207,8 @@ function NftCard() {
                                 >
                                 </Form.Check>
                                 <Card className="Ncard" style={{ width: '18rem' }}>
-                                    <Card.Img variant="top" src={browny4} />
-                                    <Card.Title >{item.id}</Card.Title>
+                                    <Card.Img variant="top" src={item} />
+                                    {/* <Card.Title >{item.id}</Card.Title>
                                     <Container className="containerCard">
                                         <Row>
                                             <Col className="col_1">price</Col>
@@ -210,7 +218,7 @@ function NftCard() {
                                             <Col className="col_2">{item.eth} ETH</Col>
                                             <Col className="col_2">{item.height}</Col>
                                         </Row>
-                                    </Container>
+                                    </Container> */}
                                 </Card>
                             </div>
                         })
