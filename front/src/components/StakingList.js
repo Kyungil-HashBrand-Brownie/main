@@ -11,13 +11,19 @@ import { check } from '../img';
 
 
 const Cardjustify = styled.div`
+    display: flex;
+    justify-content: center;
+    /* width: 50%; */
+
     .Main {
         position: relative;
         display: flex ;
         justify-content: center ;
         z-index:5;
         margin: 10px;
-        border: 1px solid;
+        border: 3px solid;
+        border-radius: 6px;
+        padding: 10px 10px;
     }
 
     .Ncard {
@@ -194,9 +200,10 @@ const StakingList = () => {
     return (
         <div>
             <div className='nftcard-header'>
-                <h1>Staked NFTs</h1>            
+                Staked NFTs
             </div>
             <Cardjustify>
+                <div>
             <div className="Main">
             {   myStakedNFTs.length > 0 
                 ? myStakedNFTs.map((item, index1) => {
@@ -245,6 +252,7 @@ const StakingList = () => {
             </div>
             <div className="cont21">
                 <button className="" onClick={unstakeNFT}> UnStake</button>
+            </div>
             </div>
             </Cardjustify>
         </div>

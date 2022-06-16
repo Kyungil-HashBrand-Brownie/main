@@ -11,13 +11,19 @@ import axios from 'axios';
 import { check } from '../img';
 
 const Cardjustify = styled.div`
+    display: flex;
+    justify-content: center;
+    /* width: 50%; */
+
     .Main {
         position: relative;
         display: flex ;
         justify-content: center ;
-        z-index:5;
+        z-index:3;
         margin: 10px;
-        border: 1px solid;
+        border: 3px solid;
+        border-radius: 6px;
+        padding: 10px 10px;
     }
 
     .Ncard {
@@ -108,8 +114,8 @@ const Cardjustify = styled.div`
 
 function NftCard() {
     const dispatch = useDispatch();
-    const { brownieContract, myAddress, myNFTs, myStakedNFTs } = useSelector(state => state.nft);
-    console.log(brownieContract.methods)
+    const { brownieContract, myAddress, myNFTs, myStakedNFTs, reward } = useSelector(state => state.nft);
+    // console.log(brownieContract.methods)
 
     const checkStakedNFTs = async() => {
         let stakedNFTs = await brownieContract.methods.checkStakedNFTs().call(
@@ -121,7 +127,38 @@ function NftCard() {
         // })
     } 
 
+    const getCurrentReward = async() => {
+        let reward = 0;
+        for (let i = 0; i < myStakedNFTs.length; i++) {
+            let totalStakedNFTs = await brownieContract.methods.totalStaked().call()
+            let whenStaked = await brownieContract.methods.whenStaked(myStakedNFTs[i].id.slice(1)).call();            
+            let currentTimestamp = parseInt(+ new Date() / 1000);
+            // console.log(totalStakedNFTs, whenStaked, currentTimestamp);
+            reward += ((currentTimestamp - whenStaked) / totalStakedNFTs) * 10;
+        }
+        console.log('reward: ', reward)
+        dispatch({type: 'GET_REWARD', payload: reward});
+
+        // return myStakedNFTs.map(async (NFT) => {
+        //     let totalStakedNFTs = await brownieContract.methods.totalStaked().call()
+        //     let whenStaked = await brownieContract.methods.whenStaked(NFT.id.slice(1)).call();            
+        //     let currentTimestamp = parseInt(+ new Date() / 1000);
+        //     console.log(totalStakedNFTs, whenStaked, currentTimestamp);
+        //     return ((currentTimestamp - whenStaked) / totalStakedNFTs) * 10;
+        // }).reduce((a,b) => a + b, 0)
+    }
+
     const checkNfts = async () => {
+        // console.log(totalNFTs);
+        // let whenStaked1 = await brownieContract.methods.whenStaked(myStakedNFTs[0].id.slice(1)).call();
+        // let whenStaked2 = await brownieContract.methods.whenStaked(myStakedNFTs[1].id.slice(1)).call();
+        // console.log(whenStaked1);
+        // console.log(whenStaked2);
+        // let currentTimestamp = parseInt(+ new Date() / 1000);
+        // console.log(currentTimestamp);
+        // let reward = getCurrentReward().then((result) => result);
+        getCurrentReward()
+        console.log('reward: ', reward);
         let myBrownieNFTs = await brownieContract.methods.myNFTs().call(
             { from: myAddress })
 
@@ -183,11 +220,12 @@ function NftCard() {
     }
 
     useEffect(() => {
-        console.log("my NFTs: ", myNFTs)
-        console.log("my stakedNFTs: ", myStakedNFTs)
-        console.log(checkItems)
+        // console.log("my NFTs: ", myNFTs)
+        // console.log("my stakedNFTs: ", myStakedNFTs)
+        // console.log(checkItems)
+        // console.log(brownieContract.methods.totalStaked().call());
         checkNfts()
-        checkStakedNFTs()
+        // checkStakedNFTs()
     }, [checkItems,brownieContract.defaultAccount,myAddress])
 
     // 카드 staking 버튼
@@ -233,9 +271,18 @@ function NftCard() {
     return (
         <div>
             <div className='nftcard-header'>
-                <h1>My NFTs</h1>            
+                My NFTs            
+            </div>
+            <div className='reward-box'>
+                {'total reward : ' + (reward/10000).toFixed(2) + ' BTK'}
+                {/* <button 
+                className='reward-button'
+                onClick={getReward}>
+                    보상 받기
+                </button> */}
             </div>
             <Cardjustify>
+                <div>
                 <div className="Main">
                     {   myNFTs.length > 0 
                         ? myNFTs.map((item, index1) => {
@@ -282,6 +329,7 @@ function NftCard() {
                 </div>
                 <div className="cont21">
                     <button className="" onClick={stakeNFT}> Stake</button>
+                </div>
                 </div>
             </Cardjustify>
         </div>

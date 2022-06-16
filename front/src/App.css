@@ -364,4 +364,20 @@ NftCard
 
 .nftcard-header {
   text-align: center;
+  font-weight: bolder;
+  font-size: 40px;
+  margin: 10px 0 20px 0;
+}
+
+.reward-box {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  /* color: yellowgreen; */
+}
+
+.reward-button {
+  margin-left: 1%;
+  font-size: 18px;
 }

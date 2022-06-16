@@ -12,6 +12,7 @@ let initialState = {
     nftList: "",
     myNFTs: [],
     myStakedNFTs: [],
+    reward: 0,
     posts: [{
         id: 1
         , title: "test1"
@@ -59,6 +60,12 @@ function nftReducer(state = initialState, action) {
             return {
                 ...state,
                 btkInstance: payload
+            }
+
+        case 'GET_REWARD':
+            return {
+                ...state,
+                reward: payload,
             }
 
         case "NFTCARD_STAKING":
