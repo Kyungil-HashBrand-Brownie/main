@@ -28,6 +28,10 @@ let initialState = {
 function nftReducer(state = initialState, action) {
     let { type, payload } = action
 
+    console.log("action", action)
+    console.log("payload", payload)
+
+
     switch (type) {
         case "MODAL_CLICK":
             return {
