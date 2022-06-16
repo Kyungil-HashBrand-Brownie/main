@@ -148,9 +148,6 @@ const WhiteList = () => {
                             </tr>
                         })
                     }
-                    <tr>
-                        <td>{myAddress} </td>
-                    </tr>
                 </tbody>
             </Table>
         </div>
