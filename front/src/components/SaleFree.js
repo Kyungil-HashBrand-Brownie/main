@@ -65,18 +65,29 @@ const FreeSale = () => {
 
     
     const preMint = async () => {
-        const conData = await brownieContract.methods.batchMint(count).encodeABI()
-        const test = await window.caver.klay.sendTransaction({
-            type: 'SMART_CONTRACT_EXECUTION',
-            from:myAddress, 
-            to:'0x2d1fF770579BF83f5Ba0534F3463D90E8e4A5758',
-            data:conData,
-            gas: 3000000
-        })
-        console.log(test)
-        dispatch({type: "WALLET_REFRESH"})
-        alert("해당 지갑 주소로 민팅되었습니다!");
-        navigate('/');
+        if(!myAddress){
+            return alert("지갑을 먼저 연결해주세요")
+        }
+        try{
+            const conData = await brownieContract.methods.batchMint(count).encodeABI()
+            const result = await window.caver.klay.sendTransaction({
+                type: 'SMART_CONTRACT_EXECUTION',
+                from:myAddress, 
+                to:'0x2d1fF770579BF83f5Ba0534F3463D90E8e4A5758',
+                data:conData,
+                gas: 3000000
+            })
+            if(result.status){
+                dispatch({type: "WALLET_REFRESH"})
+                alert("해당 지갑 주소로 민팅되었습니다!");
+                // navigate('/');
+            }
+            else alert("transaction fail")
+        }
+        catch(e){
+            alert("카이카스 서명 거부됨")
+        }
+        
     }
 
     // const dispatch = useDispatch(state => state.nft)
@@ -126,7 +137,7 @@ const FreeSale = () => {
                     </Row>
                 </Container>
                 <br />
-                <Button className="mint-wal-connect-btn" variant="success" onClick={preMint}>노진형 nft 받기</Button>{' '}
+                <Button className="mint-wal-connect-btn" variant="success" onClick={preMint}>Mint</Button>{' '}
 
             </StyledMain>
         </div>
