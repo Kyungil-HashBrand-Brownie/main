@@ -1,14 +1,15 @@
 let initialState = {
-    nft : {},
-    countAnimal : 0,
-    countKid : 0,
-    countMinority : 0,
-    countTotal : 0,
-    myAddress : "",
+    nft: {},
+    countAnimal: 0,
+    countKid: 0,
+    countMinority: 0,
+    countTotal: 0,
+    myAddress: "",
     brownieContract: {},
     modalState: false,
     btkInstance: "",
-    nftList : "",
+    walletRefresh: 1,
+    nftList: "",
     posts: [{
         id: 1
         , title: "test1"
@@ -21,8 +22,8 @@ let initialState = {
     }]
 }
 
-function nftReducer(state=initialState, action) {
-    let {type, payload} = action
+function nftReducer(state = initialState, action) {
+    let { type, payload } = action
 
 
     // const result = Object.keys(payload)[0] || null;
@@ -32,46 +33,53 @@ function nftReducer(state=initialState, action) {
 
 
     switch (type) {
-        case "MODAL_CLICK": 
-            return {...state,
+        case "MODAL_CLICK":
+            return {
+                ...state,
                 modalState: !state.modalState,
             };
 
         case "MODAL_CLOSE":
-            return {...state,
+            return {
+                ...state,
                 modalState: false,
             };
-            
+
         case "VOTE_INCREMENT":
-            return {...state,
-                [Object.keys(payload)[0]] : Object.values(payload)[0],
+            return {
+                ...state,
+                [Object.keys(payload)[0]]: Object.values(payload)[0],
                 countTotal: state.countTotal + 1,
             };
 
-        case "CONTRACT_SUCCESS": 
+        case "CONTRACT_SUCCESS":
             console.log("contract: ", payload);
-            return {...state,
-                brownieContract: payload,                
+            return {
+                ...state,
+                brownieContract: payload,
             }
 
         case "BTK_INSTANCE":
             console.log("btk instance : ", payload);
-            return {...state,
+            return {
+                ...state,
                 btkInstance: payload
             }
-        
+
         case "NFTCARD_STAKING":
             console.log("NFTLIST_DATA : ", payload);
-            return {...state,
+            return {
+                ...state,
                 nftList: payload
             }
 
         case "ADDRESS_CHANGE_SUCCESS":
-            return {...state,
+            return {
+                ...state,
                 myAddress: payload,
             }
 
-        case "REMOVE_BOOKMARK_TEST": 
+        case "REMOVE_BOOKMARK_TEST":
             let copy = [...state.posts]
             payload.checkItems.forEach((item) => {
                 let deleteIndex = copy.findIndex((value) => value.id === item)
@@ -81,9 +89,15 @@ function nftReducer(state=initialState, action) {
                 ...state, posts: copy
             }
 
+        case "WALLET_REFRESH":
+            return {
+                ...state,
+                walletRefresh: !state.walletRefresh
+            }
+
 
         default:
-            return {...state}
+            return { ...state }
     }
 }
 

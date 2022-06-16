@@ -4,11 +4,11 @@ import MintCard from '../components/MintCard';
 import Profile from '../components/Profile';
 
 const Mint = () => {
-  
+
   return (
     <>
-        <MintCard />
-        <Profile />
+      <MintCard />
+      <Profile />
     </>
   )
 }

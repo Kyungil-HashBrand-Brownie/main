@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { useEffect } from 'react';
-import { Routes , Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from './page/HomePage';
 import Mint from './page/Mint';
 import Header from './components/Header';
@@ -21,46 +21,47 @@ function App() {
 
 
   const setReducer = async () => {
-    let brownieContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0xB965D7Ba9814BaF32EE004c165288365BA65eCb5");
+    let brownieContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0x2d1fF770579BF83f5Ba0534F3463D90E8e4A5758");
     dispatch({type: "CONTRACT_SUCCESS", payload: brownieContract});
 
     // 토큰 인스턴스 주소
     const btkInstanceAddr = await brownieContract.methods.viewIns().call()
     let btkInstance = window.caver.kct.kip7.create(btkInstanceAddr)
-    dispatch({type: "BTK_INSTANCE", payload: btkInstance});
+    dispatch({ type: "BTK_INSTANCE", payload: btkInstance });
+
   }
 
-  useEffect(() => { 
-   setReducer()
+  useEffect(() => {
+    setReducer()
   }, [])
 
   return (
     <>
-        <Header />
-        <img 
-          className='backG-left-img'
-          src={LeftImg3}
-        />
-        {/* <img 
+      <Header />
+      <img
+        className='backG-left-img'
+        src={LeftImg3}
+      />
+      {/* <img 
           className='backG-right-img'
           src={RightImg}
         /> */}
-        <img 
-          className='backG-right-img2'
-          src={RightImg}
-        />
-        <Routes>
-          <Route path="/" element={<Home/>} /> 
-          <Route path="/mint" element={<Mint/>} /> 
-          {/* <Route path="/whitelist" element={<WhiteList/>} />  */}
-          <Route path="/admin" element={<AdminPage/>} /> 
-          <Route path="/test" element={<Testpage/>} /> 
-          <Route path="/swap" element={<Swap/>} /> 
-          <Route path="/nftlist" element={<NftList/>} /> 
-        </Routes>
-        <Footer />
-      </>
-    );
+      <img
+        className='backG-right-img2'
+        src={RightImg}
+      />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/mint" element={<Mint />} />
+        {/* <Route path="/whitelist" element={<WhiteList/>} />  */}
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/test" element={<Testpage />} />
+        <Route path="/swap" element={<Swap />} />
+        <Route path="/nftlist" element={<NftList />} />
+      </Routes>
+      <Footer />
+    </>
+  );
 }
 
 export default App;
