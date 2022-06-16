@@ -6,11 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -208,6 +203,32 @@
 					}
 				],
 				"name": "batchMint",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "checkStakedNFTs",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "claimed",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -502,6 +523,19 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "stake",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "bytes4",
 						"name": "interfaceId",
 						"type": "bytes4"
@@ -551,6 +585,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "totalStaked",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -587,6 +634,48 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "unstake",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "vault",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "viewCon",
 				"outputs": [
@@ -607,6 +696,25 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "whenStaked",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -696,13 +804,13 @@
 		"userdoc": {
 			"kind": "user",
 			"methods": {},
-			"notice": "author Kyungil_Team Brownie version 1.0 ERC721기반 대체 불가능 토큰 자체 nft",
+			"notice": "author Kyungil_Team Brownie version 1.0 자체 nft staking 구현",
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"minting/Minting.sol": "BrownieNft"
+			"minting/Staking.sol": "NFTStaking"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -837,19 +945,27 @@
 			]
 		},
 		"minting/Minting.sol": {
-			"keccak256": "0xe5c991404b9ba4bac2ec982bbc595f6821f8bbac0cd7967054bbc777a17eab2a",
+			"keccak256": "0xf9c59faf0a5176f6b44f64034a1258b36592c158496f45a31c933ebc59d264d4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://206cc251b474983eba2959231358ee71cdd5bd8a896b00dc048b0604fec6dc36",
-				"dweb:/ipfs/QmaZvMRNai13aPmGHAYFX1TwH2WQuHwsP7VjiJLpC6mVPp"
+				"bzz-raw://f8ed42c67385f3132a1743d7ce5e071089e4db3772dda7c23d3ce5c087c30337",
+				"dweb:/ipfs/QmZcSqBFFuU6dzURrhWTsisDfLgNw2y4wdbCYVoWjnQyJW"
+			]
+		},
+		"minting/Staking.sol": {
+			"keccak256": "0xf904e73abe2f9c3fa3c7f6ca7b300fb1d473e5dfb2cf3eb64c7386d353e21516",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://27737715c289dac72c3b155b28bdd32af40711b7ff50639633b87dad052565cd",
+				"dweb:/ipfs/QmSNMGWA5oKZ98KgczQ9NtKb96V5Mha1v8mZZSAzKb7D2b"
 			]
 		},
 		"minting/Token.sol": {
-			"keccak256": "0xf763417287129ab7bde7c647d4ace2ff1208655ed266267f51c2e7042515db5c",
+			"keccak256": "0x99523f31e91b6580de5dfb5417c3498b25792787ed7cd764986e2fbe20869fd3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2f32aa246f1725af19bbaabe29a95ae05f0fb41a3fec82fa5d9ed79f1d635030",
-				"dweb:/ipfs/QmR3fGJ3TNo6gtkKvfje6Ud2VXk77xHeEfYQVURbFHeTZb"
+				"bzz-raw://f1958e11ff060df62b085edd8546a871ac81f10e4766fe3feaf2cfefaeed5a9f",
+				"dweb:/ipfs/QmWpquVndibaxMJ7xax9FdFwiBane2KfSs4jDXLgE1Epmp"
 			]
 		},
 		"minting/Whitelist.sol": {
