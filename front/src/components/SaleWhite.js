@@ -81,7 +81,7 @@ const WhiteSale = () => {
             const result = await window.caver.klay.sendTransaction({
                 type: 'SMART_CONTRACT_EXECUTION',
                 from:myAddress, 
-                to:'0xff12ba9A7FBDE091B927863Ba392A4D4D30C1Cbb',
+                to:'0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
                 data:conData,
                 gas: 3000000
             })
