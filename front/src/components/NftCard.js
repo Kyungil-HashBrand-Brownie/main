@@ -98,7 +98,15 @@ const Cardjustify = styled.div`
 
 function NftCard() {
 
-    const { brownieContract, myAddress } = useSelector(state => state.nft);
+    const { myAddress } = useSelector(state => state.nft);
+
+    const myNfts = async () => {
+        console.log(myAddress.methods)
+        const test2 = await myAddress.methods.myNFTs().call()
+        console.log("tst: ", test2)
+        console.log(`ipfs://QmbX62qQefhBWDYqESn2JHew7qJGEgg1wdEFjM3MX8Q9Qv/${test2}.json`)
+    }
+    myNfts()
 
     let data = [{
         id: "#4312",
@@ -145,12 +153,7 @@ function NftCard() {
             setCheckItems([])
         }
     }
-    const myNfts = async () => {
-        const test2 = await brownieContract.methods.myNFTs().call()
-        console.log("tst: ", test2)
-        console.log(`ipfs://QmbX62qQefhBWDYqESn2JHew7qJGEgg1wdEFjM3MX8Q9Qv/${test2}.json`)
-    }
-    myNfts()
+
     // 삭제
     function deleteHandler() {
         dispatch({
