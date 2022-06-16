@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 * version 1.0
 * ERC20기반 자체 토큰 
 */
-contract BrownieToken is ERC20Burnable, Ownable {
+contract BrownieToken is ERC20, Ownable {
     // token swap 용 token을 위해 contract addreess에 100000BTK 선발행
     constructor(address conAddr) ERC20("BrownieToken", "BTK") {
         _mint(conAddr, 100000 * 10 ** decimals());
