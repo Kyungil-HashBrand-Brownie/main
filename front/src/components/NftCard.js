@@ -104,7 +104,6 @@ function NftCard() {
     const checkNfts = async () => {
 
         console.log(myAddress)
-        console.log(brownieContract)
         const test2 = await brownieContract.methods.myNFTs().call(
             { from: myAddress })
 
@@ -112,7 +111,7 @@ function NftCard() {
         let binaryArr = [];
         // console.log(`ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2}.json`)
         for (let i = 0; i != test2.length; i++) {
-            let data = await axios.get(`https://ipfs.io/ipfs/QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/${test2[i]}.json`)
+            let data = await axios.get(`https://ipfs.io/ipfs/QmaAYEhbXsrDn7TGgnz9EhZzrrrB8vuHDuzXioPFzjRQBt/${test2[i]}.json`)
             console.log(data.data.image)
             let image = await axios.get(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
             // document.getElementById("imgPreview").src = "data:image/png;base64," + binarySrc;
@@ -185,7 +184,7 @@ function NftCard() {
     useEffect(() => {
         console.log(checkItems)
         checkNfts()
-    }, [checkItems])
+    }, [checkItems,brownieContract.defaultAccount,myAddress])
 
     // 카드 staking 버튼
     const stakingButton = async () => {
