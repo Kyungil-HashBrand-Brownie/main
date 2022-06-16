@@ -116,7 +116,7 @@ function NftCard() {
             console.log(data.data.image)
             let image = await axios.get(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
             // document.getElementById("imgPreview").src = "data:image/png;base64," + binarySrc;
-            console.log("image : ", image.data)
+            // console.log("image : ", image.data)
             binaryArr.push(`https://ipfs.io/ipfs/${data.data.image.split('ipfs://')[1]}`)
             console.log(`data:image/png;base64,${binaryArr[1]}`)
         }
