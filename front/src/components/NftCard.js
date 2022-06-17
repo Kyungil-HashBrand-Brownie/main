@@ -27,8 +27,14 @@ const Cardjustify = styled.div`
     }
 
     .Ncard {
+        display: flex;
+        justify-content: center;
         opacity: 0.8;
-        cursor: wait;
+        padding: 7px;
+        margin: 10px;
+        padding-top: 25px;
+        text-align: center;
+        cursor: pointer;
     }
 
     .Ncard:hover {
@@ -81,10 +87,10 @@ const Cardjustify = styled.div`
         color: pink;
     }
 
-    .Ncard {
+    /* .Ncard {
         padding: 7px;
         margin: 10px;
-    }
+    } */
 
     .width1 {
         width: 100% ;
@@ -149,6 +155,8 @@ function NftCard() {
     }
 
     const checkNfts = async () => {
+        let conAddr = await brownieContract.methods.viewCon().call();
+        console.log(conAddr);
         // console.log(totalNFTs);
         // let whenStaked1 = await brownieContract.methods.whenStaked(myStakedNFTs[0].id.slice(1)).call();
         // let whenStaked2 = await brownieContract.methods.whenStaked(myStakedNFTs[1].id.slice(1)).call();
@@ -278,7 +286,7 @@ function NftCard() {
                 {/* <button 
                 className='reward-button'
                 onClick={getReward}>
-                    보상 받기
+                보상 받기
                 </button> */}
             </div>
             <Cardjustify>
@@ -287,13 +295,14 @@ function NftCard() {
                     {   myNFTs.length > 0 
                         ? myNFTs.map((item, index1) => {
                             return <div key={index1}>
+                                <Card className="Ncard" style={{ width: '15rem' }}>
                                 {
                                     !item.checked ?
                                     null
                                     :<img src={check}
                                     alt="ca"
                                     id='stake-checkbox'
-                                    className="cheked"
+                                    // className="cheked"
                                     // type={"checkbox"}
                                     // checked={true}
                                 />
@@ -306,10 +315,9 @@ function NftCard() {
                                     onChange={(e) => checkHandler(e.target.checked, item.id)}
                                     checked={checkItems.indexOf(item.id) >= 0 ? true : false}
                                     /> */}
-                                <Card className="Ncard" style={{ width: '18rem' }}>
-                                    <Card.Img onClick={()=> changeClickState(item.id)} variant="top" src={item.image} />
+                                    <div><Card.Img style={{ width: '12rem', height: '12rem'}}onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
                                     <Card.Title >{item.id}</Card.Title>
-                                    <Container className="containerCard">
+                                    {/* <Container className="containerCard">
                                         <Row>
                                             <Col className="col_1">price</Col>
                                             <Col className="col_1">highst</Col>
@@ -318,7 +326,7 @@ function NftCard() {
                                             <Col className="col_2">{item.eth} ETH</Col>
                                             <Col className="col_2">{item.height}</Col>
                                         </Row>
-                                    </Container>
+                                    </Container> */}
                                 </Card>
                             </div>
                         })

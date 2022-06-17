@@ -189,10 +189,10 @@ const HomePage = () => {
         className='backG-left-img'
         src={LeftImg3}
       /> */}
-      <img 
+      {/* <img 
         className='backG-right-img'
         src={RightImg}
-      />
+      /> */}
       {/* <img 
         className='backG-right-img2'
         src={RightImg}

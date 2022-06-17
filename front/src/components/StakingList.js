@@ -27,8 +27,14 @@ const Cardjustify = styled.div`
     }
 
     .Ncard {
+        display: flex;
+        justify-content: center;
         opacity: 0.8;
-        cursor: wait;
+        padding: 7px;
+        margin: 10px;
+        padding-top: 25px;
+        text-align: center;
+        cursor: pointer;
     }
 
     .Ncard:hover {
@@ -81,10 +87,10 @@ const Cardjustify = styled.div`
         color: pink;
     }
 
-    .Ncard {
+    /* .Ncard {
         padding: 7px;
         margin: 10px;
-    }
+    } */
 
     .width1 {
         width: 100% ;
@@ -114,13 +120,72 @@ const StakingList = () => {
 
     const dispatch = useDispatch();
 
-    const [list, setList] = useState([]);
-
     const { brownieContract, myAddress, myNFTs, myStakedNFTs } = useSelector(state => state.nft);
 
     const {posts} = useSelector(state => state.nft)
     // checked 된 것들
     const [checkItems, setCheckItems] = useState([])
+
+    // //API
+    // const fetchOwnCollection = async () => {
+    //     const WALLET_ADDRESS = myAddress;
+      
+    //     const options = {
+    //       method: 'GET',
+    //       headers: {
+    //         Accept: 'application/json',
+    //         'X-API-KEY': process.env.OPENSEA_API,
+    //       },
+    //     };
+      
+    //     const collectionResponse = await fetch(
+    //       `https://api.opensea.io/api/v1/collections?asset_owner=${WALLET_ADDRESS}`,
+    //       options,
+    //     ).then(response => response.json());
+      
+    //     const collection = collectionResponse.map(item => ({
+    //       details: item.description,
+    //       slug: item.slug,
+    //       name: item.name,
+    //       contractAddress: item.primary_asset_contracts[0].address,
+    //       owned: [],
+    //     }));
+      
+    //     for (const iterator of collection) {
+    //       const assetsResponse = await fetch(
+    //         `https://api.opensea.io/api/v1/assets?owner=${WALLET_ADDRESS}&asset_contract_address=${iterator.contractAddress}&include_orders=false`,
+    //         options,
+    //       ).then(response => response.json());
+      
+    //       iterator.owned = assetsResponse.assets
+    //         .map(item => ({
+    //           name: item.name,
+    //           img: item.image_url,
+    //           id: item.token_id,
+    //         }))
+    //         .filter(item => item.name && item.img);
+    //     }
+      
+    //     return collection;
+    const requestAPI = async () => {
+        const address = "0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01";
+        const options = {method: 'GET'};
+        let NFTs = myNFTs.map((NFT) => parseInt(NFT.id.slice(1)));
+        console.log(myAddress);
+        console.log(NFTs);
+
+        fetch(`https://testnets-api.opensea.io/api/v1/assets?owner=${myAddress}`, options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+
+        // let response = await fetch(`https://testnets-api.opensea.io/api/v1/assets?owner=${myAddress}&asset_contract_address=${address}`, options)
+        // let data = await(response.json());
+        // console.log(data);
+        // .then(response => console.log(response))
+        // .catch(err => console.error(err));
+
+    }
 
     // 전체선택
     function checkAllHandler(checked) {
@@ -153,6 +218,7 @@ const StakingList = () => {
 
     useEffect(() => {
         console.log(checkItems)
+        requestAPI();
     }, [checkItems])
 
 
@@ -208,6 +274,7 @@ const StakingList = () => {
             {   myStakedNFTs.length > 0 
                 ? myStakedNFTs.map((item, index1) => {
                     return <div key={index1}>
+                        <Card className="Ncard" style={{ width: '15rem' }}>
                         {
                             !item.checked ?
                             null
@@ -215,7 +282,7 @@ const StakingList = () => {
                             src={check}
                             alt="sss"
                             id='stake-checkbox'
-                            className="cheked"
+                            // className="cheked"
                             // type={"checkbox"}
                             // checked={true}
                         />
@@ -228,10 +295,9 @@ const StakingList = () => {
                             onChange={(e) => checkHandler(e.target.checked, item.id)}
                             checked={checkItems.indexOf(item.id) >= 0 ? true : false}
                             /> */}
-                        <Card className="Ncard" style={{ width: '18rem' }}>
-                            <Card.Img onClick={()=> changeClickState(item.id)} variant="top" src={item.image} />
+                            <div><Card.Img style={{width: '12rem', height: '12rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
                             <Card.Title >{item.id}</Card.Title>
-                            <Container className="containerCard">
+                            {/* <Container className="containerCard">
                                 <Row>
                                     <Col className="col_1">price</Col>
                                     <Col className="col_1">highst</Col>
@@ -240,7 +306,7 @@ const StakingList = () => {
                                     <Col className="col_2">{item.eth} ETH</Col>
                                     <Col className="col_2">{item.height}</Col>
                                 </Row>
-                            </Container>
+                            </Container> */}
                         </Card>
                     </div>
                 })
