@@ -119,7 +119,7 @@ const Header = () => {
     const setUserInfo = async () => {
         if(myAddress){
             setAddress(myAddress);
-            setTokenBalance(myAddress)
+            await setTokenBalance(myAddress)
         }
     }
 
@@ -133,7 +133,7 @@ const Header = () => {
         sessionStorage.setItem('id', accounts[0]);
         dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
         setAddress(accounts[0]);
-        if(btkInstance) setTokenBalance(accounts[0])
+        await setTokenBalance(accounts[0])
     })
 
     const copyAddress = () => {
@@ -152,7 +152,7 @@ const Header = () => {
 
     useEffect(() => {
         setUserInfo();
-    }, [btkInstance,myAddress,walletRefresh])
+    }, [btkInstance,myAddress,walletRefresh,btkBalance])
 
     return (
         <Navbar className="nav" expand="lg">
