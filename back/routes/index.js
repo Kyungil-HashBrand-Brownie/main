@@ -3,6 +3,7 @@ const router = express.Router();
 const pool = require('../db')
 
 
+
 router.get("/admin", async (req, res) => {
     //db에 있는 화이트 리스트 배열로 뿌려주기
     console.log('admin test');
