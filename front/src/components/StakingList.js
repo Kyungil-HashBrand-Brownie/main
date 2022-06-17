@@ -16,6 +16,7 @@ const Cardjustify = styled.div`
     /* width: 50%; */
 
     .Main {
+        flex-wrap: wrap;
         position: relative;
         display: flex ;
         justify-content: center ;
