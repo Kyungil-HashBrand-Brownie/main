@@ -17,6 +17,7 @@ const Swap = () => {
     
     const swapToken = async () => {
         let amount = amountInput.current.value
+        console.log(brownieContract);
         if(Number(amount)){
             if(swap === "BTK"){
                 try {
@@ -24,7 +25,7 @@ const Swap = () => {
                     const con = await window.caver.klay.sendTransaction({
                         type: 'SMART_CONTRACT_EXECUTION',
                         from: myAddress,
-                        to: '0xff12ba9A7FBDE091B927863Ba392A4D4D30C1Cbb',
+                        to: '0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
                         gas: 300000,
                         data:conData,
                         value: window.caver.utils.toPeb(amount, 'KLAY')
@@ -40,7 +41,7 @@ const Swap = () => {
                     const test = await window.caver.klay.sendTransaction({
                         type: 'SMART_CONTRACT_EXECUTION',
                         from: myAddress, 
-                        to:'0xff12ba9A7FBDE091B927863Ba392A4D4D30C1Cbb',
+                        to:'0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
                         data:conData,
                         gas: 300000
                     })

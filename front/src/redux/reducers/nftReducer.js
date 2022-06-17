@@ -10,6 +10,9 @@ let initialState = {
     btkInstance: "",
     walletRefresh: 1,
     nftList: "",
+    myNFTs: [],
+    myStakedNFTs: [],
+    reward: 0,
     posts: [{
         id: 1
         , title: "test1"
@@ -24,13 +27,6 @@ let initialState = {
 
 function nftReducer(state = initialState, action) {
     let { type, payload } = action
-
-
-    // const result = Object.keys(payload)[0] || null;
-
-    // console.log("action", action)
-    // console.log("payload", payload)
-
 
     switch (type) {
         case "MODAL_CLICK":
@@ -66,11 +62,50 @@ function nftReducer(state = initialState, action) {
                 btkInstance: payload
             }
 
+        case 'GET_REWARD':
+            return {
+                ...state,
+                reward: payload,
+            }
+
         case "NFTCARD_STAKING":
             console.log("NFTLIST_DATA : ", payload);
             return {
                 ...state,
                 nftList: payload
+            }
+
+        case 'NFTCARD_MYNFTS' :
+            return {
+                ...state,
+                myNFTs: payload.myNFTs,
+                myStakedNFTs: payload.myStakedNFTs,
+            }
+
+        case 'NFTCARD_MYNFTS_CLICK' :
+            return {
+                ...state,
+                myNFTs: payload,
+            }
+
+        case 'NFTCARD_STAKE_CLICK' :
+            return {
+                ...state,
+                myStakedNFTs: payload,
+            }
+
+        case 'NFTCARD_STAKE' :
+            return {
+                ...state,
+                myNFTs: payload.myNFTs,
+                myStakedNFTs: payload.myStakedNFTs,
+            }
+
+        case 'NFTCARD_UNSTAKE' :
+            return {
+                ...state,
+                myNFTs: state.myNFTs.concat(payload.myNFTs),
+                myStakedNFTs: payload.myStakedNFTs,
             }
 
         case "ADDRESS_CHANGE_SUCCESS":
@@ -94,7 +129,6 @@ function nftReducer(state = initialState, action) {
                 ...state,
                 walletRefresh: !state.walletRefresh
             }
-
 
         default:
             return { ...state }
