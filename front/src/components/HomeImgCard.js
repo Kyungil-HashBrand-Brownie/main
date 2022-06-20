@@ -9,18 +9,19 @@ import styled, { keyframes } from 'styled-components';
 const StyleDiv1 = styled.div`
     width:100% ;
     background-color: #E5E3D7;
-    height: 400px;
+    height: 500px;
     display: flex;
     justify-content: center;
     position: relative;
 
     .backgray{
       background-color: #9EB5C1;
-      width:80% ;
-      height: 300px;
+      width:70% ;
+      height: 340px;
       display: flex;
-      position: relative;
-      margin-top: 50px;
+      /* position: relative; */
+      margin-top: 150px;
+      margin-bottom: 10px;
       border-radius: 30px;
     }
     
@@ -30,33 +31,40 @@ const StyleDiv1 = styled.div`
     }
 
     .box_vertical2 {
-      writing-mode: vertical-lr;
+      /* writing-mode: vertical-lr; */
       background-color: black;
-      height:350px ;
+      height:400px ;
       color: white;
       /* margin-bottom: 100px; */
-      margin-top: -50px;
-      border-radius: 30px;
+      margin-top: -60px;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+    }
 
+    .box_vertical2 h2{
+        writing-mode: vertical-lr;
     }
 
     .box_vertical3 {
-      writing-mode: vertical-lr;
-      height:400px ;
+      height:450px ;
       background-color: pink;
-      margin-top: -100px;
+      margin-top: -110px;
       border-top-left-radius: 30px;
       border-top-right-radius: 30px;
-
+      border-bottom-right-radius: 30px;
+    }
+    
+    .box_vertical3 h2{
+        writing-mode: vertical-lr;
     }
 
     .home_img {
-      width: 500px;
-      height: 300px;
+      width: 600px;
+      height: 350px;
       /* position: relative; */
       /* padding-bottom: 100px; */
       /* margin-bottom: 10px; */
-      margin-top: -30px;
+      margin-top: -50px;
       
     }
 
@@ -101,9 +109,11 @@ const HomeImgCard = () => {
             </Row>
           </Container>
           <div class="box_vertical2">
+            <h1>02</h1>
             <h2>ox</h2>
           </div>
           <div class="box_vertical3">
+            <h1>03</h1>
             <h2>oq</h2>
           </div>
         </div>

@@ -21,8 +21,8 @@ import Ellipse from '../img/Ellipse1.png';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { img1 } from '../img';
 import HomeImgCard from '../components/HomeImgCard';
+import { group ,img1 , Group2} from '../img';
 
 const StyledMainText = styled.div`
   /* background: red; */
@@ -84,13 +84,15 @@ const displayAnimation = keyframes`
 
 const StyledBrownyAbove = styled.img`
   position: relative;
-  top: 6%;
-  width: 350px;
+  top: -10%;
+  width: 500px;
   margin: 0px 50px;
   z-index: 1;
+  border: 5px solid black;
   animation-name: ${displayAnimation};
   animation-duration: 0.5s;
   animation-iteration-count: 1;
+  background-color: lightcyan;
 `
 
 const StyledBrownyDown = styled.img`
@@ -270,7 +272,7 @@ const HomePage = () => {
       <Container className='main-container'>
           <Col className="main-col">
               <StyledMainText>Browny</StyledMainText>
-              <StyledSubText>The Best nft Collections You Can Get</StyledSubText>
+              <StyledSubText>The Best nft Collections <br/>You Can Get</StyledSubText>
               {/* <div className='main-button-container'> */}
                 <StyledButton
                   onClick={moveToMint}
@@ -283,8 +285,8 @@ const HomePage = () => {
               {/* </div> */}
           </Col>
           <Col className="main-img-col">
-            <StyledBrownyAbove src={Browny8} alt="browny-above" />
-            <StyledBrownyDown src={Browny10} alt="browny-down" />
+            <StyledBrownyAbove src={Group2} alt="browny-above" />
+            {/* <StyledBrownyDown src={Browny10} alt="browny-down" /> */}
           </Col>
           
           {/* <StyledEllipse src={Ellipse} alt="ellipse"/> */}
