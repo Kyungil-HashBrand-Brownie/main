@@ -1,16 +1,21 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import Klaytn from '../img/swap/klaytn.png';
+import Brownie from '../img/swap/brownie.png';
+import Brownie1 from '../img/swap/brownie1.png';
 
 const Swap = () => {
+    const bool = {false: 'KLAY', true: 'BTK'}
     const dispatch = useDispatch();
 
-    const [swap, setSwap] = useState('BTK');
+    const [swap, setSwap] = useState(true);
 
     const amountInput = useRef();
 
-    const swapChange = (e) => {
-        if (e.target.value === 'KLAY') setSwap('BTK')
-        else setSwap('KLAY')
+    const swapChange = () => {
+        setSwap(!swap)
     }
 
     const {brownieContract, myAddress} = useSelector(state =>state.nft);
@@ -63,17 +68,26 @@ const Swap = () => {
     return (
         <div className='swap-box'>
             <div className='select-box'>
-                <h2>SWAP</h2>
+                <p className='swap-header'>SWAP</p>
                 <div className='swap-select'>
-                    <select
-                    onChange={swapChange} 
-                    className='swapL-select'
-                    >
-                        <option value='KLAY'>KLAY</option>
-                        <option value='BTK'>BTK</option>
-                    </select>
-                    to 
-                    {swap}
+                    <div className='swap-body'>
+                        {<img 
+                        className={!swap ? 'brownie-icon' : 'klay-icon'} 
+                        src={!swap ? Brownie1 : Klaytn}
+                        />}
+                        {bool[!swap]}
+                    </div>
+                    <FontAwesomeIcon 
+                    icon={faArrowRightArrowLeft} 
+                    className='swap-token-icon'
+                    onClick={swapChange}
+                    />
+                    <div className='swap-body'>
+                        {<img 
+                        className={swap ? 'brownie-icon' : 'klay-icon'} 
+                        src={!swap ? Klaytn : Brownie1}
+                        />}{bool[swap]}
+                    </div>
                 </div>
                 <div className='swap-amount-input'>
                     금액: <input ref={amountInput} /> 
