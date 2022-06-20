@@ -22,6 +22,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { img1 } from '../img';
+import HomeImgCard from '../components/HomeImgCard';
 
 const StyledMainText = styled.div`
   /* background: red; */
@@ -139,11 +140,19 @@ const StyledEllipse = styled.img`
 `
 
 const StyleDiv1 = styled.div`
-    width:80% ;
-    background-color:gray;
-    height: 300px;
+    width:100% ;
+    background-color: #6B828E;
+    height: 50%;
     display: flex;
     position: relative;
+
+    .backgray{
+      background-color: gray;
+      width:80% ;
+      height: 300px;
+      display: flex;
+      position: relative;
+    }
     
 
     .box_vertical {
@@ -280,36 +289,8 @@ const HomePage = () => {
           
           {/* <StyledEllipse src={Ellipse} alt="ellipse"/> */}
       </Container>
+      <HomeImgCard />
 
-      <StyleDiv1 >
-        <div className="blue">
-          <h2>01</h2>
-          <div class="box_vertical">
-            <h2>Heading</h2>
-          </div>
-        </div>
-        <div class="home_img">
-          <img src={img1} />
-        </div>
-        <Container>
-          <h2>#666</h2>
-          <span> Owned By Suh</span>
-          <Row>
-            <Col>아 </Col>
-            <Col>무</Col>
-          </Row>
-          <Row>
-            <Col>내</Col>
-            <Col>용</Col>
-          </Row>
-        </Container>
-        <div class="box_vertical2">
-          <h2>ox</h2>
-        </div>
-        <div class="box_vertical3">
-          <h2>oq</h2>
-        </div>
-      </StyleDiv1>
       {/* <div className='main-team-container'> */}
         {/* <Container className='main-team-container'>
           <StyledMainText>Team</StyledMainText>
