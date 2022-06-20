@@ -8,6 +8,7 @@ import PFP from '../img/profile1.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
+import { background10 ,background13} from '../img/background';
 
 const SearchBox = styled.div`
     background-color: rgb(26, 126, 213);
@@ -87,6 +88,7 @@ const StyledInfo = styled.div`
     opacity: 90%;
 `
 
+
 const Header = () => {
     const dispatch = useDispatch();
     const { modalState, btkInstance, myAddress, walletRefresh } = useSelector(state => state.nft);
@@ -156,6 +158,8 @@ const Header = () => {
 
     return (
         <Navbar className="nav" expand="lg">
+            <img src={background13} className="backG-img-left" />
+            <img src={background13} className="backG-img-right" />
             <Container fluid>
                 <Navbar.Brand>
                     <Link to="/"><LogoContainer /></Link>

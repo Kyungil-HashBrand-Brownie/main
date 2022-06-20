@@ -136,6 +136,11 @@ const StyledEllipse = styled.img`
   bottom: 0%;
   z-index: -1; 
 `
+
+const StyleDiv1 = styled.div`
+    width:50% ;
+`
+
 const HomePage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -180,10 +185,10 @@ const HomePage = () => {
     
     return (
       <>
-      <img 
+      {/* <img 
         className='backG-img'
         src={Img}
-      />
+      /> */}
       {/* <img 
         className='backG-left-img'
         src={LeftImg3}
