@@ -6,7 +6,6 @@ import Klaytn from '../img/swap/klaytn.png';
 import Brownie from '../img/swap/brownie.png';
 import Brownie1 from '../img/swap/brownie1.png';
 import Arrow from '../img/swap/arrowRight.png';
-import {contractAddr} from "configs";
 import {brownieContract, contractAddr} from "configs";
 
 const Swap = () => {
@@ -49,7 +48,7 @@ const Swap = () => {
         
     }
 
-    const {brownieContract, myAddress} = useSelector(state =>state.nft);
+    const {myAddress} = useSelector(state =>state.nft);
     
     const swapToken = async () => {
         let amount = amountInput.current.value
@@ -132,7 +131,7 @@ const Swap = () => {
                         disabled
                         className='swap-amount-input'
                         placeholder='your exchange'
-                        value={amountInput.current.value ? exchange : 'your exchange'}
+                        value={amountInput.current ? exchange : 'your exchange'}
                         // value={exchange}
                         /> 
                         {/* <div className='swap-exchange'>
