@@ -9,31 +9,13 @@ import Footer from './components/Footer'
 import AdminPage from './page/AdminPage';
 import Testpage from './page/Testpage';
 import { useDispatch } from 'react-redux';
-import {abiJson, contractAddr} from "configs";
 import LeftImg3 from './img/chocolate/choco3.png';
 import RightImg from './img/chocolate/choco4.png';
 import Swap from './page/Swap';
 import NftList from './page/NftList';
 
 function App() {
-  const dispatch = useDispatch();
 
-
-  const setReducer = async () => {
-    const contractAbi = abiJson.output.abi;
-    let brownieContract = new window.caver.klay.Contract(contractAbi ,contractAddr);
-    dispatch({type: "CONTRACT_SUCCESS", payload: brownieContract});
-
-    // 토큰 인스턴스 주소
-    const btkInstanceAddr = await brownieContract.methods.viewIns().call()
-    let btkInstance = window.caver.kct.kip7.create(btkInstanceAddr)
-    dispatch({ type: "BTK_INSTANCE", payload: btkInstance });
-
-  }
-
-  useEffect(() => {
-    setReducer()
-  }, [])
 
   return (
     <>

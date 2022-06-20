@@ -5,7 +5,7 @@ import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Klaytn from '../img/swap/klaytn.png';
 import Brownie from '../img/swap/brownie.png';
 import Brownie1 from '../img/swap/brownie1.png';
-import {contractAddr} from "configs";
+import {brownieContract, contractAddr} from "configs";
 
 const Swap = () => {
     const bool = {false: 'KLAY', true: 'BTK'}
@@ -19,7 +19,7 @@ const Swap = () => {
         setSwap(!swap)
     }
 
-    const {brownieContract, myAddress} = useSelector(state =>state.nft);
+    const { myAddress } = useSelector(state =>state.nft);
     
     const swapToken = async () => {
         let amount = amountInput.current.value

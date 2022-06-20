@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import { check } from '../img';
-import {contractAddr} from "configs";
+import {brownieContract, contractAddr} from "configs";
 
 
 const Cardjustify = styled.div`
@@ -122,7 +122,7 @@ const StakingList = () => {
 
     const dispatch = useDispatch();
 
-    const { brownieContract, myAddress, myNFTs, myStakedNFTs } = useSelector(state => state.nft);
+    const { myAddress, myNFTs, myStakedNFTs } = useSelector(state => state.nft);
 
     const {posts} = useSelector(state => state.nft)
     // checked 된 것들

@@ -8,6 +8,8 @@ import PFP from '../img/profile1.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
+import {btkInstance} from "configs";
+
 import { background10 ,background13} from '../img/background';
 
 const SearchBox = styled.div`
@@ -91,7 +93,7 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, btkInstance, myAddress, walletRefresh } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh } = useSelector(state => state.nft);
 
     const [checked, setChecked] = useState(false);
     const [address, setAddress] = useState(null);
@@ -106,7 +108,6 @@ const Header = () => {
     }
 
     const setTokenBalance = async (address) => {
-        if(btkInstance){
             const weiBalance = await window.caver.klay.getBalance(address)
             const fixedBalance = weiToFixed(weiBalance)
             const weibtkBalance = await btkInstance.balanceOf(myAddress) //BigNumber 객체
@@ -114,8 +115,6 @@ const Header = () => {
             
             setBalance(fixedBalance)
             setBtkBalance(fixedbtkBalance);
-        }
-        
     }
 
     const setUserInfo = async () => {
@@ -154,7 +153,7 @@ const Header = () => {
 
     useEffect(() => {
         setUserInfo();
-    }, [btkInstance,myAddress,walletRefresh,btkBalance])
+    }, [myAddress,walletRefresh,btkBalance])
 
     return (
         <Navbar className="nav" expand="lg">
