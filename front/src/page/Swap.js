@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import {contractAddr} from "configs";
+import {brownieContract, contractAddr} from "configs";
 
 const Swap = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const Swap = () => {
         else setSwap('KLAY')
     }
 
-    const {brownieContract, myAddress} = useSelector(state =>state.nft);
+    const { myAddress } = useSelector(state =>state.nft);
     
     const swapToken = async () => {
         let amount = amountInput.current.value

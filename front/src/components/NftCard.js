@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {contractAddr} from "configs";
+import {brownieContract, contractAddr} from "configs";
 import { Button, Form } from "react-bootstrap";
 import axios from 'axios';
 import { check } from '../img';
@@ -122,7 +122,7 @@ const Cardjustify = styled.div`
 
 function NftCard() {
     const dispatch = useDispatch();
-    const { brownieContract, myAddress, myNFTs, myStakedNFTs, reward } = useSelector(state => state.nft);
+    const { myAddress, myNFTs, myStakedNFTs, reward } = useSelector(state => state.nft);
     // console.log(brownieContract.methods)
 
     const checkStakedNFTs = async() => {
