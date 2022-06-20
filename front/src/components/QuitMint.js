@@ -40,7 +40,7 @@ const QuitMint = () => {
     <div>
         <Styled>
         <h2> Mint 현황 </h2>
-        <CardGroup className="CardGroup">
+        {/* <CardGroup className="CardGroup">
             <MintCard className=''>
                 <CardDiv >
                     <Card className='cardnft'>
@@ -138,7 +138,7 @@ const QuitMint = () => {
                     </Card>
                     </CardDiv >
                 </MintCard>
-            </CardGroup>
+            </CardGroup> */}
             <Button variant="danger" size="lg">
                 mint 종료
             </Button>
