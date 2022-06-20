@@ -21,6 +21,7 @@ import Ellipse from '../img/Ellipse1.png';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { img1 } from '../img';
 
 const StyledMainText = styled.div`
   /* background: red; */
@@ -138,7 +139,52 @@ const StyledEllipse = styled.img`
 `
 
 const StyleDiv1 = styled.div`
-    width:50% ;
+    width:80% ;
+    background-color:gray;
+    height: 300px;
+    display: flex;
+    position: relative;
+    
+
+    .box_vertical {
+      writing-mode: vertical-lr;
+    }
+
+    .box_vertical2 {
+      writing-mode: vertical-lr;
+      background-color: black;
+      height:350px ;
+      color: white;
+      margin-bottom: 100px;
+      margin-top: -50px;
+    }
+
+    .box_vertical3 {
+      writing-mode: vertical-lr;
+      height:400px ;
+      background-color: pink;
+      margin-top: -100px;
+    }
+
+    .home_img {
+      width: 500px;
+      height: 300px;
+      /* position: relative; */
+      /* padding-bottom: 100px; */
+      /* margin-bottom: 10px; */
+      margin-top: -10px;
+    }
+
+    .home_img img{
+      width:100%;
+      height: 100%;
+    }
+
+    /* .blue {
+      background-color: blue;
+    } */
+
+    
 `
 
 const HomePage = () => {
@@ -234,6 +280,36 @@ const HomePage = () => {
           
           {/* <StyledEllipse src={Ellipse} alt="ellipse"/> */}
       </Container>
+
+      <StyleDiv1 >
+        <div className="blue">
+          <h2>01</h2>
+          <div class="box_vertical">
+            <h2>Heading</h2>
+          </div>
+        </div>
+        <div class="home_img">
+          <img src={img1} />
+        </div>
+        <Container>
+          <h2>#666</h2>
+          <span> Owned By Suh</span>
+          <Row>
+            <Col>아 </Col>
+            <Col>무</Col>
+          </Row>
+          <Row>
+            <Col>내</Col>
+            <Col>용</Col>
+          </Row>
+        </Container>
+        <div class="box_vertical2">
+          <h2>ox</h2>
+        </div>
+        <div class="box_vertical3">
+          <h2>oq</h2>
+        </div>
+      </StyleDiv1>
       {/* <div className='main-team-container'> */}
         {/* <Container className='main-team-container'>
           <StyledMainText>Team</StyledMainText>
