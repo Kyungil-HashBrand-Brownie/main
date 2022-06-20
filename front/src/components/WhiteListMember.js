@@ -9,6 +9,8 @@ import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
 import Form from 'react-bootstrap/Form';
 import { trash } from '../img'
+import {brownieContract} from "configs";
+
 
 
 const Trash = styled.div`
@@ -18,7 +20,7 @@ const Trash = styled.div`
 
 
 const WhiteList = () => {
-    const { brownieContract, myAddress } = useSelector(state => state.nft);
+    const { myAddress } = useSelector(state => state.nft);
     const [list, setList] = useState([]);
     const [checkDelete, setCheckDelete] = useState(false);
 

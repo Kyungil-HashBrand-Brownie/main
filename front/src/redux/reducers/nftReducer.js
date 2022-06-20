@@ -5,9 +5,7 @@ let initialState = {
     countMinority: 0,
     countTotal: 0,
     myAddress: "",
-    brownieContract: {},
     modalState: false,
-    btkInstance: "",
     walletRefresh: 1,
     nftList: "",
     myNFTs: [],
@@ -47,20 +45,6 @@ function nftReducer(state = initialState, action) {
                 [Object.keys(payload)[0]]: Object.values(payload)[0],
                 countTotal: state.countTotal + 1,
             };
-
-        case "CONTRACT_SUCCESS":
-            console.log("contract: ", payload);
-            return {
-                ...state,
-                brownieContract: payload,
-            }
-
-        case "BTK_INSTANCE":
-            console.log("btk instance : ", payload);
-            return {
-                ...state,
-                btkInstance: payload
-            }
 
         case 'GET_REWARD':
             return {

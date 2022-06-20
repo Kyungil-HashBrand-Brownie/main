@@ -14,10 +14,20 @@ body {
   z-index: 3;
 }
 
-.backG-img {
+.backG-img-left {
   position: absolute;
-  width: 100%;
-  z-index: -3;
+  top: 0;
+  width: 50%;
+  height: 341px;
+  z-index: -1;
+}
+.backG-img-right {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  right: 0;
+  height: 370px;
+  z-index: -1;
 }
 
 .backG-right-img {
@@ -233,7 +243,7 @@ body {
 }
 
 .nav {
-  background: #ffffff;
+  background: "pink";
   /* opacity: 70%; */
 }
 

@@ -6,7 +6,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Browny from '../img/browny8.png';
-import {contractAddr} from "configs";
+import {brownieContract, contractAddr} from "configs";
 
 
 // 리팩터링 - 코드를 단순화하는 작업 불필요한 중복요소들을 제거
@@ -63,7 +63,7 @@ const StyledBar = styled.div`
 const FreeSale = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { brownieContract, myAddress } = useSelector(state => state.nft);
+    const { myAddress } = useSelector(state => state.nft);
 
     
     const preMint = async () => {

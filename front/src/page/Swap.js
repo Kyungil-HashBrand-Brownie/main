@@ -7,6 +7,7 @@ import Brownie from '../img/swap/brownie.png';
 import Brownie1 from '../img/swap/brownie1.png';
 import Arrow from '../img/swap/arrowRight.png';
 import {contractAddr} from "configs";
+import {brownieContract, contractAddr} from "configs";
 
 const Swap = () => {
     const bool = {false: 'KLAY', true: 'BTK'}

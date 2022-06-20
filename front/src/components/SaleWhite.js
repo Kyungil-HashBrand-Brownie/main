@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Container,Row , Col , Button} from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Browny from '../img/browny9.png'
-import {contractAddr} from "configs";
+import {brownieContract, contractAddr} from "configs";
 
 const StyledMain = styled.div`
     width: 320px;
@@ -61,7 +61,7 @@ const StyledBar = styled.div`
 
 const WhiteSale = () => {
     const dispatch = useDispatch();
-    const { brownieContract, myAddress } = useSelector(state => state.nft);
+    const { myAddress } = useSelector(state => state.nft);
 
     const [count, setCount] = useState(1)
     const [isWhite, setIsWhite] = useState(false)

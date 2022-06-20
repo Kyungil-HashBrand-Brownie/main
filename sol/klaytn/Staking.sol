@@ -41,7 +41,6 @@ contract NFTStaking is BrownieNft {
     require(vault[tokenId].tokenId == 0, "already staked");
     totalStaked++;
     transferFrom(msg.sender, address(this), tokenId);
-    // _approve(address(this), tokenId);
     vault[tokenId] = Stake({
         owner: msg.sender,
         tokenId: tokenId,
