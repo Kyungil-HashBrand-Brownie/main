@@ -1,8 +1,14 @@
 body {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   overflow-x: hidden;
   background: linear-gradient(90deg, #deb38d 0.51%, #deb38d 0.52%, #deb38d 37.46%, #deb38d 53.47%, #f6f698 100%);
+}
+
+.wrapper {
+  height: auto;
+  min-height: 880px;
+  /* background-color: red; */
 }
 .backG-left-img {
   position: absolute;
@@ -370,7 +376,8 @@ body {
   border-radius: 10px;
   border: 3px solid black;
   /* background-color: rgb(8, 143, 136); */
-  background-color: rgb(237, 129, 147);
+  /* background-color: rgb(237, 129, 147); */
+  background: linear-gradient(180deg, rgb(150, 146, 146) 0.51%, rgb(142, 137, 137) 0.52%, rgb(149, 128, 128) 49.46%, rgb(224, 134, 149) 53.47%, rgb(237, 129, 147) 100%);
   color: white;
   font-size: 18px;
   width: 50%;

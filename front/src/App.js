@@ -16,9 +16,9 @@ import NftList from './page/NftList';
 
 function App() {
 
-
   return (
     <>
+    <div className='wrapper'>
       <Header />
       <img
         className='backG-left-img'
@@ -41,7 +41,8 @@ function App() {
         <Route path="/swap" element={<Swap />} />
         <Route path="/nftlist" element={<NftList />} />
       </Routes>
-      <Footer />
+    </div>
+    <Footer />
     </>
   );
 }
