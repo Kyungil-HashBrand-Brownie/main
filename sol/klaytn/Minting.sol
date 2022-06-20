@@ -18,15 +18,15 @@ contract BrownieNft is ERC721, Whitelist {
 
     // token swap - from klaytn to BTK
     function getBtk(uint256 _amount) public payable {
-        require(msg.value >= _amount * 10 ** 18, "Please check your balance");
-        instance.tokenTransfer(address(this), msg.sender, _amount);
+        require(msg.value == _amount * 10 ** 18, "Please check your balance");
+        instance.tokenTransfer(address(this), msg.sender, _amount * 10);
     }
 
     // token swap - from BTK to klaytn
     function sellBtk(uint256 amount) public {
         require(instance.checkBalance(msg.sender) >= amount * 10 ** 18, "Please check your balance");
         instance.tokenTransfer(msg.sender, address(this), amount);
-        payable(msg.sender).transfer(amount * 10 ** 18);
+        payable(msg.sender).transfer(amount * 10 ** 17);
     }
 
     // instance address 확인용
@@ -99,19 +99,19 @@ contract BrownieNft is ERC721, Whitelist {
 
     // 일반 minting
     function batchMint(uint256 amount) public {
-        require(instance.balanceOf(msg.sender) >= amount * 2 * 10 ** 18 , "Please check your balance");
+        require(instance.balanceOf(msg.sender) >= amount * 50 * 10 ** 18 , "Please check your balance");
         for (uint256 i = 0; i < amount; i++) {
-            safeMint(msg.sender, 2);
+            safeMint(msg.sender, 50);
         }
         emit NFTMinting(msg.sender, amount);
     }
 
     // whitelist 전용 minting
     function whitelistMint(uint256 amount) public onlyWhitelisted(msg.sender) {
-        require(instance.balanceOf(msg.sender) >= amount * 10 ** 18 , "Please check your balance");
+        require(instance.balanceOf(msg.sender) >= amount * 25 * 10 ** 18 , "Please check your balance");
         require(_whitelistCounter.current() + amount <= 30,"Total NFT for whitelist users is only thirty");
         for (uint256 i = 0; i < amount; i++) {
-            safeMint(msg.sender, 1);
+            safeMint(msg.sender, 25);
             _whitelistCounter.increment();
         }
         emit NFTMinting(msg.sender, amount);
