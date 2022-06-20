@@ -349,15 +349,38 @@ body {
   background-color: white;
   border-radius: 30px;
   z-index: 2;
-
+  box-shadow: 7px 7px;
 }
 .swap-select {
   /* background-color: red; */
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
+
+.swap-ratio-outer {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.swap-ratio-inner {
+  padding: 3px 1px;
+  border-radius: 10px;
+  border: 3px solid black;
+  /* background-color: rgb(8, 143, 136); */
+  background-color: rgb(237, 129, 147);
+  color: white;
+  font-size: 18px;
+  width: 50%;
+  font-weight: bold;
+}
+
+.swap-ratio {
+  margin: 10px 0px;
+}
+
 .swap-body{ 
   font-weight: 600;
   /* background: red; */
@@ -379,6 +402,20 @@ body {
 .swap-submit {
   /* width: 40%; */
   /* background-color: red; */
+}
+.swap-button {
+  width: 80px;
+  height: 30px;
+  /* background: #deb38d; */
+  border: none;
+  /* border: 2px solid black; */
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.swap-button:hover {
+  transform: scale(1.05);
+  /* font-weight: bold; */
 }
 .swap-token-icon {
   cursor: pointer;

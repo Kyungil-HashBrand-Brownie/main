@@ -77,36 +77,37 @@ const WhiteSale = () => {
     }
 
     const whiteMint = async () => {
-        try{
+        try {
             const conData = await brownieContract.methods.whitelistMint(count).encodeABI()
             const result = await window.caver.klay.sendTransaction({
                 type: 'SMART_CONTRACT_EXECUTION',
-                from:myAddress, 
-                to:contractAddr,
-                data:conData,
+                from: myAddress,
+                to: contractAddr,
+                data: conData,
                 gas: 3000000
             })
-            if(result.status){
-                dispatch({type: "WALLET_REFRESH"})
+            if (result.status) {
+                dispatch({ type: "WALLET_REFRESH" })
                 alert("해당 지갑 주소로 민팅되었습니다!");
                 // navigate('/');
             }
             else alert("transaction fail")
         }
-        catch(e){
+        catch (e) {
             // alert("카이카스 서명 거부됨")
         }
     }
 
     const checkWhitelist = async () => {
-        if(brownieContract){
-            try{
-                const isWhite =  await brownieContract.methods.isWhitelisted(myAddress).call()
+        if (brownieContract) {
+            try {
+                const isWhite = await brownieContract.methods.isWhitelisted(myAddress).call()
+                console.log(isWhite);
                 setIsWhite(isWhite)
             }
-            catch(e){
-                 throw e
-                }
+            catch (e) {
+                throw e
+            }
         }
     }
 
