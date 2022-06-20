@@ -6,11 +6,10 @@ import Home from './page/HomePage';
 import Mint from './page/Mint';
 import Header from './components/Header';
 import Footer from './components/Footer'
-import WhiteList from './page/WhiteList';
 import AdminPage from './page/AdminPage';
 import Testpage from './page/Testpage';
 import { useDispatch } from 'react-redux';
-import contractAbi from "./abi.json";
+import {abiJson, contractAddr} from "configs";
 import LeftImg3 from './img/chocolate/choco3.png';
 import RightImg from './img/chocolate/choco4.png';
 import Swap from './page/Swap';
@@ -21,7 +20,8 @@ function App() {
 
 
   const setReducer = async () => {
-    let brownieContract = new window.caver.klay.Contract(contractAbi.output.abi ,"0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01");
+    const contractAbi = abiJson.output.abi;
+    let brownieContract = new window.caver.klay.Contract(contractAbi ,contractAddr);
     dispatch({type: "CONTRACT_SUCCESS", payload: brownieContract});
 
     // 토큰 인스턴스 주소

@@ -5,6 +5,7 @@ import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Klaytn from '../img/swap/klaytn.png';
 import Brownie from '../img/swap/brownie.png';
 import Brownie1 from '../img/swap/brownie1.png';
+import {contractAddr} from "configs";
 
 const Swap = () => {
     const bool = {false: 'KLAY', true: 'BTK'}
@@ -30,7 +31,7 @@ const Swap = () => {
                     const con = await window.caver.klay.sendTransaction({
                         type: 'SMART_CONTRACT_EXECUTION',
                         from: myAddress,
-                        to: '0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
+                        to: contractAddr,
                         gas: 300000,
                         data:conData,
                         value: window.caver.utils.toPeb(amount, 'KLAY')
@@ -46,7 +47,7 @@ const Swap = () => {
                     const test = await window.caver.klay.sendTransaction({
                         type: 'SMART_CONTRACT_EXECUTION',
                         from: myAddress, 
-                        to:'0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
+                        to:contractAddr,
                         data:conData,
                         gas: 300000
                     })

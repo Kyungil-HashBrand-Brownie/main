@@ -24,19 +24,19 @@ contract BrownieToken is ERC20, Ownable {
     * tokenTransfer BTK token transfer 함수 
     * token 거래 함수에 사용하기 위한 용도
     */
-    // tokenTransfer BTK token transfer 함수 - token 거래 함수에 사용하기 위한 용도 -> token
-    function tokenTransfer(address _from, address _to, uint256 _amount) public {
+    // tokenTransfer BTK token transfer 함수 - token 거래 함수에 사용하기 위한 용도
+    function tokenTransfer(address _from, address _to, uint256 _amount) external {
         require(_from.balance >= _amount * 10 ** decimals(), "Please check your balance");
         _transfer(_from, _to, _amount * 10 ** decimals());
     }
 
     // nft staking에 대한 보상용 minting function 
-    function rewardMinting(address to, uint256 amount) public {
+    function rewardMinting(address to, uint256 amount) external {
         _mint(to, amount * 10 ** decimals());
     }
 
     // token 수량 확인
-    function checkBalance(address to) public view returns(uint256) {
+    function checkBalance(address to) external view returns(uint256) {
         return balanceOf(to);
     }
 }

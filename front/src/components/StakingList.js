@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import { check } from '../img';
+import {contractAddr} from "configs";
 
 
 const Cardjustify = styled.div`
@@ -240,7 +241,7 @@ const StakingList = () => {
             const result = await window.caver.klay.sendTransaction({
                 type: 'SMART_CONTRACT_EXECUTION',
                 from: myAddress, 
-                to: '0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
+                to: contractAddr,
                 data: unstakeData,
                 gas: 3000000
             })
