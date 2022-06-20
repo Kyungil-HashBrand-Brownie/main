@@ -10,6 +10,7 @@ import {brownieContract, contractAddr} from "configs";
 import { Button, Form } from "react-bootstrap";
 import axios from 'axios';
 import { check } from '../img';
+import { stakeNFTs } from 'api/contractMethods';
 
 const Cardjustify = styled.div`
     display: flex;
@@ -230,7 +231,7 @@ function NftCard() {
         // console.log(brownieContract.methods.totalStaked().call());
         checkNfts()
         // checkStakedNFTs()
-    }, [brownieContract.defaultAccount,myAddress])
+    }, [myAddress])
 
     // 카드 staking 버튼
     const stakeNFT = async () => {
@@ -243,15 +244,7 @@ function NftCard() {
             // let stakeInstanceId = stakeIdArr[0].id.slice(1) //#62
             console.log("stakeIdArr: ", stakeIdArr);
             try{
-            // const stakeData = await brownieContract.methods.stake(stakeInstanceId).encodeABI()
-            const stakeData = await brownieContract.methods.stakeNFTs(stakeIdArr).encodeABI()
-            const result = await window.caver.klay.sendTransaction({
-                type: 'SMART_CONTRACT_EXECUTION',
-                from:myAddress, 
-                to:contractAddr,
-                data:stakeData,
-                gas: 3000000
-            })
+            const result = await stakeNFTs(myAddress,stakeIdArr)
             if(result.status){
                 // dispatch({type: "WALLET_REFRESH"})
                 let stakedNFTs = myNFTs.filter((item) => item.checked).map((item) => {

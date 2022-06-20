@@ -5,7 +5,8 @@ import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Klaytn from '../img/swap/klaytn.png';
 import Brownie from '../img/swap/brownie.png';
 import Brownie1 from '../img/swap/brownie1.png';
-import {brownieContract, contractAddr} from "configs";
+import {brownieContract} from "configs";
+import {getBtk, sellBtk} from "api/contractMethods"
 
 const Swap = () => {
     const bool = {false: 'KLAY', true: 'BTK'}
@@ -25,36 +26,11 @@ const Swap = () => {
         let amount = amountInput.current.value
         console.log(brownieContract);
         if(Number(amount)){
-            if(swap === "BTK"){
-                try {
-                    const conData = await brownieContract.methods.getBtk(amount).encodeABI()
-                    const con = await window.caver.klay.sendTransaction({
-                        type: 'SMART_CONTRACT_EXECUTION',
-                        from: myAddress,
-                        to: contractAddr,
-                        gas: 300000,
-                        data:conData,
-                        value: window.caver.utils.toPeb(amount, 'KLAY')
-                    })
-                    console.log(con)
-                } catch (error) {
-                    console.log(error)
-                }
+            if(swap){
+                await getBtk(myAddress,amount)
             }
-            else if (swap === "KLAY"){
-                try {
-                    const conData = await brownieContract.methods.sellBtk(amount).encodeABI()
-                    const test = await window.caver.klay.sendTransaction({
-                        type: 'SMART_CONTRACT_EXECUTION',
-                        from: myAddress, 
-                        to:contractAddr,
-                        data:conData,
-                        gas: 300000
-                    })
-                    console.log(test)
-                } catch (error) {
-                    console.log(error)
-                }       
+            else{
+                await sellBtk(myAddress, amount)
             }
             console.log('test');
             alert('스왑완료');

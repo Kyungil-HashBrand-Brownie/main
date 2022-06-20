@@ -1,3 +1,3 @@
-export {default as methodExcution} from "./methodExcution"
+export {default as methodExcution} from "./contractMethods"
 const caver = window.caver
 export {caver};

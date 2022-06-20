@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import { check } from '../img';
 import {brownieContract, contractAddr} from "configs";
+import { unstakeNFTs } from 'api/contractMethods';
 
 
 const Cardjustify = styled.div`
@@ -236,15 +237,7 @@ const StakingList = () => {
         if (unstakedIdArr.length > 0) {
             // let stakeInstanceId = unstakeIdArr[0].id.slice(1) //#62
             try{
-            // const stakeData = await brownieContract.methods.unstake(stakeInstanceId).encodeABI()
-            const unstakeData = await brownieContract.methods.unstakeNFTs(unstakedIdArr).encodeABI()
-            const result = await window.caver.klay.sendTransaction({
-                type: 'SMART_CONTRACT_EXECUTION',
-                from: myAddress, 
-                to: contractAddr,
-                data: unstakeData,
-                gas: 3000000
-            })
+            const result = await unstakeNFTs(myAddress,unstakedIdArr);
             if(result.status){
                 // dispatch({type: "WALLET_REFRESH"})
                 let unstakedNFTs = myStakedNFTs.filter((item) => item.checked).map((item) => {
