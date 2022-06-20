@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {brownieContract, contractAddr} from "configs";
 import { Button, Form } from "react-bootstrap";
 import axios from 'axios';
 import { check } from '../img';
@@ -121,7 +122,7 @@ const Cardjustify = styled.div`
 
 function NftCard() {
     const dispatch = useDispatch();
-    const { brownieContract, myAddress, myNFTs, myStakedNFTs, reward } = useSelector(state => state.nft);
+    const { myAddress, myNFTs, myStakedNFTs, reward } = useSelector(state => state.nft);
     // console.log(brownieContract.methods)
 
     const checkStakedNFTs = async() => {
@@ -210,14 +211,9 @@ function NftCard() {
         console.log(myBrownieNFTs);
 
         dispatch({type: "NFTCARD_MYNFTS", payload: {myNFTs: myBrownieNFTs, myStakedNFTs: processedStakedNFTs}})
-        setList(binaryArr)
     }
 
-    const [list, setList] = useState([]);
-
     // check
-    const [checkItems, setCheckItems] = useState([])
-
     const changeClickState = (id) => {
         let newArr = myNFTs.map((li) => {
             if (li.id === id) {
@@ -231,11 +227,10 @@ function NftCard() {
     useEffect(() => {
         // console.log("my NFTs: ", myNFTs)
         // console.log("my stakedNFTs: ", myStakedNFTs)
-        // console.log(checkItems)
         // console.log(brownieContract.methods.totalStaked().call());
         checkNfts()
         // checkStakedNFTs()
-    }, [checkItems,brownieContract.defaultAccount,myAddress])
+    }, [brownieContract.defaultAccount,myAddress])
 
     // 카드 staking 버튼
     const stakeNFT = async () => {
@@ -253,7 +248,7 @@ function NftCard() {
             const result = await window.caver.klay.sendTransaction({
                 type: 'SMART_CONTRACT_EXECUTION',
                 from:myAddress, 
-                to:'0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
+                to:contractAddr,
                 data:stakeData,
                 gas: 3000000
             })

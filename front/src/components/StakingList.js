@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import { check } from '../img';
+import {brownieContract, contractAddr} from "configs";
 
 
 const Cardjustify = styled.div`
@@ -121,7 +122,7 @@ const StakingList = () => {
 
     const dispatch = useDispatch();
 
-    const { brownieContract, myAddress, myNFTs, myStakedNFTs } = useSelector(state => state.nft);
+    const { myAddress, myNFTs, myStakedNFTs } = useSelector(state => state.nft);
 
     const {posts} = useSelector(state => state.nft)
     // checked 된 것들
@@ -172,6 +173,7 @@ const StakingList = () => {
         const address = "0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01";
         const options = {method: 'GET'};
         let NFTs = myNFTs.map((NFT) => parseInt(NFT.id.slice(1)));
+        console.log(address);
         console.log(myAddress);
         console.log(NFTs);
 
@@ -239,7 +241,7 @@ const StakingList = () => {
             const result = await window.caver.klay.sendTransaction({
                 type: 'SMART_CONTRACT_EXECUTION',
                 from: myAddress, 
-                to: '0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
+                to: contractAddr,
                 data: unstakeData,
                 gas: 3000000
             })

@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
-import contractAbi from "../abi.json"
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import styled from 'styled-components'
@@ -10,6 +9,8 @@ import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
 import Form from 'react-bootstrap/Form';
 import { trash } from '../img'
+import {brownieContract} from "configs";
+
 
 
 const Trash = styled.div`
@@ -19,7 +20,7 @@ const Trash = styled.div`
 
 
 const WhiteList = () => {
-    const { brownieContract, myAddress } = useSelector(state => state.nft);
+    const { myAddress } = useSelector(state => state.nft);
     const [list, setList] = useState([]);
     const [checkDelete, setCheckDelete] = useState(false);
 
