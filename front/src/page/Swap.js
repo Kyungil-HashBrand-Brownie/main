@@ -7,7 +7,7 @@ import Brownie from '../img/swap/brownie.png';
 import Brownie1 from '../img/swap/brownie1.png';
 import Arrow from '../img/swap/arrowRight.png';
 import {brownieContract, contractAddr} from "configs";
-import {getBtk, sellBtk} from "api/contractMethods"
+import {getBtk, sellBtk} from "api"
 
 
 const Swap = () => {

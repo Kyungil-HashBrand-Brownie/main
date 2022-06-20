@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import { check } from '../img';
 import {brownieContract, contractAddr} from "configs";
-import { unstakeNFTs } from 'api/contractMethods';
+import { unstakeNFTs } from 'api';
 
 
 const Cardjustify = styled.div`

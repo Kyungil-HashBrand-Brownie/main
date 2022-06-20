@@ -10,7 +10,7 @@ import {brownieContract, contractAddr} from "configs";
 import { Button, Form } from "react-bootstrap";
 import axios from 'axios';
 import { check } from '../img';
-import { stakeNFTs } from 'api/contractMethods';
+import { stakeNFTs } from 'api';
 
 const Cardjustify = styled.div`
     display: flex;
