@@ -20,7 +20,6 @@ import Arrow from '../img/arrow.png';
 import Ellipse from '../img/Ellipse1.png';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import contractAbi from "../abi.json";
 import { useNavigate } from 'react-router-dom';
 
 const StyledMainText = styled.div`
