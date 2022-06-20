@@ -173,6 +173,7 @@ const StakingList = () => {
         const address = "0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01";
         const options = {method: 'GET'};
         let NFTs = myNFTs.map((NFT) => parseInt(NFT.id.slice(1)));
+        console.log(address);
         console.log(myAddress);
         console.log(NFTs);
 

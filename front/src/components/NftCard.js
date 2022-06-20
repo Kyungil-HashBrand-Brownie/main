@@ -211,14 +211,9 @@ function NftCard() {
         console.log(myBrownieNFTs);
 
         dispatch({type: "NFTCARD_MYNFTS", payload: {myNFTs: myBrownieNFTs, myStakedNFTs: processedStakedNFTs}})
-        setList(binaryArr)
     }
 
-    const [list, setList] = useState([]);
-
     // check
-    const [checkItems, setCheckItems] = useState([])
-
     const changeClickState = (id) => {
         let newArr = myNFTs.map((li) => {
             if (li.id === id) {
@@ -232,11 +227,10 @@ function NftCard() {
     useEffect(() => {
         // console.log("my NFTs: ", myNFTs)
         // console.log("my stakedNFTs: ", myStakedNFTs)
-        // console.log(checkItems)
         // console.log(brownieContract.methods.totalStaked().call());
         checkNfts()
         // checkStakedNFTs()
-    }, [checkItems,brownieContract.defaultAccount,myAddress])
+    }, [brownieContract.defaultAccount,myAddress])
 
     // 카드 staking 버튼
     const stakeNFT = async () => {
