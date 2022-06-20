@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Container,Row , Col , Button} from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Browny from '../img/browny9.png'
+import {contractAddr} from "configs";
 
 const StyledMain = styled.div`
     width: 320px;
@@ -81,7 +82,7 @@ const WhiteSale = () => {
             const result = await window.caver.klay.sendTransaction({
                 type: 'SMART_CONTRACT_EXECUTION',
                 from:myAddress, 
-                to:'0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
+                to:contractAddr,
                 data:conData,
                 gas: 3000000
             })

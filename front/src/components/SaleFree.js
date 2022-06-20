@@ -6,6 +6,8 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Browny from '../img/browny8.png';
+import {contractAddr} from "configs";
+
 
 // 리팩터링 - 코드를 단순화하는 작업 불필요한 중복요소들을 제거
 const StyledMain = styled.div`
@@ -73,7 +75,7 @@ const FreeSale = () => {
             const result = await window.caver.klay.sendTransaction({
                 type: 'SMART_CONTRACT_EXECUTION',
                 from:myAddress, 
-                to:'0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
+                to:contractAddr,
                 data:conData,
                 gas: 3000000
             })

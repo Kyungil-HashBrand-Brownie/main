@@ -9,8 +9,7 @@ import Footer from './components/Footer'
 import AdminPage from './page/AdminPage';
 import Testpage from './page/Testpage';
 import { useDispatch } from 'react-redux';
-import abiJson from "./config/contractAbi.json";
-import contractAddr from "./config/contractAddr.js"
+import {abiJson, contractAddr} from "configs";
 import LeftImg3 from './img/chocolate/choco3.png';
 import RightImg from './img/chocolate/choco4.png';
 import Swap from './page/Swap';

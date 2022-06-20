@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import {contractAddr} from "configs";
 
 const Swap = () => {
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const Swap = () => {
                     const con = await window.caver.klay.sendTransaction({
                         type: 'SMART_CONTRACT_EXECUTION',
                         from: myAddress,
-                        to: '0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
+                        to: contractAddr,
                         gas: 300000,
                         data:conData,
                         value: window.caver.utils.toPeb(amount, 'KLAY')
@@ -41,7 +42,7 @@ const Swap = () => {
                     const test = await window.caver.klay.sendTransaction({
                         type: 'SMART_CONTRACT_EXECUTION',
                         from: myAddress, 
-                        to:'0x35def1D38a11fE4231Fb64993aFbb9A1e0342B01',
+                        to:contractAddr,
                         data:conData,
                         gas: 300000
                     })
