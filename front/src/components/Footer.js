@@ -8,8 +8,9 @@ import kakao from "../img/footer/kakao.png"
 import kakao2 from "../img/footer/kakao2.png"
 
 const Outer = styled.div`
-    /* position: absolute; */
+    position: absolute;
     margin-top: 200px;
+    bottom: 0;
     /* background: blue; */
     width: 100%;
 `
