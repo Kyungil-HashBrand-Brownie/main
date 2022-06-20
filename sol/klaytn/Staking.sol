@@ -76,7 +76,7 @@ contract NFTStaking is BrownieNft {
   // reward claim function
   // 1. timestamp와 현재 시간 확인하여 보상부여
   // 2. 보상부여 tx block의 timestamp로 struct Stake timestamp 최신화?
-  function claimed(uint256 tokenId) public isStaked(tokenId) {
+  function claimed(uint256 tokenId) private isStaked(tokenId) {
     require(vault[tokenId].owner == msg.sender, "not an owner");
     uint256 reward = (((block.timestamp - vault[tokenId].timestamp) / 1 hours) / totalStaked) * 10;
     instance.rewardMinting(msg.sender, reward);
