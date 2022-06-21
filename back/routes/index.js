@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const pool = require('../db')
+const apiRouter = require("./api")
 
+router.use("/api",apiRouter)
 
 
 router.get("/admin", async (req, res) => {
