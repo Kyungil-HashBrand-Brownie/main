@@ -1,5 +1,7 @@
 let initialState = {
     nft: {},
+    myNFTpage: 0,
+    myStakedpage: 0,
     countAnimal: 0,
     countKid: 0,
     countMinority: 0,
@@ -82,7 +84,7 @@ function nftReducer(state = initialState, action) {
             return {
                 ...state,
                 myNFTs: payload.myNFTs,
-                myStakedNFTs: payload.myStakedNFTs,
+                myStakedNFTs: state.myStakedNFTs.concat(payload.myStakedNFTs),
             }
 
         case 'NFTCARD_UNSTAKE' :
@@ -112,6 +114,18 @@ function nftReducer(state = initialState, action) {
             return {
                 ...state,
                 walletRefresh: !state.walletRefresh
+            }
+
+        case 'GET_REWARD_SUCCESS' : 
+            return  {
+                ...state, 
+                reward: payload,
+            }
+
+        case 'GET_REWARD_FAILURE' :
+            return {
+                ...state, 
+                reward: 0,
             }
 
         default:
