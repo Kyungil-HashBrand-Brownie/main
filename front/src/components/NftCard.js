@@ -161,7 +161,7 @@ function NftCard() {
     useEffect(() => {
         checkNfts()
         // checkStakedNFTs()
-    }, [myAddress])
+    }, [myAddress,myStakedNFTs.length])
 
     // 카드 staking 버튼
     const stakeNFT = async () => {
