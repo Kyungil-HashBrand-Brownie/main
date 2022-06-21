@@ -4,7 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import { check } from '../img';
-import {brownieContract, contractAddr} from "configs";
+import {brownyContract, contractAddr} from "configs";
+import { unstakeNFTs } from 'api';
 
 
 const Cardjustify = styled.div`
@@ -13,22 +14,23 @@ const Cardjustify = styled.div`
     /* width: 50%; */
 
     .Main {
+        width: 570px;
         flex-wrap: wrap;
         position: relative;
         display: flex ;
         justify-content: center ;
-        z-index:5;
         margin: 10px;
         border: 3px solid;
-        border-radius: 6px;
+        border-radius: 40px;
         padding: 10px 10px;
+        margin-top: 60px;
     }
 
     .Ncard {
-        display: flex;
-        justify-content: center;
+        /* display: flex; */
+        /* justify-content: center; */
         opacity: 0.8;
-        padding: 7px;
+        padding: 3px;
         margin: 10px;
         padding-top: 25px;
         text-align: center;
@@ -129,27 +131,21 @@ const StakingList = () => {
 
         // console.log(unstakedIdArr)
         if (unstakedIdArr.length > 0) {
-            try {
-                const unstakeData = await brownieContract.methods.unstakeNFTs(unstakedIdArr).encodeABI()
-                const result = await window.caver.klay.sendTransaction({
-                    type: 'SMART_CONTRACT_EXECUTION',
-                    from: myAddress,
-                    to: contractAddr,
-                    data: unstakeData,
-                    gas: 3000000
-                })
-                if (result.status) {
-                    // dispatch({type: "WALLET_REFRESH"})
-                    let unstakedNFTs = myStakedNFTs.filter((item) => item.checked).map((item) => {
-                        item.checked = false;
-                        return item;
-                    });
-                    dispatch({ type: 'NFTCARD_UNSTAKE', payload: { myNFTs: unstakedNFTs, myStakedNFTs: stakedNFTs } })
-                    alert("선택한 NFT가 정상적으로 unstaking 되었습니다.");
-                    // navigate('/');
-                }
-                else alert("transaction fail")
-            } catch (e) {
+            // let stakeInstanceId = unstakeIdArr[0].id.slice(1) //#62
+            try{
+            const result = await unstakeNFTs(myAddress,unstakedIdArr);
+            if(result.status){
+                // dispatch({type: "WALLET_REFRESH"})
+                let unstakedNFTs = myStakedNFTs.filter((item) => item.checked).map((item) => {
+                    item.checked = false;
+                    return item;
+                });
+                dispatch({type: 'NFTCARD_UNSTAKE', payload: {myNFTs: unstakedNFTs, myStakedNFTs: stakedNFTs}})
+                alert("선택한 NFT가 정상적으로 unstaking 되었습니다.");
+                // navigate('/');
+            }
+            else alert("transaction fail")
+            }catch(e) {
                 console.log(e.message)
             }
         }
@@ -158,7 +154,7 @@ const StakingList = () => {
 
 
     return (
-        <div>
+        <div className='nftlist-outer'>
             <div className='nftcard-header'>
                 Staked NFTs
             </div>
@@ -186,7 +182,7 @@ const StakingList = () => {
                             onChange={(e) => checkHandler(e.target.checked, item.id)}
                             checked={checkItems.indexOf(item.id) >= 0 ? true : false}
                             /> */}
-                            <div><Card.Img style={{width: '12rem', height: '12rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
+                            <div><Card.Img style={{width: '14rem', height: '13rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
                             <Card.Title >{item.id}</Card.Title>
                             {/* <Container className="containerCard">
                                 <Row>

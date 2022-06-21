@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Container,Row , Col , Button} from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Browny from '../img/browny9.png'
-import {brownieContract, contractAddr} from "configs";
+import {brownyContract, contractAddr} from "configs";
 
 const StyledMain = styled.div`
     width: 320px;
@@ -78,7 +78,7 @@ const WhiteSale = () => {
 
     const whiteMint = async () => {
         try {
-            const conData = await brownieContract.methods.whitelistMint(count).encodeABI()
+            const conData = await brownyContract.methods.whitelistMint(count).encodeABI()
             const result = await window.caver.klay.sendTransaction({
                 type: 'SMART_CONTRACT_EXECUTION',
                 from: myAddress,
@@ -99,9 +99,9 @@ const WhiteSale = () => {
     }
 
     const checkWhitelist = async () => {
-        if (brownieContract) {
+        if (brownyContract) {
             try {
-                const isWhite = await brownieContract.methods.isWhitelisted(myAddress).call()
+                const isWhite = await brownyContract.methods.isWhitelisted(myAddress).call()
                 console.log(isWhite);
                 setIsWhite(isWhite)
             }

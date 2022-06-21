@@ -1,14 +1,12 @@
 import Card from 'react-bootstrap/Card';
-import { browny4 } from '../img'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {brownieContract, contractAddr} from "configs";
-import axios from 'axios';
+import {brownyContract, contractAddr} from "configs";
 import { check } from '../img';
+import { nftAction } from 'redux/actions/nftAction';
+import Pagination from './Pagination';
+import { stakeNFTs } from 'api';
 
 const Cardjustify = styled.div`
     display: flex;
@@ -16,22 +14,25 @@ const Cardjustify = styled.div`
     /* width: 50%; */
 
     .Main {
-        flex-wrap: wrap;
-        position: relative;
-        display: flex ;
-        justify-content: center ;
-        z-index:3;
+        width: 600px;
         margin: 10px;
         border: 3px solid;
-        border-radius: 6px;
+        border-radius: 40px;
         padding: 10px 10px;
     }
 
-    .Ncard {
+    .InnerMain {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
+
+    }
+
+    .Ncard {
         opacity: 0.8;
-        padding: 7px;
+        /* background: grey; */
+        padding: 3px;
+        /* width: 200px; */
         margin: 10px;
         padding-top: 25px;
         text-align: center;
@@ -94,49 +95,41 @@ const Cardjustify = styled.div`
 
     .cont21 {
         display: flex ;
-        justify-content: center ;
+        justify-content: center;
+        margin: 10px 0px;
     }
 `
-
-
 
 function NftCard() {
     const dispatch = useDispatch();
     const { myAddress, myNFTs, myStakedNFTs, reward } = useSelector(state => state.nft);
 
     const getCurrentReward = async() => {
-        let reward = 0;
-        for (let i = 0; i < myStakedNFTs.length; i++) {
-            let totalStakedNFTs = await brownieContract.methods.totalStaked().call()
-            let whenStaked = await brownieContract.methods.whenStaked(myStakedNFTs[i].id.slice(1)).call();            
-            let currentTimestamp = parseInt(+ new Date() / 1000);
-            reward += ((currentTimestamp - whenStaked) / totalStakedNFTs) * 10;
-        }
-        console.log('reward: ', reward)
-        dispatch({type: 'GET_REWARD', payload: reward});
+        dispatch(nftAction.getReward(brownyContract, myStakedNFTs));
+        // dispatch({type: 'GET_REWARD', payload: reward});
 
     }
 
     const checkNfts = async () => {
-        // let conAddr = await brownieContract.methods.viewCon().call();
+        // let conAddr = await brownyContract.methods.viewCon().call();
         // console.log(conAddr);
         getCurrentReward()
         // console.log('reward: ', reward);
-        let myBrownieNFTs = await brownieContract.methods.myNFTs().call(
+        let myBrownyNFTs = await brownyContract.methods.myNFTs().call(
             { from: myAddress })
 
         let binaryArr = [];
-        for (let i = 0; i != myBrownieNFTs.length; i++) {
+        for (let i = 0; i != myBrownyNFTs.length; i++) {
             let metajson = {
-                id: `#${myBrownieNFTs[i]}`,
-                image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${myBrownieNFTs[i]}.png`,
+                id: `#${myBrownyNFTs[i]}`,
+                image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${myBrownyNFTs[i]}.png`,
                 checked: false,
             }
             binaryArr.push(metajson)
         }
         // console.log(binaryArr)
 
-        let stakedNFTs = await brownieContract.methods.checkStakedNFTs().call(
+        let stakedNFTs = await brownyContract.methods.checkStakedNFTs().call(
             {from : myAddress})
         let processedStakedNFTs = stakedNFTs.map((NFT) => {
             let data = {
@@ -146,12 +139,12 @@ function NftCard() {
             }
             return data;
         })
-        myBrownieNFTs = binaryArr.filter((item) => {
+        myBrownyNFTs = binaryArr.filter((item) => {
             if (stakedNFTs.indexOf(item.id.slice(1)) < 0) return item 
         })
-        // console.log(myBrownieNFTs);
+        // console.log(myBrownyNFTs);
 
-        dispatch({type: "NFTCARD_MYNFTS", payload: {myNFTs: myBrownieNFTs, myStakedNFTs: processedStakedNFTs}})
+        dispatch({type: "NFTCARD_MYNFTS", payload: {myNFTs: myBrownyNFTs, myStakedNFTs: processedStakedNFTs}})
     }
 
     // check
@@ -167,7 +160,8 @@ function NftCard() {
 
     useEffect(() => {
         checkNfts()
-    }, [brownieContract.defaultAccount,myAddress])
+        // checkStakedNFTs()
+    }, [myAddress])
 
     // 카드 staking 버튼
     const stakeNFT = async () => {
@@ -175,16 +169,10 @@ function NftCard() {
         let stakeIdArr = myNFTs.filter((item) => item.checked).map((item) => item.id.slice(1));
 
         if (stakeIdArr.length > 0) {
-            try {
-                const stakeData = await brownieContract.methods.stakeNFTs(stakeIdArr).encodeABI()
-                const result = await window.caver.klay.sendTransaction({
-                    type: 'SMART_CONTRACT_EXECUTION',
-                    from: myAddress,
-                    to: contractAddr,
-                    data: stakeData,
-                    gas: 3000000
-                })
-
+            // let stakeInstanceId = stakeIdArr[0].id.slice(1) //#62
+            console.log("stakeIdArr: ", stakeIdArr);
+            try{
+                const result = await stakeNFTs(myAddress,stakeIdArr)
                 if (result.status) {
                     // dispatch({type: "WALLET_REFRESH"})
                     let stakedNFTs = myNFTs.filter((item) => item.checked).map((item) => {
@@ -204,24 +192,34 @@ function NftCard() {
     }
 
     return (
-        <div>
+        <div className='nftlist-outer'>
             <div className='nftcard-header'>
                 My NFTs            
             </div>
-            <div className='reward-box'>
-                {'total reward : ' + (reward/10000).toFixed(2) + ' BTK'}
-                {/* <button 
-                className='reward-button'
-                onClick={getReward}>
-                보상 받기
-                </button> */}
-            </div>
+            { myNFTs.length > 0 && 
+                <div className='myNFT-info-box'>
+                    <div className='reward-box'>
+                        {'total reward : ' + (reward/10000).toFixed(2) + ' BTK'}
+                        {/* <button 
+                        className='reward-button'
+                        onClick={getReward}>
+                        보상 받기
+                        </button> */}
+                    </div>
+                </div>
+            }
             <Cardjustify>
-                <div>
-                <div className="Main">
+                <div className='Main'>
+                    {myNFTs.length > 0 && 
+                        <div className="cont21">
+                            <button onClick={stakeNFT}>stake</button>
+                        </div>
+                    }
+                <div className='InnerMain'>
                     {   myNFTs.length > 0 
-                        ? myNFTs.map((item, index1) => {
-                            return <div key={index1}>
+                        ? <> 
+                        {myNFTs.sort((a,b) => a.id.slice(1) - b.id.slice(1)).map((item, index1) => {
+                            return <div className='card-container' key={index1}>
                                 <Card className="Ncard" style={{ width: '15rem' }}>
                                 {
                                     !item.checked ?
@@ -239,7 +237,7 @@ function NftCard() {
                                     onChange={(e) => checkHandler(e.target.checked, item.id)}
                                     checked={checkItems.indexOf(item.id) >= 0 ? true : false}
                                     /> */}
-                                    <div><Card.Img style={{ width: '12rem', height: '12rem'}}onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
+                                    <div><Card.Img style={{ width: '14rem', height: '13rem'}}onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
                                     <Card.Title >{item.id}</Card.Title>
                                     {/* <Container className="containerCard">
                                         <Row>
@@ -253,14 +251,13 @@ function NftCard() {
                                     </Container> */}
                                 </Card>
                             </div>
-                        })
+                        })}
+                        <Pagination />
+                        </> 
                         : <div>
                             <h2>Nothing to display</h2>
                         </div>
                     }
-                </div>
-                <div className="cont21">
-                    <button className="" onClick={stakeNFT}> Stake</button>
                 </div>
                 </div>
             </Cardjustify>

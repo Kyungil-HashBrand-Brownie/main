@@ -1,3 +1,1 @@
-export {default as methodExcution} from "./methodExcution"
-const caver = window.caver
-export {caver};
+export {getBtk, sellBtk, stakeNFTs, unstakeNFTs} from "./contractMethods"
