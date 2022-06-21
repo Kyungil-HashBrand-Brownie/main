@@ -445,8 +445,7 @@ body {
   width: 30px;
   margin: 0px 10px;
 }
-
-.brownie-icon { 
+.browny-icon { 
   width: 33px;
   height: 45px;
   margin: 0px 10px;
@@ -557,3 +556,64 @@ NftCard
   margin-left: 1%;
   font-size: 18px;
 }
+
+.slidediv {
+  font-size: 5em;
+  width: 350px;
+  color: white;
+  font-family: sans-serif;
+  position: relative;
+  top: 100px;
+  left: 100px;
+  animation: slide 2s ease-in-out;
+}
+
+@keyframes slide {
+  from {
+    /* 뒤에서 부터 날라온다 */
+    left: -200px;
+    opacity: 0;
+  }
+  to {
+    left: 100px;
+    opacity: 1;
+  }
+}
+
+@keyframes disappear {
+  from {
+    left: 100px;
+    opacity: 1;
+  }
+  to {
+    left: -200px;
+    opacity: 0;
+  }
+}
+
+.slidediv{
+
+}
+
+.bakingImg1 img{
+  width: 500px;
+  height: 500px;
+}
+
+@media screen and (max-width:568px) {
+  .slidediv {
+    flex-direction: column;
+    width: 100%;
+    padding: 24px;
+  }
+
+  .bakingImg1 img{
+    flex-direction: column;
+  }
+}
+
+/* @media screen and (max-width:768px) {
+  .slidediv {
+    
+  }
+} */

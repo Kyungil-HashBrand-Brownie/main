@@ -78,7 +78,7 @@ contract NFTStaking is BrownieNft {
   function claimed(uint256 tokenId) private isStaked(tokenId) {
     require(vault[tokenId].owner == msg.sender, "not an owner");
     uint256 reward = (((block.timestamp - vault[tokenId].timestamp) / 1 hours) / totalStaked) * 10;
-    instance.rewardMinting(msg.sender, reward);
+    instance.tokenTransfer(address(this), msg.sender, reward);
     vault[tokenId].timestamp = block.timestamp;
   }
 
@@ -98,5 +98,21 @@ contract NFTStaking is BrownieNft {
       } 
     }
     return stakingList;
+  }
+
+  function checkRewards() public view returns(uint) {
+    uint[] memory stakingList = new uint[](numOwnerStakedNFT[msg.sender]);
+    uint index = 0;
+    uint reward = 0;
+    for(uint i = 0; i < ownNFTs[msg.sender].length; i++) {
+      if(staked[ownNFTs[msg.sender][i]] == true) {
+        stakingList[index] = ownNFTs[msg.sender][i];
+        index++;
+      } 
+    }
+    for(uint i = 0; i < stakingList.length; i++) {
+      reward += (((block.timestamp - vault[stakingList[i]].timestamp) / 1 hours) / totalStaked) * 10;
+    }
+    return reward;
   }
 }

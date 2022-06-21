@@ -1,27 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import styled, { keyframes } from 'styled-components';
-import Browny1 from '../img/browny1.png';
-import Browny2 from '../img/browny2.png';
-import Browny3 from '../img/browny3.jpg';
-import Browny4 from '../img/browny4.jpg';
-import Browny5 from '../img/browny5.jpg';
-import Browny6 from '../img/browny6.jpg';
-import Browny7 from '../img/browny7.png';
-import Browny8 from '../img/browny8.png';
-import Browny9 from '../img/browny9.png';
-import Browny10 from '../img/browny10.png';
-import Eye from '../img/eye/Eye1.png'
-import Img from '../img/background/background11.png';
-import LeftImg from '../img/chocolate/choco1.png';
-import LeftImg2 from '../img/chocolate/choco2.png';
-import LeftImg3 from '../img/chocolate/choco3.png';
-import RightImg from '../img/chocolate/choco4.png';
 import Arrow from '../img/arrow.png';
 import { Container, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import HomeImgCard from '../components/HomeImgCard';
-import { group ,img1 , Group2} from '../img';
+import { group ,img1 , Group2 , baking, baking2, baking3} from '../img';
+import SlideShow from '../components/SlideShow';
 
 const StyledMainText = styled.div`
   /* background: red; */
@@ -133,6 +118,19 @@ const StyledArrow = styled.img`
   margin-right: 10px;
 `
 
+const BakingImg = styled.div`
+
+
+  .bakingImg1 img{
+    width: 300px;
+    height: 400px;
+    right: 400px;
+    /* margin-right: 100px; */
+    /* position: right ; */
+    /* object-position: 25% 75%; */
+  }
+`
+
 const StyledEllipse = styled.img`
   position: absolute;
   left: 0;
@@ -186,8 +184,12 @@ const StyleDiv1 = styled.div`
       width:100%;
       height: 100%;
     }
-    
+
+    /* .blue {
+      background-color: blue;
+    } */
 `
+
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -224,9 +226,39 @@ const HomePage = () => {
       dispatch({type: 'MODAL_CLOSE'});
     }
 
+
+    // let mainText = document.querySelector("slidediv")
+    let mainText = document.getElementsByClassName("slidediv")
+
+
+    // function scroll() {
+    //   let value = window.scrollY;
+    //   console.log('scroll', value);
+
+    //   if(value > 400) {
+    //     mainText.animation='disappear 1s ease-out forward';
+    //   }else{
+    //     mainText.animation='slide 1s ease-out'
+    //   }
+    // }
+
+    window.addEventListener('scroll', function() {
+      let value = window.scrollY;
+      // console.log('scroll', value);
+      // console.log(mainText)
+
+      if(value > 1500 || value < 850) {
+        mainText[0].style.animation='disappear 1s ease-out forwards';
+      }else  {
+        mainText[0].style.animation='slide 1s ease-out'
+      }
+    })
+
     useEffect(() => { 
       deadline = new Date('July 22, 2022 00:00:00').getTime();
-      timer.current = setInterval(count, 1000);   
+      timer.current = setInterval(count, 1000);  
+      // scroll() 
+      // timer();   
     }, [])
     
     return (
@@ -280,6 +312,43 @@ const HomePage = () => {
           
       </Container>
       <HomeImgCard />
+
+      <Container className='main-container'>
+          <Col className="main-col">
+          <div className="slidediv">
+            browny로 <br />사랑을 <br />전달  <br/>하세요
+          </div>
+          </Col>
+          <Col className="main-img-col">
+          <div className="bakingImg1">
+              <img src={baking2} /> 
+            </div>
+          </Col>
+          
+          {/* <StyledEllipse src={Ellipse} alt="ellipse"/> */}
+      </Container>
+
+
+        {/* <div className="slidediv">
+          PICK UP
+          YOUR NFT
+          hoihoi
+        </div> */}
+  
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        {/* <SlideShow /> */}
+      {/* <div className='main-team-container'> */}
+        {/* <Container className='main-team-container'>
+          <StyledMainText>Team</StyledMainText>
+          <Container className='main-team-img-box'>
+            <Col></Col>
+            <Col></Col>
+            <Col></Col>
+            <Col></Col>
+            <Col></Col>
+          </Container>
+        </Container> */}
+      {/* </div> */}
       </>
   )
 }

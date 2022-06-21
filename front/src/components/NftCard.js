@@ -2,10 +2,11 @@ import Card from 'react-bootstrap/Card';
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {brownieContract, contractAddr} from "configs";
+import {brownyContract, contractAddr} from "configs";
 import { check } from '../img';
 import { nftAction } from 'redux/actions/nftAction';
 import Pagination from './Pagination';
+import { stakeNFTs } from 'api';
 
 const Cardjustify = styled.div`
     display: flex;
@@ -106,13 +107,13 @@ function NftCard() {
     const { myAddress, myNFTs, myStakedNFTs, reward, myNFTpage } = useSelector(state => state.nft);
 
     const getCurrentReward = async() => {
-        dispatch(nftAction.getReward(brownieContract, myStakedNFTs));
+        dispatch(nftAction.getReward(brownyContract, myStakedNFTs));
         // dispatch({type: 'GET_REWARD', payload: reward});
 
     }
 
     const checkNfts = async () => {
-        // let conAddr = await brownieContract.methods.viewCon().call();
+        // let conAddr = await brownyContract.methods.viewCon().call();
         // console.log(conAddr);
         // console.log('reward: ', reward);
         getCurrentReward()
@@ -120,17 +121,17 @@ function NftCard() {
             { from: myAddress })
 
         let binaryArr = [];
-        for (let i = 0; i != myBrownieNFTs.length; i++) {
+        for (let i = 0; i != myBrownyNFTs.length; i++) {
             let metajson = {
-                id: `#${myBrownieNFTs[i]}`,
-                image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${myBrownieNFTs[i]}.png`,
+                id: `#${myBrownyNFTs[i]}`,
+                image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${myBrownyNFTs[i]}.png`,
                 checked: false,
             }
             binaryArr.push(metajson)
         }
         // console.log(binaryArr)
 
-        let stakedNFTs = await brownieContract.methods.checkStakedNFTs().call(
+        let stakedNFTs = await brownyContract.methods.checkStakedNFTs().call(
             {from : myAddress})
         let processedStakedNFTs = stakedNFTs.map((NFT) => {
             let data = {
@@ -140,12 +141,12 @@ function NftCard() {
             }
             return data;
         })
-        myBrownieNFTs = binaryArr.filter((item) => {
+        myBrownyNFTs = binaryArr.filter((item) => {
             if (stakedNFTs.indexOf(item.id.slice(1)) < 0) return item 
         })
-        // console.log(myBrownieNFTs);
+        // console.log(myBrownyNFTs);
 
-        dispatch({type: "NFTCARD_MYNFTS", payload: {myNFTs: myBrownieNFTs, myStakedNFTs: processedStakedNFTs}})
+        dispatch({type: "NFTCARD_MYNFTS", payload: {myNFTs: myBrownyNFTs, myStakedNFTs: processedStakedNFTs}})
     }
 
     // check
@@ -169,16 +170,10 @@ function NftCard() {
         let stakeIdArr = myNFTs.filter((item) => item.checked).map((item) => item.id.slice(1));
 
         if (stakeIdArr.length > 0) {
-            try {
-                const stakeData = await brownieContract.methods.stakeNFTs(stakeIdArr).encodeABI()
-                const result = await window.caver.klay.sendTransaction({
-                    type: 'SMART_CONTRACT_EXECUTION',
-                    from: myAddress,
-                    to: contractAddr,
-                    data: stakeData,
-                    gas: 3000000
-                })
-
+            // let stakeInstanceId = stakeIdArr[0].id.slice(1) //#62
+            console.log("stakeIdArr: ", stakeIdArr);
+            try{
+                const result = await stakeNFTs(myAddress,stakeIdArr)
                 if (result.status) {
                     // dispatch({type: "WALLET_REFRESH"})
                     let stakedNFTs = myNFTs.filter((item) => item.checked).map((item) => {
