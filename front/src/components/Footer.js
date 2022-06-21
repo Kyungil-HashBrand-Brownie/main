@@ -8,17 +8,15 @@ import kakao from "../img/footer/kakao.png"
 import kakao2 from "../img/footer/kakao2.png"
 
 const Outer = styled.div`
-    /* position: absolute; */
+    position: absolute;
     margin-top: 200px;
-    /* background: blue; */
+    bottom: 0;
     width: 100%;
 `
 
 const Foot = styled.div`
-    /* margin-top: 7%; */
     padding-left: 10%;
     padding-right: 10%;
-    /* background: red; */
     
     /* fContainer1 */
     .fContainer {
@@ -92,7 +90,6 @@ const Foot = styled.div`
         width: 36px;
         height: 36px;
     }
-
 
     /* 폰트 */
     font-family: 'Gothic A1', sans-serif;

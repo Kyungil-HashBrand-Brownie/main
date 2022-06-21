@@ -17,11 +17,11 @@ import LeftImg2 from '../img/chocolate/choco2.png';
 import LeftImg3 from '../img/chocolate/choco3.png';
 import RightImg from '../img/chocolate/choco4.png';
 import Arrow from '../img/arrow.png';
-import Ellipse from '../img/Ellipse1.png';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { img1 } from '../img';
+import HomeImgCard from '../components/HomeImgCard';
+import { group ,img1 , Group2} from '../img';
 
 const StyledMainText = styled.div`
   /* background: red; */
@@ -83,13 +83,15 @@ const displayAnimation = keyframes`
 
 const StyledBrownyAbove = styled.img`
   position: relative;
-  top: 6%;
-  width: 350px;
+  top: -10%;
+  width: 500px;
   margin: 0px 50px;
   z-index: 1;
+  border: 5px solid black;
   animation-name: ${displayAnimation};
   animation-duration: 0.5s;
   animation-iteration-count: 1;
+  background-color: lightcyan;
 `
 
 const StyledBrownyDown = styled.img`
@@ -139,11 +141,19 @@ const StyledEllipse = styled.img`
 `
 
 const StyleDiv1 = styled.div`
-    width:80% ;
-    background-color:gray;
-    height: 300px;
+    width:100% ;
+    background-color: #6B828E;
+    height: 50%;
     display: flex;
     position: relative;
+
+    .backgray{
+      background-color: gray;
+      width:80% ;
+      height: 300px;
+      display: flex;
+      position: relative;
+    }
     
 
     .box_vertical {
@@ -169,9 +179,6 @@ const StyleDiv1 = styled.div`
     .home_img {
       width: 500px;
       height: 300px;
-      /* position: relative; */
-      /* padding-bottom: 100px; */
-      /* margin-bottom: 10px; */
       margin-top: -10px;
     }
 
@@ -179,11 +186,6 @@ const StyleDiv1 = styled.div`
       width:100%;
       height: 100%;
     }
-
-    /* .blue {
-      background-color: blue;
-    } */
-
     
 `
 
@@ -202,7 +204,6 @@ const HomePage = () => {
     let timer = useRef(null); 
 
     const count = () => {
-      // console.log('test');
       let now = new Date().getTime();
       let t = deadline - now;
       let day = Math.floor((t % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
@@ -226,7 +227,6 @@ const HomePage = () => {
     useEffect(() => { 
       deadline = new Date('July 22, 2022 00:00:00').getTime();
       timer.current = setInterval(count, 1000);   
-      // timer();   
     }, [])
     
     return (
@@ -261,7 +261,7 @@ const HomePage = () => {
       <Container className='main-container'>
           <Col className="main-col">
               <StyledMainText>Browny</StyledMainText>
-              <StyledSubText>The Best nft Collections You Can Get</StyledSubText>
+              <StyledSubText>The Best nft Collections <br/>You Can Get</StyledSubText>
               {/* <div className='main-button-container'> */}
                 <StyledButton
                   onClick={moveToMint}
@@ -274,54 +274,12 @@ const HomePage = () => {
               {/* </div> */}
           </Col>
           <Col className="main-img-col">
-            <StyledBrownyAbove src={Browny8} alt="browny-above" />
-            <StyledBrownyDown src={Browny10} alt="browny-down" />
+            <StyledBrownyAbove src={Group2} alt="browny-above" />
+            {/* <StyledBrownyDown src={Browny10} alt="browny-down" /> */}
           </Col>
           
-          {/* <StyledEllipse src={Ellipse} alt="ellipse"/> */}
       </Container>
-
-      <StyleDiv1 >
-        <div className="blue">
-          <h2>01</h2>
-          <div class="box_vertical">
-            <h2>Heading</h2>
-          </div>
-        </div>
-        <div class="home_img">
-          <img src={img1} />
-        </div>
-        <Container>
-          <h2>#666</h2>
-          <span> Owned By Suh</span>
-          <Row>
-            <Col>아 </Col>
-            <Col>무</Col>
-          </Row>
-          <Row>
-            <Col>내</Col>
-            <Col>용</Col>
-          </Row>
-        </Container>
-        <div class="box_vertical2">
-          <h2>ox</h2>
-        </div>
-        <div class="box_vertical3">
-          <h2>oq</h2>
-        </div>
-      </StyleDiv1>
-      {/* <div className='main-team-container'> */}
-        {/* <Container className='main-team-container'>
-          <StyledMainText>Team</StyledMainText>
-          <Container className='main-team-img-box'>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-          </Container>
-        </Container> */}
-      {/* </div> */}
+      <HomeImgCard />
       </>
   )
 }

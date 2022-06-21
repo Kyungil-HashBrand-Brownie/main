@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Logo from '../img/logo.png';
 import axios from 'axios';
 import Exit from '../img/exit.png';
-// import Draggable from 'react-draggable';
 
 const StyledBody = styled.div`
     width: 100%;
@@ -49,10 +48,8 @@ const WhiteList = () => {
     const [image, setImage] = useState(Logo);
 
     const onUploadImg = async (e) => {
-        // console.log(e.target.files[0]);
         const formData = new FormData();
         formData.append('file', e.target.files[0]);
-        // 서버에 { key: 해당 메타마스크 주소 value: 이미지 } 저장
         // const result = await axios.post('http://localhost:4000/api/whitelist', formData,
             // { headers: { 'Accept': 'multipart/form-data' } },
         // ) 
@@ -89,23 +86,6 @@ const WhiteList = () => {
         </StyledWhiteListDiv>
         </StyledOuter>
         </StyledBody>
-    //     <Draggable
-    //     handle=".handle"
-    //     defaultPosition={{x: 0, y: 0}}
-    //     position={null}
-    //     grid={[25, 25]}
-    //     scale={1}
-    //     bounds={{left:0, right: 1500, top:0, bottom: 100}}
-    //     // onStart={handleStart}
-    //     // onDrag={handleDrag}
-    //     // onStop={handleStop}
-    //     >
-    //     <div>
-    //       <div className="handle">Drag from here</div>
-    //       <div>This readme is really dragging on...</div>
-    //     </div>
-    //   </Draggable>
-        
     )
 }
 
