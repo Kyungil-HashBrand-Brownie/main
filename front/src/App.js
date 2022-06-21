@@ -20,10 +20,10 @@ function App() {
     <>
     <div className='wrapper'>
       <Header />
-      <img
+      {/* <img
         className='backG-left-img'
         src={LeftImg3}
-      />
+      /> */}
       {/* <img 
           className='backG-right-img'
           src={RightImg}
