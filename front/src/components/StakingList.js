@@ -13,22 +13,23 @@ const Cardjustify = styled.div`
     /* width: 50%; */
 
     .Main {
+        width: 570px;
         flex-wrap: wrap;
         position: relative;
         display: flex ;
         justify-content: center ;
-        z-index:5;
         margin: 10px;
         border: 3px solid;
-        border-radius: 6px;
+        border-radius: 40px;
         padding: 10px 10px;
+        margin-top: 60px;
     }
 
     .Ncard {
-        display: flex;
-        justify-content: center;
+        /* display: flex; */
+        /* justify-content: center; */
         opacity: 0.8;
-        padding: 7px;
+        padding: 3px;
         margin: 10px;
         padding-top: 25px;
         text-align: center;
@@ -158,7 +159,7 @@ const StakingList = () => {
 
 
     return (
-        <div>
+        <div className='nftlist-outer'>
             <div className='nftcard-header'>
                 Staked NFTs
             </div>
@@ -186,7 +187,7 @@ const StakingList = () => {
                             onChange={(e) => checkHandler(e.target.checked, item.id)}
                             checked={checkItems.indexOf(item.id) >= 0 ? true : false}
                             /> */}
-                            <div><Card.Img style={{width: '12rem', height: '12rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
+                            <div><Card.Img style={{width: '14rem', height: '13rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
                             <Card.Title >{item.id}</Card.Title>
                             {/* <Container className="containerCard">
                                 <Row>

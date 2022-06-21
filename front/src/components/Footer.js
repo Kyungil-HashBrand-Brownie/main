@@ -8,10 +8,13 @@ import kakao from "../img/footer/kakao.png"
 import kakao2 from "../img/footer/kakao2.png"
 
 const Outer = styled.div`
-    position: absolute;
+    /* position: absolute;
     margin-top: 200px;
     bottom: 0;
-    width: 100%;
+    width: 100%; */
+    flex: 1;
+    /* position : relative; */
+    /* transform : translateY(-100%); */
 `
 
 const Foot = styled.div`
@@ -74,7 +77,6 @@ const Foot = styled.div`
         justify-content: flex-end;
         width: 100%;
         height: 100%;
-        
     }
 
     .snsText{

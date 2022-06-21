@@ -1,8 +1,14 @@
 body {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   overflow-x: hidden;
   background: linear-gradient(90deg, #deb38d 0.51%, #deb38d 0.52%, #deb38d 37.46%, #deb38d 53.47%, #f6f698 100%);
+}
+
+.wrapper {
+  height: auto;
+  min-height: 880px;
+  /* background-color: red; */
 }
 .backG-left-img {
   position: absolute;
@@ -351,6 +357,7 @@ body {
   z-index: 2;
   box-shadow: 7px 7px;
 }
+
 .swap-select {
   /* background-color: red; */
   display: flex;
@@ -370,7 +377,8 @@ body {
   border-radius: 10px;
   border: 3px solid black;
   /* background-color: rgb(8, 143, 136); */
-  background-color: rgb(237, 129, 147);
+  /* background-color: rgb(237, 129, 147); */
+  background: linear-gradient(180deg, rgb(150, 146, 146) 0.51%, rgb(142, 137, 137) 0.52%, rgb(149, 128, 128) 49.46%, rgb(224, 134, 149) 53.47%, rgb(237, 129, 147) 100%);
   color: white;
   font-size: 18px;
   width: 50%;
@@ -394,42 +402,50 @@ body {
   width: 30%;
   text-align: end;
 }
+
 .swap-box {
   display: flex;
   /* width: 400px; */
   justify-content: center;
 }
+
 .swap-submit {
   /* width: 40%; */
   /* background-color: red; */
 }
+
 .swap-button {
   width: 80px;
   height: 30px;
-  /* background: #deb38d; */
+  background: rgb(175, 173, 173);
   border: none;
   /* border: 2px solid black; */
   border-radius: 10px;
   font-size: 16px;
   font-weight: bold;
 }
+
 .swap-button:hover {
   transform: scale(1.05);
   /* font-weight: bold; */
 }
+
 .swap-token-icon {
   cursor: pointer;
   margin: 0px 20px;
   width: 20px;
   height: 20px;
 }
+
 .swap-token-icon:hover {
   transform: scale(1.2);
 }
+
 .klay-icon {
   width: 30px;
   margin: 0px 10px;
 }
+
 .brownie-icon { 
   width: 33px;
   height: 45px;
@@ -468,9 +484,37 @@ body {
   font-weight: bold;
 }
 
+/*Pagination*/
+.pageA {
+  margin-top: 30px;
+}
+
 /*
 NftCard
 */
+.myNFT-info-box {
+  display: flex;
+  justify-content: flex-end;
+  /* background-color: blue; */
+  /* display: flex; */
+  /* justify-content: center; */
+}
+.nftlist-outer {
+  margin-top: 15%;
+}
+.stake-box {
+  width: 100%;
+  padding: 0;
+  /* margin: 0; */
+  background-color: blue;
+}
+
+.stake-outer-box {
+  display: flex;
+  /* flex-direction: row; */
+  /* background-color: red; */
+  width: 100%;
+}
 
 #stake-checkbox {
   position: relative;
@@ -480,7 +524,7 @@ NftCard
   height: 35px;
   z-index: 2;
   top: 20px;
-  margin-top: -15.8%;
+  margin-top: -15.0%;
   /* transform: translate(50%, 50%) */
 }
 
@@ -491,9 +535,16 @@ NftCard
   margin: 10px 0 20px 0;
 }
 
+.card-container {
+  /* background-color: red; */
+}
+
 .reward-box {
+  /* background-color: red; */
+  position: relative;
+  right: 0;
   text-align: center;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 600;
   margin-bottom: 20px;
   /* color: yellowgreen; */
