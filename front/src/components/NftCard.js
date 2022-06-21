@@ -19,20 +19,19 @@ const Cardjustify = styled.div`
         border: 3px solid;
         border-radius: 40px;
         padding: 10px 10px;
+        background: #d78034;
+        /* background: #6e3503; */
     }
 
     .InnerMain {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-
     }
 
     .Ncard {
         opacity: 0.8;
-        /* background: grey; */
         padding: 3px;
-        /* width: 200px; */
         margin: 10px;
         padding-top: 25px;
         text-align: center;
@@ -117,7 +116,7 @@ function NftCard() {
         // console.log(conAddr);
         // console.log('reward: ', reward);
         getCurrentReward()
-        let myBrownieNFTs = await brownieContract.methods.myNFTs().call(
+        let myBrownyNFTs = await brownyContract.methods.myNFTs().call(
             { from: myAddress })
 
         let binaryArr = [];
