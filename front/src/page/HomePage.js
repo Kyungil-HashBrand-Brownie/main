@@ -1,21 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
 import styled, { keyframes } from 'styled-components';
-import Browny1 from '../img/browny1.png';
-import Browny2 from '../img/browny2.png';
-import Browny3 from '../img/browny3.jpg';
-import Browny4 from '../img/browny4.jpg';
-import Browny5 from '../img/browny5.jpg';
-import Browny6 from '../img/browny6.jpg';
-import Browny7 from '../img/browny7.png';
-import Browny8 from '../img/browny8.png';
-import Browny9 from '../img/browny9.png';
-import Browny10 from '../img/browny10.png';
-import Eye from '../img/eye/Eye1.png'
-import Img from '../img/background/background11.png';
-import LeftImg from '../img/chocolate/choco1.png';
-import LeftImg2 from '../img/chocolate/choco2.png';
-import LeftImg3 from '../img/chocolate/choco3.png';
-import RightImg from '../img/chocolate/choco4.png';
 import Arrow from '../img/arrow.png';
 import { Container, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';

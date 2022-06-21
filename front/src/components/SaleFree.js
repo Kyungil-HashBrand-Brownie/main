@@ -6,7 +6,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Browny from '../img/browny8.png';
-import {brownieContract, contractAddr} from "configs";
+import {brownyContract, contractAddr} from "configs";
 
 
 // 리팩터링 - 코드를 단순화하는 작업 불필요한 중복요소들을 제거
@@ -70,7 +70,7 @@ const FreeSale = () => {
             return alert("지갑을 먼저 연결해주세요")
         }
         try{
-            const conData = await brownieContract.methods.batchMint(count).encodeABI()
+            const conData = await brownyContract.methods.batchMint(count).encodeABI()
             const result = await window.caver.klay.sendTransaction({
                 type: 'SMART_CONTRACT_EXECUTION',
                 from:myAddress, 

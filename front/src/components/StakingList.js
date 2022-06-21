@@ -4,7 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import { check } from '../img';
-import {brownieContract, contractAddr} from "configs";
+import {brownyContract, contractAddr} from "configs";
+import { unstakeNFTs } from 'api';
 
 
 const Cardjustify = styled.div`
@@ -130,27 +131,21 @@ const StakingList = () => {
 
         // console.log(unstakedIdArr)
         if (unstakedIdArr.length > 0) {
-            try {
-                const unstakeData = await brownieContract.methods.unstakeNFTs(unstakedIdArr).encodeABI()
-                const result = await window.caver.klay.sendTransaction({
-                    type: 'SMART_CONTRACT_EXECUTION',
-                    from: myAddress,
-                    to: contractAddr,
-                    data: unstakeData,
-                    gas: 3000000
-                })
-                if (result.status) {
-                    // dispatch({type: "WALLET_REFRESH"})
-                    let unstakedNFTs = myStakedNFTs.filter((item) => item.checked).map((item) => {
-                        item.checked = false;
-                        return item;
-                    });
-                    dispatch({ type: 'NFTCARD_UNSTAKE', payload: { myNFTs: unstakedNFTs, myStakedNFTs: stakedNFTs } })
-                    alert("선택한 NFT가 정상적으로 unstaking 되었습니다.");
-                    // navigate('/');
-                }
-                else alert("transaction fail")
-            } catch (e) {
+            // let stakeInstanceId = unstakeIdArr[0].id.slice(1) //#62
+            try{
+            const result = await unstakeNFTs(myAddress,unstakedIdArr);
+            if(result.status){
+                // dispatch({type: "WALLET_REFRESH"})
+                let unstakedNFTs = myStakedNFTs.filter((item) => item.checked).map((item) => {
+                    item.checked = false;
+                    return item;
+                });
+                dispatch({type: 'NFTCARD_UNSTAKE', payload: {myNFTs: unstakedNFTs, myStakedNFTs: stakedNFTs}})
+                alert("선택한 NFT가 정상적으로 unstaking 되었습니다.");
+                // navigate('/');
+            }
+            else alert("transaction fail")
+            }catch(e) {
                 console.log(e.message)
             }
         }
