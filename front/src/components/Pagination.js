@@ -1,30 +1,66 @@
 import React from 'react';
-import { Pagination } from 'react-bootstrap';
-// import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components'
 
-const PageButton = () => {
-    // console.log('page: ', page, length)
-    // const navigate = useNavigate();
-    // console.log('page: ', page);
+const Nav = styled.nav`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin: 16px;
+`;
 
-    // const movePage = (to) => {
-    //     // console.log(page);
-    //     if (to != page + 1 && (to > 0 && to <= length)) navigate(`/movie/${to}`);
-    // }
+const Button = styled.button`
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 0;
+  background: black;
+  color: white;
+  font-size: 1rem;
+  &:hover {
+    background: tomato;
+    cursor: pointer;
+    transform: translateY(-2px);
+  }
+  &[disabled] {
+    background: grey;
+    cursor: revert;
+    transform: revert;
+  }
+  &[aria-current] {
+    background: deeppink;
+    font-weight: bold;
+    cursor: revert;
+    transform: revert;
+  }
+`;
 
-    // let quotient = parseInt(page / 5);
-    // let array = [1, 2, 3, 4, 5].map((ele) => 5 * quotient + ele);
+const PageButton = ({ total, page, setPage }) => {
+    console.log('page: ', page)
+    const numPages = Math.ceil(total / 4);
 
     return (
-        <Pagination className='pageA'>
-            <Pagination.First />
-            <Pagination.Prev />
-            <Pagination.Item active>1</Pagination.Item>
-            <Pagination.Item >2</Pagination.Item>
-            <Pagination.Item >3</Pagination.Item>
-            <Pagination.Next />
-            <Pagination.Last />
-        </Pagination>
+        <Nav>
+            <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
+            &lt;
+            </Button>
+            {
+            Array(numPages)
+            .fill()
+            .map((_, i) => (
+                <Button
+                key={i + 1}
+                onClick={() => setPage(i + 1)}
+                aria-current={page === i + 1 ? "page" : null}
+                >
+                {i + 1}
+                </Button>
+            ))
+            }
+            <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+            &gt;
+            </Button>
+        </Nav>
     )
 }
 

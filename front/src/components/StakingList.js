@@ -105,7 +105,6 @@ const StakingList = () => {
 
     const { myAddress, myNFTs, myStakedNFTs } = useSelector(state => state.nft);
 
-    const { posts } = useSelector(state => state.nft)
     // checked 된 것들
     const [checkItems, setCheckItems] = useState([])
 

@@ -25,10 +25,13 @@
 // }
 // }
 
-function getReward(contract, stake) {
+function getReward(contract, stake, renewMine, renewStaked) {
 
     return async (dispatch) => {
         let reward = 0;
+        console.log('there')
+        console.log(stake)
+        console.log(contract)
 
         try {
             for (let i = 0; i < stake.length; i++) {
@@ -38,7 +41,7 @@ function getReward(contract, stake) {
                 reward += ((currentTimestamp - whenStaked) / totalStakedNFTs) * 10;
                 console.log('reward: ', reward);
             }
-            dispatch({type: 'GET_REWARD_SUCCESS', payload: reward})
+            dispatch({type: 'GET_REWARD_SUCCESS', payload: reward })
         } catch(error) {
             console.log(error);
             dispatch({type: 'GET_REWARD_FAILURE'})

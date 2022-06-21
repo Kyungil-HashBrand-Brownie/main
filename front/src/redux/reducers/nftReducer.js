@@ -1,7 +1,7 @@
 let initialState = {
     nft: {},
-    myNFTpage: 0,
-    myStakedpage: 0,
+    myNFTpage: 1,
+    myStakedpage: 1,
     countAnimal: 0,
     countKid: 0,
     countMinority: 0,
