@@ -1,4 +1,4 @@
-import { brownieContract,contractAddr } from "configs";
+import { brownyContract,contractAddr } from "configs";
 
 // value가 들지 않는 method의 경우 amount = 0 이 default라서 안 넣어줘도 됨
 const methodExcution = async (from,encodedAbi,amount=0) =>{
@@ -18,7 +18,7 @@ const methodExcution = async (from,encodedAbi,amount=0) =>{
 
 const getBtk = async (myAddress,amount)=> {
     try {
-        const encodedAbi = await brownieContract.methods.getBtk(amount).encodeABI()
+        const encodedAbi = await brownyContract.methods.getBtk(amount).encodeABI()
         const result = await methodExcution(myAddress,encodedAbi,amount)
         return result
     } catch (error) {
@@ -28,7 +28,7 @@ const getBtk = async (myAddress,amount)=> {
 
 const sellBtk = async (myAddress,amount)=> {
     try {
-        const encodedAbi = await brownieContract.methods.sellBtk(amount).encodeABI()
+        const encodedAbi = await brownyContract.methods.sellBtk(amount).encodeABI()
         const result = await methodExcution(myAddress,encodedAbi,amount)
         return result
     } catch (error) {
@@ -39,7 +39,7 @@ const sellBtk = async (myAddress,amount)=> {
 // from 주소와 언스테이킹 상태의 nft tokenId를 인자로 필요로한다
 const stakeNFTs = async (myAddress,stakeIdArr)=> {
     try {
-        const encodedAbi = await brownieContract.methods.stakeNFTs(stakeIdArr).encodeABI()
+        const encodedAbi = await brownyContract.methods.stakeNFTs(stakeIdArr).encodeABI()
         const result = await methodExcution(myAddress,encodedAbi)
         return result
     } catch (error) {
@@ -49,7 +49,7 @@ const stakeNFTs = async (myAddress,stakeIdArr)=> {
 
 const unstakeNFTs = async (myAddress,unstakedIdArr)=> {
     try {
-        const encodedAbi = await brownieContract.methods.unstakeNFTs(unstakedIdArr).encodeABI()
+        const encodedAbi = await brownyContract.methods.unstakeNFTs(unstakedIdArr).encodeABI()
         const result = await methodExcution(myAddress,encodedAbi)
         return result
     } catch (error) {

@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Klaytn from '../img/swap/klaytn.png';
-import Brownie from '../img/swap/brownie.png';
-import Brownie1 from '../img/swap/brownie1.png';
+import Browny1 from '../img/swap/browny1.png';
 import Arrow from '../img/swap/arrowRight.png';
-import {brownieContract, contractAddr} from "configs";
+import {brownyContract, contractAddr} from "configs";
 import {getBtk, sellBtk} from "api"
 
 
@@ -57,7 +56,7 @@ const Swap = () => {
     
     const swapToken = async () => {
         let amount = amountInput.current.value
-        console.log(brownieContract);
+        console.log(brownyContract);
         if(Number(amount)){
             if(swap){
                 await getBtk(myAddress,amount)
@@ -80,8 +79,8 @@ const Swap = () => {
                 <div className='swap-select'>
                     <div className='swap-body'>
                         {<img 
-                        className={!swap ? 'brownie-icon' : 'klay-icon'} 
-                        src={!swap ? Brownie1 : Klaytn}
+                        className={!swap ? 'browny-icon' : 'klay-icon'} 
+                        src={!swap ? Browny1 : Klaytn}
                         />}
                         {bool[!swap]}
                     </div>
@@ -92,8 +91,8 @@ const Swap = () => {
                     />
                     <div className='swap-body'>
                         {<img 
-                        className={swap ? 'brownie-icon' : 'klay-icon'} 
-                        src={!swap ? Klaytn : Brownie1}
+                        className={swap ? 'browny-icon' : 'klay-icon'} 
+                        src={!swap ? Klaytn : Browny1}
                         />}{bool[swap]}
                     </div>
                 </div>

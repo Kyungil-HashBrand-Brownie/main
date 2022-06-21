@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {brownieContract, contractAddr} from "configs";
+import {brownyContract, contractAddr} from "configs";
 import axios from 'axios';
 import { check } from '../img';
 import { stakeNFTs } from 'api';
@@ -108,8 +108,8 @@ function NftCard() {
     const getCurrentReward = async() => {
         let reward = 0;
         for (let i = 0; i < myStakedNFTs.length; i++) {
-            let totalStakedNFTs = await brownieContract.methods.totalStaked().call()
-            let whenStaked = await brownieContract.methods.whenStaked(myStakedNFTs[i].id.slice(1)).call();            
+            let totalStakedNFTs = await brownyContract.methods.totalStaked().call()
+            let whenStaked = await brownyContract.methods.whenStaked(myStakedNFTs[i].id.slice(1)).call();            
             let currentTimestamp = parseInt(+ new Date() / 1000);
             reward += ((currentTimestamp - whenStaked) / totalStakedNFTs) * 10;
         }
@@ -119,25 +119,25 @@ function NftCard() {
     }
 
     const checkNfts = async () => {
-        // let conAddr = await brownieContract.methods.viewCon().call();
+        // let conAddr = await brownyContract.methods.viewCon().call();
         // console.log(conAddr);
         getCurrentReward()
         // console.log('reward: ', reward);
-        let myBrownieNFTs = await brownieContract.methods.myNFTs().call(
+        let myBrownyNFTs = await brownyContract.methods.myNFTs().call(
             { from: myAddress })
 
         let binaryArr = [];
-        for (let i = 0; i != myBrownieNFTs.length; i++) {
+        for (let i = 0; i != myBrownyNFTs.length; i++) {
             let metajson = {
-                id: `#${myBrownieNFTs[i]}`,
-                image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${myBrownieNFTs[i]}.png`,
+                id: `#${myBrownyNFTs[i]}`,
+                image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${myBrownyNFTs[i]}.png`,
                 checked: false,
             }
             binaryArr.push(metajson)
         }
         // console.log(binaryArr)
 
-        let stakedNFTs = await brownieContract.methods.checkStakedNFTs().call(
+        let stakedNFTs = await brownyContract.methods.checkStakedNFTs().call(
             {from : myAddress})
         let processedStakedNFTs = stakedNFTs.map((NFT) => {
             let data = {
@@ -147,12 +147,12 @@ function NftCard() {
             }
             return data;
         })
-        myBrownieNFTs = binaryArr.filter((item) => {
+        myBrownyNFTs = binaryArr.filter((item) => {
             if (stakedNFTs.indexOf(item.id.slice(1)) < 0) return item 
         })
-        // console.log(myBrownieNFTs);
+        // console.log(myBrownyNFTs);
 
-        dispatch({type: "NFTCARD_MYNFTS", payload: {myNFTs: myBrownieNFTs, myStakedNFTs: processedStakedNFTs}})
+        dispatch({type: "NFTCARD_MYNFTS", payload: {myNFTs: myBrownyNFTs, myStakedNFTs: processedStakedNFTs}})
     }
 
     // check

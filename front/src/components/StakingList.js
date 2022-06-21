@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import { check } from '../img';
-import {brownieContract, contractAddr} from "configs";
+import {brownyContract, contractAddr} from "configs";
 import { unstakeNFTs } from 'api';
 
 
