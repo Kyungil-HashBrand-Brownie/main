@@ -17,8 +17,7 @@ import LeftImg2 from '../img/chocolate/choco2.png';
 import LeftImg3 from '../img/chocolate/choco3.png';
 import RightImg from '../img/chocolate/choco4.png';
 import Arrow from '../img/arrow.png';
-import Ellipse from '../img/Ellipse1.png';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import HomeImgCard from '../components/HomeImgCard';
@@ -180,9 +179,6 @@ const StyleDiv1 = styled.div`
     .home_img {
       width: 500px;
       height: 300px;
-      /* position: relative; */
-      /* padding-bottom: 100px; */
-      /* margin-bottom: 10px; */
       margin-top: -10px;
     }
 
@@ -190,11 +186,6 @@ const StyleDiv1 = styled.div`
       width:100%;
       height: 100%;
     }
-
-    /* .blue {
-      background-color: blue;
-    } */
-
     
 `
 
@@ -213,7 +204,6 @@ const HomePage = () => {
     let timer = useRef(null); 
 
     const count = () => {
-      // console.log('test');
       let now = new Date().getTime();
       let t = deadline - now;
       let day = Math.floor((t % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
@@ -237,7 +227,6 @@ const HomePage = () => {
     useEffect(() => { 
       deadline = new Date('July 22, 2022 00:00:00').getTime();
       timer.current = setInterval(count, 1000);   
-      // timer();   
     }, [])
     
     return (
@@ -289,22 +278,8 @@ const HomePage = () => {
             {/* <StyledBrownyDown src={Browny10} alt="browny-down" /> */}
           </Col>
           
-          {/* <StyledEllipse src={Ellipse} alt="ellipse"/> */}
       </Container>
       <HomeImgCard />
-
-      {/* <div className='main-team-container'> */}
-        {/* <Container className='main-team-container'>
-          <StyledMainText>Team</StyledMainText>
-          <Container className='main-team-img-box'>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-          </Container>
-        </Container> */}
-      {/* </div> */}
       </>
   )
 }

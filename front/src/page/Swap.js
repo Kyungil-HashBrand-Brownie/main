@@ -17,7 +17,7 @@ const Swap = () => {
     const [swap, setSwap] = useState(true);
     const [exchange, setExchange] = useState('');
 
-    const amountInput = useRef();
+    const amountInput = useRef('');
 
     const swapChange = () => {
         setSwap(!swap)
@@ -43,8 +43,11 @@ const Swap = () => {
         }
 
         else {
-            if (swap) setExchange(parseInt(Number(value) / 77).toString() + ' ' + bool[swap])
-            else setExchange(parseInt(Number(value) * 77).toString() + ' ' + bool[swap])
+            if (value != '') {
+                if (swap) setExchange(parseInt(Number(value) / 7.22).toString() + ' ' + bool[swap])
+                else setExchange(parseInt(Number(value) * 7.22).toString() + ' ' + bool[swap])
+            }
+            else setExchange('your exchange')
             // amountInput.current.value = ;
         }
         
@@ -62,7 +65,6 @@ const Swap = () => {
             else{
                 await sellBtk(myAddress, amount)
             }
-            console.log('test');
             alert('스왑완료');
             dispatch({type: "WALLET_REFRESH"})
         }
@@ -70,7 +72,6 @@ const Swap = () => {
             alert("숫자를 입력해주세요")
             amountInput.current.value = "";
         }
-        console.log("end")
     }
     return (
         <div className='swap-box'>
@@ -96,6 +97,12 @@ const Swap = () => {
                         />}{bool[swap]}
                     </div>
                 </div>
+                <div className='swap-ratio-outer'>
+                <div className='swap-ratio-inner'>
+                    <div className='swap-ratio'>1 BTK = 7.22 KLAY</div>
+                    <div className='swap-ratio'>1 KLAY =  0.14 BTK</div>
+                </div>
+                </div>
                 <div className='swap-amount-input-box'>
                     <div className='swap-amount-inner'>
                         <input 
@@ -108,8 +115,7 @@ const Swap = () => {
                         disabled
                         className='swap-amount-input'
                         placeholder='your exchange'
-                        value={amountInput.current ? exchange : 'your exchange'}
-                        // value={exchange}
+                        value={amountInput.current.value != '' ?  exchange : 'your exchange'}
                         /> 
                         {/* <div className='swap-exchange'>
                             4{bool[swap]}
@@ -117,13 +123,13 @@ const Swap = () => {
                     </div>
                 </div>
                 <div className='swap-text-box'>
-                    <p className='swap-text'>최대 1000000개까지 거래 가능합니다</p>
+                    <p className='swap-text'>최대 1000000(일백만)개 거래 가능합니다</p>
                 </div>
                 <div className='swap-submit'>
                     <button 
-                    // className='swap-submit'
+                    className='swap-button'
                     onClick={swapToken}
-                    type='button'>확인</button>
+                    type='button'>Submit</button>
                 </div>
             </div>
         </div>

@@ -37,7 +37,6 @@ const StyledDiv = styled.div`
     margin-left: 20px;
     border-radius: 8px;
     
-    /* background: blue; */
 `;
 
 const StyledButton = styled.button`
@@ -105,10 +104,6 @@ const FreeSale = () => {
     const countMinus = () => {
         if (count > 0) setCount(count - 1);
     }
-
-    // useEffect(() => {
-    //     dispatch(countAdd())
-    // })
 
     return (
         <div className="freelist">
