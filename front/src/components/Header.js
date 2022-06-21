@@ -72,7 +72,7 @@ const Header = () => {
     const setTokenBalance = async (address) => {
             const weiBalance = await window.caver.klay.getBalance(address)
             const fixedBalance = weiToFixed(weiBalance)
-            const weibtkBalance = await btkInstance.balanceOf(myAddress) //BigNumber 객체
+            const weibtkBalance = await btkInstance.balanceOf(address) //BigNumber 객체
             const fixedbtkBalance = weiToFixed(weibtkBalance)
             
             setBalance(fixedBalance)
