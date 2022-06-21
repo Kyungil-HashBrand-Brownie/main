@@ -100,8 +100,10 @@ const Cardjustify = styled.div`
 `
 
 function NftCard() {
+    const [page, setPage] = useState(1);
+
     const dispatch = useDispatch();
-    const { myAddress, myNFTs, myStakedNFTs, reward } = useSelector(state => state.nft);
+    const { myAddress, myNFTs, myStakedNFTs, reward, myNFTpage } = useSelector(state => state.nft);
 
     const getCurrentReward = async() => {
         dispatch(nftAction.getReward(brownieContract, myStakedNFTs));
@@ -112,8 +114,8 @@ function NftCard() {
     const checkNfts = async () => {
         // let conAddr = await brownieContract.methods.viewCon().call();
         // console.log(conAddr);
-        getCurrentReward()
         // console.log('reward: ', reward);
+        getCurrentReward()
         let myBrownieNFTs = await brownieContract.methods.myNFTs().call(
             { from: myAddress })
 
@@ -159,7 +161,7 @@ function NftCard() {
 
     useEffect(() => {
         checkNfts()
-    }, [brownieContract.defaultAccount,myAddress])
+    }, [myAddress, myStakedNFTs.length])
 
     // 카드 staking 버튼
     const stakeNFT = async () => {
@@ -222,7 +224,7 @@ function NftCard() {
                 <div className='InnerMain'>
                     {   myNFTs.length > 0 
                         ? <> 
-                        {myNFTs.sort((a,b) => a.id.slice(1) - b.id.slice(1)).map((item, index1) => {
+                        {myNFTs.sort((a,b) => a.id.slice(1) - b.id.slice(1)).slice((page-1)*4, (page-1)*4 + 4).map((item, index1) => {
                             return <div className='card-container' key={index1}>
                                 <Card className="Ncard" style={{ width: '15rem' }}>
                                 {
@@ -256,13 +258,19 @@ function NftCard() {
                                 </Card>
                             </div>
                         })}
-                        <Pagination />
                         </> 
                         : <div>
                             <h2>Nothing to display</h2>
                         </div>
                     }
                 </div>
+                {myNFTs.length > 0 &&
+                    <Pagination 
+                        page={page}
+                        setPage={setPage}
+                        total={myNFTs.length}
+                    />
+                }
                 </div>
             </Cardjustify>
         </div>

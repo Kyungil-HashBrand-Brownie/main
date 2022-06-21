@@ -486,6 +486,9 @@ body {
 
 /*Pagination*/
 .pageA {
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
   margin-top: 30px;
 }
 
