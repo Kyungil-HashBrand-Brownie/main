@@ -7,4 +7,6 @@ router.post("/sellBtk",apiController.sellBtk)
 router.post("/stakeNFTs",apiController.stakeNFTs)
 router.post("/unstakeNFTs",apiController.unstakeNFTs)
 
+router.post("/sendGetBtk",apiController.sendGetBtk)
+
 module.exports = router

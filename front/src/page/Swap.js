@@ -7,6 +7,7 @@ import Brownie from '../img/swap/brownie.png';
 import Brownie1 from '../img/swap/brownie1.png';
 import Arrow from '../img/swap/arrowRight.png';
 import {brownieContract, contractAddr} from "configs";
+import axios from 'axios';
 
 const Swap = () => {
     const bool = {false: 'KLAY', true: 'BTK'}
@@ -54,18 +55,21 @@ const Swap = () => {
         let amount = amountInput.current.value
         console.log(brownieContract);
         if(Number(amount)){
-            if(swap === "BTK"){
+            if(swap){
                 try {
-                    const conData = await brownieContract.methods.getBtk(amount).encodeABI()
-                    const con = await window.caver.klay.sendTransaction({
-                        type: 'SMART_CONTRACT_EXECUTION',
+                    const conData = await axios.post("http://localhost:4000/api/getBtk",{amount})
+                    const con = await window.caver.klay.signTransaction({
+                        type: 'FEE_DELEGATED_SMART_CONTRACT_EXECUTION',
                         from: myAddress,
                         to: contractAddr,
                         gas: 300000,
                         data:conData,
                         value: window.caver.utils.toPeb(amount, 'KLAY')
                     })
-                    console.log(con)
+                    const raw = con.rawTransaction
+                    console.log(raw)
+                    const {data} = await axios.post("http://localhost:4000/api/sendGetBtk",{raw})
+                    console.log(data)
                 } catch (error) {
                     console.log(error)
                 }

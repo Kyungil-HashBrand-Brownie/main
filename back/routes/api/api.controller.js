@@ -49,6 +49,10 @@ const unstakeNFTs = async (myAddress,unstakedIdArr)=> {
     }
 }
 
+const sendGetBtk = async (req,res)=> {
+    const {raw} = req.body
+    caver.rpc.klay.sendRawTransaction(raw)
+}
 
 
-module.exports = { getBtk, sellBtk, stakeNFTs, unstakeNFTs }
+module.exports = { getBtk, sellBtk, stakeNFTs, unstakeNFTs , sendGetBtk }
