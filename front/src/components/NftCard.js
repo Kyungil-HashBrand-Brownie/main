@@ -6,6 +6,7 @@ import {brownyContract, contractAddr} from "configs";
 import { check } from '../img';
 import { nftAction } from 'redux/actions/nftAction';
 import Pagination from './Pagination';
+import { stakeNFTs } from 'api';
 
 const Cardjustify = styled.div`
     display: flex;
