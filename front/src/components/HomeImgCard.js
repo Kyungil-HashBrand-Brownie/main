@@ -89,11 +89,11 @@ const HomeImgCard = () => {
         <div className="backgray">
           <div className="blue">
             <h2>01</h2>
-            <div class="box_vertical">
+            <div className="box_vertical">
               <h2>Heading</h2>
             </div>
           </div>
-          <div class="home_img">
+          <div className="home_img">
             <img src={img1} />
           </div>
           <Container>
@@ -108,11 +108,11 @@ const HomeImgCard = () => {
               <Col>용</Col>
             </Row>
           </Container>
-          <div class="box_vertical2">
+          <div className="box_vertical2">
             <h1>02</h1>
             <h2>ox</h2>
           </div>
-          <div class="box_vertical3">
+          <div className="box_vertical3">
             <h1>03</h1>
             <h2>oq</h2>
           </div>
