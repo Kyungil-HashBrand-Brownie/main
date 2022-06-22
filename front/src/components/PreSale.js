@@ -59,7 +59,7 @@ const StyledBar = styled.div`
     text-align: center;
 `;
 
-const FreeSale = () => {
+const PreSale = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { myAddress } = useSelector(state => state.nft);
@@ -140,4 +140,4 @@ const FreeSale = () => {
         </div>
     )
 }
-export default FreeSale
+export default PreSale
