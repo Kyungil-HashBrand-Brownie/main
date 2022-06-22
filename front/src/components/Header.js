@@ -84,6 +84,7 @@ const Header = () => {
             setAddress(myAddress);
             await setTokenBalance(myAddress)
         }
+        else dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }
 
     const enableKikas = () => {
@@ -113,7 +114,7 @@ const Header = () => {
 
     useEffect(() => {
         setUserInfo();
-    }, [myAddress,walletRefresh,btkBalance])
+    }, [myAddress,walletRefresh])
 
     return (
         <Navbar className="nav" expand="lg">

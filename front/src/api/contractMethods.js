@@ -57,6 +57,25 @@ const unstakeNFTs = async (myAddress,unstakedIdArr)=> {
     }
 }
 
+const batchMint = async (myAddress,count)=> {
+    try {
+        const encodedAbi = await brownyContract.methods.batchMint(count).encodeABI()
+        const result = await methodExcution(myAddress,encodedAbi)
+        return result
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const whitelistMint = async (myAddress,count)=> {
+    try {
+        const encodedAbi = await brownyContract.methods.whitelistMint(count).encodeABI()
+        const result = await methodExcution(myAddress,encodedAbi)
+        return result
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
-export {methodExcution, getBtk, sellBtk, stakeNFTs, unstakeNFTs};
+export {methodExcution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, batchMint, whitelistMint};
