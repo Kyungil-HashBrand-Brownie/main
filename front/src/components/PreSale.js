@@ -32,7 +32,6 @@ const StyledDiv = styled.div`
     font-size: 1rem;
     color: green;
     line-height: 1.5;
-    background-color: rgb(144, 214, 32);
     /* margin-top: 20px; */
     margin-bottom: 30px;
     margin-left: 20px;
@@ -49,7 +48,7 @@ const StyledButton = styled.button`
     line-height: 1.5;
     border: 1px solid lightgray;
     color: white;
-    background-color: blue;
+    background-color: #361500;
     margin: 0 6px;
 `;
 
@@ -95,7 +94,7 @@ const PreSale = () => {
     }
 
     const countMinus = () => {
-        if (count > 0) setCount(count - 1);
+        if (count > 1) setCount(count - 1);
     }
 
     return (
