@@ -5,7 +5,7 @@ import { Container, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import HomeImgCard from '../components/HomeImgCard';
-import { group ,img1 , Group2 , baking, baking2, baking3} from '../img';
+import { group ,img1 , Group2 , baking, baking2, baking3 } from '../img';
 import SlideShow from '../components/SlideShow';
 
 const StyledMainText = styled.div`
@@ -336,7 +336,7 @@ const HomePage = () => {
         </div> */}
   
         <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-        {/* <SlideShow /> */}
+        <SlideShow />
       {/* <div className='main-team-container'> */}
         {/* <Container className='main-team-container'>
           <StyledMainText>Team</StyledMainText>
