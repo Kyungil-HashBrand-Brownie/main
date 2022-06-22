@@ -4,10 +4,18 @@ const Caver = require("caver-js")
 const caver = new Caver('https://api.baobab.klaytn.net:8651/')
 
 const getBtk = async (req,res)=> {
-    const {amount} = req.body
+    const {amount, myAddress} = req.body
     try {
         const encodedAbi = await brownieContract.methods.getBtk(amount).encodeABI()
-        res.send(encodedAbi)
+        const tx = {
+            type: 'SMART_CONTRACT_EXECUTION',
+            from: myAddress,
+            to: contractAddr,
+            gas: 300000,
+            data:encodedAbi,
+            value: caver.utils.toPeb(amount, 'KLAY')
+        }
+        res.send(tx)
         
     } catch (error) {
         console.log(error)
