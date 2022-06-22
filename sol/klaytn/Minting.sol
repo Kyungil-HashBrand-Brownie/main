@@ -129,8 +129,27 @@ contract BrownieNft is ERC721, Whitelist {
         return tokenNum;
     }
 
+    // 현재 whitelist가 minting한 nft 수 확인 
+    function whitelistNftNum() public view returns(uint256) {
+        uint256 tokenNum = _whitelistCounter.current();
+        return tokenNum;
+    }
+
     // 내가 보유한 nft tokenId들
     function myNFTs() public view returns(uint256[] memory) {
         return ownNFTs[msg.sender];
+    }
+
+    // 사용자의 tier
+    function userRank() public view returns(uint) {
+        if(balanceOf(msg.sender) == 0) {
+            return 0; // "unranked"
+        } else if(balanceOf(msg.sender) >= 1 && balanceOf(msg.sender) < 5) {
+            return 1; // "bronze"
+        } else if(balanceOf(msg.sender) >= 5 && balanceOf(msg.sender) < 10) {
+            return 2; // "silver"
+        } else {
+            return 3; // "gold"
+        } 
     }
 }
