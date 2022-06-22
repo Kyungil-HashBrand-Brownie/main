@@ -6,6 +6,7 @@ import {Container,Row , Col , Button} from 'react-bootstrap'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Browny from '../img/browny9.png'
 import {brownyContract, contractAddr} from "configs";
+import { whitelistMint } from 'api';
 
 const StyledMain = styled.div`
     width: 320px;
@@ -52,12 +53,6 @@ const StyledButton = styled.button`
     margin: 0 6px ;
 `;
 
-const StyledBar = styled.div`
-    margin-bottom: 20px;
-    width: 200px;
-    height: 20px;
-    text-align: center;
-`;
 
 const WhiteSale = () => {
     const dispatch = useDispatch();
@@ -77,29 +72,16 @@ const WhiteSale = () => {
     }
 
     const whiteMint = async () => {
-        try {
-            const conData = await brownyContract.methods.whitelistMint(count).encodeABI()
-            const result = await window.caver.klay.sendTransaction({
-                type: 'SMART_CONTRACT_EXECUTION',
-                from: myAddress,
-                to: contractAddr,
-                data: conData,
-                gas: 3000000
-            })
+            const result = await whitelistMint(myAddress,count)
             if (result.status) {
                 dispatch({ type: "WALLET_REFRESH" })
                 alert("해당 지갑 주소로 민팅되었습니다!");
-                // navigate('/');
             }
             else alert("transaction fail")
-        }
-        catch (e) {
-            // alert("카이카스 서명 거부됨")
-        }
     }
 
     const checkWhitelist = async () => {
-        if (brownyContract) {
+        if (myAddress) {
             try {
                 const isWhite = await brownyContract.methods.isWhitelisted(myAddress).call()
                 console.log(isWhite);
