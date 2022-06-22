@@ -334,8 +334,8 @@ const HomePage = () => {
           YOUR NFT
           hoihoi
         </div> */}
+        <br />
   
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         <SlideShow />
       {/* <div className='main-team-container'> */}
         {/* <Container className='main-team-container'>
