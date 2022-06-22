@@ -91,7 +91,7 @@ contract VoteContract {
     }
 
     // 발의 끝 함수
-    function endProposal() private isBeforeVote onlyOwner {
+    function endProposal() public isBeforeVote onlyOwner {
         voteStatus = VoteStatus.nowVote;
     }
 
@@ -113,12 +113,12 @@ contract VoteContract {
     }
     
     // 투표 끝 함수 
-    function endVote() private onlyOwner isNowVote {
+    function endVote() public onlyOwner isNowVote {
         voteStatus = VoteStatus.afterVote;
     }
 
     // 투표 재시작
-    function restartVote() private onlyOwner isAfterVote {
+    function restartVote() public onlyOwner isAfterVote {
         for(uint i = 0; i < proposalCounts; i++){
             delete proposals[i];
         }
