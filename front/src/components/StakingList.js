@@ -2,11 +2,10 @@ import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {useDispatch, useSelector} from "react-redux";
 import Card from 'react-bootstrap/Card';
-import axios from 'axios';
 import { check } from '../img';
 import {brownyContract, contractAddr} from "configs";
 import { unstakeNFTs } from 'api';
-
+import Pagination from './Pagination';
 
 const Cardjustify = styled.div`
     display: flex;
@@ -14,16 +13,28 @@ const Cardjustify = styled.div`
     /* width: 50%; */
 
     .Main {
-        width: 570px;
-        flex-wrap: wrap;
-        position: relative;
-        display: flex ;
-        justify-content: center ;
+        width: 600px;
         margin: 10px;
         border: 3px solid;
         border-radius: 40px;
         padding: 10px 10px;
-        margin-top: 60px;
+        /* background: rgb(81, 81, 221); */
+        background: #854207;
+    }
+
+    /* &::before {
+        position: absolute;
+        left: 1%;
+        width: 30%;
+        height: 600px;
+        content: '';
+        background: linear-gradient(to right, rgb(193, 214, 160), transparent);
+    } */
+
+    .InnerMain {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .Ncard {
@@ -91,24 +102,21 @@ const Cardjustify = styled.div`
         transform: translate(150%, 150%);
     }
 
-
-
     .cont21 {
         display: flex ;
         justify-content: center ;
+        margin: 10px 0px;
     }
 `
 
 const StakingList = () => {
+    const [page, setPage] = useState(1);
 
     const dispatch = useDispatch();
 
     const { myAddress, myNFTs, myStakedNFTs } = useSelector(state => state.nft);
 
-    const { posts } = useSelector(state => state.nft)
     // checked 된 것들
-    const [checkItems, setCheckItems] = useState([])
-
     const changeClickState = (id) => {
         let newArr = myStakedNFTs.map((li) => {
             if (li.id === id) {
@@ -121,8 +129,7 @@ const StakingList = () => {
     }
 
     useEffect(() => {
-        console.log(checkItems)
-    }, [checkItems])
+    }, [])
 
 
     const unstakeNFT = async () => {
@@ -155,58 +162,69 @@ const StakingList = () => {
 
     return (
         <div className='nftlist-outer'>
-            <div className='nftcard-header'>
+            <div className='nftcard-header stake-header'>
                 Staked NFTs
             </div>
             <Cardjustify>
-                <div>
-            <div className="Main">
-            {   myStakedNFTs.length > 0 
-                ? myStakedNFTs.map((item, index1) => {
-                    return <div key={index1}>
-                        <Card className="Ncard" style={{ width: '15rem' }}>
-                        {
-                            !item.checked ?
-                            null
-                            :< img 
-                            src={check}
-                            alt="sss"
-                            id='stake-checkbox'
-                        />
-                        }
+                <div className="Main">
+                    {myStakedNFTs.length > 0 && 
+                        <div className="cont21">
+                            <button onClick={unstakeNFT}>unstake</button>
+                        </div>
+                    }
+                <div className='InnerMain'>
+                    {   myStakedNFTs.length > 0 
+                        ? <>
+                        {myStakedNFTs.sort((a,b) => a.id.slice(1) - b.id.slice(1)).slice((page-1)*4, (page-1)*4 + 4).map((item, index1) => {
+                            return <div className='card-container' key={index1}>
+                                <Card className="Ncard" style={{ width: '15rem' }}>
+                                {
+                                    !item.checked ?
+                                    null
+                                    :< img 
+                                    src={check}
+                                    alt="sss"
+                                    id='stake-checkbox'
+                                />
+                                }
 
-                            {/* <Form.Check
-                            id='stake-checkbox'
-                            className="cheked"
-                            type={"checkbox"}
-                            onChange={(e) => checkHandler(e.target.checked, item.id)}
-                            checked={checkItems.indexOf(item.id) >= 0 ? true : false}
-                            /> */}
-                            <div><Card.Img style={{width: '14rem', height: '13rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
-                            <Card.Title >{item.id}</Card.Title>
-                            {/* <Container className="containerCard">
-                                <Row>
-                                    <Col className="col_1">price</Col>
-                                    <Col className="col_1">highst</Col>
-                                </Row>
-                                <Row>
-                                    <Col className="col_2">{item.eth} ETH</Col>
-                                    <Col className="col_2">{item.height}</Col>
-                                </Row>
-                            </Container> */}
-                        </Card>
-                    </div>
-                })
-                : 
-                <div>
-                    <h2>Nothing to display</h2>
+                                    {/* <Form.Check
+                                    id='stake-checkbox'
+                                    className="cheked"
+                                    type={"checkbox"}
+                                    onChange={(e) => checkHandler(e.target.checked, item.id)}
+                                    checked={checkItems.indexOf(item.id) >= 0 ? true : false}
+                                    /> */}
+                                    <div><Card.Img style={{width: '14rem', height: '13rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
+                                    <Card.Title >{item.id}</Card.Title>
+                                    {/* <Container className="containerCard">
+                                        <Row>
+                                            <Col className="col_1">price</Col>
+                                            <Col className="col_1">highst</Col>
+                                        </Row>
+                                        <Row>
+                                            <Col className="col_2">{item.eth} ETH</Col>
+                                            <Col className="col_2">{item.height}</Col>
+                                        </Row>
+                                    </Container> */}
+                                </Card>
+                            </div>
+                        })}
+                        </>
+                        : 
+                        <div>
+                            <h2>Nothing to display</h2>
+                        </div>
+                    }
                 </div>
-            }
-            </div>
-            <div className="cont21">
-                <button className="" onClick={unstakeNFT}> UnStake</button>
-            </div>
-            </div>
+                {myStakedNFTs.length > 0 &&
+                    <Pagination 
+                        page={page}
+                        setPage={setPage}
+                        total={myStakedNFTs.length}
+                    />
+                }
+                </div>
             </Cardjustify>
         </div>
     )

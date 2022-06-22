@@ -485,12 +485,18 @@ body {
 
 /*Pagination*/
 .pageA {
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
   margin-top: 30px;
+  background:#854207;
 }
-
 /*
 NftCard
 */
+.stake-header {
+  margin-bottom: 45px;
+}
 .myNFT-info-box {
   display: flex;
   justify-content: flex-end;
@@ -531,7 +537,7 @@ NftCard
   text-align: center;
   font-weight: bolder;
   font-size: 40px;
-  margin: 10px 0 20px 0;
+  /* margin: 10px 0 20px 0; */
 }
 
 .card-container {

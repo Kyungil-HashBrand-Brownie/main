@@ -19,20 +19,19 @@ const Cardjustify = styled.div`
         border: 3px solid;
         border-radius: 40px;
         padding: 10px 10px;
+        background: #d78034;
+        /* background: #6e3503; */
     }
 
     .InnerMain {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-
     }
 
     .Ncard {
         opacity: 0.8;
-        /* background: grey; */
         padding: 3px;
-        /* width: 200px; */
         margin: 10px;
         padding-top: 25px;
         text-align: center;
@@ -101,8 +100,10 @@ const Cardjustify = styled.div`
 `
 
 function NftCard() {
+    const [page, setPage] = useState(1);
+
     const dispatch = useDispatch();
-    const { myAddress, myNFTs, myStakedNFTs, reward } = useSelector(state => state.nft);
+    const { myAddress, myNFTs, myStakedNFTs, reward, myNFTpage } = useSelector(state => state.nft);
 
     const getCurrentReward = async() => {
         dispatch(nftAction.getReward(brownyContract, myStakedNFTs));
@@ -113,8 +114,8 @@ function NftCard() {
     const checkNfts = async () => {
         // let conAddr = await brownyContract.methods.viewCon().call();
         // console.log(conAddr);
-        getCurrentReward()
         // console.log('reward: ', reward);
+        getCurrentReward()
         let myBrownyNFTs = await brownyContract.methods.myNFTs().call(
             { from: myAddress })
 
@@ -160,8 +161,7 @@ function NftCard() {
 
     useEffect(() => {
         checkNfts()
-        // checkStakedNFTs()
-    }, [myAddress,myStakedNFTs.length])
+    }, [myAddress, myStakedNFTs.length])
 
     // 카드 staking 버튼
     const stakeNFT = async () => {
@@ -218,7 +218,7 @@ function NftCard() {
                 <div className='InnerMain'>
                     {   myNFTs.length > 0 
                         ? <> 
-                        {myNFTs.sort((a,b) => a.id.slice(1) - b.id.slice(1)).map((item, index1) => {
+                        {myNFTs.sort((a,b) => a.id.slice(1) - b.id.slice(1)).slice((page-1)*4, (page-1)*4 + 4).map((item, index1) => {
                             return <div className='card-container' key={index1}>
                                 <Card className="Ncard" style={{ width: '15rem' }}>
                                 {
@@ -252,13 +252,19 @@ function NftCard() {
                                 </Card>
                             </div>
                         })}
-                        <Pagination />
                         </> 
                         : <div>
                             <h2>Nothing to display</h2>
                         </div>
                     }
                 </div>
+                {myNFTs.length > 0 &&
+                    <Pagination 
+                        page={page}
+                        setPage={setPage}
+                        total={myNFTs.length}
+                    />
+                }
                 </div>
             </Cardjustify>
         </div>
