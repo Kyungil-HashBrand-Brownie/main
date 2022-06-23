@@ -29,9 +29,9 @@ function getReward(contract, stake, renewMine, renewStaked) {
 
     return async (dispatch) => {
         let reward = 0;
-        console.log('there')
-        console.log(stake)
-        console.log(contract)
+        // console.log('there')
+        // console.log(stake)
+        // console.log(contract)
 
         try {
             for (let i = 0; i < stake.length; i++) {
