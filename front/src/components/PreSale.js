@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Browny from '../img/browny8.png';
 import {brownyContract, contractAddr} from "configs";
+import { batchMint } from 'api';
 
 
 // 리팩터링 - 코드를 단순화하는 작업 불필요한 중복요소들을 제거
@@ -52,42 +53,34 @@ const StyledButton = styled.button`
     margin: 0 6px;
 `;
 
-const StyledBar = styled.div`
-    margin-bottom: 20px;
-    width: 200px;
-    height: 20px;
-    text-align: center;
-`;
 
 const PreSale = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { myAddress } = useSelector(state => state.nft);
+    
+    const [totalCnt, setTotalCnt] = useState(0);
+
+    const getMintCnt = async ()=> {
+        const totalCnt = await brownyContract.methods.nftNum().call()
+        setTotalCnt(totalCnt)
+    }
+
+    getMintCnt()
 
     
     const preMint = async () => {
         if(!myAddress){
             return alert("지갑을 먼저 연결해주세요")
         }
-        try{
-            const conData = await brownyContract.methods.batchMint(count).encodeABI()
-            const result = await window.caver.klay.sendTransaction({
-                type: 'SMART_CONTRACT_EXECUTION',
-                from:myAddress, 
-                to:contractAddr,
-                data:conData,
-                gas: 3000000
-            })
-            if(result.status){
-                dispatch({type: "WALLET_REFRESH"})
-                alert("해당 지갑 주소로 민팅되었습니다!");
-                // navigate('/');
-            }
-            else alert("transaction fail")
+        const result = await batchMint(myAddress,count)
+        console.log(result)
+        if(result.status){
+            dispatch({type: "WALLET_REFRESH"})
+            alert("해당 지갑 주소로 민팅되었습니다!");
         }
-        catch(e){
-            alert("카이카스 서명 거부됨")
-        }
+        else alert("transaction fail")
+        
         
     }
 
@@ -130,7 +123,7 @@ const PreSale = () => {
                     </Row>
                     <Row>
                         <Col>Amount</Col>
-                        <Col>limited</Col>
+                        <Col>{totalCnt}/150</Col>
                     </Row>
                 </Container>
                 <br />

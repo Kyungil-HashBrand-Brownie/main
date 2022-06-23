@@ -1,1 +1,1 @@
-export {getBtk, sellBtk, stakeNFTs, unstakeNFTs} from "./contractMethods"
+export {getBtk, sellBtk, stakeNFTs, unstakeNFTs, batchMint, whitelistMint} from "./contractMethods"
