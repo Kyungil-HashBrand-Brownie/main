@@ -35,7 +35,6 @@ const StyledDiv = styled.div`
     margin-bottom: 20px;
     border-radius: 8px;
     /* margin-top: 20px; */
-    background: rgb(144, 214, 32);
   /* border: 1px solid black; */
 `;
 
@@ -49,7 +48,7 @@ const StyledButton = styled.button`
     line-height: 1.5;
     border: 1px solid lightgray;
     color: white;
-    background-color: blue;
+    background-color: #361500;
     margin: 0 6px ;
 `;
 
@@ -68,7 +67,7 @@ const WhiteSale = () => {
     }
 
     const countMinus = () => {
-        if (count > 0) setCount(count - 1);
+        if (count > 1) setCount(count - 1);
     }
 
     const whiteMint = async () => {
@@ -131,7 +130,7 @@ const WhiteSale = () => {
                 <br />
                 <Button
                     className="mint-wal-connect-btn"
-                    variant="primary"
+                    variant="success"
                     onClick={whiteMint}
                 >Mint </Button>{' '}
                 </>

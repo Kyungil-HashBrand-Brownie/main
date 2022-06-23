@@ -221,7 +221,7 @@ body {
 .mint-img-container{
   width: 220px;
   height: 232px;
-  background-color: rgb(144, 214, 32);
+  background-color: white;
   margin-bottom: 20px;
   border-radius: 8px;
 }
@@ -639,3 +639,9 @@ NftCard
   }
 }
 
+/*
+MintCard
+*/
+.MintCard {
+  margin-top: 15%;
+}
