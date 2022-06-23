@@ -3,7 +3,24 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { img1 } from '../img';
 import styled, { keyframes } from 'styled-components';
 
+const datas = [
+  {
+     id: 0,
+     num: '01',
+     header: 'heading',
+ },
+ {
+     id: 1,
+     num: '02',
+     header: 'rabel',  
+ },
+ {
+     id: 2,
+     num: '03',
+     header: 'rabepl'  
+ },
 
+ ]
 
 
 const StyleDiv1 = styled.div`
@@ -14,7 +31,7 @@ const StyleDiv1 = styled.div`
     justify-content: center;
     position: relative;
 
-    .backgray{
+    .backColor{
       background-color: #F6C6EA;
       width:70% ;
       height: 340px;
@@ -25,6 +42,26 @@ const StyleDiv1 = styled.div`
       border-radius: 30px;
     }
     
+    .back{
+      background-color: #F6C6EA;
+      width:70% ;
+      height: 340px;
+      display: flex;
+      /* position: relative; */
+      margin-top: 150px;
+      margin-bottom: 10px;
+      border-radius: 30px;
+    }
+    .backColor{
+      background-color: #F6C6EA;
+      width:70% ;
+      height: 340px;
+      display: flex;
+      /* position: relative; */
+      margin-top: 150px;
+      margin-bottom: 10px;
+      border-radius: 30px;
+    }
 
     .box_vertical {
       writing-mode: vertical-lr;
@@ -50,6 +87,7 @@ const StyleDiv1 = styled.div`
       height: 410px;
       margin-top: -70px;
       transform: scale(1.0);
+      cursor: alias;
     }
 
     .box_vertical3 {
@@ -65,6 +103,7 @@ const StyleDiv1 = styled.div`
       height: 460px;
       margin-top: -120px;
       transform: scale(1.0);
+      cursor: alias;
     }
     
     .box_vertical3 h2{
@@ -98,33 +137,28 @@ const HomeImgCard = () => {
 
   const [click, setClick] = useState(0)
 
-  const buttonA = () => {
-    console.log("test")
-
-    if (click === 1) {
-      setClick(click)
-      console.log("rabel 02")
-    }else if (click === 2) {
-      setClick(click)
-      console.log("rabel 03")
-    }else {
-
-    }
-  }
-
-  // useEffect(() => {
-  //   buttonA()
-  // })
+  // 처음부터 끝까지 배열 값을 읽는다
+  let getData = datas.filter((item) => item.id !== click)
+  // 처음부터 읽는데 값을 찾으면 빠져 나온다.
+  let frontData = datas.find(item => item.id === click)
 
   return (
     <div>
         
       <StyleDiv1 >
-        <div className="backgray">
+        <div className="backColor"
+        style={{backgroundColor:
+                                 click === 1 ?
+                                 "#FAF4B7"
+                                 :click === 2 ?
+                                 "#F9F9F9"
+                                 :"#F6C6EA"
+                                
+        }}>
           <div className="blue">
-            <h2>01</h2>
-            <div className="box_vertical" onClick={()=>setClick(0)}>
-              <h2>Heading</h2>
+            <h2>{frontData.num}</h2>
+            <div className="box_vertical" onClick={()=>setClick(frontData.id)}>
+              <h2>{frontData.header}</h2>
             </div>
           </div>
           <div className="home_img">
@@ -137,13 +171,13 @@ const HomeImgCard = () => {
               <div>
                 <h1>우리들의 일그러진 영웅</h1>
                 <b> Warior Browny</b>
-                브라우니의 제조법은 보스턴 요리학교 요리기본서("The Boston Cooking School Cook Book")의 1906년판에 최초로 등장하였다. 이 제조법에 따른 초기의 브라우니는 케이크형이며 부드러운 맛이었다. "브라우니"라는 이름은 1896년판의 책에서 처음으로 등장했으나 이것은 양철 틀에 구운 당밀 케이크였다. 즉, 현재의 브라우니는 아니었다.
+                <div>브라우니의 제조법은 보스턴 요리학교 요리기본서("The Boston Cooking School Cook Book")의 1906년판에 최초로 등장하였다. 이 제조법에 따른 초기의 브라우니는 케이크형이며 부드러운 맛이었다. "브라우니"라는 이름은 1896년판의 책에서 처음으로 등장했으나 이것은 양철 틀에 구운 당밀 케이크였다. 즉, 현재의 브라우니는 아니었다.</div>
               </div>
               : click ===2 ?
               <div>
-                <h1>우리들의 희망</h1>
+                <h2>황무화 된 땅에서  희망</h2>
                 <b> Got Browny</b>
-                브라우니의 제조법은 보스턴 요리학교 요리기본서("The Boston Cooking School Cook Book")의 1906년판에 최초로 등장하였다. 이 제조법에 따른 초기의 브라우니는 케이크형이며 부드러운 맛이었다. "브라우니"라는 이름은 1896년판의 책에서 처음으로 등장했으나 이것은 양철 틀에 구운 당밀 케이크였다. 즉, 현재의 브라우니는 아니었다.
+                <div>브라우니의 제조법은 보스턴 요리학교 요리기본서("The Boston Cooking School Cook Book")의 1906년판에 최초로 등장하였다. 이 제조법에 따른 초기의 브라우니는 케이크형이며 부드러운 맛이었다. "브라우니"라는 이름은 1896년판의 책에서 처음으로 등장했으나 이것은 양철 틀에 구운 당밀 케이크였다. 즉, 현재의 브라우니는 아니었다.</div>
               </div>
               :<div>
                 <h1>#666</h1>
@@ -152,18 +186,27 @@ const HomeImgCard = () => {
               </div>
             }
           </Container>
-          <div className="box_vertical2" onClick={()=>setClick(1)}>
-            <h1>02</h1>
-            <h2>rabel</h2>
-          </div>
-          <div className="box_vertical3" onClick={()=>setClick(2)}>
-            <h1>03</h1>
-            <h2>rabel</h2>
-          </div>
+          {
+            getData.map((item, index) => 
+              // css 적용시키기 위해 위치 고정을 위해서 index ===0 을 사용한다? 
+              <div key={index} className={index === 0 ? 'box_vertical2' : 'box_vertical3'} 
+              style={{backgroundColor:
+                item.id === 1 ?
+                "#FAF4B7"
+                :item.id === 2 ?
+                "#F9F9F9"
+                :"#F6C6EA"
+              }}
+              onClick={()=>setClick(item.id)}>
+                <h1>{item.num}</h1>
+                <h2>{item.header}</h2>
+              </div>
+            )
+          }
         </div>
       </StyleDiv1>
     </div>
   )
 }
 
-export default HomeImgCard
+export default HomeImgCard;
