@@ -485,34 +485,34 @@ body {
 
 /*Pagination*/
 .pageA {
-  position: relative;
-  bottom: 0;
-  /* margin-top: 289px; */
+  margin-top: 300px;
 }
 
 .pageB {
+  margin-top: 10px;
   /* margin-top: 200px; */
 }
 /*
 NftCard
 */
+.nftlist-select-all-button:hover{
+  background-color: lightgray;
+  transform: scale(1.05);
+  /* font-weight: 550; */
+}
+
 .stake-button, .unstake-button{
   width: 50%;
   font-size: 20px;
   border-radius: 20px;
-  background-color: #198754;
+  /* background-color: #198754; */
   /* color: white; */
 }
 
-.stake-button:hover {
-  transform: scale(1.1);
+.stake-button:hover, .unstake-button:hover {
+  transform: scale(1.03);
   font-weight: bold;
-  /* background-color: #198754; */
-}
-
-.unstake-button:hover {
-  transform: scale(1.1);
-  font-weight: bold;
+  background-color: #efb369;
   /* background-color: #198754; */
 }
 
@@ -563,7 +563,7 @@ NftCard
 }
 
 .card-container {
-  /* background-color: red; */
+  /* background-color: rgb(205, 49, 49); */
 }
 
 .reward-box {
@@ -573,7 +573,9 @@ NftCard
   text-align: center;
   font-size: 17px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+  margin-top: 10px;
   /* color: yellowgreen; */
 }
 

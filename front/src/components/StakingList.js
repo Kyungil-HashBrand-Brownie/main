@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {useDispatch, useSelector} from "react-redux";
 import Card from 'react-bootstrap/Card';
-import { check } from '../img';
+import { Check } from '../img';
 import {brownyContract, contractAddr} from "configs";
 import { unstakeNFTs } from 'api';
 import Pagination from './Pagination';
@@ -16,25 +16,28 @@ const Cardjustify = styled.div`
 
     .Main {
         width: 600px;
-        height: 840px;
+        min-height: 875px;
+        /* height: 840px; */
         margin: 10px;
         border: 3px solid;
         border-radius: 40px;
         padding: 10px 10px;
+        background: radial-gradient(transparent, #854207);
         /* background: rgb(81, 81, 221); */
-        background: linear-gradient(to right, #854207, transparent);
+        /* background: linear-gradient(to right, #854207, transparent); */
     }
 
     .InnerMain {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .Ncard {
         opacity: 0.8;
         padding: 3px;
         margin: 10px;
+        margin-left: 27px;
         padding-top: 25px;
         text-align: center;
         cursor: pointer;
@@ -118,7 +121,7 @@ const Cardjustify = styled.div`
         background: rgb(47, 47, 238);
         color: white;
         border-radius: 30px;
-        font-size: 18px;
+        font-size: 15px;
         text-align: center;
         font-weight: bold;
         cursor: pointer;
@@ -173,6 +176,18 @@ const Cardjustify = styled.div`
         position: absolute;
         opacity: 1;
     }
+
+    .nftlist-select-all {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 5px;
+        margin-right: 50px;
+    }
+    
+    .nftlist-select-all-button {
+        border-radius: 10px;
+        cursor: pointer;
+    }
 `
 
 const StakingList = () => {
@@ -184,6 +199,23 @@ const StakingList = () => {
 
     let list = myStakedNFTs.filter((item) => item.checked);
     // checked 된 것들
+    const changeAllState = (checked) => {
+        let newArr;
+        if (checked) {
+            newArr = myStakedNFTs.map((item) => {
+                item.checked = true
+                return item
+        })
+        }
+        else {
+            newArr = myStakedNFTs.map((item) => {
+                item.checked = false
+                return item
+            })
+        }
+        // console.log(myNFTs)
+        dispatch({type: 'NFTCARD_CHANGE_ALL', payload: {myStakedNFTs: newArr}})
+    }
     const changeClickState = (id) => {
         let newArr = myStakedNFTs.map((li) => {
             if (li.id === id) {
@@ -239,6 +271,15 @@ const StakingList = () => {
                             </div>
                             <div className='nftlist-box'>
                                 <div className='nftlist-header'><i>Unstakelist</i></div>
+                                    <div className='nftlist-select-all'>
+                                        <div>
+                                            <input 
+                                            onChange={(e) => {changeAllState(e.target.checked)}}
+                                            type='checkbox'
+                                            className='nftlist-select-all-checkbox' />
+                                            Select All
+                                        </div>
+                                    </div>
                                     <div className='nftlist-justify'>
                                         <div className='nftlist'>
                                             {list.length > 0 ?
@@ -268,7 +309,7 @@ const StakingList = () => {
                                     !item.checked ?
                                     null
                                     :< img 
-                                    src={check}
+                                    src={Check}
                                     alt="sss"
                                     id='stake-checkbox'
                                 />

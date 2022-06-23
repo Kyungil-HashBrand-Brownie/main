@@ -8,7 +8,8 @@ const Testpage = () => {
     <div>
         {/* <EarthVote /> */}
         {/* <QuitVote /> */}
-        <SlideShow />
+        {/* <SlideShow /> */}
+        
     </div>
   )
 }
