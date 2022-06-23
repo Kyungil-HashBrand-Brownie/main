@@ -6,7 +6,7 @@ import Logo from '../img/brownyLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
-import {btkInstance} from "configs";
+import {btkInstance, brownyContract} from "configs";
 
 import { background10 ,background13} from '../img/background';
 
@@ -62,6 +62,7 @@ const Header = () => {
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(null);
     const [btkBalance, setBtkBalance] = useState(0);
+    const [isDeployer, setIsDeployer] = useState(false)
 
     const weiToFixed = (wei) => {
         const toKlay = window.caver.utils.convertFromPeb(wei);
@@ -78,11 +79,12 @@ const Header = () => {
             setBalance(fixedBalance)
             setBtkBalance(fixedbtkBalance);
     }
-
     const setUserInfo = async () => {
         if(myAddress){
             setAddress(myAddress);
             await setTokenBalance(myAddress)
+            const contractOwner = await brownyContract.methods.owner().call()
+            setIsDeployer(window.caver.utils.toChecksumAddress(myAddress) === contractOwner)
         }
         else dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }
@@ -92,13 +94,7 @@ const Header = () => {
         dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }
 
-    window.klaytn.on('accountsChanged', async function(accounts) {
-        console.log(accounts[0])
-        sessionStorage.setItem('id', accounts[0]);
-        dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
-        setAddress(accounts[0]);
-        await setTokenBalance(accounts[0])
-    })
+    
 
     const copyAddress = () => {
         navigator.clipboard.writeText(address)
@@ -114,7 +110,18 @@ const Header = () => {
 
     useEffect(() => {
         setUserInfo();
+        
     }, [myAddress,walletRefresh])
+
+    useEffect(()=>{
+        window.klaytn.on('accountsChanged', async function(accounts) {
+            console.log(accounts[0])
+            sessionStorage.setItem('id', accounts[0]);
+            dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
+            setAddress(accounts[0]);
+            await setTokenBalance(accounts[0])
+        })
+    },[])
 
     return (
         <Navbar className="nav" expand="lg">
@@ -134,10 +141,10 @@ const Header = () => {
                     <Link onClick={closeModal} className='nav-item' to="/">Home</Link>
                     <Link onClick={closeModal} className='nav-item' to="/mint">Mint</Link>
                     {/* <Link className='nav-item' to="/whitelist">Whitelist</Link> */}
-                    <Link onClick={closeModal} className='nav-item' to="/admin">admin</Link>
                     <Link onClick={closeModal} className='nav-item' to="/test">testpage</Link>
                     <Link onClick={closeModal} className='nav-item' to="/swap">swap</Link>
                     <Link onClick={closeModal} className='nav-item' to="/nftlist">nftlist</Link>
+                    {isDeployer ? <Link onClick={closeModal} className='nav-item' to="/admin">admin</Link> : null}
                 </Nav>
                 {
                 address != null
