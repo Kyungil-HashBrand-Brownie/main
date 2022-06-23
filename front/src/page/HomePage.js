@@ -226,31 +226,17 @@ const HomePage = () => {
       dispatch({type: 'MODAL_CLOSE'});
     }
 
-
-    // let mainText = document.querySelector("slidediv")
     let mainText = document.getElementsByClassName("slidediv")
-
-
-    // function scroll() {
-    //   let value = window.scrollY;
-    //   console.log('scroll', value);
-
-    //   if(value > 400) {
-    //     mainText.animation='disappear 1s ease-out forward';
-    //   }else{
-    //     mainText.animation='slide 1s ease-out'
-    //   }
-    // }
 
     window.addEventListener('scroll', function() {
       let value = window.scrollY;
-      // console.log('scroll', value);
-      // console.log(mainText)
-
-      if(value > 1500 || value < 850) {
-        mainText[0].style.animation='disappear 1s ease-out forwards';
-      }else  {
-        mainText[0].style.animation='slide 1s ease-out'
+      let loc = window.location.href;
+      if (loc == 'http://localhost:3000/') {
+        if(value > 1500 || value < 850) {
+          mainText[0].style.animation='disappear 1s ease-out forwards';
+        }else  {
+          mainText[0].style.animation='slide 1s ease-out'
+        }
       }
     })
 

@@ -3,41 +3,58 @@ import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {brownyContract, contractAddr} from "configs";
-import { check } from '../img';
+import { Check } from '../img';
 import { nftAction } from 'redux/actions/nftAction';
 import Pagination from './Pagination';
 import { stakeNFTs } from 'api';
 import Cancel from '../img/stake/cancel.png';
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: black;
+  margin-right: 70px;
+`;
 
 const Cardjustify = styled.div`
     display: flex;
     justify-content: center;
-    /* width: 50%; */
 
     .Main {
         width: 600px;
-        height: 840px;
+        min-height: 875px;
+        /* height: 840px; */
         margin: 10px;
         border: 3px solid;
         border-radius: 40px;
         padding: 10px 10px;
-        background: linear-gradient(to right, #d78034, transparent);
+        background: radial-gradient(transparent, #d78034);
+        /* background: linear-gradient(to right, #d78034 0%, transparent 50%, #d78034 100%); */
         /* background: #6e3503; */
     }
 
     .InnerMain {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .Ncard {
         opacity: 0.8;
         padding: 3px;
         margin: 10px;
+        margin-left: 27px;
         padding-top: 25px;
+        border-radius: 200px;
         text-align: center;
         cursor: pointer;
+        /* background: #fc5a8d ; */
+        /* background: #FAFA33 ; */
+        /* background: #FFA500; */
+        /* background: #4f86f7; */
+        /* background: #464196  */
     }
 
     .Ncard:hover {
@@ -130,7 +147,7 @@ const Cardjustify = styled.div`
         /* border: 1px solid black; */
         color: white;
         border-radius: 30px;
-        font-size: 18px;
+        font-size: 15px;
         /* padding-left: 15px; */
         text-align: center;
         font-weight: bold;
@@ -191,13 +208,42 @@ const Cardjustify = styled.div`
         /* width: 100%; */
         /* height: 100%; */
     }
+
+    .nftlist-select-all {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 5px;
+        margin-right: 50px;
+        /* background: red; */
+        align-items: center;
+    }
+    
+    .nftlist-select-all-button {
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .nftlist-select-all-text {
+        margin-top: 10px;
+        background: blue;
+        /* padding-top: 5px; */
+    }
+
+    .nftlist-select-all-checkbox {
+        margin-right: 3px;
+    }
+
+    .nftlist-card-img {
+        border-radius: 80px;
+    }
+
 `
 
 function NftCard() {
     const [page, setPage] = useState(1);
 
     const dispatch = useDispatch();
-    const { myAddress, myNFTs, myStakedNFTs, reward, myNFTpage } = useSelector(state => state.nft);
+    const { myAddress, myNFTs, myStakedNFTs, reward, myNFTpage, loading } = useSelector(state => state.nft);
 
     let list = myNFTs.filter((item) => item.checked);
     const getCurrentReward = async() => {
@@ -240,6 +286,24 @@ function NftCard() {
     }
 
     // check
+    const changeAllState = (checked) => {
+        let newArr;
+        if (checked) {
+            newArr = myNFTs.map((item) => {
+                item.checked = true
+                return item
+        })
+        }
+        else {
+            newArr = myNFTs.map((item) => {
+                item.checked = false
+                return item
+            })
+        }
+        // console.log(myNFTs)
+        dispatch({type: 'NFTCARD_CHANGE_ALL', payload: {myNFTs: newArr}})
+    }
+
     const changeClickState = (id) => {
         let newArr = myNFTs.map((li) => {
             if (li.id === id) {
@@ -284,13 +348,15 @@ function NftCard() {
 
     return (
         <div className='nftlist-outer'>
+
             <div className='nftcard-header'>
                 My NFTs
             </div>
             { myNFTs.length > 0 && 
                 <div className='myNFT-info-box'>
                     <div className='reward-box'>
-                        {'total reward : ' + (reward/10000).toFixed(2) + ' BTK'}
+                        <ClipLoader loading={loading} css={override} size={30} />
+                        {!loading && <div className='nftlist-reward'>total reward : {(reward/10000).toFixed(2)} BTK</div>}
                         {/* <button 
                         className='reward-button'
                         onClick={getReward}>
@@ -310,6 +376,17 @@ function NftCard() {
                             </div>
                             <div className='nftlist-box'>
                                 <div className='nftlist-header'><i>Stakelist</i></div>
+                                    <div className='nftlist-select-all'>
+                                        <div>
+                                            <input 
+                                            onChange={(e) => {changeAllState(e.target.checked)}}
+                                            type='checkbox'
+                                            className='nftlist-select-all-checkbox' />
+                                            Select All
+                                        </div>
+                                        {/* <button 
+                                        className='nftlist-select-all-button'>Select All</button> */}
+                                    </div>
                                     <div className='nftlist-justify'>
                                         <div className='nftlist'>
                                             {list.length > 0 ?
@@ -338,20 +415,12 @@ function NftCard() {
                                 {
                                     !item.checked ?
                                     null
-                                    :<img src={check}
+                                    :<img src={Check}
                                     alt="ca"
                                     id='stake-checkbox'
                                 />
                                 }
-
-                                    {/* <Form.Check
-                                    id='stake-checkbox'
-                                    className="cheked"
-                                    type={"checkbox"}
-                                    onChange={(e) => checkHandler(e.target.checked, item.id)}
-                                    checked={checkItems.indexOf(item.id) >= 0 ? true : false}
-                                    /> */}
-                                    <div><Card.Img style={{ width: '14rem', height: '13rem'}}onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
+                                    <div><Card.Img className='nftlist-card-img' style={{ width: '12rem', height: '12rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
                                     <Card.Title >{item.id}</Card.Title>
                                     {/* <Container className="containerCard">
                                         <Row>
