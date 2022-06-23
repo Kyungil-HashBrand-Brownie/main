@@ -23,16 +23,19 @@ const getBtk = async (myAddress,amount)=> {
         return result
     } catch (error) {
         console.log(error)
+        return error
     }
 }
 
 const sellBtk = async (myAddress,amount)=> {
     try {
         const encodedAbi = await brownyContract.methods.sellBtk(amount).encodeABI()
-        const result = await methodExcution(myAddress,encodedAbi,amount)
+        // btk를 transfer하는 함수이므로 value= 기본값0 이 되어야해서 amount 인자로 주면 안됨
+        const result = await methodExcution(myAddress,encodedAbi)
         return result
     } catch (error) {
         console.log(error)
+        return error
     }
 }
 
@@ -44,6 +47,7 @@ const stakeNFTs = async (myAddress,stakeIdArr)=> {
         return result
     } catch (error) {
         console.log(error)
+        return error
     }
 }
 
@@ -54,6 +58,7 @@ const unstakeNFTs = async (myAddress,unstakedIdArr)=> {
         return result
     } catch (error) {
         console.log(error)
+        return error
     }
 }
 
@@ -64,6 +69,7 @@ const batchMint = async (myAddress,count)=> {
         return result
     } catch (error) {
         console.log(error)
+        return error
     }
 }
 
@@ -74,6 +80,7 @@ const whitelistMint = async (myAddress,count)=> {
         return result
     } catch (error) {
         console.log(error)
+        return error
     }
 }
 

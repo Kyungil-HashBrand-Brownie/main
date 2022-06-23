@@ -57,12 +57,11 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh, isDeployer } = useSelector(state => state.nft);
 
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(null);
     const [btkBalance, setBtkBalance] = useState(0);
-    const [isDeployer, setIsDeployer] = useState(false)
 
     const weiToFixed = (wei) => {
         const toKlay = window.caver.utils.convertFromPeb(wei);
@@ -84,7 +83,8 @@ const Header = () => {
             setAddress(myAddress);
             await setTokenBalance(myAddress)
             const contractOwner = await brownyContract.methods.owner().call()
-            setIsDeployer(window.caver.utils.toChecksumAddress(myAddress) === contractOwner)
+            const isDeployer = window.caver.utils.toChecksumAddress(myAddress) === contractOwner
+            dispatch({type: 'CHECK_ISDEPLOYER', payload: isDeployer})
         }
         else dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }
@@ -93,8 +93,6 @@ const Header = () => {
         window.klaytn.enable()
         dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }
-
-    
 
     const copyAddress = () => {
         navigator.clipboard.writeText(address)
@@ -110,7 +108,6 @@ const Header = () => {
 
     useEffect(() => {
         setUserInfo();
-        
     }, [myAddress,walletRefresh])
 
     useEffect(()=>{
@@ -120,6 +117,9 @@ const Header = () => {
             dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
             setAddress(accounts[0]);
             await setTokenBalance(accounts[0])
+        })
+        window.klaytn.on('networkChanged', async function(network) {
+            console.log(network)
         })
     },[])
 
