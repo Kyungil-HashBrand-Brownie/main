@@ -13,6 +13,7 @@ let initialState = {
     myNFTs: [],
     myStakedNFTs: [],
     reward: 0,
+    loading: false,
     posts: [{
         id: 1
         , title: "test1"
@@ -54,11 +55,26 @@ function nftReducer(state = initialState, action) {
                 reward: payload,
             }
 
+        case 'LOADING_START' :
+            return {
+                ...state, 
+                loading: true,
+            }
+
         case "NFTCARD_STAKING":
             console.log("NFTLIST_DATA : ", payload);
             return {
                 ...state,
                 nftList: payload
+            }
+
+        case 'NFTCARD_CHANGE_ALL' :
+            // console.log(payload)
+            // console.log(Object.keys(payload)[0])
+            // console.log(Object.values(payload)[0])
+            return {
+                ...state,
+                [Object.keys(payload)[0]]: Object.values(payload)[0],
             }
 
         case 'NFTCARD_MYNFTS' :
@@ -120,12 +136,14 @@ function nftReducer(state = initialState, action) {
             return  {
                 ...state, 
                 reward: payload,
+                loading: false,
             }
 
         case 'GET_REWARD_FAILURE' :
             return {
                 ...state, 
                 reward: 0,
+                loading: false,
             }
 
         default:
