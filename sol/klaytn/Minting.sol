@@ -68,7 +68,7 @@ contract BrownieNft is ERC721, Whitelist {
         uint256 randNonce = 0;
         uint256 randomNum;
         while(true) {
-            randomNum = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender, randNonce))) % 150 + 1;
+            randomNum = uint256(keccak256(abi.encodePacked(block.timestamp, randNonce, msg.sender))) % 150 + 1;
             if(mintinglist[randomNum] == false) {
                 mintinglist[randomNum] = true;
                 break;
@@ -138,18 +138,5 @@ contract BrownieNft is ERC721, Whitelist {
     // 내가 보유한 nft tokenId들
     function myNFTs() public view returns(uint256[] memory) {
         return ownNFTs[msg.sender];
-    }
-
-    // 사용자의 tier
-    function userRank() public view returns(uint) {
-        if(balanceOf(msg.sender) == 0) {
-            return 0; // "unranked"
-        } else if(balanceOf(msg.sender) >= 1 && balanceOf(msg.sender) < 5) {
-            return 1; // "bronze"
-        } else if(balanceOf(msg.sender) >= 5 && balanceOf(msg.sender) < 10) {
-            return 2; // "silver"
-        } else {
-            return 3; // "gold"
-        } 
     }
 }
