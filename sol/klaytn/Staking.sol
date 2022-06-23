@@ -100,19 +100,17 @@ contract NFTStaking is BrownieNft {
     return stakingList;
   }
 
-  function checkRewards() public view returns(uint) {
-    uint[] memory stakingList = new uint[](numOwnerStakedNFT[msg.sender]);
-    uint index = 0;
-    uint reward = 0;
-    for(uint i = 0; i < ownNFTs[msg.sender].length; i++) {
-      if(staked[ownNFTs[msg.sender][i]] == true) {
-        stakingList[index] = ownNFTs[msg.sender][i];
-        index++;
-      } 
-    }
-    for(uint i = 0; i < stakingList.length; i++) {
-      reward += (((block.timestamp - vault[stakingList[i]].timestamp) / 1 hours) / totalStaked) * 10;
-    }
-    return reward;
+  // 사용자의 tier
+  function userRank() public view returns(uint) {
+    uint _amount = balanceOf(msg.sender) + checkStakedNFTs().length;
+    if(_amount == 0) {
+      return 0; // "unranked"
+    } else if(_amount >= 1 && _amount < 5) {
+      return 1; // "bronze"
+    } else if(_amount >= 5 && _amount < 10) {
+      return 2; // "silver"
+    } else {
+      return 3; // "gold"
+    } 
   }
 }
