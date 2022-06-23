@@ -6,7 +6,7 @@ const Nav = styled.nav`
   justify-content: center;
   align-items: center;
   gap: 4px;
-  margin: 16px;
+  /* margin: 16px; */
 `;
 
 const Button = styled.button`
@@ -36,11 +36,10 @@ const Button = styled.button`
 `;
 
 const PageButton = ({ total, page, setPage }) => {
-    console.log('page: ', page)
     const numPages = Math.ceil(total / 4);
 
     return (
-        <Nav>
+        <Nav className={total%4 < 3 && page == numPages ? 'pageA': 'pageB'}>
             <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
             &lt;
             </Button>

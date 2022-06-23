@@ -7,6 +7,7 @@ import { check } from '../img';
 import { nftAction } from 'redux/actions/nftAction';
 import Pagination from './Pagination';
 import { stakeNFTs } from 'api';
+import Cancel from '../img/stake/cancel.png';
 
 const Cardjustify = styled.div`
     display: flex;
@@ -15,11 +16,12 @@ const Cardjustify = styled.div`
 
     .Main {
         width: 600px;
+        height: 840px;
         margin: 10px;
         border: 3px solid;
         border-radius: 40px;
         padding: 10px 10px;
-        background: #d78034;
+        background: linear-gradient(to right, #d78034, transparent);
         /* background: #6e3503; */
     }
 
@@ -96,6 +98,98 @@ const Cardjustify = styled.div`
         display: flex ;
         justify-content: center;
         margin: 10px 0px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid black;
+        /* background: red; */
+        /* border: 3px solid black; */
+    }
+
+    .nftlist {
+        text-align: center;
+        border-radius: 3px;
+        width: 80%;
+        padding: 5px;
+        background: lightgray;
+        /* width: 100%; */
+        /* text-align: center; */
+        /* border: 5px solid black; */
+        /* border-radius: 3px; */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        /* margin: 20px; */
+        /* padding: 5px; */
+        /* background: lightgray; */
+    }
+
+    .nftlist-id-box {
+        width: 80px;
+        margin: 3px 4px;
+        /* background: white; */
+        background: rgb(47, 47, 238);
+        /* border: 1px solid black; */
+        color: white;
+        border-radius: 30px;
+        font-size: 18px;
+        /* padding-left: 15px; */
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .nftlist-id-box:hover {
+        transform: scale(1.1);
+    }
+
+    .nftlist-header {
+        font-size: 25px;
+        padding-left: 70px;
+        margin-bottom: 20px;
+    }
+    .nftlist-text {
+        text-align: center;
+        border-radius: 3px;
+        width: 80%;
+        padding: 5px;
+        background: lightgray;
+    }
+
+    .nftlist-box {
+        margin: 0px 30px;
+        /* background:red; */
+        /* display: flex; */
+        /* flex-direction: column; */
+        /* justify-content: center; */
+    }
+
+    .nftlist-justify {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .nftlist-cancel {
+        width: 50px;
+        height: 50px;
+    }
+
+    .overlay {
+        /* display: none, */
+        position: absolute;
+        opacity: 0;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        transform: translate(15px, -40px);
+    }
+
+    .nftlist-id-box:hover .overlay{
+        /* transform: translate(-15px, 0); */
+        position: absolute;
+        opacity: 1;
+        /* background: rgba(43, 41, 41, 0.9); */
+        /* width: 100%; */
+        /* height: 100%; */
     }
 `
 
@@ -105,16 +199,13 @@ function NftCard() {
     const dispatch = useDispatch();
     const { myAddress, myNFTs, myStakedNFTs, reward, myNFTpage } = useSelector(state => state.nft);
 
+    let list = myNFTs.filter((item) => item.checked);
     const getCurrentReward = async() => {
         dispatch(nftAction.getReward(brownyContract, myStakedNFTs));
         // dispatch({type: 'GET_REWARD', payload: reward});
-
     }
 
     const checkNfts = async () => {
-        // let conAddr = await brownyContract.methods.viewCon().call();
-        // console.log(conAddr);
-        // console.log('reward: ', reward);
         getCurrentReward()
         let myBrownyNFTs = await brownyContract.methods.myNFTs().call(
             { from: myAddress })
@@ -194,7 +285,7 @@ function NftCard() {
     return (
         <div className='nftlist-outer'>
             <div className='nftcard-header'>
-                My NFTs            
+                My NFTs
             </div>
             { myNFTs.length > 0 && 
                 <div className='myNFT-info-box'>
@@ -211,9 +302,32 @@ function NftCard() {
             <Cardjustify>
                 <div className='Main'>
                     {myNFTs.length > 0 && 
-                        <div className="cont21">
-                            <button onClick={stakeNFT}>stake</button>
-                        </div>
+                        <>
+                            <div className="cont21">
+                                <button 
+                                className='stake-button'
+                                onClick={stakeNFT}>stake</button>
+                            </div>
+                            <div className='nftlist-box'>
+                                <div className='nftlist-header'><i>Stakelist</i></div>
+                                    <div className='nftlist-justify'>
+                                        <div className='nftlist'>
+                                            {list.length > 0 ?
+                                                list.map((item) => 
+                                                <div className='nftlist-id-box'>
+                                                    {item.id}
+                                                    <div className='overlay'>
+                                                        <img src={Cancel} 
+                                                        onClick={() => changeClickState(item.id)}
+                                                        className='nftlist-cancel'/>
+                                                    </div>
+                                                </div>)
+                                                : <div className='nftlist-text'>Select an item from below!</div>
+                                            }
+                                        </div>
+                                    </div>
+                            </div>
+                        </>
                     }
                 <div className='InnerMain'>
                     {   myNFTs.length > 0 
