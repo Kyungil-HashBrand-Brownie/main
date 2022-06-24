@@ -5,10 +5,29 @@ body {
   background: linear-gradient(90deg, #e9a667 0.52%, #f0e3a1 39.46%, #f0e3a1 70.47%, #e9a667 90%);
 }
 
+/* 폰트 */
+@font-face {
+  font-family: "Yfont1";
+  src: url("./font/Y1.otf");
+}
+@font-face {
+  font-family: "Yfont2";
+  src: url("./font/Y2.ttf");
+}
+/* @font-face {
+  font-family: "Yfont3";
+  src: url("./font/YUniverse-L.otf");
+}
+@font-face {
+  font-family: "Yfont4";
+  src: url("./font/YUniverse-L.ttf");
+} */
+
 .wrapper {
   height: auto;
   min-height: 880px;
-  /* background-color: red; */
+  font-family: "Yfont2";
+  font-weight: 50;
 }
 .backG-left-img {
   position: absolute;
@@ -534,7 +553,7 @@ NftCard
   width: 100%;
   padding: 0;
   /* margin: 0; */
-  background-color: rgb(47, 47, 238);
+  background-color: blue;
 }
 
 .stake-outer-box {
@@ -647,4 +666,19 @@ MintCard
 */
 .MintCard {
   margin-top: 15%;
+}
+/* the slides */
+.slick-slide {
+  margin: 0 10px;
+}
+/* the parent */
+.slick-list {
+  margin: 0 20px;
+  /* background-color: black; */
+  height: 450px;
+}
+
+.brownyLogo{
+  display: flex;
+  text-align: center;
 }

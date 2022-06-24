@@ -6,9 +6,7 @@ let initialState = {
     countKid: 0,
     countMinority: 0,
     countTotal: 0,
-    myAddress: "",
     modalState: false,
-    walletRefresh: 1,
     nftList: "",
     myNFTs: [],
     myStakedNFTs: [],
@@ -23,7 +21,11 @@ let initialState = {
     }, {
         id: 3
         , title: "test3"
-    }]
+    }],
+    // address, walletRefresh, isDeployer update
+    myAddress: "",
+    walletRefresh: 1,
+    isDeployer: false
 }
 
 function nftReducer(state = initialState, action) {
@@ -110,11 +112,6 @@ function nftReducer(state = initialState, action) {
                 myStakedNFTs: payload.myStakedNFTs,
             }
 
-        case "ADDRESS_CHANGE_SUCCESS":
-            return {
-                ...state,
-                myAddress: payload,
-            }
 
         case "REMOVE_BOOKMARK_TEST":
             let copy = [...state.posts]
@@ -126,11 +123,6 @@ function nftReducer(state = initialState, action) {
                 ...state, posts: copy
             }
 
-        case "WALLET_REFRESH":
-            return {
-                ...state,
-                walletRefresh: !state.walletRefresh
-            }
 
         case 'GET_REWARD_SUCCESS' : 
             return  {
@@ -144,6 +136,25 @@ function nftReducer(state = initialState, action) {
                 ...state, 
                 reward: 0,
                 loading: false,
+            }
+        // address, walletRefresh, isDeployer update
+
+        case "ADDRESS_CHANGE_SUCCESS":
+            return {
+                ...state,
+                myAddress: payload,
+            }
+        
+        case "WALLET_REFRESH":
+            return {
+                ...state,
+                walletRefresh: !state.walletRefresh
+            }
+        
+        case "CHECK_ISDEPLOYER":
+            return {
+                ...state,
+                isDeployer: payload
             }
 
         default:

@@ -56,16 +56,21 @@ const Swap = () => {
     
     const swapToken = async () => {
         let amount = amountInput.current.value
-        console.log(brownyContract);
+        let status;
         if(Number(amount)){
             if(swap){
-                await getBtk(myAddress,amount)
+                const result = await getBtk(myAddress,amount)
+                status = result.status
             }
             else{
-                await sellBtk(myAddress, amount)
+                const result = await sellBtk(myAddress, amount)
+                status = result.status
             }
-            alert('스왑완료');
-            dispatch({type: "WALLET_REFRESH"})
+            if(status){
+                alert('스왑완료');
+                dispatch({type: "WALLET_REFRESH"})
+            }
+            else alert("오류 발생")
         }
         else {
             alert("숫자를 입력해주세요")
