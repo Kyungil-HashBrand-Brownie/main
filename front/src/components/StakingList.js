@@ -188,6 +188,12 @@ const Cardjustify = styled.div`
         border-radius: 10px;
         cursor: pointer;
     }
+
+    .no-display {
+        /* background: red; */
+        position: absolute;
+        transform: translate(120px, 385px);
+    }
 `
 
 const StakingList = () => {
@@ -250,6 +256,9 @@ const StakingList = () => {
             }catch(e) {
                 console.log(e.message)
             }
+        }
+        else {
+            alert('언스테이킹할 아이템을 선택하세요.');
         }
     }
 
@@ -339,8 +348,8 @@ const StakingList = () => {
                         })}
                         </>
                         : 
-                        <div>
-                            <h2>Nothing to display</h2>
+                        <div className='no-display'>
+                            <h1>Nothing to display</h1>
                         </div>
                     }
                 </div>

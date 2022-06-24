@@ -41,14 +41,16 @@ const StyledSubText = styled.div`
 `
 const StyledMintDate = styled.div`
   position: relative;
-  top: 60px;
-  border: 15px solid white;
+  top: 40px;
+  border: 5px solid rgb(31, 162, 31);
   border-radius: 10px;
   padding: 10px 0px;
   text-align: center;
   font-weight: bolder;
   font-size: larger;
   width: 300px;
+  background: white;
+  /* background: rgb(31, 162, 31); */
   /* display: flex; */
   /* justify-content: center; */
 `
@@ -73,7 +75,7 @@ const StyledBrownyAbove = styled.img`
   width: 500px;
   margin: 0px 50px;
   z-index: 1;
-  border: 5px solid black;
+  /* border: 5px solid black; */
   animation-name: ${displayAnimation};
   animation-duration: 0.5s;
   animation-iteration-count: 1;
@@ -175,7 +177,7 @@ const StyleDiv1 = styled.div`
       margin-top: -100px;
     }
 
-    .home_img {
+    /* .home_img {
       width: 500px;
       height: 300px;
       margin-top: -10px;
@@ -184,7 +186,7 @@ const StyleDiv1 = styled.div`
     .home_img img{
       width:100%;
       height: 100%;
-    }
+    } */
 
     /* .blue {
       background-color: blue;
@@ -271,7 +273,7 @@ const HomePage = () => {
       {/* </div> */}
       <div className='mintdate-container'>
         <StyledMintDate>
-          <span>민팅 시작까지 남은 시간</span><br />
+          <span>민팅 까지 남은 시간</span><br />
           <span>
             {state.day < 10 ? `0${state.day}` : state.day}D 
             &nbsp;{state.hours < 10 ? `0${state.hours}` : state.hours}h 

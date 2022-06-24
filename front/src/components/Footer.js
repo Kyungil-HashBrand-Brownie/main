@@ -110,9 +110,9 @@ const Foot = styled.div`
 const Footer = () => (
     <Outer>
     <Foot>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Roboto:wght@900&family=Kdam+Thmor+Pro&family=Walter+Turncoat&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Roboto:wght@900&family=Kdam+Thmor+Pro&family=Walter+Turncoat&display=swap" rel="stylesheet" /> */}
         <div className="fContainer">
             <div className="fContainer_left">
                 <div className="fContainer_left_content">

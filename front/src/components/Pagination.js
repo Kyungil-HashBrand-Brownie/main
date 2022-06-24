@@ -39,7 +39,7 @@ const PageButton = ({ total, page, setPage }) => {
     const numPages = Math.ceil(total / 4);
 
     return (
-        <div className={page !=numPages ? 'pageB' : page == numPages & total % 4 != 0 ? 'pageA': 'pageB'}>
+        <div className={page !=numPages ? 'pageB' : page == numPages && (total % 4 == 1 || total % 4 == 2) ? 'pageA': 'pageB'}>
         <Nav>
             <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
             &lt;

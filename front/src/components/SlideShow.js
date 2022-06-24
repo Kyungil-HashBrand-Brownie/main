@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { nft1, nft2, nft3, nft4, nft5, nft6, nft7, nft8, nft9, nft10, nft11, nft12, nft13, nft14, nft15, nft16 } from '../img/nft';
+import { useNavigate } from 'react-router-dom';
 
 
 const data = [{
@@ -89,7 +90,9 @@ const Container = styled.div`
     width:400px;
     border-radius: 20px ;
     border: 5px solid white;
+    cursor: pointer;
   `,
+
   BottomLeft = styled.div`
     position: absolute;
     font-size: 40px;
@@ -101,6 +104,7 @@ const Container = styled.div`
 
 const SlideShow = () => {
 
+    const navigate = useNavigate();
     const [slide, setSlide] = useState(data)
 
     const settings = {
@@ -141,9 +145,6 @@ const SlideShow = () => {
           rtl: false,
       };
 
-
-      
-
   return (
     <>
         <Slider {...settings}>
@@ -155,7 +156,7 @@ const SlideShow = () => {
             return (
               <div key={item.id}>
                 <ImageContainer>
-                  <Image src={item.img} />
+                  <Image onClick={() => navigate('/mint')} src={item.img} />
                   <BottomLeft>{item.caption}</BottomLeft>
                 </ImageContainer>
               </div>
@@ -170,9 +171,9 @@ const SlideShow = () => {
 
             {slide.map(item => {
             return (
-              <div key={item.id}>
+              <div key={item.id + 15}>
                 <ImageContainer>
-                  <Image src={item.img} />
+                  <Image onClick={() => navigate('/mint')} src={item.img} />
                   <BottomLeft>{item.caption}</BottomLeft>
                 </ImageContainer>
               </div>
