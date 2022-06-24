@@ -673,11 +673,11 @@ MintCard
 }
 /* the slides */
 .slick-slide {
-  margin: 0 10px;
+  /* margin: 0 10px; */
 }
 /* the parent */
 .slick-list {
-  margin: 0 20px;
+  /* margin: 0 20px; */
   /* background-color: black; */
   height: 450px;
 }

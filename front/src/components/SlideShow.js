@@ -84,6 +84,7 @@ const Container = styled.div`
     /* margin:auto ; */
     margin-top: 50px;
     margin-bottom:50px;
+    /* margin-left: 10px; */
   `,
   Image = styled.img`
     width:400px;
