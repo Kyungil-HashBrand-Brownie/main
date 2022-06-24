@@ -192,7 +192,7 @@ const Cardjustify = styled.div`
     .no-display {
         /* background: red; */
         position: absolute;
-        transform: translate(120px, 385px);
+        transform: translate(55px, 385px);
     }
 `
 
