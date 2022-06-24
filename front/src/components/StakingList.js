@@ -257,6 +257,9 @@ const StakingList = () => {
                 console.log(e.message)
             }
         }
+        else {
+            alert('언스테이킹할 아이템을 선택하세요.');
+        }
     }
 
 
