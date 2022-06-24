@@ -95,11 +95,13 @@ body {
 }
 
 .mint-wal-connect-btn {
-  margin: 10px 0;
+  margin: 20px 0 10px 0;
+  padding: 3px 3px;
 }
 
 .main-team-img-box {
   display: flex;
+  color: rgb(31, 162, 31)
 }
 
 /* .whitelist {
@@ -187,17 +189,15 @@ body {
 }
 
 
-/* .FreeSale {
-  background-color: blue;
-} */
+.FreeSale {
+  /* background-color: blue; */
+  margin-right: 30%;
+  margin-left: 0%;
+}
 
 .profile-inner {
   width: 80%;
   /* color: rgb(236, 236, 115); */
-}
-
-.mint-wal-connect-btn {
-  margin: 10px 0;
 }
 
 .info-box {
@@ -237,6 +237,9 @@ body {
   /* border-bottom: 2px black solid; */
   /* background-color: rgb(144, 214, 32); */
 }
+.mint-info-row {
+  margin-bottom: 10px;
+}
 .mint-img-container{
   width: 220px;
   height: 232px;
@@ -249,9 +252,19 @@ body {
   font-weight: 600;
   background: white;
   border-radius: 30px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 10px 10px;
   font-size: 16px;
+}
+.mint-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mint-title-box {
+  margin-top: 20px;
+  border-bottom: 3px solid black;
+  margin-bottom: 20px;
 }
 
 /* .mint-count {
@@ -665,7 +678,7 @@ NftCard
 MintCard
 */
 .MintCard {
-  margin-top: 15%;
+  margin-top: 5%;
 }
 /* the slides */
 .slick-slide {

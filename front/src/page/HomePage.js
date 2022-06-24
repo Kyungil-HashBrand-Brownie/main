@@ -42,13 +42,15 @@ const StyledSubText = styled.div`
 const StyledMintDate = styled.div`
   position: relative;
   top: 40px;
-  border: 10px solid white;
+  border: 5px solid rgb(31, 162, 31);
   border-radius: 10px;
   padding: 10px 0px;
   text-align: center;
   font-weight: bolder;
   font-size: larger;
   width: 300px;
+  background: white;
+  /* background: rgb(31, 162, 31); */
   /* display: flex; */
   /* justify-content: center; */
 `
@@ -73,7 +75,7 @@ const StyledBrownyAbove = styled.img`
   width: 500px;
   margin: 0px 50px;
   z-index: 1;
-  border: 5px solid black;
+  /* border: 5px solid black; */
   animation-name: ${displayAnimation};
   animation-duration: 0.5s;
   animation-iteration-count: 1;
