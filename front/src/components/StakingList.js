@@ -188,6 +188,12 @@ const Cardjustify = styled.div`
         border-radius: 10px;
         cursor: pointer;
     }
+
+    .no-display {
+        /* background: red; */
+        position: absolute;
+        transform: translate(120px, 385px);
+    }
 `
 
 const StakingList = () => {
@@ -339,8 +345,8 @@ const StakingList = () => {
                         })}
                         </>
                         : 
-                        <div>
-                            <h2>Nothing to display</h2>
+                        <div className='no-display'>
+                            <h1>Nothing to display</h1>
                         </div>
                     }
                 </div>

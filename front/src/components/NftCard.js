@@ -27,10 +27,11 @@ const Cardjustify = styled.div`
         min-height: 875px;
         /* height: 840px; */
         margin: 10px;
-        border: 3px solid;
+        border: 3px solid white;
         border-radius: 40px;
         padding: 10px 10px;
-        background: radial-gradient(transparent, #d78034);
+        background: #F5FADB;
+        /* background: radial-gradient(transparent, #FFF9F9); */
         /* background: linear-gradient(to right, #d78034 0%, transparent 50%, #d78034 100%); */
         /* background: #6e3503; */
     }
@@ -42,7 +43,7 @@ const Cardjustify = styled.div`
     }
 
     .Ncard {
-        opacity: 0.8;
+        opacity: 0.9;
         padding: 3px;
         margin: 10px;
         margin-left: 27px;
@@ -50,9 +51,6 @@ const Cardjustify = styled.div`
         border-radius: 200px;
         text-align: center;
         cursor: pointer;
-        /* background: #fc5a8d ; */
-        /* background: #FAFA33 ; */
-        /* background: #FFA500; */
         /* background: #4f86f7; */
         /* background: #464196  */
     }
@@ -124,6 +122,8 @@ const Cardjustify = styled.div`
     .nftlist {
         text-align: center;
         border-radius: 3px;
+        border-top-left-radius: 10px;
+        border-bottom-right-radius: 10px;
         width: 80%;
         padding: 5px;
         background: lightgray;
@@ -142,10 +142,10 @@ const Cardjustify = styled.div`
     .nftlist-id-box {
         width: 80px;
         margin: 3px 4px;
-        /* background: white; */
-        background: rgb(47, 47, 238);
+        background: white;
+        /* background: rgb(47, 47, 238); */
         /* border: 1px solid black; */
-        color: white;
+        /* color: white; */
         border-radius: 30px;
         font-size: 15px;
         /* padding-left: 15px; */
@@ -186,8 +186,8 @@ const Cardjustify = styled.div`
     }
 
     .nftlist-cancel {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
     }
 
     .overlay {
@@ -197,7 +197,7 @@ const Cardjustify = styled.div`
         display: flex;
         justify-content: center;
         text-align: center;
-        transform: translate(15px, -40px);
+        transform: translate(22px, -33px);
     }
 
     .nftlist-id-box:hover .overlay{
@@ -235,6 +235,12 @@ const Cardjustify = styled.div`
 
     .nftlist-card-img {
         border-radius: 80px;
+    }
+
+    .no-display {
+        /* background: red; */
+        position: absolute;
+        transform: translate(120px, 385px);
     }
 
 `
@@ -352,19 +358,21 @@ function NftCard() {
             <div className='nftcard-header'>
                 My NFTs
             </div>
-            { myNFTs.length > 0 && 
                 <div className='myNFT-info-box'>
                     <div className='reward-box'>
-                        <ClipLoader loading={loading} css={override} size={30} />
-                        {!loading && <div className='nftlist-reward'>total reward : {(reward/10000).toFixed(2)} BTK</div>}
-                        {/* <button 
-                        className='reward-button'
-                        onClick={getReward}>
-                        보상 받기
-                        </button> */}
+                    { myNFTs.length > 0 && 
+                                <>
+                                <ClipLoader loading={loading} css={override} size={30} />
+                                {!loading && <div className='nftlist-reward'>total reward : {(reward/10000).toFixed(2)} BTK</div>}
+                                {/* <button 
+                                className='reward-button'
+                                onClick={getReward}>
+                                보상 받기
+                                </button> */}
+                                </>
+                    }
                     </div>
                 </div>
-            }
             <Cardjustify>
                 <div className='Main'>
                     {myNFTs.length > 0 && 
@@ -411,12 +419,19 @@ function NftCard() {
                         ? <> 
                         {myNFTs.sort((a,b) => a.id.slice(1) - b.id.slice(1)).slice((page-1)*4, (page-1)*4 + 4).map((item, index1) => {
                             return <div className='card-container' key={index1}>
-                                <Card className="Ncard" style={{ width: '15rem' }}>
+                                <Card 
+                                    className="Ncard" 
+                                    style={{ 
+                                        width: '15rem', 
+                                        backgroundColor: "lightgray"
+                                            // index1%4 == 0 ? "#fc518d" : index1%4 == 1 ? "orange" 
+                                            // : index1%4 == 2 ? "#3cb346" : "#FAFA33"
+                                    }}>
                                 {
                                     !item.checked ?
                                     null
                                     :<img src={Check}
-                                    alt="ca"
+                                    alt="checked"
                                     id='stake-checkbox'
                                 />
                                 }
@@ -436,8 +451,8 @@ function NftCard() {
                             </div>
                         })}
                         </> 
-                        : <div>
-                            <h2>Nothing to display</h2>
+                        : <div className='no-display'>
+                            <h1>Nothing to display</h1>
                         </div>
                     }
                 </div>
