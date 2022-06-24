@@ -61,7 +61,7 @@ const Header = () => {
     const { modalState, myAddress, walletRefresh, isDeployer } = useSelector(state => state.nft);
 
     const [address, setAddress] = useState(null);
-    const [balance, setBalance] = useState(null);
+    const [balance, setBalance] = useState(0);
     const [btkBalance, setBtkBalance] = useState(0);
 
     const weiToFixed = (wei) => {
