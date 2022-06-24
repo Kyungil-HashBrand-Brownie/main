@@ -112,31 +112,24 @@ const StyleDiv1 = styled.div`
     .home_img {
       width: 600px;
       height: 350px;
-      /* position: relative; */
-      /* padding-bottom: 100px; */
-      /* margin-bottom: 10px; */
+      position: relative;
       margin-top: -50px;
-      
     }
 
     .home_img img{
       width:100%;
       height: 100%;
       border-radius: 30px;
-      border: $((props) => props.click === 1 ? '5px solid #FAF4B7' :
+      /* border: $((props) => props.click === 1 ? '5px solid #FAF4B7' :
                           props.click === 2 ? '5px solid #F9F9F9' :
                           null
               
-      )
+      ) */
     }
 
 `
 
 const HomeImgCard = () => {
-
-  // const [rabelState, setRabelState] = useState(0)
-  // const [rabelYellow, setRabelYellow] = useState(1)
-  // const [rabelWhite, setRabelWhite] = useState(2)
 
   const [click, setClick] = useState(0)
 
@@ -147,7 +140,6 @@ const HomeImgCard = () => {
 
   return (
     <div>
-        
       <StyleDiv1 >
         <div className="backColor"
         style={{backgroundColor:
@@ -165,7 +157,7 @@ const HomeImgCard = () => {
             </div>
           </div>
           <div className="home_img">
-            <img src={img1} click={click} alt="hi"/>
+            <img src={img1} alt="hi"/>
           </div>
           <Container>
 

@@ -141,9 +141,6 @@ const SlideShow = () => {
           rtl: false,
       };
 
-
-      
-
   return (
     <>
         <Slider {...settings}>
