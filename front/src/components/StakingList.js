@@ -15,7 +15,7 @@ const Cardjustify = styled.div`
     /* width: 50%; */
 
     .Main {
-        width: 600px;
+        width: 500px;
         min-height: 875px;
         /* height: 840px; */
         margin: 10px;
@@ -313,7 +313,7 @@ const StakingList = () => {
                         ? <>
                         {myStakedNFTs.sort((a,b) => a.id.slice(1) - b.id.slice(1)).slice((page-1)*4, (page-1)*4 + 4).map((item, index1) => {
                             return <div className='card-container' key={index1}>
-                                <Card className="Ncard" style={{ width: '15rem' }}>
+                                <Card className="Ncard" style={{ width: '12rem' }}>
                                 {
                                     !item.checked ?
                                     null
@@ -331,7 +331,7 @@ const StakingList = () => {
                                     onChange={(e) => checkHandler(e.target.checked, item.id)}
                                     checked={checkItems.indexOf(item.id) >= 0 ? true : false}
                                     /> */}
-                                    <div><Card.Img style={{width: '14rem', height: '13rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
+                                    <div><Card.Img style={{width: '11rem', height: '11rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
                                     <Card.Title >{item.id}</Card.Title>
                                     {/* <Container className="containerCard">
                                         <Row>
