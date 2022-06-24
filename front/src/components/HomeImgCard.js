@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import { img1 } from '../img';
-import styled, { keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import D3 from './D3';
 
 const datas = [
@@ -116,20 +116,21 @@ const StyleDiv1 = styled.div`
       /* padding-bottom: 100px; */
       /* margin-bottom: 10px; */
       margin-top: -50px;
-      
-    }
+      /* background-color: black ; */
+    };
+`;
 
-    .home_img img{
-      width:100%;
-      height: 100%;
-      border-radius: 30px;
-      border: $((props) => props.click === 1 ? '5px solid #FAF4B7' :
-                          props.click === 2 ? '5px solid #F9F9F9' :
-                          null
-              
-      )
-    }
 
+  const ImgDivCard = styled.img`
+        width:100%;
+        height: 100%;
+        border-radius: 30px;
+        border: ${props => props.click === 1 ?  
+                              '5px solid #FAF4B7'
+                    :props.click === 2 ? 
+                              '5px solid #F9F9F9'
+                    :"5px solid #F6C6EA"
+        };
 `
 
 const HomeImgCard = () => {
@@ -164,8 +165,8 @@ const HomeImgCard = () => {
               <h2>{frontData.header}</h2>
             </div>
           </div>
-          <div className="home_img">
-            <img src={img1} click={click} alt="hi"/>
+          <div className="home_img" >
+            <ImgDivCard src={img1} alt="hi" click={click}/>
           </div>
           <Container>
 

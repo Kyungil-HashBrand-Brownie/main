@@ -107,7 +107,7 @@ const SlideShow = () => {
         dots: false,
         infinite: true,             //무한 반복 옵션
         slidesToShow: 3,            // 한 화면에 보여질 컨텐츠 개수
-        slidesToScroll: 1,
+        // slidesToScroll: 1,
         autoplay: true,             // 자동 스크롤 사용 여부
         speed: 6000,                // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
         autoplaySpeed: 1,
