@@ -265,12 +265,16 @@ function NftCard() {
         console.log(myBrownyNFTs)
         console.log(myBrownyNFTs.length)
         let dict;
-        const imageData = async () => {
-            const result = await axios.post('http://localhost:4000/images', myBrownyNFTs)
-            console.log(result)
-            return result.data;
-        }
-        dict = imageData();
+        let dict1;
+        // const imageData = async () => {
+        const result = await axios.post('/images', { myBrownyNFTs, stakedNFTs })
+        console.log(result.data);
+        dict = result.data.data;
+        dict1 = result.data.data1;
+        // console.log(result)
+        // return result.data;
+        // }
+        // dict = imageData();
         // {
         //     1: 'asdasdad',
         //     3: 'asdasaddd',
@@ -281,7 +285,8 @@ function NftCard() {
         for (let i = 0; i != myBrownyNFTs.length; i++) {
             let metajson = {
                 id: `#${myBrownyNFTs[i]}`,
-                image: `http://localhost:4000/images/${dict[myBrownyNFTs[i]]}`,
+                image: `/images/${dict[myBrownyNFTs[i]]}`,
+                // image: `/images/lfx35Bfx0XQ9iHwAAAAASUVORK5CYII`,
                 // image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${myBrownyNFTs[i]}.png`,
                 checked: false,
             }
@@ -293,7 +298,8 @@ function NftCard() {
         let processedStakedNFTs = stakedNFTs.map((NFT) => {
             let data = {
                 id: `#${NFT}`,
-                image: `https://insta-amazing-app-stagraaa.s3.ap-northeast-2.amazonaws.com/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${NFT}.png`,
+                image: `/images/${dict1[NFT]}`,
+                // image: `https://insta-amazing-app-stagraaa.s3.ap-northeast-2.amazonaws.com/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${NFT}.png`,
                 checked: false,
             }
             return data;
