@@ -2,7 +2,7 @@ import Card from 'react-bootstrap/Card';
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {brownyContract, contractAddr} from "configs";
+import { brownyContract, contractAddr } from "configs";
 import { Check } from '../img';
 import { nftAction } from 'redux/actions/nftAction';
 import Pagination from './Pagination';
@@ -246,7 +246,7 @@ function NftCard() {
     const { myAddress, myNFTs, myStakedNFTs, reward, myNFTpage, loading } = useSelector(state => state.nft);
 
     let list = myNFTs.filter((item) => item.checked);
-    const getCurrentReward = async() => {
+    const getCurrentReward = async () => {
         dispatch(nftAction.getReward(brownyContract, myStakedNFTs));
         // dispatch({type: 'GET_REWARD', payload: reward});
     }
@@ -255,6 +255,18 @@ function NftCard() {
         getCurrentReward()
         let myBrownyNFTs = await brownyContract.methods.myNFTs().call(
             { from: myAddress })
+
+        let stakedNFTs = await brownyContract.methods.checkStakedNFTs().call(
+            { from: myAddress })
+
+        myBrownyNFTs = myBrownyNFTs.filter((item) => !stakeNFTs.includes(item));
+        // [1, 3, 16, 119]
+        console.log(myBrownyNFTs)
+        let imageData = await axios.post('http://localhost:4000/image', { myBrownyNFTs });
+        // {
+        //     1: 'asdasdad',
+        //     3: 'asdasaddd',
+        // }
 
         let binaryArr = [];
         for (let i = 0; i != myBrownyNFTs.length; i++) {
@@ -266,23 +278,22 @@ function NftCard() {
             binaryArr.push(metajson)
         }
         // console.log(binaryArr)
+        // img src='images/asidfasdifasdfiasdfasdfjaskj'
 
-        let stakedNFTs = await brownyContract.methods.checkStakedNFTs().call(
-            {from : myAddress})
         let processedStakedNFTs = stakedNFTs.map((NFT) => {
             let data = {
                 id: `#${NFT}`,
-                image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${NFT}.png`,
+                image: `https://insta-amazing-app-stagraaa.s3.ap-northeast-2.amazonaws.com/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${NFT}.png`,
                 checked: false,
             }
             return data;
         })
         myBrownyNFTs = binaryArr.filter((item) => {
-            if (stakedNFTs.indexOf(item.id.slice(1)) < 0) return item 
+            if (stakedNFTs.indexOf(item.id.slice(1)) < 0) return item
         })
         // console.log(myBrownyNFTs);
 
-        dispatch({type: "NFTCARD_MYNFTS", payload: {myNFTs: myBrownyNFTs, myStakedNFTs: processedStakedNFTs}})
+        dispatch({ type: "NFTCARD_MYNFTS", payload: { myNFTs: myBrownyNFTs, myStakedNFTs: processedStakedNFTs } })
     }
 
     // check
@@ -292,7 +303,7 @@ function NftCard() {
             newArr = myNFTs.map((item) => {
                 item.checked = true
                 return item
-        })
+            })
         }
         else {
             newArr = myNFTs.map((item) => {
@@ -301,17 +312,17 @@ function NftCard() {
             })
         }
         // console.log(myNFTs)
-        dispatch({type: 'NFTCARD_CHANGE_ALL', payload: {myNFTs: newArr}})
+        dispatch({ type: 'NFTCARD_CHANGE_ALL', payload: { myNFTs: newArr } })
     }
 
     const changeClickState = (id) => {
         let newArr = myNFTs.map((li) => {
             if (li.id === id) {
-                li.checked = !li.checked; 
+                li.checked = !li.checked;
             }
             return li
         })
-        dispatch({type: 'NFTCARD_MYNFTS_CLICK', payload: newArr});
+        dispatch({ type: 'NFTCARD_MYNFTS_CLICK', payload: newArr });
     }
 
     useEffect(() => {
@@ -326,8 +337,8 @@ function NftCard() {
         if (stakeIdArr.length > 0) {
             // let stakeInstanceId = stakeIdArr[0].id.slice(1) //#62
             console.log("stakeIdArr: ", stakeIdArr);
-            try{
-                const result = await stakeNFTs(myAddress,stakeIdArr)
+            try {
+                const result = await stakeNFTs(myAddress, stakeIdArr)
                 if (result.status) {
                     // dispatch({type: "WALLET_REFRESH"})
                     let stakedNFTs = myNFTs.filter((item) => item.checked).map((item) => {
@@ -352,11 +363,11 @@ function NftCard() {
             <div className='nftcard-header'>
                 My NFTs
             </div>
-            { myNFTs.length > 0 && 
+            {myNFTs.length > 0 &&
                 <div className='myNFT-info-box'>
                     <div className='reward-box'>
                         <ClipLoader loading={loading} css={override} size={30} />
-                        {!loading && <div className='nftlist-reward'>total reward : {(reward/10000).toFixed(2)} BTK</div>}
+                        {!loading && <div className='nftlist-reward'>total reward : {(reward / 10000).toFixed(2)} BTK</div>}
                         {/* <button 
                         className='reward-button'
                         onClick={getReward}>
@@ -367,62 +378,62 @@ function NftCard() {
             }
             <Cardjustify>
                 <div className='Main'>
-                    {myNFTs.length > 0 && 
+                    {myNFTs.length > 0 &&
                         <>
                             <div className="cont21">
-                                <button 
-                                className='stake-button'
-                                onClick={stakeNFT}>stake</button>
+                                <button
+                                    className='stake-button'
+                                    onClick={stakeNFT}>stake</button>
                             </div>
                             <div className='nftlist-box'>
                                 <div className='nftlist-header'><i>Stakelist</i></div>
-                                    <div className='nftlist-select-all'>
-                                        <div>
-                                            <input 
-                                            onChange={(e) => {changeAllState(e.target.checked)}}
+                                <div className='nftlist-select-all'>
+                                    <div>
+                                        <input
+                                            onChange={(e) => { changeAllState(e.target.checked) }}
                                             type='checkbox'
                                             className='nftlist-select-all-checkbox' />
-                                            Select All
-                                        </div>
-                                        {/* <button 
-                                        className='nftlist-select-all-button'>Select All</button> */}
+                                        Select All
                                     </div>
-                                    <div className='nftlist-justify'>
-                                        <div className='nftlist'>
-                                            {list.length > 0 ?
-                                                list.map((item) => 
+                                    {/* <button 
+                                        className='nftlist-select-all-button'>Select All</button> */}
+                                </div>
+                                <div className='nftlist-justify'>
+                                    <div className='nftlist'>
+                                        {list.length > 0 ?
+                                            list.map((item) =>
                                                 <div className='nftlist-id-box'>
                                                     {item.id}
                                                     <div className='overlay'>
-                                                        <img src={Cancel} 
-                                                        onClick={() => changeClickState(item.id)}
-                                                        className='nftlist-cancel'/>
+                                                        <img src={Cancel}
+                                                            onClick={() => changeClickState(item.id)}
+                                                            className='nftlist-cancel' />
                                                     </div>
                                                 </div>)
-                                                : <div className='nftlist-text'>Select an item from below!</div>
-                                            }
-                                        </div>
+                                            : <div className='nftlist-text'>Select an item from below!</div>
+                                        }
                                     </div>
+                                </div>
                             </div>
                         </>
                     }
-                <div className='InnerMain'>
-                    {   myNFTs.length > 0 
-                        ? <> 
-                        {myNFTs.sort((a,b) => a.id.slice(1) - b.id.slice(1)).slice((page-1)*4, (page-1)*4 + 4).map((item, index1) => {
-                            return <div className='card-container' key={index1}>
-                                <Card className="Ncard" style={{ width: '15rem' }}>
-                                {
-                                    !item.checked ?
-                                    null
-                                    :<img src={Check}
-                                    alt="ca"
-                                    id='stake-checkbox'
-                                />
-                                }
-                                    <div><Card.Img className='nftlist-card-img' style={{ width: '12rem', height: '12rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
-                                    <Card.Title >{item.id}</Card.Title>
-                                    {/* <Container className="containerCard">
+                    <div className='InnerMain'>
+                        {myNFTs.length > 0
+                            ? <>
+                                {myNFTs.sort((a, b) => a.id.slice(1) - b.id.slice(1)).slice((page - 1) * 4, (page - 1) * 4 + 4).map((item, index1) => {
+                                    return <div className='card-container' key={index1}>
+                                        <Card className="Ncard" style={{ width: '15rem' }}>
+                                            {
+                                                !item.checked ?
+                                                    null
+                                                    : <img src={Check}
+                                                        alt="ca"
+                                                        id='stake-checkbox'
+                                                    />
+                                            }
+                                            <div><Card.Img className='nftlist-card-img' style={{ width: '12rem', height: '12rem' }} onClick={() => changeClickState(item.id)} variant="top" src={item.image} /></div>
+                                            <Card.Title >{item.id}</Card.Title>
+                                            {/* <Container className="containerCard">
                                         <Row>
                                             <Col className="col_1">price</Col>
                                             <Col className="col_1">highst</Col>
@@ -432,22 +443,22 @@ function NftCard() {
                                             <Col className="col_2">{item.height}</Col>
                                         </Row>
                                     </Container> */}
-                                </Card>
+                                        </Card>
+                                    </div>
+                                })}
+                            </>
+                            : <div>
+                                <h2>Nothing to display</h2>
                             </div>
-                        })}
-                        </> 
-                        : <div>
-                            <h2>Nothing to display</h2>
-                        </div>
+                        }
+                    </div>
+                    {myNFTs.length > 0 &&
+                        <Pagination
+                            page={page}
+                            setPage={setPage}
+                            total={myNFTs.length}
+                        />
                     }
-                </div>
-                {myNFTs.length > 0 &&
-                    <Pagination 
-                        page={page}
-                        setPage={setPage}
-                        total={myNFTs.length}
-                    />
-                }
                 </div>
             </Cardjustify>
         </div>
