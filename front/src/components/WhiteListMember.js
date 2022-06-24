@@ -9,7 +9,7 @@ import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
 import Form from 'react-bootstrap/Form';
 import { trash } from '../img'
-import {brownyContract} from "configs";
+import { brownyContract } from "configs";
 
 
 
