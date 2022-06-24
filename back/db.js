@@ -1,10 +1,15 @@
 const mysql = require("mysql2/promise"); // object
+require('dotenv').config()
 
+const user = process.env.AWS_USER
+const host = process.env.AWS_HOST
+const password = process.env.AWS_PASSWORD
+const database = process.env.AWS_DATABASE
 const pool = mysql.createPool({
-    host: "52.79.194.50",
-    user: "root",
-    password: "1234",
-    database: "GCP_SQL",
+    host: host,
+    user: user,
+    password: password,
+    database: database,
 });
 
 module.exports = pool
