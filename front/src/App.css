@@ -533,7 +533,7 @@ NftCard
   width: 100%;
   padding: 0;
   /* margin: 0; */
-  background-color: rgb(47, 47, 238);
+  background-color: blue;
 }
 
 .stake-outer-box {
@@ -644,4 +644,19 @@ MintCard
 */
 .MintCard {
   margin-top: 15%;
+}
+/* the slides */
+.slick-slide {
+  margin: 0 10px;
+}
+/* the parent */
+.slick-list {
+  margin: 0 20px;
+  /* background-color: black; */
+  height: 450px;
+}
+
+.brownyLogo{
+  display: flex;
+  text-align: center;
 }
