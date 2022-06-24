@@ -114,7 +114,7 @@ const PreSale = () => {
                 <Container className="mint-info-box">
                     <Row>
                         <Col>Price</Col>
-                        <Col>2 BTK</Col>
+                        <Col>50 BTK</Col>
                     </Row>
                     <Row>
                         <Col>Per transaction</Col>
