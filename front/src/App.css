@@ -5,10 +5,29 @@ body {
   background: linear-gradient(90deg, #deb38d 0.51%, #deb38d 0.52%, #deb38d 37.46%, #deb38d 53.47%, #f6f698 100%);
 }
 
+/* 폰트 */
+@font-face {
+  font-family: "Yfont1";
+  src: url("./font/Y\ 너만을\ 비춤체.otf");
+}
+@font-face {
+  font-family: "Yfont2";
+  src: url("./font/Y\ 너만을\ 비춤체.ttf");
+}
+/* @font-face {
+  font-family: "Yfont3";
+  src: url("./font/YUniverse-L.otf");
+}
+@font-face {
+  font-family: "Yfont4";
+  src: url("./font/YUniverse-L.ttf");
+} */
+
 .wrapper {
   height: auto;
   min-height: 880px;
-  /* background-color: red; */
+  font-family: "Yfont2";
+  font-weight: 50;
 }
 .backG-left-img {
   position: absolute;
