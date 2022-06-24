@@ -54,10 +54,10 @@ const StyledButton = styled.button`
 
 
 const PreSale = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { myAddress } = useSelector(state => state.nft);
     
+    const [count, setCount] = useState(1)
     const [totalCnt, setTotalCnt] = useState(0);
 
     const getMintCnt = async ()=> {
@@ -67,7 +67,6 @@ const PreSale = () => {
 
     getMintCnt()
 
-    
     const preMint = async () => {
         if(!myAddress){
             return alert("지갑을 먼저 연결해주세요")
@@ -79,14 +78,7 @@ const PreSale = () => {
             alert("해당 지갑 주소로 민팅되었습니다!");
         }
         else alert("transaction fail")
-        
-        
     }
-
-    // const dispatch = useDispatch(state => state.nft)
-
-    const [count, setCount] = useState(1)
-
 
     const countAdd = () => {
         if (count < 5) setCount(count + 1);

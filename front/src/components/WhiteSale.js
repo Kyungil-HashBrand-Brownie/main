@@ -59,6 +59,23 @@ const WhiteSale = () => {
 
     const [count, setCount] = useState(1)
     const [isWhite, setIsWhite] = useState(false)
+    const [whitelistCnt, setWhitelistCnt] = useState(0);
+
+    const getWhitelistMintCnt = async ()=> {
+        const whitelistCnt = await brownyContract.methods.whitelistNftNum().call()
+        setWhitelistCnt(whitelistCnt)
+    }
+
+    getWhitelistMintCnt()
+
+    const whiteMint = async () => {
+        const result = await whitelistMint(myAddress,count)
+        if (result.status) {
+            dispatch({ type: "WALLET_REFRESH" })
+            alert("해당 지갑 주소로 민팅되었습니다!");
+        }
+        else alert("transaction fail")
+    }
 
     const countAdd = () => {
         // counting 
@@ -68,15 +85,6 @@ const WhiteSale = () => {
 
     const countMinus = () => {
         if (count > 1) setCount(count - 1);
-    }
-
-    const whiteMint = async () => {
-            const result = await whitelistMint(myAddress,count)
-            if (result.status) {
-                dispatch({ type: "WALLET_REFRESH" })
-                alert("해당 지갑 주소로 민팅되었습니다!");
-            }
-            else alert("transaction fail")
     }
 
     const checkWhitelist = async () => {
@@ -124,7 +132,7 @@ const WhiteSale = () => {
                     </Row>
                     <Row>
                         <Col>Amount</Col>
-                        <Col>limited</Col>
+                        <Col>{whitelistCnt}/30</Col>
                     </Row>
                 </Container>
                 <br />
