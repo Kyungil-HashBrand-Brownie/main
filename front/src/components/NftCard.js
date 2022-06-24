@@ -24,7 +24,7 @@ const Cardjustify = styled.div`
     justify-content: center;
 
     .Main {
-        width: 600px;
+        width: 500px;
         min-height: 875px;
         /* height: 840px; */
         margin: 10px;
@@ -444,7 +444,7 @@ function NftCard() {
                                 <Card 
                                     className="Ncard" 
                                     style={{ 
-                                        width: '15rem', 
+                                        width: '12rem', 
                                         backgroundColor: "lightgray"
                                             // index1%4 == 0 ? "#fc518d" : index1%4 == 1 ? "orange" 
                                             // : index1%4 == 2 ? "#3cb346" : "#FAFA33"
@@ -457,7 +457,7 @@ function NftCard() {
                                     id='stake-checkbox'
                                 />
                                 }
-                                    <div><Card.Img className='nftlist-card-img' style={{ width: '12rem', height: '12rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
+                                    <div><Card.Img className='nftlist-card-img' style={{ width: '11rem', height: '11rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
                                     <Card.Title >{item.id}</Card.Title>
                                     {/* <Container className="containerCard">
                                         <Row>
