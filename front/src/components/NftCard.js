@@ -24,14 +24,15 @@ const Cardjustify = styled.div`
     justify-content: center;
 
     .Main {
-        width: 600px;
+        width: 500px;
         min-height: 875px;
         /* height: 840px; */
         margin: 10px;
-        border: 3px solid;
+        border: 3px solid white;
         border-radius: 40px;
         padding: 10px 10px;
-        background: radial-gradient(transparent, #d78034);
+        background: #F5FADB;
+        /* background: radial-gradient(transparent, #FFF9F9); */
         /* background: linear-gradient(to right, #d78034 0%, transparent 50%, #d78034 100%); */
         /* background: #6e3503; */
     }
@@ -43,7 +44,7 @@ const Cardjustify = styled.div`
     }
 
     .Ncard {
-        opacity: 0.8;
+        opacity: 0.9;
         padding: 3px;
         margin: 10px;
         margin-left: 27px;
@@ -51,9 +52,6 @@ const Cardjustify = styled.div`
         border-radius: 200px;
         text-align: center;
         cursor: pointer;
-        /* background: #fc5a8d ; */
-        /* background: #FAFA33 ; */
-        /* background: #FFA500; */
         /* background: #4f86f7; */
         /* background: #464196  */
     }
@@ -125,6 +123,8 @@ const Cardjustify = styled.div`
     .nftlist {
         text-align: center;
         border-radius: 3px;
+        border-top-left-radius: 10px;
+        border-bottom-right-radius: 10px;
         width: 80%;
         padding: 5px;
         background: lightgray;
@@ -143,10 +143,10 @@ const Cardjustify = styled.div`
     .nftlist-id-box {
         width: 80px;
         margin: 3px 4px;
-        /* background: white; */
-        background: rgb(47, 47, 238);
+        background: white;
+        /* background: rgb(47, 47, 238); */
         /* border: 1px solid black; */
-        color: white;
+        /* color: white; */
         border-radius: 30px;
         font-size: 15px;
         /* padding-left: 15px; */
@@ -187,8 +187,8 @@ const Cardjustify = styled.div`
     }
 
     .nftlist-cancel {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
     }
 
     .overlay {
@@ -198,7 +198,7 @@ const Cardjustify = styled.div`
         display: flex;
         justify-content: center;
         text-align: center;
-        transform: translate(15px, -40px);
+        transform: translate(22px, -33px);
     }
 
     .nftlist-id-box:hover .overlay{
@@ -238,7 +238,14 @@ const Cardjustify = styled.div`
         border-radius: 80px;
     }
 
+    .no-display {
+        /* background: red; */
+        position: absolute;
+        transform: translate(120px, 385px);
+    }
+
 `
+
 
 function NftCard() {
     const [page, setPage] = useState(1);
@@ -260,19 +267,25 @@ function NftCard() {
         let stakedNFTs = await brownyContract.methods.checkStakedNFTs().call(
             { from: myAddress })
 
-        myBrownyNFTs = myBrownyNFTs.filter((item) => !stakeNFTs.includes(item));
+        console.log(myBrownyNFTs);
+        myBrownyNFTs = myBrownyNFTs.filter((item) => !stakedNFTs.includes(item));
         // [1, 3, 16, 119]
         console.log(myBrownyNFTs)
-        let imageData = await axios.post('http://localhost:4000/image', { myBrownyNFTs });
-        // {
-        //     1: 'asdasdad',
-        //     3: 'asdasaddd',
+
+        let dict;
+        // const imageData = async () => {
+        //     const result = await axios.post('http://localhost:4000/images', myBrownyNFTs)
+        //     console.log(result)
+        //     return result.data;
         // }
+        // dict = imageData();
 
         let binaryArr = [];
+        console.log(dict)
         for (let i = 0; i != myBrownyNFTs.length; i++) {
             let metajson = {
                 id: `#${myBrownyNFTs[i]}`,
+                // image: `http://localhost:4000/images/${dict[myBrownyNFTs[i]]}`,
                 image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${myBrownyNFTs[i]}.png`,
                 checked: false,
             }
@@ -284,7 +297,7 @@ function NftCard() {
         let processedStakedNFTs = stakedNFTs.map((NFT) => {
             let data = {
                 id: `#${NFT}`,
-                image: `https://insta-amazing-app-stagraaa.s3.ap-northeast-2.amazonaws.com/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${NFT}.png`,
+                image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${NFT}.png`,
                 checked: false,
             }
             return data;
@@ -356,6 +369,9 @@ function NftCard() {
                 console.log(e.message)
             }
         }
+        else {
+            alert('스테이킹할 아이템을 선택하세요.');
+        }
     }
 
     return (
@@ -364,19 +380,21 @@ function NftCard() {
             <div className='nftcard-header'>
                 My NFTs
             </div>
-            {myNFTs.length > 0 &&
                 <div className='myNFT-info-box'>
                     <div className='reward-box'>
-                        <ClipLoader loading={loading} css={override} size={30} />
-                        {!loading && <div className='nftlist-reward'>total reward : {(reward / 10000).toFixed(2)} BTK</div>}
-                        {/* <button 
-                        className='reward-button'
-                        onClick={getReward}>
-                        보상 받기
-                        </button> */}
+                    { myNFTs.length > 0 && 
+                                <>
+                                <ClipLoader loading={loading} css={override} size={30} />
+                                {!loading && <div className='nftlist-reward'>total reward : {(reward/10000).toFixed(2)} BTK</div>}
+                                {/* <button 
+                                className='reward-button'
+                                onClick={getReward}>
+                                보상 받기
+                                </button> */}
+                                </>
+                    }
                     </div>
                 </div>
-            }
             <Cardjustify>
                 <div className='Main'>
                     {myNFTs.length > 0 &&
@@ -418,23 +436,30 @@ function NftCard() {
                             </div>
                         </>
                     }
-                    <div className='InnerMain'>
-                        {myNFTs.length > 0
-                            ? <>
-                                {myNFTs.sort((a, b) => a.id.slice(1) - b.id.slice(1)).slice((page - 1) * 4, (page - 1) * 4 + 4).map((item, index1) => {
-                                    return <div className='card-container' key={index1}>
-                                        <Card className="Ncard" style={{ width: '15rem' }}>
-                                            {
-                                                !item.checked ?
-                                                    null
-                                                    : <img src={Check}
-                                                        alt="ca"
-                                                        id='stake-checkbox'
-                                                    />
-                                            }
-                                            <div><Card.Img className='nftlist-card-img' style={{ width: '12rem', height: '12rem' }} onClick={() => changeClickState(item.id)} variant="top" src={item.image} /></div>
-                                            <Card.Title >{item.id}</Card.Title>
-                                            {/* <Container className="containerCard">
+                <div className='InnerMain'>
+                    {   myNFTs.length > 0 
+                        ? <> 
+                        {myNFTs.sort((a,b) => a.id.slice(1) - b.id.slice(1)).slice((page-1)*4, (page-1)*4 + 4).map((item, index1) => {
+                            return <div className='card-container' key={index1}>
+                                <Card 
+                                    className="Ncard" 
+                                    style={{ 
+                                        width: '12rem', 
+                                        backgroundColor: "lightgray"
+                                            // index1%4 == 0 ? "#fc518d" : index1%4 == 1 ? "orange" 
+                                            // : index1%4 == 2 ? "#3cb346" : "#FAFA33"
+                                    }}>
+                                {
+                                    !item.checked ?
+                                    null
+                                    :<img src={Check}
+                                    alt="checked"
+                                    id='stake-checkbox'
+                                />
+                                }
+                                    <div><Card.Img className='nftlist-card-img' style={{ width: '11rem', height: '11rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
+                                    <Card.Title >{item.id}</Card.Title>
+                                    {/* <Container className="containerCard">
                                         <Row>
                                             <Col className="col_1">price</Col>
                                             <Col className="col_1">highst</Col>
@@ -447,9 +472,9 @@ function NftCard() {
                                         </Card>
                                     </div>
                                 })}
-                            </>
-                            : <div>
-                                <h2>Nothing to display</h2>
+                             </> 
+                            : <div className='no-display'>
+                                <h1>Nothing to display</h1>
                             </div>
                         }
                     </div>

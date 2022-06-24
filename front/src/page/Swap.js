@@ -36,7 +36,7 @@ const Swap = () => {
             amountInput.current.value = '';
             setExchange('');
         }
-        else if (Number(value) > 1000000) {
+        else if (Number(value) > 10000) {
             alert('최대 거래 수량 초과 \n ')
             amountInput.current.value = '';
             setExchange('');
@@ -128,7 +128,7 @@ const Swap = () => {
                     </div>
                 </div>
                 <div className='swap-text-box'>
-                    <p className='swap-text'>최대 1000000(일백만)개 거래 가능합니다</p>
+                    <p className='swap-text'>최대 10000(일만)개 거래 가능합니다</p>
                 </div>
                 <div className='swap-submit'>
                     <button 

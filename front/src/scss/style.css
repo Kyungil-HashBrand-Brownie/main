@@ -12,11 +12,12 @@
   width: 500px;
   color: rgba(168, 84, 35, 0.895);
   /* margin: auto; */
-  /* position:absolute; */
-  top: 0; right: 0; bottom: 0; left: 0;
+  /* top: 0; right: 0; bottom: 0; left: -10%; */
+  transform: translate(-30px, -30px);
   perspective: 9999px;
   transform-style: preserve-3d;
   padding-top: 80px;
+  /* background: black; */
 }
 .layer{
   width: 100%;
@@ -24,9 +25,10 @@
 
   position: absolute;
   transform-style: preserve-3d;
-  animation: ಠ_ಠ 5s infinite alternate ease-in-out -7.5s;
+  animation: ಠ_ಠ 3s infinite alternate ease-in-out -4.5s;
+  /* animation-iteration-count: 10; */
   animation-fill-mode: forwards;
-  transform: rotateY(40deg) rotateX(22deg) translateZ(0);
+  transform: rotateY(20deg) rotateX(42deg) translateZ(0);
 }
 .layer:after{
   font: 150px/0.65 'Pacifico', 'Kaushan Script', Futura, 'Roboto', 'Trebuchet MS', Helvetica, sans-serif;
