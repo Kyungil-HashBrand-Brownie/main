@@ -20,6 +20,7 @@ function App() {
     <>
     <div className='wrapper'>
       <Header />
+      
       {/* <img
         className='backG-left-img'
         src={LeftImg3}
