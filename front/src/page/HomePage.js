@@ -8,6 +8,7 @@ import HomeImgCard from '../components/HomeImgCard';
 import { group ,img1 , Group2 , baking, baking2, baking3 } from '../img';
 import SlideShow from '../components/SlideShow';
 import D3 from '../components/D3';
+// import "../scss/styled.css"
 
 const StyledMainText = styled.div`
   /* background: red; */
@@ -191,6 +192,10 @@ const StyleDiv1 = styled.div`
     } */
 `
 
+const PositionCss = styled.div`
+
+`
+
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -224,7 +229,7 @@ const HomePage = () => {
 
     const moveToMint = () => {
       navigate('/mint');
-      dispatch({type: 'MODAL_CLOSE'});
+
     }
 
     let mainText = document.getElementsByClassName("slidediv")
@@ -313,21 +318,41 @@ const HomePage = () => {
           <div className="bakingImg1">
               <img src={baking2} /> 
             </div>
-          </Col>
-      </Container>
-        <SlideShow />
-      {/* <div className='main-team-container'> */}
-        {/* <Container className='main-team-container'>
-          <StyledMainText>Team</StyledMainText>
-          <Container className='main-team-img-box'>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-          </Container>
-        </Container> */}
-      {/* </div> */}
+            <Container className='main-container'>
+                <Col className="main-col">
+                    <StyledMainText><D3/></StyledMainText>
+                    <StyledSubText>The Best nft Collections <br/>You Can Get</StyledSubText>
+                    {/* <div className='main-button-container'> */}
+                      <StyledButton
+                        onClick={moveToMint}
+                      >
+                        <div>
+                          <StyledArrow src={Arrow} alt="nft-arrows"/>
+                          <span>Explore our nfts</span>
+                        </div>
+                      </StyledButton>
+                    {/* </div> */}
+                </Col>
+                <Col className="main-img-col">
+                  <StyledBrownyAbove src={Group2} alt="browny-above" />
+                  {/* <StyledBrownyDown src={Browny10} alt="browny-down" /> */}
+                </Col>
+            </Container>
+        <HomeImgCard />
+          <Container className='main-container'>
+                <Col className="main-col">
+                <div className="slidediv">
+                  Love <br /> Your Browny
+                </div>
+                </Col>
+                <Col className="main-img-col">
+                <div className="bakingImg1">
+                    <img src={baking2} /> 
+                  </div>
+                </Col>
+            </Container>
+            <SlideShow />
+      </PositionCss>
       </>
   )
 }

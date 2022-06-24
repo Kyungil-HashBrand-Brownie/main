@@ -25,9 +25,12 @@ body {
 
 .wrapper {
   height: auto;
-  min-height: 880px;
   font-family: "Yfont2";
-  font-weight: 50;
+  font-weight: 500;
+  margin: 0 auto;
+
+  line-height: 1.6;
+  /* padding-top: 80px; */
 }
 .backG-left-img {
   position: absolute;
@@ -604,14 +607,18 @@ NftCard
 }
 
 .slidediv {
-  font-size: 5em;
+  font-size: 7em;
   width: 350px;
-  color: white;
+  /* color: white; */
   font-family: sans-serif;
   position: relative;
   top: 100px;
   left: 100px;
   animation: slide 2s ease-in-out;
+  letter-spacing: .05em;
+  text-shadow: 
+    4px 4px 0px #d5d5d5, 
+    7px 7px 0px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes slide {
