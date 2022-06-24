@@ -33,6 +33,7 @@ function App() {
         className='backG-right-img2'
         src={RightImg}
       /> */}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/mint" element={<Mint />} />

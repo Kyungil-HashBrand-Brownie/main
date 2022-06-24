@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import HomeImgCard from '../components/HomeImgCard';
 import { group ,img1 , Group2 , baking, baking2, baking3 } from '../img';
 import SlideShow from '../components/SlideShow';
+import D3 from '../components/D3';
 
 const StyledMainText = styled.div`
   /* background: red; */
@@ -265,6 +266,9 @@ const HomePage = () => {
         className='backG-right-img2'
         src={RightImg}
       /> */}
+      {/* <div className='brownyLogo'> */}
+        {/* <D3/> */}
+      {/* </div> */}
       <div className='mintdate-container'>
         <StyledMintDate>
           <span>민팅 시작까지 남은 시간</span><br />
@@ -278,7 +282,7 @@ const HomePage = () => {
       </div>
       <Container className='main-container'>
           <Col className="main-col">
-              <StyledMainText>Browny</StyledMainText>
+              <StyledMainText><D3/></StyledMainText>
               <StyledSubText>The Best nft Collections <br/>You Can Get</StyledSubText>
               {/* <div className='main-button-container'> */}
                 <StyledButton
@@ -310,18 +314,7 @@ const HomePage = () => {
               <img src={baking2} /> 
             </div>
           </Col>
-          
-          {/* <StyledEllipse src={Ellipse} alt="ellipse"/> */}
       </Container>
-
-
-        {/* <div className="slidediv">
-          PICK UP
-          YOUR NFT
-          hoihoi
-        </div> */}
-        <br />
-  
         <SlideShow />
       {/* <div className='main-team-container'> */}
         {/* <Container className='main-team-container'>

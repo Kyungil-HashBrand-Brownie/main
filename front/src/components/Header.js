@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {btkInstance, brownyContract} from "configs";
 
 import { background10 ,background13} from '../img/background';
+import D3 from './D3';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -127,6 +128,7 @@ const Header = () => {
         <Navbar className="nav" expand="lg">
             <img src={background13} className="backG-img-left" />
             <img src={background13} className="backG-img-right" />
+            {/* <D3/> */}
             <Container fluid>
                 <Navbar.Brand>
                     <Link to="/"><LogoContainer /></Link>

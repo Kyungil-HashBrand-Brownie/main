@@ -80,9 +80,9 @@ const Container = styled.div`
   ImageContainer = styled.div`
     position: relative;
     color: white;
-    /* margin: 10px; */
+    margin: 10px;
     /* margin:auto ; */
-    margin-top: 10px;
+    margin-top: 50px;
     margin-bottom:50px;
   `,
   Image = styled.img`

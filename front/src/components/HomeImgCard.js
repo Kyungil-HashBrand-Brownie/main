@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import { img1 } from '../img';
 import styled, { keyframes } from 'styled-components';
+import D3 from './D3';
 
 const datas = [
   {
@@ -18,9 +19,7 @@ const datas = [
      id: 2,
      num: '03',
      header: 'rabepl'  
- },
-
- ]
+ }]
 
 
 const StyleDiv1 = styled.div`
