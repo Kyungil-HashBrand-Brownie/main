@@ -10,6 +10,7 @@ import { stakeNFTs } from 'api';
 import Cancel from '../img/stake/cancel.png';
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
+import axios from 'axios';
 
 const override = css`
   display: block;
