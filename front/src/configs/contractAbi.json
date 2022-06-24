@@ -6,6 +6,11 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -66,25 +71,6 @@
 					}
 				],
 				"name": "ApprovalForAll",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "account",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "NFTMinting",
 				"type": "event"
 			},
 			{
@@ -197,6 +183,11 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "amount",
 						"type": "uint256"
@@ -204,33 +195,7 @@
 				],
 				"name": "batchMint",
 				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "checkStakedNFTs",
-				"outputs": [
-					{
-						"internalType": "uint256[]",
-						"name": "",
-						"type": "uint256[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "claimed",
-				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -266,16 +231,16 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
+				"inputs": [],
+				"name": "getMintingCount",
+				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "_amount",
+						"name": "",
 						"type": "uint256"
 					}
 				],
-				"name": "getBtk",
-				"outputs": [],
-				"stateMutability": "payable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -323,38 +288,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "myNFTs",
-				"outputs": [
-					{
-						"internalType": "uint256[]",
-						"name": "",
-						"type": "uint256[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "name",
 				"outputs": [
 					{
 						"internalType": "string",
 						"name": "",
 						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "nftNum",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -419,21 +358,21 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address[]",
-						"name": "_address",
-						"type": "address[]"
-					}
-				],
-				"name": "removeMany",
+				"inputs": [],
+				"name": "renounceOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "renounceOwnership",
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					}
+				],
+				"name": "safeMint",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -492,19 +431,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "sellBtk",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
 						"name": "operator",
 						"type": "address"
@@ -516,19 +442,6 @@
 					}
 				],
 				"name": "setApprovalForAll",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256[]",
-						"name": "tokenId",
-						"type": "uint256[]"
-					}
-				],
-				"name": "stakeNFTs",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -585,19 +498,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "totalStaked",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -636,92 +536,10 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256[]",
-						"name": "tokenId",
-						"type": "uint256[]"
-					}
-				],
-				"name": "unstakeNFTs",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "vault",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
 					},
-					{
-						"internalType": "uint256",
-						"name": "timestamp",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "viewCon",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "viewIns",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "whenStaked",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
 					{
 						"internalType": "uint256",
 						"name": "amount",
@@ -730,7 +548,7 @@
 				],
 				"name": "whitelistMint",
 				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -743,7 +561,7 @@
 				],
 				"name": "withdrawKLAY",
 				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
 				"type": "function"
 			}
 		],
@@ -804,13 +622,12 @@
 		"userdoc": {
 			"kind": "user",
 			"methods": {},
-			"notice": "author Kyungil_Team Browny version 1.0 자체 nft staking 구현",
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"minting/Staking.sol": "NFTStaking"
+			"test.sol": "BrownieNft"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -830,30 +647,6 @@
 			"urls": [
 				"bzz-raw://e12cbaa7378fd9b62280e4e1d164bedcb4399ce238f5f98fc0eefb7e50577981",
 				"dweb:/ipfs/QmXRoFGUgfsaRkoPT5bxNMtSayKTQ8GZATLPXf69HcRA51"
-			]
-		},
-		"@openzeppelin/contracts/token/ERC20/ERC20.sol": {
-			"keccak256": "0xe0c8b625a79bac0fe80f17cfb521e072805cc9cef1c96a5caf45b264e74812fa",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://12fd1efc9ad061ef675bd50fb0c8e3c6f2952a09f8df0e3c688b8d81b8918838",
-				"dweb:/ipfs/QmawN6PjTwy91pU7ANjCSgbsLc8TDA6hwu9GsFFaNSuhb5"
-			]
-		},
-		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
-				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
-			]
-		},
-		"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
-			"keccak256": "0x8de418a5503946cabe331f35fe242d3201a73f67f77aaeb7110acb1f30423aca",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://5a376d3dda2cb70536c0a45c208b29b34ac560c4cb4f513a42079f96ba47d2dd",
-				"dweb:/ipfs/QmZQg6gn1sUpM8wHzwNvSnihumUCAhxD119MpXeKp8B9s8"
 			]
 		},
 		"@openzeppelin/contracts/token/ERC721/ERC721.sol": {
@@ -936,36 +729,12 @@
 				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
 			]
 		},
-		"minting/Minting.sol": {
-			"keccak256": "0xf9c59faf0a5176f6b44f64034a1258b36592c158496f45a31c933ebc59d264d4",
+		"test.sol": {
+			"keccak256": "0xf69011a4e698cc8cfe222c2caadb31b40f46161c72ebb2bdcf6884237b9a2e6b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f8ed42c67385f3132a1743d7ce5e071089e4db3772dda7c23d3ce5c087c30337",
-				"dweb:/ipfs/QmZcSqBFFuU6dzURrhWTsisDfLgNw2y4wdbCYVoWjnQyJW"
-			]
-		},
-		"minting/Staking.sol": {
-			"keccak256": "0x3c3b9990f979e6880fe66c4de053dda0e13db2b1d7f9e8f81976a19989cd2c64",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://b3e200fba6cdbfb00de076af3b8d07f559d6a72be9babe317ccd641425aa21db",
-				"dweb:/ipfs/Qmbk1BbRgezGB3KL5kzfZvMB1Utws5cESrNpaShURTqTx9"
-			]
-		},
-		"minting/Token.sol": {
-			"keccak256": "0x9dcdd0ece766d0d33c98416bfaa0de4a7931af4d0073037f8ba6b83c02b7863e",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://9e0af7bad96447b35ff03c5adbfc9438b31571f659dbf8f459e325143c98fa12",
-				"dweb:/ipfs/QmdVYQvVmSo3oy991sJJQuUpSr9YvKUwM432xXG3Fqtfoy"
-			]
-		},
-		"minting/Whitelist.sol": {
-			"keccak256": "0x10c6237378847e8484b1981ccbefbfc7a1fcf2c3fe921fa72bfe0dbee2e4f511",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://e1ed4f437e0e7fb529071f1aa502d19ee63c38aa621848503aabf4cbb3b10481",
-				"dweb:/ipfs/QmR2R4srPpiJEPXhq9DEwX1HQcMm1gq384M4bxQeVG67zD"
+				"bzz-raw://fc390dff948a3eaeaa25fdfaa6782e08f99323e33136a2122013065e01aa40bd",
+				"dweb:/ipfs/QmSKj1w4Xv4fGpCie5LncmskSm1YHV61LYv3So4dAKQEuk"
 			]
 		}
 	},
