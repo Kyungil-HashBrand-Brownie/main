@@ -8,11 +8,11 @@ body {
 /* 폰트 */
 @font-face {
   font-family: "Yfont1";
-  src: url("./font/Y\ 너만을\ 비춤체.otf");
+  src: url("./font/Y1.otf");
 }
 @font-face {
   font-family: "Yfont2";
-  src: url("./font/Y\ 너만을\ 비춤체.ttf");
+  src: url("./font/Y2.ttf");
 }
 /* @font-face {
   font-family: "Yfont3";

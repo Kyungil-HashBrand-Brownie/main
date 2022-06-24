@@ -123,7 +123,11 @@ const StyleDiv1 = styled.div`
       width:100%;
       height: 100%;
       border-radius: 30px;
-      border: 5px solid #F6C6EA;
+      border: $((props) => props.click === 1 ? '5px solid #FAF4B7' :
+                          props.click === 2 ? '5px solid #F9F9F9' :
+                          null
+              
+      )
     }
 
 `
@@ -161,7 +165,7 @@ const HomeImgCard = () => {
             </div>
           </div>
           <div className="home_img">
-            <img src={img1} />
+            <img src={img1} click={click} alt="hi"/>
           </div>
           <Container>
 
