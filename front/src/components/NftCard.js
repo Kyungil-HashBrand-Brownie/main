@@ -246,6 +246,7 @@ const Cardjustify = styled.div`
 
 `
 
+
 function NftCard() {
     const [page, setPage] = useState(1);
 
@@ -270,16 +271,21 @@ function NftCard() {
         myBrownyNFTs = myBrownyNFTs.filter((item) => !stakedNFTs.includes(item));
         // [1, 3, 16, 119]
         console.log(myBrownyNFTs)
-        // let imageData = await axios.post('http://localhost:4000/image', { myBrownyNFTs });
-        // {
-        //     1: 'asdasdad',
-        //     3: 'asdasaddd',
+
+        let dict;
+        // const imageData = async () => {
+        //     const result = await axios.post('http://localhost:4000/images', myBrownyNFTs)
+        //     console.log(result)
+        //     return result.data;
         // }
+        // dict = imageData();
 
         let binaryArr = [];
+        console.log(dict)
         for (let i = 0; i != myBrownyNFTs.length; i++) {
             let metajson = {
                 id: `#${myBrownyNFTs[i]}`,
+                // image: `http://localhost:4000/images/${dict[myBrownyNFTs[i]]}`,
                 image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${myBrownyNFTs[i]}.png`,
                 checked: false,
             }
