@@ -26,14 +26,14 @@ contract Minting {
     // token swap - from klaytn to BTK
     function getBtk(uint256 _amount) public payable {
         require(msg.value == _amount * 10 ** 18, "Please check your balance");
-        brownieToken.tokenTransfer(address(brownieToken), msg.sender, _amount * 10);
+        brownieToken.tokenTransfer(address(brownieToken), msg.sender, _amount, 722 * 10 ** 16);
     }
 
     // token swap - from BTK to klaytn
     function sellBtk(uint256 amount) public {
         require(brownieToken.checkBalance(msg.sender) >= amount * 10 ** 18, "Please check your balance");
-        brownieToken.tokenTransfer(msg.sender, address(brownieToken), amount);
-        payable(msg.sender).transfer(amount * 10 ** 17);
+        brownieToken.tokenTransfer(msg.sender, address(brownieToken), amount, 10 ** 18);
+        payable(msg.sender).transfer(amount * (14 * 10 ** 16));
     }
 
     // nft random 발행을 위한 난수 생성 함수
@@ -58,7 +58,7 @@ contract Minting {
     function safeMint(address to, uint256 cost, uint8 _status) private {
         uint256 randomNum = randNum();
         brownieNFT.safeMint(to, msg.sender, randomNum, _status);
-        brownieToken.tokenTransfer(msg.sender, address(this), cost);
+        brownieToken.tokenTransfer(msg.sender, address(this), cost, 10 ** 18);
     }
 
     // 일반 minting
@@ -124,8 +124,15 @@ contract Minting {
     // 2. 보상부여 tx block의 timestamp로 struct Stake timestamp 최신화?
     function claimed(uint256 tokenId) private isStaked(tokenId) {
         require(brownieNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
-        uint256 reward = ((block.timestamp - brownieNFT.whenStaked(tokenId) / 1 hours) / brownieNFT.totalStakedNum()) * 10;
-        brownieToken.tokenTransfer(address(brownieToken), msg.sender, reward);
+        uint256 reward = ((block.timestamp - brownieNFT.whenStaked(tokenId)) / brownieNFT.totalStakedNum());
+        brownieToken.tokenTransfer(address(brownieToken), msg.sender, reward, 10 ** 14);
         brownieNFT.changeTime(tokenId, block.timestamp);
+    }
+
+    function checkClaimed(uint256 tokenId) public view isStaked(tokenId) returns(uint256) {
+        require(brownieNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
+        // uint256 reward = ((block.timestamp - brownieNFT.whenStaked(tokenId) / 1 hours) / brownieNFT.totalStakedNum()) * 10;
+        uint256 reward = (block.timestamp - brownieNFT.whenStaked(tokenId)) / brownieNFT.totalStakedNum();
+        return reward;
     }
 }
