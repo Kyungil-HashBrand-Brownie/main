@@ -124,7 +124,7 @@ contract Minting {
     }
 
     function checkClaimed(uint256 tokenId) public view isStaked(tokenId) returns(uint256) {
-        require(brownieNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
+        // require(brownieNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
         // uint256 reward = ((block.timestamp - brownieNFT.whenStaked(tokenId) / 1 hours) / brownieNFT.totalStakedNum()) * 10;
         uint256 reward = (block.timestamp - brownieNFT.whenStaked(tokenId));
         return reward;
