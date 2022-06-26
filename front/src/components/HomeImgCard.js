@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import { img1 } from '../img';
 import styled, { css } from 'styled-components';
-import D3 from './D3';
 
 const datas = [
   {
@@ -18,7 +17,7 @@ const datas = [
  {
      id: 2,
      num: '03',
-     header: 'rabepl'  
+     header: 'rabel'  
  }]
 
 
@@ -29,6 +28,8 @@ const StyleDiv1 = styled.div`
     display: flex;
     justify-content: center;
     position: relative;
+
+
 
     .backColor{
       background-color: #F6C6EA;
@@ -64,6 +65,7 @@ const StyleDiv1 = styled.div`
 
     .box_vertical {
       writing-mode: vertical-lr;
+      cursor: alias;
     }
 
     .box_vertical2 {
@@ -114,7 +116,6 @@ const StyleDiv1 = styled.div`
       height: 350px;
       position: relative;
       margin-top: -50px;
-      /* background-color: black ; */
     };
 `;
 
