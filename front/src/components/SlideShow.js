@@ -115,7 +115,7 @@ const SlideShow = () => {
         cssEase: "linear",
         // draggable : true,
         // setPosition: 0,
-        // vertical : false,		// 세로 방향 슬라이드 옵션
+        vertical : false,		// 세로 방향 슬라이드 옵션
         // verticalSwiping: true,
         rtl: true,                  //slider 방향을 오른쪽에서 왼쪽으로 변경 -default:false
 
