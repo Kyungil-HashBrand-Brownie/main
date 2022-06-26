@@ -26,7 +26,6 @@ const Cardjustify = styled.div`
     .Main {
         width: 500px;
         min-height: 875px;
-        /* height: 840px; */
         margin: 10px;
         border: 3px solid white;
         border-radius: 40px;
@@ -251,7 +250,7 @@ function NftCard() {
     const [page, setPage] = useState(1);
 
     const dispatch = useDispatch();
-    const { myAddress, myNFTs, myStakedNFTs, reward, myNFTpage, loading } = useSelector(state => state.nft);
+    const { myAddress, myNFTs, myStakedNFTs, reward, loading } = useSelector(state => state.nft);
 
     let list = myNFTs.filter((item) => item.checked);
     const getCurrentReward = async () => {
@@ -361,7 +360,6 @@ function NftCard() {
 
         if (stakeIdArr.length > 0) {
             // let stakeInstanceId = stakeIdArr[0].id.slice(1) //#62
-            console.log("stakeIdArr: ", stakeIdArr);
             try {
                 const result = await stakeNFTs(myAddress, stakeIdArr)
                 if (result.status) {

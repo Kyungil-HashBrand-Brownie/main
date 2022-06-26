@@ -21,8 +21,6 @@ const StyledMain = styled.div`
 `;
 
 const StyledDiv = styled.div`
-    width: 220px;
-    height: 220px;
     font-size: 1rem;
     color: green;
     line-height: 1.5;

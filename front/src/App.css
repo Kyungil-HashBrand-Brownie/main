@@ -81,6 +81,10 @@ body {
   background-color: red;
 } */
 
+.not-whitelist {
+  margin-top: -50px;
+}
+
 .mint-container {
   background-color: rgb(26, 126, 213);
   width: 100%;

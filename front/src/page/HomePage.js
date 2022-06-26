@@ -9,6 +9,7 @@ import { group ,img1 , Group2 , baking, baking2, baking3 } from '../img';
 import SlideShow from '../components/SlideShow';
 import D3 from '../components/D3';
 import Viliage from 'components/Viliage';
+import Team from 'components/Team';
 // import "../scss/styled.css"
 
 const StyledMainText = styled.div`
@@ -302,6 +303,7 @@ const HomePage = () => {
           </Container>
           <Viliage />
         <SlideShow />
+        <Team />
       {/* </PositionCss> */}
       </>
   )
