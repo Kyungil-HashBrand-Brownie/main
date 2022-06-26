@@ -3,7 +3,6 @@ pragma solidity ^0.8.4;
 
 import "./Token.sol";
 import "./NFT.sol";
-import "./Whitelist.sol";
 
 /**
 * author Kyungil_Team Brownie
