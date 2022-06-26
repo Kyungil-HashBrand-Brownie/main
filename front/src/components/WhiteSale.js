@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { WhiteImg } from '../img'
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 import {Container,Row , Col , Button} from 'react-bootstrap'
-import ProgressBar from 'react-bootstrap/ProgressBar'
 import Browny from '../img/browny9.png'
 import {brownyContract, contractAddr} from "configs";
 import { whitelistMint } from 'api';
@@ -14,7 +12,6 @@ const StyledMain = styled.div`
     line-height: 1.5;
     background-color: white;
     opacity: 95%;
-    /* border: 3px solid black; */
     border-radius: 10px;
     text-align: center;
     display: flex ;
@@ -26,15 +23,12 @@ const StyledMain = styled.div`
 const StyledDiv = styled.div`
     width: 220px;
     height: 220px;
-    /* padding: 0.375rem 0.75rem; */
     font-size: 1rem;
     color: green;
     line-height: 1.5;
     background-color: white;
     margin-bottom: 20px;
     border-radius: 8px;
-    /* margin-top: 20px; */
-  /* border: 1px solid black; */
 `;
 
 
@@ -142,8 +136,6 @@ const WhiteSale = () => {
                 </Container>
                 </>
                 }
-                
-
             </StyledMain>
         </div>
     )

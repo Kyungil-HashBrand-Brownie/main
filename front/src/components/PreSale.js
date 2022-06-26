@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { FreeImg } from '../img'
 import styled from "styled-components";
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import ProgressBar from 'react-bootstrap/ProgressBar'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import Browny from '../img/browny8.png';
 import {brownyContract, contractAddr} from "configs";
 import { batchMint } from 'api';
 
@@ -18,7 +14,6 @@ const StyledMain = styled.div`
     border-radius: 0.25rem;
     background-color: white;
     opacity: 95%;
-    /* border: 3px solid black; */
     border-radius: 10px;
     text-align: center;
     display: flex ;
@@ -28,7 +23,7 @@ const StyledMain = styled.div`
 `;
 
 const StyledDiv = styled.div`
-    padding: 0.375rem 0.75rem;
+    padding: 0.375rem 0;
     font-size: 1rem;
     color: green;
     line-height: 1.5;
@@ -53,21 +48,24 @@ const StyledButton = styled.button`
 `;
 
 
-const PreSale = () => {
-    const navigate = useNavigate();
+const PreSale = ({ data }) => {
+    // console.log('data: ', data)
+    const {amount, img, price, title} = data;
     const dispatch = useDispatch();
     const { myAddress } = useSelector(state => state.nft);
-    
+
+    const [count, setCount] = useState(1)    
     const [totalCnt, setTotalCnt] = useState(0);
 
-    const getMintCnt = async ()=> {
-        const totalCnt = await brownyContract.methods.nftNum().call()
-        setTotalCnt(totalCnt)
+    const countAdd = () => {
+        if (count < 5) setCount(count + 1);
+        else alert("최대 5개까지 민팅 가능합니다.");
     }
 
-    getMintCnt()
+    const countMinus = () => {
+        if (count > 1) setCount(count - 1);
+    }
 
-    
     const preMint = async () => {
         if(!myAddress){
             return alert("지갑을 먼저 연결해주세요")
@@ -79,33 +77,27 @@ const PreSale = () => {
             alert("해당 지갑 주소로 민팅되었습니다!");
         }
         else alert("transaction fail")
-        
-        
     }
 
-    // const dispatch = useDispatch(state => state.nft)
-
-    const [count, setCount] = useState(1)
-
-
-    const countAdd = () => {
-        if (count < 5) setCount(count + 1);
-        else alert("최대 5개까지 민팅 가능합니다.");
+    // 전체 민팅 갯수
+    const getMintCnt = async ()=> {
+        const totalCnt = await brownyContract.methods.nftNum().call()
+        setTotalCnt(totalCnt)
     }
 
-    const countMinus = () => {
-        if (count > 1) setCount(count - 1);
-    }
+    useEffect(() => {
+        getMintCnt()
+    }, [])
 
     return (
         <div className="freelist">
             <StyledMain >
                 <div className='mint-title-box'>
-                    <h2 className="mint-title">Pre-Sale</h2>
+                    <h2 className="mint-title">{title}</h2>
                 </div>
                 <div className='mint-img-container'>
                     <StyledDiv >
-                        <img src={Browny} style={{ width: 187, height: 220 }} />
+                        <img src={img} style={{ width: 187, height: 220 }} />
                     </StyledDiv>
                 </div>
                 <div className='mint-count-box'>
@@ -116,7 +108,7 @@ const PreSale = () => {
                 <Container className="mint-info-box">
                     <Row className='mint-info-row'>
                         <Col><i>Price</i></Col>
-                        <Col>2 BTK</Col>
+                        <Col>{price} BTK</Col>
                     </Row>
                     <Row className='mint-info-row'>
                         <Col><i>Per transaction</i></Col>
@@ -124,12 +116,16 @@ const PreSale = () => {
                     </Row>
                     <Row className='mint-info-row'>
                         <Col><i>Amount</i></Col>
-                        <Col>{totalCnt}/150</Col>
+                        <Col>{amount == 'limited' ? amount : totalCnt + amount}</Col>
                     </Row>
                 </Container>
                 <br />
-                <Button className="mint-wal-connect-btn" variant="success" onClick={preMint}>Mint</Button>{' '}
-
+                <Button 
+                    className="mint-wal-connect-btn" 
+                    variant="success" 
+                    onClick={preMint}>
+                    Mint
+                </Button>
             </StyledMain>
         </div>
     )
