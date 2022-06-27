@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { FreeImg } from '../img'
 import styled from "styled-components";
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import ProgressBar from 'react-bootstrap/ProgressBar'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import Browny from '../img/browny8.png';
 import {brownyContract, contractAddr} from "configs";
-import { batchMint } from 'api';
+import { batchMint, whitelistMint } from 'api';
 
 
 // 리팩터링 - 코드를 단순화하는 작업 불필요한 중복요소들을 제거
 const StyledMain = styled.div`
     width: 320px;
+    min-height: 620px;
     font-size: 1rem;
     line-height: 1.5;
     border-radius: 0.25rem;
     background-color: white;
     opacity: 95%;
-    border: 3px solid black;
-    border-radius: 6px;
+    border-radius: 10px;
     text-align: center;
     display: flex ;
     flex-wrap: wrap;
@@ -28,14 +24,13 @@ const StyledMain = styled.div`
 `;
 
 const StyledDiv = styled.div`
-    padding: 0.375rem 0.75rem;
+    padding: 0.375rem 0;
     font-size: 1rem;
     color: green;
     line-height: 1.5;
-    background-color: rgb(144, 214, 32);
-    /* margin-top: 20px; */
     margin-bottom: 30px;
-    margin-left: 20px;
+    margin-left: 
+        ${props => props.price == 50 ? '10px' : 0} ;
     border-radius: 8px;
     
 `;
@@ -49,26 +44,29 @@ const StyledButton = styled.button`
     line-height: 1.5;
     border: 1px solid lightgray;
     color: white;
-    background-color: blue;
+    background-color: #361500;
     margin: 0 6px;
 `;
 
 
-const PreSale = () => {
-    const navigate = useNavigate();
+const PreSale = ({ data }) => {
     const dispatch = useDispatch();
     const { myAddress } = useSelector(state => state.nft);
-    
-    const [totalCnt, setTotalCnt] = useState(0);
+    const { amount, img, price, title } = data;
 
-    const getMintCnt = async ()=> {
-        const totalCnt = await brownyContract.methods.nftNum().call()
-        setTotalCnt(totalCnt)
+    const [count, setCount] = useState(1)    
+    const [totalCnt, setTotalCnt] = useState(0);
+    const [isWhite, setIsWhite] = useState(false)
+
+    const countAdd = () => {
+        if (count < 5) setCount(count + 1);
+        else alert("최대 5개까지 민팅 가능합니다.");
     }
 
-    getMintCnt()
+    const countMinus = () => {
+        if (count > 1) setCount(count - 1);
+    }
 
-    
     const preMint = async () => {
         if(!myAddress){
             return alert("지갑을 먼저 연결해주세요")
@@ -80,31 +78,56 @@ const PreSale = () => {
             alert("해당 지갑 주소로 민팅되었습니다!");
         }
         else alert("transaction fail")
-        
-        
     }
 
-    // const dispatch = useDispatch(state => state.nft)
-
-    const [count, setCount] = useState(1)
-
-
-    const countAdd = () => {
-        if (count < 5) setCount(count + 1);
-        else alert("최대 5개까지 민팅 가능합니다.");
+    const whiteMint = async () => {
+        const result = await whitelistMint(myAddress,count)
+        if (result.status) {
+            dispatch({ type: "WALLET_REFRESH" })
+            alert("해당 지갑 주소로 민팅되었습니다!");
+        }
+        else alert("transaction fail")
     }
 
-    const countMinus = () => {
-        if (count > 0) setCount(count - 1);
+    // 전체 민팅 갯수
+    const getMintCnt = async ()=> {
+        const totalCnt = await brownyContract.methods.nftNum().call()
+        setTotalCnt(totalCnt)
     }
+
+    const checkWhitelist = async () => {
+        if (myAddress) {
+            try {
+                const isWhite = await brownyContract.methods.isWhitelisted(myAddress).call()
+                console.log(isWhite);
+                setIsWhite(isWhite)
+            }
+            catch (e) {
+                throw e
+            }
+        }
+    }
+
+    useEffect(() => {
+        getMintCnt()
+    }, [])
+
+    useEffect(() => {
+        checkWhitelist()
+    }, [isWhite, myAddress])
 
     return (
         <div className="freelist">
             <StyledMain >
-                <h2 className="mint-title">Pre-Sale</h2>
+                <div className='mint-title-box'>
+                    <h2 className="mint-title">{title}</h2>
+                </div>
+                {(price == 2 || isWhite)
+                ?
+                <>
                 <div className='mint-img-container'>
-                    <StyledDiv >
-                        <img src={Browny} style={{ width: 187, height: 220 }} />
+                    <StyledDiv price={price}>
+                        <img src={img} style={{ width: price==1 ? 220 : 187, height: 220 }} />
                     </StyledDiv>
                 </div>
                 <div className='mint-count-box'>
@@ -113,22 +136,32 @@ const PreSale = () => {
                     <StyledButton onClick={() => countAdd()}> +</StyledButton>
                 </div>
                 <Container className="mint-info-box">
-                    <Row>
-                        <Col>Price</Col>
-                        <Col>2 BTK</Col>
+                    <Row className='mint-info-row'>
+                        <Col><i>Price</i></Col>
+                        <Col>{price} BTK</Col>
                     </Row>
-                    <Row>
-                        <Col>Per transaction</Col>
-                        <Col>최대 5 개</Col>
+                    <Row className='mint-info-row'>
+                        <Col><i>Per transaction</i></Col>
+                        <Col className='mint-text'>최대 5 개</Col>
                     </Row>
-                    <Row>
-                        <Col>Amount</Col>
-                        <Col>{totalCnt}/150</Col>
+                    <Row className='mint-info-row'>
+                        <Col><i>Amount</i></Col>
+                        <Col>{amount == 'limited' ? amount : totalCnt + amount}</Col>
                     </Row>
                 </Container>
                 <br />
-                <Button className="mint-wal-connect-btn" variant="success" onClick={preMint}>Mint</Button>{' '}
-
+                <Button 
+                    className="mint-wal-connect-btn" 
+                    variant="success" 
+                    onClick={price==2 ? preMint : whiteMint}>
+                    Mint
+                </Button>
+                </>
+                :
+                <Container className="not-whitelist">
+                    <div>화이트리스트가 아닙니다</div>
+                </Container>
+                }
             </StyledMain>
         </div>
     )

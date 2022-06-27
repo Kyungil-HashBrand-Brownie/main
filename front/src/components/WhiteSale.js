@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { WhiteImg } from '../img'
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 import {Container,Row , Col , Button} from 'react-bootstrap'
-import ProgressBar from 'react-bootstrap/ProgressBar'
 import Browny from '../img/browny9.png'
 import {brownyContract, contractAddr} from "configs";
 import { whitelistMint } from 'api';
@@ -12,11 +10,9 @@ const StyledMain = styled.div`
     width: 320px;
     font-size: 1rem;
     line-height: 1.5;
-    border-radius: 0.25rem;
     background-color: white;
     opacity: 95%;
-    border: 3px solid black;
-    border-radius: 6px;
+    border-radius: 10px;
     text-align: center;
     display: flex ;
     flex-wrap: wrap;
@@ -25,18 +21,12 @@ const StyledMain = styled.div`
 `;
 
 const StyledDiv = styled.div`
-    width: 220px;
-    height: 220px;
-    /* padding: 0.375rem 0.75rem; */
     font-size: 1rem;
     color: green;
     line-height: 1.5;
     background-color: white;
     margin-bottom: 20px;
     border-radius: 8px;
-    /* margin-top: 20px; */
-    background: rgb(144, 214, 32);
-  /* border: 1px solid black; */
 `;
 
 
@@ -49,7 +39,7 @@ const StyledButton = styled.button`
     line-height: 1.5;
     border: 1px solid lightgray;
     color: white;
-    background-color: blue;
+    background-color: #361500;
     margin: 0 6px ;
 `;
 
@@ -60,6 +50,23 @@ const WhiteSale = () => {
 
     const [count, setCount] = useState(1)
     const [isWhite, setIsWhite] = useState(false)
+    const [whitelistCnt, setWhitelistCnt] = useState(0);
+
+    const getWhitelistMintCnt = async ()=> {
+        const whitelistCnt = await brownyContract.methods.whitelistNftNum().call()
+        setWhitelistCnt(whitelistCnt)
+    }
+
+    getWhitelistMintCnt()
+
+    const whiteMint = async () => {
+        const result = await whitelistMint(myAddress,count)
+        if (result.status) {
+            dispatch({ type: "WALLET_REFRESH" })
+            alert("해당 지갑 주소로 민팅되었습니다!");
+        }
+        else alert("transaction fail")
+    }
 
     const countAdd = () => {
         // counting 
@@ -68,16 +75,7 @@ const WhiteSale = () => {
     }
 
     const countMinus = () => {
-        if (count > 0) setCount(count - 1);
-    }
-
-    const whiteMint = async () => {
-            const result = await whitelistMint(myAddress,count)
-            if (result.status) {
-                dispatch({ type: "WALLET_REFRESH" })
-                alert("해당 지갑 주소로 민팅되었습니다!");
-            }
-            else alert("transaction fail")
+        if (count > 1) setCount(count - 1);
     }
 
     const checkWhitelist = async () => {
@@ -101,7 +99,9 @@ const WhiteSale = () => {
     return (
         <div className='whitelist'>
             <StyledMain >
-                <h2 className="mint-title">WhiteSale</h2>
+                <div className='mint-title-box'>
+                    <h2 className="mint-title">White-Sale</h2>
+                </div>
                 {isWhite 
                 ?
                 <>
@@ -115,25 +115,25 @@ const WhiteSale = () => {
                 </div>
 
                 <Container className="mint-info-box">
-                    <Row>
-                        <Col>Price</Col>
-                        <Col>1 BTK</Col>
+                    <Row className="mint-info-row">
+                        <Col><i>Price</i></Col>
+                        <Col>25 BTK</Col>
                     </Row>
-                    <Row>
-                        <Col>Per transaction</Col>
-                        <Col>최대 5 개</Col>
+                    <Row className="mint-info-row">
+                        <Col><i>Per transaction</i></Col>
+                        <Col className='mint-text'>최대 5 개</Col>
                     </Row>
-                    <Row>
-                        <Col>Amount</Col>
-                        <Col>limited</Col>
+                    <Row className="mint-info-row">
+                        <Col><i>Amount</i></Col>
+                        <Col>{whitelistCnt}/30</Col>
                     </Row>
                 </Container>
                 <br />
                 <Button
                     className="mint-wal-connect-btn"
-                    variant="primary"
+                    variant="success"
                     onClick={whiteMint}
-                >Mint </Button>{' '}
+                >Mint </Button>
                 </>
                 :
                 <>
@@ -142,8 +142,6 @@ const WhiteSale = () => {
                 </Container>
                 </>
                 }
-                
-
             </StyledMain>
         </div>
     )

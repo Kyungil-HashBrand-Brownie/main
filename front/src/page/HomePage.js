@@ -7,6 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import HomeImgCard from '../components/HomeImgCard';
 import { group ,img1 , Group2 , baking, baking2, baking3 } from '../img';
 import SlideShow from '../components/SlideShow';
+import D3 from '../components/D3';
+import Viliage from 'components/Viliage';
+import Team from 'components/Team';
+// import "../scss/styled.css"
 
 const StyledMainText = styled.div`
   /* background: red; */
@@ -40,14 +44,16 @@ const StyledSubText = styled.div`
 `
 const StyledMintDate = styled.div`
   position: relative;
-  top: 60px;
-  border: 15px solid white;
+  top: 40px;
+  border: 5px solid rgb(31, 162, 31);
   border-radius: 10px;
   padding: 10px 0px;
   text-align: center;
   font-weight: bolder;
   font-size: larger;
   width: 300px;
+  background: white;
+  /* background: rgb(31, 162, 31); */
   /* display: flex; */
   /* justify-content: center; */
 `
@@ -72,7 +78,7 @@ const StyledBrownyAbove = styled.img`
   width: 500px;
   margin: 0px 50px;
   z-index: 1;
-  border: 5px solid black;
+  /* border: 5px solid black; */
   animation-name: ${displayAnimation};
   animation-duration: 0.5s;
   animation-iteration-count: 1;
@@ -119,8 +125,6 @@ const StyledArrow = styled.img`
 `
 
 const BakingImg = styled.div`
-
-
   .bakingImg1 img{
     width: 300px;
     height: 400px;
@@ -138,58 +142,13 @@ const StyledEllipse = styled.img`
   z-index: -1; 
 `
 
-const StyleDiv1 = styled.div`
-    width:100% ;
-    background-color: #6B828E;
-    height: 50%;
-    display: flex;
-    position: relative;
 
-    .backgray{
-      background-color: gray;
-      width:80% ;
-      height: 300px;
-      display: flex;
-      position: relative;
-    }
-    
-
-    .box_vertical {
-      writing-mode: vertical-lr;
-    }
-
-    .box_vertical2 {
-      writing-mode: vertical-lr;
-      background-color: black;
-      height:350px ;
-      color: white;
-      margin-bottom: 100px;
-      margin-top: -50px;
-    }
-
-    .box_vertical3 {
-      writing-mode: vertical-lr;
-      height:400px ;
-      background-color: pink;
-      margin-top: -100px;
-    }
-
-    .home_img {
-      width: 500px;
-      height: 300px;
-      margin-top: -10px;
-    }
-
-    .home_img img{
-      width:100%;
-      height: 100%;
-    }
-
-    /* .blue {
-      background-color: blue;
-    } */
+const HomeBackImgPosition = styled.div`
+  width: 100%;
+  height: 400px;
+  background-color: black;
+  opacity : 0.9;
 `
-
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -223,34 +182,20 @@ const HomePage = () => {
 
     const moveToMint = () => {
       navigate('/mint');
-      dispatch({type: 'MODAL_CLOSE'});
+
     }
 
-
-    // let mainText = document.querySelector("slidediv")
     let mainText = document.getElementsByClassName("slidediv")
-
-
-    // function scroll() {
-    //   let value = window.scrollY;
-    //   console.log('scroll', value);
-
-    //   if(value > 400) {
-    //     mainText.animation='disappear 1s ease-out forward';
-    //   }else{
-    //     mainText.animation='slide 1s ease-out'
-    //   }
-    // }
 
     window.addEventListener('scroll', function() {
       let value = window.scrollY;
-      // console.log('scroll', value);
-      // console.log(mainText)
-
-      if(value > 1500 || value < 850) {
-        mainText[0].style.animation='disappear 1s ease-out forwards';
-      }else  {
-        mainText[0].style.animation='slide 1s ease-out'
+      let loc = window.location.href;
+      if (loc == 'http://localhost:3000/') {
+        if(value > 1500 || value < 850) {
+          mainText[0].style.animation='disappear 1s ease-out forwards';
+        }else  {
+          mainText[0].style.animation='slide 1s ease-out'
+        }
       }
     })
 
@@ -263,25 +208,9 @@ const HomePage = () => {
     
     return (
       <>
-      {/* <img 
-        className='backG-img'
-        src={Img}
-      /> */}
-      {/* <img 
-        className='backG-left-img'
-        src={LeftImg3}
-      /> */}
-      {/* <img 
-        className='backG-right-img'
-        src={RightImg}
-      /> */}
-      {/* <img 
-        className='backG-right-img2'
-        src={RightImg}
-      /> */}
       <div className='mintdate-container'>
         <StyledMintDate>
-          <span>민팅 시작까지 남은 시간</span><br />
+          <span>민팅 까지 남은 시간</span><br />
           <span>
             {state.day < 10 ? `0${state.day}` : state.day}D 
             &nbsp;{state.hours < 10 ? `0${state.hours}` : state.hours}h 
@@ -291,64 +220,37 @@ const HomePage = () => {
         </StyledMintDate>
       </div>
       <Container className='main-container'>
-          <Col className="main-col">
-              <StyledMainText>Browny</StyledMainText>
-              <StyledSubText>The Best nft Collections <br/>You Can Get</StyledSubText>
-              {/* <div className='main-button-container'> */}
-                <StyledButton
-                  onClick={moveToMint}
-                >
-                  <div>
-                    <StyledArrow src={Arrow} alt="nft-arrows"/>
-                    <span>Explore our nfts</span>
-                  </div>
-                </StyledButton>
-              {/* </div> */}
-          </Col>
-          <Col className="main-img-col">
-            <StyledBrownyAbove src={Group2} alt="browny-above" />
-            {/* <StyledBrownyDown src={Browny10} alt="browny-down" /> */}
-          </Col>
-          
+        <Col className="main-col">
+            <StyledMainText><D3/></StyledMainText>
+            <StyledSubText>The Best nft Collections <br/>You Can Get</StyledSubText>
+            {/* <div className='main-button-container'> */}
+              <StyledButton onClick={moveToMint}>
+                <div>
+                  <StyledArrow src={Arrow} alt="nft-arrows"/>
+                  <span>Explore our nfts</span>
+                </div>
+              </StyledButton>
+            {/* </div> */}
+        </Col>
+        <Col className="main-img-col">
+          <StyledBrownyAbove src={Group2} alt="browny-above" />
+          {/* <StyledBrownyDown src={Browny10} alt="browny-down" /> */}
+        </Col>
+      </Container>
+      <Viliage />
+      <Container className='main-container'>
+        <Col className="main-col">
+          <div className="slidediv">
+            Love <br /> Your Browny
+          </div>
+        </Col>
+        <Col className="main-img-col">
+            <SlideShow />
+        </Col>
       </Container>
       <HomeImgCard />
-
-      <Container className='main-container'>
-          <Col className="main-col">
-          <div className="slidediv">
-            browny로 <br />사랑을 <br />전달  <br/>하세요
-          </div>
-          </Col>
-          <Col className="main-img-col">
-          <div className="bakingImg1">
-              <img src={baking2} /> 
-            </div>
-          </Col>
-          
-          {/* <StyledEllipse src={Ellipse} alt="ellipse"/> */}
-      </Container>
-
-
-        {/* <div className="slidediv">
-          PICK UP
-          YOUR NFT
-          hoihoi
-        </div> */}
-        <br />
-  
-        <SlideShow />
-      {/* <div className='main-team-container'> */}
-        {/* <Container className='main-team-container'>
-          <StyledMainText>Team</StyledMainText>
-          <Container className='main-team-img-box'>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-          </Container>
-        </Container> */}
-      {/* </div> */}
+      <Team />
+      {/* </PositionCss> */}
       </>
   )
 }

@@ -221,19 +221,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "claimed",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "fileExtention",
 				"outputs": [
@@ -647,6 +634,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "userRank",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -734,6 +734,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "whitelistNftNum",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -804,7 +817,7 @@
 		"userdoc": {
 			"kind": "user",
 			"methods": {},
-			"notice": "author Kyungil_Team Browny version 1.0 자체 nft staking 구현",
+			"notice": "author Kyungil_Team Brownie version 1.0 자체 nft staking 구현",
 			"version": 1
 		}
 	},
@@ -825,11 +838,11 @@
 	},
 	"sources": {
 		"@openzeppelin/contracts/access/Ownable.sol": {
-			"keccak256": "0x24e0364e503a9bbde94c715d26573a76f14cd2a202d45f96f52134ab806b67b9",
+			"keccak256": "0x651f8382c9fa0d82ab533bc680dbb412347b00c6e296a00b72fe870c75229eca",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e12cbaa7378fd9b62280e4e1d164bedcb4399ce238f5f98fc0eefb7e50577981",
-				"dweb:/ipfs/QmXRoFGUgfsaRkoPT5bxNMtSayKTQ8GZATLPXf69HcRA51"
+				"bzz-raw://6ef3188255b93fde58b3c073582fccd01daf9e5febd53682dda814438429e3f3",
+				"dweb:/ipfs/QmcG37ZJzUpYUjYtTMjStgbNzLNUM8v7iKA8w7caMTQC43"
 			]
 		},
 		"@openzeppelin/contracts/token/ERC20/ERC20.sol": {
@@ -937,27 +950,27 @@
 			]
 		},
 		"minting/Minting.sol": {
-			"keccak256": "0xf9c59faf0a5176f6b44f64034a1258b36592c158496f45a31c933ebc59d264d4",
+			"keccak256": "0xe75216e3cd1830e0e0007246b5c5d2b9424963ba0095a72687a676f3985beb55",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f8ed42c67385f3132a1743d7ce5e071089e4db3772dda7c23d3ce5c087c30337",
-				"dweb:/ipfs/QmZcSqBFFuU6dzURrhWTsisDfLgNw2y4wdbCYVoWjnQyJW"
+				"bzz-raw://da43b510db6812994902da32ebd7f99dc2d6b9cfb7322bf384d55532bea79934",
+				"dweb:/ipfs/QmQZvHohFSaBLtDRZXJNSJPDEHwdkonuov2MQwm1N1osa7"
 			]
 		},
 		"minting/Staking.sol": {
-			"keccak256": "0x3c3b9990f979e6880fe66c4de053dda0e13db2b1d7f9e8f81976a19989cd2c64",
+			"keccak256": "0x961144af25ba43295358a5e91b58f84b014330a985cc1c5004f12f76382c1bf7",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b3e200fba6cdbfb00de076af3b8d07f559d6a72be9babe317ccd641425aa21db",
-				"dweb:/ipfs/Qmbk1BbRgezGB3KL5kzfZvMB1Utws5cESrNpaShURTqTx9"
+				"bzz-raw://b31615221a385f013f3179246a384acdd3ce26fd0f7c1127f8c4494c395e3d97",
+				"dweb:/ipfs/QmTUjxqH36NWq3eQgeTckUG4j7xEBBv5CDCHqT9CA47io9"
 			]
 		},
 		"minting/Token.sol": {
-			"keccak256": "0x9dcdd0ece766d0d33c98416bfaa0de4a7931af4d0073037f8ba6b83c02b7863e",
+			"keccak256": "0x5c110414a68b372201279abd3eced63da78dda7d3882267d4030627b0ed525e1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9e0af7bad96447b35ff03c5adbfc9438b31571f659dbf8f459e325143c98fa12",
-				"dweb:/ipfs/QmdVYQvVmSo3oy991sJJQuUpSr9YvKUwM432xXG3Fqtfoy"
+				"bzz-raw://9b1bd462c6dda26499a494b946e86a0d4a410003cbb8123938deb99cae37768e",
+				"dweb:/ipfs/QmNZp4fHQxuTNigsJDh4Ug4HAhtF3xjAsqripQopm6hte9"
 			]
 		},
 		"minting/Whitelist.sol": {

@@ -20,6 +20,7 @@ const Swap = () => {
 
     const swapChange = () => {
         setSwap(!swap)
+        amountInput.current.value = ''
     }
 
     const checkValidation = () => {
@@ -35,7 +36,7 @@ const Swap = () => {
             amountInput.current.value = '';
             setExchange('');
         }
-        else if (Number(value) > 1000000) {
+        else if (Number(value) > 10000) {
             alert('최대 거래 수량 초과 \n ')
             amountInput.current.value = '';
             setExchange('');
@@ -43,8 +44,8 @@ const Swap = () => {
 
         else {
             if (value != '') {
-                if (swap) setExchange(parseInt(Number(value) / 7.22).toString() + ' ' + bool[swap])
-                else setExchange(parseInt(Number(value) * 7.22).toString() + ' ' + bool[swap])
+                if (swap) setExchange(parseFloat(Number(value) * 10).toFixed(2) + ' ' + bool[swap])
+                else setExchange(parseFloat(Number(value) / 10).toFixed(2) + ' ' + bool[swap])
             }
             else setExchange('your exchange')
             // amountInput.current.value = ;
@@ -56,16 +57,21 @@ const Swap = () => {
     
     const swapToken = async () => {
         let amount = amountInput.current.value
-        console.log(brownyContract);
+        let status;
         if(Number(amount)){
             if(swap){
-                await getBtk(myAddress,amount)
+                const result = await getBtk(myAddress,amount)
+                status = result.status
             }
             else{
-                await sellBtk(myAddress, amount)
+                const result = await sellBtk(myAddress, amount)
+                status = result.status
             }
-            alert('스왑완료');
-            dispatch({type: "WALLET_REFRESH"})
+            if(status){
+                alert('스왑완료');
+                dispatch({type: "WALLET_REFRESH"})
+            }
+            else alert("오류 발생")
         }
         else {
             alert("숫자를 입력해주세요")
@@ -98,8 +104,8 @@ const Swap = () => {
                 </div>
                 <div className='swap-ratio-outer'>
                 <div className='swap-ratio-inner'>
-                    <div className='swap-ratio'>1 KLAY = 7.22 BTK</div>
-                    <div className='swap-ratio'>1 BTK = 0.14 KLAY</div>
+                    <div className='swap-ratio'>1 KLAY = 10 BTK</div>
+                    <div className='swap-ratio'>1 BTK = 0.1 KLAY</div>
                 </div>
                 </div>
                 <div className='swap-amount-input-box'>
@@ -122,7 +128,7 @@ const Swap = () => {
                     </div>
                 </div>
                 <div className='swap-text-box'>
-                    <p className='swap-text'>최대 1000000(일백만)개 거래 가능합니다</p>
+                    <p className='swap-text'>최대 10000(일만)개 거래 가능합니다</p>
                 </div>
                 <div className='swap-submit'>
                     <button 

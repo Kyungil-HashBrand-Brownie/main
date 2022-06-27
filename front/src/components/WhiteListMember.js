@@ -9,7 +9,7 @@ import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
 import Form from 'react-bootstrap/Form';
 import { trash } from '../img'
-import {brownyContract} from "configs";
+import { brownyContract } from "configs";
 
 
 
@@ -30,7 +30,7 @@ const WhiteList = () => {
 
     const getWhiteList = async () => {
         try {
-            const { data } = await axios.get("http://localhost:4000/admin")
+            const { data } = await axios.get("/white/whitelist")
             setList(data)
         }
         catch (e) {
@@ -54,7 +54,7 @@ const WhiteList = () => {
         const Sucs = await brownyContract.methods.add(addInput.current).send({ from: myAddress, gas: 300000, value: 0 })
         console.log(Sucs)
         if (Sucs.status === true) {
-            await axios.post('http://localhost:4000/whitelist',
+            await axios.post('/white/whitelist',
                 {
                     data: { from: addInput.current, status: Sucs.status },
                 })
@@ -75,7 +75,7 @@ const WhiteList = () => {
         }
         const Del = await brownyContract.methods.remove(delInput.current).send({ from: myAddress, gas: 300000, value: 0 })
         if (Del.status === true) {
-            await axios.post('http://localhost:4000/deletelist',
+            await axios.post('/white/deletelist',
                 {
                     data: { from: delInput.current, status: Del.status },
                 })

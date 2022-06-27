@@ -6,7 +6,7 @@ const Nav = styled.nav`
   justify-content: center;
   align-items: center;
   gap: 4px;
-  margin: 16px;
+  /* margin: 16px; */
 `;
 
 const Button = styled.button`
@@ -36,10 +36,10 @@ const Button = styled.button`
 `;
 
 const PageButton = ({ total, page, setPage }) => {
-    console.log('page: ', page)
     const numPages = Math.ceil(total / 4);
 
     return (
+        <div className={page !=numPages ? 'pageB' : page == numPages && (total % 4 == 1 || total % 4 == 2) ? 'pageA': 'pageB'}>
         <Nav>
             <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
             &lt;
@@ -61,6 +61,7 @@ const PageButton = ({ total, page, setPage }) => {
             &gt;
             </Button>
         </Nav>
+        </div>
     )
 }
 
