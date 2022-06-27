@@ -1,66 +1,38 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
 import "./Token.sol";
-import "./Whitelist.sol";
+import "./NFT.sol";
 
 /**
 * author Kyungil_Team Brownie
 * version 1.0
-* ERC721기반 대체 불가능 토큰 자체 nft
+* nft 발행 contract
 */
-contract BrownieNft is ERC721, Whitelist {
+contract Minting {
+    BrownieToken public brownieToken;
+    BrownieNFT public brownieNFT;
+
+    constructor(address _brownieToken, address _brownieNFT) {
+        brownieToken = BrownieToken(_brownieToken);
+        brownieNFT = BrownieNFT(_brownieNFT);
+    }
+
     // nft 거래 및 staking reward를 위한 BTK instance
-    BrownieToken instance = new BrownieToken(address(this));
+    // BrownieToken instance = new BrownieToken(address(this));
     event NFTMinting(address indexed account, uint indexed amount);
 
     // token swap - from klaytn to BTK
     function getBtk(uint256 _amount) public payable {
         require(msg.value == _amount * 10 ** 18, "Please check your balance");
-        instance.tokenTransfer(address(this), msg.sender, _amount * 10);
+        brownieToken.tokenTransfer(address(brownieToken), msg.sender, _amount, 722 * 10 ** 16);
     }
 
     // token swap - from BTK to klaytn
     function sellBtk(uint256 amount) public {
-        require(instance.checkBalance(msg.sender) >= amount * 10 ** 18, "Please check your balance");
-        instance.tokenTransfer(msg.sender, address(this), amount);
-        payable(msg.sender).transfer(amount * 10 ** 17);
-    }
-
-    // instance address 확인용
-    function viewIns() public view returns(address) {
-        return address(instance);
-    }
-    // contract address 확인용
-    function viewCon() public view returns(address) {
-        return address(this);
-    }
-
-    using Counters for Counters.Counter;
-    string public fileExtention = ".json";
-    using Strings for uint256;
-    mapping(uint256 => bool) mintinglist;
-    mapping(address => uint256[]) ownNFTs;
-
-    /** 
-    * _tokenIdCounter - 전체 발행된 nft 수
-    * _whitelistCounter - whitelist가 발행한 nft 수
-    */
-    Counters.Counter private _tokenIdCounter;
-    Counters.Counter private _whitelistCounter;
-
-    /*-
-    * 자체 nft 생성
-    * @name BrownieNft
-    * @symbol BFT
-    */
-    constructor() ERC721("BrownieNft", "BFT") {}
-
-    // _baseURI - nft 발행시 참조할 ipfs 주소 
-    function _baseURI() internal pure override returns (string memory) {
-        return "ipfs://QmaAYEhbXsrDn7TGgnz9EhZzrrrB8vuHDuzXioPFzjRQBt/";
+        require(brownieToken.checkBalance(msg.sender) >= amount * 10 ** 18, "Please check your balance");
+        brownieToken.tokenTransfer(msg.sender, address(brownieToken), amount, 10 ** 18);
+        payable(msg.sender).transfer(amount * (14 * 10 ** 16));
     }
 
     // nft random 발행을 위한 난수 생성 함수
@@ -69,8 +41,8 @@ contract BrownieNft is ERC721, Whitelist {
         uint256 randomNum;
         while(true) {
             randomNum = uint256(keccak256(abi.encodePacked(block.timestamp, randNonce, msg.sender))) % 150 + 1;
-            if(mintinglist[randomNum] == false) {
-                mintinglist[randomNum] = true;
+            if(brownieNFT.checkMinting(randomNum) == false) {
+                brownieNFT.minted(randomNum);
                 break;
             }
             randNonce++;
@@ -82,61 +54,79 @@ contract BrownieNft is ERC721, Whitelist {
     * safeMint - nft 발행 함수 
     * nft 발행시 이 함수 사용해서 발행 
     */
-    function safeMint(address to, uint256 cost) private {
+    function safeMint(address to, uint256 cost, uint8 _status) private {
         uint256 randomNum = randNum();
-        _safeMint(to, randomNum);
-        _tokenIdCounter.increment();
-        ownNFTs[msg.sender].push(randomNum);
-        instance.tokenTransfer(msg.sender, address(this), cost);
-    }
-
-    // 발행된 nft tokenId에 대한 ipfs주소 return 함수 
-    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
-        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
-        string memory baseURI = _baseURI();
-        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), fileExtention)) : "";
+        brownieNFT.safeMint(to, msg.sender, randomNum, _status);
+        brownieToken.tokenTransfer(msg.sender, address(this), cost, 10 ** 18);
     }
 
     // 일반 minting
     function batchMint(uint256 amount) public {
-        require(instance.balanceOf(msg.sender) >= amount * 50 * 10 ** 18 , "Please check your balance");
+        require(brownieToken.balanceOf(msg.sender) >= amount * 50 * 10 ** 18 , "Please check your balance");
         for (uint256 i = 0; i < amount; i++) {
-            safeMint(msg.sender, 50);
+            safeMint(msg.sender, 50, 0);
         }
         emit NFTMinting(msg.sender, amount);
     }
 
     // whitelist 전용 minting
-    function whitelistMint(uint256 amount) public onlyWhitelisted(msg.sender) {
-        require(instance.balanceOf(msg.sender) >= amount * 25 * 10 ** 18 , "Please check your balance");
-        require(_whitelistCounter.current() + amount <= 30,"Total NFT for whitelist users is only thirty");
+    function whitelistMint(uint256 amount) public {
+        require(brownieNFT.isWhitelisted(msg.sender), "Yor are not whitelist member");
+        require(brownieToken.balanceOf(msg.sender) >= amount * 25 * 10 ** 18 , "Please check your balance");
+        require(brownieNFT.whitelistNftNum() + amount <= 30,"Total NFT for whitelist users is only thirty");
         for (uint256 i = 0; i < amount; i++) {
-            safeMint(msg.sender, 25);
-            _whitelistCounter.increment();
+            safeMint(msg.sender, 25, 1);
         }
         emit NFTMinting(msg.sender, amount);
     }
 
-    // contract에 있는 klaytn 출금용
-    function withdrawKLAY(uint _balance) public onlyOwner {
-        require(address(this).balance >= _balance * 10 ** 18, "insurfficient balance");
-        payable(msg.sender).transfer(_balance * 10 ** 18);
+        modifier isStaked(uint256 tokenId) {
+        require(brownieNFT.isStaked(tokenId), "not staked tokenId");
+        _;
     }
 
-    // 현재 발행된 nft 수 확인 
-    function nftNum() public view returns(uint256) {
-        uint256 tokenNum = _tokenIdCounter.current();
-        return tokenNum;
+    // stake function 
+    function stake(uint256 tokenId) private {
+        require(brownieNFT.ownerOf(tokenId) == msg.sender, "not your token");
+        require(brownieNFT.isStaked(tokenId) == false, "already staked");
+        brownieNFT.transferFrom(msg.sender, address(brownieNFT), tokenId);
+        brownieNFT.setStake(tokenId, uint256(block.timestamp), msg.sender);
+        brownieNFT.stakedFunc(tokenId, msg.sender);
+    }
+    function stakeNFTs(uint256[] memory tokenId) external {
+        for(uint i = 0; i < tokenId.length; i++) {
+          stake(tokenId[i]);
+        }
     }
 
-    // 현재 whitelist가 minting한 nft 수 확인 
-    function whitelistNftNum() public view returns(uint256) {
-        uint256 tokenNum = _whitelistCounter.current();
-        return tokenNum;
+    // unstake function
+    function unstake(uint256 tokenId) private isStaked(tokenId) {
+        require(brownieNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
+        claimed(tokenId);
+        brownieNFT.transferFrom(address(brownieNFT), msg.sender, tokenId);
+        brownieNFT.deleteStake(tokenId);
+        brownieNFT.stakedFunc(tokenId, msg.sender);
+    }
+    function unstakeNFTs(uint256[] memory tokenId) external {
+        for(uint i = 0; i < tokenId.length; i++) {
+          unstake(tokenId[i]);
+        }
     }
 
-    // 내가 보유한 nft tokenId들
-    function myNFTs() public view returns(uint256[] memory) {
-        return ownNFTs[msg.sender];
+    // reward claim function
+    // 1. timestamp와 현재 시간 확인하여 보상부여
+    // 2. 보상부여 tx block의 timestamp로 struct Stake timestamp 최신화?
+    function claimed(uint256 tokenId) public isStaked(tokenId) {
+        require(brownieNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
+        uint256 reward = (block.timestamp - brownieNFT.whenStaked(tokenId));
+        brownieToken.tokenTransfer(address(brownieToken), msg.sender, reward, 10 ** 14);
+        brownieNFT.changeTime(tokenId, block.timestamp);
+    }
+
+    function checkClaimed(uint256 tokenId) public view isStaked(tokenId) returns(uint256) {
+        // require(brownieNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
+        // uint256 reward = ((block.timestamp - brownieNFT.whenStaked(tokenId) / 1 hours) / brownieNFT.totalStakedNum()) * 10;
+        uint256 reward = (block.timestamp - brownieNFT.whenStaked(tokenId));
+        return reward;
     }
 }
