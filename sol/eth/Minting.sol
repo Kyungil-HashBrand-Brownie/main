@@ -7,8 +7,8 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "./Token.sol";
 import "./Whitelist.sol";
 
-contract BrownieNft is ERC721, Whitelist {
-    BrownieToken instance = new BrownieToken(address(this));
+contract BrownyNft is ERC721, Whitelist {
+    BrownyToken instance = new BrownyToken(address(this));
 
     function instanceGetBtk(uint256 amount) public payable {
         instance.getBtk(address(this), msg.sender, amount, msg.value);
@@ -39,7 +39,7 @@ contract BrownieNft is ERC721, Whitelist {
     Counters.Counter private _tokenIdCounter;
     Counters.Counter private _whitelistCounter;
 
-    constructor() ERC721("BrownieNft", "BFT") {}
+    constructor() ERC721("BrownyNft", "BFT") {}
 
     function _baseURI() internal pure override returns (string memory) {
         return "ipfs://QmbqhcAu5QhdE55e8UzbKY92c6pERPCSuMHMebdrA2mFs7/";
