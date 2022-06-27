@@ -125,8 +125,6 @@ const StyledArrow = styled.img`
 `
 
 const BakingImg = styled.div`
-
-
   .bakingImg1 img{
     width: 300px;
     height: 400px;
@@ -144,62 +142,13 @@ const StyledEllipse = styled.img`
   z-index: -1; 
 `
 
-const StyleDiv1 = styled.div`
-    width:100% ;
-    background-color: #6B828E;
-    height: 50%;
-    display: flex;
-    position: relative;
 
-    .backgray{
-      background-color: gray;
-      width:80% ;
-      height: 300px;
-      display: flex;
-      position: relative;
-    }
-    
-
-    .box_vertical {
-      writing-mode: vertical-lr;
-    }
-
-    .box_vertical2 {
-      writing-mode: vertical-lr;
-      background-color: black;
-      height:350px ;
-      color: white;
-      margin-bottom: 100px;
-      margin-top: -50px;
-    }
-
-    .box_vertical3 {
-      writing-mode: vertical-lr;
-      height:400px ;
-      background-color: pink;
-      margin-top: -100px;
-    }
-
-    /* .home_img {
-      width: 500px;
-      height: 300px;
-      margin-top: -10px;
-    }
-
-    .home_img img{
-      width:100%;
-      height: 100%;
-    } */
-
-    /* .blue {
-      background-color: blue;
-    } */
+const HomeBackImgPosition = styled.div`
+  width: 100%;
+  height: 400px;
+  background-color: black;
+  opacity : 0.9;
 `
-
-const PositionCss = styled.div`
-
-`
-
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -286,6 +235,17 @@ const HomePage = () => {
         <Col className="main-img-col">
           <StyledBrownyAbove src={Group2} alt="browny-above" />
           {/* <StyledBrownyDown src={Browny10} alt="browny-down" /> */}
+        </Col>
+      </Container>
+      <Viliage />
+      <Container className='main-container'>
+        <Col className="main-col">
+          <div className="slidediv">
+            Love <br /> Your Browny
+          </div>
+        </Col>
+        <Col className="main-img-col">
+            <SlideShow />
         </Col>
       </Container>
       <HomeImgCard />
