@@ -10,14 +10,14 @@ import { brownyContract, contractAddr } from "configs";
 let preSaleProps = {
   title: 'Pre-Sale',
   img: PreBrowny,
-  price: 2,
+  price: 50,
   amount: '/150',
 }
 
 let whiteSaleProps = {
   title: 'White-Sale',
   img: WhiteBrowny,
-  price: 1,
+  price: 25,
   amount: 'limited',
 }
 

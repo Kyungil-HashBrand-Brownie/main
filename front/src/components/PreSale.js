@@ -30,7 +30,7 @@ const StyledDiv = styled.div`
     line-height: 1.5;
     margin-bottom: 30px;
     margin-left: 
-        ${props => props.price == 2 ? '10px' : 0} ;
+        ${props => props.price == 50 ? '10px' : 0} ;
     border-radius: 8px;
     
 `;
