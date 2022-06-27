@@ -71,14 +71,16 @@ const Header = () => {
     }
 
     const setTokenBalance = async (address) => {
-            const weiBalance = await window.caver.klay.getBalance(address)
-            const fixedBalance = weiToFixed(weiBalance)
-            const weibtkBalance = await btkInstance.balanceOf(address) //BigNumber 객체
-            const fixedbtkBalance = weiToFixed(weibtkBalance)
-            
-            setBalance(fixedBalance)
-            setBtkBalance(fixedbtkBalance);
+        const weiBalance = await window.caver.klay.getBalance(address)
+        const fixedBalance = weiToFixed(weiBalance)
+        console.log(fixedBalance)
+        const weibtkBalance = await btkInstance.balanceOf(address) //BigNumber 객체
+        const fixedbtkBalance = weiToFixed(weibtkBalance)
+
+        setBalance(fixedBalance)
+        setBtkBalance(fixedbtkBalance);
     }
+
     const setUserInfo = async () => {
         if(myAddress){
             setAddress(myAddress);

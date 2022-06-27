@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react'
-import styled from 'styled-components'
-import {useDispatch, useSelector} from "react-redux";
 import Card from 'react-bootstrap/Card';
+import styled from 'styled-components'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { brownyContract, contractAddr } from "configs";
 import { Check } from '../img';
-import {brownyContract, contractAddr} from "configs";
 import { unstakeNFTs } from 'api';
 import Pagination from './Pagination';
 import Cancel from '../img/stake/cancel.png';
@@ -192,7 +192,7 @@ const Cardjustify = styled.div`
     .no-display {
         /* background: red; */
         position: absolute;
-        transform: translate(120px, 385px);
+        transform: translate(55px, 385px);
     }
 `
 
@@ -229,7 +229,6 @@ const StakingList = () => {
             }
             return li
         })
-        console.log('newarr: ', newArr);
         dispatch({type: 'NFTCARD_STAKE_CLICK', payload: newArr})
     }
 
@@ -261,8 +260,6 @@ const StakingList = () => {
             alert('언스테이킹할 아이템을 선택하세요.');
         }
     }
-
-
 
     return (
         <div className='nftlist-outer'>
@@ -323,26 +320,8 @@ const StakingList = () => {
                                     id='stake-checkbox'
                                 />
                                 }
-
-                                    {/* <Form.Check
-                                    id='stake-checkbox'
-                                    className="cheked"
-                                    type={"checkbox"}
-                                    onChange={(e) => checkHandler(e.target.checked, item.id)}
-                                    checked={checkItems.indexOf(item.id) >= 0 ? true : false}
-                                    /> */}
                                     <div><Card.Img style={{width: '11rem', height: '11rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
                                     <Card.Title >{item.id}</Card.Title>
-                                    {/* <Container className="containerCard">
-                                        <Row>
-                                            <Col className="col_1">price</Col>
-                                            <Col className="col_1">highst</Col>
-                                        </Row>
-                                        <Row>
-                                            <Col className="col_2">{item.eth} ETH</Col>
-                                            <Col className="col_2">{item.height}</Col>
-                                        </Row>
-                                    </Container> */}
                                 </Card>
                             </div>
                         })}
