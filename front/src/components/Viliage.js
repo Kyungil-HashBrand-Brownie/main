@@ -3,38 +3,43 @@ import styled from 'styled-components'
 import { viliage2 } from '../img'
 
 const StyledViliage = styled.div`
-    width: 100%;
-    height: 1000px;
-    display: flex;
-    opacity: 0.8;
 
-    img {
-        width: 100%;
-    }
+    width: 100%;
+    height: 400px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    /* position: relative; */
+
     .div1 {
         background-color: pink ;
         position: absolute;
         width: 100%;
-        height: 1000px;
+        height: 400px;
         opacity: 0.3;
-        z-index:1;
+        z-index:-1;
     }
-    .div1::before{
-        background: linear-gradient(to right, black, transparent) ;
-    }
+
 `
+const HomeBackImgPosition = styled.div`
+    width: 100%;
+    height: 400px;
+    background-image: url(${viliage2});
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+    z-index: -2;
+`
+
 const Viliage = () => {
   return (
     <div>
         <StyledViliage>
-        <div className="div1">
-        {/* <img src={viliage2} /> */}
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-        </div>
-        <img src={viliage2} />
-
+            <div className="div1">
+                <HomeBackImgPosition>
+                </HomeBackImgPosition>
+            </div>
         </StyledViliage>
-
     </div>
   )
 }
