@@ -249,21 +249,7 @@ const HomePage = () => {
         </Col>
       </Container>
       <HomeImgCard />
-        <Container className='main-container'>
-              <Col className="main-col">
-                <div className="slidediv">
-                  Love <br /> Your Browny
-                </div>
-              </Col>
-              <Col className="main-img-col">
-                <div className="bakingImg1">
-                  <img src={baking2} /> 
-                </div>
-              </Col>
-          </Container>
-          <Viliage />
-        <SlideShow />
-        <Team />
+      <Team />
       {/* </PositionCss> */}
       </>
   )
