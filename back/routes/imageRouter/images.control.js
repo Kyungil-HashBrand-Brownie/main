@@ -4,7 +4,7 @@ const fs = require('fs')
 const { getFileStream } = require('./s3')
 
 const imagesKey = (req, res) => {
-    console.log('/image/images')
+    console.log('images')
     console.log(req.params)
     const key = req.params.Key
     const readStream = getFileStream(key)
@@ -15,8 +15,8 @@ const imagesKey = (req, res) => {
 const images = async (req, res) => {
     let { myBrownyNFTs, stakedNFTs } = req.body
     console.log(req.body)
-
-    const result = await pool.query('select * from BrownyImg')
+    //더미데이터 컨트렉트 재구성시 다시 설정해야함
+    const result = await pool.query('select * from dummyImg')
     console.log(result)
     let resd = myBrownyNFTs.map((item) => result[0].find((id) => id.imgNum == item))
     console.log('resd : ', resd)
