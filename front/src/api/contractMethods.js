@@ -1,4 +1,4 @@
-import { mintingContract,mintingAddr } from "configs";
+import { mintingContract,mintingAddr, nftInstance } from "configs";
 
 // value가 들지 않는 method의 경우 amount = 0 이 default라서 안 넣어줘도 됨
 const methodExecution = async (from,encodedAbi,amount=0) =>{
@@ -42,6 +42,7 @@ const sellBtk = async (myAddress,amount)=> {
 // from 주소와 언스테이킹 상태의 nft tokenId를 인자로 필요로한다
 const stakeNFTs = async (myAddress,stakeIdArr)=> {
     try {
+        
         const encodedAbi = await mintingContract.methods.stakeNFTs(stakeIdArr).encodeABI()
         const result = await methodExecution(myAddress,encodedAbi)
         return result
