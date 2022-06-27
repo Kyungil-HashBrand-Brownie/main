@@ -30,4 +30,4 @@ import baking3 from './baking3.png'
 import viliage from './viliage.png'
 import viliage2 from './viliage2.jpeg'
 
-export {FreeImg ,viliage2,viliage,baking,baking2,baking3, Group2, img1 ,group , WhiteImg , browny1 , Apro , Epro , ModalKpro, ani1 , ani2 , ani3 , ModalAni1, Kproblem ,KP1, KP2, KP3, EP1, EP2, EP3 , browny8, browny9, trash , browny10 , browny4 , Check};
+export {FreeImg  ,viliage2,viliage,baking,baking2,baking3, Group2, img1 ,group , WhiteImg , browny1 , Apro , Epro , ModalKpro, ani1 , ani2 , ani3 , ModalAni1, Kproblem ,KP1, KP2, KP3, EP1, EP2, EP3 , browny8, browny9, trash , browny10 , browny4 , Check};
