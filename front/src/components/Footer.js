@@ -6,6 +6,7 @@ import inst from "../img/footer/inst.png"
 import tele from "../img/footer/tele.png"
 import kakao from "../img/footer/kakao.png"
 import kakao2 from "../img/footer/kakao2.png"
+import { footerImg } from 'img/footer';
 
 const Outer = styled.div`
     /* position: absolute;
@@ -19,8 +20,13 @@ const Outer = styled.div`
 `
 
 const Foot = styled.div`
-    padding-left: 10%;
-    padding-right: 10%;
+    /* padding-left: 10%; */
+    /* padding-right: 10%; */
+    
+    img {
+        width: 100%;
+        height:  100%;
+    }
     
     /* fContainer1 */
     .fContainer {
@@ -114,6 +120,7 @@ const Footer = () => (
         {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Roboto:wght@900&family=Kdam+Thmor+Pro&family=Walter+Turncoat&display=swap" rel="stylesheet" /> */}
+        <img src={footerImg} />
         <div className="fContainer">
             <div className="fContainer_left">
                 <div className="fContainer_left_content">
