@@ -6,23 +6,23 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "./Whitelist.sol";
 
 /**
-* author Kyungil_Team Brownie
+* author Kyungil_Team Browny
 * version 1.0
 * ERC721기반 대체 불가능 토큰 자체 nft
 */
-contract BrownieNFT is ERC721, Whitelist {
+contract BrownyNFT is ERC721, Whitelist {
     /*-
     * 자체 nft 생성
-    * @name BrownieNFT
+    * @name BrownyNFT
     * @symbol BFT
     */
-    constructor() ERC721("BrownieNFT", "BFT") {}
+    constructor() ERC721("BrownyNFT", "BFT") {}
 
     string public fileExtention = ".json";
     using Strings for uint256;
     mapping(uint256 => bool) public mintinglist;
     mapping(address => uint256[]) public ownNFTs;
-
+    uint256[] mintedNftList;
 
     // _baseURI - nft 발행시 참조할 ipfs 주소 
     function _baseURI() internal pure override returns (string memory) {
@@ -42,7 +42,7 @@ contract BrownieNFT is ERC721, Whitelist {
         return ownNFTs[msg.sender];
     }
 
-        // 현재 발행된 nft 수 확인 
+    // 현재 발행된 일반 nft 수 확인 
     function nftNum() public view returns(uint256) {
         uint256 tokenNum = _tokenIdCounter.current();
         return tokenNum;
@@ -64,11 +64,17 @@ contract BrownieNFT is ERC721, Whitelist {
 
     function safeMint(address to, address from, uint256 tokenId, uint8 status) external {
         _safeMint(to, tokenId);
-        _tokenIdCounter.increment();
         ownNFTs[from].push(tokenId);
-        if(status == 1) {
+        mintedNftList.push(tokenId);
+        if(status == 0) {
+            _tokenIdCounter.increment();
+        } else if(status == 1) {
             _whitelistCounter.increment();
         }
+    }
+
+    function mintedNFT() public view returns(uint256[] memory) {
+        return mintedNftList;
     }
 
     // 현재 staking 된 nft 수
@@ -95,8 +101,8 @@ contract BrownieNFT is ERC721, Whitelist {
     function approveNFT(address _address, uint _tokenId) external {
         _approve(_address, _tokenId);
     }
-    function approveAllNFT(address _address, bool _approved) external {
-        _setApprovalForAll(msg.sender, _address, _approved);
+    function approveAllNFT(address _owner, address _operator, bool _approved) external {
+        _setApprovalForAll(_owner, _operator, _approved);
     }
     // stake시 
     function stakedFunc(uint256 _tokenId, address _owner) external {

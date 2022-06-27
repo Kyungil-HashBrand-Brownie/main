@@ -4,8 +4,8 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract BrownieToken is ERC20Burnable, Ownable {
-    constructor(address conAddr) ERC20("BrownieToken", "BTK") {
+contract BrownyToken is ERC20Burnable, Ownable {
+    constructor(address conAddr) ERC20("BrownyToken", "BTK") {
         _mint(conAddr, 100000 * 10 ** decimals());
     }
 

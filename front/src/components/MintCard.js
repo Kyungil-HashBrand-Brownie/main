@@ -5,19 +5,18 @@ import WhiteSale from './WhiteSale'
 import mintBackground from "img/mint/fireplace.png"
 import PreBrowny from '../img/browny8.png';
 import WhiteBrowny from '../img/browny9.png';
-import { brownyContract, contractAddr } from "configs";
 
 let preSaleProps = {
   title: 'Pre-Sale',
   img: PreBrowny,
-  price: 2,
+  price: 50,
   amount: '/150',
 }
 
 let whiteSaleProps = {
   title: 'White-Sale',
   img: WhiteBrowny,
-  price: 1,
+  price: 25,
   amount: 'limited',
 }
 

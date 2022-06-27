@@ -5,7 +5,6 @@ import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Klaytn from '../img/swap/klaytn.png';
 import Browny1 from '../img/swap/browny1.png';
 import Arrow from '../img/swap/arrowRight.png';
-import {brownyContract, contractAddr} from "configs";
 import {getBtk, sellBtk} from "api"
 
 
@@ -111,8 +110,8 @@ const Swap = () => {
                 </div>
                 <div className='swap-ratio-outer'>
                 <div className='swap-ratio-inner'>
-                    <div className='swap-ratio'>1 KLAY = 7.22 BTK</div>
-                    <div className='swap-ratio'>1 BTK = 0.14 KLAY</div>
+                    <div className='swap-ratio'>1 KLAY = 10 BTK</div>
+                    <div className='swap-ratio'>1 BTK = 0.1 KLAY</div>
                 </div>
                 </div>
                 <div className='swap-amount-input-box'>

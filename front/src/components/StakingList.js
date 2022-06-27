@@ -2,7 +2,6 @@ import Card from 'react-bootstrap/Card';
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { brownyContract, contractAddr } from "configs";
 import { Check } from '../img';
 import { unstakeNFTs } from 'api';
 import Pagination from './Pagination';

@@ -4,7 +4,7 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
-* author Kyungil_Team Brownie
+* author Kyungil_Team Browny
 * version 1.0
 * nft - whitelist 
 */

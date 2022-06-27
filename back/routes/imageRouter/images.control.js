@@ -14,12 +14,9 @@ const imagesKey = (req, res) => {
 
 const images = async (req, res) => {
     let { myBrownyNFTs, stakedNFTs } = req.body
-    console.log('myB :' , myBrownyNFTs);
-    console.log('sta :', stakedNFTs );
-
-    const result = await pool.query('select * from BrownyImg')
-    const result1 = await pool.query('select * from whiteBrownyImg')
-
+    console.log(req.body)
+    //더미데이터 컨트렉트 재구성시 다시 설정해야함
+    const result = await pool.query('select * from dummyImg')
     console.log(result)
     let resd = myBrownyNFTs.map((item) => {
         if (parseInt(item) < 31) {
