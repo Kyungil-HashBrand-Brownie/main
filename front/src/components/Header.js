@@ -58,20 +58,20 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh, isDeployer, caver } = useSelector(state => state.nft);
 
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(0);
     const [btkBalance, setBtkBalance] = useState(0);
 
     const weiToFixed = (wei) => {
-        const toKlay = window.caver.utils.convertFromPeb(wei);
+        const toKlay = caver.utils.convertFromPeb(wei);
         const fixed = parseFloat(toKlay).toFixed(2);
         return fixed;
     }
 
     const setTokenBalance = async (address) => {
-        const weiBalance = await window.caver.klay.getBalance(address)
+        const weiBalance = await caver.klay.getBalance(address)
         const fixedBalance = weiToFixed(weiBalance)
         console.log(fixedBalance)
         const weibtkBalance = await tokenInstance.balanceOf(address) //BigNumber 객체
@@ -86,15 +86,18 @@ const Header = () => {
             setAddress(myAddress);
             await setTokenBalance(myAddress)
             const contractOwner = await nftInstance.methods.owner().call()
-            const isDeployer = window.caver.utils.toChecksumAddress(myAddress) === contractOwner
+            const isDeployer = caver.utils.toChecksumAddress(myAddress) === contractOwner
             dispatch({type: 'CHECK_ISDEPLOYER', payload: isDeployer})
         }
         else dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }
 
     const enableKikas = () => {
-        window.klaytn.enable()
-        dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
+        if(window.klaytn){
+            window.klaytn.enable()
+            dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
+        }
+        else alert("카이카스 설치 필요")
     }
 
     const copyAddress = () => {
@@ -114,16 +117,19 @@ const Header = () => {
     }, [myAddress,walletRefresh])
 
     useEffect(()=>{
-        window.klaytn.on('accountsChanged', async function(accounts) {
-            console.log(accounts[0])
-            sessionStorage.setItem('id', accounts[0]);
-            dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
-            setAddress(accounts[0]);
-            await setTokenBalance(accounts[0])
-        })
-        window.klaytn.on('networkChanged', async function(network) {
-            console.log(network)
-        })
+        if(window.klaytn) {
+            window.klaytn.on('accountsChanged', async function(accounts) {
+                console.log(accounts[0])
+                sessionStorage.setItem('id', accounts[0]);
+                dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
+                setAddress(accounts[0]);
+                await setTokenBalance(accounts[0])
+            })
+            window.klaytn.on('networkChanged', async function(network) {
+                console.log(network)
+            })
+        }
+        else alert("카이카스 설치 필요")
     },[])
 
     return (
