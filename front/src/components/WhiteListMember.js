@@ -54,7 +54,7 @@ const WhiteList = () => {
         const Sucs = await brownyContract.methods.add(addInput.current).send({ from: myAddress, gas: 300000, value: 0 })
         console.log(Sucs)
         if (Sucs.status === true) {
-            await axios.post('http://localhost:4000/whitelist',
+            await axios.post('http://localhost:4000/mint/whitelist',
                 {
                     data: { from: addInput.current, status: Sucs.status },
                 })

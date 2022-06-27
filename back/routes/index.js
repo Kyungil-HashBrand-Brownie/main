@@ -1,8 +1,11 @@
-// const express = require("express");
-// const router = express.Router();
-// const pool = require('../db')
+const express = require('express')
+const router = express.Router();
+const pool = require('../db')
+const mintRouter = require('./mintRouter')
 
+router.use('/mint', mintRouter)
 
+module.exports = router
 
 // router.get("/admin", async (req, res) => {
 //     //db에 있는 화이트 리스트 배열로 뿌려주기
