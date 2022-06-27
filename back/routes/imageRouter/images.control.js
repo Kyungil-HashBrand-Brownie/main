@@ -4,7 +4,7 @@ const fs = require('fs')
 const { getFileStream } = require('./s3')
 
 const imagesKey = (req, res) => {
-    console.log('images')
+    console.log('/image/images')
     console.log(req.params)
     const key = req.params.Key
     const readStream = getFileStream(key)
