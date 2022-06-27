@@ -122,7 +122,7 @@ const PreSale = ({ data }) => {
                 <div className='mint-title-box'>
                     <h2 className="mint-title">{title}</h2>
                 </div>
-                {isWhite 
+                {(price == 2 || isWhite)
                 ?
                 <>
                 <div className='mint-img-container'>
