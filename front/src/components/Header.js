@@ -10,6 +10,7 @@ import {tokenInstance, nftInstance, caver} from "configs";
 
 import { background10 ,background13} from '../img/background';
 import D3 from './D3';
+import { checkWhite } from 'api';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -58,19 +59,17 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh, isDeployer, isWhite } = useSelector(state => state.nft);
 
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(0);
     const [btkBalance, setBtkBalance] = useState(0);
-    const [isWhite, setIsWhite] = useState(false);
 
     const checkWhitelist = async () => {
         if (myAddress) {
             try {
-                const isWhite = await brownyContract.methods.isWhitelisted(myAddress).call()
-                console.log(isWhite);
-                setIsWhite(isWhite)
+                const isWhite = await checkWhite(myAddress)
+                dispatch({ type : "CHECK_ISWHITELIST" , payload:isWhite })
             }
             catch (e) {
                 throw e

@@ -77,23 +77,6 @@ const WhiteSale = () => {
         if (count > 1) setCount(count - 1);
     }
 
-    const checkWhitelist = async () => {
-        if (myAddress) {
-            try {
-                const isWhite = await checkWhite(myAddress)
-                dispatch({ type : "CHECK_ISWHITELIST" , payload:isWhite })
-            }
-            catch (e) {
-                throw e
-            }
-        }
-    }
-
-    useEffect(()=>{
-        checkWhitelist()
-    },[isWhite,myAddress])
-    
-
     return (
         <div className='whitelist'>
             <StyledMain >
