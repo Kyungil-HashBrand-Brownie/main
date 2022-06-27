@@ -8,17 +8,24 @@ import kakao from "../img/footer/kakao.png"
 import kakao2 from "../img/footer/kakao2.png"
 
 const Outer = styled.div`
-    /* position: absolute;
-    margin-top: 200px;
-    bottom: 0;
-    width: 100%; */
     flex: 1;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+    height: 120px;
+    padding-bottom: 20px;
+    background: #F39798;
+    display: flex;
+    align-items: center;
     /* position : relative; */
     /* transform : translateY(-100%); */
 `
 
 const Foot = styled.div`
+    /* background: blue; */
+    display: flex;
+    align-items: center;
+    height: 120px;
+    width: 100%;
+    margin-top: 23px;
     padding-left: 10%;
     padding-right: 10%;
     
@@ -26,12 +33,12 @@ const Foot = styled.div`
     .fContainer {
         /* background-color: gray; */
         width: 100%;
-        vertical-align: middle;
+        /* vertical-align: middle; */
         display: flex;
         align-items: center;
         position: relative;
         /* position: absolute; */
-        margin-top: 30px;
+        /* margin-top: 30px; */
         /* margin-bottom: 30px; */
         color: brown;
         font-weight: 600;
@@ -70,7 +77,7 @@ const Foot = styled.div`
     /* RIGHT */
     .fContainer_right {
         /* margin-left:5%; */
-        padding-top: 10px;
+        /* padding-top: 10px; */
     }
 
     .imgSection {
@@ -85,7 +92,9 @@ const Foot = styled.div`
     }
 
     .img_box {
-        padding-top: 5%;
+        /* background: red; */
+        /* padding-top: 20px; */
+        margin-top: 20px;
         padding-left: 20px;
     }
 

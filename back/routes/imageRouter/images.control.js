@@ -14,13 +14,24 @@ const imagesKey = (req, res) => {
 
 const images = async (req, res) => {
     let { myBrownyNFTs, stakedNFTs } = req.body
-    console.log(req.body)
+    console.log('myB :' , myBrownyNFTs);
+    console.log('sta :', stakedNFTs );
 
     const result = await pool.query('select * from BrownyImg')
+    const result1 = await pool.query('select * from whiteBrownyImg')
+
     console.log(result)
-    let resd = myBrownyNFTs.map((item) => result[0].find((id) => id.imgNum == item))
+    let resd = myBrownyNFTs.map((item) => {
+        if (parseInt(item) < 31) {
+            return result1[0].find((id) => id.imgNum == item)
+        }
+        else {
+            return result[0].find((id) => id.imgNum == item)
+        }
+    })
     console.log('resd : ', resd)
     let ress = stakedNFTs.map((item) => result[0].find((id) => id.imgNum == item))
+    console.log('ress : ', ress);
     let data = {};
     let data1 = {};
     resd.forEach((item) => {

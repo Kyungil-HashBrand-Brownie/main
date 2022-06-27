@@ -63,6 +63,20 @@ const Header = () => {
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(null);
     const [btkBalance, setBtkBalance] = useState(0);
+    const [isWhite, setIsWhite] = useState(false);
+
+    const checkWhitelist = async () => {
+        if (myAddress) {
+            try {
+                const isWhite = await brownyContract.methods.isWhitelisted(myAddress).call()
+                console.log(isWhite);
+                setIsWhite(isWhite)
+            }
+            catch (e) {
+                throw e
+            }
+        }
+    }
 
     const weiToFixed = (wei) => {
         const toKlay = window.caver.utils.convertFromPeb(wei);
@@ -126,6 +140,10 @@ const Header = () => {
         })
     },[])
 
+    useEffect(() => {
+        checkWhitelist();
+    }, [myAddress])
+
     return (
         <Navbar className="nav" expand="lg">
             <img src={background13} className="backG-img-left" />
@@ -161,7 +179,7 @@ const Header = () => {
                     </PFPContainer>
                     {modalState && 
                         <StyledInfo>
-                        WHITELIST<br/>
+                        {isWhite ? 'WHITELIST' : 'NORMAL'}<br/>
                         Copy Address
                         <FontAwesomeIcon 
                             className='copy-icon'

@@ -19,11 +19,17 @@ const Swap = () => {
     const amountInput = useRef('');
 
     const swapChange = () => {
+        let changeAmount = exchange;
         setSwap(!swap)
+        setExchange(amountInput.current.value);
+        amountInput.current.value = changeAmount;
     }
 
     const checkValidation = () => {
         let value = amountInput.current.value
+        // let wordLen = bool[!swap].length;
+        // value = value.slice(0, -wordLen)
+
         // let testLen = value.length - bool[!swap].length - 1;
         // value = value.slice(0,testLen);
         // console.log(testLen)
@@ -43,8 +49,10 @@ const Swap = () => {
 
         else {
             if (value != '') {
-                if (swap) setExchange((Number(value) * 7.22).toFixed(2).toString() + ' ' + bool[swap])
-                else setExchange((Number(value) / 7.22).toFixed(2).toString() + ' ' + bool[swap])
+                // if (swap) setExchange((Number(value) * 7.22).toFixed(2).toString() + ' ' + bool[swap])
+                if (swap) setExchange(parseInt(Number(value) * 7.22))
+                else setExchange(parseInt(Number(value) / 7.22))
+                // else setExchange((Number(value) / 7.22).toFixed(2).toString() + ' ' + bool[swap])
             }
             else setExchange('your exchange')
             // amountInput.current.value = ;
@@ -59,7 +67,7 @@ const Swap = () => {
         let status;
         if(Number(amount)){
             if(swap){
-                const result = await getBtk(myAddress,amount)
+                const result = await getBtk(myAddress, amount)
                 status = result.status
             }
             else{
@@ -113,7 +121,9 @@ const Swap = () => {
                         className='swap-amount-input'
                         placeholder='input amount'
                         onChange={checkValidation}
-                        ref={amountInput} /> 
+                        // value={bool[!swap]}
+                        ref={amountInput} />
+                        
                         <img className='swap-arrow' src={Arrow} />
                         <input 
                         disabled
