@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { WhiteImg } from '../img'
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 import {Container,Row , Col , Button} from 'react-bootstrap'
-import ProgressBar from 'react-bootstrap/ProgressBar'
 import Browny from '../img/browny9.png'
 import {brownyContract, contractAddr} from "configs";
 import { whitelistMint } from 'api';
@@ -12,11 +10,9 @@ const StyledMain = styled.div`
     width: 320px;
     font-size: 1rem;
     line-height: 1.5;
-    border-radius: 0.25rem;
     background-color: white;
     opacity: 95%;
-    border: 3px solid black;
-    border-radius: 6px;
+    border-radius: 10px;
     text-align: center;
     display: flex ;
     flex-wrap: wrap;
@@ -25,17 +21,12 @@ const StyledMain = styled.div`
 `;
 
 const StyledDiv = styled.div`
-    width: 220px;
-    height: 220px;
-    /* padding: 0.375rem 0.75rem; */
     font-size: 1rem;
     color: green;
     line-height: 1.5;
     background-color: white;
     margin-bottom: 20px;
     border-radius: 8px;
-    /* margin-top: 20px; */
-  /* border: 1px solid black; */
 `;
 
 
@@ -100,7 +91,9 @@ const WhiteSale = () => {
     return (
         <div className='whitelist'>
             <StyledMain >
-                <h2 className="mint-title">WhiteSale</h2>
+                <div className='mint-title-box'>
+                    <h2 className="mint-title">White-Sale</h2>
+                </div>
                 {isWhite 
                 ?
                 <>
@@ -114,16 +107,16 @@ const WhiteSale = () => {
                 </div>
 
                 <Container className="mint-info-box">
-                    <Row>
-                        <Col>Price</Col>
+                    <Row className="mint-info-row">
+                        <Col><i>Price</i></Col>
                         <Col>1 BTK</Col>
                     </Row>
-                    <Row>
-                        <Col>Per transaction</Col>
-                        <Col>최대 5 개</Col>
+                    <Row className="mint-info-row">
+                        <Col><i>Per transaction</i></Col>
+                        <Col className='mint-text'>최대 5 개</Col>
                     </Row>
-                    <Row>
-                        <Col>Amount</Col>
+                    <Row className="mint-info-row">
+                        <Col><i>Amount</i></Col>
                         <Col>limited</Col>
                     </Row>
                 </Container>
@@ -132,7 +125,7 @@ const WhiteSale = () => {
                     className="mint-wal-connect-btn"
                     variant="success"
                     onClick={whiteMint}
-                >Mint </Button>{' '}
+                >Mint </Button>
                 </>
                 :
                 <>
@@ -141,8 +134,6 @@ const WhiteSale = () => {
                 </Container>
                 </>
                 }
-                
-
             </StyledMain>
         </div>
     )

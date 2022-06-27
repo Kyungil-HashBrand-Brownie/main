@@ -5,6 +5,7 @@ import QuitVote from '../components/QuitVote'
 import SlideShow from '../components/SlideShow'
 import styled from 'styled-components'
 import Viliage from 'components/Viliage'
+import Team from 'components/Team'
 
 
 const Testpage = () => {
@@ -14,7 +15,8 @@ const Testpage = () => {
         {/* <EarthVote /> */}
         {/* <QuitVote /> */}
         {/* <SlideShow /> */}
-        <Viliage />
+        {/* <Viliage /> */}
+        <Team />
     </div>
   )
 }

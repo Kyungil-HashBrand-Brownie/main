@@ -114,9 +114,7 @@ const StyleDiv1 = styled.div`
     .home_img {
       width: 600px;
       height: 350px;
-      /* position: relative; */
-      /* padding-bottom: 100px; */
-      /* margin-bottom: 10px; */
+      position: relative;
       margin-top: -50px;
     };
 `;
@@ -136,10 +134,6 @@ const StyleDiv1 = styled.div`
 
 const HomeImgCard = () => {
 
-  // const [rabelState, setRabelState] = useState(0)
-  // const [rabelYellow, setRabelYellow] = useState(1)
-  // const [rabelWhite, setRabelWhite] = useState(2)
-
   const [click, setClick] = useState(0)
 
   // 처음부터 끝까지 배열 값을 읽는다
@@ -149,7 +143,6 @@ const HomeImgCard = () => {
 
   return (
     <div>
-        
       <StyleDiv1 >
         <div className="backColor"
         style={{backgroundColor:

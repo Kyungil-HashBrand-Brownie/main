@@ -13,6 +13,7 @@ import LeftImg3 from './img/chocolate/choco3.png';
 import RightImg from './img/chocolate/choco4.png';
 import Swap from './page/Swap';
 import NftList from './page/NftList';
+import NoPage from 'page/NoPage';
 
 function App() {
   const {isDeployer} = useSelector(state=>state.nft)
@@ -20,19 +21,6 @@ function App() {
     <>
     <div className='wrapper'>
       <Header />
-      
-      {/* <img
-        className='backG-left-img'
-        src={LeftImg3}
-      /> */}
-      {/* <img 
-          className='backG-right-img'
-          src={RightImg}
-        /> */}
-      {/* <img
-        className='backG-right-img2'
-        src={RightImg}
-      /> */}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -46,6 +34,7 @@ function App() {
         <Route path="/test" element={<Testpage />} />
         <Route path="/swap" element={<Swap />} />
         <Route path="/nftlist" element={<NftList />} />
+        <Route path='*' element={<NoPage />} />
       </Routes>
     </div>
     <Footer />
