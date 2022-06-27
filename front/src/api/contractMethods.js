@@ -1,8 +1,10 @@
 import { mintingContract,mintingAddr, nftInstance } from "configs";
+import Caver from "caver-js"
+const caver = new Caver("https://api.baobab.klaytn.net:8651/")
 
 // value가 들지 않는 method의 경우 amount = 0 이 default라서 안 넣어줘도 됨
 const methodExecution = async (from,encodedAbi,amount=0) =>{
-    const result = await window.caver.klay.sendTransaction({
+    const result = await caver.klay.sendTransaction({
         type: 'SMART_CONTRACT_EXECUTION',
         //보통 myAddress
         from: from, 
@@ -10,7 +12,7 @@ const methodExecution = async (from,encodedAbi,amount=0) =>{
         to: mintingAddr, 
         gas: 3000000,
         data: encodedAbi,
-        value: window.caver.utils.toPeb(amount, 'KLAY')
+        value: caver.utils.toPeb(amount, 'KLAY')
     })
     return result;
 }
@@ -86,4 +88,4 @@ const whitelistMint = async (myAddress,count)=> {
 }
 
 
-export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, batchMint, whitelistMint};
+export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, batchMint, whitelistMint, caver};

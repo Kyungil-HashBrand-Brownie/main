@@ -1,5 +1,7 @@
+import {caver} from "configs"
+
 let initialState = {
-    nft: {},
+    caver: caver,
     myNFTpage: 1,
     myStakedpage: 1,
     countAnimal: 0,
