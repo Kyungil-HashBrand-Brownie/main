@@ -42,7 +42,7 @@ contract BrownieNFT is ERC721, Whitelist {
         return ownNFTs[msg.sender];
     }
 
-        // 현재 발행된 nft 수 확인 
+    // 현재 발행된 일반 nft 수 확인 
     function nftNum() public view returns(uint256) {
         uint256 tokenNum = _tokenIdCounter.current();
         return tokenNum;
@@ -64,9 +64,10 @@ contract BrownieNFT is ERC721, Whitelist {
 
     function safeMint(address to, address from, uint256 tokenId, uint8 status) external {
         _safeMint(to, tokenId);
-        _tokenIdCounter.increment();
         ownNFTs[from].push(tokenId);
-        if(status == 1) {
+        if(status == 0) {
+            _tokenIdCounter.increment();
+        } else if(status == 1) {
             _whitelistCounter.increment();
         }
     }
