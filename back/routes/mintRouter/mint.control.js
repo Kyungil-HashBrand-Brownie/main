@@ -1,14 +1,10 @@
-const express = require("express");
-const router = express.Router();
-const pool = require('../db')
+const pool = require('../../db')
 
+const whitelist = async (req, res) => {
 
-router.get("/whitelist", async (req, res) => {
-    //db에 있는 화이트 리스트 배열로 뿌려주기
-})
+}
 
-router.post("/whitelist", async (req, res) => {
-    //화이트리스트 db에 추가(중복검사할것)
+const whitelistPost = async (req, res) => {
     const publicKey = req.body.data
     console.log(publicKey)
     const publicKeys = await pool.query(`SELECT * FROM users WHERE publicKey = '${publicKey}'`)
@@ -24,6 +20,9 @@ router.post("/whitelist", async (req, res) => {
         console.log('----------------------')
         res.send('failed')
     }
-})
+}
 
-module.exports = router;
+module.exports = {
+    whitelist,
+    whitelistPost
+}
