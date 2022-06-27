@@ -9,11 +9,11 @@ contract NFTTrading {
     // nft 매매 function 
     // 1. 매매할 nft 매매권한 contract에 부여 (approve)
     // 2. contract에서 구매자에게 nft 소유권 양도
-    BrownieToken public brownieToken;
-    BrownieNFT public brownieNFT;
+    BrownyToken public brownyToken;
+    BrownyNFT public brownyNFT;
 
-    constructor(address _brownieToken, address _brownieNFT) {
-        brownieToken = BrownieToken(_brownieToken);
-        brownieNFT = BrownieNFT(_brownieNFT);
+    constructor(address _brownyToken, address _brownyNFT) {
+        brownyToken = BrownyToken(_brownyToken);
+        brownyNFT = BrownyNFT(_brownyNFT);
     }
 }

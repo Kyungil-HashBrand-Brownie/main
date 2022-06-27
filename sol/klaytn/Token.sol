@@ -5,16 +5,16 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
-* author Kyungil_Team Brownie
+* author Kyungil_Team Browny
 * version 1.0
 * ERC20기반 자체 토큰 
 */
-contract BrownieToken is ERC20, Ownable {
+contract BrownyToken is ERC20, Ownable {
     // token swap 용 token을 위해 contract addreess에 100000BTK 선발행
-    // constructor(address conAddr) ERC20("BrownieToken", "BTK") {
+    // constructor(address conAddr) ERC20("BrownyToken", "BTK") {
     //     _mint(conAddr, 1000000 * 10 ** 18);
     // }
-    constructor() ERC20("BrownieToken", "BTK") {
+    constructor() ERC20("BrownyToken", "BTK") {
         _mint(address(this), 1000000 * 10 ** 18);
     }
 

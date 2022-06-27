@@ -5,7 +5,6 @@ import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Klaytn from '../img/swap/klaytn.png';
 import Browny1 from '../img/swap/browny1.png';
 import Arrow from '../img/swap/arrowRight.png';
-import {brownyContract, contractAddr} from "configs";
 import {getBtk, sellBtk} from "api"
 
 

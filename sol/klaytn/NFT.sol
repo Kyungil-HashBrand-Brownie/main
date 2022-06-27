@@ -6,17 +6,17 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "./Whitelist.sol";
 
 /**
-* author Kyungil_Team Brownie
+* author Kyungil_Team Browny
 * version 1.0
 * ERC721기반 대체 불가능 토큰 자체 nft
 */
-contract BrownieNFT is ERC721, Whitelist {
+contract BrownyNFT is ERC721, Whitelist {
     /*-
     * 자체 nft 생성
-    * @name BrownieNFT
+    * @name BrownyNFT
     * @symbol BFT
     */
-    constructor() ERC721("BrownieNFT", "BFT") {}
+    constructor() ERC721("BrownyNFT", "BFT") {}
 
     string public fileExtention = ".json";
     using Strings for uint256;
