@@ -274,7 +274,7 @@ function NftCard() {
         let dict;
         let dict1;
         // const imageData = async () => {
-        const result = await axios.post('/images', { myBrownyNFTs, stakedNFTs })
+        const result = await axios.post('/image/images', { myBrownyNFTs, stakedNFTs })
         console.log(result.data);
         dict = result.data.data;
         dict1 = result.data.data1;
@@ -389,21 +389,21 @@ function NftCard() {
             <div className='nftcard-header'>
                 My NFTs
             </div>
-                <div className='myNFT-info-box'>
-                    <div className='reward-box'>
-                    { myNFTs.length > 0 && 
-                                <>
-                                <ClipLoader loading={loading} css={override} size={30} />
-                                {!loading && <div className='nftlist-reward'>total reward : {(reward/10000).toFixed(2)} BTK</div>}
-                                {/* <button 
+            <div className='myNFT-info-box'>
+                <div className='reward-box'>
+                    {myNFTs.length > 0 &&
+                        <>
+                            <ClipLoader loading={loading} css={override} size={30} />
+                            {!loading && <div className='nftlist-reward'>total reward : {(reward / 10000).toFixed(2)} BTK</div>}
+                            {/* <button 
                                 className='reward-button'
                                 onClick={getReward}>
                                 보상 받기
                                 </button> */}
-                                </>
+                        </>
                     }
-                    </div>
                 </div>
+            </div>
             <Cardjustify>
                 <div className='Main'>
                     {myNFTs.length > 0 &&
@@ -445,33 +445,33 @@ function NftCard() {
                             </div>
                         </>
                     }
-                <div className='InnerMain'>
-                    {   myNFTs.length > 0 
-                        ? <> 
-                        {myNFTs.sort((a,b) => a.id.slice(1) - b.id.slice(1)).slice((page-1)*4, (page-1)*4 + 4).map((item, index1) => {
-                            return <div className='card-container' key={index1}>
-                                <Card 
-                                    className="Ncard" 
-                                    style={{ 
-                                        width: '12rem', 
-                                        backgroundColor: "lightgray"
-                                            // index1%4 == 0 ? "#fc518d" : index1%4 == 1 ? "orange" 
-                                            // : index1%4 == 2 ? "#3cb346" : "#FAFA33"
-                                    }}>
-                                {
-                                    !item.checked ?
-                                    null
-                                    :<img src={Check}
-                                    alt="checked"
-                                    id='stake-checkbox'
-                                />
-                                }
-                                    <div><Card.Img className='nftlist-card-img' style={{ width: '11rem', height: '11rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
-                                    <Card.Title >{item.id}</Card.Title>
-                                    </Card>
+                    <div className='InnerMain'>
+                        {myNFTs.length > 0
+                            ? <>
+                                {myNFTs.sort((a, b) => a.id.slice(1) - b.id.slice(1)).slice((page - 1) * 4, (page - 1) * 4 + 4).map((item, index1) => {
+                                    return <div className='card-container' key={index1}>
+                                        <Card
+                                            className="Ncard"
+                                            style={{
+                                                width: '12rem',
+                                                backgroundColor: "lightgray"
+                                                // index1%4 == 0 ? "#fc518d" : index1%4 == 1 ? "orange" 
+                                                // : index1%4 == 2 ? "#3cb346" : "#FAFA33"
+                                            }}>
+                                            {
+                                                !item.checked ?
+                                                    null
+                                                    : <img src={Check}
+                                                        alt="checked"
+                                                        id='stake-checkbox'
+                                                    />
+                                            }
+                                            <div><Card.Img className='nftlist-card-img' style={{ width: '11rem', height: '11rem' }} onClick={() => changeClickState(item.id)} variant="top" src={item.image} /></div>
+                                            <Card.Title >{item.id}</Card.Title>
+                                        </Card>
                                     </div>
                                 })}
-                             </> 
+                            </>
                             : <div className='no-display'>
                                 <h1>Nothing to display</h1>
                             </div>

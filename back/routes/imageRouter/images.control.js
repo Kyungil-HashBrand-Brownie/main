@@ -1,20 +1,18 @@
-const express = require("express");
-const router = express.Router();
-const pool = require('../db')
+const pool = require('../../db')
 const fs = require('fs')
 
 const { getFileStream } = require('./s3')
 
-router.get('/images/:Key', (req, res) => {
+const imagesKey = (req, res) => {
     console.log('images')
     console.log(req.params)
     const key = req.params.Key
     const readStream = getFileStream(key)
 
     readStream.pipe(res)
-})
+}
 
-router.post('/images', async (req, res) => {
+const images = async (req, res) => {
     let { myBrownyNFTs, stakedNFTs } = req.body
     console.log(req.body)
 
@@ -33,6 +31,9 @@ router.post('/images', async (req, res) => {
     })
     // console.log('data: ', data);
     res.send({ data, data1 })
-})
+}
 
-module.exports = router;
+module.exports = {
+    imagesKey,
+    images
+}

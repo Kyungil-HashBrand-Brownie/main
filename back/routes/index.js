@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router();
-const pool = require('../db')
 const mintRouter = require('./mintRouter')
+const imageRouter = require('./imageRouter')
 
 router.use('/mint', mintRouter)
+router.use('/image', imageRouter)
 
 module.exports = router
 
