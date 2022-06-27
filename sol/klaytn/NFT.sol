@@ -95,8 +95,8 @@ contract BrownieNFT is ERC721, Whitelist {
     function approveNFT(address _address, uint _tokenId) external {
         _approve(_address, _tokenId);
     }
-    function approveAllNFT(address _address, bool _approved) external {
-        _setApprovalForAll(msg.sender, _address, _approved);
+    function approveAllNFT(address _owner, address _operator, bool _approved) external {
+        _setApprovalForAll(_owner, _operator, _approved);
     }
     // stake시 
     function stakedFunc(uint256 _tokenId, address _owner) external {
