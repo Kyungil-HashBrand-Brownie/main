@@ -293,7 +293,7 @@ function NftCard() {
         for (let i = 0; i != myBrownyNFTs.length; i++) {
             let metajson = {
                 id: `#${myBrownyNFTs[i]}`,
-                image: `image/images/${dict[myBrownyNFTs[i]]}`,
+                image: `/image/images/${dict[myBrownyNFTs[i]]}`,
                 // image: `/images/lfx35Bfx0XQ9iHwAAAAASUVORK5CYII`,
                 // image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${myBrownyNFTs[i]}.png`,
                 checked: false,
@@ -306,7 +306,7 @@ function NftCard() {
         let processedStakedNFTs = stakedNFTs.map((NFT) => {
             let data = {
                 id: `#${NFT}`,
-                image: `image/images/${dict1[NFT]}`,
+                image: `/image/images/${dict1[NFT]}`,
                 // image: `https://insta-amazing-app-stagraaa.s3.ap-northeast-2.amazonaws.com/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${NFT}.png`,
                 checked: false,
             }
