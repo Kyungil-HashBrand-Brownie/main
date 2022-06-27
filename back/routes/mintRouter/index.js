@@ -4,6 +4,6 @@ const mintController = require('./mint.control')
 
 router.get('/whitelist', mintController.whitelist)
 
-router.post('/writelist', mintController.writelistPost)
+router.post('/whitelist', mintController.whitelistPost)
 
 module.exports = router
