@@ -21,13 +21,15 @@ const datas = [
  }]
 
 
-const StyleDiv1 = styled.div`
+const StyleHomeImgCard = styled.div`
     width:100% ;
     background-color: #CDF0EA;
     height: 500px;
     display: flex;
     justify-content: center;
     position: relative;
+    margin-top:50px;
+
 
 
 
@@ -143,7 +145,8 @@ const HomeImgCard = () => {
 
   return (
     <div>
-      <StyleDiv1 >
+        
+      <StyleHomeImgCard >
         <div className="backColor"
         style={{backgroundColor:
                                  click === 1 ?
@@ -202,7 +205,7 @@ const HomeImgCard = () => {
             )
           }
         </div>
-      </StyleDiv1>
+      </StyleHomeImgCard>
     </div>
   )
 }
