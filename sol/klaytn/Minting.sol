@@ -40,7 +40,20 @@ contract Minting {
         uint256 randNonce = 0;
         uint256 randomNum;
         while(true) {
-            randomNum = uint256(keccak256(abi.encodePacked(block.timestamp, randNonce, msg.sender))) % 150 + 1;
+            randomNum = uint256(keccak256(abi.encodePacked(block.timestamp, randNonce, msg.sender))) % 120 + 31;
+            if(brownieNFT.checkMinting(randomNum) == false) {
+                brownieNFT.minted(randomNum);
+                break;
+            }
+            randNonce++;
+        }
+        return randomNum;
+    }
+    function whiteRandNum() public returns(uint256) {
+        uint256 randNonce = 0;
+        uint256 randomNum;
+        while(true) {
+            randomNum = uint256(keccak256(abi.encodePacked(block.timestamp, randNonce, msg.sender))) % 30 + 1;
             if(brownieNFT.checkMinting(randomNum) == false) {
                 brownieNFT.minted(randomNum);
                 break;
@@ -54,8 +67,17 @@ contract Minting {
     * safeMint - nft 발행 함수 
     * nft 발행시 이 함수 사용해서 발행 
     */
-    function safeMint(address to, uint256 cost, uint8 _status) private {
-        uint256 randomNum = randNum();
+    modifier isStatus(uint8 _status) {
+        require(_status == 0 || _status == 1, "Wrong Minting Way");
+        _;
+    }
+    function safeMint(address to, uint256 cost, uint8 _status) private isStatus(_status){
+        uint256 randomNum;
+        if(_status == 0) {
+            randomNum = randNum();
+        } else if(_status == 1) {
+            randomNum = whiteRandNum();
+        }
         brownieNFT.safeMint(to, msg.sender, randomNum, _status);
         brownieToken.tokenTransfer(msg.sender, address(this), cost, 10 ** 18);
     }
@@ -80,7 +102,7 @@ contract Minting {
         emit NFTMinting(msg.sender, amount);
     }
 
-        modifier isStaked(uint256 tokenId) {
+    modifier isStaked(uint256 tokenId) {
         require(brownieNFT.isStaked(tokenId), "not staked tokenId");
         _;
     }
