@@ -1,27 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react'
 import styled, { keyframes } from 'styled-components';
-import Browny1 from '../img/browny1.png';
-import Browny2 from '../img/browny2.png';
-import Browny3 from '../img/browny3.jpg';
-import Browny4 from '../img/browny4.jpg';
-import Browny5 from '../img/browny5.jpg';
-import Browny6 from '../img/browny6.jpg';
-import Browny7 from '../img/browny7.png';
-import Browny8 from '../img/browny8.png';
-import Browny9 from '../img/browny9.png';
-import Browny10 from '../img/browny10.png';
-import Eye from '../img/eye/Eye1.png'
-import Img from '../img/background/background11.png';
-import LeftImg from '../img/chocolate/choco1.png';
-import LeftImg2 from '../img/chocolate/choco2.png';
-import LeftImg3 from '../img/chocolate/choco3.png';
-import RightImg from '../img/chocolate/choco4.png';
 import Arrow from '../img/arrow.png';
-import Ellipse from '../img/Ellipse1.png';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import contractAbi from "../abi.json";
 import { useNavigate } from 'react-router-dom';
+import HomeImgCard from '../components/HomeImgCard';
+import { group ,img1 , Group2 , baking, baking2, baking3 } from '../img';
+import SlideShow from '../components/SlideShow';
+import D3 from '../components/D3';
+import Viliage from 'components/Viliage';
+import Team from 'components/Team';
+// import "../scss/styled.css"
 
 const StyledMainText = styled.div`
   /* background: red; */
@@ -55,14 +44,16 @@ const StyledSubText = styled.div`
 `
 const StyledMintDate = styled.div`
   position: relative;
-  top: 60px;
-  border: 15px solid white;
+  top: 40px;
+  border: 5px solid rgb(31, 162, 31);
   border-radius: 10px;
   padding: 10px 0px;
   text-align: center;
   font-weight: bolder;
   font-size: larger;
   width: 300px;
+  background: white;
+  /* background: rgb(31, 162, 31); */
   /* display: flex; */
   /* justify-content: center; */
 `
@@ -83,13 +74,15 @@ const displayAnimation = keyframes`
 
 const StyledBrownyAbove = styled.img`
   position: relative;
-  top: 6%;
-  width: 350px;
+  top: -10%;
+  width: 500px;
   margin: 0px 50px;
   z-index: 1;
+  /* border: 5px solid black; */
   animation-name: ${displayAnimation};
   animation-duration: 0.5s;
   animation-iteration-count: 1;
+  background-color: lightcyan;
 `
 
 const StyledBrownyDown = styled.img`
@@ -131,12 +124,32 @@ const StyledArrow = styled.img`
   margin-right: 10px;
 `
 
+const BakingImg = styled.div`
+  .bakingImg1 img{
+    width: 300px;
+    height: 400px;
+    right: 400px;
+    /* margin-right: 100px; */
+    /* position: right ; */
+    /* object-position: 25% 75%; */
+  }
+`
+
 const StyledEllipse = styled.img`
   position: absolute;
   left: 0;
   bottom: 0%;
   z-index: -1; 
 `
+
+
+const HomeBackImgPosition = styled.div`
+  width: 100%;
+  height: 400px;
+  background-color: black;
+  opacity : 0.9;
+`
+
 const HomePage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -152,7 +165,6 @@ const HomePage = () => {
     let timer = useRef(null); 
 
     const count = () => {
-      // console.log('test');
       let now = new Date().getTime();
       let t = deadline - now;
       let day = Math.floor((t % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
@@ -170,36 +182,35 @@ const HomePage = () => {
 
     const moveToMint = () => {
       navigate('/mint');
-      dispatch({type: 'MODAL_CLOSE'});
+
     }
+
+    let mainText = document.getElementsByClassName("slidediv")
+
+    window.addEventListener('scroll', function() {
+      let value = window.scrollY;
+      let loc = window.location.href;
+      if (loc == 'http://localhost:3000/') {
+        if(value > 1500 || value < 850) {
+          mainText[0].style.animation='disappear 1s ease-out forwards';
+        }else  {
+          mainText[0].style.animation='slide 1s ease-out'
+        }
+      }
+    })
 
     useEffect(() => { 
       deadline = new Date('July 22, 2022 00:00:00').getTime();
-      timer.current = setInterval(count, 1000);   
+      timer.current = setInterval(count, 1000);  
+      // scroll() 
       // timer();   
     }, [])
     
     return (
       <>
-      <img 
-        className='backG-img'
-        src={Img}
-      />
-      {/* <img 
-        className='backG-left-img'
-        src={LeftImg3}
-      /> */}
-      <img 
-        className='backG-right-img'
-        src={RightImg}
-      />
-      {/* <img 
-        className='backG-right-img2'
-        src={RightImg}
-      /> */}
       <div className='mintdate-container'>
         <StyledMintDate>
-          <span>민팅 시작까지 남은 시간</span><br />
+          <span>민팅 까지 남은 시간</span><br />
           <span>
             {state.day < 10 ? `0${state.day}` : state.day}D 
             &nbsp;{state.hours < 10 ? `0${state.hours}` : state.hours}h 
@@ -209,39 +220,37 @@ const HomePage = () => {
         </StyledMintDate>
       </div>
       <Container className='main-container'>
-          <Col className="main-col">
-              <StyledMainText>Browny</StyledMainText>
-              <StyledSubText>The Best nft Collections You Can Get</StyledSubText>
-              {/* <div className='main-button-container'> */}
-                <StyledButton
-                  onClick={moveToMint}
-                >
-                  <div>
-                    <StyledArrow src={Arrow} alt="nft-arrows"/>
-                    <span>Explore our nfts</span>
-                  </div>
-                </StyledButton>
-              {/* </div> */}
-          </Col>
-          <Col className="main-img-col">
-            <StyledBrownyAbove src={Browny8} alt="browny-above" />
-            <StyledBrownyDown src={Browny10} alt="browny-down" />
-          </Col>
-          
-          {/* <StyledEllipse src={Ellipse} alt="ellipse"/> */}
+        <Col className="main-col">
+            <StyledMainText><D3/></StyledMainText>
+            <StyledSubText>The Best nft Collections <br/>You Can Get</StyledSubText>
+            {/* <div className='main-button-container'> */}
+              <StyledButton onClick={moveToMint}>
+                <div>
+                  <StyledArrow src={Arrow} alt="nft-arrows"/>
+                  <span>Explore our nfts</span>
+                </div>
+              </StyledButton>
+            {/* </div> */}
+        </Col>
+        <Col className="main-img-col">
+          <StyledBrownyAbove src={Group2} alt="browny-above" />
+          {/* <StyledBrownyDown src={Browny10} alt="browny-down" /> */}
+        </Col>
       </Container>
-      {/* <div className='main-team-container'> */}
-        {/* <Container className='main-team-container'>
-          <StyledMainText>Team</StyledMainText>
-          <Container className='main-team-img-box'>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-          </Container>
-        </Container> */}
-      {/* </div> */}
+      <Viliage />
+      <Container className='main-container'>
+        <Col className="main-col">
+          <div className="slidediv">
+            Love <br /> Your Browny
+          </div>
+        </Col>
+        <Col className="main-img-col">
+            <SlideShow />
+        </Col>
+      </Container>
+      <HomeImgCard />
+      <Team />
+      {/* </PositionCss> */}
       </>
   )
 }

@@ -8,17 +8,19 @@ import kakao from "../img/footer/kakao.png"
 import kakao2 from "../img/footer/kakao2.png"
 
 const Outer = styled.div`
-    /* position: absolute; */
+    /* position: absolute;
     margin-top: 200px;
-    /* background: blue; */
-    width: 100%;
+    bottom: 0;
+    width: 100%; */
+    flex: 1;
+    margin-bottom: 20px;
+    /* position : relative; */
+    /* transform : translateY(-100%); */
 `
 
 const Foot = styled.div`
-    /* margin-top: 7%; */
     padding-left: 10%;
     padding-right: 10%;
-    /* background: red; */
     
     /* fContainer1 */
     .fContainer {
@@ -35,14 +37,14 @@ const Foot = styled.div`
         font-weight: 600;
         font-size: 1vw;
         line-height: 16px;
-        font-family: 'Walter Turncoat', cursive;
+        /* font-family: 'Walter Turncoat', cursive; */
         align-items: flex-start;
         justify-content: space-between;
     } 
 
     .fContainer a {
         text-decoration: none;
-        color: white;
+        color: white; 
     }
 
     .fContainer a:link{
@@ -76,7 +78,6 @@ const Foot = styled.div`
         justify-content: flex-end;
         width: 100%;
         height: 100%;
-        
     }
 
     .snsText{
@@ -93,12 +94,11 @@ const Foot = styled.div`
         height: 36px;
     }
 
-
     /* 폰트 */
-    font-family: 'Gothic A1', sans-serif;
-    font-family: 'Roboto', sans-serif;
-    font-family: 'Rock Salt', cursive;
-    font-family: 'Walter Turncoat', cursive;
+    /* font-family: 'Gothic A1', sans-serif; */
+    /* font-family: 'Roboto', sans-serif; */
+    /* font-family: 'Rock Salt', cursive; */
+    /* font-family: 'Walter Turncoat', cursive; */
 
     /* 반응형 */
     @media (max-width: 768px) {
@@ -111,21 +111,20 @@ const Foot = styled.div`
 const Footer = () => (
     <Outer>
     <Foot>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Roboto:wght@900&family=Kdam+Thmor+Pro&family=Walter+Turncoat&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Roboto:wght@900&family=Kdam+Thmor+Pro&family=Walter+Turncoat&display=swap" rel="stylesheet" /> */}
         <div className="fContainer">
             <div className="fContainer_left">
                 <div className="fContainer_left_content">
                     BROWNY PROJECT<br />
-                    THE KLAYTN NETWORK'S FIRST
-                    COMMUNITY FOR COLLECTIBLES
-                    AND NON-FUNGIBLE TOKEN TRADERS.<br />
+                    A browny day keeps the frownies away
+                    <br />
                 </div>
             </div>
             <div className="fContainer_right">
                 <div className="fContainer_right_content">
-                    <div className="snsText">Join our COMMUNITY</div>
+                    <div className="snsText">Join our Community</div>
                     <div className="imgSection">
                         <div className="img_box">
                             <a href="https://twitter.com/DaoPirates" target="blank"><img alt="twit" className="sns_logo" src={twit}></img></a>

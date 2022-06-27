@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
-import contractAbi from "../abi.json"
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import styled from 'styled-components'
@@ -10,6 +9,8 @@ import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
 import Form from 'react-bootstrap/Form';
 import { trash } from '../img'
+import { brownyContract } from "configs";
+
 
 
 const Trash = styled.div`
@@ -19,7 +20,7 @@ const Trash = styled.div`
 
 
 const WhiteList = () => {
-    const { brownieContract, myAddress } = useSelector(state => state.nft);
+    const { myAddress } = useSelector(state => state.nft);
     const [list, setList] = useState([]);
     const [checkDelete, setCheckDelete] = useState(false);
 
@@ -47,13 +48,13 @@ const WhiteList = () => {
     }, [])
 
     const addWhitelist = async () => {
-        if (await brownieContract.methods.isWhitelisted(addInput.current).call() == true) {
+        if (await brownyContract.methods.isWhitelisted(addInput.current).call() == true) {
             return alert('이미 등록됨')
         }
-        const Sucs = await brownieContract.methods.add(addInput.current).send({ from: myAddress, gas: 300000, value: 0 })
+        const Sucs = await brownyContract.methods.add(addInput.current).send({ from: myAddress, gas: 300000, value: 0 })
         console.log(Sucs)
         if (Sucs.status === true) {
-            await axios.post('http://localhost:4000/whitelist',
+            await axios.post('http://localhost:4000/mint/whitelist',
                 {
                     data: { from: addInput.current, status: Sucs.status },
                 })
@@ -69,10 +70,10 @@ const WhiteList = () => {
         }
     }
     const delWhitelist = async () => {
-        if (await brownieContract.methods.isWhitelisted(delInput.current).call() == false) {
+        if (await brownyContract.methods.isWhitelisted(delInput.current).call() == false) {
             return alert('등록되지 않음')
         }
-        const Del = await brownieContract.methods.remove(delInput.current).send({ from: myAddress, gas: 300000, value: 0 })
+        const Del = await brownyContract.methods.remove(delInput.current).send({ from: myAddress, gas: 300000, value: 0 })
         if (Del.status === true) {
             await axios.post('http://localhost:4000/deletelist',
                 {
@@ -91,7 +92,7 @@ const WhiteList = () => {
     }
 
     const checkWhitelist = async () => {
-        console.log(await brownieContract.methods.isWhitelisted(checkInput.current).call())
+        console.log(await brownyContract.methods.isWhitelisted(checkInput.current).call())
     }
 
     return (

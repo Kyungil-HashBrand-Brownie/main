@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const router = require("./routes")
+const router = require("./routes/images")
 const cors = require('cors')
 
 app.use(express.json());

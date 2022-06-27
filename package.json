@@ -1,6 +1,10 @@
 {
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.1.1",
+    "@fortawesome/free-regular-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@openzeppelin/contracts": "^4.6.0",
+    "@openzeppelin/contracts-upgradeable": "^4.6.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "concurrently": "^7.2.1",

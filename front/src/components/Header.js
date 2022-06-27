@@ -1,31 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { ToggleButton, Nav, Form, FormControl, Button, Navbar, Container } from 'react-bootstrap';
+import {Nav, Button, Navbar, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../img/brownyLogo.png';
-import { useNavigate } from 'react-router-dom';
-import PFP from '../img/profile1.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
+import {btkInstance, brownyContract} from "configs";
 
-const SearchBox = styled.div`
-    background-color: rgb(26, 126, 213);
-    border-radius: 30px;
-    width: 290px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 20px 10px 350px;
-    border: 1px solid black;
-`
-const SearchInput = styled.input`
-    padding-left: 20px;
-    width: 16rem;
-    height: 2.5rem;
-    font-size: medium;
-`
+import { background10 ,background13} from '../img/background';
+import D3 from './D3';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -36,26 +20,10 @@ const LogoContainer = styled.div`
     border: 1px solid black;
     margin-left: 1px;
 `
-const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* margin-left: 0px; */
-    /* position: absolute; */
-    /* right: 10%; */
-`
 
 const PFPContainer = styled.div`
-  /* position: fixed;
-  right: 10px;
-  top: 0px; */
-  /* margin-top: 10px; */
-  /* margin-left: 1px; */
   margin-left: 10px;
-  /* font-weight: bold; */
   font-size: 20px;
-  /* width: 50px;
-  height: 50px; */
   padding: 2px 10px;
   border: 3px solid;
   border-radius: 20px;
@@ -87,15 +55,14 @@ const StyledInfo = styled.div`
     opacity: 90%;
 `
 
+
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, btkInstance, myAddress, walletRefresh } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh, isDeployer } = useSelector(state => state.nft);
 
-    const [checked, setChecked] = useState(false);
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(null);
     const [btkBalance, setBtkBalance] = useState(0);
-    const [infoState, setInfoState] = useState(false);
 
     const weiToFixed = (wei) => {
         const toKlay = window.caver.utils.convertFromPeb(wei);
@@ -104,23 +71,25 @@ const Header = () => {
     }
 
     const setTokenBalance = async (address) => {
-        if(btkInstance){
-            const weiBalance = await window.caver.klay.getBalance(address)
-            const fixedBalance = weiToFixed(weiBalance)
-            const weibtkBalance = await btkInstance.balanceOf(myAddress) //BigNumber 객체
-            const fixedbtkBalance = weiToFixed(weibtkBalance)
-            
-            setBalance(fixedBalance)
-            setBtkBalance(fixedbtkBalance);
-        }
-        
+        const weiBalance = await window.caver.klay.getBalance(address)
+        const fixedBalance = weiToFixed(weiBalance)
+        console.log(fixedBalance)
+        const weibtkBalance = await btkInstance.balanceOf(address) //BigNumber 객체
+        const fixedbtkBalance = weiToFixed(weibtkBalance)
+
+        setBalance(fixedBalance)
+        setBtkBalance(fixedbtkBalance);
     }
 
     const setUserInfo = async () => {
         if(myAddress){
             setAddress(myAddress);
-            setTokenBalance(myAddress)
+            await setTokenBalance(myAddress)
+            const contractOwner = await brownyContract.methods.owner().call()
+            const isDeployer = window.caver.utils.toChecksumAddress(myAddress) === contractOwner
+            dispatch({type: 'CHECK_ISDEPLOYER', payload: isDeployer})
         }
+        else dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }
 
     const enableKikas = () => {
@@ -128,20 +97,11 @@ const Header = () => {
         dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }
 
-    window.klaytn.on('accountsChanged', async function(accounts) {
-        console.log(accounts[0])
-        sessionStorage.setItem('id', accounts[0]);
-        dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
-        setAddress(accounts[0]);
-        if(btkInstance) setTokenBalance(accounts[0])
-    })
-
     const copyAddress = () => {
         navigator.clipboard.writeText(address)
     }
 
     const showInfo = () => {
-        // console.log('show');
         dispatch({type: "MODAL_CLICK"})
     }
 
@@ -151,10 +111,26 @@ const Header = () => {
 
     useEffect(() => {
         setUserInfo();
-    }, [btkInstance,myAddress,walletRefresh])
+    }, [myAddress,walletRefresh])
+
+    useEffect(()=>{
+        window.klaytn.on('accountsChanged', async function(accounts) {
+            console.log(accounts[0])
+            sessionStorage.setItem('id', accounts[0]);
+            dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
+            setAddress(accounts[0]);
+            await setTokenBalance(accounts[0])
+        })
+        window.klaytn.on('networkChanged', async function(network) {
+            console.log(network)
+        })
+    },[])
 
     return (
         <Navbar className="nav" expand="lg">
+            <img src={background13} className="backG-img-left" />
+            <img src={background13} className="backG-img-right" />
+            {/* <D3/> */}
             <Container fluid>
                 <Navbar.Brand>
                     <Link to="/"><LogoContainer /></Link>
@@ -169,34 +145,12 @@ const Header = () => {
                     <Link onClick={closeModal} className='nav-item' to="/">Home</Link>
                     <Link onClick={closeModal} className='nav-item' to="/mint">Mint</Link>
                     {/* <Link className='nav-item' to="/whitelist">Whitelist</Link> */}
-                    <Link onClick={closeModal} className='nav-item' to="/admin">admin</Link>
                     <Link onClick={closeModal} className='nav-item' to="/test">testpage</Link>
                     <Link onClick={closeModal} className='nav-item' to="/swap">swap</Link>
                     <Link onClick={closeModal} className='nav-item' to="/nftlist">nftlist</Link>
+                    {isDeployer ? <Link onClick={closeModal} className='nav-item' to="/admin">admin</Link> : null}
                 </Nav>
-                {/* <SearchBox>
-                    <SearchInput 
-                    type="text"
-                    placeholder="Search By ID..."
-                    aria-label="Search"
-                    />
-                </SearchBox> */}
-
-                {/* <ButtonContainer>
-                    <ToggleButton
-                        className="mb-2"
-                        id="toggle-check"
-                        type="checkbox"
-                        variant="outline-primary"
-                        checked={checked}
-                        value="1"
-                        onChange={(e) => setChecked(e.currentTarget.checked)}
-                    >
-                        Search
-                    </ToggleButton>
-                </ButtonContainer> */}
                 {
-                // sessionStorage.getItem('id')
                 address != null
                 ? 
                 <div className="info-box">  
@@ -226,30 +180,6 @@ const Header = () => {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-        // <div className='mint-container'>
-        //     <LogoContainer />
-
-        //     <SearchBox>
-        //         <SearchInput 
-        //         type="text"
-        //         placeholder="Search By ID..."
-        //         aria-label="Search"
-        //         />
-        //     </SearchBox>
-        //     <ButtonContainer>
-        //         <ToggleButton
-        //             className="mb-2"
-        //             id="toggle-check"
-        //             type="checkbox"
-        //             variant="outline-primary"
-        //             checked={checked}
-        //             value="1"
-        //             onChange={(e) => setChecked(e.currentTarget.checked)}
-        //         >
-        //             Kaikas 열기
-        //         </ToggleButton>
-        //     </ButtonContainer>
-        // </div>
     )
 }
 

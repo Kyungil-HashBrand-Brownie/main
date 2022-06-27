@@ -15,10 +15,10 @@ const AdminPage = () => {
   }
 
   return (
-      <div >
-        {/* <button className='admin-outer-box' onClick={()=>click1(0)}>화이트키</button>
+      <>
+        <button className='admin-outer-box' onClick={()=>click1(0)}>화이트키</button>
         <button className='admin-outer-box' onClick={()=>click1(1)}>mint</button>
-        <button className='admin-outer-box' onClick={()=>click1(2)}>자선단체 </button> */}
+        <button className='admin-outer-box' onClick={()=>click1(2)}>자선단체 </button>
 
         {
           click == 0 ? <WhiteListMember /> : click == 1 ? <QuitMint /> : <QuitVote/>
@@ -26,7 +26,7 @@ const AdminPage = () => {
 
           {/* <EarthVote /> */}
           {/* <QuitVote /> */}
-      </div>
+      </>
   )
 }
 
