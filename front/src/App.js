@@ -21,13 +21,15 @@ function App() {
   const [isBaobab,setIsBaobab] = useState(false)
 
   useEffect(()=>{
-    if(window.klaytn.networkVersion === 1001) setIsBaobab(true)
-    else setIsBaobab(false)
+    if(window.klaytn){
+      if(window.klaytn.networkVersion === 1001) setIsBaobab(true)
+      else setIsBaobab(false)
 
-    window.klaytn.on('networkChanged', async function(network) {
+      window.klaytn.on('networkChanged', async function(network) {
         if(network === 1001) setIsBaobab(true)
         else setIsBaobab(false)
-    })
+      })
+    }
 },[])
 
   return (
