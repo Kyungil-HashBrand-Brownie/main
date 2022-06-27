@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Container,Row , Col , Button} from 'react-bootstrap'
 import Browny from '../img/browny9.png'
 import {nftInstance} from "configs";
-import { whitelistMint } from 'api';
+import { checkWhite, whitelistMint } from 'api';
 
 const StyledMain = styled.div`
     width: 320px;
@@ -46,10 +46,9 @@ const StyledButton = styled.button`
 
 const WhiteSale = () => {
     const dispatch = useDispatch();
-    const { myAddress } = useSelector(state => state.nft);
+    const { myAddress, isWhite } = useSelector(state => state.nft);
 
     const [count, setCount] = useState(1)
-    const [isWhite, setIsWhite] = useState(false)
     const [whitelistCnt, setWhitelistCnt] = useState(0);
 
     const getWhitelistMintCnt = async ()=> {
@@ -81,9 +80,8 @@ const WhiteSale = () => {
     const checkWhitelist = async () => {
         if (myAddress) {
             try {
-                const isWhite = await nftInstance.methods.isWhitelisted(myAddress).call()
-                console.log(isWhite);
-                setIsWhite(isWhite)
+                const isWhite = await checkWhite(myAddress)
+                dispatch({ type : "CHECK_ISWHITELIST" , payload:isWhite })
             }
             catch (e) {
                 throw e

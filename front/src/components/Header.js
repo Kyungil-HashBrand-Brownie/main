@@ -6,7 +6,7 @@ import Logo from '../img/brownyLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
-import {tokenInstance, nftInstance} from "configs";
+import {tokenInstance, nftInstance, caver} from "configs";
 
 import { background10 ,background13} from '../img/background';
 import D3 from './D3';
@@ -58,7 +58,7 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer, caver } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh, isDeployer } = useSelector(state => state.nft);
 
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(0);

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import {nftInstance} from "configs";
-import { batchMint, whitelistMint } from 'api';
+import { batchMint, checkWhite, nftNum, whitelistMint } from 'api';
 
 
 // 리팩터링 - 코드를 단순화하는 작업 불필요한 중복요소들을 제거
@@ -91,15 +91,14 @@ const PreSale = ({ data }) => {
 
     // 전체 민팅 갯수
     const getMintCnt = async ()=> {
-        const totalCnt = await nftInstance.methods.nftNum().call()
+        const totalCnt = await nftNum()
         setTotalCnt(totalCnt)
     }
 
     const checkWhitelist = async () => {
         if (myAddress) {
             try {
-                const isWhite = await nftInstance.methods.isWhitelisted(myAddress).call()
-                console.log(isWhite);
+                const isWhite = await checkWhite(myAddress)
                 setIsWhite(isWhite)
             }
             catch (e) {
@@ -122,7 +121,7 @@ const PreSale = ({ data }) => {
                 <div className='mint-title-box'>
                     <h2 className="mint-title">{title}</h2>
                 </div>
-                {(price == 2 || isWhite)
+                {(price == 50 || isWhite)
                 ?
                 <>
                 <div className='mint-img-container'>
