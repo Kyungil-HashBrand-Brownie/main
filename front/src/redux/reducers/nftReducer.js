@@ -76,6 +76,7 @@ function nftReducer(state = initialState, action) {
             // console.log(payload)
             // console.log(Object.keys(payload)[0])
             // console.log(Object.values(payload)[0])
+            // payload = {myNFTs: [{id: 1, image: '1adasd', checked: true}]}
             return {
                 ...state,
                 [Object.keys(payload)[0]]: Object.values(payload)[0],
