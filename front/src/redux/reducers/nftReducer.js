@@ -1,7 +1,4 @@
-import {caver} from "configs"
-
 let initialState = {
-    caver: caver,
     myNFTpage: 1,
     myStakedpage: 1,
     countAnimal: 0,
@@ -24,10 +21,11 @@ let initialState = {
         id: 3
         , title: "test3"
     }],
-    // address, walletRefresh, isDeployer update
+    // address, walletRefresh, isDeployer, isWhite update
     myAddress: "",
     walletRefresh: 1,
-    isDeployer: false
+    isDeployer: false,
+    isWhite: false
 }
 
 function nftReducer(state = initialState, action) {
@@ -158,6 +156,12 @@ function nftReducer(state = initialState, action) {
             return {
                 ...state,
                 isDeployer: payload
+            }
+        
+        case "CHECK_ISWHITELIST":
+            return {
+                ...state,
+                isWhite: payload
             }
 
         default:

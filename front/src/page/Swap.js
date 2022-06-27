@@ -110,8 +110,8 @@ const Swap = () => {
                 </div>
                 <div className='swap-ratio-outer'>
                 <div className='swap-ratio-inner'>
-                    <div className='swap-ratio'>1 KLAY = 10 BTK</div>
-                    <div className='swap-ratio'>1 BTK = 0.1 KLAY</div>
+                    <div className='swap-ratio'>1 KLAY = 7.22 BTK</div>
+                    <div className='swap-ratio'>1 BTK = 0.14 KLAY</div>
                 </div>
                 </div>
                 <div className='swap-amount-input-box'>
