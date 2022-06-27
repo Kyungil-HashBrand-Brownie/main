@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import {brownyContract, contractAddr} from "configs";
+import {nftInstance} from "configs";
 import { batchMint, whitelistMint } from 'api';
 
 
@@ -91,14 +91,14 @@ const PreSale = ({ data }) => {
 
     // 전체 민팅 갯수
     const getMintCnt = async ()=> {
-        const totalCnt = await brownyContract.methods.nftNum().call()
+        const totalCnt = await nftInstance.methods.nftNum().call()
         setTotalCnt(totalCnt)
     }
 
     const checkWhitelist = async () => {
         if (myAddress) {
             try {
-                const isWhite = await brownyContract.methods.isWhitelisted(myAddress).call()
+                const isWhite = await nftInstance.methods.isWhitelisted(myAddress).call()
                 console.log(isWhite);
                 setIsWhite(isWhite)
             }

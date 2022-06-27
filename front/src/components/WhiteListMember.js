@@ -9,7 +9,7 @@ import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
 import Form from 'react-bootstrap/Form';
 import { trash } from '../img'
-import { brownyContract } from "configs";
+import { nftInstance } from "configs";
 
 
 
@@ -48,10 +48,10 @@ const WhiteList = () => {
     }, [])
 
     const addWhitelist = async () => {
-        if (await brownyContract.methods.isWhitelisted(addInput.current).call() == true) {
+        if (await nftInstance.methods.isWhitelisted(addInput.current).call() == true) {
             return alert('이미 등록됨')
         }
-        const Sucs = await brownyContract.methods.add(addInput.current).send({ from: myAddress, gas: 300000, value: 0 })
+        const Sucs = await nftInstance.methods.add(addInput.current).send({ from: myAddress, gas: 300000, value: 0 })
         console.log(Sucs)
         if (Sucs.status === true) {
             await axios.post('/white/whitelist',
@@ -70,10 +70,10 @@ const WhiteList = () => {
         }
     }
     const delWhitelist = async () => {
-        if (await brownyContract.methods.isWhitelisted(delInput.current).call() == false) {
+        if (await nftInstance.methods.isWhitelisted(delInput.current).call() == false) {
             return alert('등록되지 않음')
         }
-        const Del = await brownyContract.methods.remove(delInput.current).send({ from: myAddress, gas: 300000, value: 0 })
+        const Del = await nftInstance.methods.remove(delInput.current).send({ from: myAddress, gas: 300000, value: 0 })
         if (Del.status === true) {
             await axios.post('/white/deletelist',
                 {
@@ -92,7 +92,7 @@ const WhiteList = () => {
     }
 
     const checkWhitelist = async () => {
-        console.log(await brownyContract.methods.isWhitelisted(checkInput.current).call())
+        console.log(await nftInstance.methods.isWhitelisted(checkInput.current).call())
     }
 
     return (

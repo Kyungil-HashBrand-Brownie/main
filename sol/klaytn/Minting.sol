@@ -5,33 +5,33 @@ import "./Token.sol";
 import "./NFT.sol";
 
 /**
-* author Kyungil_Team Brownie
+* author Kyungil_Team Browny
 * version 1.0
 * nft 발행 contract
 */
 contract Minting {
-    BrownieToken public brownieToken;
-    BrownieNFT public brownieNFT;
+    BrownyToken public brownyToken;
+    BrownyNFT public brownyNFT;
 
-    constructor(address _brownieToken, address _brownieNFT) {
-        brownieToken = BrownieToken(_brownieToken);
-        brownieNFT = BrownieNFT(_brownieNFT);
+    constructor(address _brownyToken, address _brownyNFT) {
+        brownyToken = BrownyToken(_brownyToken);
+        brownyNFT = BrownyNFT(_brownyNFT);
     }
 
     // nft 거래 및 staking reward를 위한 BTK instance
-    // BrownieToken instance = new BrownieToken(address(this));
+    // BrownyToken instance = new BrownyToken(address(this));
     event NFTMinting(address indexed account, uint indexed amount);
 
     // token swap - from klaytn to BTK
     function getBtk(uint256 _amount) public payable {
         require(msg.value == _amount * 10 ** 18, "Please check your balance");
-        brownieToken.tokenTransfer(address(brownieToken), msg.sender, _amount, 722 * 10 ** 16);
+        brownyToken.tokenTransfer(address(brownyToken), msg.sender, _amount, 722 * 10 ** 16);
     }
 
     // token swap - from BTK to klaytn
     function sellBtk(uint256 amount) public {
-        require(brownieToken.checkBalance(msg.sender) >= amount * 10 ** 18, "Please check your balance");
-        brownieToken.tokenTransfer(msg.sender, address(brownieToken), amount, 10 ** 18);
+        require(brownyToken.checkBalance(msg.sender) >= amount * 10 ** 18, "Please check your balance");
+        brownyToken.tokenTransfer(msg.sender, address(brownyToken), amount, 10 ** 18);
         payable(msg.sender).transfer(amount * (14 * 10 ** 16));
     }
 
@@ -41,8 +41,8 @@ contract Minting {
         uint256 randomNum;
         while(true) {
             randomNum = uint256(keccak256(abi.encodePacked(block.timestamp, randNonce, msg.sender))) % 120 + 31;
-            if(brownieNFT.checkMinting(randomNum) == false) {
-                brownieNFT.minted(randomNum);
+            if(brownyNFT.checkMinting(randomNum) == false) {
+                brownyNFT.minted(randomNum);
                 break;
             }
             randNonce++;
@@ -54,8 +54,8 @@ contract Minting {
         uint256 randomNum;
         while(true) {
             randomNum = uint256(keccak256(abi.encodePacked(block.timestamp, randNonce, msg.sender))) % 30 + 1;
-            if(brownieNFT.checkMinting(randomNum) == false) {
-                brownieNFT.minted(randomNum);
+            if(brownyNFT.checkMinting(randomNum) == false) {
+                brownyNFT.minted(randomNum);
                 break;
             }
             randNonce++;
@@ -78,13 +78,13 @@ contract Minting {
         } else if(_status == 1) {
             randomNum = whiteRandNum();
         }
-        brownieNFT.safeMint(to, msg.sender, randomNum, _status);
-        brownieToken.tokenTransfer(msg.sender, address(this), cost, 10 ** 18);
+        brownyNFT.safeMint(to, msg.sender, randomNum, _status);
+        brownyToken.tokenTransfer(msg.sender, address(this), cost, 10 ** 18);
     }
 
     // 일반 minting
     function batchMint(uint256 amount) public {
-        require(brownieToken.balanceOf(msg.sender) >= amount * 50 * 10 ** 18 , "Please check your balance");
+        require(brownyToken.balanceOf(msg.sender) >= amount * 50 * 10 ** 18 , "Please check your balance");
         for (uint256 i = 0; i < amount; i++) {
             safeMint(msg.sender, 50, 0);
         }
@@ -93,9 +93,9 @@ contract Minting {
 
     // whitelist 전용 minting
     function whitelistMint(uint256 amount) public {
-        require(brownieNFT.isWhitelisted(msg.sender), "Yor are not whitelist member");
-        require(brownieToken.balanceOf(msg.sender) >= amount * 25 * 10 ** 18 , "Please check your balance");
-        require(brownieNFT.whitelistNftNum() + amount <= 30,"Total NFT for whitelist users is only thirty");
+        require(brownyNFT.isWhitelisted(msg.sender), "Yor are not whitelist member");
+        require(brownyToken.balanceOf(msg.sender) >= amount * 25 * 10 ** 18 , "Please check your balance");
+        require(brownyNFT.whitelistNftNum() + amount <= 30,"Total NFT for whitelist users is only thirty");
         for (uint256 i = 0; i < amount; i++) {
             safeMint(msg.sender, 25, 1);
         }
@@ -103,17 +103,17 @@ contract Minting {
     }
 
     modifier isStaked(uint256 tokenId) {
-        require(brownieNFT.isStaked(tokenId), "not staked tokenId");
+        require(brownyNFT.isStaked(tokenId), "not staked tokenId");
         _;
     }
 
     // stake function 
     function stake(uint256 tokenId) private {
-        require(brownieNFT.ownerOf(tokenId) == msg.sender, "not your token");
-        require(brownieNFT.isStaked(tokenId) == false, "already staked");
-        brownieNFT.transferFrom(msg.sender, address(brownieNFT), tokenId);
-        brownieNFT.setStake(tokenId, uint256(block.timestamp), msg.sender);
-        brownieNFT.stakedFunc(tokenId, msg.sender);
+        require(brownyNFT.ownerOf(tokenId) == msg.sender, "not your token");
+        require(brownyNFT.isStaked(tokenId) == false, "already staked");
+        brownyNFT.transferFrom(msg.sender, address(brownyNFT), tokenId);
+        brownyNFT.setStake(tokenId, uint256(block.timestamp), msg.sender);
+        brownyNFT.stakedFunc(tokenId, msg.sender);
     }
     function stakeNFTs(uint256[] memory tokenId) external {
         for(uint i = 0; i < tokenId.length; i++) {
@@ -123,11 +123,11 @@ contract Minting {
 
     // unstake function
     function unstake(uint256 tokenId) private isStaked(tokenId) {
-        require(brownieNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
+        require(brownyNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
         claimed(tokenId);
-        brownieNFT.transferFrom(address(brownieNFT), msg.sender, tokenId);
-        brownieNFT.deleteStake(tokenId);
-        brownieNFT.stakedFunc(tokenId, msg.sender);
+        brownyNFT.transferFrom(address(brownyNFT), msg.sender, tokenId);
+        brownyNFT.deleteStake(tokenId);
+        brownyNFT.stakedFunc(tokenId, msg.sender);
     }
     function unstakeNFTs(uint256[] memory tokenId) external {
         for(uint i = 0; i < tokenId.length; i++) {
@@ -139,16 +139,16 @@ contract Minting {
     // 1. timestamp와 현재 시간 확인하여 보상부여
     // 2. 보상부여 tx block의 timestamp로 struct Stake timestamp 최신화?
     function claimed(uint256 tokenId) public isStaked(tokenId) {
-        require(brownieNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
-        uint256 reward = (block.timestamp - brownieNFT.whenStaked(tokenId));
-        brownieToken.tokenTransfer(address(brownieToken), msg.sender, reward, 10 ** 14);
-        brownieNFT.changeTime(tokenId, block.timestamp);
+        require(brownyNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
+        uint256 reward = (block.timestamp - brownyNFT.whenStaked(tokenId));
+        brownyToken.tokenTransfer(address(brownyToken), msg.sender, reward, 10 ** 14);
+        brownyNFT.changeTime(tokenId, block.timestamp);
     }
 
     function checkClaimed(uint256 tokenId) public view isStaked(tokenId) returns(uint256) {
-        // require(brownieNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
-        // uint256 reward = ((block.timestamp - brownieNFT.whenStaked(tokenId) / 1 hours) / brownieNFT.totalStakedNum()) * 10;
-        uint256 reward = (block.timestamp - brownieNFT.whenStaked(tokenId));
+        // require(brownyNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
+        // uint256 reward = ((block.timestamp - brownyNFT.whenStaked(tokenId) / 1 hours) / brownyNFT.totalStakedNum()) * 10;
+        uint256 reward = (block.timestamp - brownyNFT.whenStaked(tokenId));
         return reward;
     }
 }
