@@ -25,6 +25,7 @@ body {
 
 .wrapper {
   height: auto;
+  min-height: 885px;
   font-family: "Yfont2";
   font-weight: 500;
   margin: 0 auto;
@@ -159,6 +160,11 @@ body {
   margin-left: 30px;
 }
 
+.slidediv {
+  opacity: 0;
+  transition: 1s all ease;
+}
+
 
 @media (max-width: 1300px) {
   .main-img-col {
@@ -290,6 +296,7 @@ body {
 
 .nav {
   background: "pink";
+  /* position: fixed; */
   /* opacity: 70%; */
 }
 
@@ -378,6 +385,18 @@ body {
 }
 
 /*swap*/
+.swap-amount-input:before {
+  content: '123';
+}
+
+.swap-input-text {
+  display: inline;
+  font-weight: bold;
+  /* margin-left: 30px; */
+  /* position: absolute; */
+  /* transform: translate(-63px, 4px); */
+}
+
 .swap-header {
   font-weight: 600;
   font-size: 40px;
@@ -492,7 +511,7 @@ body {
 }
 
 .swap-amount-input, .swap-exchange {
-  width: 140px;
+  width: 155px;
   font-size: 17px;
   border-radius: 4px;
   border: 3px solid black;

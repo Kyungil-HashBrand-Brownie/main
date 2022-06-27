@@ -63,6 +63,20 @@ const Header = () => {
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(0);
     const [btkBalance, setBtkBalance] = useState(0);
+    const [isWhite, setIsWhite] = useState(false);
+
+    const checkWhitelist = async () => {
+        if (myAddress) {
+            try {
+                const isWhite = await brownyContract.methods.isWhitelisted(myAddress).call()
+                console.log(isWhite);
+                setIsWhite(isWhite)
+            }
+            catch (e) {
+                throw e
+            }
+        }
+    }
 
     const weiToFixed = (wei) => {
         const toKlay = caver.utils.convertFromPeb(wei);
@@ -132,6 +146,10 @@ const Header = () => {
         else alert("카이카스 설치 필요")
     },[])
 
+    useEffect(() => {
+        checkWhitelist();
+    }, [myAddress])
+
     return (
         <Navbar className="nav" expand="lg">
             <img src={background13} className="backG-img-left" />
@@ -167,7 +185,7 @@ const Header = () => {
                     </PFPContainer>
                     {modalState && 
                         <StyledInfo>
-                        WHITELIST<br/>
+                        {isWhite ? 'WHITELIST' : 'NORMAL'}<br/>
                         Copy Address
                         <FontAwesomeIcon 
                             className='copy-icon'

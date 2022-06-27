@@ -22,7 +22,7 @@ contract BrownyNFT is ERC721, Whitelist {
     using Strings for uint256;
     mapping(uint256 => bool) public mintinglist;
     mapping(address => uint256[]) public ownNFTs;
-
+    uint256[] mintedNftList;
 
     // _baseURI - nft 발행시 참조할 ipfs 주소 
     function _baseURI() internal pure override returns (string memory) {
@@ -65,11 +65,16 @@ contract BrownyNFT is ERC721, Whitelist {
     function safeMint(address to, address from, uint256 tokenId, uint8 status) external {
         _safeMint(to, tokenId);
         ownNFTs[from].push(tokenId);
+        mintedNftList.push(tokenId);
         if(status == 0) {
             _tokenIdCounter.increment();
         } else if(status == 1) {
             _whitelistCounter.increment();
         }
+    }
+
+    function mintedNFT() public view returns(uint256[] memory) {
+        return mintedNftList;
     }
 
     // 현재 staking 된 nft 수
