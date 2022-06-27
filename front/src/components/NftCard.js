@@ -2,7 +2,7 @@ import Card from 'react-bootstrap/Card';
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { brownyContract, contractAddr } from "configs";
+import { nftInstance } from "configs";
 import { Check } from '../img';
 import { nftAction } from 'redux/actions/nftAction';
 import Pagination from './Pagination';
@@ -254,16 +254,16 @@ function NftCard() {
 
     let list = myNFTs.filter((item) => item.checked);
     const getCurrentReward = async () => {
-        dispatch(nftAction.getReward(brownyContract, myStakedNFTs));
+        dispatch(nftAction.getReward(nftInstance, myStakedNFTs));
         // dispatch({type: 'GET_REWARD', payload: reward});
     }
 
     const checkNfts = async () => {
         getCurrentReward()
-        let myBrownyNFTs = await brownyContract.methods.myNFTs().call(
+        let myBrownyNFTs = await nftInstance.methods.myNFTs().call(
             { from: myAddress })
 
-        let stakedNFTs = await brownyContract.methods.checkStakedNFTs().call(
+        let stakedNFTs = await nftInstance.methods.checkStakedNFTs().call(
             { from: myAddress })
 
         console.log(myBrownyNFTs);

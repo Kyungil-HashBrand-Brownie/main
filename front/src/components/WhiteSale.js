@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 import {Container,Row , Col , Button} from 'react-bootstrap'
 import Browny from '../img/browny9.png'
-import {brownyContract, contractAddr} from "configs";
+import {nftInstance} from "configs";
 import { whitelistMint } from 'api';
 
 const StyledMain = styled.div`
@@ -53,7 +53,7 @@ const WhiteSale = () => {
     const [whitelistCnt, setWhitelistCnt] = useState(0);
 
     const getWhitelistMintCnt = async ()=> {
-        const whitelistCnt = await brownyContract.methods.whitelistNftNum().call()
+        const whitelistCnt = await nftInstance.methods.whitelistNftNum().call()
         setWhitelistCnt(whitelistCnt)
     }
 
@@ -81,7 +81,7 @@ const WhiteSale = () => {
     const checkWhitelist = async () => {
         if (myAddress) {
             try {
-                const isWhite = await brownyContract.methods.isWhitelisted(myAddress).call()
+                const isWhite = await nftInstance.methods.isWhitelisted(myAddress).call()
                 console.log(isWhite);
                 setIsWhite(isWhite)
             }

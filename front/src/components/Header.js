@@ -6,7 +6,7 @@ import Logo from '../img/brownyLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
-import {btkInstance, brownyContract} from "configs";
+import {tokenInstance, nftInstance} from "configs";
 
 import { background10 ,background13} from '../img/background';
 import D3 from './D3';
@@ -74,7 +74,7 @@ const Header = () => {
         const weiBalance = await window.caver.klay.getBalance(address)
         const fixedBalance = weiToFixed(weiBalance)
         console.log(fixedBalance)
-        const weibtkBalance = await btkInstance.balanceOf(address) //BigNumber 객체
+        const weibtkBalance = await tokenInstance.balanceOf(address) //BigNumber 객체
         const fixedbtkBalance = weiToFixed(weibtkBalance)
 
         setBalance(fixedBalance)
@@ -85,7 +85,7 @@ const Header = () => {
         if(myAddress){
             setAddress(myAddress);
             await setTokenBalance(myAddress)
-            const contractOwner = await brownyContract.methods.owner().call()
+            const contractOwner = await nftInstance.methods.owner().call()
             const isDeployer = window.caver.utils.toChecksumAddress(myAddress) === contractOwner
             dispatch({type: 'CHECK_ISDEPLOYER', payload: isDeployer})
         }
