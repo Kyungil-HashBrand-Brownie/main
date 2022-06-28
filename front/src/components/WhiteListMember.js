@@ -12,23 +12,23 @@ import { trash } from '../img'
 import { nftInstance } from "configs";
 import { checkWhite, removeWhite, addWhite, removeSelectedWhites } from 'api'
 
-
-
 const Trash = styled.div`
     width: 50px;
     cursor: pointer;
 `
 
-
-
 const WhiteList = () => {
+
     const { myAddress } = useSelector(state => state.nft);
     const [list, setList] = useState([]);
     const [checkDelete, setCheckDelete] = useState(false);
+    const [deleteList, setDeleteList] = useState([]);
 
     const addInput = useRef("")
     const delInput = useRef("")
     const checkInput = useRef("")
+
+    // console.log(list);
 
     const getWhiteList = async () => {
         try {
@@ -38,11 +38,16 @@ const WhiteList = () => {
         catch (e) {
             console.log(e)
         }
-
     }
 
     const buttonDelete = () => {
-        setCheckDelete(!checkDelete)
+        console.log(deleteList)
+
+        console.log(checkDelete) // false
+        // let data = document.query
+        if (!checkDelete) setDeleteList([])
+        else delWhitelists(deleteList)
+        setCheckDelete(!checkDelete)      // console.log(data)
     }
 
     useEffect(() => {
@@ -106,8 +111,25 @@ const WhiteList = () => {
         }
     }
 
+
     const showWhitelist = async () => {
         alert(await checkWhite(checkInput.current))
+    }
+
+    const [checkedA, setCheckedA] = useState(false);
+
+    const checkData = (publicKey, checked) => {
+        if (checked) {
+            console.log(publicKey);
+            setDeleteList([...deleteList, publicKey])
+        }
+        else {
+            // deleteList = [0xAc456, ]
+            let copy = deleteList.filter((item) => item !== publicKey);
+            setDeleteList(copy)
+        }
+
+
     }
 
     return (
@@ -156,8 +178,13 @@ const WhiteList = () => {
                                     {
                                         !checkDelete ?
                                             <span> {index+1}</span>
-                                            : <Form.Check aria-label="option 1" />
-
+                                            : 
+                                            <Form.Check 
+                                                aria-label="option 1"
+                                                className='whitelistCheck'
+                                                // checked={checkedA}
+                                                onChange={(e) => checkData(item.publicKey, e.target.checked)}
+                                            />
                                     }
                                 </td>
                                 <td>{item.publicKey}</td>
