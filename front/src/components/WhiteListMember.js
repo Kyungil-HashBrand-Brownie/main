@@ -140,7 +140,6 @@ const WhiteList = () => {
                             checkDelete ?
                             <img src={trash} onClick={buttonDelete} width="100%" />
                             :<img src={trash2} onClick={buttonDelete} width="100%" />
-
                         }
                     </Trash>
                 </div>
