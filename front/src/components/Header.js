@@ -6,10 +6,11 @@ import Logo from '../img/brownyLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
-import {tokenInstance, nftInstance} from "configs";
+import {tokenInstance, nftInstance, caver} from "configs";
 
 import { background10 ,background13} from '../img/background';
 import D3 from './D3';
+import { checkWhite } from 'api';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -58,11 +59,23 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer, caver } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh, isDeployer, isWhite } = useSelector(state => state.nft);
 
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(0);
     const [btkBalance, setBtkBalance] = useState(0);
+
+    const checkWhitelist = async () => {
+        if (myAddress) {
+            try {
+                const isWhite = await checkWhite(myAddress)
+                dispatch({ type : "CHECK_ISWHITELIST" , payload:isWhite })
+            }
+            catch (e) {
+                throw e
+            }
+        }
+    }
 
     const weiToFixed = (wei) => {
         const toKlay = caver.utils.convertFromPeb(wei);
@@ -97,7 +110,10 @@ const Header = () => {
             window.klaytn.enable()
             dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
         }
-        else alert("카이카스 설치 필요")
+        else {
+            alert("카이카스 설치 필요")
+            window.open("https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko")
+        }
     }
 
     const copyAddress = () => {
@@ -129,8 +145,11 @@ const Header = () => {
                 console.log(network)
             })
         }
-        else alert("카이카스 설치 필요")
     },[])
+
+    useEffect(() => {
+        checkWhitelist();
+    }, [myAddress])
 
     return (
         <Navbar className="nav" expand="lg">
@@ -167,7 +186,7 @@ const Header = () => {
                     </PFPContainer>
                     {modalState && 
                         <StyledInfo>
-                        WHITELIST<br/>
+                        {isWhite ? 'WHITELIST' : 'NORMAL'}<br/>
                         Copy Address
                         <FontAwesomeIcon 
                             className='copy-icon'

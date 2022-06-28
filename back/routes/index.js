@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router();
-const mintRouter = require('./mintRouter')
+const whiteRouter = require('./whiteRouter')
 const imageRouter = require('./imageRouter')
 
-router.use('/white', mintRouter)
+router.use('/white', whiteRouter)
 
 router.use('/image', imageRouter)
 

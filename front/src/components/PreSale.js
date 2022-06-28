@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import {nftInstance} from "configs";
-import { batchMint, whitelistMint } from 'api';
+import { batchMint, checkWhite, nftNum, whitelistMint } from 'api';
 
 
 // 리팩터링 - 코드를 단순화하는 작업 불필요한 중복요소들을 제거
@@ -51,12 +51,11 @@ const StyledButton = styled.button`
 
 const PreSale = ({ data }) => {
     const dispatch = useDispatch();
-    const { myAddress } = useSelector(state => state.nft);
+    const { myAddress, isWhite } = useSelector(state => state.nft);
     const { amount, img, price, title } = data;
 
-    const [count, setCount] = useState(1)    
+    const [count, setCount] = useState(1)
     const [totalCnt, setTotalCnt] = useState(0);
-    const [isWhite, setIsWhite] = useState(false)
 
     const countAdd = () => {
         if (count < 5) setCount(count + 1);
@@ -91,38 +90,22 @@ const PreSale = ({ data }) => {
 
     // 전체 민팅 갯수
     const getMintCnt = async ()=> {
-        const totalCnt = await nftInstance.methods.nftNum().call()
+        const totalCnt = await nftNum()
         setTotalCnt(totalCnt)
-    }
-
-    const checkWhitelist = async () => {
-        if (myAddress) {
-            try {
-                const isWhite = await nftInstance.methods.isWhitelisted(myAddress).call()
-                console.log(isWhite);
-                setIsWhite(isWhite)
-            }
-            catch (e) {
-                throw e
-            }
-        }
     }
 
     useEffect(() => {
         getMintCnt()
     }, [])
 
-    useEffect(() => {
-        checkWhitelist()
-    }, [isWhite, myAddress])
-
+    
     return (
         <div className="freelist">
             <StyledMain >
                 <div className='mint-title-box'>
                     <h2 className="mint-title">{title}</h2>
                 </div>
-                {(price == 2 || isWhite)
+                {(price == 50 || isWhite)
                 ?
                 <>
                 <div className='mint-img-container'>
@@ -153,7 +136,7 @@ const PreSale = ({ data }) => {
                 <Button 
                     className="mint-wal-connect-btn" 
                     variant="success" 
-                    onClick={price==2 ? preMint : whiteMint}>
+                    onClick={price==50 ? preMint : whiteMint}>
                     Mint
                 </Button>
                 </>

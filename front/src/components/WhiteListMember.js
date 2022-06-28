@@ -10,6 +10,7 @@ import axios from 'axios'
 import Form from 'react-bootstrap/Form';
 import { trash } from '../img'
 import { nftInstance } from "configs";
+import { checkWhite, removeWhite, addWhite } from 'api'
 
 
 
@@ -48,10 +49,10 @@ const WhiteList = () => {
     }, [])
 
     const addWhitelist = async () => {
-        if (await nftInstance.methods.isWhitelisted(addInput.current).call() == true) {
+        if (await checkWhite(addInput.current)) {
             return alert('이미 등록됨')
         }
-        const Sucs = await nftInstance.methods.add(addInput.current).send({ from: myAddress, gas: 300000, value: 0 })
+        const Sucs = await addWhite(addInput.current)
         console.log(Sucs)
         if (Sucs.status === true) {
             await axios.post('/white/whitelist',
@@ -70,10 +71,10 @@ const WhiteList = () => {
         }
     }
     const delWhitelist = async () => {
-        if (await nftInstance.methods.isWhitelisted(delInput.current).call() == false) {
+        if (!await checkWhite(delInput.current)) {
             return alert('등록되지 않음')
         }
-        const Del = await nftInstance.methods.remove(delInput.current).send({ from: myAddress, gas: 300000, value: 0 })
+        const Del = await removeWhite(delInput.current)
         if (Del.status === true) {
             await axios.post('/white/deletelist',
                 {
@@ -91,8 +92,8 @@ const WhiteList = () => {
         }
     }
 
-    const checkWhitelist = async () => {
-        console.log(await nftInstance.methods.isWhitelisted(checkInput.current).call())
+    const showWhitelist = async () => {
+        alert(await checkWhite(checkInput.current))
     }
 
     return (
@@ -119,7 +120,7 @@ const WhiteList = () => {
                 <div>
                     <h2>test</h2>
                     <input onChange={(e) => delInput.current = e.target.value}></input><button onClick={delWhitelist}>화리 삭제</button>
-                    <input onChange={(e) => checkInput.current = e.target.value}></input><button onClick={checkWhitelist}>화리 확인</button>
+                    <input onChange={(e) => checkInput.current = e.target.value}></input><button onClick={showWhitelist}>화리 확인</button>
                     <Trash >
                         <img src={trash} onClick={buttonDelete} width="100%" />
                     </Trash>

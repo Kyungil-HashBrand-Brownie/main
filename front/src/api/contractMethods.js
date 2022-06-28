@@ -1,6 +1,7 @@
 import { mintingContract,mintingAddr, nftInstance } from "configs";
-import Caver from "caver-js"
-const caver = new Caver("https://api.baobab.klaytn.net:8651/")
+import { getContractOwner } from "./viewMethods";
+import {caver} from "configs";
+
 
 // value가 들지 않는 method의 경우 amount = 0 이 default라서 안 넣어줘도 됨
 const methodExecution = async (from,encodedAbi,amount=0) =>{
@@ -87,5 +88,25 @@ const whitelistMint = async (myAddress,count)=> {
     }
 }
 
+const addWhite = async (address) => {
+    try{
+        const contractOwner =await getContractOwner()
+        const result = await nftInstance.methods.add(address).send({ from: contractOwner, gas: 300000, value: 0 })
+        return result
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+const removeWhite = async (address) => {
+    try{
+        const contractOwner =await getContractOwner()
+        const result = await nftInstance.methods.remove(address).send({ from: contractOwner, gas: 300000, value: 0 })
+        return result
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
 
-export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, batchMint, whitelistMint, caver};
+export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, batchMint, whitelistMint,addWhite, removeWhite, caver};

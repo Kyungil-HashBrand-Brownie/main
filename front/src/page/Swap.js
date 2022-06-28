@@ -18,12 +18,17 @@ const Swap = () => {
     const amountInput = useRef('');
 
     const swapChange = () => {
+        let changeAmount = exchange;
         setSwap(!swap)
-        amountInput.current.value = ''
+        setExchange(amountInput.current.value);
+        amountInput.current.value = changeAmount;
     }
 
     const checkValidation = () => {
         let value = amountInput.current.value
+        // let wordLen = bool[!swap].length;
+        // value = value.slice(0, -wordLen)
+
         // let testLen = value.length - bool[!swap].length - 1;
         // value = value.slice(0,testLen);
         // console.log(testLen)
@@ -43,8 +48,10 @@ const Swap = () => {
 
         else {
             if (value != '') {
-                if (swap) setExchange(parseFloat(Number(value) * 10).toFixed(2) + ' ' + bool[swap])
-                else setExchange(parseFloat(Number(value) / 10).toFixed(2) + ' ' + bool[swap])
+                // if (swap) setExchange((Number(value) * 7.22).toFixed(2).toString() + ' ' + bool[swap])
+                if (swap) setExchange(parseInt(Number(value) * 7.22))
+                else setExchange(parseInt(Number(value) / 7.22))
+                // else setExchange((Number(value) / 7.22).toFixed(2).toString() + ' ' + bool[swap])
             }
             else setExchange('your exchange')
             // amountInput.current.value = ;
@@ -59,7 +66,7 @@ const Swap = () => {
         let status;
         if(Number(amount)){
             if(swap){
-                const result = await getBtk(myAddress,amount)
+                const result = await getBtk(myAddress, amount)
                 status = result.status
             }
             else{
@@ -74,7 +81,6 @@ const Swap = () => {
         }
         else {
             alert("숫자를 입력해주세요")
-            amountInput.current.value = "";
         }
     }
     return (
@@ -103,8 +109,8 @@ const Swap = () => {
                 </div>
                 <div className='swap-ratio-outer'>
                 <div className='swap-ratio-inner'>
-                    <div className='swap-ratio'>1 KLAY = 10 BTK</div>
-                    <div className='swap-ratio'>1 BTK = 0.1 KLAY</div>
+                    <div className='swap-ratio'>1 KLAY = 7.22 BTK</div>
+                    <div className='swap-ratio'>1 BTK = 0.14 KLAY</div>
                 </div>
                 </div>
                 <div className='swap-amount-input-box'>
@@ -113,7 +119,9 @@ const Swap = () => {
                         className='swap-amount-input'
                         placeholder='input amount'
                         onChange={checkValidation}
-                        ref={amountInput} /> 
+                        // value={bool[!swap]}
+                        ref={amountInput} />
+                        
                         <img className='swap-arrow' src={Arrow} />
                         <input 
                         disabled
