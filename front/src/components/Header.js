@@ -147,6 +147,17 @@ const Header = () => {
         }
     },[])
 
+    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist'];
+    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist'];
+
+    let pages = paths.map((path, index) => {
+        let data = {
+                    path: path, 
+                    text: texts[index],
+                   };
+        return data;
+    })
+
     useEffect(() => {
         checkWhitelist();
     }, [myAddress])
@@ -167,13 +178,15 @@ const Header = () => {
                     style={{ maxHeight: '100px' }}
                     navbarScroll
                 >
-                    <Link onClick={closeModal} className='nav-item' to="/">Home</Link>
-                    <Link onClick={closeModal} className='nav-item' to="/mint">Mint</Link>
-                    {/* <Link className='nav-item' to="/whitelist">Whitelist</Link> */}
-                    <Link onClick={closeModal} className='nav-item' to="/test">testpage</Link>
-                    <Link onClick={closeModal} className='nav-item' to="/swap">swap</Link>
-                    <Link onClick={closeModal} className='nav-item' to="/nftlist">nftlist</Link>
-                    {isDeployer ? <Link onClick={closeModal} className='nav-item' to="/admin">admin</Link> : null}
+                    {pages.map((item, index) => 
+                        <Link key={index}
+                            onClick={closeModal} 
+                            className='nav-item' 
+                            to={item.path}>
+                            {item.text}</Link>
+                    )}
+
+                    {isDeployer ? <Link onClick={closeModal} className='nav-item' to="/admin">Admin</Link> : null}
                 </Nav>
                 {
                 address != null

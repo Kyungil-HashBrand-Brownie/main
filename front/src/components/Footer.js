@@ -156,9 +156,9 @@ const Footer = () => (
                         <div className="img_box">
                             <a href="https://t.me/piratesdao" target="blank"><img alt="tele" className="sns_logo" src={tele}></img></a>
                         </div>
-                        <div className="img_box">
+                        {/* <div className="img_box">
                             <a href="https://open.kakao.com/o/gzAIhHXd" target="blank"><img alt="kakao" className="sns_logo" src={kakao2} ></img></a>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

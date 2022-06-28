@@ -160,10 +160,10 @@ body {
   margin-left: 30px;
 }
 
-.slidediv {
+/* .slidediv {
   opacity: 0;
   transition: 1s all ease;
-}
+} */
 
 
 @media (max-width: 1300px) {
@@ -647,14 +647,14 @@ NftCard
 }
 
 .slidediv {
+  /* background: red; */
   font-size: 7em;
   width: 350px;
-  /* color: white; */
   font-family: sans-serif;
   position: relative;
   top: 100px;
-  left: 100px;
-  animation: slide 2s ease-in-out;
+  /* left: 50px; */
+  animation: slide 2s ease-out;
   letter-spacing: .05em;
   text-shadow: 
     4px 4px 0px #d5d5d5, 
@@ -664,11 +664,11 @@ NftCard
 @keyframes slide {
   from {
     /* 뒤에서 부터 날라온다 */
-    left: -200px;
+    left: -250px;
     opacity: 0;
   }
   to {
-    left: 100px;
+    left: 0px;
     opacity: 1;
   }
 }
@@ -682,10 +682,6 @@ NftCard
     left: -200px;
     opacity: 0;
   }
-}
-
-.slidediv{
-
 }
 
 .bakingImg1 img{
@@ -726,3 +722,11 @@ MintCard
   display: flex;
   text-align: center;
 }
+
+/*
+Collection 
+ */
+
+ .brown {
+  color: rgb(241, 149, 165)
+ }

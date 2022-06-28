@@ -14,6 +14,7 @@ import RightImg from './img/chocolate/choco4.png';
 import Swap from './page/Swap';
 import NftList from './page/NftList';
 import NoPage from 'page/NoPage';
+import Collection from 'page/Collection';
 
 function App() {
   const {isDeployer} = useSelector(state=>state.nft)
@@ -41,6 +42,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/mint" element={<Mint />} />
         <Route path="/test" element={<Testpage />} />
+        <Route path='/collection' element={<Collection />} />
         {
           isBaobab
           ?
