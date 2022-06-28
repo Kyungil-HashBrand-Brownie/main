@@ -62,9 +62,9 @@ contract BrownyNFT is ERC721, Whitelist {
     Counters.Counter private _tokenIdCounter;
     Counters.Counter private _whitelistCounter;
 
-    function safeMint(address to, address from, uint256 tokenId, uint8 status) external {
+    function safeMint(address to, uint256 tokenId, uint8 status) external {
         _safeMint(to, tokenId);
-        ownNFTs[from].push(tokenId);
+        ownNFTs[to].push(tokenId);
         mintedNftList.push(tokenId);
         if(status == 0) {
             _tokenIdCounter.increment();
@@ -101,9 +101,15 @@ contract BrownyNFT is ERC721, Whitelist {
     function approveNFT(address _address, uint _tokenId) external {
         _approve(_address, _tokenId);
     }
-    function approveAllNFT(address _owner, address _operator, bool _approved) external {
-        _setApprovalForAll(_owner, _operator, _approved);
+    function approveAllNFT(address _address, uint[] memory _tokenId) external {
+        require(_tokenId.length <= 5, "Too many loop");
+        for(uint8 i = 0; i < _tokenId.length; i++) {
+            _approve(_address, _tokenId[i]);
+        }
     }
+    // function approveAllNFT(address _owner, address _operator, bool _approved) external {
+    //     _setApprovalForAll(_owner, _operator, _approved);
+    // }
     // stake시 
     function stakedFunc(uint256 _tokenId, address _owner) external {
         if(staked[_tokenId] == false) {

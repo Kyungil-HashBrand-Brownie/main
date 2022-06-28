@@ -71,14 +71,14 @@ contract Minting {
         require(_status == 0 || _status == 1, "Wrong Minting Way");
         _;
     }
-    function safeMint(address to, uint256 cost, uint8 _status) private isStatus(_status){
+    function safeMint(uint256 cost, uint8 _status) private isStatus(_status){
         uint256 randomNum;
         if(_status == 0) {
             randomNum = randNum();
         } else if(_status == 1) {
             randomNum = whiteRandNum();
         }
-        brownyNFT.safeMint(to, msg.sender, randomNum, _status);
+        brownyNFT.safeMint(msg.sender, randomNum, _status);
         brownyToken.tokenTransfer(msg.sender, address(this), cost, 10 ** 18);
     }
 
@@ -86,7 +86,7 @@ contract Minting {
     function batchMint(uint256 amount) public {
         require(brownyToken.balanceOf(msg.sender) >= amount * 50 * 10 ** 18 , "Please check your balance");
         for (uint256 i = 0; i < amount; i++) {
-            safeMint(msg.sender, 50, 0);
+            safeMint(50, 0);
         }
         emit NFTMinting(msg.sender, amount);
     }
@@ -97,7 +97,7 @@ contract Minting {
         require(brownyToken.balanceOf(msg.sender) >= amount * 25 * 10 ** 18 , "Please check your balance");
         require(brownyNFT.whitelistNftNum() + amount <= 30,"Total NFT for whitelist users is only thirty");
         for (uint256 i = 0; i < amount; i++) {
-            safeMint(msg.sender, 25, 1);
+            safeMint(25, 1);
         }
         emit NFTMinting(msg.sender, amount);
     }
@@ -138,11 +138,16 @@ contract Minting {
     // reward claim function
     // 1. timestamp와 현재 시간 확인하여 보상부여
     // 2. 보상부여 tx block의 timestamp로 struct Stake timestamp 최신화?
-    function claimed(uint256 tokenId) public isStaked(tokenId) {
+    function claimed(uint256 tokenId) private isStaked(tokenId) {
         require(brownyNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
         uint256 reward = (block.timestamp - brownyNFT.whenStaked(tokenId));
         brownyToken.tokenTransfer(address(brownyToken), msg.sender, reward, 10 ** 14);
         brownyNFT.changeTime(tokenId, block.timestamp);
+    }
+    function callClaim(uint256[] memory tokenId) public {
+        for(uint8 i = 0; i < tokenId.length; i++) {
+            claimed(tokenId[i]);
+        }
     }
 
     function checkClaimed(uint256 tokenId) public view isStaked(tokenId) returns(uint256) {
