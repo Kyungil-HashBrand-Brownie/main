@@ -18,10 +18,12 @@ const Swap = () => {
     const amountInput = useRef('');
 
     const swapChange = () => {
-        let changeAmount = exchange;
-        setSwap(!swap)
-        setExchange(amountInput.current.value);
-        amountInput.current.value = changeAmount;
+        // let changeAmount = exchange;
+        setSwap(!swap);
+        amountInput.current.value = '';
+        // setSwap(!swap)
+        // setExchange(amountInput.current.value);
+        // amountInput.current.value = changeAmount;
     }
 
     const checkValidation = () => {
