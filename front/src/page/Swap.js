@@ -81,7 +81,6 @@ const Swap = () => {
         }
         else {
             alert("숫자를 입력해주세요")
-            amountInput.current.value = "";
         }
     }
     return (

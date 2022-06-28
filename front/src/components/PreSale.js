@@ -51,12 +51,11 @@ const StyledButton = styled.button`
 
 const PreSale = ({ data }) => {
     const dispatch = useDispatch();
-    const { myAddress } = useSelector(state => state.nft);
+    const { myAddress, isWhite } = useSelector(state => state.nft);
     const { amount, img, price, title } = data;
 
-    const [count, setCount] = useState(1)    
+    const [count, setCount] = useState(1)
     const [totalCnt, setTotalCnt] = useState(0);
-    const [isWhite, setIsWhite] = useState(false)
 
     const countAdd = () => {
         if (count < 5) setCount(count + 1);
@@ -95,26 +94,11 @@ const PreSale = ({ data }) => {
         setTotalCnt(totalCnt)
     }
 
-    const checkWhitelist = async () => {
-        if (myAddress) {
-            try {
-                const isWhite = await checkWhite(myAddress)
-                setIsWhite(isWhite)
-            }
-            catch (e) {
-                throw e
-            }
-        }
-    }
-
     useEffect(() => {
         getMintCnt()
     }, [])
 
-    useEffect(() => {
-        checkWhitelist()
-    }, [isWhite, myAddress])
-
+    
     return (
         <div className="freelist">
             <StyledMain >
@@ -152,7 +136,7 @@ const PreSale = ({ data }) => {
                 <Button 
                     className="mint-wal-connect-btn" 
                     variant="success" 
-                    onClick={price==2 ? preMint : whiteMint}>
+                    onClick={price==50 ? preMint : whiteMint}>
                     Mint
                 </Button>
                 </>

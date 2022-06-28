@@ -110,8 +110,10 @@ const Header = () => {
             window.klaytn.enable()
             dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
         }
-        else alert("카이카스 설치 필요")
-        window.open("https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko")
+        else {
+            alert("카이카스 설치 필요")
+            window.open("https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko")
+        }
     }
 
     const copyAddress = () => {
