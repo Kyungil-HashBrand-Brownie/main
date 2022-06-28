@@ -42,6 +42,14 @@ contract BrownyNFT is ERC721, Whitelist {
         return ownNFTs[msg.sender];
     }
 
+    /** 
+    * _tokenIdCounter - 전체 발행된 nft 수
+    * _whitelistCounter - whitelist가 발행한 nft 수
+    */
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIdCounter;
+    Counters.Counter private _whitelistCounter;
+
     // 현재 발행된 일반 nft 수 확인 
     function nftNum() public view returns(uint256) {
         uint256 tokenNum = _tokenIdCounter.current();
@@ -53,15 +61,7 @@ contract BrownyNFT is ERC721, Whitelist {
         uint256 tokenNum = _whitelistCounter.current();
         return tokenNum;
     }
-
-    /** 
-    * _tokenIdCounter - 전체 발행된 nft 수
-    * _whitelistCounter - whitelist가 발행한 nft 수
-    */
-    using Counters for Counters.Counter;
-    Counters.Counter private _tokenIdCounter;
-    Counters.Counter private _whitelistCounter;
-
+    
     function safeMint(address to, uint256 tokenId, uint8 status) external {
         _safeMint(to, tokenId);
         ownNFTs[to].push(tokenId);
