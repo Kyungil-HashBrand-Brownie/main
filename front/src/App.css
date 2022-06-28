@@ -25,11 +25,11 @@ body {
 
 .wrapper {
   height: auto;
-  min-height: 885px;
+  min-height: 939px;
+  bottom: 0px;
   font-family: "Yfont2";
   font-weight: 500;
   margin: 0 auto;
-
   line-height: 1.6;
   /* padding-top: 80px; */
 }
