@@ -1,16 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/Button'
+import {Table, Button, Form, InputGroup, FormControl} from 'react-bootstrap'
 import { useSelector } from 'react-redux'
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
 import styled from 'styled-components'
-import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
-import Form from 'react-bootstrap/Form';
 import { trash , trash2 } from '../img'
-import { nftInstance } from "configs";
-import { checkWhite, removeWhite, addWhite, removeSelectedWhites } from 'api'
+import { checkWhite, addWhite, removeSelectedWhites } from 'api'
 
 const Trash = styled.div`
     width: 50px;
@@ -80,6 +74,7 @@ const WhiteList = () => {
 
 
     const delWhitelists = async (addressArr) => {
+        if(addressArr.length===0) return false
         const Del = await removeSelectedWhites(addressArr)
         if (Del.status) {
             const {data} = await axios.post('/white/deletelists',
@@ -92,12 +87,6 @@ const WhiteList = () => {
         }
     }
 
-
-    const showWhitelist = async () => {
-        alert(await checkWhite(checkInput.current))
-    }
-
-    const [checkedA, setCheckedA] = useState(false);
 
     const checkData = (publicKey, checked) => {
         if (checked) {
@@ -165,7 +154,6 @@ const WhiteList = () => {
                                             <Form.Check 
                                                 aria-label="option 1"
                                                 className='whitelistCheck'
-                                                // checked={checkedA}
                                                 onChange={(e) => checkData(item.publicKey, e.target.checked)}
                                             />
                                     }
