@@ -16,6 +16,7 @@ import { checkWhite, removeWhite, addWhite } from 'api'
 
 const Trash = styled.div`
     width: 50px;
+    cursor: pointer;
 `
 
 
@@ -141,7 +142,7 @@ const WhiteList = () => {
                                 <td>
                                     {
                                         !checkDelete ?
-                                            <span> *</span>
+                                            <span> {index+1}</span>
                                             : <Form.Check aria-label="option 1" />
 
                                     }
