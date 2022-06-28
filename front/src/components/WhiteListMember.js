@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
 import Form from 'react-bootstrap/Form';
-import { trash } from '../img'
+import { trash , trash2 } from '../img'
 import { nftInstance } from "configs";
 import { checkWhite, removeWhite, addWhite, removeSelectedWhites } from 'api'
 
@@ -54,6 +54,7 @@ const WhiteList = () => {
         getWhiteList()
     }, [])
 
+
     const addWhitelist = async () => {
         if (await checkWhite(addInput.current)) {
             return alert('이미 등록됨')
@@ -76,27 +77,7 @@ const WhiteList = () => {
                 })
         }
     }
-    const delWhitelist = async () => {
-        if (!await checkWhite(delInput.current)) {
-            return alert('등록되지 않음')
-        }
-        const Del = await removeWhite(delInput.current)
-        if (Del.status === true) {
-            await axios.post('/white/deletelist',
-                {
-                    data: { from: delInput.current, status: Del.status },
-                })
-                .then((res) => {
-                    console.log(res);
-                    let result = res.data;
-                    console.log(result)
-                    if (result === "Success!") {
-                        alert("화이트리스트 제거 완료되었습니다!");
-                    }
-                    getWhiteList()
-                })
-        }
-    }
+
 
     const delWhitelists = async (addressArr) => {
         const Del = await removeSelectedWhites(addressArr)
@@ -154,11 +135,13 @@ const WhiteList = () => {
                 </div>
 
                 <div>
-                    <h2>test</h2>
-                    <input onChange={(e) => delInput.current = e.target.value}></input><button onClick={()=>delWhitelists(["0x3c47888b43F48560e52e4860160526eA04668dAC","0xAc45689e82aE9F93ED325b9254fe42BB77bA7849"])}>화리 삭제</button>
-                    <input onChange={(e) => checkInput.current = e.target.value}></input><button onClick={showWhitelist}>화리 확인</button>
                     <Trash >
-                        <img src={trash} onClick={buttonDelete} width="100%" />
+                        {
+                            checkDelete ?
+                            <img src={trash} onClick={buttonDelete} width="100%" />
+                            :<img src={trash2} onClick={buttonDelete} width="100%" />
+
+                        }
                     </Trash>
                 </div>
             </div>
