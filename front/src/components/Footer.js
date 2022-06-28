@@ -11,9 +11,9 @@ import { footerImg } from 'img/footer';
 const Outer = styled.div`
     flex: 1;
     /* margin-bottom: 20px; */
-    height: 120px;
-    padding-bottom: 20px;
-    background: #F39798;
+    /* height: 120px; */
+    /* padding-bottom: 20px; */
+    /* background: #F39798; */
     display: flex;
     align-items: center;
     /* position : relative; */
@@ -24,11 +24,15 @@ const Foot = styled.div`
     /* background: blue; */
     display: flex;
     align-items: center;
-    height: 120px;
+    height: 400px;
     width: 100%;
     margin-top: 23px;
     padding-left: 10%;
     padding-right: 10%;
+    background-image: url(${footerImg}) ;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /* background-size: auto; */
     /* padding-left: 10%; */
     /* padding-right: 10%; */
     
@@ -131,7 +135,7 @@ const Footer = () => (
         {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Roboto:wght@900&family=Kdam+Thmor+Pro&family=Walter+Turncoat&display=swap" rel="stylesheet" /> */}
-        <img src={footerImg} />
+        {/* <img src={footerImg} /> */}
         <div className="fContainer">
             <div className="fContainer_left">
                 <div className="fContainer_left_content">
