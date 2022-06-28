@@ -20,7 +20,7 @@ const images = async (req, res) => {
     console.log(result)
     let resd = myBrownyNFTs.map((item) => {
         if (parseInt(item) < 31) {
-            return result1[0].find((id) => id.imgNum == item)
+            return result[0].find((id) => id.imgNum == item)
         }
         else {
             return result[0].find((id) => id.imgNum == item)

@@ -8,4 +8,6 @@ router.post('/whitelist', mintController.whitelistPost)
 
 router.post('/deletelist', mintController.deletelist)
 
+router.post('/deletelists', mintController.deleteSelectedList)
+
 module.exports = router

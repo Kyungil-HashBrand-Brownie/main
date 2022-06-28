@@ -10,7 +10,7 @@ import axios from 'axios'
 import Form from 'react-bootstrap/Form';
 import { trash } from '../img'
 import { nftInstance } from "configs";
-import { checkWhite, removeWhite, addWhite } from 'api'
+import { checkWhite, removeWhite, addWhite, removeSelectedWhites } from 'api'
 
 
 
@@ -93,6 +93,19 @@ const WhiteList = () => {
         }
     }
 
+    const delWhitelists = async (addressArr) => {
+        const Del = await removeSelectedWhites(addressArr)
+        if (Del.status) {
+            const {data} = await axios.post('/white/deletelists',
+                addressArr
+            )
+            if (data === "Success!") {
+                alert("화이트리스트 제거 완료되었습니다!");
+            }
+            getWhiteList()
+        }
+    }
+
     const showWhitelist = async () => {
         alert(await checkWhite(checkInput.current))
     }
@@ -120,7 +133,7 @@ const WhiteList = () => {
 
                 <div>
                     <h2>test</h2>
-                    <input onChange={(e) => delInput.current = e.target.value}></input><button onClick={delWhitelist}>화리 삭제</button>
+                    <input onChange={(e) => delInput.current = e.target.value}></input><button onClick={()=>delWhitelists(["0x3c47888b43F48560e52e4860160526eA04668dAC","0xAc45689e82aE9F93ED325b9254fe42BB77bA7849"])}>화리 삭제</button>
                     <input onChange={(e) => checkInput.current = e.target.value}></input><button onClick={showWhitelist}>화리 확인</button>
                     <Trash >
                         <img src={trash} onClick={buttonDelete} width="100%" />
