@@ -42,8 +42,18 @@ const deletelist = async (req, res) => {
     }
 }
 
+const deleteSelectedList = async (req, res) => {
+    //화이트리스트 db에서 여러개 삭제
+    const publicKeys = req.body
+    publicKeys.forEach(async (publicKey)=> {
+        await pool.query(`DELETE FROM users where publicKey = '${publicKey}'`)
+    })
+    res.send('Success!')
+}
+
 module.exports = {
     whitelist,
     whitelistPost,
-    deletelist
+    deletelist,
+    deleteSelectedList
 }

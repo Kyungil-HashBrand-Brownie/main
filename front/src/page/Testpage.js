@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import Viliage from 'components/Viliage'
 import Team from 'components/Team'
 import { viliage2 } from '../img'
+import WhiteListMember from 'components/WhiteListMember'
 
 
 
@@ -42,7 +43,8 @@ const Testpage = () => {
         {/* <QuitVote /> */}
         {/* <SlideShow /> */}
         {/* <Viliage /> */}
-        <Team />
+        {/* <Team /> */}
+        <WhiteListMember />
     </div>
   )
 }

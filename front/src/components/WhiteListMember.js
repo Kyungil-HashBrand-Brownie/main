@@ -1,33 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/Button'
+import {Table, Button, Form, InputGroup, FormControl} from 'react-bootstrap'
 import { useSelector } from 'react-redux'
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
 import styled from 'styled-components'
-import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
-import Form from 'react-bootstrap/Form';
-import { trash } from '../img'
-import { nftInstance } from "configs";
-import { checkWhite, removeWhite, addWhite } from 'api'
-
-
+import { trash , trash2 } from '../img'
+import { checkWhite, addWhite, removeSelectedWhites } from 'api'
 
 const Trash = styled.div`
     width: 50px;
+    cursor: pointer;
 `
 
-
-
 const WhiteList = () => {
+
     const { myAddress } = useSelector(state => state.nft);
     const [list, setList] = useState([]);
     const [checkDelete, setCheckDelete] = useState(false);
+    const [deleteList, setDeleteList] = useState([]);
 
     const addInput = useRef("")
     const delInput = useRef("")
     const checkInput = useRef("")
+
+    // console.log(list);
 
     const getWhiteList = async () => {
         try {
@@ -37,16 +32,22 @@ const WhiteList = () => {
         catch (e) {
             console.log(e)
         }
-
     }
 
     const buttonDelete = () => {
-        setCheckDelete(!checkDelete)
+        console.log(deleteList)
+
+        console.log(checkDelete) // false
+        // let data = document.query
+        if (!checkDelete) setDeleteList([])
+        else delWhitelists(deleteList)
+        setCheckDelete(!checkDelete)      // console.log(data)
     }
 
     useEffect(() => {
         getWhiteList()
     }, [])
+
 
     const addWhitelist = async () => {
         if (await checkWhite(addInput.current)) {
@@ -70,30 +71,35 @@ const WhiteList = () => {
                 })
         }
     }
-    const delWhitelist = async () => {
-        if (!await checkWhite(delInput.current)) {
-            return alert('등록되지 않음')
-        }
-        const Del = await removeWhite(delInput.current)
-        if (Del.status === true) {
-            await axios.post('/white/deletelist',
-                {
-                    data: { from: delInput.current, status: Del.status },
-                })
-                .then((res) => {
-                    console.log(res);
-                    let result = res.data;
-                    console.log(result)
-                    if (result === "Success!") {
-                        alert("화이트리스트 제거 완료되었습니다!");
-                    }
-                    getWhiteList()
-                })
+
+
+    const delWhitelists = async (addressArr) => {
+        if(addressArr.length===0) return false
+        const Del = await removeSelectedWhites(addressArr)
+        if (Del.status) {
+            const {data} = await axios.post('/white/deletelists',
+                addressArr
+            )
+            if (data === "Success!") {
+                alert("화이트리스트 제거 완료되었습니다!");
+            }
+            getWhiteList()
         }
     }
 
-    const showWhitelist = async () => {
-        alert(await checkWhite(checkInput.current))
+
+    const checkData = (publicKey, checked) => {
+        if (checked) {
+            console.log(publicKey);
+            setDeleteList([...deleteList, publicKey])
+        }
+        else {
+            // deleteList = [0xAc456, ]
+            let copy = deleteList.filter((item) => item !== publicKey);
+            setDeleteList(copy)
+        }
+
+
     }
 
     return (
@@ -118,11 +124,12 @@ const WhiteList = () => {
                 </div>
 
                 <div>
-                    <h2>test</h2>
-                    <input onChange={(e) => delInput.current = e.target.value}></input><button onClick={delWhitelist}>화리 삭제</button>
-                    <input onChange={(e) => checkInput.current = e.target.value}></input><button onClick={showWhitelist}>화리 확인</button>
                     <Trash >
-                        <img src={trash} onClick={buttonDelete} width="100%" />
+                        {
+                            checkDelete ?
+                            <img src={trash} onClick={buttonDelete} width="100%" />
+                            :<img src={trash2} onClick={buttonDelete} width="100%" />
+                        }
                     </Trash>
                 </div>
             </div>
@@ -141,9 +148,13 @@ const WhiteList = () => {
                                 <td>
                                     {
                                         !checkDelete ?
-                                            <span> *</span>
-                                            : <Form.Check aria-label="option 1" />
-
+                                            <span> {index+1}</span>
+                                            : 
+                                            <Form.Check 
+                                                aria-label="option 1"
+                                                className='whitelistCheck'
+                                                onChange={(e) => checkData(item.publicKey, e.target.checked)}
+                                            />
                                     }
                                 </td>
                                 <td>{item.publicKey}</td>

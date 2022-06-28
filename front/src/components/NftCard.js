@@ -369,7 +369,6 @@ function NftCard() {
             try {
                 const result = await stakeNFTs(myAddress, stakeIdArr)
                 if (result.status) {
-                    // dispatch({type: "WALLET_REFRESH"})
                     let stakedNFTs = myNFTs.filter((item) => item.checked).map((item) => {
                         item.checked = false;
                         return item;

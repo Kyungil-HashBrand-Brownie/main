@@ -1,6 +1,5 @@
-import { mintingContract,mintingAddr, nftInstance } from "configs";
+import { mintingContract, mintingAddr, nftInstance, caver } from "configs";
 import { getContractOwner } from "./viewMethods";
-import {caver} from "configs";
 
 
 // value가 들지 않는 method의 경우 amount = 0 이 default라서 안 넣어줘도 됨
@@ -42,10 +41,11 @@ const sellBtk = async (myAddress,amount)=> {
     }
 }
 
-// from 주소와 언스테이킹 상태의 nft tokenId를 인자로 필요로한다
+
 const stakeNFTs = async (myAddress,stakeIdArr)=> {
     try {
-        
+        // const approval = await nftInstance.methods.approveAllNFT(myAddress, mintingAddr, true).send({ from: myAddress, gas: 300000, value: 0 })
+        // console.log(approval)
         const encodedAbi = await mintingContract.methods.stakeNFTs(stakeIdArr).encodeABI()
         const result = await methodExecution(myAddress,encodedAbi)
         return result
@@ -109,4 +109,15 @@ const removeWhite = async (address) => {
     }
 }
 
-export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, batchMint, whitelistMint,addWhite, removeWhite, caver};
+const removeSelectedWhites = async (addressArr) => {
+    try{
+        const contractOwner =await getContractOwner()
+        const result = await nftInstance.methods.removeMany(addressArr).send({ from: contractOwner, gas: 300000, value: 0 })
+        return result
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, batchMint, whitelistMint,addWhite, removeWhite, removeSelectedWhites};
