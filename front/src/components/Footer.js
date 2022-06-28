@@ -10,19 +10,29 @@ import { footerImg } from 'img/footer';
 
 const Outer = styled.div`
     flex: 1;
+    height: 320px;
     /* margin-bottom: 20px; */
     height: 120px;
     /* padding-bottom: 20px; */
     /* background: #F39798; */
+
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    background: grey;
+    background-image: url(${footerImg});
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     /* position : relative; */
     /* transform : translateY(-100%); */
+
 `
 
 const Foot = styled.div`
     /* background: blue; */
+    /* background: red; */
     display: flex;
+    /* bottom: 0px; */
+    /* top: 100px ; */
     align-items: center;
     height: 120px;
     width: 100%;
