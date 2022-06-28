@@ -8,4 +8,6 @@ router.post('/whitelist', whiteController.whitelistPost)
 
 router.post('/deletelist', whiteController.deletelist)
 
+router.post('/deletelists', whiteController.deleteSelectedList)
+
 module.exports = router

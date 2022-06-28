@@ -109,4 +109,15 @@ const removeWhite = async (address) => {
     }
 }
 
-export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, batchMint, whitelistMint,addWhite, removeWhite, caver};
+const removeSelectedWhites = async (addressArr) => {
+    try{
+        const contractOwner =await getContractOwner()
+        const result = await nftInstance.methods.removeMany(addressArr).send({ from: contractOwner, gas: 300000, value: 0 })
+        return result
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, batchMint, whitelistMint,addWhite, removeWhite, removeSelectedWhites};
