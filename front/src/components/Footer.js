@@ -11,7 +11,7 @@ import { footerImg } from 'img/footer';
 const Outer = styled.div`
     flex: 1;
     /* margin-bottom: 20px; */
-    /* height: 120px; */
+    height: 120px;
     /* padding-bottom: 20px; */
     /* background: #F39798; */
     display: flex;
@@ -24,14 +24,17 @@ const Foot = styled.div`
     /* background: blue; */
     display: flex;
     align-items: center;
-    height: 400px;
+    height: 120px;
     width: 100%;
-    margin-top: 23px;
+    /* margin-top: 23px; */
     padding-left: 10%;
     padding-right: 10%;
-    background-image: url(${footerImg}) ;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background: #F39798;
+
+    /* background: gray; */
+    /* background-image: url(${footerImg}) ; */
+    /* background-repeat: no-repeat; */
+    /* background-size: 100% 100%; */
     /* background-size: auto; */
     /* padding-left: 10%; */
     /* padding-right: 10%; */
@@ -130,7 +133,7 @@ const Foot = styled.div`
 `
 
 const Footer = () => (
-    <Outer>
+    // <Outer>
     <Foot>
         {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -168,6 +171,6 @@ const Footer = () => (
             </div>
         </div>
     </Foot>
-    </Outer>
+    // </Outer>
 )
 export default Footer;

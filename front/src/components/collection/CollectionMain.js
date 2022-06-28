@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { nft1, nft2, nft3, nft4, nft5 } from '../../img/nft';
 
 const CollectionMainOuter = styled.div`
     margin-left: 100px;
@@ -30,31 +31,78 @@ const CollectionBody = styled.div`
 const CollectionRow = styled.div`
     display: flex;
     flex-direction: row;
-    width: 94%;
+    width: 96%;
     margin-top: 20px;
     /* padding: 20px 0; */
     background: lightgray;
     height: 300px;
+    border-radius: 5px;
+`
+const CollectionCardOuter = styled.div`
+    width: 220px;
+    height: 270px;
+    background: lightgray;
+    margin: auto;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: brown 6px 5px;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    ::before {
+        content: '';
+        /* position: absolute; */
+        background: red;
+        opacity: 0.9;
+    }
 `
 
 const CollectionCard = styled.div`
-    background: red;
+    /* background: red; */
     width: 200px;
-    height: 200px;
+    height: 250px;
     margin: auto;
+    margin-top: 10px;
 `
+const CollectionCardImg = styled.div`
+    width: 100%;
+    height: 200px;
+    background-image: url(
+        ${(props) => props.image && props.image});
+    background-size: cover;
+`
+const CollectionCardDetail = styled.div`
+    width: 100%;
+    height: 40px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* color: pink; */
+    /* background: green; */
+`
+
+const images = [nft1, nft2, nft3, nft4, nft5];
 
 const CollectionMain = () => {
     return (
         <CollectionMainOuter>
-            <CollectionHeader>Collection Items</CollectionHeader>
+            <CollectionHeader>Collections</CollectionHeader>
             <CollectionBody>
                 <CollectionRow>
-                    <CollectionCard/>
-                    <CollectionCard/>
-                    <CollectionCard/>
-                    <CollectionCard/>
-                    <CollectionCard/>
+                    {images.map((image, index )=>
+                        <CollectionCardOuter key={index}>
+                            <CollectionCard>
+                                <CollectionCardImg image={image} />
+                                <CollectionCardDetail>
+                                    Browny#{index + 1}
+                                </CollectionCardDetail>
+                            </CollectionCard>
+                        </CollectionCardOuter>
+                    )}
                 </CollectionRow>
             </CollectionBody>
         </CollectionMainOuter>
