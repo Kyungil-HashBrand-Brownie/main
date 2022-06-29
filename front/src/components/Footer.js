@@ -37,7 +37,7 @@ const Foot = styled.div`
     /* margin-top: 23px; */
     padding-left: 10%;
     padding-right: 10%;
-    background: #F39798;
+    /* background: #F39798; */
     background-image: url(${footerImg});
     background-repeat: no-repeat;
     background-size: 100% 100%;
