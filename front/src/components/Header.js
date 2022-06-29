@@ -147,8 +147,8 @@ const Header = () => {
         }
     },[])
 
-    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist'];
-    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist'];
+    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/voting'];
+    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Voting'];
 
     let pages = paths.map((path, index) => {
         let data = {
