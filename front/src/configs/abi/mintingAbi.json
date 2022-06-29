@@ -90,13 +90,7 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256[]",
-						"name": "tokenId",
-						"type": "uint256[]"
-					}
-				],
+				"inputs": [],
 				"name": "callClaim",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -354,11 +348,11 @@
 			]
 		},
 		"minting/Minting.sol": {
-			"keccak256": "0xe44cd559f0277cc0ecbd8bb168a7096b2f5d4f6f1735ef4ae5c26c90bcd0caab",
+			"keccak256": "0xc041e7181c941693afd335a76e9f86da978ac814b8cc83850b30e0ac44aec11e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a42321fef83c2c5692f37ef45583bde71112468d672a459172c560f3f01139e9",
-				"dweb:/ipfs/QmPp3cEaRxQrV5k2K5Ti7pPhZ9FRTELrMy1CWnkZjxv7fT"
+				"bzz-raw://0fd0b243b632c9a2c44628d8d67f704bb4db32a444ac3807482c7fc11377dcb0",
+				"dweb:/ipfs/QmSQ7EPDcg563mGkq4GEn4FjtQNisHiYAf1yTUxoPdNZ86"
 			]
 		},
 		"minting/NFT.sol": {
