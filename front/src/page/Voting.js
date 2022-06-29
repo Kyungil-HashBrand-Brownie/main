@@ -1,15 +1,21 @@
-import { Form } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Form } from 'react-bootstrap';
 import Proposal from 'components/Proposal';
 import axios from "axios"
 
 
 function Voting() {
+  const {myAddress, userRank} = useSelector(state=>state.nft)
 
   const [vote, setVote] = useState(0)
   
     const callApi = async () => {
       // db안건 데이터 불러오기
+      // 랭크 불러오기
+      if(myAddress) {
+        console.log(userRank)
+      }
     }
 
     useEffect(()=>{
