@@ -9,61 +9,18 @@ let preSaleProps = {
   title: 'Pre-Sale',
   img: PreBrowny,
   price: 50,
-  amount: '/150',
+  amount: '/120',
 }
 
 let whiteSaleProps = {
   title: 'White-Sale',
   img: WhiteBrowny,
   price: 25,
-  amount: 'limited',
+  amount: '/30',
 }
 
 
 const MintCard = () => {
-  // const [totalCnt, setTotalCnt] = useState(0);
-  // const [isWhite, setIsWhite] = useState(false)
-
-  // const preMint = async () => {
-  //   if(!myAddress){
-  //       return alert("지갑을 먼저 연결해주세요")
-  //   }
-  //   const result = await batchMint(myAddress,count)
-  //   console.log(result)
-  //   if(result.status){
-  //       dispatch({type: "WALLET_REFRESH"})
-  //       alert("해당 지갑 주소로 민팅되었습니다!");
-  //   }
-  //   else alert("transaction fail")
-  // }
-  
-  // const whiteMint = async () => {
-  //   const result = await whitelistMint(myAddress,count)
-  //   if (result.status) {
-  //       dispatch({ type: "WALLET_REFRESH" })
-  //       alert("해당 지갑 주소로 민팅되었습니다!");
-  //   }
-  //   else alert("transaction fail")
-  // }
-
-  // // 전체 민팅 갯수
-  // const getMintCnt = async ()=> {
-  //   const totalCnt = await brownyContract.methods.nftNum().call()
-  //   setTotalCnt(totalCnt)
-  // }
-
-  // const checkWhitelist = async () => {
-  //   if (myAddress) {
-  //       try {
-  //           const isWhite = await brownyContract.methods.isWhitelisted(myAddress).call()
-  //           console.log(isWhite);
-  //           setIsWhite(isWhite)
-  //       }
-  //       catch (e) {
-  //           throw e
-  //       }
-  //   }
-  // }
 
   return (
     <>

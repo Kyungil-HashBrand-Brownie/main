@@ -642,7 +642,7 @@ NftCard
 }
 
 .reward-button {
-  margin-left: 1%;
+  margin-left: 2%;
   font-size: 18px;
 }
 
@@ -659,6 +659,13 @@ NftCard
   text-shadow: 
     4px 4px 0px #d5d5d5, 
     7px 7px 0px rgba(0, 0, 0, 0.2);
+}
+
+.refresh-reward-icon {
+  cursor: pointer;
+  margin: 0px 20px;
+  width: 20px;
+  height: 20px;
 }
 
 @keyframes slide {
@@ -721,6 +728,10 @@ MintCard
 .brownyLogo{
   display: flex;
   text-align: center;
+}
+
+.nftlist-reward {
+  white-space: nowrap;
 }
 
 /*

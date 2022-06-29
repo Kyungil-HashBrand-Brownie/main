@@ -247,6 +247,8 @@ const StakingList = () => {
                     return item;
                 });
                 dispatch({type: 'NFTCARD_UNSTAKE', payload: {myNFTs: unstakedNFTs, myStakedNFTs: stakedNFTs}})
+                dispatch({type: "WALLET_REFRESH"})
+
                 alert("선택한 NFT가 정상적으로 unstaking 되었습니다.");
                 // navigate('/');
             }

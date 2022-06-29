@@ -165,18 +165,13 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_owner",
+						"name": "_address",
 						"type": "address"
 					},
 					{
-						"internalType": "address",
-						"name": "_operator",
-						"type": "address"
-					},
-					{
-						"internalType": "bool",
-						"name": "_approved",
-						"type": "bool"
+						"internalType": "uint256[]",
+						"name": "_tokenId",
+						"type": "uint256[]"
 					}
 				],
 				"name": "approveAllNFT",
@@ -392,6 +387,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "mintedNFT",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -581,11 +589,6 @@
 					{
 						"internalType": "address",
 						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "from",
 						"type": "address"
 					},
 					{
@@ -1087,11 +1090,11 @@
 			]
 		},
 		"minting/NFT.sol": {
-			"keccak256": "0xce91b05e5e6ecd2bfb2205012627910cb8a011972ea97feb75ce6a93a49973da",
+			"keccak256": "0xdf0f8cfd6b3835cc30b9d7977e017b952e83221a16292b502a48f1226e703652",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f1b80a247996f56b71c75d8f08c241ba786a4f26dbe6353002993c5ab7263f32",
-				"dweb:/ipfs/QmasP2B5ry7vs31vFSrzaFX8xaJ8BfhvBNLcDnjgffxnFo"
+				"bzz-raw://d14e328f0e310f07df62c9c7a57cf7b8025330d8e4f511f2daea284f734845e5",
+				"dweb:/ipfs/QmYeWKoRCk6y7yuzx8Hw3Aoddk2VgMJx1ZzUZcri5hS1Qb"
 			]
 		},
 		"minting/Whitelist.sol": {
