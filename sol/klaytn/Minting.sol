@@ -125,7 +125,8 @@ contract Minting {
         brownyToken.tokenTransfer(address(brownyToken), msg.sender, reward, 10 ** 14);
         brownyNFT.changeTime(tokenId, block.timestamp);
     }
-    function callClaim(uint256[] memory tokenId) public {
+    function callClaim() public {
+        uint256[] memory tokenId = brownyNFT.myNFTs();
         for(uint8 i = 0; i < tokenId.length; i++) {
             claimed(tokenId[i]);
         }
