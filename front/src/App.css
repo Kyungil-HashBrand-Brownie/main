@@ -25,11 +25,11 @@ body {
 
 .wrapper {
   height: auto;
-  min-height: 885px;
+  min-height: 939px;
+  bottom: 0px;
   font-family: "Yfont2";
   font-weight: 500;
   margin: 0 auto;
-
   line-height: 1.6;
   /* padding-top: 80px; */
 }
@@ -634,7 +634,7 @@ NftCard
 }
 
 .reward-button {
-  margin-left: 1%;
+  margin-left: 2%;
   font-size: 18px;
 }
 
@@ -650,6 +650,13 @@ NftCard
   text-shadow: 
     4px 4px 0px #d5d5d5, 
     7px 7px 0px rgba(0, 0, 0, 0.2);
+}
+
+.refresh-reward-icon {
+  cursor: pointer;
+  margin: 0px 20px;
+  width: 20px;
+  height: 20px;
 }
 
 @keyframes slide {
@@ -712,6 +719,10 @@ MintCard
 .brownyLogo{
   display: flex;
   text-align: center;
+}
+
+.nftlist-reward {
+  white-space: nowrap;
 }
 
 /*

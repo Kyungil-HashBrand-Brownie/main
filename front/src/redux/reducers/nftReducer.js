@@ -23,6 +23,7 @@ let initialState = {
     }],
     // address, walletRefresh, isDeployer, isWhite update
     myAddress: "",
+    userRank:0,
     walletRefresh: 1,
     isDeployer: false,
     isWhite: false
@@ -162,6 +163,12 @@ function nftReducer(state = initialState, action) {
             return {
                 ...state,
                 isWhite: payload
+            }
+        
+        case "GET_USER_RANK" :
+            return {
+                ...state,
+                userRank : payload
             }
 
         default:

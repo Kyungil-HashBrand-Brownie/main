@@ -11,12 +11,14 @@ import Cancel from '../img/stake/cancel.png';
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
 
 const override = css`
-  display: block;
-  margin: 0 auto;
+//   display: flex;
   border-color: black;
-  margin-right: 4.375rem;
+
+  margin: 0rem 1.25rem 0rem 1.25rem;
 `;
 
 const Cardjustify = styled.div`
@@ -319,6 +321,8 @@ function NftCard() {
                     })
 
                     dispatch({ type: 'NFTCARD_STAKE', payload: { myNFTs: renewMyNFTs, myStakedNFTs: stakedNFTs } })
+                    dispatch({type: "WALLET_REFRESH"})
+
                     alert("스테이킹 성공");
                 }
                 else alert("transaction fail")
@@ -331,6 +335,10 @@ function NftCard() {
         }
     }
 
+    const clickRefresh = () => {
+        dispatch(nftAction.getReward(nftInstance, myStakedNFTs));
+    }
+
     return (
         <div className='nftlist-outer'>
 
@@ -339,15 +347,25 @@ function NftCard() {
             </div>
             <div className='myNFT-info-box'>
                 <div className='reward-box'>
-                    {myNFTs.length > 0 &&
+                    {(myNFTs.length > 0 || myStakedNFTs.length > 0) &&
                         <>
-                            <ClipLoader loading={loading} css={override} size={30} />
-                            {!loading && <div className='nftlist-reward'>total reward : {(reward / 10000).toFixed(2)} BTK</div>}
+                            <div className='nftlist-reward'>
+                            <FontAwesomeIcon 
+                                icon={faRotateRight}
+                                className='refresh-reward-icon'
+                                onClick={clickRefresh}
+                            />
+                                total reward : &nbsp;
+                                <ClipLoader loading={loading} css={override} size={20} />
+                                {!loading &&<>{(reward / 10000).toFixed(4)}</>} BTK
                             <button 
                                 className='reward-button'
+                                // onClick={getReward}
                                 >
-                                보상 받기
+                                claim
                                 </button>
+                            
+                            </div>
                         </>
                     }
                 </div>

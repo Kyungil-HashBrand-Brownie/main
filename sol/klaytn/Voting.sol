@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
+import "./NFT.sol";
+
 /*
 투표 
 nft 보유량에 따른 등급제로 투표가중치
@@ -17,10 +19,14 @@ contract VoteContract {
         nowVote,    // 투표 중
         afterVote   // 투표 끝
     }  
+
     VoteStatus public voteStatus;
-    constructor() {
+    BrownyNFT public brownyNFT;
+
+    constructor(address _brownyNFT) {
         owner = msg.sender;
         voteStatus = VoteStatus.beforeVote;
+        brownyNFT = BrownyNFT(_brownyNFT);
     }
     // owner check
     modifier onlyOwner () { 
@@ -51,8 +57,8 @@ contract VoteContract {
     uint8 forHasVotes = 1; // 중복 방지 검사용 수
 
     // 투표 권한 확인
-    modifier onlyHolder(uint _tier) { 
-        require(_tier > 0, "You are not holder");
+    modifier onlyHolder() { 
+        require(brownyNFT.userRank() > 0, "You are not holder");
         _;
     }
 
@@ -63,8 +69,8 @@ contract VoteContract {
     }
 
     // 발의 권한 확인
-    modifier permissionProposal(uint _tier) { 
-        require(_tier > 2 || msg.sender == owner, "You do not have permission");
+    modifier permissionProposal() { 
+        require(brownyNFT.userRank() > 2 || msg.sender == owner, "You do not have permission");
         _;
     }
 
@@ -85,24 +91,24 @@ contract VoteContract {
     }
 
     // 발의 함수
-    function newProposal(uint256 _tier) public isBeforeVote permissionProposal(_tier) { 
+    function newProposal() public isBeforeVote permissionProposal() { 
         proposals[proposalCounts] = Proposal(proposalCounts + 1, 0);
         proposalCounts++;
     }
 
-    // 발의 끝 함수
+    // 발의 끝 동시에 투표 시작 함수
     function endProposal() public isBeforeVote onlyOwner {
         voteStatus = VoteStatus.nowVote;
     }
 
     // 투표 함수
-    function voting(uint _proposalId, uint256 _votingPower) public alreadyVote isNowVote onlyHolder(_votingPower) {
+    function voting(uint _proposalId) public alreadyVote isNowVote onlyHolder() {
         uint index = _proposalId - 1;
         voters[msg.sender].votedProposalId = _proposalId;
         voters[msg.sender].hasVotes = forHasVotes;
-        voters[msg.sender].votePower = _votingPower; 
-        voteCounts += _votingPower;
-        proposals[index].votedCounts += _votingPower;
+        voters[msg.sender].votePower = brownyNFT.myNFTs().length; 
+        voteCounts += brownyNFT.myNFTs().length;
+        proposals[index].votedCounts += brownyNFT.myNFTs().length;
         voterCounts++;
         emit Voting(msg.sender, _proposalId);
     }
@@ -111,7 +117,7 @@ contract VoteContract {
     function numberOfVotes(uint _index) public view returns(uint256) {
         return proposals[_index].votedCounts;
     }
-    
+
     // 투표 끝 함수 
     function endVote() public onlyOwner isNowVote {
         voteStatus = VoteStatus.afterVote;

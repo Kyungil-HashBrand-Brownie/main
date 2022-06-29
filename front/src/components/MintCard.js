@@ -9,14 +9,14 @@ let preSaleProps = {
   title: 'Pre-Sale',
   img: PreBrowny,
   price: 50,
-  amount: '/150',
+  amount: '/120',
 }
 
 let whiteSaleProps = {
   title: 'White-Sale',
   img: WhiteBrowny,
   price: 25,
-  amount: 'limited',
+  amount: '/30',
 }
 
 

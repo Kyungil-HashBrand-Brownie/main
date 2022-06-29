@@ -42,6 +42,14 @@ contract BrownyNFT is ERC721, Whitelist {
         return ownNFTs[msg.sender];
     }
 
+    /** 
+    * _tokenIdCounter - 전체 발행된 nft 수
+    * _whitelistCounter - whitelist가 발행한 nft 수
+    */
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIdCounter;
+    Counters.Counter private _whitelistCounter;
+
     // 현재 발행된 일반 nft 수 확인 
     function nftNum() public view returns(uint256) {
         uint256 tokenNum = _tokenIdCounter.current();
@@ -53,18 +61,10 @@ contract BrownyNFT is ERC721, Whitelist {
         uint256 tokenNum = _whitelistCounter.current();
         return tokenNum;
     }
-
-    /** 
-    * _tokenIdCounter - 전체 발행된 nft 수
-    * _whitelistCounter - whitelist가 발행한 nft 수
-    */
-    using Counters for Counters.Counter;
-    Counters.Counter private _tokenIdCounter;
-    Counters.Counter private _whitelistCounter;
-
-    function safeMint(address to, address from, uint256 tokenId, uint8 status) external {
+    
+    function safeMint(address to, uint256 tokenId, uint8 status) external {
         _safeMint(to, tokenId);
-        ownNFTs[from].push(tokenId);
+        ownNFTs[to].push(tokenId);
         mintedNftList.push(tokenId);
         if(status == 0) {
             _tokenIdCounter.increment();
@@ -101,10 +101,16 @@ contract BrownyNFT is ERC721, Whitelist {
     function approveNFT(address _address, uint _tokenId) external {
         _approve(_address, _tokenId);
     }
-    // owner는 nft 소유자, operator는 권한 줄 contract address
-    function approveAllNFT(address _owner, address _operator, bool _approved) external {
-        _setApprovalForAll(_owner, _operator, _approved);
+    function approveAllNFT(address _address, uint[] memory _tokenId) external {
+        require(_tokenId.length <= 5, "Too many loop");
+        for(uint8 i = 0; i < _tokenId.length; i++) {
+            _approve(_address, _tokenId[i]);
+        }
     }
+    // owner는 nft 소유자, operator는 권한 줄 contract address
+    // function approveAllNFT(address _owner, address _operator, bool _approved) external {
+    //     _setApprovalForAll(_owner, _operator, _approved);
+    // }
     // stake시 
     function stakedFunc(uint256 _tokenId, address _owner) external {
         if(staked[_tokenId] == false) {
