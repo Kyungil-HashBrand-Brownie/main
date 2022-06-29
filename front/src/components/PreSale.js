@@ -78,6 +78,8 @@ const PreSale = ({ data }) => {
             alert("해당 지갑 주소로 민팅되었습니다!");
         }
         else alert("transaction fail")
+
+        getMintCnt()
     }
 
     const whiteMint = async () => {
@@ -87,6 +89,8 @@ const PreSale = ({ data }) => {
             alert("해당 지갑 주소로 민팅되었습니다!");
         }
         else alert("transaction fail")
+
+        getMintCnt()
     }
 
     // 전체 민팅 갯수

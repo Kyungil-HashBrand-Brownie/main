@@ -36,10 +36,9 @@ function getReward(contract, stake, renewMine, renewStaked) {
         try {
             dispatch({type: 'LOADING_START'})
             for (let i = 0; i < stake.length; i++) {
-                let totalStakedNFTs = await contract.methods.totalStaked().call()
                 let whenStaked = await contract.methods.whenStaked(stake[i].id.slice(1)).call();            
                 let currentTimestamp = parseInt(+ new Date() / 1000);
-                reward += ((currentTimestamp - whenStaked) / totalStakedNFTs) * 10;
+                reward += (currentTimestamp - whenStaked);
                 // console.log('reward: ', reward);
             }
             dispatch({type: 'GET_REWARD_SUCCESS', payload: reward })
