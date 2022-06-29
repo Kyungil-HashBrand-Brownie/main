@@ -11,16 +11,6 @@ let initialState = {
     myStakedNFTs: [],
     reward: 0,
     loading: false,
-    posts: [{
-        id: 1
-        , title: "test1"
-    }, {
-        id: 2
-        , title: "test2"
-    }, {
-        id: 3
-        , title: "test3"
-    }],
     // address, walletRefresh, isDeployer, isWhite update
     myAddress: "",
     userRank:0,
