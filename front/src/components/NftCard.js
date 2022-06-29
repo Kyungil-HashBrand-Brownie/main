@@ -6,7 +6,7 @@ import { nftInstance } from "configs";
 import { Check } from '../img';
 import { nftAction } from 'redux/actions/nftAction';
 import Pagination from './Pagination';
-import { stakeNFTs } from 'api';
+import { claimReward, stakeNFTs } from 'api';
 import Cancel from '../img/stake/cancel.png';
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -339,6 +339,11 @@ function NftCard() {
         dispatch(nftAction.getReward(nftInstance, myStakedNFTs));
     }
 
+    const clickClaim = async () => {
+        await claimReward(myAddress)
+        dispatch({type: "WALLET_REFRESH"})
+    }
+
     return (
         <div className='nftlist-outer'>
 
@@ -360,7 +365,7 @@ function NftCard() {
                                 {!loading &&<>{(reward / 10000).toFixed(4)}</>} BTK
                             <button 
                                 className='reward-button'
-                                // onClick={getReward}
+                                onClick={clickClaim}
                                 >
                                 claim
                                 </button>

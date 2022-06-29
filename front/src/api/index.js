@@ -1,2 +1,2 @@
-export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, batchMint, whitelistMint,addWhite, removeWhite, removeSelectedWhites} from "./contractMethods"
+export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, claimReward, batchMint, whitelistMint,addWhite, removeWhite, removeSelectedWhites} from "./contractMethods"
 export {getContractOwner, nftNum, checkWhite, whitelistNftNum ,getUserRank } from "./viewMethods"

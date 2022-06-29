@@ -67,6 +67,17 @@ const unstakeNFTs = async (myAddress,unstakeIdArr)=> {
     }
 }
 
+const claimReward = async (myAddress) => {
+    try {
+        const encodedAbi = await mintingContract.methods.callClaim().encodeABI()
+        const result = await methodExecution(myAddress,encodedAbi)
+        return result
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
 const batchMint = async (myAddress,count)=> {
     try {
         const encodedAbi = await mintingContract.methods.batchMint(count).encodeABI()
@@ -121,4 +132,4 @@ const removeSelectedWhites = async (addressArr) => {
     }
 }
 
-export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, batchMint, whitelistMint,addWhite, removeWhite, removeSelectedWhites};
+export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, claimReward, batchMint, whitelistMint,addWhite, removeWhite, removeSelectedWhites};
