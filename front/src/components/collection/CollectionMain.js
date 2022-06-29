@@ -10,6 +10,7 @@ const CollectionMainOuter = styled.div`
     /* opacity: 0.9; */
     border: 3px solid white;
     border-radius: 20px;
+    margin-bottom: 20px;
 `
 const CollectionHeader = styled.div`
     /* background: blue; */
@@ -27,6 +28,7 @@ const CollectionBody = styled.div`
     min-height: 650px;
     margin-top: 30px;
     border-radius: 15px;
+    flex-wrap: wrap;
 `
 const CollectionRow = styled.div`
     display: flex;
@@ -47,6 +49,7 @@ const CollectionCardOuter = styled.div`
     border: 1px solid black;
     border-radius: 10px;
     box-shadow: brown 6px 5px;
+    margin-bottom: 20px;
 
     &:hover {
         transform: scale(1.05);
@@ -87,23 +90,26 @@ const CollectionCardDetail = styled.div`
 
 const images = [nft1, nft2, nft3, nft4, nft5];
 
-const CollectionMain = () => {
+const CollectionMain = ({ data }) => {
     return (
         <CollectionMainOuter>
             <CollectionHeader>Collections</CollectionHeader>
             <CollectionBody>
-                <CollectionRow>
-                    {images.map((image, index )=>
+                {/* <CollectionRow> */}
+                    {/* {images.map((image, index) => */}
+                    { data !== null &&  
+                    data.map((item, index) => 
                         <CollectionCardOuter key={index}>
                             <CollectionCard>
-                                <CollectionCardImg image={image} />
+                                <CollectionCardImg image={`/image/images/${item.images}`}>
+                                </CollectionCardImg>
                                 <CollectionCardDetail>
-                                    Browny#{index + 1}
+                                    Browny#{item.idx}
                                 </CollectionCardDetail>
                             </CollectionCard>
                         </CollectionCardOuter>
                     )}
-                </CollectionRow>
+                {/* </CollectionRow> */}
             </CollectionBody>
         </CollectionMainOuter>
     )

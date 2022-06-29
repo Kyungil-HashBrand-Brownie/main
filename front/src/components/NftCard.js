@@ -105,7 +105,6 @@ const Cardjustify = styled.div`
     .rel{
         background-color: red;
         position: absolute;
-        /* top : 1.5625rem; */
         transform: translate(150%, 150%);
     }
 
@@ -115,8 +114,6 @@ const Cardjustify = styled.div`
         margin: .625rem 0rem;
         padding-bottom: .625rem;
         border-bottom: .0625rem solid black;
-        /* background: red; */
-        /* border: .1875rem solid black; */
     }
 
     .nftlist {
@@ -127,28 +124,17 @@ const Cardjustify = styled.div`
         width: 80%;
         padding: .3125rem;
         background: lightgray;
-        /* width: 100%; */
-        /* text-align: center; */
-        /* border: .3125rem solid black; */
-        /* border-radius: .1875rem; */
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        /* margin: 1.25rem; */
-        /* padding: .3125rem; */
-        /* background: lightgray; */
     }
 
     .nftlist-id-box {
         width: 5rem;
         margin: .1875rem .25rem;
         background: white;
-        /* background: rgb(47, 47, 238); */
-        /* border: .0625rem solid black; */
-        /* color: white; */
         border-radius: 1.875rem;
         font-size: .9375rem;
-        /* padding-left: .9375rem; */
         text-align: center;
         font-weight: bold;
         cursor: pointer;
@@ -173,10 +159,6 @@ const Cardjustify = styled.div`
 
     .nftlist-box {
         margin: 0rem 1.875rem;
-        /* background:red; */
-        /* display: flex; */
-        /* flex-direction: column; */
-        /* justify-content: center; */
     }
 
     .nftlist-justify {
@@ -191,7 +173,6 @@ const Cardjustify = styled.div`
     }
 
     .overlay {
-        /* display: none, */
         position: absolute;
         opacity: 0;
         display: flex;
@@ -201,12 +182,8 @@ const Cardjustify = styled.div`
     }
 
     .nftlist-id-box:hover .overlay{
-        /* transform: translate(-0.9375rem, 0); */
         position: absolute;
         opacity: 1;
-        /* background: rgba(43, 41, 41, 0.9); */
-        /* width: 100%; */
-        /* height: 100%; */
     }
 
     .nftlist-select-all {
@@ -214,7 +191,6 @@ const Cardjustify = styled.div`
         justify-content: flex-end;
         margin-bottom: .3125rem;
         margin-right: 3.125rem;
-        /* background: red; */
         align-items: center;
     }
     
@@ -226,7 +202,6 @@ const Cardjustify = styled.div`
     .nftlist-select-all-text {
         margin-top: .625rem;
         background: blue;
-        /* padding-top: .3125rem; */
     }
 
     .nftlist-select-all-checkbox {
@@ -238,11 +213,9 @@ const Cardjustify = styled.div`
     }
 
     .no-display {
-        /* background: red; */
         position: absolute;
         transform: translate(3.4375rem, 24.0625rem);
     }
-
 `
 
 
@@ -256,7 +229,6 @@ function NftCard() {
     let list = myNFTs.filter((item) => item.checked);
     const getCurrentReward = async () => {
         dispatch(nftAction.getReward(nftInstance, myStakedNFTs));
-        // dispatch({type: 'GET_REWARD', payload: reward});
     }
 
     const checkNfts = async () => {
@@ -267,48 +239,28 @@ function NftCard() {
         let stakedNFTs = await nftInstance.methods.checkStakedNFTs().call(
             { from: myAddress })
 
-        console.log(myBrownyNFTs);
         myBrownyNFTs = myBrownyNFTs.filter((item) => !stakedNFTs.includes(item));
-        // [1, 3, 16, 119]
-        console.log(myBrownyNFTs)
 
         let dict;
         let dict1;
-        // const imageData = async () => {
         const result = await axios.post('/image/images', { myBrownyNFTs, stakedNFTs })
-        // console.log(result.data);
         dict = result.data.data;
         dict1 = result.data.data1;
-        // console.log(result)
-        // return result.data;
-        // }
-        // dict = imageData();
-        // {
-        //     1: 'asdasdad',
-        //     3: 'asdasaddd',
-        // }
-        // dict = imageData();
 
         let binaryArr = [];
-        // console.log(dict)
         for (let i = 0; i != myBrownyNFTs.length; i++) {
             let metajson = {
                 id: `#${myBrownyNFTs[i]}`,
                 image: `/image/images/${dict[myBrownyNFTs[i]]}`,
-                // image: `/images/lfx35Bfx0XQ9iHwAAAAASUVORK5CYII`,
-                // image: `https://gateway.pinata.cloud/ipfs/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${myBrownyNFTs[i]}.png`,
                 checked: false,
             }
             binaryArr.push(metajson)
         }
-        // console.log(binaryArr)
-        // img src='images/asidfasdifasdfiasdfasdfjaskj'
 
         let processedStakedNFTs = stakedNFTs.map((NFT) => {
             let data = {
                 id: `#${NFT}`,
                 image: `/image/images/${dict1[NFT]}`,
-                // image: `https://insta-amazing-app-stagraaa.s3.ap-northeast-2.amazonaws.com/QmVYG6jQYNdEyPYd6FMZY5gacumeEKg8TCNWCwQ6Psvgxi/${NFT}.png`,
                 checked: false,
             }
             return data;
@@ -316,7 +268,6 @@ function NftCard() {
         myBrownyNFTs = binaryArr.filter((item) => {
             if (stakedNFTs.indexOf(item.id.slice(1)) < 0) return item
         })
-        // console.log(myBrownyNFTs);
 
         dispatch({ type: "NFTCARD_MYNFTS", payload: { myNFTs: myBrownyNFTs, myStakedNFTs: processedStakedNFTs } })
     }
@@ -326,24 +277,18 @@ function NftCard() {
         // console.log(checked)
         //checked = true / false
         let newArr = myNFTs.sort((a, b) => a.id.slice(1) - b.id.slice(1))
-        //                 // .slice((page - 1) * 4, (page - 1) * 4 + 4)
         console.log('page: ', page);
         newArr = newArr.map((item, index) => {
             if (index >= (page - 1) * 4 && index < (page - 1) * 4 + 4) {
                 item.checked = checked;
-                // console.log(index)
             }
             return item;
         })
-        console.log(myNFTs)
         setInputCheck(!inputCheck);
         dispatch({ type: 'NFTCARD_CHANGE_ALL', payload: { myNFTs: newArr } })
     }
 
     const changeClickState = (id) => {
-        // let input = document.getElementsByClassName('nftlist-select-all-checkbox')[0];
-        // console.log(input)
-        // console.log(input.checked);
         setInputCheck(false);
 
         let newArr = myNFTs.map((li) => {
@@ -365,7 +310,6 @@ function NftCard() {
         let stakeIdArr = myNFTs.filter((item) => item.checked).map((item) => item.id.slice(1));
 
         if (stakeIdArr.length > 0) {
-            // let stakeInstanceId = stakeIdArr[0].id.slice(1) //#62
             try {
                 const result = await stakeNFTs(myAddress, stakeIdArr)
                 if (result.status) {
@@ -376,7 +320,6 @@ function NftCard() {
 
                     dispatch({ type: 'NFTCARD_STAKE', payload: { myNFTs: renewMyNFTs, myStakedNFTs: stakedNFTs } })
                     alert("스테이킹 성공");
-                    // navigate('/');
                 }
                 else alert("transaction fail")
             } catch (e) {
@@ -400,11 +343,11 @@ function NftCard() {
                         <>
                             <ClipLoader loading={loading} css={override} size={30} />
                             {!loading && <div className='nftlist-reward'>total reward : {(reward / 10000).toFixed(2)} BTK</div>}
-                            {/* <button 
+                            <button 
                                 className='reward-button'
-                                onClick={getReward}>
+                                >
                                 보상 받기
-                                </button> */}
+                                </button>
                         </>
                     }
                 </div>

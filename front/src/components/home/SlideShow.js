@@ -1,10 +1,10 @@
 import React,{useState, useEffect} from 'react'
-import { baking, baking2 , baking3 ,Group2, img1 ,group , WhiteImg , browny1 , Apro , Epro , ModalKpro } from '../img'
+import { baking, baking2 , baking3 ,Group2, img1 ,group , WhiteImg , browny1 , Apro , Epro , ModalKpro } from '../../img'
 import styled from 'styled-components';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { nft1, nft2, nft3, nft4, nft5, nft6, nft7, nft8, nft9, nft10, nft11, nft12, nft13, nft14, nft15, nft16 } from '../img/nft';
+import { nft1, nft2, nft3, nft4, nft5, nft6, nft7, nft8, nft9, nft10, nft11, nft12, nft13, nft14, nft15, nft16 } from '../../img/nft';
 import { useNavigate } from 'react-router-dom';
 
 

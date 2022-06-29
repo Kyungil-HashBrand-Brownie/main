@@ -33,7 +33,15 @@ const images = async (req, res) => {
     res.send({ data, data1 })
 }
 
+const allImages = async (req, res) => {
+    console.log('hi');
+    const result = await pool.query('select * from dummyImg')
+    const data = result[0];
+    res.send(data)
+}
+
 module.exports = {
     imagesKey,
-    images
+    images,
+    allImages,
 }

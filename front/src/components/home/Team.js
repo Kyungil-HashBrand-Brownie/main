@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { nft1, nft2, nft3, nft4, nft5 } from 'img/nft';
+import { nft1, nft2, nft3, nft4, nft5 } from '../../img/nft';
 import TeamCard from './TeamCard';
 
 const teamInfo = [
@@ -55,10 +55,10 @@ const TeamText = styled.div `
 const Team = () => {
   return (
     <TeamOuter>
-    <TeamText>Team</TeamText>
-    <TeamBrowny>
-        {teamInfo.map((info, index) => <TeamCard key={index} info={info}/>)}
-    </TeamBrowny>
+        <TeamText>Team</TeamText>
+        <TeamBrowny>
+            {teamInfo.map((info, index) => <TeamCard key={index} info={info}/>)}
+        </TeamBrowny>
     </TeamOuter>
   )
 }

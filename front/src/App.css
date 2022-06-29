@@ -33,6 +33,7 @@ body {
   line-height: 1.6;
   /* padding-top: 80px; */
 }
+
 .backG-left-img {
   position: absolute;
   width: 15%;
@@ -50,6 +51,7 @@ body {
   height: 341px;
   z-index: -1;
 }
+
 .backG-img-right {
   position: absolute;
   top: 0;
@@ -65,22 +67,12 @@ body {
   top: -4%;
   z-index: -2;
 }
+
 .backG-right-img2 {
   position: absolute;
   right: -5%;
-  /* opacity: 30%; */
-  /* z-index: -1; */
-  /* top: -4%; */
   z-index: -1;
 }
-/* .main-outer {
-  width: 100%;
-  height: 120%;
-  background-image: url('./img/background/background11.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: red;
-} */
 
 .not-whitelist {
   margin-top: -50px;
@@ -156,7 +148,7 @@ body {
   /* background-color: #f6f698; */
   display: flex;
   flex-direction: row;
-  padding-top: 130px;
+  /* padding-top: 60px; */
   margin-left: 30px;
 }
 
@@ -647,13 +639,12 @@ NftCard
 }
 
 .slidediv {
-  /* background: red; */
   font-size: 7em;
   width: 350px;
   font-family: sans-serif;
   position: relative;
-  top: 100px;
-  /* left: 50px; */
+  top: 30px;
+  /* visibility: hidden; */
   animation: slide 2s ease-out;
   letter-spacing: .05em;
   text-shadow: 
@@ -730,3 +721,16 @@ Collection
  .brown {
   color:rgb(142, 83, 83);
  }
+
+ .toggle {
+  width: auto;
+  /* height: 100px; */
+  background: rgb(151, 223, 220);
+  padding: 3px 5px;
+  border-radius: 10px;
+  /* font-size: 40px; */
+}
+
+.bgDiv {
+  min-width: 150px;
+}
