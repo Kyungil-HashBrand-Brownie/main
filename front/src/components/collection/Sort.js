@@ -6,7 +6,7 @@ import Filter from './Filter'
 const SortOuter = styled.div `
     margin-left: 30px;
     margin-top: 50px;
-    width: 400px;
+    width: 350px;
     height: 700px;
     border: 3px solid white;
     border-radius: 10px;

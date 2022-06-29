@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
-import { img1 } from '../img';
+import { img1 } from '../../img';
 import styled, { css } from 'styled-components';
 
 const datas = [

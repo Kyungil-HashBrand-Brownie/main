@@ -20,26 +20,24 @@ let whiteSaleProps = {
 }
 
 
-const MintCard = () => {
-
-  return (
-    <>
-    <img style={{position:"absolute",width:"100%", height:"93%",top:"5%", left: "0%", zIndex:"-2"}} src={mintBackground} />
-    <Container className='MintCard'>
-        <Row>
-          <Col className='FreeSale' xs={{span:4, offset:2 }}> 
-            <PreSale 
-              data={preSaleProps}/> 
-          </Col>
-          <Col className='WhiteSale' xs={{span:4 }}> 
-            <PreSale 
-              data={whiteSaleProps}/> 
+const MintCard = () => {  
+    return (
+      <>
+      <img style={{position:"absolute",width:"100%", height:"93%",top:"5%", left: "0%", zIndex:"-2"}} src={mintBackground} />
+      <Container className='MintCard'>
+          <Row>
+            <Col className='FreeSale' xs={{span:4, offset:2 }}> 
+              <PreSale 
+                data={preSaleProps}/> 
             </Col>
-          {/* <Col className='WhiteSale'xs={{span:4, }}> <WhiteSale /> </Col> */}
-        </Row>
-      </Container>
-    </>
-  )
+            <Col className='WhiteSale' xs={{span:4 }}> 
+              <PreSale 
+                data={whiteSaleProps}/> 
+              </Col>
+          </Row>
+        </Container>
+      </>
+    )
 }
 
 export default MintCard

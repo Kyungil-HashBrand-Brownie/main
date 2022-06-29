@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {tokenInstance, nftInstance, caver} from "configs";
 
 import { background10 ,background13} from '../img/background';
-import D3 from './D3';
 import { checkWhite, getUserRank } from 'api';
 
 const LogoContainer = styled.div`

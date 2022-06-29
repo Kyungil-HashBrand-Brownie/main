@@ -1,257 +1,44 @@
-import React, { useEffect, useState, useRef } from 'react'
-import styled, { keyframes } from 'styled-components';
-import Arrow from '../img/arrow.png';
+import React from 'react'
 import { Container, Col } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import HomeImgCard from '../components/HomeImgCard';
-import { group ,img1 , Group2 , baking, baking2, baking3 } from '../img';
-import SlideShow from '../components/SlideShow';
-import D3 from '../components/D3';
-import Viliage from 'components/Viliage';
-import Team from 'components/Team';
-// import "../scss/styled.css"
-
-const StyledMainText = styled.div`
-  /* background: red; */
-  position: relative;
-  top: 0%;
-  width: 360px;
-  height: 120px;
-  font-weight: bold;
-  font-size: 84px;
-  color: black;
-  left: 5%;
-  /* font-family: 'Poppins'; */
-  /* font-style: normal; */
-
-  @media (max-width: 970px) {
-    margin-top: 50px;
-  }
-`
-const StyledSubText = styled.div`
-  position: relative;
-  top: 12%;
-  width: 540px;
-  height: 105px;
-  color: black;
-  font-size: 43px;
-  left: 5%;
-
-  @media (max-width: 970px) {
-    margin-top: 60px;
-  }
-`
-const StyledMintDate = styled.div`
-  position: relative;
-  top: 40px;
-  border: 5px solid rgb(31, 162, 31);
-  border-radius: 10px;
-  padding: 10px 0px;
-  text-align: center;
-  font-weight: bolder;
-  font-size: larger;
-  width: 300px;
-  background: white;
-  /* background: rgb(31, 162, 31); */
-  /* display: flex; */
-  /* justify-content: center; */
-`
-
-const displayAnimation = keyframes`
- 0% { opacity: 0}
- 10% { opacity: 0.1; }
- 15% { opacity: 0.15; }
- 30% { opacity: 0.3 }
- 40% { opacity: 0.4; }
- 65% { opacity: 0.55; }
- 75% { opacity: 0.7; }
- 85% { opacity: 0.85; }
- 90% { opacity: 0.93; }
- 100% { opacity: 1; }
-`
-
-
-const StyledBrownyAbove = styled.img`
-  position: relative;
-  top: -10%;
-  width: 500px;
-  margin: 0px 50px;
-  z-index: 1;
-  /* border: 5px solid black; */
-  animation-name: ${displayAnimation};
-  animation-duration: 0.5s;
-  animation-iteration-count: 1;
-  background-color: lightcyan;
-`
-
-const StyledBrownyDown = styled.img`
-  /* position: relative; */
-  margin-top: 40px;
-  width: 350px;
-  z-index: 1;
-  animation-name: ${displayAnimation};
-  animation-duration: 0.5s;
-  animation-iteration-count: 1;`
-
-const StyledButton = styled.div`
-  position: relative;
-  top: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  width: 400px;
-  height: 100px;
-  background: white;
-  border-radius: 30px;
-  font-size:30px;
-  /* top: 50%; */
-  border: 3px solid black;
-  /* left: 240px; */
-  cursor: pointer;
-  &:hover{  
-    transform: scale(1.05);
-  }
-
-  @media (max-width: 970px) {
-    margin-top: 150px;
-    margin-left: 30px;
-  }
-`
-
-const StyledArrow = styled.img`
-  width: 60px;
-  margin-right: 10px;
-`
-
-const BakingImg = styled.div`
-  .bakingImg1 img{
-    width: 300px;
-    height: 400px;
-    right: 400px;
-    /* margin-right: 100px; */
-    /* position: right ; */
-    /* object-position: 25% 75%; */
-  }
-`
-
-const StyledEllipse = styled.img`
-  position: absolute;
-  left: 0;
-  bottom: 0%;
-  z-index: -1; 
-`
-
-
-const HomeBackImgPosition = styled.div`
-  width: 100%;
-  height: 400px;
-  background-color: black;
-  opacity : 0.9;
-`
+import Home from 'components/home/Home'
+import Viliage from 'components/home/Viliage'
+import SlideShow from 'components/home/SlideShow'
+import HomeImgCard from 'components/home/HomeImgCard'
+import Team from 'components/home/Team'
 
 const HomePage = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    let deadline = useRef(); 
-    let deadlineDate = new Date('July 22, 2022 00:00:00').getTime();
-    let now = new Date().getTime();
-    let t = deadlineDate - now;
-    let day = Math.floor((t % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 7));
-    let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((t % (1000 * 60)) / 1000);
-    const [state, setState] = useState({ day: day, hours: hours, minutes: minutes, seconds: seconds});
-    let timer = useRef(null); 
-
-    const count = () => {
-      let now = new Date().getTime();
-      let t = deadline - now;
-      let day = Math.floor((t % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
-      let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      let minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((t % (1000 * 60)) / 1000);
-
-      setState({ day, hours, minutes, seconds });
-
-      if (t < 0) {
-        clearInterval(timer);
-        setState({ day: 0, hours: 0, minutes: 0, seconds: 0 });
-      }
-    }
+    let mainText = document.getElementsByClassName("slidediv")
 
     window.addEventListener('scroll', function() {
       let value = window.scrollY;
       let loc = window.location.href;
       if (loc == 'http://localhost:3000/') {
-        if (value > 1800 || value < 850) {
-          mainText[0].style.animation='disappear 1s ease-out forwards';
+        if ((value > 1800 && value < 1820) || (value < 930 && value > 900)) {
+          mainText[0].style.animation ='disappear 1s ease-out forwards';
         } else  {
           mainText[0].style.animation='slide 1s ease-out'
         }
       }
     })
 
-    const moveToMint = () => {
-      navigate('/mint');
-
-    }
-
-    let mainText = document.getElementsByClassName("slidediv")
-
-    useEffect(() => { 
-      deadline = new Date('July 22, 2022 00:00:00').getTime();
-      timer.current = setInterval(count, 1000);  
-      // scroll() 
-      // timer();   
-    }, [])
-    
-    return (
+    return ( 
       <>
-      <div className='mintdate-container'>
-        <StyledMintDate>
-          <span>민팅 까지 남은 시간</span><br />
-          <span>
-            {state.day < 10 ? `0${state.day}` : state.day}D 
-            &nbsp;{state.hours < 10 ? `0${state.hours}` : state.hours}h 
-            &nbsp;{state.minutes < 10 ? `0${state.minutes}` : state.minutes}m
-            &nbsp;{state.seconds < 10 ? `0${state.seconds}` : state.seconds}s
-          </span>
-        </StyledMintDate>
-      </div>
-      <Container className='main-container'>
-        <Col className="main-col">
-            <StyledMainText><D3/></StyledMainText>
-            <StyledSubText>The Best nft Collections <br/>You Can Get</StyledSubText>
-            {/* <div className='main-button-container'> */}
-              <StyledButton onClick={moveToMint}>
-                <div>
-                  <StyledArrow src={Arrow} alt="nft-arrows"/>
-                  <span>Explore our nfts</span>
-                </div>
-              </StyledButton>
-            {/* </div> */}
-        </Col>
-        <Col className="main-img-col">
-          <StyledBrownyAbove src={Group2} alt="browny-above" />
-        </Col>
-      </Container>
-      <Viliage />
-      <Container className='main-container'>
-        <Col className="main-col">
-          <div className="slidediv">
-            Love <br /> Your Browny
-          </div>
-        </Col>
-        <Col className="main-img-col">
-            <SlideShow />
-        </Col>
-      </Container>
-      <HomeImgCard />
-      <Team />
-      {/* </PositionCss> */}
+        <Home />
+        <Viliage />
+        <Container className='main-container'>
+          <Col>
+            <div className="slidediv">
+              Love <br /> Your Browny
+            </div>
+          </Col>
+          <Col className="main-img-col">
+              <SlideShow />
+          </Col>
+        </Container>
+        <HomeImgCard />
+        <Team />
       </>
-  )
+    )
 }
 
 export default HomePage

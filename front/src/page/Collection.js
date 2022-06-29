@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { mintingContract, votingAddr, nftInstance, caver } from "configs";
+import { getMintList } from 'api/viewMethods';
+// import { getContractOwner } from "./viewMethods";
+import axios from 'axios'
 import Sort from 'components/collection/Sort'
 import CollectionMain from 'components/collection/CollectionMain'
-import { Container, Col } from 'react-bootstrap'
 import styled from 'styled-components'
 
 const CollectionOuter = styled.div `
@@ -11,18 +14,22 @@ const CollectionOuter = styled.div `
 `
 
 const Collection = () => {
+    const [data, setData] = useState(null)
+
+    const getData = async () => {
+        let result = await axios.get('/image/images')
+        setData(result.data)
+    }
+
+    useEffect(() => {
+        getData()
+        console.log(nftInstance)
+    }, [])
+
     return (
         <CollectionOuter>
-            {/* <Container className='collection-sort-container'>
-                <Col> */}
-                    <Sort />
-                {/* </Col> */}
-            {/* </Container> */}
-            {/* <Container className='collection-main-container'> */}
-                {/* <Col> */}
-                    <CollectionMain />
-                {/* </Col> */}
-            {/* </Container> */}
+            <Sort />
+            <CollectionMain data={data}/>
         </CollectionOuter>
     )
 }
