@@ -18,7 +18,7 @@ const Outer = styled.div`
 
     display: flex;
     align-items: flex-end;
-    background: grey;
+    /* background: grey; */
     background-image: url(${footerImg});
     background-repeat: no-repeat;
     background-size: 100% 100%;
