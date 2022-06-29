@@ -178,6 +178,17 @@ contract BrownyNFT is ERC721, Whitelist {
         }
         return stakingList;
     }
+    function checkUserStakedNFTs(address _user) external view returns(uint[] memory) {
+        uint[] memory stakingList = new uint[](numOwnerStakedNFT[_user]);
+        uint index = 0;
+        for(uint i = 0; i < ownNFTs[_user].length; i++) {
+        if(staked[ownNFTs[_user][i]] == true) {
+            stakingList[index] = ownNFTs[_user][i];
+            index++;
+        } 
+        }
+        return stakingList;
+    }
 
     // 사용자의 tier
     function userRank() public view returns(uint) {

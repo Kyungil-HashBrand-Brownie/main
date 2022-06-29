@@ -126,7 +126,7 @@ contract Minting {
         brownyNFT.changeTime(tokenId, block.timestamp);
     }
     function callClaim() public {
-        uint256[] memory tokenId = brownyNFT.myNFTs();
+        uint256[] memory tokenId = brownyNFT.checkUserStakedNFTs(msg.sender);
         for(uint8 i = 0; i < tokenId.length; i++) {
             claimed(tokenId[i]);
         }
