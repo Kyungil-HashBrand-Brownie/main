@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { mintingContract, votingAddr, nftInstance, caver } from "configs";
+import { getMintList } from 'api/viewMethods';
+// import { getContractOwner } from "./viewMethods";
 import axios from 'axios'
 import Sort from 'components/collection/Sort'
 import CollectionMain from 'components/collection/CollectionMain'
@@ -20,6 +23,7 @@ const Collection = () => {
 
     useEffect(() => {
         getData()
+        console.log(nftInstance)
     }, [])
 
     return (
