@@ -90,7 +90,7 @@ contract VoteContract {
         proposalCounts++;
     }
 
-    // 발의 끝 함수
+    // 발의 끝 동시에 투표 시작 함수
     function endProposal() public isBeforeVote onlyOwner {
         voteStatus = VoteStatus.nowVote;
     }
