@@ -19,9 +19,7 @@ const Outer = styled.div`
     display: flex;
     align-items: flex-end;
     /* background: grey; */
-    background-image: url(${footerImg});
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+
     /* position : relative; */
     /* transform : translateY(-100%); */
 
@@ -40,6 +38,10 @@ const Foot = styled.div`
     padding-left: 10%;
     padding-right: 10%;
     background: #F39798;
+    background-image: url(${footerImg});
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
 
     /* background: gray; */
     /* background-image: url(${footerImg}) ; */
