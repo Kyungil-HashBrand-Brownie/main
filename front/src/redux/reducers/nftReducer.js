@@ -1,5 +1,4 @@
 let initialState = {
-    nft: {},
     myNFTpage: 1,
     myStakedpage: 1,
     countAnimal: 0,
@@ -22,10 +21,11 @@ let initialState = {
         id: 3
         , title: "test3"
     }],
-    // address, walletRefresh, isDeployer update
+    // address, walletRefresh, isDeployer, isWhite update
     myAddress: "",
     walletRefresh: 1,
-    isDeployer: false
+    isDeployer: false,
+    isWhite: false
 }
 
 function nftReducer(state = initialState, action) {
@@ -74,6 +74,7 @@ function nftReducer(state = initialState, action) {
             // console.log(payload)
             // console.log(Object.keys(payload)[0])
             // console.log(Object.values(payload)[0])
+            // payload = {myNFTs: [{id: 1, image: '1adasd', checked: true}]}
             return {
                 ...state,
                 [Object.keys(payload)[0]]: Object.values(payload)[0],
@@ -155,6 +156,12 @@ function nftReducer(state = initialState, action) {
             return {
                 ...state,
                 isDeployer: payload
+            }
+        
+        case "CHECK_ISWHITELIST":
+            return {
+                ...state,
+                isWhite: payload
             }
 
         default:

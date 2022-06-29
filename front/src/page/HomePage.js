@@ -180,24 +180,24 @@ const HomePage = () => {
       }
     }
 
+    window.addEventListener('scroll', function() {
+      let value = window.scrollY;
+      let loc = window.location.href;
+      if (loc == 'http://localhost:3000/') {
+        if (value > 1800 || value < 850) {
+          mainText[0].style.animation='disappear 1s ease-out forwards';
+        } else  {
+          mainText[0].style.animation='slide 1s ease-out'
+        }
+      }
+    })
+
     const moveToMint = () => {
       navigate('/mint');
 
     }
 
     let mainText = document.getElementsByClassName("slidediv")
-
-    window.addEventListener('scroll', function() {
-      let value = window.scrollY;
-      let loc = window.location.href;
-      if (loc == 'http://localhost:3000/') {
-        if(value > 1500 || value < 850) {
-          mainText[0].style.animation='disappear 1s ease-out forwards';
-        }else  {
-          mainText[0].style.animation='slide 1s ease-out'
-        }
-      }
-    })
 
     useEffect(() => { 
       deadline = new Date('July 22, 2022 00:00:00').getTime();
@@ -234,7 +234,6 @@ const HomePage = () => {
         </Col>
         <Col className="main-img-col">
           <StyledBrownyAbove src={Group2} alt="browny-above" />
-          {/* <StyledBrownyDown src={Browny10} alt="browny-down" /> */}
         </Col>
       </Container>
       <Viliage />

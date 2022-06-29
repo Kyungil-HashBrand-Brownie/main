@@ -14,6 +14,8 @@ import RightImg from './img/chocolate/choco4.png';
 import Swap from './page/Swap';
 import NftList from './page/NftList';
 import NoPage from 'page/NoPage';
+import Collection from 'page/Collection';
+import Voting from 'page/Voting';
 
 function App() {
   const {isDeployer} = useSelector(state=>state.nft)
@@ -21,13 +23,15 @@ function App() {
   const [isBaobab,setIsBaobab] = useState(false)
 
   useEffect(()=>{
-    if(window.klaytn.networkVersion === 1001) setIsBaobab(true)
-    else setIsBaobab(false)
+    if(window.klaytn){
+      if(window.klaytn.networkVersion === 1001) setIsBaobab(true)
+      else setIsBaobab(false)
 
-    window.klaytn.on('networkChanged', async function(network) {
+      window.klaytn.on('networkChanged', async function(network) {
         if(network === 1001) setIsBaobab(true)
         else setIsBaobab(false)
-    })
+      })
+    }
 },[])
 
   return (
@@ -39,6 +43,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/mint" element={<Mint />} />
         <Route path="/test" element={<Testpage />} />
+        <Route path='/collection' element={<Collection />} />
+        <Route path='/voting' element={<Voting />} />
         {
           isBaobab
           ?

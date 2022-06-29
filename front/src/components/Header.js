@@ -6,10 +6,11 @@ import Logo from '../img/brownyLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
-import {tokenInstance, nftInstance} from "configs";
+import {tokenInstance, nftInstance, caver} from "configs";
 
 import { background10 ,background13} from '../img/background';
 import D3 from './D3';
+import { checkWhite } from 'api';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -58,20 +59,32 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh, isDeployer, isWhite } = useSelector(state => state.nft);
 
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(0);
     const [btkBalance, setBtkBalance] = useState(0);
 
+    const checkWhitelist = async () => {
+        if (myAddress) {
+            try {
+                const isWhite = await checkWhite(myAddress)
+                dispatch({ type : "CHECK_ISWHITELIST" , payload:isWhite })
+            }
+            catch (e) {
+                throw e
+            }
+        }
+    }
+
     const weiToFixed = (wei) => {
-        const toKlay = window.caver.utils.convertFromPeb(wei);
+        const toKlay = caver.utils.convertFromPeb(wei);
         const fixed = parseFloat(toKlay).toFixed(2);
         return fixed;
     }
 
     const setTokenBalance = async (address) => {
-        const weiBalance = await window.caver.klay.getBalance(address)
+        const weiBalance = await caver.klay.getBalance(address)
         const fixedBalance = weiToFixed(weiBalance)
         console.log(fixedBalance)
         const weibtkBalance = await tokenInstance.balanceOf(address) //BigNumber 객체
@@ -86,15 +99,21 @@ const Header = () => {
             setAddress(myAddress);
             await setTokenBalance(myAddress)
             const contractOwner = await nftInstance.methods.owner().call()
-            const isDeployer = window.caver.utils.toChecksumAddress(myAddress) === contractOwner
+            const isDeployer = caver.utils.toChecksumAddress(myAddress) === contractOwner
             dispatch({type: 'CHECK_ISDEPLOYER', payload: isDeployer})
         }
         else dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }
 
     const enableKikas = () => {
-        window.klaytn.enable()
-        dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
+        if(window.klaytn){
+            window.klaytn.enable()
+            dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
+        }
+        else {
+            alert("카이카스 설치 필요")
+            window.open("https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko")
+        }
     }
 
     const copyAddress = () => {
@@ -114,17 +133,34 @@ const Header = () => {
     }, [myAddress,walletRefresh])
 
     useEffect(()=>{
-        window.klaytn.on('accountsChanged', async function(accounts) {
-            console.log(accounts[0])
-            sessionStorage.setItem('id', accounts[0]);
-            dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
-            setAddress(accounts[0]);
-            await setTokenBalance(accounts[0])
-        })
-        window.klaytn.on('networkChanged', async function(network) {
-            console.log(network)
-        })
+        if(window.klaytn) {
+            window.klaytn.on('accountsChanged', async function(accounts) {
+                console.log(accounts[0])
+                sessionStorage.setItem('id', accounts[0]);
+                dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
+                setAddress(accounts[0]);
+                await setTokenBalance(accounts[0])
+            })
+            window.klaytn.on('networkChanged', async function(network) {
+                console.log(network)
+            })
+        }
     },[])
+
+    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/voting'];
+    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Voting'];
+
+    let pages = paths.map((path, index) => {
+        let data = {
+                    path: path, 
+                    text: texts[index],
+                   };
+        return data;
+    })
+
+    useEffect(() => {
+        checkWhitelist();
+    }, [myAddress])
 
     return (
         <Navbar className="nav" expand="lg">
@@ -142,13 +178,15 @@ const Header = () => {
                     style={{ maxHeight: '100px' }}
                     navbarScroll
                 >
-                    <Link onClick={closeModal} className='nav-item' to="/">Home</Link>
-                    <Link onClick={closeModal} className='nav-item' to="/mint">Mint</Link>
-                    {/* <Link className='nav-item' to="/whitelist">Whitelist</Link> */}
-                    <Link onClick={closeModal} className='nav-item' to="/test">testpage</Link>
-                    <Link onClick={closeModal} className='nav-item' to="/swap">swap</Link>
-                    <Link onClick={closeModal} className='nav-item' to="/nftlist">nftlist</Link>
-                    {isDeployer ? <Link onClick={closeModal} className='nav-item' to="/admin">admin</Link> : null}
+                    {pages.map((item, index) => 
+                        <Link key={index}
+                            onClick={closeModal} 
+                            className='nav-item' 
+                            to={item.path}>
+                            {item.text}</Link>
+                    )}
+
+                    {isDeployer ? <Link onClick={closeModal} className='nav-item' to="/admin">Admin</Link> : null}
                 </Nav>
                 {
                 address != null
@@ -161,7 +199,7 @@ const Header = () => {
                     </PFPContainer>
                     {modalState && 
                         <StyledInfo>
-                        WHITELIST<br/>
+                        {isWhite ? 'WHITELIST' : 'NORMAL'}<br/>
                         Copy Address
                         <FontAwesomeIcon 
                             className='copy-icon'

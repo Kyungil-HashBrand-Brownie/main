@@ -16,7 +16,7 @@ const override = css`
   display: block;
   margin: 0 auto;
   border-color: black;
-  margin-right: 70px;
+  margin-right: 4.375rem;
 `;
 
 const Cardjustify = styled.div`
@@ -24,12 +24,12 @@ const Cardjustify = styled.div`
     justify-content: center;
 
     .Main {
-        width: 500px;
-        min-height: 875px;
-        margin: 10px;
-        border: 3px solid white;
-        border-radius: 40px;
-        padding: 10px 10px;
+        width: 31.25rem;
+        min-height: 54.6875rem;
+        margin: .625rem;
+        border: .1875rem solid white;
+        border-radius: 2.5rem;
+        padding: .625rem .625rem;
         background: #F5FADB;
         /* background: radial-gradient(transparent, #FFF9F9); */
         /* background: linear-gradient(to right, #d78034 0%, transparent 50%, #d78034 100%); */
@@ -44,11 +44,11 @@ const Cardjustify = styled.div`
 
     .Ncard {
         opacity: 0.9;
-        padding: 3px;
-        margin: 10px;
-        margin-left: 27px;
-        padding-top: 25px;
-        border-radius: 200px;
+        padding: .1875rem;
+        margin: .625rem;
+        margin-left: 1.6875rem;
+        padding-top: 1.5625rem;
+        border-radius: 12.5rem;
         text-align: center;
         cursor: pointer;
         /* background: #4f86f7; */
@@ -72,7 +72,7 @@ const Cardjustify = styled.div`
         position: relative;
         display: flex ;
         justify-content: center ;
-        bottom: 200px;
+        bottom: 12.5rem;
     }
 
     .spaan {
@@ -84,7 +84,7 @@ const Cardjustify = styled.div`
         width: 100%;
         height: 100%;
         background-color: gray;
-        border-radius: 0.5rem;
+        border-radius: 8px;
     }
 
     .col_1 {
@@ -105,50 +105,50 @@ const Cardjustify = styled.div`
     .rel{
         background-color: red;
         position: absolute;
-        /* top : 25px; */
+        /* top : 1.5625rem; */
         transform: translate(150%, 150%);
     }
 
     .cont21 {
         display: flex ;
         justify-content: center;
-        margin: 10px 0px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid black;
+        margin: .625rem 0rem;
+        padding-bottom: .625rem;
+        border-bottom: .0625rem solid black;
         /* background: red; */
-        /* border: 3px solid black; */
+        /* border: .1875rem solid black; */
     }
 
     .nftlist {
         text-align: center;
-        border-radius: 3px;
-        border-top-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+        border-radius: .1875rem;
+        border-top-left-radius: .625rem;
+        border-bottom-right-radius: .625rem;
         width: 80%;
-        padding: 5px;
+        padding: .3125rem;
         background: lightgray;
         /* width: 100%; */
         /* text-align: center; */
-        /* border: 5px solid black; */
-        /* border-radius: 3px; */
+        /* border: .3125rem solid black; */
+        /* border-radius: .1875rem; */
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        /* margin: 20px; */
-        /* padding: 5px; */
+        /* margin: 1.25rem; */
+        /* padding: .3125rem; */
         /* background: lightgray; */
     }
 
     .nftlist-id-box {
-        width: 80px;
-        margin: 3px 4px;
+        width: 5rem;
+        margin: .1875rem .25rem;
         background: white;
         /* background: rgb(47, 47, 238); */
-        /* border: 1px solid black; */
+        /* border: .0625rem solid black; */
         /* color: white; */
-        border-radius: 30px;
-        font-size: 15px;
-        /* padding-left: 15px; */
+        border-radius: 1.875rem;
+        font-size: .9375rem;
+        /* padding-left: .9375rem; */
         text-align: center;
         font-weight: bold;
         cursor: pointer;
@@ -159,20 +159,20 @@ const Cardjustify = styled.div`
     }
 
     .nftlist-header {
-        font-size: 25px;
-        padding-left: 70px;
-        margin-bottom: 20px;
+        font-size: 1.5625rem;
+        padding-left: 4.375rem;
+        margin-bottom: 1.25rem;
     }
     .nftlist-text {
         text-align: center;
-        border-radius: 3px;
+        border-radius: .1875rem;
         width: 80%;
-        padding: 5px;
+        padding: .3125rem;
         background: lightgray;
     }
 
     .nftlist-box {
-        margin: 0px 30px;
+        margin: 0rem 1.875rem;
         /* background:red; */
         /* display: flex; */
         /* flex-direction: column; */
@@ -182,12 +182,12 @@ const Cardjustify = styled.div`
     .nftlist-justify {
         display: flex;
         justify-content: center;
-        margin-bottom: 20px;
+        margin-bottom: 1.25rem;
     }
 
     .nftlist-cancel {
-        width: 40px;
-        height: 40px;
+        width: 2.5rem;
+        height: 2.5rem;
     }
 
     .overlay {
@@ -197,11 +197,11 @@ const Cardjustify = styled.div`
         display: flex;
         justify-content: center;
         text-align: center;
-        transform: translate(22px, -33px);
+        transform: translate(1.375rem, -2.0625rem);
     }
 
     .nftlist-id-box:hover .overlay{
-        /* transform: translate(-15px, 0); */
+        /* transform: translate(-0.9375rem, 0); */
         position: absolute;
         opacity: 1;
         /* background: rgba(43, 41, 41, 0.9); */
@@ -212,35 +212,35 @@ const Cardjustify = styled.div`
     .nftlist-select-all {
         display: flex;
         justify-content: flex-end;
-        margin-bottom: 5px;
-        margin-right: 50px;
+        margin-bottom: .3125rem;
+        margin-right: 3.125rem;
         /* background: red; */
         align-items: center;
     }
     
     .nftlist-select-all-button {
-        border-radius: 10px;
+        border-radius: .625rem;
         cursor: pointer;
     }
 
     .nftlist-select-all-text {
-        margin-top: 10px;
+        margin-top: .625rem;
         background: blue;
-        /* padding-top: 5px; */
+        /* padding-top: .3125rem; */
     }
 
     .nftlist-select-all-checkbox {
-        margin-right: 3px;
+        margin-right: .1875rem;
     }
 
     .nftlist-card-img {
-        border-radius: 80px;
+        border-radius: 5rem;
     }
 
     .no-display {
         /* background: red; */
         position: absolute;
-        transform: translate(55px, 385px);
+        transform: translate(3.4375rem, 24.0625rem);
     }
 
 `
@@ -248,6 +248,7 @@ const Cardjustify = styled.div`
 
 function NftCard() {
     const [page, setPage] = useState(1);
+    const [inputCheck, setInputCheck] = useState(false)
 
     const dispatch = useDispatch();
     const { myAddress, myNFTs, myStakedNFTs, reward, loading } = useSelector(state => state.nft);
@@ -275,7 +276,7 @@ function NftCard() {
         let dict1;
         // const imageData = async () => {
         const result = await axios.post('/image/images', { myBrownyNFTs, stakedNFTs })
-        console.log(result.data);
+        // console.log(result.data);
         dict = result.data.data;
         dict1 = result.data.data1;
         // console.log(result)
@@ -289,7 +290,7 @@ function NftCard() {
         // dict = imageData();
 
         let binaryArr = [];
-        console.log(dict)
+        // console.log(dict)
         for (let i = 0; i != myBrownyNFTs.length; i++) {
             let metajson = {
                 id: `#${myBrownyNFTs[i]}`,
@@ -322,24 +323,29 @@ function NftCard() {
 
     // check
     const changeAllState = (checked) => {
-        let newArr;
-        if (checked) {
-            newArr = myNFTs.map((item) => {
-                item.checked = true
-                return item
-            })
-        }
-        else {
-            newArr = myNFTs.map((item) => {
-                item.checked = false
-                return item
-            })
-        }
-        // console.log(myNFTs)
+        // console.log(checked)
+        //checked = true / false
+        let newArr = myNFTs.sort((a, b) => a.id.slice(1) - b.id.slice(1))
+        //                 // .slice((page - 1) * 4, (page - 1) * 4 + 4)
+        console.log('page: ', page);
+        newArr = newArr.map((item, index) => {
+            if (index >= (page - 1) * 4 && index < (page - 1) * 4 + 4) {
+                item.checked = checked;
+                // console.log(index)
+            }
+            return item;
+        })
+        console.log(myNFTs)
+        setInputCheck(!inputCheck);
         dispatch({ type: 'NFTCARD_CHANGE_ALL', payload: { myNFTs: newArr } })
     }
 
     const changeClickState = (id) => {
+        // let input = document.getElementsByClassName('nftlist-select-all-checkbox')[0];
+        // console.log(input)
+        // console.log(input.checked);
+        setInputCheck(false);
+
         let newArr = myNFTs.map((li) => {
             if (li.id === id) {
                 li.checked = !li.checked;
@@ -351,7 +357,7 @@ function NftCard() {
 
     useEffect(() => {
         checkNfts()
-    }, [myAddress, myStakedNFTs.length])
+    }, [myAddress, myStakedNFTs.length, page])
 
     // 카드 staking 버튼
     const stakeNFT = async () => {
@@ -363,7 +369,6 @@ function NftCard() {
             try {
                 const result = await stakeNFTs(myAddress, stakeIdArr)
                 if (result.status) {
-                    // dispatch({type: "WALLET_REFRESH"})
                     let stakedNFTs = myNFTs.filter((item) => item.checked).map((item) => {
                         item.checked = false;
                         return item;
@@ -420,11 +425,11 @@ function NftCard() {
                                         <input
                                             onChange={(e) => { changeAllState(e.target.checked) }}
                                             type='checkbox'
-                                            className='nftlist-select-all-checkbox' />
+                                            className='nftlist-select-all-checkbox' 
+                                            checked={inputCheck}
+                                            />
                                         Select All
                                     </div>
-                                    {/* <button 
-                                        className='nftlist-select-all-button'>Select All</button> */}
                                 </div>
                                 <div className='nftlist-justify'>
                                     <div className='nftlist'>
@@ -453,7 +458,7 @@ function NftCard() {
                                         <Card
                                             className="Ncard"
                                             style={{
-                                                width: '12rem',
+                                                width: '192px',
                                                 backgroundColor: "lightgray"
                                                 // index1%4 == 0 ? "#fc518d" : index1%4 == 1 ? "orange" 
                                                 // : index1%4 == 2 ? "#3cb346" : "#FAFA33"
@@ -466,7 +471,7 @@ function NftCard() {
                                                         id='stake-checkbox'
                                                     />
                                             }
-                                            <div><Card.Img className='nftlist-card-img' style={{ width: '11rem', height: '11rem' }} onClick={() => changeClickState(item.id)} variant="top" src={item.image} /></div>
+                                            <div><Card.Img className='nftlist-card-img' style={{ width: '176px', height: '176px' }} onClick={() => changeClickState(item.id)} variant="top" src={item.image} /></div>
                                             <Card.Title >{item.id}</Card.Title>
                                         </Card>
                                     </div>
@@ -482,6 +487,8 @@ function NftCard() {
                             page={page}
                             setPage={setPage}
                             total={myNFTs.length}
+                            setInputCheck={setInputCheck}
+                            inputCheck={inputCheck}
                         />
                     }
                 </div>

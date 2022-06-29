@@ -6,32 +6,54 @@ import inst from "../img/footer/inst.png"
 import tele from "../img/footer/tele.png"
 import kakao from "../img/footer/kakao.png"
 import kakao2 from "../img/footer/kakao2.png"
+import { footerImg } from 'img/footer';
 
 const Outer = styled.div`
-    /* position: absolute;
-    margin-top: 200px;
-    bottom: 0;
-    width: 100%; */
     flex: 1;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+    height: 120px;
+    /* padding-bottom: 20px; */
+    /* background: #F39798; */
+    display: flex;
+    align-items: center;
     /* position : relative; */
     /* transform : translateY(-100%); */
 `
 
 const Foot = styled.div`
+    /* background: blue; */
+    display: flex;
+    align-items: center;
+    height: 120px;
+    width: 100%;
+    /* margin-top: 23px; */
     padding-left: 10%;
     padding-right: 10%;
+    background: #F39798;
+
+    /* background: gray; */
+    /* background-image: url(${footerImg}) ; */
+    /* background-repeat: no-repeat; */
+    /* background-size: 100% 100%; */
+    /* background-size: auto; */
+    /* padding-left: 10%; */
+    /* padding-right: 10%; */
+    
+    img {
+        width: 100%;
+        height:  100%;
+    }
     
     /* fContainer1 */
     .fContainer {
         /* background-color: gray; */
         width: 100%;
-        vertical-align: middle;
+        /* vertical-align: middle; */
         display: flex;
         align-items: center;
         position: relative;
         /* position: absolute; */
-        margin-top: 30px;
+        /* margin-top: 30px; */
         /* margin-bottom: 30px; */
         color: brown;
         font-weight: 600;
@@ -70,7 +92,7 @@ const Foot = styled.div`
     /* RIGHT */
     .fContainer_right {
         /* margin-left:5%; */
-        padding-top: 10px;
+        /* padding-top: 10px; */
     }
 
     .imgSection {
@@ -85,7 +107,9 @@ const Foot = styled.div`
     }
 
     .img_box {
-        padding-top: 5%;
+        /* background: red; */
+        /* padding-top: 20px; */
+        margin-top: 20px;
         padding-left: 20px;
     }
 
@@ -109,11 +133,12 @@ const Foot = styled.div`
 `
 
 const Footer = () => (
-    <Outer>
+    // <Outer>
     <Foot>
         {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&family=Roboto:wght@900&family=Kdam+Thmor+Pro&family=Walter+Turncoat&display=swap" rel="stylesheet" /> */}
+        {/* <img src={footerImg} /> */}
         <div className="fContainer">
             <div className="fContainer_left">
                 <div className="fContainer_left_content">
@@ -138,14 +163,14 @@ const Footer = () => (
                         <div className="img_box">
                             <a href="https://t.me/piratesdao" target="blank"><img alt="tele" className="sns_logo" src={tele}></img></a>
                         </div>
-                        <div className="img_box">
+                        {/* <div className="img_box">
                             <a href="https://open.kakao.com/o/gzAIhHXd" target="blank"><img alt="kakao" className="sns_logo" src={kakao2} ></img></a>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
         </div>
     </Foot>
-    </Outer>
+    // </Outer>
 )
 export default Footer;

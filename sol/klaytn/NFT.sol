@@ -107,6 +107,7 @@ contract BrownyNFT is ERC721, Whitelist {
             _approve(_address, _tokenId[i]);
         }
     }
+    // owner는 nft 소유자, operator는 권한 줄 contract address
     // function approveAllNFT(address _owner, address _operator, bool _approved) external {
     //     _setApprovalForAll(_owner, _operator, _approved);
     // }
