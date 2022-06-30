@@ -49,10 +49,9 @@ const StyledButton = styled.button`
 `;
 
 
-const PreSale = ({ data }) => {
+const PreSale = ({ amount, img, price, title }) => {
     const dispatch = useDispatch();
     const { myAddress, isWhite } = useSelector(state => state.nft);
-    const { amount, img, price, title } = data;
 
     const [count, setCount] = useState(1)
     const [PreCount, setPreCount] = useState(0);

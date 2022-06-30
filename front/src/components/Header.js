@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {tokenInstance, nftInstance, caver} from "configs";
 
 import { background10 ,background13} from '../img/background';
-import { checkWhite, getUserRank } from 'api';
+import { checkWhite, getUserRank, pebToFixed } from 'api';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -76,18 +76,12 @@ const Header = () => {
         }
     }
 
-    const weiToFixed = (wei,fixId) => {
-        const toKlay = caver.utils.convertFromPeb(wei);
-        const fixed = parseFloat(toKlay).toFixed(fixId);
-        return fixed;
-    }
-
     const setTokenBalance = async (address) => {
-        const weiKLAYBalance = await caver.klay.getBalance(address)
-        const fixedKLAYBalance = weiToFixed(weiKLAYBalance,2)
+        const pebKLAYBalance = await caver.klay.getBalance(address)
+        const fixedKLAYBalance = pebToFixed(pebKLAYBalance,2)
 
-        const weiBTKBalance = await tokenInstance.balanceOf(address) //BigNumber 객체
-        const fixedBTKBalance = weiToFixed(weiBTKBalance,4)
+        const pebBTKBalance = await tokenInstance.balanceOf(address) //BigNumber 객체
+        const fixedBTKBalance = pebToFixed(pebBTKBalance,4)
 
         setBalance(fixedKLAYBalance)
         setBtkBalance(fixedBTKBalance);

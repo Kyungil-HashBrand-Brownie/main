@@ -1147,11 +1147,11 @@
 			]
 		},
 		"minting/NFT.sol": {
-			"keccak256": "0x0bc47917bc22bcb5d4e00be85dd08a77f841c744fa578210c8e1d9aaf73092d9",
+			"keccak256": "0x68b6e4d1cc37973461b79a9543a60d7b6a9f4035cee7d197d4a4c026c4fe64c7",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2f1caed913a0bbf9742c080603c31c89d95b3d019eba98f854c7832085e14453",
-				"dweb:/ipfs/Qmbex4EpYpu7J1aBPgAfD6HfkxPxUyhaXjB11byYaRDH68"
+				"bzz-raw://30114171117dd548c153ab86e4ee8e38ea5171f3c552d710314648a06f4add3c",
+				"dweb:/ipfs/QmZsginbE65oEB8q7JNwwZcpp9TtYk4Uafe5xcbtTAVSFM"
 			]
 		},
 		"minting/Whitelist.sol": {

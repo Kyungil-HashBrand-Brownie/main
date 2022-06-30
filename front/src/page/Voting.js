@@ -20,7 +20,7 @@ const useInput = (defaultValue) => {
 }
 
 function Voting() {
-  const {myAddress, userRank} = useSelector(state=>state.nft)
+  const {myAddress, userRank, isDeployer} = useSelector(state=>state.nft)
 
   const [vote, setVote] = useState(0)
   const [proposals, setProposals] = useState([])
@@ -30,9 +30,6 @@ function Voting() {
     const callApi = async () => {
       // db안건 데이터 불러오기
       // 랭크 불러오기
-      if(myAddress) {
-        console.log(userRank)
-      }
     }
 
     useEffect(()=>{
@@ -55,6 +52,20 @@ function Voting() {
     setProposals([...proposals, proposal.value])
   }
 
+  const votingButtonProps = () => {
+    
+    return {
+      // children:,
+      // onClick:,
+    }
+  }
+
+  const ChangeVotingButton = ({children, onClick})=> {
+
+    return <Button variant="success" onClick={onClick}>{children}</Button>
+    
+  }
+
   return (
     <div className="App">
       <Form
@@ -67,14 +78,22 @@ function Voting() {
         </div>
         <button type='submit'>제출</button>
       </Form>
+
+      {/* contract owner이거나 userRank가 3이어야 안건 발의 가능 */}
+      {(isDeployer || userRank == 3)
+      ?
       <Form
-        onSubmit={addProposal}
+      onSubmit={addProposal}
       >
         <InputGroup className='mb-3'>
           <Form.Control type='text' {...proposal}/>
           <Button type='submit' variant='success'>Add proposal</Button>
         </InputGroup>
       </Form>
+      : null
+    }
+      <Button variant="success"></Button>
+      <div>USER RANK : {userRank}</div>
     </div>
   )
 }
