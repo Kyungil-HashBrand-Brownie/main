@@ -58,7 +58,7 @@ contract VoteContract {
 
     // 투표 권한 확인
     modifier onlyHolder() { 
-        require(brownyNFT.userRank() > 0, "You are not holder");
+        require(brownyNFT.userRankEx(msg.sender) > 0, "You are not holder");
         _;
     }
 
@@ -70,7 +70,7 @@ contract VoteContract {
 
     // 발의 권한 확인
     modifier permissionProposal() { 
-        require(brownyNFT.userRank() > 2 || msg.sender == owner, "You do not have permission");
+        require(brownyNFT.userRankEx(msg.sender) > 2 || msg.sender == owner, "You do not have permission");
         _;
     }
 
@@ -104,11 +104,12 @@ contract VoteContract {
     // 투표 함수
     function voting(uint _proposalId) public alreadyVote isNowVote onlyHolder() {
         uint index = _proposalId - 1;
+        uint _votePower = brownyNFT.userNFTs(msg.sender).length;
         voters[msg.sender].votedProposalId = _proposalId;
         voters[msg.sender].hasVotes = forHasVotes;
-        voters[msg.sender].votePower = brownyNFT.myNFTs().length; 
-        voteCounts += brownyNFT.myNFTs().length;
-        proposals[index].votedCounts += brownyNFT.myNFTs().length;
+        voters[msg.sender].votePower = _votePower; 
+        voteCounts += _votePower;
+        proposals[index].votedCounts += _votePower;
         voterCounts++;
         emit Voting(msg.sender, _proposalId);
     }
