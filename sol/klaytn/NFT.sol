@@ -41,6 +41,9 @@ contract BrownyNFT is ERC721, Whitelist {
     function myNFTs() public view returns(uint256[] memory) {
         return ownNFTs[msg.sender];
     }
+    function userNFTs(address _address) external view returns(uint256[] memory) {
+        return ownNFTs[_address];
+    }
 
     /** 
     * _tokenIdCounter - 전체 발행된 nft 수
@@ -178,7 +181,7 @@ contract BrownyNFT is ERC721, Whitelist {
         }
         return stakingList;
     }
-    function checkUserStakedNFTs(address _user) external view returns(uint[] memory) {
+    function checkUserStakedNFTs(address _user) public view returns(uint[] memory) {
         uint[] memory stakingList = new uint[](numOwnerStakedNFT[_user]);
         uint index = 0;
         for(uint i = 0; i < ownNFTs[_user].length; i++) {
@@ -193,6 +196,18 @@ contract BrownyNFT is ERC721, Whitelist {
     // 사용자의 tier
     function userRank() public view returns(uint) {
         uint _amount = balanceOf(msg.sender) + checkStakedNFTs().length;
+        if(_amount == 0) {
+        return 0; // "unranked"
+        } else if(_amount >= 1 && _amount < 5) {
+        return 1; // "bronze"
+        } else if(_amount >= 5 && _amount < 10) {
+        return 2; // "silver"
+        } else {
+        return 3; // "gold"
+        } 
+    }
+    function userRankEx(address _address) external view returns(uint) {
+        uint _amount = balanceOf(_address) + checkUserStakedNFTs(_address).length;
         if(_amount == 0) {
         return 0; // "unranked"
         } else if(_amount >= 1 && _amount < 5) {
