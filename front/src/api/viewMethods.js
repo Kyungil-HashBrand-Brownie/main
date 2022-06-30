@@ -8,4 +8,8 @@ const checkWhite = async(address) => await nftInstance.methods.isWhitelisted(add
 
 const whitelistNftNum = async() => await nftInstance.methods.whitelistNftNum().call();
 
-export {getContractOwner, nftNum, checkWhite, whitelistNftNum};
+const getUserRank = async(from) => await nftInstance.methods.userRank().call({from});
+
+const getMintList = async(from) => await nftInstance.methods.checkMinting().call();
+
+export {getContractOwner, nftNum, checkWhite, whitelistNftNum, getUserRank, getMintList};

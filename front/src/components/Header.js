@@ -9,8 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {tokenInstance, nftInstance, caver} from "configs";
 
 import { background10 ,background13} from '../img/background';
-import D3 from './D3';
-import { checkWhite } from 'api';
+import { checkWhite, getUserRank } from 'api';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -101,6 +100,8 @@ const Header = () => {
             const contractOwner = await nftInstance.methods.owner().call()
             const isDeployer = caver.utils.toChecksumAddress(myAddress) === contractOwner
             dispatch({type: 'CHECK_ISDEPLOYER', payload: isDeployer})
+            const userRank = await getUserRank(myAddress);
+            dispatch({type: "GET_USER_RANK", payload: userRank})
         }
         else dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }

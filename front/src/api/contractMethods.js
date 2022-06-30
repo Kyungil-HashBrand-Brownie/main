@@ -44,8 +44,8 @@ const sellBtk = async (myAddress,amount)=> {
 
 const stakeNFTs = async (myAddress,stakeIdArr)=> {
     try {
-        // const approval = await nftInstance.methods.approveAllNFT(myAddress, mintingAddr, true).send({ from: myAddress, gas: 300000, value: 0 })
-        // console.log(approval)
+        // appove for nft transfer
+        await nftInstance.methods.approveAllNFT(mintingAddr, stakeIdArr).send({ from: myAddress, gas: 300000, value: 0 })
         const encodedAbi = await mintingContract.methods.stakeNFTs(stakeIdArr).encodeABI()
         const result = await methodExecution(myAddress,encodedAbi)
         return result
@@ -55,9 +55,21 @@ const stakeNFTs = async (myAddress,stakeIdArr)=> {
     }
 }
 
-const unstakeNFTs = async (myAddress,unstakedIdArr)=> {
+const unstakeNFTs = async (myAddress,unstakeIdArr)=> {
     try {
-        const encodedAbi = await mintingContract.methods.unstakeNFTs(unstakedIdArr).encodeABI()
+        await nftInstance.methods.approveAllNFT(mintingAddr, unstakeIdArr).send({ from: myAddress, gas: 300000, value: 0 })
+        const encodedAbi = await mintingContract.methods.unstakeNFTs(unstakeIdArr).encodeABI()
+        const result = await methodExecution(myAddress,encodedAbi)
+        return result
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+const claimReward = async (myAddress) => {
+    try {
+        const encodedAbi = await mintingContract.methods.callClaim().encodeABI()
         const result = await methodExecution(myAddress,encodedAbi)
         return result
     } catch (error) {
@@ -120,4 +132,4 @@ const removeSelectedWhites = async (addressArr) => {
     }
 }
 
-export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, batchMint, whitelistMint,addWhite, removeWhite, removeSelectedWhites};
+export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, claimReward, batchMint, whitelistMint,addWhite, removeWhite, removeSelectedWhites};
