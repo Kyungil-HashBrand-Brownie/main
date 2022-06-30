@@ -12,13 +12,13 @@ import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
+import { faRotateRight, faCircle } from '@fortawesome/free-solid-svg-icons'
 
 const override = css`
 //   display: flex;
   border-color: black;
 
-  margin: 0rem 1.25rem 0rem 1.25rem;
+  margin: 0rem 1.42rem 0rem 1.4rem;
 `;
 
 const Cardjustify = styled.div`
@@ -356,6 +356,9 @@ function NftCard() {
                         <>
                             <div className='nftlist-reward'>
                             <FontAwesomeIcon 
+                                bounce
+                                transform="shrink-3"
+                                mask={faCircle}
                                 icon={faRotateRight}
                                 className='refresh-reward-icon'
                                 onClick={clickRefresh}
