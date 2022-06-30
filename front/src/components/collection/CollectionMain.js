@@ -95,7 +95,6 @@ const moveToDetailPage = (edi) => {
 }
 
 const CollectionMain = ({ data }) => {
-    data = data.sort((a,b) => a.edition - b.edition)
         
     return (
         <CollectionMainOuter>
