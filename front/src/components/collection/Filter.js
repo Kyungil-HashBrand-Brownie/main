@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,6 +11,7 @@ const filterData = ['Body', 'Eye', 'Mouth', 'Item', 'Background']
 
 const FilterOuter = styled.div`
     margin-top: 20px;
+    margin-bottom: 20px;
 `
 const FilterInner = styled.div`
     width: 300px;
@@ -79,25 +81,36 @@ const FilterContent = styled.div`
         }
     }
 `
-let selectInit = filterData.map((data) => {
-    let d = {};
-    d.id = data;
-    d.click = false;
-    return d
-})
+// let selectInit = filterData.map((data) => {
+//     let d = {};
+//     d.id = data;
+//     d.click = false;
+//     return d
+// })
 
 const Filter = () => {
-    const [select, setSelect] = useState(selectInit)
+    const dispatch = useDispatch();
+    const { filterOpenState, filterOption } = useSelector(state => state.nft)
 
     const changeSelect = (data) => {
-        let copy = _.cloneDeep(select).map((item) => {
+        // console.log(filterOption);
+        console.log(data)
+        let copyFilterOption = _.cloneDeep(filterOption).map(item => {
+            if (data.click) {
+                if (item.id == data.id) item.opt = null;
+            }
+            return item
+        })
+        
+        let copy = _.cloneDeep(filterOpenState).map((item) => {
             if (item.id === data.id) {
                 item.click = !item.click;
             }
             return item
         });
-    
-        setSelect(copy)
+        
+        dispatch({type: 'CHANGE_FILTER_OPTION_STATE', payload: copyFilterOption});
+        dispatch({type:'CHANGE_FILTER_STATE', payload: copy});
     } 
 
     return (
@@ -109,7 +122,7 @@ const Filter = () => {
                 <FilterText>Filter By</FilterText>
               </FilterSubHeader>
               <FilterContentBox>
-              { select.map((data, index) => 
+              { filterOpenState.map((data, index) => 
                 <div key={index}>
                     <FilterContent onClick={() => changeSelect(data)}>
                         <FilterOption key={index}>
@@ -121,7 +134,7 @@ const Filter = () => {
                         />
                     </FilterContent>
                     {data.click && 
-                        <FilterDetail parts={[data.id+'1', data.id+'2', data.id+'3', data.id+'4', data.id+'5']}/>
+                        <FilterDetail parts={data.id}/>
                     }
                 </div>
             )}
