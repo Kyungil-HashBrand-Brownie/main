@@ -269,6 +269,25 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "checkUserStakedNFTs",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256",
 						"name": "_tokenId",
 						"type": "uint256"
@@ -850,8 +869,46 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "userNFTs",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "userRank",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "userRankEx",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -1090,11 +1147,11 @@
 			]
 		},
 		"minting/NFT.sol": {
-			"keccak256": "0xdf0f8cfd6b3835cc30b9d7977e017b952e83221a16292b502a48f1226e703652",
+			"keccak256": "0x0bc47917bc22bcb5d4e00be85dd08a77f841c744fa578210c8e1d9aaf73092d9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d14e328f0e310f07df62c9c7a57cf7b8025330d8e4f511f2daea284f734845e5",
-				"dweb:/ipfs/QmYeWKoRCk6y7yuzx8Hw3Aoddk2VgMJx1ZzUZcri5hS1Qb"
+				"bzz-raw://2f1caed913a0bbf9742c080603c31c89d95b3d019eba98f854c7832085e14453",
+				"dweb:/ipfs/Qmbex4EpYpu7J1aBPgAfD6HfkxPxUyhaXjB11byYaRDH68"
 			]
 		},
 		"minting/Whitelist.sol": {
