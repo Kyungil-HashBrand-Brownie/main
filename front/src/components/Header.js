@@ -58,7 +58,7 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer, isWhite } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh, isDeployer, isWhite, filterOpenState, filterOption, sortOption } = useSelector(state => state.nft);
 
     const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(0);
@@ -125,6 +125,15 @@ const Header = () => {
         dispatch({type: "MODAL_CLICK"})
     }
 
+    const reset = () => {
+        closeModal();
+        resetCollection();
+    }
+
+    const resetCollection = () => {
+        dispatch({type: 'RESET_COLLECTION'})
+    }
+
     const closeModal = () => {
         dispatch({type: "MODAL_CLOSE"})
     }
@@ -181,13 +190,13 @@ const Header = () => {
                 >
                     {pages.map((item, index) => 
                         <Link key={index}
-                            onClick={closeModal} 
+                            onClick={reset} 
                             className='nav-item' 
                             to={item.path}>
                             {item.text}</Link>
                     )}
 
-                    {isDeployer ? <Link onClick={closeModal} className='nav-item' to="/admin">Admin</Link> : null}
+                    {isDeployer ? <Link onClick={reset} className='nav-item' to="/admin">Admin</Link> : null}
                 </Nav>
                 {
                 address != null
