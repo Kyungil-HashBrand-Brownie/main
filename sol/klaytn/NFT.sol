@@ -26,7 +26,7 @@ contract BrownyNFT is ERC721, Whitelist {
 
     // _baseURI - nft 발행시 참조할 ipfs 주소 
     function _baseURI() internal pure override returns (string memory) {
-        return "ipfs://QmaAYEhbXsrDn7TGgnz9EhZzrrrB8vuHDuzXioPFzjRQBt/";
+        return "ipfs://Qmcta8PfoECTVgtmHxVBMcDToKk6Nes5RHZnTnNxJuZ2yi/";
     }
 
     function checkMinting(uint _tokenId) public view returns(bool) {
