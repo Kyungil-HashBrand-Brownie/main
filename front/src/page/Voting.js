@@ -1,14 +1,31 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Form } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 import Proposal from 'components/Proposal';
 import axios from "axios"
+import { newProposal } from 'api';
 
+
+const useInput = (defaultValue) => {
+  const [value , setValue] = useState(defaultValue)
+
+  const onChange = (e) => {
+    setValue(e.target.value)
+  }
+
+  return {
+    value,
+    onChange
+  }
+}
 
 function Voting() {
   const {myAddress, userRank} = useSelector(state=>state.nft)
 
   const [vote, setVote] = useState(0)
+  const [proposals, setProposals] = useState([])
+
+  const proposal = useInput("")
   
     const callApi = async () => {
       // db안건 데이터 불러오기
@@ -20,7 +37,7 @@ function Voting() {
 
     useEffect(()=>{
       callApi();
-    },[])
+    },[userRank])
 
   const voteSubmit = async (e) => {
     e.preventDefault();
@@ -32,8 +49,11 @@ function Voting() {
     setVote(e.target.value)
   }
 
-  // db에 저장된 안건 example
-  const proposals = ["vote1","vote2","vote3"]
+  const addProposal = async (e) => {
+    e.preventDefault()
+    await newProposal("0xAc45689e82aE9F93ED325b9254fe42BB77bA7849");
+    setProposals([...proposals, proposal.value])
+  }
 
   return (
     <div className="App">
@@ -46,6 +66,14 @@ function Voting() {
           }
         </div>
         <button type='submit'>제출</button>
+      </Form>
+      <Form
+        onSubmit={addProposal}
+      >
+        <InputGroup className='mb-3'>
+          <Form.Control type='text' {...proposal}/>
+          <Button type='submit' variant='success'>Add proposal</Button>
+        </InputGroup>
       </Form>
     </div>
   )
