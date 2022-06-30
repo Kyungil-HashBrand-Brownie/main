@@ -13,7 +13,7 @@ const whitelistNftNum = async() => await nftInstance.methods.whitelistNftNum().c
 
 const getUserRank = async(from) => await nftInstance.methods.userRank().call({from});
 
-const getMintList = async(from) => await nftInstance.methods.checkMinting().call();
+const getMintList = async() => await nftInstance.methods.mintedNFT().call();
 
 // voting view 함수
 

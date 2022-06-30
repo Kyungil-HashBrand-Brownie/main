@@ -1,8 +1,16 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import _ from 'lodash'
 import styled from 'styled-components'
-import { Check } from '../../img';
+import { Check } from '../../img'
 
-// const parts = ['body1', 'body2', 'body3', 'body4', 'body5'];
+const partsCount = {
+    'Body': 1,
+    'Eye': 7,
+    'Mouth': 5,
+    'Item': 5,
+    'Background': 11,
+}
 
 const FilterDetailOuter = styled.div`
     width: 100%;
@@ -43,19 +51,43 @@ const FilterDetailBox = styled.div`
 `
 
 const FilterDetail = ({ parts }) => {
-    parts = parts.map((item) => item.replace('Background', 'Back'))
+    const dispatch = useDispatch();
+    const { filterOption } = useSelector(state => state.nft);
+    console.log()
+    let partOptions = new Array(partsCount[parts]).fill(0).map((item, index) => {
+        if (parts == 'Background') parts = 'Back' 
+        return parts + (index+1)
+    })
     const [check, setCheck] = useState(null);
 
     const changeCheck = (part) => {
-        if (check == part) setCheck(null);
-        else setCheck(part) 
+        // console.log(filterOption);
+        // console.log('part: ', part)
+        if (parts == 'Back') parts = 'Background';
+        // console.log('parts: ', parts)
+        let copy = _.cloneDeep(filterOption).map((item) => {
+            // console.log(item.id == parts)
+            if (item.id == parts) {
+                if (item.opt == part) item.opt = null
+                else item.opt = part
+            }
+            return item
+        })
+        // console.log(copy)
+        if (check == part) {
+            setCheck(null);
+        }
+        else {
+            setCheck(part) 
+        }
+        dispatch({type: 'CHANGE_FILTER_OPTION_STATE', payload: copy})
     }
 
     return (
         <FilterDetailOuter>
             {
                 parts &&
-                parts.map((part, index) => 
+                partOptions.map((part, index) => 
                     <FilterDetailBox 
                         key={index}
                         info={part}

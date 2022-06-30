@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import _ from 'lodash'
 import styled from 'styled-components'
-import { nft1, nft2, nft3, nft4, nft5 } from '../../img/nft';
 
 const CollectionMainOuter = styled.div`
     margin-left: 100px;
     width: 1300px;
-    min-height: 760px;
+    min-height: 160px;
     background: white;
     /* opacity: 0.9; */
     border: 3px solid white;
     border-radius: 20px;
     margin-bottom: 20px;
+    transform: translate(10%, 0);
 `
 const CollectionHeader = styled.div`
     /* background: blue; */
@@ -25,7 +27,7 @@ const CollectionBody = styled.div`
     justify-content: center;
     /* border: 3px solid black; */
     /* padding:  */
-    min-height: 650px;
+    min-height: 250px;
     margin-top: 30px;
     border-radius: 15px;
     flex-wrap: wrap;
@@ -88,28 +90,29 @@ const CollectionCardDetail = styled.div`
     /* background: green; */
 `
 
-const images = [nft1, nft2, nft3, nft4, nft5];
+const moveToDetailPage = (edi) => {
+    console.log(edi);
+}
 
 const CollectionMain = ({ data }) => {
+    data = data.sort((a,b) => a.edition - b.edition)
+        
     return (
         <CollectionMainOuter>
             <CollectionHeader>Collections</CollectionHeader>
             <CollectionBody>
-                {/* <CollectionRow> */}
-                    {/* {images.map((image, index) => */}
                     { data !== null &&  
                     data.map((item, index) => 
-                        <CollectionCardOuter key={index}>
+                        <CollectionCardOuter key={index} onClick={() => moveToDetailPage(item.edition)}>
                             <CollectionCard>
-                                <CollectionCardImg image={`/image/images/${item.images}`}>
+                                <CollectionCardImg image={`/image/images/${item.addr}`}>
                                 </CollectionCardImg>
                                 <CollectionCardDetail>
-                                    Browny#{item.idx}
+                                    Browny#{item.edition}
                                 </CollectionCardDetail>
                             </CollectionCard>
                         </CollectionCardOuter>
                     )}
-                {/* </CollectionRow> */}
             </CollectionBody>
         </CollectionMainOuter>
     )

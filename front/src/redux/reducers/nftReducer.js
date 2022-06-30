@@ -16,7 +16,24 @@ let initialState = {
     userRank:0,
     walletRefresh: 1,
     isDeployer: false,
-    isWhite: false
+    isWhite: false,
+
+    // Collection
+    sortOption: 0,
+    filterOpenState: [
+        { id: 'Body', click: false },
+        { id: 'Eye', click: false },
+        { id: 'Mouth', click: false },
+        { id: 'Item', click: false },
+        { id: 'Background', click: false },
+    ],
+    filterOption: [
+        { id: 'Body', opt: null },
+        { id: 'Eye', opt: null },
+        { id: 'Mouth', opt: null },
+        { id: 'Item', opt: null },
+        { id: 'Background', opt: null },
+    ],
 }
 
 function nftReducer(state = initialState, action) {
@@ -159,6 +176,45 @@ function nftReducer(state = initialState, action) {
             return {
                 ...state,
                 userRank : payload
+            }
+
+        // Collection
+        case 'CHANGE_SORT_OPTION' : 
+            return {
+                ...state,
+                sortOption: payload,
+            }
+
+        case 'CHANGE_FILTER_STATE' :
+            return {
+                ...state,
+                filterOpenState: payload,
+            }
+
+        case 'CHANGE_FILTER_OPTION_STATE' :
+            return {
+                ...state,
+                filterOption: payload,
+            }
+
+        case 'RESET_COLLECTION' : 
+            return {
+                ...state,
+                sortOption: 0,
+                filterOpenState: [
+                    { id: 'Body', click: false },
+                    { id: 'Eye', click: false },
+                    { id: 'Mouth', click: false },
+                    { id: 'Item', click: false },
+                    { id: 'Background', click: false },
+                    ],
+                filterOption: [
+                    { id: 'Body', opt: null },
+                    { id: 'Eye', opt: null },
+                    { id: 'Mouth', opt: null },
+                    { id: 'Item', opt: null },
+                    { id: 'Background', opt: null },
+                ],
             }
 
         default:
