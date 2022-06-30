@@ -16,8 +16,6 @@ const CollectionOuter = styled.div `
     /* background-color: brown; */
 `
 
-const sortData = ['All(default)', 'Not Minted', 'Minted'];
-
 const Collection = () => {
     const [data, setData] = useState(null);
     const { sortOption, filterOption } = useSelector(state => state.nft);
@@ -57,6 +55,7 @@ const Collection = () => {
                 break;
         }
         console.log('_data:', _data)
+        _data = _data.sort((a,b) => a.edition - b.edition)
         setData(_data);
     }
 
