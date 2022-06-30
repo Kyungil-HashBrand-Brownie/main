@@ -16,17 +16,24 @@ contract BrownyNFT is ERC721, Whitelist {
     * @name BrownyNFT
     * @symbol BFT
     */
-    constructor() ERC721("BrownyNFT", "BFT") {}
-
     string public fileExtention = ".json";
     using Strings for uint256;
     mapping(uint256 => bool) public mintinglist;
     mapping(address => uint256[]) public ownNFTs;
     uint256[] mintedNftList;
 
+    constructor() ERC721("BrownyNFT", "BFT") {}
+
     // _baseURI - nft 발행시 참조할 ipfs 주소 
     function _baseURI() internal pure override returns (string memory) {
         return "ipfs://Qmcta8PfoECTVgtmHxVBMcDToKk6Nes5RHZnTnNxJuZ2yi/";
+    }
+
+    // 발행된 nft tokenId에 대한 ipfs주소 return 함수 
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
+        string memory baseURI = _baseURI();
+        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), fileExtention)) : "";
     }
 
     function checkMinting(uint _tokenId) public view returns(bool) {

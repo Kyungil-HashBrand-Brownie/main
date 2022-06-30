@@ -76,21 +76,21 @@ const Header = () => {
         }
     }
 
-    const weiToFixed = (wei) => {
+    const weiToFixed = (wei,fixId) => {
         const toKlay = caver.utils.convertFromPeb(wei);
-        const fixed = parseFloat(toKlay).toFixed(2);
+        const fixed = parseFloat(toKlay).toFixed(fixId);
         return fixed;
     }
 
     const setTokenBalance = async (address) => {
-        const weiBalance = await caver.klay.getBalance(address)
-        const fixedBalance = weiToFixed(weiBalance)
-        console.log(fixedBalance)
-        const weibtkBalance = await tokenInstance.balanceOf(address) //BigNumber 객체
-        const fixedbtkBalance = weiToFixed(weibtkBalance)
+        const weiKLAYBalance = await caver.klay.getBalance(address)
+        const fixedKLAYBalance = weiToFixed(weiKLAYBalance,2)
 
-        setBalance(fixedBalance)
-        setBtkBalance(fixedbtkBalance);
+        const weiBTKBalance = await tokenInstance.balanceOf(address) //BigNumber 객체
+        const fixedBTKBalance = weiToFixed(weiBTKBalance,4)
+
+        setBalance(fixedKLAYBalance)
+        setBtkBalance(fixedBTKBalance);
     }
 
     const setUserInfo = async () => {
