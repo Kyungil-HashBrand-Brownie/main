@@ -4,4 +4,4 @@ export {getContractOwner, nftNum, checkWhite, whitelistNftNum ,getUserRank, getV
 
 export {newProposal, startVote, endVote, resetVote} from "./votingMethods"
 
-export {pebToFixed} from "./utils"
+export {pebToFixed, getTokenBalance} from "./utils"
