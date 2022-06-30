@@ -15,8 +15,8 @@ const imagesKey = (req, res) => {
 const images = async (req, res) => {
     let { myBrownyNFTs, stakedNFTs } = req.body
     console.log(req.body)
-
-    const result = await pool.query('select * from BrownyImg')
+    //더미데이터 컨트렉트 재구성시 다시 설정해야함
+    const result = await pool.query('select * from dummyImg')
     console.log(result)
     let resd = myBrownyNFTs.map((item) => result[0].find((id) => id.imgNum == item))
     console.log('resd : ', resd)
@@ -33,7 +33,15 @@ const images = async (req, res) => {
     res.send({ data, data1 })
 }
 
+const allImages = async (req, res) => {
+    console.log('hi');
+    const result = await pool.query('select * from dummyImg')
+    const data = result[0];
+    res.send(data)
+}
+
 module.exports = {
     imagesKey,
-    images
+    images,
+    allImages,
 }

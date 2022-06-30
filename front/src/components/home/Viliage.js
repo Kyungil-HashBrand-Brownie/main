@@ -1,16 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-import { viliage2 } from '../img'
+import { viliage2 } from '../../img'
 
 const StyledViliage = styled.div`
-
     width: 100%;
     height: 400px;
-    margin-top: 100px;
+    margin-top: 200px;
     margin-bottom: 100px;
-    /* position: relative; */
 
-    .div1 {
+    .village {
         background-color: pink ;
         position: absolute;
         width: 100%;
@@ -18,7 +16,6 @@ const StyledViliage = styled.div`
         opacity: 0.3;
         z-index:-1;
     }
-
 `
 const HomeBackImgPosition = styled.div`
     width: 100%;
@@ -32,16 +29,14 @@ const HomeBackImgPosition = styled.div`
 `
 
 const Viliage = () => {
-  return (
-    <div>
-        <StyledViliage>
-            <div className="div1">
-                <HomeBackImgPosition>
-                </HomeBackImgPosition>
-            </div>
-        </StyledViliage>
-    </div>
-  )
+    return (
+            <StyledViliage>
+                <div className="village">
+                    <HomeBackImgPosition>
+                    </HomeBackImgPosition>
+                </div>
+            </StyledViliage>
+    )
 }
 
 export default Viliage

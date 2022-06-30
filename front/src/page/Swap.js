@@ -5,7 +5,6 @@ import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Klaytn from '../img/swap/klaytn.png';
 import Browny1 from '../img/swap/browny1.png';
 import Arrow from '../img/swap/arrowRight.png';
-import {brownyContract, contractAddr} from "configs";
 import {getBtk, sellBtk} from "api"
 
 
@@ -19,11 +18,19 @@ const Swap = () => {
     const amountInput = useRef('');
 
     const swapChange = () => {
-        setSwap(!swap)
+        // let changeAmount = exchange;
+        setSwap(!swap);
+        amountInput.current.value = '';
+        // setSwap(!swap)
+        // setExchange(amountInput.current.value);
+        // amountInput.current.value = changeAmount;
     }
 
     const checkValidation = () => {
         let value = amountInput.current.value
+        // let wordLen = bool[!swap].length;
+        // value = value.slice(0, -wordLen)
+
         // let testLen = value.length - bool[!swap].length - 1;
         // value = value.slice(0,testLen);
         // console.log(testLen)
@@ -43,8 +50,10 @@ const Swap = () => {
 
         else {
             if (value != '') {
-                if (swap) setExchange((Number(value) * 7.22).toFixed(2).toString() + ' ' + bool[swap])
-                else setExchange((Number(value) / 7.22).toFixed(2).toString() + ' ' + bool[swap])
+                // if (swap) setExchange((Number(value) * 7.22).toFixed(2).toString() + ' ' + bool[swap])
+                if (swap) setExchange(parseInt(Number(value) * 7.22))
+                else setExchange(parseInt(Number(value) / 7.22))
+                // else setExchange((Number(value) / 7.22).toFixed(2).toString() + ' ' + bool[swap])
             }
             else setExchange('your exchange')
             // amountInput.current.value = ;
@@ -59,7 +68,7 @@ const Swap = () => {
         let status;
         if(Number(amount)){
             if(swap){
-                const result = await getBtk(myAddress,amount)
+                const result = await getBtk(myAddress, amount)
                 status = result.status
             }
             else{
@@ -74,7 +83,6 @@ const Swap = () => {
         }
         else {
             alert("숫자를 입력해주세요")
-            amountInput.current.value = "";
         }
     }
     return (
@@ -113,7 +121,9 @@ const Swap = () => {
                         className='swap-amount-input'
                         placeholder='input amount'
                         onChange={checkValidation}
-                        ref={amountInput} /> 
+                        // value={bool[!swap]}
+                        ref={amountInput} />
+                        
                         <img className='swap-arrow' src={Arrow} />
                         <input 
                         disabled

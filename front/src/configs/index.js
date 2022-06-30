@@ -1,3 +1,4 @@
-export {contractAddr,tokenAddr} from "./contractAddr"
-export {default as abiJson} from "./contractAbi"
-export {brownyContract, btkInstance} from"./contractInstance"
+export {default as caver} from "./caverjs"
+export {mintingAbi, nftAbi, tokenAbi, votingAbi} from "./abi"
+export {tokenAddr, nftAddr, mintingAddr, votingAddr} from "./contractAddress"
+export { tokenInstance, nftInstance, mintingContract, votingContract } from "./contractInstance"

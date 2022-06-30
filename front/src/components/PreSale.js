@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import {brownyContract, contractAddr} from "configs";
-import { batchMint, whitelistMint } from 'api';
+import {nftInstance} from "configs";
+import { batchMint, checkWhite, nftNum, whitelistMint, whitelistNftNum } from 'api';
 
 
 // 리팩터링 - 코드를 단순화하는 작업 불필요한 중복요소들을 제거
@@ -30,7 +30,7 @@ const StyledDiv = styled.div`
     line-height: 1.5;
     margin-bottom: 30px;
     margin-left: 
-        ${props => props.price == 2 ? '10px' : 0} ;
+        ${props => props.price == 50 ? '10px' : 0} ;
     border-radius: 8px;
     
 `;
@@ -51,12 +51,12 @@ const StyledButton = styled.button`
 
 const PreSale = ({ data }) => {
     const dispatch = useDispatch();
-    const { myAddress } = useSelector(state => state.nft);
+    const { myAddress, isWhite } = useSelector(state => state.nft);
     const { amount, img, price, title } = data;
 
-    const [count, setCount] = useState(1)    
-    const [totalCnt, setTotalCnt] = useState(0);
-    const [isWhite, setIsWhite] = useState(false)
+    const [count, setCount] = useState(1)
+    const [PreCount, setPreCount] = useState(0);
+    const [whiteCount, setWhiteCount] = useState(0);
 
     const countAdd = () => {
         if (count < 5) setCount(count + 1);
@@ -78,6 +78,8 @@ const PreSale = ({ data }) => {
             alert("해당 지갑 주소로 민팅되었습니다!");
         }
         else alert("transaction fail")
+
+        getMintCnt()
     }
 
     const whiteMint = async () => {
@@ -87,42 +89,30 @@ const PreSale = ({ data }) => {
             alert("해당 지갑 주소로 민팅되었습니다!");
         }
         else alert("transaction fail")
+
+        getMintCnt()
     }
 
     // 전체 민팅 갯수
     const getMintCnt = async ()=> {
-        const totalCnt = await brownyContract.methods.nftNum().call()
-        setTotalCnt(totalCnt)
-    }
-
-    const checkWhitelist = async () => {
-        if (myAddress) {
-            try {
-                const isWhite = await brownyContract.methods.isWhitelisted(myAddress).call()
-                console.log(isWhite);
-                setIsWhite(isWhite)
-            }
-            catch (e) {
-                throw e
-            }
-        }
+        const PreCount = await nftNum()
+        setPreCount(PreCount)
+        const WhiteCount = await whitelistNftNum()
+        setWhiteCount(WhiteCount)
     }
 
     useEffect(() => {
         getMintCnt()
     }, [])
 
-    useEffect(() => {
-        checkWhitelist()
-    }, [isWhite, myAddress])
-
+    
     return (
         <div className="freelist">
             <StyledMain >
                 <div className='mint-title-box'>
                     <h2 className="mint-title">{title}</h2>
                 </div>
-                {(price == 2 || isWhite)
+                {(price == 50 || isWhite)
                 ?
                 <>
                 <div className='mint-img-container'>
@@ -146,14 +136,14 @@ const PreSale = ({ data }) => {
                     </Row>
                     <Row className='mint-info-row'>
                         <Col><i>Amount</i></Col>
-                        <Col>{amount == 'limited' ? amount : totalCnt + amount}</Col>
+                        <Col>{amount == '/30' ? whiteCount + amount : PreCount + amount}</Col>
                     </Row>
                 </Container>
                 <br />
                 <Button 
                     className="mint-wal-connect-btn" 
                     variant="success" 
-                    onClick={price==2 ? preMint : whiteMint}>
+                    onClick={price==50 ? preMint : whiteMint}>
                     Mint
                 </Button>
                 </>

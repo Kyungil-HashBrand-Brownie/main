@@ -6,7 +6,7 @@ import "./Token.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 
-contract NFTStaking is BrownieNft {
+contract NFTStaking is BrownyNft {
   uint256 public totalStaked;
 
   struct Stake {

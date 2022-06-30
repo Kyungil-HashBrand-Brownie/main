@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './page/HomePage';
 import Mint from './page/Mint';
@@ -14,9 +14,26 @@ import RightImg from './img/chocolate/choco4.png';
 import Swap from './page/Swap';
 import NftList from './page/NftList';
 import NoPage from 'page/NoPage';
+import Collection from 'page/Collection';
+import Voting from 'page/Voting';
 
 function App() {
   const {isDeployer} = useSelector(state=>state.nft)
+
+  const [isBaobab,setIsBaobab] = useState(false)
+
+  useEffect(()=>{
+    if(window.klaytn){
+      if(window.klaytn.networkVersion === 1001) setIsBaobab(true)
+      else setIsBaobab(false)
+
+      window.klaytn.on('networkChanged', async function(network) {
+        if(network === 1001) setIsBaobab(true)
+        else setIsBaobab(false)
+      })
+    }
+},[])
+
   return (
     <>
     <div className='wrapper'>
@@ -25,15 +42,28 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/mint" element={<Mint />} />
-        {/* <Route path="/whitelist" element={<WhiteList/>} />  */}
-        {isDeployer
-        ?
-        <Route path="/admin" element={<AdminPage />} />
-        : null
-        }
         <Route path="/test" element={<Testpage />} />
-        <Route path="/swap" element={<Swap />} />
-        <Route path="/nftlist" element={<NftList />} />
+        <Route path='/collection' element={<Collection />} />
+        <Route path='/voting' element={<Voting />} />
+        {
+          isBaobab
+          ?
+          <>
+            {isDeployer
+            ?
+            <Route path="/admin" element={<AdminPage />} />
+            : null
+            }
+            <Route path="/swap" element={<Swap />} />
+            <Route path="/nftlist" element={<NftList />} />
+          </>
+          :
+          <>
+          <Route path='/swap' element={<div>테스트 네트워크가 아닙니다</div>}/>
+          <Route path='/nftlist' element={<div>테스트 네트워크가 아닙니다</div>}/>
+          </>
+        }
+        {/* <Route path="/whitelist" element={<WhiteList/>} />  */}
         <Route path='*' element={<NoPage />} />
       </Routes>
     </div>

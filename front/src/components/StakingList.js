@@ -2,7 +2,6 @@ import Card from 'react-bootstrap/Card';
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { brownyContract, contractAddr } from "configs";
 import { Check } from '../img';
 import { unstakeNFTs } from 'api';
 import Pagination from './Pagination';
@@ -248,6 +247,8 @@ const StakingList = () => {
                     return item;
                 });
                 dispatch({type: 'NFTCARD_UNSTAKE', payload: {myNFTs: unstakedNFTs, myStakedNFTs: stakedNFTs}})
+                dispatch({type: "WALLET_REFRESH"})
+
                 alert("선택한 NFT가 정상적으로 unstaking 되었습니다.");
                 // navigate('/');
             }
