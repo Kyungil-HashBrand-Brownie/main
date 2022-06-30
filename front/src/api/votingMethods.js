@@ -1,4 +1,4 @@
-import { mintingContract, votingAddr, nftInstance, caver } from "configs";
+import { mintingContract, votingAddr, nftInstance, caver, votingContract } from "configs";
 import { getContractOwner } from "./viewMethods";
 
 const methodExecution = async (from,encodedAbi,amount=0) =>{
@@ -15,13 +15,17 @@ const methodExecution = async (from,encodedAbi,amount=0) =>{
     return result;
 }
 
-const getBtk = async (myAddress,amount)=> {
+const newProposal = async (myAddress)=> {
     try {
-        const encodedAbi = await mintingContract.methods.getBtk(amount).encodeABI()
-        const result = await methodExecution(myAddress,encodedAbi,amount)
+
+        const encodedAbi = await votingContract.methods.newProposal().encodeABI()
+        const result = await methodExecution(myAddress,encodedAbi)
+        console.log(result)
         return result
     } catch (error) {
         console.log(error)
         return error
     }
 }
+
+export {newProposal}
