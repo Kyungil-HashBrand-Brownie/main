@@ -341,6 +341,7 @@ function NftCard() {
 
     const clickClaim = async () => {
         await claimReward(myAddress)
+        dispatch(nftAction.getReward(nftInstance, myStakedNFTs));
         dispatch({type: "WALLET_REFRESH"})
     }
 

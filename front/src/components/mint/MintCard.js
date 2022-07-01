@@ -28,11 +28,11 @@ const MintCard = () => {
           <Row>
             <Col className='FreeSale' xs={{span:4, offset:2 }}> 
               <PreSale 
-                data={preSaleProps}/> 
+                {...preSaleProps}/> 
             </Col>
             <Col className='WhiteSale' xs={{span:4 }}> 
               <PreSale 
-                data={whiteSaleProps}/> 
+               {...whiteSaleProps}/> 
               </Col>
           </Row>
         </Container>

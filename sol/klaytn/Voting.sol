@@ -113,8 +113,18 @@ contract VoteContract {
         voterCounts++;
         emit Voting(msg.sender, _proposalId);
     }
+    // 현재 총 투표수
+    function viewVoteCount() public view returns(uint) {
+        return voteCounts;
+    }
+    
+    // 현재 총 투표 참여자 수
+    function viewVoterCount() public view returns(uint) {
+        return voterCounts;
+    }
 
     // 각 안건 득표수 확인 함수
+    // 1번에 투표하면 0을 조회해야 득표수 알 수 있음
     function numberOfVotes(uint _index) public view returns(uint256) {
         return proposals[_index].votedCounts;
     }
