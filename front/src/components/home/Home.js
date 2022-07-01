@@ -68,7 +68,7 @@ const StyledBrownyAbove = styled.img`
   animation-name: ${displayAnimation};
   animation-duration: 0.5s;
   animation-iteration-count: 1;
-  background-color: lightcyan;
+  // background-color: lightcyan;
   border-radius: 20px;
 `
 
