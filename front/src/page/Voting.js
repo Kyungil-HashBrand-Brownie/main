@@ -92,6 +92,7 @@ function Voting() {
   }
 
   return (
+    <>
     <div className="App">
       <AlertModal {...customAlert} />
       <Form
@@ -125,6 +126,8 @@ function Voting() {
           TestButton
       </Button>
     </div>
+    
+    </>
   )
 }
 
