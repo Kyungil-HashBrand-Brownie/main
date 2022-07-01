@@ -101,11 +101,9 @@ function NftCard({ bool }) {
 
     const checkNfts = async () => {
         getCurrentReward()
-        let myBrownyNFTs = await nftInstance.methods.myNFTs().call(
-            { from: myAddress })
+        let myBrownyNFTs = await getMyNFTs(myAddress)
 
-        let stakedNFTs = await nftInstance.methods.checkStakedNFTs().call(
-            { from: myAddress })
+        let stakedNFTs = await getMyStaked(myAddress)
 
         myBrownyNFTs = myBrownyNFTs.filter((item) => !stakedNFTs.includes(item));
 
@@ -168,7 +166,8 @@ function NftCard({ bool }) {
                                     onClick={stakeNFT}>stake</button>
                             </div>
                             <div className='nftlist-box'>
-                                <div className='nftlist-header'><i>Stakelist</i></div>
+                                <div className='nftlist-header'><i>Total Browny : {myNFTs.length+myStakedNFTs.length}</i></div>
+                                <div className='nftlist-header'><i>Unstaked Browny : {myNFTs.length}</i></div>
                                 <div className='nftlist-select-all'>
                                     <div>
                                         <input

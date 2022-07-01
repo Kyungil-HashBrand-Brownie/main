@@ -81,8 +81,12 @@ const Header = () => {
         dispatch(nftAction.setUserInfo(address));
     }
 
-    const enableKikas = () => {
-        dispatch(nftAction.enableKikas());
+    const setVoteStatus = () => {
+        dispatch(nftAction.setVoteStatus())
+    }
+
+    const enableKaikas = () => {
+        dispatch(nftAction.enableKaikas());
     }
 
     const copyAddress = () => {
@@ -126,8 +130,9 @@ const Header = () => {
                 console.log(network)
             })
         }
+        
+        setVoteStatus();
     },[])
-
     const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/voting'];
     const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Voting'];
 
@@ -191,7 +196,7 @@ const Header = () => {
                         </StyledInfo>
                     }
                 </div>
-                : <><Button className="mint-wal-connect-btn" variant="success" onClick={enableKikas}>지갑 연결하기</Button>{' '}</>
+                : <><Button className="mint-wal-connect-btn" variant="success" onClick={enableKaikas}>지갑 연결하기</Button>{' '}</>
                 }
                 </Navbar.Collapse>
             </Container>

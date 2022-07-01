@@ -109,20 +109,20 @@ const Home = () => {
     let deadlineDate = new Date('July 22, 2022 00:00:00').getTime();
     let now = new Date().getTime();
     let t = deadlineDate - now;
-    let day = Math.floor((t % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 7));
+    let day = Math.floor((t % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
     let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     let minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((t % (1000 * 60)) / 1000);
     
-    const [state, setState] = useState({ day: day, hours: hours, minutes: minutes, seconds: seconds});
+    const [state, setState] = useState({ day, hours, minutes, seconds});
 
     const count = () => {
-      let now = new Date().getTime();
-      let t = deadline - now;
-      let day = Math.floor((t % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
-      let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      let minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((t % (1000 * 60)) / 1000);
+      now = new Date().getTime();
+      t = deadline - now;
+      day = Math.floor((t % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
+      hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+      seconds = Math.floor((t % (1000 * 60)) / 1000);
 
       setState({ day, hours, minutes, seconds });
 

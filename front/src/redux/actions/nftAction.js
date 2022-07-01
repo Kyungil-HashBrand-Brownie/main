@@ -26,7 +26,7 @@
 // }
 
 import { caver, nftInstance,  } from "configs";
-import { checkWhite, getUserRank } from "api";
+import { checkWhite, getUserRank, getVoteStatus } from "api";
 
 function getReward(contract, stake, renewMine, renewStaked) {
 
@@ -52,14 +52,12 @@ function getReward(contract, stake, renewMine, renewStaked) {
     }
 }
 
-const enableKikas = () => {
+const enableKaikas = () => {
     return async (dispatch) => {
         if(window.klaytn){
             window.klaytn.enable()
-            if(await window.klaytn._kaikas.isApproved()){
-                // 계정 정보 리덕스에 저장하는 부분
-                dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
-            }
+            // 카이카스 계정 정보 리덕스에 저장하는 부분
+            dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
         }
         else {
             alert("카이카스 설치 필요")
@@ -95,9 +93,17 @@ const checkWhitelist = (address) => {
     }
 }
 
+const setVoteStatus = () => {
+    return async (dispatch) => {
+        const voteStatus = await getVoteStatus()
+        dispatch({type:"GET_VOTE_STATUS", payload : voteStatus})
+    }
+}
+
 export const nftAction = {
     getReward,
-    enableKikas,
+    enableKaikas,
     setUserInfo,
-    checkWhitelist
+    checkWhitelist,
+    setVoteStatus
 }
