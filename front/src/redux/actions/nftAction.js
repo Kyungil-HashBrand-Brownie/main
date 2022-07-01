@@ -52,7 +52,7 @@ function getReward(contract, stake, renewMine, renewStaked) {
     }
 }
 
-const enableKikas = () => {
+const enableKaikas = () => {
     return async (dispatch) => {
         if(window.klaytn){
             window.klaytn.enable()
@@ -102,7 +102,7 @@ const setVoteStatus = () => {
 
 export const nftAction = {
     getReward,
-    enableKikas,
+    enableKaikas,
     setUserInfo,
     checkWhitelist,
     setVoteStatus
