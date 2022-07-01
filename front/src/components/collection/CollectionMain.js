@@ -41,6 +41,7 @@ const CollectionRow = styled.div`
     background: lightgray;
     height: 300px;
     border-radius: 5px;
+    align-items: center;
 `
 const CollectionCardOuter = styled.div`
     width: 220px;
@@ -94,23 +95,35 @@ const moveToDetailPage = (edi) => {
     console.log(edi);
 }
 
-const CollectionMain = ({ data }) => {
-        
+const CollectionMain = ({ data, row }) => {
     return (
         <CollectionMainOuter>
             <CollectionHeader>Collections</CollectionHeader>
+            <div className='collection-info-outer'>
+                <div className='collection-info-box'>total: {data.length} / 150</div>
+            </div>
             <CollectionBody>
                     { data !== null &&  
-                    data.map((item, index) => 
-                        <CollectionCardOuter key={index} onClick={() => moveToDetailPage(item.edition)}>
-                            <CollectionCard>
-                                <CollectionCardImg image={`/image/images/${item.addr}`}>
-                                </CollectionCardImg>
-                                <CollectionCardDetail>
-                                    Browny#{item.edition}
-                                </CollectionCardDetail>
-                            </CollectionCard>
-                        </CollectionCardOuter>
+                    new Array(row).fill(0).map((item, index) => 
+                        <CollectionRow 
+                            key={index}
+                            // className={(index == row - 1) && data.slice(5*index, 5*index+5).length != 5 ? 'collection-last-row' : undefined}
+                        >
+                            {data.slice(5*index, 5*index+5).map((img, idx) => 
+                                <CollectionCardOuter 
+                                    key={idx + 1000} 
+                                    state={(index == row - 1) && data.slice(5 * index, 5 * index + 5).length != 5 ? false : true}
+                                    onClick={() => moveToDetailPage(img.edition)}>
+                                    <CollectionCard>
+                                        <CollectionCardImg image={`/image/images/${img.addr}`}>
+                                        </CollectionCardImg>
+                                        <CollectionCardDetail>
+                                            Browny#{img.edition}
+                                        </CollectionCardDetail>
+                                    </CollectionCard>
+                                </CollectionCardOuter>
+                            )}
+                        </CollectionRow>
                     )}
             </CollectionBody>
         </CollectionMainOuter>
