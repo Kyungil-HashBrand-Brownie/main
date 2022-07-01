@@ -26,7 +26,7 @@
 // }
 
 import { caver, nftInstance,  } from "configs";
-import { checkWhite, getUserRank } from "api";
+import { checkWhite, getUserRank, getVoteStatus } from "api";
 
 function getReward(contract, stake, renewMine, renewStaked) {
 
@@ -93,9 +93,17 @@ const checkWhitelist = (address) => {
     }
 }
 
+const setVoteStatus = () => {
+    return async (dispatch) => {
+        const voteStatus = await getVoteStatus()
+        dispatch({type:"GET_VOTE_STATUS", payload : voteStatus})
+    }
+}
+
 export const nftAction = {
     getReward,
     enableKikas,
     setUserInfo,
-    checkWhitelist
+    checkWhitelist,
+    setVoteStatus
 }
