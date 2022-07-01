@@ -29,7 +29,7 @@ const newProposal = async (myAddress)=> {
 
 const startVote = async ()=> {
     try {
-        const contractOwner = await getContractOwner()
+        const contractOwner = getContractOwner()
         const encodedAbi = await votingContract.methods.endProposal().encodeABI()
         const result = await methodExecution(contractOwner,encodedAbi)
         console.log(result)
@@ -42,7 +42,7 @@ const startVote = async ()=> {
 
 const endVote = async ()=> {
     try {
-        const contractOwner = await getContractOwner()
+        const contractOwner = getContractOwner()
         const encodedAbi = await votingContract.methods.endVote().encodeABI()
         const result = await methodExecution(contractOwner,encodedAbi)
         console.log(result)
@@ -55,7 +55,7 @@ const endVote = async ()=> {
 
 const resetVote = async ()=> {
     try {
-        const contractOwner = await getContractOwner()
+        const contractOwner = getContractOwner()
         const encodedAbi = await votingContract.methods.restartVote().encodeABI()
         const result = await methodExecution(contractOwner,encodedAbi)
         console.log(result)

@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import Proposal from 'components/Proposal';
 import axios from "axios"
-import { endVote, newProposal, resetVote, startVote } from 'api';
-import { nftAction } from 'redux/actions/nftAction';
+import { newProposal } from 'api';
 
 
 const useInput = (defaultValue) => {
@@ -21,14 +20,21 @@ const useInput = (defaultValue) => {
 }
 
 function Voting() {
-  const dispatch = useDispatch()
-  const {myAddress, userRank, isDeployer, myNFTs, myStakedNFTs, voteStatus} = useSelector(state=>state.nft)
+  const {myAddress, userRank, isDeployer} = useSelector(state=>state.nft)
 
   const [vote, setVote] = useState(0)
   const [proposals, setProposals] = useState([])
 
   const proposal = useInput("")
   
+    const callApi = async () => {
+      // db안건 데이터 불러오기
+      // 랭크 불러오기
+    }
+
+    useEffect(()=>{
+      callApi();
+    },[userRank])
 
   const voteSubmit = async (e) => {
     e.preventDefault();
@@ -42,50 +48,22 @@ function Voting() {
 
   const addProposal = async (e) => {
     e.preventDefault()
-    // await newProposal(myAddress);
+    await newProposal("0xAc45689e82aE9F93ED325b9254fe42BB77bA7849");
     setProposals([...proposals, proposal.value])
   }
 
-  const getVotingButtonProps = () => {
-    let value, onClick;
-    switch(voteStatus) {
-      case "0":
-        // beforeVote
-        value="투표시작"
-        onClick= async ()=>{
-          await startVote()
-          dispatch(nftAction.setVoteStatus())
-        }
-        break;
-
-      case "1":
-        // nowVote
-        value="투표종료"
-        onClick= async ()=>{
-          await endVote()
-          dispatch(nftAction.setVoteStatus())
-        }
-        break;
-
-      case "2":
-        // afterVote
-        value="투표초기화"
-        onClick= async ()=>{
-          await resetVote()
-          dispatch(nftAction.setVoteStatus())
-        }
-      
-    }
+  const votingButtonProps = () => {
+    
     return {
-      value,
-      onClick
+      // children:,
+      // onClick:,
     }
   }
 
-  const votingProps = getVotingButtonProps()
+  const ChangeVotingButton = ({children, onClick})=> {
 
-  const ChangeVotingButton = ({value, onClick})=> {
-    return <Button as='input' type='button' variant="success" value={value} onClick={onClick}></Button>
+    return <Button variant="success" onClick={onClick}>{children}</Button>
+    
   }
 
   return (
@@ -113,10 +91,9 @@ function Voting() {
         </InputGroup>
       </Form>
       : null
-      }
-      <ChangeVotingButton {...votingProps} ></ChangeVotingButton>
-      <div>MY RANK : {userRank}</div>
-      <div>MY VOTING POWER (NFT COUNT) : {myNFTs.length + myStakedNFTs.length}  </div>
+    }
+      <Button variant="success"></Button>
+      <div>USER RANK : {userRank}</div>
     </div>
   )
 }

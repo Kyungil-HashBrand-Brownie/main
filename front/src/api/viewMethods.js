@@ -15,12 +15,8 @@ const getUserRank = async(from) => await nftInstance.methods.userRank().call({fr
 
 const getMintList = async() => await nftInstance.methods.mintedNFT().call();
 
-const getMyNFTs = async(from) => await nftInstance.methods.myNFTs().call({from});
-
-const getMyStaked = async(from) => await nftInstance.methods.checkStakedNFTs().call({from});
-
 // voting view 함수
 
 const getVoteStatus = async() => await votingContract.methods.voteStatus().call();
 
-export {getContractOwner, nftNum, checkWhite, whitelistNftNum, getUserRank, getMintList, getMyNFTs, getMyStaked, getVoteStatus};
+export {getContractOwner, nftNum, checkWhite, whitelistNftNum, getUserRank, getMintList, getVoteStatus};

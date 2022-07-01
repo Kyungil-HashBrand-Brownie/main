@@ -17,7 +17,6 @@ let initialState = {
     walletRefresh: 1,
     isDeployer: false,
     isWhite: false,
-    voteStatus: "0",
 
     // Collection
     sortOption: 0,
@@ -177,12 +176,6 @@ function nftReducer(state = initialState, action) {
             return {
                 ...state,
                 userRank : payload
-            }
-
-        case "GET_VOTE_STATUS" :
-            return {
-                ...state,
-                voteStatus : payload
             }
 
         // Collection
