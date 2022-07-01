@@ -56,6 +56,7 @@ function Voting() {
   }
 
   return (
+    <>
     <div className="App">
       <Form
         onSubmit={voteSubmit}
@@ -76,6 +77,8 @@ function Voting() {
         </InputGroup>
       </Form>
     </div>
+    
+    </>
   )
 }
 

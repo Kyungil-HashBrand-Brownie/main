@@ -2,11 +2,10 @@ import Card from 'react-bootstrap/Card';
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { Check } from '../img';
+import { Check } from '../../img';
 import { unstakeNFTs } from 'api';
 import Pagination from './Pagination';
-import Cancel from '../img/stake/cancel.png';
-
+import Cancel from '../../img/stake/cancel.png';
 
 const Cardjustify = styled.div`
     display: flex;
