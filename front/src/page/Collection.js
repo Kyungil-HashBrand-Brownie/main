@@ -54,8 +54,9 @@ const Collection = () => {
             default: 
                 break;
         }
-        console.log('_data:', _data)
+        // console.log('_data:', _data)
         _data = _data.sort((a,b) => a.edition - b.edition)
+        console.log('_data: ', _data);
         setData(_data);
     }
 

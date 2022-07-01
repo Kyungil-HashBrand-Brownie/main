@@ -89,6 +89,7 @@ function Voting() {
   }
 
   return (
+    <>
     <div className="App">
       <Form
         onSubmit={voteSubmit}
@@ -118,6 +119,8 @@ function Voting() {
       <div>MY RANK : {userRank}</div>
       <div>MY VOTING POWER (NFT COUNT) : {myNFTs.length + myStakedNFTs.length}  </div>
     </div>
+    
+    </>
   )
 }
 
