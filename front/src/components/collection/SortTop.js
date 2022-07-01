@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useDispatch, useSelector } from 'react-redux'
 
 const SortTopHeader = styled.div`
     /* background: blue; */
@@ -46,7 +47,14 @@ const SortOption = styled.div`
 const options = ['All(default)', 'Not Minted', 'Minted'];
 
 const SortTop = () => {
-    const [state, setState] = useState(0)
+    const dispatch = useDispatch()
+    const { sortOption } = useSelector(state => state.nft)
+
+    const changeOption = (idx) => {
+        dispatch({'type': 'CHANGE_SORT_OPTION', payload: idx})
+    } 
+
+    // const [state, setState] = useState(0)
     return (
         <SortTopOuter>
             <SortTopInner>
@@ -56,9 +64,9 @@ const SortTop = () => {
                 {options.map((option, index) => 
                             <SortOption 
                                 key={index}
-                                onClick={() => setState(index)}
+                                onClick={() => changeOption(index)}
                             >
-                                <span className={state == index && 'toggle'}>
+                                <span className={sortOption == index ? 'toggle' : undefined}>
                                     {option}
                                 </span>
                             </SortOption>

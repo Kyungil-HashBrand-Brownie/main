@@ -1,5 +1,8 @@
-import { nftInstance } from "configs";
+import { nftInstance, votingContract } from "configs";
 
+// NFT instance view 함수
+
+// NFT 컨트랙트의 배포자
 const getContractOwner = async() => await nftInstance.methods.owner().call();
 
 const nftNum = async () => await nftInstance.methods.nftNum().call();
@@ -10,6 +13,10 @@ const whitelistNftNum = async() => await nftInstance.methods.whitelistNftNum().c
 
 const getUserRank = async(from) => await nftInstance.methods.userRank().call({from});
 
-const getMintList = async(from) => await nftInstance.methods.checkMinting().call();
+const getMintList = async() => await nftInstance.methods.mintedNFT().call();
 
-export {getContractOwner, nftNum, checkWhite, whitelistNftNum, getUserRank, getMintList};
+// voting view 함수
+
+const getVoteStatus = async() => await votingContract.methods.voteStatus().call();
+
+export {getContractOwner, nftNum, checkWhite, whitelistNftNum, getUserRank, getMintList, getVoteStatus};

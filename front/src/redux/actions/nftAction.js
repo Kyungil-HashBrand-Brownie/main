@@ -25,6 +25,9 @@
 // }
 // }
 
+import { caver, nftInstance,  } from "configs";
+import { checkWhite, getUserRank } from "api";
+
 function getReward(contract, stake, renewMine, renewStaked) {
 
     return async (dispatch) => {
@@ -49,6 +52,52 @@ function getReward(contract, stake, renewMine, renewStaked) {
     }
 }
 
+const enableKikas = () => {
+    return async (dispatch) => {
+        if(window.klaytn){
+            window.klaytn.enable()
+            if(await window.klaytn._kaikas.isApproved()){
+                // 계정 정보 리덕스에 저장하는 부분
+                dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
+            }
+        }
+        else {
+            alert("카이카스 설치 필요")
+            window.open("https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko")
+        }
+    }
+}
+
+const setUserInfo =  (address) => {
+    return async (dispatch) => {
+        if(address){
+            const contractOwner = await nftInstance.methods.owner().call()
+            const isDeployer = caver.utils.toChecksumAddress(address) === contractOwner
+            dispatch({type: 'CHECK_ISDEPLOYER', payload: isDeployer})
+            const userRank = await getUserRank(address);
+            dispatch({type: "GET_USER_RANK", payload: userRank})
+        }
+        else dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
+    }
+}
+
+const checkWhitelist = (address) => {
+    return async (dispatch) => {
+        if (address) {
+            try {
+                const isWhite = await checkWhite(address)
+                dispatch({ type : "CHECK_ISWHITELIST" , payload:isWhite })
+            }
+            catch (e) {
+                throw e
+            }
+        }
+    }
+}
+
 export const nftAction = {
     getReward,
+    enableKikas,
+    setUserInfo,
+    checkWhitelist
 }

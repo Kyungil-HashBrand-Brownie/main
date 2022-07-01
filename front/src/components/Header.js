@@ -6,10 +6,9 @@ import Logo from '../img/brownyLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
-import {tokenInstance, nftInstance, caver} from "configs";
-
+import { nftAction } from 'redux/actions/nftAction';
 import { background10 ,background13} from '../img/background';
-import { checkWhite, getUserRank } from 'api';
+import { getTokenBalance } from 'api';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -58,71 +57,49 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer, isWhite } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh, isDeployer, isWhite, filterOpenState, filterOption, sortOption } = useSelector(state => state.nft);
 
-    const [address, setAddress] = useState(null);
     const [balance, setBalance] = useState(0);
     const [btkBalance, setBtkBalance] = useState(0);
 
-    const checkWhitelist = async () => {
-        if (myAddress) {
-            try {
-                const isWhite = await checkWhite(myAddress)
-                dispatch({ type : "CHECK_ISWHITELIST" , payload:isWhite })
-            }
-            catch (e) {
-                throw e
-            }
+
+    const setToken = async (address) =>{
+        const tokenBalance = await getTokenBalance(address)
+
+        setBalance(tokenBalance.KLAY)
+        setBtkBalance(tokenBalance.BTK)
+    }
+
+    const checkWhitelist = (address) => {
+         dispatch(nftAction.checkWhitelist(address));
+    }
+
+    const setUserInfo = async (address) => {
+        if(address){
+            await setToken(address)
         }
-    }
-
-    const weiToFixed = (wei) => {
-        const toKlay = caver.utils.convertFromPeb(wei);
-        const fixed = parseFloat(toKlay).toFixed(2);
-        return fixed;
-    }
-
-    const setTokenBalance = async (address) => {
-        const weiBalance = await caver.klay.getBalance(address)
-        const fixedBalance = weiToFixed(weiBalance)
-        console.log(fixedBalance)
-        const weibtkBalance = await tokenInstance.balanceOf(address) //BigNumber 객체
-        const fixedbtkBalance = weiToFixed(weibtkBalance)
-
-        setBalance(fixedBalance)
-        setBtkBalance(fixedbtkBalance);
-    }
-
-    const setUserInfo = async () => {
-        if(myAddress){
-            setAddress(myAddress);
-            await setTokenBalance(myAddress)
-            const contractOwner = await nftInstance.methods.owner().call()
-            const isDeployer = caver.utils.toChecksumAddress(myAddress) === contractOwner
-            dispatch({type: 'CHECK_ISDEPLOYER', payload: isDeployer})
-            const userRank = await getUserRank(myAddress);
-            dispatch({type: "GET_USER_RANK", payload: userRank})
-        }
-        else dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
+        dispatch(nftAction.setUserInfo(address));
     }
 
     const enableKikas = () => {
-        if(window.klaytn){
-            window.klaytn.enable()
-            dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
-        }
-        else {
-            alert("카이카스 설치 필요")
-            window.open("https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko")
-        }
+        dispatch(nftAction.enableKikas());
     }
 
     const copyAddress = () => {
-        navigator.clipboard.writeText(address)
+        navigator.clipboard.writeText(myAddress)
     }
 
     const showInfo = () => {
         dispatch({type: "MODAL_CLICK"})
+    }
+
+    const reset = () => {
+        closeModal();
+        resetCollection();
+    }
+
+    const resetCollection = () => {
+        dispatch({type: 'RESET_COLLECTION'})
     }
 
     const closeModal = () => {
@@ -130,8 +107,12 @@ const Header = () => {
     }
 
     useEffect(() => {
-        setUserInfo();
+        setUserInfo(myAddress);
     }, [myAddress,walletRefresh])
+
+    useEffect(() => {
+        checkWhitelist(myAddress);
+    }, [myAddress])
 
     useEffect(()=>{
         if(window.klaytn) {
@@ -139,8 +120,7 @@ const Header = () => {
                 console.log(accounts[0])
                 sessionStorage.setItem('id', accounts[0]);
                 dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
-                setAddress(accounts[0]);
-                await setTokenBalance(accounts[0])
+                await setToken(accounts[0])
             })
             window.klaytn.on('networkChanged', async function(network) {
                 console.log(network)
@@ -159,9 +139,6 @@ const Header = () => {
         return data;
     })
 
-    useEffect(() => {
-        checkWhitelist();
-    }, [myAddress])
 
     return (
         <Navbar className="nav" expand="lg">
@@ -181,22 +158,22 @@ const Header = () => {
                 >
                     {pages.map((item, index) => 
                         <Link key={index}
-                            onClick={closeModal} 
+                            onClick={reset} 
                             className='nav-item' 
                             to={item.path}>
                             {item.text}</Link>
                     )}
 
-                    {isDeployer ? <Link onClick={closeModal} className='nav-item' to="/admin">Admin</Link> : null}
+                    {isDeployer ? <Link onClick={reset} className='nav-item' to="/admin">Admin</Link> : null}
                 </Nav>
                 {
-                address != null
+                myAddress
                 ? 
                 <div className="info-box">  
                     <PFPContainer
                         onClick={showInfo}
                     >
-                    {address.toString().slice(0,7)+'...'+address.toString().slice(-7)}
+                    {myAddress.slice(0,7)+'...'+myAddress.slice(-7)}
                     </PFPContainer>
                     {modalState && 
                         <StyledInfo>
