@@ -1,7 +1,9 @@
 import React from 'react'
 import Cancel from '../../img/stake/cancel.png';
 
-const CardMain = ({bool, inputCheck, checkedList, transactNFT, changeClickState, changeAllState}) => {
+const CardHead = ({bool, inputCheck, checkedList, transactNFT, 
+    changeClickState, changeAllState, total, current }) => {
+
     return (
         <>
             <div className="cont21">
@@ -11,6 +13,12 @@ const CardMain = ({bool, inputCheck, checkedList, transactNFT, changeClickState,
                 >
                     {bool ? 'stake' : 'unstake'}
                 </button>
+            </div>
+            <div className='nftlist-count-box'>
+                <div className='nftlist-count-inner-box'>
+                    <div>total: {total}</div>
+                    <div>{bool ? 'staked' : 'unstaked'} total: {current}</div>
+                </div>
             </div>
             <div className='nftlist-box'>
                 <div className='nftlist-header'>
@@ -48,4 +56,4 @@ const CardMain = ({bool, inputCheck, checkedList, transactNFT, changeClickState,
     )
 }
 
-export default CardMain
+export default CardHead

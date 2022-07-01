@@ -7,7 +7,7 @@ import Pagination from './Pagination';
 import { stakeNFTs, unstakeNFTs } from 'api';
 import axios from 'axios';
 import Reward from './Reward';
-import CardMain from './CardMain';
+import CardHead from './CardHead';
 import CardContainer from './CardContainer';
 
 const Cardjustify = styled.div`
@@ -18,6 +18,7 @@ const Cardjustify = styled.div`
 `
 const Main = styled.div`
     width: 31.25rem;    
+    /* height: auto; */
     min-height: 54.6875rem;
     margin: .625rem;
     border: 
@@ -173,13 +174,15 @@ function NftCard({ bool }) {
             <Cardjustify bool={bool}>
                 <Main bool={bool}>
                     {list.length > 0 &&
-                        <CardMain 
+                        <CardHead 
                             bool={bool}
                             checkedList={checkedList}
                             inputCheck={inputCheck}
                             transactNFT={transactNFT}
                             changeClickState={changeClickState}
                             changeAllState={changeAllState}
+                            total={myNFTs.length + myStakedNFTs.length}
+                            current={bool? myNFTs.length : myStakedNFTs.length}
                         />
                     }
                     <div className='InnerMain'>

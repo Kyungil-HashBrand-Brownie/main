@@ -18,6 +18,7 @@ const CollectionOuter = styled.div `
 
 const Collection = () => {
     const [data, setData] = useState(null);
+    const [row, setRow] = useState(0);
     const { sortOption, filterOption } = useSelector(state => state.nft);
 
     const getData = async () => {
@@ -56,7 +57,8 @@ const Collection = () => {
         }
         // console.log('_data:', _data)
         _data = _data.sort((a,b) => a.edition - b.edition)
-        console.log('_data: ', _data);
+        // console.log('_data: ', _data);
+        setRow(Math.ceil(_data.length / 5));
         setData(_data);
     }
 
@@ -67,7 +69,7 @@ const Collection = () => {
     return (
         <CollectionOuter>
             <Sort />
-            <CollectionMain data={data}/>
+            <CollectionMain data={data} row={row}/>
         </CollectionOuter>
     )
 }

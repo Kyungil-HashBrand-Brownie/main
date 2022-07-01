@@ -546,6 +546,18 @@ body {
 /*
 NftCard
 */
+.nftlist-count-box {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: flex-end;
+}
+
+.nftlist-count-inner-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: end;
+}
 
 .nftlist-select-all-button:hover{
   background-color: lightgray;
@@ -726,6 +738,7 @@ NftCard
 
     .cont21 {
         display: flex ;
+        /* flex-direction: column; */
         justify-content: center;
         margin: .625rem 0rem;
         padding-bottom: .625rem;
@@ -763,7 +776,7 @@ NftCard
     .nftlist-header {
         font-size: 1.5625rem;
         padding-left: 4.375rem;
-        margin-bottom: 1.25rem;
+        /* margin-bottom: 1.25rem; */
     }
     .nftlist-text {
         text-align: center;
@@ -942,4 +955,20 @@ Collection
 
 .bgDiv {
   min-width: 150px;
+}
+
+.collection-info-outer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.collection-info-box {
+  font-size: 18px;
+  text-align: end;
+  width: 200px;
+  margin-right: 50px;
+}
+
+.collection-last-row {
+  justify-content: flex-start;
 }
