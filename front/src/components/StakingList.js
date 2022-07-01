@@ -277,7 +277,8 @@ const StakingList = () => {
                                 onClick={unstakeNFT}>unstake</button>
                             </div>
                             <div className='nftlist-box'>
-                                <div className='nftlist-header'><i>Unstakelist</i></div>
+                                <div className='nftlist-header'><i>Total Browny : {myNFTs.length+myStakedNFTs.length}</i></div>
+                                <div className='nftlist-header'><i>Staked Browny : {myStakedNFTs.length}</i></div>
                                     <div className='nftlist-select-all'>
                                         <div>
                                             <input 
