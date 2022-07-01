@@ -48,6 +48,7 @@ const CollectionCardOuter = styled.div`
     height: 270px;
     background: lightgray;
     margin: auto;
+        /* ${props => props.state ? 'auto' : '10px 0'} */
     cursor: pointer;
     border: 1px solid black;
     border-radius: 10px;
@@ -99,9 +100,11 @@ const CollectionMain = ({ data, row }) => {
     return (
         <CollectionMainOuter>
             <CollectionHeader>Collections</CollectionHeader>
-            <div className='collection-info-outer'>
-                <div className='collection-info-box'>total: {data.length} / 150</div>
-            </div>
+            { data !== null && 
+                <div className='collection-info-outer'>
+                    <div className='collection-info-box'>total: {data.length} / 150</div>
+                </div>
+            }
             <CollectionBody>
                     { data !== null &&  
                     new Array(row).fill(0).map((item, index) => 
