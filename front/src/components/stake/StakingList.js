@@ -2,11 +2,10 @@ import Card from 'react-bootstrap/Card';
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { Check } from '../img';
+import { Check } from '../../img';
 import { unstakeNFTs } from 'api';
 import Pagination from './Pagination';
-import Cancel from '../img/stake/cancel.png';
-
+import Cancel from '../../img/stake/cancel.png';
 
 const Cardjustify = styled.div`
     display: flex;
@@ -26,7 +25,7 @@ const Cardjustify = styled.div`
         /* background: linear-gradient(to right, #854207, transparent); */
     }
 
-    .InnerMain {
+    /* .InnerMain {
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
@@ -145,10 +144,6 @@ const Cardjustify = styled.div`
 
     .nftlist-box {
         margin: 0px 30px;
-        /* background:red; */
-        /* display: flex; */
-        /* flex-direction: column; */
-        /* justify-content: center; */
     }
 
     .nftlist-justify {
@@ -189,71 +184,82 @@ const Cardjustify = styled.div`
     }
 
     .no-display {
-        /* background: red; */
         position: absolute;
         transform: translate(55px, 385px);
-    }
+    } */
 `
 
-const StakingList = () => {
-    const [page, setPage] = useState(1);
-
+const StakingList = ({ bool }) => {
     const dispatch = useDispatch();
-
     const { myAddress, myNFTs, myStakedNFTs } = useSelector(state => state.nft);
+    
+    const [page, setPage] = useState(1);
+    const [inputCheck, setInputCheck] = useState(false)
 
-    let list = myStakedNFTs.filter((item) => item.checked);
+    let list = bool ? myNFTs : myStakedNFTs;
     // checked 된 것들
     const changeAllState = (checked) => {
-        let newArr;
-        if (checked) {
-            newArr = myStakedNFTs.map((item) => {
-                item.checked = true
-                return item
+        let newArr = myStakedNFTs.sort((a, b) => a.id.slice(1) - b.id.slice(1));
+        newArr = newArr.map((item, index) => {
+            if (index >= (page - 1) * 4 && index < (page - 1) * 4 + 4) {
+                item.checked = checked;
+            }
+            return item;
         })
-        }
-        else {
-            newArr = myStakedNFTs.map((item) => {
-                item.checked = false
-                return item
-            })
-        }
+        setInputCheck(!inputCheck);
+
+        // if (checked) {
+        //     newArr = myStakedNFTs.map((item) => {
+        //         item.checked = true
+        //         return item
+        // })
+        // }
+        // else {
+        //     newArr = myStakedNFTs.map((item) => {
+        //         item.checked = false
+        //         return item
+        //     })
+        // }
         // console.log(myNFTs)
         dispatch({type: 'NFTCARD_CHANGE_ALL', payload: {myStakedNFTs: newArr}})
     }
+
     const changeClickState = (id) => {
+        setInputCheck(false);
+
         let newArr = myStakedNFTs.map((li) => {
             if (li.id === id) {
                 li.checked = !li.checked; 
             }
             return li
         })
-        dispatch({type: 'NFTCARD_STAKE_CLICK', payload: newArr})
+        let click = bool ? { myNFTs: newArr } : {myStakedNFTs: newArr };
+        dispatch({type: 'NFTCARD_CLICK', payload: click})
     }
 
     const unstakeNFT = async () => {
         let stakedNFTs = myStakedNFTs.filter((item) => !item.checked);
         let unstakedIdArr = myStakedNFTs.filter((item) => item.checked).map((item) => item.id.slice(1));
 
-        // console.log(unstakedIdArr)
         if (unstakedIdArr.length > 0) {
-            // let stakeInstanceId = unstakeIdArr[0].id.slice(1) //#62
             try{
-            const result = await unstakeNFTs(myAddress,unstakedIdArr);
-            if(result.status){
-                // dispatch({type: "WALLET_REFRESH"})
-                let unstakedNFTs = myStakedNFTs.filter((item) => item.checked).map((item) => {
-                    item.checked = false;
-                    return item;
-                });
-                dispatch({type: 'NFTCARD_UNSTAKE', payload: {myNFTs: unstakedNFTs, myStakedNFTs: stakedNFTs}})
-                dispatch({type: "WALLET_REFRESH"})
+                const result = await unstakeNFTs(myAddress,unstakedIdArr);
 
-                alert("선택한 NFT가 정상적으로 unstaking 되었습니다.");
-                // navigate('/');
-            }
-            else alert("transaction fail")
-            }catch(e) {
+                if(result.status){
+                    let unstakedNFTs = myStakedNFTs.filter((item) => item.checked).map((item) => {
+                        item.checked = false;
+                        return item;
+                    });
+
+                    dispatch({type: 'NFTCARD_UNSTAKE', payload: {myNFTs: unstakedNFTs, myStakedNFTs: stakedNFTs}})
+                    dispatch({type: "WALLET_REFRESH"})
+
+                    alert("선택한 NFT가 정상적으로 unstaking 되었습니다.");
+                }
+
+                else alert("transaction fail")
+
+            } catch(e) {
                 console.log(e.message)
             }
         }
@@ -284,7 +290,9 @@ const StakingList = () => {
                                             <input 
                                             onChange={(e) => {changeAllState(e.target.checked)}}
                                             type='checkbox'
-                                            className='nftlist-select-all-checkbox' />
+                                            className='nftlist-select-all-checkbox' 
+                                            checked={inputCheck}
+                                            />
                                             Select All
                                         </div>
                                     </div>
@@ -310,23 +318,25 @@ const StakingList = () => {
                 <div className='InnerMain'>
                     {   myStakedNFTs.length > 0 
                         ? <>
-                        {myStakedNFTs.sort((a,b) => a.id.slice(1) - b.id.slice(1)).slice((page-1)*4, (page-1)*4 + 4).map((item, index1) => {
-                            return <div className='card-container' key={index1}>
-                                <Card className="Ncard" style={{ width: '12rem' }}>
-                                {
-                                    !item.checked ?
-                                    null
-                                    :< img 
-                                    src={Check}
-                                    alt="sss"
-                                    id='stake-checkbox'
-                                />
-                                }
-                                    <div><Card.Img style={{width: '11rem', height: '11rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
-                                    <Card.Title >{item.id}</Card.Title>
-                                </Card>
+                            {myStakedNFTs.sort((a,b) => a.id.slice(1) - b.id.slice(1)).slice((page-1)*4, (page-1)*4 + 4).map((item, index1) => {
+                                return <div className='card-container' key={index1}>
+                                    <Card 
+                                        className="Ncard" 
+                                        style={{ width: '12rem' }}>
+                                    {
+                                        !item.checked ?
+                                        null
+                                        :
+                                        <img src={Check}
+                                            alt="sss"
+                                            id='stake-checkbox'
+                                        />
+                                    }
+                                        <div><Card.Img className='nftlist-card-img' style={{width: '11rem', height: '11rem'}} onClick={()=> changeClickState(item.id)} variant="top" src={item.image} /></div>
+                                        <Card.Title >{item.id}</Card.Title>
+                                    </Card>
                             </div>
-                        })}
+                            })}
                         </>
                         : 
                         <div className='no-display'>

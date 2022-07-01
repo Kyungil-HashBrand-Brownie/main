@@ -96,10 +96,10 @@ function nftReducer(state = initialState, action) {
                 myStakedNFTs: payload.myStakedNFTs,
             }
 
-        case 'NFTCARD_MYNFTS_CLICK' :
+        case 'NFTCARD_CLICK' :
             return {
                 ...state,
-                myNFTs: payload,
+                [Object.keys(payload)[0]]: Object.values(payload)[0],
             }
 
         case 'NFTCARD_STAKE_CLICK' :
@@ -108,19 +108,19 @@ function nftReducer(state = initialState, action) {
                 myStakedNFTs: payload,
             }
 
-        case 'NFTCARD_STAKE' :
+        case 'NFTCARD_TRANSACT' :
             return {
                 ...state,
                 myNFTs: payload.myNFTs,
-                myStakedNFTs: state.myStakedNFTs.concat(payload.myStakedNFTs),
-            }
-
-        case 'NFTCARD_UNSTAKE' :
-            return {
-                ...state,
-                myNFTs: state.myNFTs.concat(payload.myNFTs),
                 myStakedNFTs: payload.myStakedNFTs,
             }
+
+        // case 'NFTCARD_UNSTAKE' :
+        //     return {
+        //         ...state,
+        //         myNFTs: state.myNFTs.concat(payload.myNFTs),
+        //         myStakedNFTs: payload.myStakedNFTs,
+        //     }
 
 
         case "REMOVE_BOOKMARK_TEST":
