@@ -5,3 +5,5 @@ export {getContractOwner, nftNum, checkWhite, whitelistNftNum, getUserRank, getM
 export {newProposal, startVote, endVote, resetVote} from "./votingMethods"
 
 export {pebToFixed, getTokenBalance} from "./utils"
+
+export {useAlert } from "./customHook"

@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import Proposal from 'components/Proposal';
 import axios from "axios"
-import { endVote, newProposal, resetVote, startVote } from 'api';
+import { endVote, newProposal, resetVote, startVote, useAlert } from 'api';
 import { nftAction } from 'redux/actions/nftAction';
+import AlertModal from 'components/AlertModal';
 
 
 const useInput = (defaultValue) => {
@@ -21,6 +22,8 @@ const useInput = (defaultValue) => {
 }
 
 function Voting() {
+  const customAlert = useAlert()
+
   const dispatch = useDispatch()
   const {myAddress, userRank, isDeployer, myNFTs, myStakedNFTs, voteStatus} = useSelector(state=>state.nft)
 
@@ -90,6 +93,7 @@ function Voting() {
 
   return (
     <div className="App">
+      <AlertModal {...customAlert} />
       <Form
         onSubmit={voteSubmit}
       >
@@ -117,6 +121,9 @@ function Voting() {
       <ChangeVotingButton {...votingProps} ></ChangeVotingButton>
       <div>MY RANK : {userRank}</div>
       <div>MY VOTING POWER (NFT COUNT) : {myNFTs.length + myStakedNFTs.length}  </div>
+      <Button variant="primary" onClick={() => customAlert.open("test content")}>
+          TestButton
+      </Button>
     </div>
   )
 }
