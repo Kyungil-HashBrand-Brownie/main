@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import { viliage2 } from '../img'
 import WhiteListMember from 'components/WhiteListMember'
 import { Animation } from 'components/Animation'
+import AlertModal from 'components/AlertModal'
 
 
 
@@ -45,8 +46,9 @@ const Testpage = () => {
         {/* <SlideShow /> */}
         {/* <Viliage /> */}
         {/* <Team /> */}
-        <WhiteListMember />
+        {/* <WhiteListMember /> */}
         {/* <Animation /> */}
+        {/* <AlertModal /> */}
     </div>
   )
 }
