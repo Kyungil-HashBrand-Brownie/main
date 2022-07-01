@@ -81,6 +81,10 @@ const Header = () => {
         dispatch(nftAction.setUserInfo(address));
     }
 
+    const setVoteStatus = () => {
+        dispatch(nftAction.setVoteStatus())
+    }
+
     const enableKikas = () => {
         dispatch(nftAction.enableKikas());
     }
@@ -126,8 +130,9 @@ const Header = () => {
                 console.log(network)
             })
         }
+        
+        setVoteStatus();
     },[])
-
     const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/voting'];
     const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Voting'];
 
