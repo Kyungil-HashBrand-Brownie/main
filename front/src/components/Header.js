@@ -85,8 +85,8 @@ const Header = () => {
         dispatch(nftAction.setVoteStatus())
     }
 
-    const enableKikas = () => {
-        dispatch(nftAction.enableKikas());
+    const enableKaikas = () => {
+        dispatch(nftAction.enableKaikas());
     }
 
     const copyAddress = () => {
@@ -196,7 +196,7 @@ const Header = () => {
                         </StyledInfo>
                     }
                 </div>
-                : <><Button className="mint-wal-connect-btn" variant="success" onClick={enableKikas}>지갑 연결하기</Button>{' '}</>
+                : <><Button className="mint-wal-connect-btn" variant="success" onClick={enableKaikas}>지갑 연결하기</Button>{' '}</>
                 }
                 </Navbar.Collapse>
             </Container>
