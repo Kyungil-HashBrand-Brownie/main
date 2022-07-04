@@ -28,14 +28,6 @@ const Swap = () => {
 
     const checkValidation = () => {
         let value = amountInput.current.value
-        // let wordLen = bool[!swap].length;
-        // value = value.slice(0, -wordLen)
-
-        // let testLen = value.length - bool[!swap].length - 1;
-        // value = value.slice(0,testLen);
-        // console.log(testLen)
-        // console.log(value.slice(0, testLen));
-        // value = value.slice(0, testLen);
         let re = /[^0-9]/g;
         if (re.test(value)) {
             alert('숫자를 입력해 주세요!');
