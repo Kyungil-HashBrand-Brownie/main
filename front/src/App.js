@@ -16,6 +16,7 @@ import NftList from './page/NftList';
 import NoPage from 'page/NoPage';
 import Collection from 'page/Collection';
 import Voting from 'page/Voting';
+import DetailCollecion from 'components/collection/DetailCollecion';
 
 function App() {
   const {isDeployer} = useSelector(state=>state.nft)
@@ -64,6 +65,7 @@ function App() {
           </>
         }
         {/* <Route path="/whitelist" element={<WhiteList/>} />  */}
+        <Route path='/detailcollection' element={<DetailCollecion />} />
         <Route path='*' element={<NoPage />} />
       </Routes>
     </div>
