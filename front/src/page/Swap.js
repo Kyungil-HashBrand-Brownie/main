@@ -13,17 +13,14 @@ const Swap = () => {
     const dispatch = useDispatch();
 
     const [swap, setSwap] = useState(true);
-    const [exchange, setExchange] = useState('');
+    const [input, setInput] = useState('');
+    const [exchange, setExchange] = useState('exchange');
 
     const amountInput = useRef('');
 
     const swapChange = () => {
-        // let changeAmount = exchange;
         setSwap(!swap);
         amountInput.current.value = '';
-        // setSwap(!swap)
-        // setExchange(amountInput.current.value);
-        // amountInput.current.value = changeAmount;
     }
 
     const checkValidation = () => {
@@ -47,13 +44,13 @@ const Swap = () => {
                 else setExchange(parseInt(Number(value) / 7.22))
                 // else setExchange((Number(value) / 7.22).toFixed(2).toString() + ' ' + bool[swap])
             }
-            else setExchange('your exchange')
+            else setExchange('exchange')
             // amountInput.current.value = ;
         }
         
     }
 
-    const {myAddress} = useSelector(state =>state.nft);
+    const { myAddress, klayBalance, btkBalance } = useSelector(state => state.nft);
     
     const swapToken = async () => {
         let amount = amountInput.current.value
@@ -77,10 +74,25 @@ const Swap = () => {
             alert("숫자를 입력해주세요")
         }
     }
+
+    const checkInput = (e) => {
+        console.log(e.target.value);
+        setInput(e.target.value);
+    }
+
+    console.log(exchange)
+
     return (
         <div className='swap-box'>
             <div className='select-box'>
-                <p className='swap-header'>SWAP</p>
+                <div className='swap-header'>SWAP</div>
+                <div className='mywal-info-outer'>
+                    <div className='mywal-info'>
+                        <div className='mywal-header'>보유량</div>
+                        <div className='mywal-bal'>{klayBalance} KLAY</div>
+                        <div className='mywal-bal'>{btkBalance} BTK</div>
+                    </div>
+                </div>
                 <div className='swap-select'>
                     <div className='swap-body'>
                         {<img 
@@ -109,31 +121,58 @@ const Swap = () => {
                 </div>
                 <div className='swap-amount-input-box'>
                     <div className='swap-amount-inner'>
-                        <input 
-                        className='swap-amount-input'
-                        placeholder='input amount'
-                        onChange={checkValidation}
-                        // value={bool[!swap]}
-                        ref={amountInput} />
+                        <div className='swap-input-flex'>
+                            <input 
+                            className='swap-amount-input'
+                            placeholder='amount'
+                            // value={input}
+                            // onChange={checkInput}
+                            onChange={checkValidation}
+                            // value={bool[!swap]}
+                            ref={amountInput} 
+                            />
+                            <div className='swap-amount-token'>{bool[!swap]}</div>
+                        </div>
                         
                         <img className='swap-arrow' src={Arrow} />
-                        <input 
-                        disabled
-                        className='swap-amount-input'
-                        placeholder='your exchange'
-                        value={amountInput.current.value != '' ?  exchange : 'your exchange'}
-                        /> 
+                        <div className='swap-input-flex'>
+                            <input 
+                            disabled
+                            className='swap-amount-input'
+                            placeholder='exchange'
+                            value={amountInput.current.value != '' ?  exchange : 'exchange'}
+                            /> 
+                            <div className='swap-amount-token'>{bool[swap]}</div>
+                        </div>
                         {/* <div className='swap-exchange'>
                             4{bool[swap]}
                         </div> */}
                     </div>
                 </div>
-                <div>
-                    <div>거래 후 잔액: </div>
-                    <div>수수료: 0.023 KLAY</div>
-                </div>
+                {exchange != 'exchange' &&
+                    <div className='swap-user-token-outer'>
+                        <div className='swap-user-token-head-outer'>
+                            <div className='swap-user-token-header'>거래 후 잔액</div>
+                        </div>
+                        <div>
+                            <div>
+                            KLAY: {klayBalance + ' => '}
+                            {
+                            !swap ? (Number(klayBalance) + Number(exchange) - 0.023).toFixed(2) : (Number(klayBalance) - Number(amountInput.current.value) - 0.023).toFixed(2)
+                            }
+                            </div>
+                            <div>
+                            BTK: {btkBalance + ' => '}
+                            {
+                            !swap ? (Number(btkBalance) - Number(amountInput.current.value)).toFixed(4) : (Number(btkBalance) + Number(exchange)).toFixed(4)
+                            }
+                            </div>
+                        </div>
+                    </div>
+                }
                 <div className='swap-text-box'>
-                    <p className='swap-text'>최대 10000(일만)개 거래 가능합니다</p>
+                    <div className='swap-text'>수수료: 0.023 KLAY</div>
+                    <div className='swap-text'>최대 10000(일만)개 거래 가능합니다</div>
                 </div>
                 <div className='swap-submit'>
                     <button 
