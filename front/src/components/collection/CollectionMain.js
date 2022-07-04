@@ -24,7 +24,8 @@ const CollectionBody = styled.div`
     /* width: 100%; */
     /* background: green; */
     display: flex;
-    justify-content: center;
+    transform: translate(3.5%, 0);
+    /* justify-content: center; */
     /* border: 3px solid black; */
     /* padding:  */
     min-height: 250px;
@@ -35,8 +36,8 @@ const CollectionBody = styled.div`
 const CollectionRow = styled.div`
     display: flex;
     flex-direction: row;
-    width: 96%;
-    margin-top: 20px;
+    /* width: 96%; */
+    margin: 10px 0 15px 0;
     /* padding: 20px 0; */
     background: lightgray;
     height: 300px;
@@ -47,8 +48,9 @@ const CollectionCardOuter = styled.div`
     width: 220px;
     height: 270px;
     background: lightgray;
-    margin: auto;
-        /* ${props => props.state ? 'auto' : '10px 0'} */
+    /* margin: */
+        /* ${props => props.state ? 'auto' : '10px 14.1px'}; */
+    margin: 10px 10px;
     cursor: pointer;
     border: 1px solid black;
     border-radius: 10px;
@@ -71,6 +73,7 @@ const CollectionCard = styled.div`
     /* background: red; */
     width: 200px;
     height: 250px;
+    /* margin: 10px; */
     margin: auto;
     margin-top: 10px;
 `
