@@ -182,7 +182,7 @@ function nftReducer(state = initialState, action) {
                 userRank : payload
             }
 
-        case "GET_VOTE_STATUS" :
+        case "SET_VOTE_STATUS" :
             return {
                 ...state,
                 voteStatus : payload
