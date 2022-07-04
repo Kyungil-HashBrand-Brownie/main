@@ -57,17 +57,11 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer, isWhite, filterOpenState, filterOption, sortOption } = useSelector(state => state.nft);
-
-    const [balance, setBalance] = useState(0);
-    const [btkBalance, setBtkBalance] = useState(0);
+    const { modalState, myAddress, walletRefresh, isDeployer, isWhite, klayBalance,  btkBalance } = useSelector(state => state.nft);
 
 
-    const setToken = async (address) =>{
-        const tokenBalance = await getTokenBalance(address)
-
-        setBalance(tokenBalance.KLAY)
-        setBtkBalance(tokenBalance.BTK)
+    const setToken = (address) =>{
+        dispatch(nftAction.setToken(address))
     }
 
     const checkWhitelist = (address) => {
@@ -76,7 +70,7 @@ const Header = () => {
 
     const setUserInfo = async (address) => {
         if(address){
-            await setToken(address)
+            setToken(address)
         }
         dispatch(nftAction.setUserInfo(address));
     }
@@ -112,7 +106,7 @@ const Header = () => {
 
     useEffect(() => {
         setUserInfo(myAddress);
-    }, [myAddress,walletRefresh])
+    }, [myAddress, walletRefresh])
 
     useEffect(() => {
         checkWhitelist(myAddress);
@@ -124,7 +118,7 @@ const Header = () => {
                 console.log(accounts[0])
                 sessionStorage.setItem('id', accounts[0]);
                 dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
-                await setToken(accounts[0])
+                setToken(accounts[0])
             })
             window.klaytn.on('networkChanged', async function(network) {
                 console.log(network)
@@ -190,7 +184,7 @@ const Header = () => {
                             onClick={copyAddress}    
                         />
                         <br />
-                        {balance + " KLAYS"}
+                        {klayBalance + " KLAYS"}
                         <br />
                         {btkBalance + " BTK"}
                         </StyledInfo>
