@@ -96,7 +96,7 @@ const checkWhitelist = (address) => {
 const setVoteStatus = () => {
     return async (dispatch) => {
         const voteStatus = await getVoteStatus()
-        dispatch({type:"GET_VOTE_STATUS", payload : voteStatus})
+        dispatch({type:"SET_VOTE_STATUS", payload : voteStatus})
     }
 }
 
