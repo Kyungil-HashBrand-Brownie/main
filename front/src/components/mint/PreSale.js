@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import {nftInstance} from "configs";
-import { batchMint, checkWhite, nftNum, whitelistMint, whitelistNftNum } from 'api';
+import { batchMint, checkWhite, nftNum, useAlert, whitelistMint, whitelistNftNum } from 'api';
+import AlertModal from 'components/AlertModal';
 
 
 // 리팩터링 - 코드를 단순화하는 작업 불필요한 중복요소들을 제거
@@ -50,6 +51,7 @@ const StyledButton = styled.button`
 
 
 const PreSale = ({ amount, img, price, title }) => {
+    const customAlert = useAlert()
     const dispatch = useDispatch();
     const { myAddress, isWhite } = useSelector(state => state.nft);
 
@@ -59,7 +61,7 @@ const PreSale = ({ amount, img, price, title }) => {
 
     const countAdd = () => {
         if (count < 5) setCount(count + 1);
-        else alert("최대 5개까지 민팅 가능합니다.");
+        else customAlert.open("최대 5개까지 민팅 가능합니다.");
     }
 
     const countMinus = () => {
@@ -68,15 +70,15 @@ const PreSale = ({ amount, img, price, title }) => {
 
     const preMint = async () => {
         if(!myAddress){
-            return alert("지갑을 먼저 연결해주세요")
+            return customAlert.open("지갑을 먼저 연결해주세요")
         }
         const result = await batchMint(myAddress,count)
         console.log(result)
         if(result.status){
             dispatch({type: "WALLET_REFRESH"})
-            alert("해당 지갑 주소로 민팅되었습니다!");
+            customAlert.open("해당 지갑 주소로 민팅되었습니다!");
         }
-        else alert("transaction fail")
+        else customAlert.open("transaction fail")
 
         getMintCnt()
     }
@@ -85,9 +87,9 @@ const PreSale = ({ amount, img, price, title }) => {
         const result = await whitelistMint(myAddress,count)
         if (result.status) {
             dispatch({ type: "WALLET_REFRESH" })
-            alert("해당 지갑 주소로 민팅되었습니다!");
+            customAlert.open("해당 지갑 주소로 민팅되었습니다!");
         }
-        else alert("transaction fail")
+        else customAlert.open("transaction fail")
 
         getMintCnt()
     }
@@ -107,6 +109,7 @@ const PreSale = ({ amount, img, price, title }) => {
     
     return (
         <div className="freelist">
+            <AlertModal {...customAlert} />
             <StyledMain >
                 <div className='mint-title-box'>
                     <h2 className="mint-title">{title}</h2>

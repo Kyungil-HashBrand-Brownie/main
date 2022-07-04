@@ -52,7 +52,7 @@ function getReward(contract, stake, renewMine, renewStaked) {
     }
 }
 
-const enableKaikas = () => {
+const enableKaikas = (customAlert) => {
     return async (dispatch) => {
         if(window.klaytn){
             window.klaytn.enable()
@@ -60,8 +60,8 @@ const enableKaikas = () => {
             dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
         }
         else {
-            alert("카이카스 설치 필요")
-            window.open("https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko")
+            customAlert.open(<a href="https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko" target="blank">카이카스 설치 필요</ a>)
+
         }
     }
 }

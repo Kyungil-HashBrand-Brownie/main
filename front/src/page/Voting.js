@@ -122,9 +122,6 @@ function Voting() {
       <ChangeVotingButton {...votingProps} ></ChangeVotingButton>
       <div>MY RANK : {userRank}</div>
       <div>MY VOTING POWER (NFT COUNT) : {myNFTs.length + myStakedNFTs.length}  </div>
-      <Button variant="primary" onClick={() => customAlert.open("test content")}>
-          TestButton
-      </Button>
     </div>
     
     </>

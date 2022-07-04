@@ -8,7 +8,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/react";
 
 const override = css`
-  display: flex;
   border-color: black;
 
   margin: 0rem 1.42rem 0rem 1.4rem;

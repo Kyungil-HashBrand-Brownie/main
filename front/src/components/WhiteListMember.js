@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import axios from 'axios'
 import { trash , trash2 } from '../img'
-import { checkWhite, addWhite, removeSelectedWhites } from 'api'
+import { checkWhite, addWhite, removeSelectedWhites, useAlert } from 'api'
+import AlertModal from './AlertModal'
 
 const Trash = styled.div`
     width: 50px;
@@ -12,6 +13,7 @@ const Trash = styled.div`
 `
 
 const WhiteList = () => {
+    const customAlert = useAlert();
 
     const { myAddress } = useSelector(state => state.nft);
     const [list, setList] = useState([]);
@@ -51,7 +53,7 @@ const WhiteList = () => {
 
     const addWhitelist = async () => {
         if (await checkWhite(addInput.current)) {
-            return alert('이미 등록됨')
+            return customAlert.open('이미 등록됨')
         }
         const Sucs = await addWhite(addInput.current)
         console.log(Sucs)
@@ -65,7 +67,7 @@ const WhiteList = () => {
                     let result = res.data;
                     console.log(result)
                     if (result === "Success!") {
-                        alert("화이트리스트 설정 완료되었습니다!");
+                        customAlert.open("화이트리스트 설정 완료되었습니다!");
                     }
                     getWhiteList()
                 })
@@ -81,7 +83,7 @@ const WhiteList = () => {
                 addressArr
             )
             if (data === "Success!") {
-                alert("화이트리스트 제거 완료되었습니다!");
+                customAlert.open("화이트리스트 제거 완료되었습니다!");
             }
             getWhiteList()
         }
@@ -104,6 +106,7 @@ const WhiteList = () => {
 
     return (
         <div>
+            <AlertModal {...customAlert} />
             <div className="Cont">
                 <h1>White List key</h1>
                 <div className='father'>
