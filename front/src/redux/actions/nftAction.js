@@ -26,7 +26,7 @@
 // }
 
 import { caver, nftInstance,  } from "configs";
-import { checkWhite, getUserRank, getVoteStatus } from "api";
+import { checkWhite, getTokenBalance, getUserRank, getVoteStatus } from "api";
 
 function getReward(contract, stake, renewMine, renewStaked) {
 
@@ -100,10 +100,19 @@ const setVoteStatus = () => {
     }
 }
 
+const setToken = (address) => {
+    return async (dispatch) => {
+        const tokenBalance = await getTokenBalance(address)
+
+        dispatch({type: 'GET_TOKEN_BALANCE',payload: tokenBalance})
+    }
+}
+
 export const nftAction = {
     getReward,
     enableKaikas,
     setUserInfo,
     checkWhitelist,
-    setVoteStatus
+    setVoteStatus,
+    setToken
 }
