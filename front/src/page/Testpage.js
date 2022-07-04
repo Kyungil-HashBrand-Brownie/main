@@ -10,8 +10,11 @@ import { viliage2 } from '../img'
 import WhiteListMember from 'components/WhiteListMember'
 import { Animation } from 'components/Animation'
 import AlertModal from 'components/AlertModal'
-
-
+import CommunityTable from 'components/vote/CommunityTable'
+import MainHeader from 'components/MainHeader'
+import VoteDescription from 'components/vote/VoteDescription'
+import CommunityPostButton from 'components/vote/CommunityPostButton'
+import CommunityTopic from 'components/vote/CommunityTopic'
 
 const HomeBackImgPosition = styled.div`
     /* width: 100%;
@@ -49,6 +52,11 @@ const Testpage = () => {
         {/* <WhiteListMember /> */}
         {/* <Animation /> */}
         {/* <AlertModal /> */}
+        <MainHeader />
+        <CommunityTopic />
+        <VoteDescription />
+        <CommunityPostButton />
+        <CommunityTable />
     </div>
   )
 }
