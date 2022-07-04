@@ -128,6 +128,10 @@ const Swap = () => {
                         </div> */}
                     </div>
                 </div>
+                <div>
+                    <div>거래 후 잔액: </div>
+                    <div>수수료: 0.023 KLAY</div>
+                </div>
                 <div className='swap-text-box'>
                     <p className='swap-text'>최대 10000(일만)개 거래 가능합니다</p>
                 </div>

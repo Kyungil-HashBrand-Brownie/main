@@ -437,7 +437,10 @@ body {
 }
 
 .swap-ratio {
-  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0px 5px;
 }
 
 .swap-body{ 
