@@ -6,4 +6,4 @@ export {newProposal, startVote, endVote, resetVote} from "./votingMethods"
 
 export {pebToFixed, getTokenBalance} from "./utils"
 
-export {useAlert } from "./customHook"
+export {useAlert, useInput } from "./customHook"
