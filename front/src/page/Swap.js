@@ -5,7 +5,8 @@ import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Klaytn from '../img/swap/klaytn.png';
 import Browny1 from '../img/swap/browny1.png';
 import Arrow from '../img/swap/arrowRight.png';
-import {getBtk, sellBtk} from "api"
+import {getBtk, sellBtk, useAlert} from "api"
+import AlertModal from 'components/AlertModal';
 
 
 const Swap = () => {
@@ -14,6 +15,8 @@ const Swap = () => {
 
     const [swap, setSwap] = useState(true);
     const [exchange, setExchange] = useState('');
+
+    const customAlert = useAlert();
 
     const amountInput = useRef('');
 
@@ -30,12 +33,12 @@ const Swap = () => {
         let value = amountInput.current.value
         let re = /[^0-9]/g;
         if (re.test(value)) {
-            alert('숫자를 입력해 주세요!');
+            customAlert.open('숫자를 입력해 주세요!');
             amountInput.current.value = '';
             setExchange('');
         }
         else if (Number(value) > 10000) {
-            alert('최대 거래 수량 초과 \n ')
+            customAlert.open('최대 거래 수량 초과 \n ')
             amountInput.current.value = '';
             setExchange('');
         }
@@ -68,17 +71,18 @@ const Swap = () => {
                 status = result.status
             }
             if(status){
-                alert('스왑완료');
+                customAlert.open('스왑완료');
                 dispatch({type: "WALLET_REFRESH"})
             }
-            else alert("오류 발생")
+            else customAlert.open("오류 발생")
         }
         else {
-            alert("숫자를 입력해주세요")
+            customAlert.open("숫자를 입력해주세요")
         }
     }
     return (
         <div className='swap-box'>
+            <AlertModal {...customAlert} />
             <div className='select-box'>
                 <p className='swap-header'>SWAP</p>
                 <div className='swap-select'>
