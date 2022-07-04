@@ -1,0 +1,91 @@
+.layout-container{
+    background-color: white;
+    display: grid;
+    gap: 1em;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+
+    /* 행 개수 1f 1fr 2행r */
+    grid-template-columns: 1fr 1fr ;
+    padding: 100px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 50px;
+}
+
+.detailImglNft-item1 {
+    height: 80vh;
+    width: 70%;
+    background-color: lavender;
+    display: grid;
+    grid-template-rows: 900px 1fr;
+    text-align: center;
+}
+
+.detailImglNft-mainImg{
+    background-color: red
+}
+
+.detailImglNft-mainImg img{
+    width: 100%;
+    height: 100%;
+}
+
+.detailImglNft-subImg{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px;
+    background-color: rosybrown;
+}
+
+.detailImglNft-subImg_item{
+    margin: 10px
+}
+
+.detailImglNft-subImg_item img{
+    width: 100%;
+    height: 100%;
+}
+
+
+.detailImglNft-item2  {
+    height: 70vh;
+    background-color: pink;
+    display: grid;
+    grid-template-rows: 1fr 2fr 500px;
+    gap : 30px;
+
+}
+
+.detailImglNft-description_1{
+    width: 100%;
+    height: 15rem;
+    background-color: lawngreen;
+}
+
+.detailImglNft-description_2{
+    width: 100%;
+    height: 25rem;
+    background-color: firebrick;
+    font-size: 2em;
+    font-weight: 100;
+}
+
+.detailImglNft-description_3{
+    width: 100%;
+    height: 10rem;
+    background-color: lemonchiffon;
+}
+
+.div-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    /* background-color: lightcoral; */
+    border-top: 1px solid lightgray;
+    margin: 10px;
+}
+
+.right-layout {
+    display: flex;
+    justify-content: flex-end;
+}

@@ -8,6 +8,8 @@ import axios from 'axios'
 import Sort from 'components/collection/Sort'
 import CollectionMain from 'components/collection/CollectionMain'
 import styled from 'styled-components'
+import DetailCollecion from 'components/collection/DetailCollecion';
+import { useNavigate } from 'react-router-dom';
 
 const CollectionOuter = styled.div `
     display: flex;
@@ -20,6 +22,7 @@ const Collection = () => {
     const [data, setData] = useState(null);
     const [row, setRow] = useState(0);
     const { sortOption, filterOption } = useSelector(state => state.nft);
+    const navigate = useNavigate('')
 
     const getData = async () => {
         let result = await axios.get('/image/images')

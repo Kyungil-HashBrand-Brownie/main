@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Check } from '../../img';
-import { unstakeNFTs } from 'api';
+import { unstakeNFTs, useAlert } from 'api';
 import Pagination from './Pagination';
 import Cancel from '../../img/stake/cancel.png';
+import AlertModal from 'components/AlertModal';
 
 const Cardjustify = styled.div`
     display: flex;
@@ -196,6 +197,8 @@ const StakingList = ({ bool }) => {
     const [page, setPage] = useState(1);
     const [inputCheck, setInputCheck] = useState(false)
 
+    const customAlert = useAlert()
+
     let list = bool ? myNFTs : myStakedNFTs;
     // checked 된 것들
     const changeAllState = (checked) => {
@@ -254,22 +257,23 @@ const StakingList = ({ bool }) => {
                     dispatch({type: 'NFTCARD_UNSTAKE', payload: {myNFTs: unstakedNFTs, myStakedNFTs: stakedNFTs}})
                     dispatch({type: "WALLET_REFRESH"})
 
-                    alert("선택한 NFT가 정상적으로 unstaking 되었습니다.");
+                    customAlert.open("선택한 NFT가 정상적으로 unstaking 되었습니다.");
                 }
 
-                else alert("transaction fail")
+                else customAlert.open("transaction fail")
 
             } catch(e) {
                 console.log(e.message)
             }
         }
         else {
-            alert('언스테이킹할 아이템을 선택하세요.');
+            customAlert.open('언스테이킹할 아이템을 선택하세요.');
         }
     }
 
     return (
         <div className='nftlist-outer'>
+            <AlertModal {...customAlert} />
             <div className='nftcard-header stake-header'>
                 Staked NFTs
             </div>

@@ -8,7 +8,8 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
 import { nftAction } from 'redux/actions/nftAction';
 import { background10 ,background13} from '../img/background';
-import { getTokenBalance } from 'api';
+import { getTokenBalance, useAlert } from 'api';
+import AlertModal from './AlertModal';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -59,6 +60,7 @@ const Header = () => {
     const dispatch = useDispatch();
     const { modalState, myAddress, walletRefresh, isDeployer, isWhite, klayBalance,  btkBalance } = useSelector(state => state.nft);
 
+    const customAlert = useAlert();
 
     const setToken = (address) =>{
         dispatch(nftAction.setToken(address))
@@ -80,7 +82,7 @@ const Header = () => {
     }
 
     const enableKaikas = () => {
-        dispatch(nftAction.enableKaikas());
+        dispatch(nftAction.enableKaikas(customAlert));
     }
 
     const copyAddress = () => {
@@ -140,6 +142,8 @@ const Header = () => {
 
 
     return (
+        <>
+        <AlertModal {...customAlert} />
         <Navbar className="nav" expand="lg">
             <img src={background13} className="backG-img-left" />
             <img src={background13} className="backG-img-right" />
@@ -195,6 +199,7 @@ const Header = () => {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+        </>
     )
 }
 

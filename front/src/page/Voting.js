@@ -3,36 +3,45 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import Proposal from 'components/Proposal';
 import axios from "axios"
-import { endVote, newProposal, resetVote, startVote, useAlert } from 'api';
+import { endVote, getMyNFTs, newProposal, resetVote, startVote, useAlert, useInput } from 'api';
 import { nftAction } from 'redux/actions/nftAction';
 import AlertModal from 'components/AlertModal';
 
 
-const useInput = (defaultValue) => {
-  const [value , setValue] = useState(defaultValue)
-
-  const onChange = (e) => {
-    setValue(e.target.value)
-  }
-
-  return {
-    value,
-    onChange
-  }
-}
 
 function Voting() {
-  const customAlert = useAlert()
+  const customAlert = useAlert();
 
-  const dispatch = useDispatch()
-  const {myAddress, userRank, isDeployer, myNFTs, myStakedNFTs, voteStatus} = useSelector(state=>state.nft)
+  const dispatch = useDispatch();
+  const {myAddress, userRank, isDeployer, voteStatus} = useSelector(state=>state.nft);
 
-  const [vote, setVote] = useState(0)
-  const [proposals, setProposals] = useState([])
+ 
+
+  const [vote, setVote] = useState(0);
+  const [proposals, setProposals] = useState([]);
+  const [proposalId, setProposalId] = useState(1);
+  const [voteIdx, setVoteIdx] = useState(1);
+  const [votingPower, setVotingPower] = useState(0)
 
   const proposal = useInput("")
-  
 
+  const getVotingPower = async () => {
+    const myNFTs = await getMyNFTs(myAddress);
+    console.log(myNFTs)
+    setVotingPower(myNFTs.length)
+  }
+
+  const getList = async () => {
+    const {data} = await axios.get("/vote/list");
+    
+  }
+
+  const getCurrent = async () => {
+    const {data:{voteIdx, proposals}} = await axios.get("/vote/current")
+    setVoteIdx(voteIdx);
+    setProposals(proposals)
+  }
+  
   const voteSubmit = async (e) => {
     e.preventDefault();
     console.log(vote)
@@ -45,9 +54,15 @@ function Voting() {
 
   const addProposal = async (e) => {
     e.preventDefault()
-    // await newProposal(myAddress);
-    setProposals([...proposals, proposal.value])
+    await newProposal(myAddress);
+    const {data} = await axios.post("/vote/add",{proposalId, proposalContent : proposal.value ,voteIdx})
+    setProposals([...proposals, proposal.value]);
+    setProposalId(proposalId+1)
   }
+
+  useEffect(()=> {
+    getVotingPower();
+  },[myAddress])
 
   const getVotingButtonProps = () => {
     let value, onClick;
@@ -121,10 +136,7 @@ function Voting() {
       }
       <ChangeVotingButton {...votingProps} ></ChangeVotingButton>
       <div>MY RANK : {userRank}</div>
-      <div>MY VOTING POWER (NFT COUNT) : {myNFTs.length + myStakedNFTs.length}  </div>
-      <Button variant="primary" onClick={() => customAlert.open("test content")}>
-          TestButton
-      </Button>
+      <div>MY VOTING POWER (NFT COUNT) : {votingPower}  </div>
     </div>
     
     </>
