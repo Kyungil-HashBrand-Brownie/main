@@ -1,8 +1,8 @@
 CREATE TABLE votes(  
     `voteIdx` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `selectedProposal` VARCHAR(255) NULL,
+    `selectedProposal` VARCHAR(255) DEFAULT "" NULL,
     `startDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    `endDate` TIMESTAMP NULL
+    `endDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 CREATE TABLE proposals(  
@@ -22,4 +22,4 @@ CREATE TABLE proposals(
 
 -- 투표시작하면 votes에 시작 날짜변경, 투표종료하면 뽑힌 proposal과 endDate수정
 
--- 투표리셋하면 votes에 새로운 row 추가하고 voteIdx는 새로운것 참조해야함 (auto, null, date, null)
+-- 투표리셋하면 votes에 새로운 row 추가하고 voteIdx는 새로운것 참조해야함 => proposals는 비운다
