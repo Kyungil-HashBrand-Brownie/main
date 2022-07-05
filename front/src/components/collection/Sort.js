@@ -17,7 +17,7 @@ const SortOuter = styled.div `
     border: 3px solid white;
     border-radius: 10px;
     background: rgb(241, 149, 165);
-    /* background: rgb(214, 107, 107); */
+    box-shadow: white 7px 10px 7px;
 `
 const SortTopHeader = styled.div`
     margin-left: 10px;

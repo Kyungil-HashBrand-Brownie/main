@@ -14,21 +14,26 @@ const imagesKey = (req, res) => {
 
 const images = async (req, res) => {
     let { myBrownyNFTs, stakedNFTs } = req.body
+    console.log(req.body);
     // console.log(req.body)
     //더미데이터 컨트렉트 재구성시 다시 설정해야함
     const result = await pool.query('select * from BrownyData')
     // console.log(result)
-    let resd = myBrownyNFTs.map((item) => result[0].find((id) => id.edition == item))
+    let resd = myBrownyNFTs.map((item) => result[0].find((id) => id.edition == parseInt(item)+1))
     // console.log('resd : ', resd)
-    let ress = stakedNFTs.map((item) => result[0].find((id) => id.edition == item))
+    let ress = stakedNFTs.map((item) => result[0].find((id) => id.edition == parseInt(item)+1))
     let data = {};
     let data1 = {};
+    // console.log('resd: ', resd);
+    // console.log('ress: ', ress);
     resd.forEach((item) => {
-        data[item.edition] = item.addr
+        data[item.edition-1] = item.addr
     })
     ress.forEach((item) => {
-        data1[item.edition] = item.addr
+        data1[item.edition-1] = item.addr
     })
+    // console.log(data);
+    // console.log(data1);
     // console.log('data: ', data);
     res.send({ data, data1 })
 }

@@ -3,39 +3,56 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import Proposal from 'components/Proposal';
 import axios from "axios"
-import { endVote, newProposal, resetVote, startVote, useAlert } from 'api';
+import { endVote, getMyNFTs, newProposal, resetVote, startVote, submitVote, useAlert, useInput } from 'api';
 import { nftAction } from 'redux/actions/nftAction';
 import AlertModal from 'components/AlertModal';
 
 
-const useInput = (defaultValue) => {
-  const [value , setValue] = useState(defaultValue)
-
-  const onChange = (e) => {
-    setValue(e.target.value)
-  }
-
-  return {
-    value,
-    onChange
-  }
-}
 
 function Voting() {
-  const customAlert = useAlert()
+  const customAlert = useAlert();
 
-  const dispatch = useDispatch()
-  const {myAddress, userRank, isDeployer, myNFTs, myStakedNFTs, voteStatus} = useSelector(state=>state.nft)
+  const dispatch = useDispatch();
+  const {myAddress, userRank, isDeployer, voteStatus} = useSelector(state=>state.nft);
 
-  const [vote, setVote] = useState(0)
-  const [proposals, setProposals] = useState([])
+ 
+
+  const [vote, setVote] = useState(0);
+  const [proposals, setProposals] = useState([]);
+  const [proposalId, setProposalId] = useState(1);
+  const [voteIdx, setVoteIdx] = useState(1);
+  const [votingPower, setVotingPower] = useState(0);
+  const [voteList, setVoteList] = useState([]);
 
   const proposal = useInput("")
-  
 
+  const getVotingPower = async () => {
+    const myNFTs = await getMyNFTs(myAddress);
+    setVotingPower(myNFTs.length)
+  }
+
+  const getList = async () => {
+    const {data} = await axios.get("/vote/list");
+    console.log(data);
+    setVoteList(data);
+
+    getCurrent();
+  }
+
+  const getCurrent = async () => {
+    const {data:{voteIdx, proposals}} = await axios.get("/vote/current")
+    console.log(voteIdx,proposals)
+    
+    setVoteIdx(voteIdx);
+    setProposals(proposals)
+    setProposalId(proposals.length+1)
+  }
+  
   const voteSubmit = async (e) => {
     e.preventDefault();
-    console.log(vote)
+    console.log(vote);
+
+    await submitVote(myAddress);
   }
 
   const changeSelected = (e) => {
@@ -45,9 +62,16 @@ function Voting() {
 
   const addProposal = async (e) => {
     e.preventDefault()
-    // await newProposal(myAddress);
-    setProposals([...proposals, proposal.value])
+    await newProposal(myAddress);
+    await axios.post("/vote/add",{proposalId, proposalContent : proposal.value ,voteIdx})
+    console.log(proposals)
+    await getCurrent()
   }
+
+  useEffect(()=> {
+    getVotingPower();
+    getList();
+  },[myAddress])
 
   const getVotingButtonProps = () => {
     let value, onClick;
@@ -67,6 +91,7 @@ function Voting() {
         onClick= async ()=>{
           await endVote()
           dispatch(nftAction.setVoteStatus())
+          // selectedProposal과 endDate 업데이트
         }
         break;
 
@@ -76,8 +101,12 @@ function Voting() {
         onClick= async ()=>{
           await resetVote()
           dispatch(nftAction.setVoteStatus())
+          // votes에 새로운 row 추가하고 (voteIdx는 새로운것 참조 proposals는 비움) => getCurrent실행
         }
-      
+        break;
+      default:
+        value="에러 발생"
+        onClick = async () => {}
     }
     return {
       value,
@@ -100,14 +129,14 @@ function Voting() {
       >
         <div key={`inline-radio`} className="mb-3">
           {
-            proposals.map((label,index) => <Proposal key={index} label={label} index={index+1} changeSelected={changeSelected} />)
+            proposals.map((proposal,index) => <Proposal key={index} label={proposal.proposalContent} index={index+1} changeSelected={changeSelected} />)
           }
         </div>
         <button type='submit'>제출</button>
       </Form>
 
       {/* contract owner이거나 userRank가 3이어야 안건 발의 가능 */}
-      {(isDeployer || userRank == 3)
+      {(isDeployer || userRank === 3)
       ?
       <Form
       onSubmit={addProposal}
@@ -121,10 +150,17 @@ function Voting() {
       }
       <ChangeVotingButton {...votingProps} ></ChangeVotingButton>
       <div>MY RANK : {userRank}</div>
-      <div>MY VOTING POWER (NFT COUNT) : {myNFTs.length + myStakedNFTs.length}  </div>
-      <Button variant="primary" onClick={() => customAlert.open("test content")}>
-          TestButton
-      </Button>
+      <div>MY VOTING POWER (NFT COUNT) : {votingPower}  </div>
+      <div><h4>보팅 리스트</h4></div>
+      { voteList.length &&
+      voteList.map((vote,index)=>
+        <div key={index}>
+        <div>voteIdx : {vote.voteIdx}</div>
+        <div>startDate : {vote.startDate}</div>
+        <div>endData : {vote.endData}</div>
+        <div>selectedProposal : {vote.selectedProposal}</div>
+        </div>
+      )}
     </div>
     
     </>

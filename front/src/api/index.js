@@ -1,9 +1,9 @@
 export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, claimReward, batchMint, whitelistMint,addWhite, removeWhite, removeSelectedWhites} from "./contractMethods";
 
-export {getContractOwner, nftNum, checkWhite, whitelistNftNum, getUserRank, getMintList, getMyNFTs, getMyStaked, getVoteStatus} from "./viewMethods";
+export {getContractOwner, nftNum, checkWhite, whitelistNftNum, getUserRank, getMintList, getMyNFTs, getMyStaked, getVoteStatus, getVoteCount} from "./viewMethods";
 
-export {newProposal, startVote, endVote, resetVote} from "./votingMethods"
+export {newProposal, startVote, endVote, resetVote, submitVote} from "./votingMethods"
 
 export {pebToFixed, getTokenBalance} from "./utils"
 
-export {useAlert } from "./customHook"
+export {useAlert, useInput } from "./customHook"

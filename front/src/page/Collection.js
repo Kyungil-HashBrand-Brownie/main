@@ -8,6 +8,8 @@ import axios from 'axios'
 import Sort from 'components/collection/Sort'
 import CollectionMain from 'components/collection/CollectionMain'
 import styled from 'styled-components'
+import DetailCollecion from 'components/collection/DetailCollecion';
+import { useNavigate } from 'react-router-dom';
 
 const CollectionOuter = styled.div `
     display: flex;
@@ -18,7 +20,9 @@ const CollectionOuter = styled.div `
 
 const Collection = () => {
     const [data, setData] = useState(null);
+    const [row, setRow] = useState(0);
     const { sortOption, filterOption } = useSelector(state => state.nft);
+    const navigate = useNavigate('')
 
     const getData = async () => {
         let result = await axios.get('/image/images')
@@ -56,7 +60,8 @@ const Collection = () => {
         }
         // console.log('_data:', _data)
         _data = _data.sort((a,b) => a.edition - b.edition)
-        console.log('_data: ', _data);
+        // console.log('_data: ', _data);
+        setRow(Math.ceil(_data.length / 5));
         setData(_data);
     }
 
@@ -67,7 +72,7 @@ const Collection = () => {
     return (
         <CollectionOuter>
             <Sort />
-            <CollectionMain data={data}/>
+            <CollectionMain data={data} row={row}/>
         </CollectionOuter>
     )
 }

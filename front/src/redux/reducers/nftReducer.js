@@ -11,13 +11,16 @@ let initialState = {
     myStakedNFTs: [],
     reward: 0,
     loading: false,
-    // address, walletRefresh, isDeployer, isWhite update
+    voteStatus: "0",
+    // userInfo
     myAddress: "",
     userRank:0,
     walletRefresh: 1,
     isDeployer: false,
     isWhite: false,
-    voteStatus: "0",
+    klayBalance: 0,
+    btkBalance : 0,
+    
 
     // Collection
     sortOption: 0,
@@ -179,10 +182,17 @@ function nftReducer(state = initialState, action) {
                 userRank : payload
             }
 
-        case "GET_VOTE_STATUS" :
+        case "SET_VOTE_STATUS" :
             return {
                 ...state,
                 voteStatus : payload
+            }
+
+        case "GET_TOKEN_BALANCE" :
+            return {
+                ...state,
+                klayBalance : payload.KLAY,
+                btkBalance : payload.BTK
             }
 
         // Collection

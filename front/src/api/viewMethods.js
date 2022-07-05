@@ -23,4 +23,6 @@ const getMyStaked = async(from) => await nftInstance.methods.checkStakedNFTs().c
 
 const getVoteStatus = async() => await votingContract.methods.voteStatus().call();
 
-export {getContractOwner, nftNum, checkWhite, whitelistNftNum, getUserRank, getMintList, getMyNFTs, getMyStaked, getVoteStatus};
+const getVoteCount = async(index) => await votingContract.methods.numberOfVotes(index-1).call();
+
+export {getContractOwner, nftNum, checkWhite, whitelistNftNum, getUserRank, getMintList, getMyNFTs, getMyStaked, getVoteStatus, getVoteCount};

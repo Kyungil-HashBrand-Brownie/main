@@ -26,7 +26,7 @@
 // }
 
 import { caver, nftInstance,  } from "configs";
-import { checkWhite, getUserRank, getVoteStatus } from "api";
+import { checkWhite, getTokenBalance, getUserRank, getVoteStatus } from "api";
 
 function getReward(contract, stake, renewMine, renewStaked) {
 
@@ -52,7 +52,7 @@ function getReward(contract, stake, renewMine, renewStaked) {
     }
 }
 
-const enableKaikas = () => {
+const enableKaikas = (customAlert) => {
     return async (dispatch) => {
         if(window.klaytn){
             window.klaytn.enable()
@@ -60,8 +60,8 @@ const enableKaikas = () => {
             dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
         }
         else {
-            alert("카이카스 설치 필요")
-            window.open("https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko")
+            customAlert.open(<a href="https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko" target="blank">카이카스 설치 필요</ a>)
+
         }
     }
 }
@@ -96,7 +96,15 @@ const checkWhitelist = (address) => {
 const setVoteStatus = () => {
     return async (dispatch) => {
         const voteStatus = await getVoteStatus()
-        dispatch({type:"GET_VOTE_STATUS", payload : voteStatus})
+        dispatch({type:"SET_VOTE_STATUS", payload : voteStatus})
+    }
+}
+
+const setToken = (address) => {
+    return async (dispatch) => {
+        const tokenBalance = await getTokenBalance(address)
+
+        dispatch({type: 'GET_TOKEN_BALANCE',payload: tokenBalance})
     }
 }
 
@@ -105,5 +113,6 @@ export const nftAction = {
     enableKaikas,
     setUserInfo,
     checkWhitelist,
-    setVoteStatus
+    setVoteStatus,
+    setToken
 }

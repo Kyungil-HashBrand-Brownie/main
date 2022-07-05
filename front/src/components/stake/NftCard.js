@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { nftInstance } from "configs";
 import { nftAction } from 'redux/actions/nftAction';
 import Pagination from './Pagination';
-import { stakeNFTs, unstakeNFTs } from 'api';
+import { stakeNFTs, unstakeNFTs, useAlert } from 'api';
 import axios from 'axios';
 import Reward from './Reward';
-import CardMain from './CardMain';
+import CardHead from './CardHead';
 import CardContainer from './CardContainer';
+import AlertModal from 'components/AlertModal';
 
 const Cardjustify = styled.div`
     display: flex;
@@ -18,6 +19,7 @@ const Cardjustify = styled.div`
 `
 const Main = styled.div`
     width: 31.25rem;    
+    /* height: auto; */
     min-height: 54.6875rem;
     margin: .625rem;
     border: 
@@ -36,6 +38,7 @@ const Main = styled.div`
 function NftCard({ bool }) {
     const dispatch = useDispatch();
     const { myAddress, myNFTs, myStakedNFTs, loading } = useSelector(state => state.nft);
+    const customAlert = useAlert()
 
     const [page, setPage] = useState(1);
     const [inputCheck, setInputCheck] = useState(false)
@@ -92,19 +95,19 @@ function NftCard({ bool }) {
                     dispatch({ type: 'NFTCARD_TRANSACT', payload: data })
                     dispatch({ type: "WALLET_REFRESH" })
 
-                    if (bool) alert("스테이킹 성공");
-                    else alert("선택한 NFT가 정상적으로 unstaking 되었습니다.");
+                    if (bool) customAlert.open("스테이킹 성공");
+                    else customAlert.open("선택한 NFT가 정상적으로 unstaking 되었습니다.");
                 }
                 
-                else alert("transaction fail")
+                else customAlert.open("transaction fail")
 
             } catch (e) {
                 console.log(e.message)
             }
         }
         else {
-            bool ? alert('스테이킹할 아이템을 선택하세요.')
-                : alert('언스테이킹할 아이템을 선택하세요.')
+            bool ? customAlert.open('스테이킹할 아이템을 선택하세요.')
+                : customAlert.open('언스테이킹할 아이템을 선택하세요.')
         }
     }
 
@@ -159,6 +162,7 @@ function NftCard({ bool }) {
 
     return (
         <div className='nftlist-outer'>
+            <AlertModal {...customAlert} />
             <div className='nftcard-header'>
                 {bool ? 'My NFTs' : 'Staked NFTs'}
             </div>
@@ -173,13 +177,15 @@ function NftCard({ bool }) {
             <Cardjustify bool={bool}>
                 <Main bool={bool}>
                     {list.length > 0 &&
-                        <CardMain 
+                        <CardHead 
                             bool={bool}
                             checkedList={checkedList}
                             inputCheck={inputCheck}
                             transactNFT={transactNFT}
                             changeClickState={changeClickState}
                             changeAllState={changeAllState}
+                            total={myNFTs.length + myStakedNFTs.length}
+                            current={bool? myNFTs.length : myStakedNFTs.length}
                         />
                     }
                     <div className='InnerMain'>
