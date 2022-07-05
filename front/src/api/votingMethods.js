@@ -66,4 +66,16 @@ const resetVote = async ()=> {
     }
 }
 
-export {newProposal, startVote, endVote, resetVote}
+const submitVote = async (myAddress) => {
+    try {
+        const encodedAbi = await votingContract.methods.voting().encodeABI()
+        const result = await methodExecution(myAddress,encodedAbi)
+        console.log(result)
+        return result
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+export {newProposal, startVote, endVote, resetVote, submitVote}
