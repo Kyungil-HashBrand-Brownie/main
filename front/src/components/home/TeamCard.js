@@ -2,7 +2,7 @@ import React from 'react'
 import { Img, TeamImgOuter, TeamInfoPos, TeamInfoName } from './homeModule'
 
 const TeamCard = ({ info }) => {
-    const { id, img, name, pos } = info;
+    const { img, name, pos } = info;
 
     const LinkTo = () => {
         window.open('https://github.com/Kyungil-HashBrand-Brownie/main', '_blank')

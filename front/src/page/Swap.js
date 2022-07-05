@@ -5,9 +5,8 @@ import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Klaytn from '../img/swap/klaytn.png';
 import Browny1 from '../img/swap/browny1.png';
 import Arrow from '../img/swap/arrowRight.png';
-import {getBtk, sellBtk, useAlert} from "api"
+import { getBtk, sellBtk, useAlert } from "api"
 import AlertModal from 'components/AlertModal';
-
 
 const Swap = () => {
     const bool = {false: 'KLAY', true: 'BTK'}
@@ -41,15 +40,11 @@ const Swap = () => {
 
         else {
             if (value !== '') {
-                // if (swap) setExchange((Number(value) * 7.22).toFixed(2).toString() + ' ' + bool[swap])
                 if (swap) setExchange(parseInt(Number(value) * 7.22))
                 else setExchange(parseInt(Number(value) / 7.22))
-                // else setExchange((Number(value) / 7.22).toFixed(2).toString() + ' ' + bool[swap])
             }
             else setExchange('exchange')
-            // amountInput.current.value = ;
         }
-        
     }
 
     const { myAddress, klayBalance, btkBalance } = useSelector(state => state.nft);
@@ -77,21 +72,20 @@ const Swap = () => {
         }
     }
 
-
-    console.log(exchange)
-
     return (
         <div className='swap-box'>
             <AlertModal {...customAlert} />
             <div className='select-box'>
                 <div className='swap-header'>SWAP</div>
-                <div className='mywal-info-outer'>
-                    <div className='mywal-info'>
-                        <div className='mywal-header'>보유량</div>
-                        <div className='mywal-bal'>{klayBalance} KLAY</div>
-                        <div className='mywal-bal'>{btkBalance} BTK</div>
+                {myAddress && 
+                    <div className='mywal-info-outer'>
+                        <div className='mywal-info'>
+                            <div className='mywal-header'>보유량</div>
+                            <div className='mywal-bal'>{klayBalance} KLAY</div>
+                            <div className='mywal-bal'>{btkBalance} BTK</div>
+                        </div>
                     </div>
-                </div>
+                }
                 <div className='swap-select'>
                     <div className='swap-body'>
                         {<img 
@@ -150,7 +144,7 @@ const Swap = () => {
                         </div> */}
                     </div>
                 </div>
-                {exchange !== 'exchange' &&
+                {exchange !== 'exchange' && myAddress && 
                     <div className='swap-user-token-outer'>
                         <div className='swap-user-token-head-outer'>
                             <div className='swap-user-token-header'>거래 후 잔액</div>

@@ -9,7 +9,6 @@ import { css } from "@emotion/react";
 
 const override = css`
   border-color: black;
-
   margin: 0rem 1.42rem 0rem 1.4rem;
 `;
 

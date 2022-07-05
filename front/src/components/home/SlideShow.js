@@ -62,15 +62,13 @@ const SlideShow = () => {
   return (
     <SliderPosition>
       {mapping.map((mapItem, index) =>
-        <Slider {...mapItem}>
+        <Slider {...mapItem} key={index}>
           {data.map(item => {
             return (
-              <div key={item.id + index * 15}>
-                <ImageContainer>
+                <ImageContainer key={item.caption}>
                   <Image onClick={() => navigate('/mint')} src={item.img} />
                   <BottomLeft>{item.caption}</BottomLeft>
                 </ImageContainer>
-              </div>
             );
           })}
         </Slider>

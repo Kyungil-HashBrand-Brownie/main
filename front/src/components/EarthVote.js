@@ -1,15 +1,13 @@
-import React,{useState} from 'react'
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
-import ToggleButton from 'react-bootstrap/ToggleButton'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Accordion from 'react-bootstrap/Accordion'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import { Epro, ModalKpro, Apro, ani1, ani2, ani3 , Kproblem , KP1 , KP2, KP3 ,ModalAni1 , EP1 , EP2 , EP3 } from '../img'
+import { Ani1, Ani2, Ani3, Apro, Ep1, Ep2, Ep3, Kp1, Kp2, Kp3 } from '../img/vote/organizations'
+import { Epro , ModalAni1, ModalKpro, Kpro1 } from '../img/vote/detail'
 import styled from 'styled-components'
-
 
     const MainStyled = styled.div`
         display: flex;
@@ -35,9 +33,6 @@ function EarthVote() {
     const [lgShow, setLgShow] = useState(false);
     const {countAnimal , countKid, countMinority } = useSelector(state =>state.nft);
     const [show, setShow] = useState(false);
-
-
-
 
     const radios = [
         { name: '멸종위기 동물 구조단체', value: '1' },
@@ -81,9 +76,9 @@ function EarthVote() {
                         <Accordion.Header>참여하고 있는 단체</Accordion.Header>
                         <Accordion.Body>
                         <div>
-                            <img width="200px" height="100px" src={ani1} alt="help_company" />
-                            <img width="200px" height="100px" src={ani2} alt="help_company" />
-                            <img width="200px" height="100px" src={ani3} alt="help_company" />
+                            <img width="200px" height="100px" src={Ani1} alt="help_company" />
+                            <img width="200px" height="100px" src={Ani2} alt="help_company" />
+                            <img width="200px" height="100px" src={Ani3} alt="help_company" />
                         </div>
                         </Accordion.Body>
                     </Accordion.Item>
@@ -136,7 +131,7 @@ function EarthVote() {
             <br />
             <div>
             <Card style={{ width: '18rem' }} className="cardclass">
-            <Card.Img width="100px" height="300px" variant="top" src={Kproblem} />
+            <Card.Img width="100px" height="300px" variant="top" src={Kpro1} />
                 <Card.Body>
                     <Card.Title>세계 난민 구조 단체 </Card.Title>
                     <Card.Text>
@@ -150,9 +145,9 @@ function EarthVote() {
                         <Accordion.Header>참여하고 있는 단체</Accordion.Header>
                         <Accordion.Body>
                         <div>
-                            <img width="200px" height="100px" src={KP1} alt="help_company"/>
-                            <img width="200px" height="100px" src={KP2} alt="help_company"/>
-                            <img width="200px" height="100px" src={KP3} alt="help_company"/>
+                            <img width="200px" height="100px" src={Kp1} alt="help_company"/>
+                            <img width="200px" height="100px" src={Kp2} alt="help_company"/>
+                            <img width="200px" height="100px" src={Kp3} alt="help_company"/>
                         </div>
                         </Accordion.Body>
                     </Accordion.Item>
@@ -219,9 +214,9 @@ function EarthVote() {
                         <Accordion.Header>참여하고 있는 단체</Accordion.Header>
                         <Accordion.Body>
                         <div>
-                            <img width="200px" height="100px" src={EP1} alt="help_company"/>
-                            <img width="200px" height="100px" src={EP2} alt="help_company"/>
-                            <img width="200px" height="100px" src={EP3} alt="help_company"/>
+                            <img width="200px" height="100px" src={Ep1} alt="help_company"/>
+                            <img width="200px" height="100px" src={Ep2} alt="help_company"/>
+                            <img width="200px" height="100px" src={Ep3} alt="help_company"/>
                         </div>
                         </Accordion.Body>
                     </Accordion.Item>

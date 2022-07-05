@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { img1 } from '../../img';
+import { Img1 } from '../../img/browny';
 import styled from 'styled-components';
 import { StyleHomeImgCard } from './homeModule';
 import HomeImgCardMain from './HomeImgCardMain';
@@ -63,7 +63,7 @@ const HomeImgCard = () => {
             </div>
           </div>
           <div className="home_img" >
-            <ImgDivCard src={img1} alt="hi" click={click} />
+            <ImgDivCard src={Img1} alt="hi" click={click} />
           </div>
           <HomeImgCardMain click={click} />
           <HomeImgCardSide getData={getData} setClick={setClick} />
