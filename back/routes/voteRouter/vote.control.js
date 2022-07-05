@@ -5,13 +5,13 @@ const list = async (req, res) => {
     if(!result.length) {
         await pool.query("INSERT INTO votes VALUES ()")
         const [data] = await pool.query(`SELECT * FROM votes`);
-        res.send(data)
+        return res.send(data)
     }
     res.send(result);
 }
 
 const current = async (req, res) => {
-    const [result] = await pool.query("SELECT * FROM votes ORDER BY voteIdx DESC LIMIT 1;");
+    const [[result]] = await pool.query("SELECT * FROM votes ORDER BY voteIdx DESC LIMIT 1;");
     const {voteIdx} = result
     const [proposals] = await pool.query(`SELECT * FROM proposals WHERE voteIdx=${voteIdx}`)
     res.json({voteIdx, proposals})
