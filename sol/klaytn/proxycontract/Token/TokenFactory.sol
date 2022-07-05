@@ -19,7 +19,7 @@ contract TokenFactory {
         return address(Token);
     }
 
-    function getNFTAddress(uint32 _version) public view returns(address) {
+    function getTokenAddress(uint32 _version) public view returns(address) {
         return tokens[_version];
     }
     function getBeacon() public view returns(address) {

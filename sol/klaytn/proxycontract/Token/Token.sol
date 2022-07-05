@@ -7,6 +7,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 contract BrownyToken is Initializable, ERC20Upgradeable {
     function initialize(string memory _name, string memory _symbol) external initializer {
         __ERC20_init(_name, _symbol);
+        _mint(address(this), 1000000 * 10 ** 18);
     }
 
     function mint(address to, uint amount) private {

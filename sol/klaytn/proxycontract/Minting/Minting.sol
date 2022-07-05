@@ -1,23 +1,24 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "./Token.sol";
-import "./NFT.sol";
-import "./WhiteListTokenId.sol";
-import "./NormalListTokenId.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "../Token/Token.sol";
+import "../NFT/NFT.sol";
+import "../WhiteListTokenId.sol";
+import "../NormalListTokenId.sol";
 
 /**
 * author Kyungil_Team Browny
 * version 1.0
 * nft 발행 contract
 */
-contract Minting {
+contract Minting is Initializable {
     BrownyToken public brownyToken;
     BrownyNFT public brownyNFT;
     WhiteListTokenId public whiteListTokenId;
     NormalListTokenId public normalListTokenId;
 
-    constructor(address _brownyToken, address _brownyNFT, address _whiteListTokenId, address _normalListTokenId) {
+    function initialize(address _brownyToken, address _brownyNFT, address _whiteListTokenId, address _normalListTokenId) external initializer {
         brownyToken = BrownyToken(_brownyToken);
         brownyNFT = BrownyNFT(_brownyNFT);
         whiteListTokenId = WhiteListTokenId(_whiteListTokenId);
@@ -53,10 +54,10 @@ contract Minting {
         uint256 nftNum;
         uint256 randomNum;
         if(_status == 0) {
-            nftNum = brownyNFT.nftNum();
+            nftNum = brownyNFT.checkMintedNormalNFTNum();
             randomNum = normalListTokenId.showId(nftNum);
         } else if(_status == 1) {
-            nftNum = brownyNFT.whitelistNftNum();
+            nftNum = brownyNFT.checkMintedWhitelistNFTNum();
             randomNum = whiteListTokenId.showId(nftNum);
         }
         brownyNFT.safeMint(msg.sender, randomNum, _status);
@@ -76,7 +77,7 @@ contract Minting {
     function whitelistMint(uint256 amount) public {
         require(brownyNFT.isWhitelisted(msg.sender), "Yor are not whitelist member");
         require(brownyToken.balanceOf(msg.sender) >= amount * 25 * 10 ** 18 , "Please check your balance");
-        require(brownyNFT.whitelistNftNum() + amount <= 30,"Total NFT for whitelist users is only thirty");
+        require(brownyNFT.checkMintedWhitelistNFTNum() + amount <= 30,"Total NFT for whitelist users is only thirty");
         for (uint256 i = 0; i < amount; i++) {
             safeMint(25, 1);
         }
@@ -126,7 +127,7 @@ contract Minting {
         brownyNFT.changeTime(tokenId, block.timestamp);
     }
     function callClaim() public {
-        uint256[] memory tokenId = brownyNFT.checkUserStakedNFTs(msg.sender);
+        uint256[] memory tokenId = brownyNFT.checkStakedNFTs();
         for(uint8 i = 0; i < tokenId.length; i++) {
             claimed(tokenId[i]);
         }
