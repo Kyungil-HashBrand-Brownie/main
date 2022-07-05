@@ -44,6 +44,7 @@ const CommunityTopic = () => {
             <TopicHeader>Topic</TopicHeader>
             {/* <TopicFlex> */}
                 <Topic>- NFT</Topic>
+                <Topic>- Vote</Topic>
                 <Topic>- 기타</Topic>
             {/* </TopicFlex> */}
         </TopicOuter>
