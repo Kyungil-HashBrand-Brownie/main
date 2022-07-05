@@ -112,7 +112,9 @@ body {
 } */
 
 .copy-icon {
-  margin-left: 10px;
+  width: 17px;
+  height: 17px;
+  margin-left: 5px;
 }
 
 .copy-icon:hover {
@@ -531,6 +533,7 @@ body {
 
 .swap-amount-token {
   font-size: 15px;
+  width: 40px;
 }
 
 .swap-amount-inner {
@@ -1092,4 +1095,32 @@ Collection
 
 th {
   border-bottom: 1px solid black;
+}
+
+
+/*AlertModal*/
+/*position absolute => width가 안먹음? */
+.alert-modal {
+  width: auto;
+  left: 41%;
+  top: -5%;
+  min-width: 350px;
+}
+.modal-header {
+  height: 30px;
+}
+.modal-body {
+  padding-top: 10px;
+  font-size: 16px;
+  background-color: rgb(243, 237, 237);
+}
+.modal-footer {
+  display: flex;
+  align-items: center;
+  max-height: 40px;
+}
+.modal-btn {
+  font-size: 14px;
+  padding: 2px 5px;
+  transform: translate(-122px, -10px);
 }

@@ -2,8 +2,7 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import PreSale from './PreSale'
 import mintBackground from "../../img/mint/fireplace.png"
-import PreBrowny from '../../img/browny8.png';
-import WhiteBrowny from '../../img/browny9.png';
+import { PreBrowny, WhiteBrowny } from '../../img/browny';
 
 let preSaleProps = {
   title: 'Pre-Sale',
