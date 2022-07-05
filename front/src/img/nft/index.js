@@ -15,4 +15,6 @@ import nft14 from './14.png'
 import nft15 from './15.png'
 import nft16 from './16.png'
 
-export {nft1, nft2, nft3, nft4, nft5, nft6, nft7, nft8, nft9, nft10, nft11, nft12, nft13 ,nft14,nft15,nft16}
+let NFTs = [nft1, nft2, nft3, nft4, nft5, nft6, nft7, nft8, nft9, nft10, nft11, nft12, nft13, nft14];
+export { nft1, nft2, nft3, nft4, nft5, nft6, nft7, nft8, nft9, nft10, nft11, nft12, nft13, nft14, nft15, nft16 }
+export { NFTs }

@@ -4,8 +4,6 @@ import twit from "../img/footer/twit.png"
 import disc from "../img/footer/disc.png"
 import inst from "../img/footer/inst.png"
 import tele from "../img/footer/tele.png"
-import kakao from "../img/footer/kakao.png"
-import kakao2 from "../img/footer/kakao2.png"
 import { footerImg } from 'img/footer';
 
 const Outer = styled.div`

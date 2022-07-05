@@ -1,7 +1,7 @@
 import React from 'react'
-import styled from 'styled-components';
 import { nft1, nft2, nft3, nft4, nft5 } from '../../img/nft';
 import TeamCard from './TeamCard';
+import { TeamOuter, TeamBrowny, TeamText } from './homeModule';
 
 const teamInfo = [
     {   
@@ -35,22 +35,6 @@ const teamInfo = [
         pos: 'Backend'
     },
 ]
-
-const TeamOuter = styled.div `
-    margin: 100px 0;
-`
-
-const TeamBrowny = styled.div `
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-`
-const TeamText = styled.div `
-    text-align: center;
-    font-size: 40px;
-    margin: 40px 0;
-`
 
 const Team = () => {
   return (

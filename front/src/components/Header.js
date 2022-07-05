@@ -20,7 +20,6 @@ const LogoContainer = styled.div`
     border: 1px solid black;
     margin-left: 1px;
 `
-
 const PFPContainer = styled.div`
   margin-left: 10px;
   font-size: 20px;
@@ -39,20 +38,42 @@ const PFPContainer = styled.div`
   }
 `
 const StyledInfo = styled.div`
+    width: 90%;
+    height: auto;
     background-color: white;
-    width: 105%;
-    margin-top: 7px;
-    position: relative;
-    border: 1px solid black;
-    border-radius: 8px;
-    padding: 6px 10px;
-    font-weight: bold;
+    margin-top: 5px;
+    transform: translate(17.5px, 0);
+    /* position: relative; */
+    /* border: 1px solid black; */
+    border-radius: 20px;
+    /* padding: 3px 0px; */
     line-height: 30px;
-    /* margin-right: 20px; */
-    /* background: white; */
     text-align: center;
     z-index: 3;
     opacity: 90%;
+    /* background: ; */
+
+    .header-white {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        background: white;
+        padding-top: 3px;
+        font-size: 19px;
+        font-weight: bold;
+        letter-spacing: 1.0px;
+        border-bottom: 3px solid gray;
+    }
+    .header-line {
+        /* background: green; */
+        /* margin: 3px 0; */
+        font-weight: 500;
+        font-size: 17px;
+    }
+    .header-address {
+        font-size: 13px;
+        text-align: center;
+        /* padding-right: 5px; */
+    }
 `
 
 
@@ -180,17 +201,16 @@ const Header = () => {
                     </PFPContainer>
                     {modalState && 
                         <StyledInfo>
-                        {isWhite ? 'WHITELIST' : 'NORMAL'}<br/>
-                        Copy Address
+                        <div className='header-white'>{isWhite ? 'WHITE' : 'NORMAL'}</div>
+                        {/* <div className='header-address'>Address
                         <FontAwesomeIcon 
                             className='copy-icon'
                             icon={faCopy} 
                             onClick={copyAddress}    
                         />
-                        <br />
-                        {klayBalance + " KLAYS"}
-                        <br />
-                        {btkBalance + " BTK"}
+                        </div> */}
+                        <div className='header-line'>{klayBalance + " KLAY"}</div>
+                        <div className='header-line'>{btkBalance + " BTK"}</div>
                         </StyledInfo>
                     }
                 </div>
