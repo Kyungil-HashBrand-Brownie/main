@@ -1,5 +1,6 @@
 import styled, { keyframes, css } from 'styled-components'
 import { viliage2 } from '../../img'
+import { Main1, Main2, Main3 } from '../../img'
 
 /* Home */
 
@@ -294,7 +295,8 @@ export const StyledViliage = styled.div`
 export const HomeBackImgPosition = styled.div`
     width: 100%;
     height: 400px;
-    background-image: url(${viliage2});
+    /* background-image: url(/${viliage2}); */
+    background-image: url(${Main2});
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;

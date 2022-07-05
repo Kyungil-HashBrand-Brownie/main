@@ -30,7 +30,7 @@ export const CollectionRow = styled.div`
     display: flex;
     flex-direction: row;
     margin: 10px 0 15px 0;
-    background: lightgray;
+    /* background: lightgray; */
     height: 300px;
     border-radius: 5px;
     align-items: center;
