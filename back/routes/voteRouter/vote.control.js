@@ -18,9 +18,11 @@ const current = async (req, res) => {
 }
 
 const addAction = async (req,res) => {
-    const data = [...req.body];
-    console.log(data)
-    await pool.query(`INSERT INTO proposals(proposalId, proposalContent ,voteIdx, voteCount) VALUES (?, ?, ?, 0)`,data)
+    // object에서 value만 array로 
+    const data = Object.values(req.body)
+    console.log(data) // [proposalId value, proposalContent value ,voteIdx value]
+    const result = await pool.query(`INSERT INTO proposals(proposalId, proposalContent ,voteIdx, voteCount) VALUES (?, ?, ?, 0)`, data);
+    res.send(result)
 }
 
 const resetAction = async (req, res) => {
