@@ -10,11 +10,11 @@ contract MintingFactory {
     mapping(uint32 => address) private mintings;
     
     constructor(address _initBlueprint) {
-        beacon = new WhitelistBeacon(_initBlueprint);
+        beacon = new MintingBeacon(_initBlueprint);
     }
 
-    function buildWhitelist(uint32 _version) external returns(address){
-        BeaconProxy minting = new BeaconProxy(address(beacon), abi.encodeWithSelector(Minting(address(0)).initialize.selector));
+    function buildMinting(address _brownyToken, address _brownyNFT, address _whiteListTokenId, address _normalListTokenId, uint32 _version) external returns(address){
+        BeaconProxy minting = new BeaconProxy(address(beacon), abi.encodeWithSelector(Minting(address(0)).initialize.selector, _brownyToken, _brownyNFT, _whiteListTokenId, _normalListTokenId));
         mintings[_version] = address(minting);
         return address(minting);
     }

@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/proxy/beacon/BeaconProxy.sol";
 import "./WhitelistBeacon.sol";
 import "./Whitelist.sol";
 
-contract NFTFactory {
+contract WhitelistFactory {
     WhitelistBeacon immutable beacon;
     mapping(uint32 => address) private whitelists;
     
