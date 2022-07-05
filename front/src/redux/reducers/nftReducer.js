@@ -11,12 +11,33 @@ let initialState = {
     myStakedNFTs: [],
     reward: 0,
     loading: false,
-    // address, walletRefresh, isDeployer, isWhite update
+    voteStatus: "0",
+    // userInfo
     myAddress: "",
     userRank:0,
     walletRefresh: 1,
     isDeployer: false,
-    isWhite: false
+    isWhite: false,
+    klayBalance: 0,
+    btkBalance : 0,
+    
+
+    // Collection
+    sortOption: 0,
+    filterOpenState: [
+        { id: 'Body', click: false },
+        { id: 'Eye', click: false },
+        { id: 'Mouth', click: false },
+        { id: 'Item', click: false },
+        { id: 'Background', click: false },
+    ],
+    filterOption: [
+        { id: 'Body', opt: null },
+        { id: 'Eye', opt: null },
+        { id: 'Mouth', opt: null },
+        { id: 'Item', opt: null },
+        { id: 'Background', opt: null },
+    ],
 }
 
 function nftReducer(state = initialState, action) {
@@ -78,10 +99,10 @@ function nftReducer(state = initialState, action) {
                 myStakedNFTs: payload.myStakedNFTs,
             }
 
-        case 'NFTCARD_MYNFTS_CLICK' :
+        case 'NFTCARD_CLICK' :
             return {
                 ...state,
-                myNFTs: payload,
+                [Object.keys(payload)[0]]: Object.values(payload)[0],
             }
 
         case 'NFTCARD_STAKE_CLICK' :
@@ -90,19 +111,19 @@ function nftReducer(state = initialState, action) {
                 myStakedNFTs: payload,
             }
 
-        case 'NFTCARD_STAKE' :
+        case 'NFTCARD_TRANSACT' :
             return {
                 ...state,
                 myNFTs: payload.myNFTs,
-                myStakedNFTs: state.myStakedNFTs.concat(payload.myStakedNFTs),
-            }
-
-        case 'NFTCARD_UNSTAKE' :
-            return {
-                ...state,
-                myNFTs: state.myNFTs.concat(payload.myNFTs),
                 myStakedNFTs: payload.myStakedNFTs,
             }
+
+        // case 'NFTCARD_UNSTAKE' :
+        //     return {
+        //         ...state,
+        //         myNFTs: state.myNFTs.concat(payload.myNFTs),
+        //         myStakedNFTs: payload.myStakedNFTs,
+        //     }
 
 
         case "REMOVE_BOOKMARK_TEST":
@@ -159,6 +180,58 @@ function nftReducer(state = initialState, action) {
             return {
                 ...state,
                 userRank : payload
+            }
+
+        case "SET_VOTE_STATUS" :
+            return {
+                ...state,
+                voteStatus : payload
+            }
+
+        case "GET_TOKEN_BALANCE" :
+            return {
+                ...state,
+                klayBalance : payload.KLAY,
+                btkBalance : payload.BTK
+            }
+
+        // Collection
+        case 'CHANGE_SORT_OPTION' : 
+            return {
+                ...state,
+                sortOption: payload,
+            }
+
+        case 'CHANGE_FILTER_STATE' :
+            return {
+                ...state,
+                filterOpenState: payload,
+            }
+
+        case 'CHANGE_FILTER_OPTION_STATE' :
+            return {
+                ...state,
+                filterOption: payload,
+            }
+
+        case 'RESET_COLLECTION' : 
+            return {
+                ...state,
+                sortOption: 0,
+                filterOpenState: [
+                    { id: 'Body', click: false },
+                    { id: 'Eye', click: false },
+                    { id: 'Mouth', click: false },
+                    { id: 'Item', click: false },
+                    { id: 'Background', click: false },
+                    ],
+                filterOption: [
+                    { id: 'Body', opt: null },
+                    { id: 'Eye', opt: null },
+                    { id: 'Mouth', opt: null },
+                    { id: 'Item', opt: null },
+                    { id: 'Background', opt: null },
+                ],
             }
 
         default:

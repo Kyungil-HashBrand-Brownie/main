@@ -1,5 +1,5 @@
 import React from 'react'
-import MintCard from '../components/MintCard';
+import MintCard from '../components/mint/MintCard';
 
 const Mint = () => {
 

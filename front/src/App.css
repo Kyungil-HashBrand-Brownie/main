@@ -112,7 +112,9 @@ body {
 } */
 
 .copy-icon {
-  margin-left: 10px;
+  width: 17px;
+  height: 17px;
+  margin-left: 5px;
 }
 
 .copy-icon:hover {
@@ -392,6 +394,7 @@ body {
 .swap-header {
   font-weight: 600;
   font-size: 40px;
+  margin-bottom: 10px;
 }
 
 .select-box {
@@ -437,7 +440,10 @@ body {
 }
 
 .swap-ratio {
-  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0px 5px;
 }
 
 .swap-body{ 
@@ -503,8 +509,8 @@ body {
 }
 
 .swap-amount-input, .swap-exchange {
-  width: 155px;
-  font-size: 17px;
+  width: 95px;
+  font-size: 14px;
   border-radius: 4px;
   border: 3px solid black;
   text-align: center;
@@ -518,20 +524,81 @@ body {
   /* background-color: red; */
 }
 
+.swap-input-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: auto;
+}
+
+.swap-amount-token {
+  font-size: 15px;
+  width: 40px;
+}
+
 .swap-amount-inner {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 
 .swap-arrow {
   width: 30px;
 }
 
+.swap-text-box {
+  margin-bottom: 2px;
+}
+
+.swap-user-token-outer {
+  margin-bottom: 20px;
+}
+
+.swap-user-token-head-outer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.swap-user-token-header {
+  padding: 2px 5px;
+  background: lightblue;
+  border-radius: 20px;
+}
+
 .swap-text {
   font-size: 12px;
   /* color:blue */
   font-weight: bold;
+}
+
+.mywal-info-outer {
+  /* position: absolute; */
+  /* transform: translate(290px, -180px); */
+  /* background-color: #efb369; */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.mywal-info {
+  /* border: 3px solid black; */
+  padding: 2px 5px;
+  border-radius: 20px;
+  /* background-color: purple; */
+}
+
+.mywal-header {
+  font-size: 20px;
+  background-color: lightblue;
+  border-radius: 20px;
+  margin-bottom: 5px;
+}
+
+.mywal-bal {
+  font-size: 18px;
+  margin-bottom: 2px;
 }
 
 /*Pagination*/
@@ -546,6 +613,18 @@ body {
 /*
 NftCard
 */
+.nftlist-count-box {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: flex-end;
+}
+
+.nftlist-count-inner-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: end;
+}
 
 .nftlist-select-all-button:hover{
   background-color: lightgray;
@@ -573,13 +652,13 @@ NftCard
 }
 .myNFT-info-box {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   /* background-color: blue; */
   /* display: flex; */
   /* justify-content: center; */
 }
 .nftlist-outer {
-  margin-top: 15%;
+  margin-top: 4%;
 }
 .stake-box {
   width: 100%;
@@ -592,6 +671,7 @@ NftCard
   display: flex;
   /* flex-direction: row; */
   background-color: lightgray;
+  opacity: 0.9;
   width: 100%;
 }
 
@@ -604,7 +684,7 @@ NftCard
   z-index: 2;
   top: 20px;
   left: 10px;
-  margin-top: -15.0%;
+  margin-top: -19.0%;
   /* transform: translate(50%, 50%) */
 }
 
@@ -638,6 +718,204 @@ NftCard
   font-size: 18px;
 }
 
+    .Main {
+        width: 31.25rem;
+        min-height: 54.6875rem;
+        margin: .625rem;
+        border: .1875rem solid white;
+        border-radius: 2.5rem;
+        padding: .625rem .625rem;
+        background: #F5FADB;
+        /* background: radial-gradient(transparent, #FFF9F9); */
+        /* background: linear-gradient(to right, #d78034 0%, transparent 50%, #d78034 100%); */
+        /* background: #6e3503; */
+    }
+
+    .InnerMain {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .Ncard {
+        opacity: 0.9;
+        padding: .1875rem;
+        margin: .625rem;
+        margin-left: 1.6875rem;
+        padding-top: 1.5625rem;
+        border-radius: 12.5rem;
+        text-align: center;
+        cursor: pointer;
+        /* background: #4f86f7; */
+        /* background: #464196  */
+    }
+
+    .Ncard:hover {
+        opacity: 1;
+    }
+
+    .card:hover {
+        opacity: 1;
+        transform :scale(1.1);
+    }
+
+    .card:hover  button{
+        opacity: 1.0;
+    }
+
+    .nftcardbutton{
+        position: relative;
+        display: flex ;
+        justify-content: center ;
+        bottom: 12.5rem;
+    }
+
+    .spaan {
+        background-color: pink ;
+        opacity: 0;
+    }
+
+    .containerCard {
+        width: 100%;
+        height: 100%;
+        background-color: gray;
+        border-radius: 8px;
+    }
+
+    .col_1 {
+        color: blue;
+    }
+
+    .col_2 {
+        color: pink;
+    }
+
+    .width1 {
+        width: 100% ;
+    }
+    .width2 {
+        width: 100% ;
+    }
+
+    .rel{
+        background-color: red;
+        position: absolute;
+        transform: translate(150%, 150%);
+    }
+
+    .cont21 {
+        display: flex ;
+        /* flex-direction: column; */
+        justify-content: center;
+        margin: .625rem 0rem;
+        padding-bottom: .625rem;
+        border-bottom: .0625rem solid black;
+    }
+
+    .nftlist {
+        text-align: center;
+        border-radius: .1875rem;
+        border-top-left-radius: .625rem;
+        border-bottom-right-radius: .625rem;
+        width: 80%;
+        padding: .3125rem;
+        background: lightgray;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nftlist-id-box {
+        width: 5rem;
+        margin: .1875rem .25rem;
+        background: white;
+        border-radius: 1.875rem;
+        font-size: .9375rem;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .nftlist-id-box:hover {
+        transform: scale(1.1);
+    }
+
+    .nftlist-header {
+        font-size: 1.5625rem;
+        padding-left: 4.375rem;
+        /* margin-bottom: 1.25rem; */
+    }
+    .nftlist-text {
+        text-align: center;
+        border-radius: .1875rem;
+        width: 80%;
+        padding: .3125rem;
+        background: lightgray;
+    }
+
+    .nftlist-box {
+        margin: 0rem 1.875rem;
+    }
+
+    .nftlist-justify {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.25rem;
+    }
+
+    .nftlist-cancel {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .overlay {
+        position: absolute;
+        opacity: 0;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        transform: translate(1.375rem, -2.0625rem);
+    }
+
+    .nftlist-id-box:hover .overlay{
+        position: absolute;
+        opacity: 1;
+    }
+
+    .nftlist-select-all {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: .3125rem;
+        margin-right: 3.125rem;
+        align-items: center;
+    }
+    
+    .nftlist-select-all-button {
+        border-radius: .625rem;
+        cursor: pointer;
+    }
+
+    .nftlist-select-all-text {
+        margin-top: .625rem;
+        background: blue;
+    }
+
+    .nftlist-select-all-checkbox {
+        margin-right: .1875rem;
+    }
+
+    .nftlist-card-img {
+        border-radius: 5rem;
+    }
+
+    .no-display {
+        position: absolute;
+        transform: translate(3.4375rem, 24.0625rem);
+    }
+
+
+/*main slide animation*/
+
 .slidediv {
   font-size: 7em;
   width: 350px;
@@ -654,7 +932,7 @@ NftCard
 
 .refresh-reward-icon {
   cursor: pointer;
-  margin: 0px 20px;
+  margin: 0px 10px;
   width: 20px;
   height: 20px;
 }
@@ -744,4 +1022,105 @@ Collection
 
 .bgDiv {
   min-width: 150px;
+}
+
+.collection-info-outer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.collection-info-box {
+  font-size: 18px;
+  text-align: end;
+  width: 200px;
+  margin-right: 50px;
+}
+
+.collection-last-row {
+  justify-content: flex-start;
+}
+
+/*Vote*/
+
+.vote-table {
+  width: 80%;
+  z-index: 4;
+}
+
+.vote-table-header {
+  background: white;
+}
+
+.table-title {
+  display: flex;
+  align-items: center;
+  width: 550px;
+}
+
+.table-writer {
+  width: 100px;
+}
+
+.table-date {
+  width: 150px;
+}
+
+.table-view {
+  width: 60px;
+ }
+
+ .table-icon {
+  width: 6px;
+  height: 6px;
+  margin-right: 10px;
+ }
+
+ .title {
+  cursor: pointer;
+ }
+
+ .title:hover {
+  text-decoration: solid underline 3px;
+ }
+
+ td {
+  padding: 0 10px;
+  border-bottom: 1px solid lightgray;
+ }
+
+.table-view, .table-writer, .table-date, .title-flex {
+  text-align: center;
+  justify-content: center;
+}
+
+th {
+  border-bottom: 1px solid black;
+}
+
+
+/*AlertModal*/
+/*position absolute => width가 안먹음? */
+.alert-modal {
+  width: auto;
+  left: 41%;
+  top: -5%;
+  min-width: 350px;
+}
+.modal-header {
+  height: 30px;
+}
+.modal-body {
+  padding-top: 10px;
+  font-size: 16px;
+  background-color: rgb(243, 237, 237);
+}
+.modal-footer {
+  display: flex;
+  align-items: center;
+  max-height: 40px;
+}
+.modal-btn {
+  font-size: 14px;
+  padding: 2px 5px;
+  transform: translate(-122px, -10px);
 }

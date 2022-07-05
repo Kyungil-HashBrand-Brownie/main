@@ -5,63 +5,49 @@ import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Klaytn from '../img/swap/klaytn.png';
 import Browny1 from '../img/swap/browny1.png';
 import Arrow from '../img/swap/arrowRight.png';
-import {getBtk, sellBtk} from "api"
-
+import { getBtk, sellBtk, useAlert } from "api"
+import AlertModal from 'components/AlertModal';
 
 const Swap = () => {
     const bool = {false: 'KLAY', true: 'BTK'}
     const dispatch = useDispatch();
 
     const [swap, setSwap] = useState(true);
-    const [exchange, setExchange] = useState('');
+    const [exchange, setExchange] = useState('exchange');
+
+    const customAlert = useAlert();
 
     const amountInput = useRef('');
 
     const swapChange = () => {
-        // let changeAmount = exchange;
         setSwap(!swap);
         amountInput.current.value = '';
-        // setSwap(!swap)
-        // setExchange(amountInput.current.value);
-        // amountInput.current.value = changeAmount;
     }
 
     const checkValidation = () => {
         let value = amountInput.current.value
-        // let wordLen = bool[!swap].length;
-        // value = value.slice(0, -wordLen)
-
-        // let testLen = value.length - bool[!swap].length - 1;
-        // value = value.slice(0,testLen);
-        // console.log(testLen)
-        // console.log(value.slice(0, testLen));
-        // value = value.slice(0, testLen);
         let re = /[^0-9]/g;
         if (re.test(value)) {
-            alert('숫자를 입력해 주세요!');
+            customAlert.open('숫자를 입력해 주세요!');
             amountInput.current.value = '';
             setExchange('');
         }
         else if (Number(value) > 10000) {
-            alert('최대 거래 수량 초과 \n ')
+            customAlert.open('최대 거래 수량 초과 \n ')
             amountInput.current.value = '';
             setExchange('');
         }
 
         else {
-            if (value != '') {
-                // if (swap) setExchange((Number(value) * 7.22).toFixed(2).toString() + ' ' + bool[swap])
+            if (value !== '') {
                 if (swap) setExchange(parseInt(Number(value) * 7.22))
                 else setExchange(parseInt(Number(value) / 7.22))
-                // else setExchange((Number(value) / 7.22).toFixed(2).toString() + ' ' + bool[swap])
             }
-            else setExchange('your exchange')
-            // amountInput.current.value = ;
+            else setExchange('exchange')
         }
-        
     }
 
-    const {myAddress} = useSelector(state =>state.nft);
+    const { myAddress, klayBalance, btkBalance } = useSelector(state => state.nft);
     
     const swapToken = async () => {
         let amount = amountInput.current.value
@@ -76,24 +62,36 @@ const Swap = () => {
                 status = result.status
             }
             if(status){
-                alert('스왑완료');
+                customAlert.open('스왑완료');
                 dispatch({type: "WALLET_REFRESH"})
             }
-            else alert("오류 발생")
+            else customAlert.open("오류 발생")
         }
         else {
-            alert("숫자를 입력해주세요")
+            customAlert.open("숫자를 입력해주세요")
         }
     }
+
     return (
         <div className='swap-box'>
+            <AlertModal {...customAlert} />
             <div className='select-box'>
-                <p className='swap-header'>SWAP</p>
+                <div className='swap-header'>SWAP</div>
+                {myAddress && 
+                    <div className='mywal-info-outer'>
+                        <div className='mywal-info'>
+                            <div className='mywal-header'>보유량</div>
+                            <div className='mywal-bal'>{klayBalance} KLAY</div>
+                            <div className='mywal-bal'>{btkBalance} BTK</div>
+                        </div>
+                    </div>
+                }
                 <div className='swap-select'>
                     <div className='swap-body'>
                         {<img 
                         className={!swap ? 'browny-icon' : 'klay-icon'} 
                         src={!swap ? Browny1 : Klaytn}
+                        alt="이미지를 찾을 수 없습니다"
                         />}
                         {bool[!swap]}
                     </div>
@@ -106,6 +104,7 @@ const Swap = () => {
                         {<img 
                         className={swap ? 'browny-icon' : 'klay-icon'} 
                         src={!swap ? Klaytn : Browny1}
+                        alt="이미지를 찾을 수 없습니다"
                         />}{bool[swap]}
                     </div>
                 </div>
@@ -117,27 +116,58 @@ const Swap = () => {
                 </div>
                 <div className='swap-amount-input-box'>
                     <div className='swap-amount-inner'>
-                        <input 
-                        className='swap-amount-input'
-                        placeholder='input amount'
-                        onChange={checkValidation}
-                        // value={bool[!swap]}
-                        ref={amountInput} />
+                        <div className='swap-input-flex'>
+                            <input 
+                            className='swap-amount-input'
+                            placeholder='amount'
+                            // value={input}
+                            // onChange={checkInput}
+                            onChange={checkValidation}
+                            // value={bool[!swap]}
+                            ref={amountInput} 
+                            />
+                            <div className='swap-amount-token'>{bool[!swap]}</div>
+                        </div>
                         
-                        <img className='swap-arrow' src={Arrow} />
-                        <input 
-                        disabled
-                        className='swap-amount-input'
-                        placeholder='your exchange'
-                        value={amountInput.current.value != '' ?  exchange : 'your exchange'}
-                        /> 
+                        <img className='swap-arrow' src={Arrow} alt="이미지를 찾을 수 없습니다"/>
+                        <div className='swap-input-flex'>
+                            <input 
+                            disabled
+                            className='swap-amount-input'
+                            placeholder='exchange'
+                            value={amountInput.current.value !== '' ?  exchange : 'exchange'}
+                            /> 
+                            <div className='swap-amount-token'>{bool[swap]}</div>
+                        </div>
                         {/* <div className='swap-exchange'>
                             4{bool[swap]}
                         </div> */}
                     </div>
                 </div>
+                {exchange !== 'exchange' && myAddress && 
+                    <div className='swap-user-token-outer'>
+                        <div className='swap-user-token-head-outer'>
+                            <div className='swap-user-token-header'>거래 후 잔액</div>
+                        </div>
+                        <div>
+                            <div>
+                            KLAY: {klayBalance + ' => '}
+                            {
+                            !swap ? (Number(klayBalance) + Number(exchange) - 0.023).toFixed(2) : (Number(klayBalance) - Number(amountInput.current.value) - 0.023).toFixed(2)
+                            }
+                            </div>
+                            <div>
+                            BTK: {btkBalance + ' => '}
+                            {
+                            !swap ? (Number(btkBalance) - Number(amountInput.current.value)).toFixed(4) : (Number(btkBalance) + Number(exchange)).toFixed(4)
+                            }
+                            </div>
+                        </div>
+                    </div>
+                }
                 <div className='swap-text-box'>
-                    <p className='swap-text'>최대 10000(일만)개 거래 가능합니다</p>
+                    <div className='swap-text'>수수료: 0.023 KLAY</div>
+                    <div className='swap-text'>최대 10000(일만)개 거래 가능합니다</div>
                 </div>
                 <div className='swap-submit'>
                     <button 

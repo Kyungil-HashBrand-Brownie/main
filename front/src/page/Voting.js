@@ -1,47 +1,58 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import Proposal from 'components/Proposal';
 import axios from "axios"
-import { newProposal } from 'api';
+import { endVote, getMyNFTs, newProposal, resetVote, startVote, submitVote, useAlert, useInput } from 'api';
+import { nftAction } from 'redux/actions/nftAction';
+import AlertModal from 'components/AlertModal';
 
 
-const useInput = (defaultValue) => {
-  const [value , setValue] = useState(defaultValue)
-
-  const onChange = (e) => {
-    setValue(e.target.value)
-  }
-
-  return {
-    value,
-    onChange
-  }
-}
 
 function Voting() {
-  const {myAddress, userRank} = useSelector(state=>state.nft)
+  const customAlert = useAlert();
 
-  const [vote, setVote] = useState(0)
-  const [proposals, setProposals] = useState([])
+  const dispatch = useDispatch();
+  const {myAddress, userRank, isDeployer, voteStatus} = useSelector(state=>state.nft);
+
+ 
+
+  const [vote, setVote] = useState(0);
+  const [proposals, setProposals] = useState([]);
+  const [proposalId, setProposalId] = useState(1);
+  const [voteIdx, setVoteIdx] = useState(1);
+  const [votingPower, setVotingPower] = useState(0);
+  const [voteList, setVoteList] = useState([]);
 
   const proposal = useInput("")
+
+  const getVotingPower = async () => {
+    const myNFTs = await getMyNFTs(myAddress);
+    setVotingPower(myNFTs.length)
+  }
+
+  const getList = async () => {
+    const {data} = await axios.get("/vote/list");
+    console.log(data);
+    setVoteList(data);
+
+    getCurrent();
+  }
+
+  const getCurrent = async () => {
+    const {data:{voteIdx, proposals}} = await axios.get("/vote/current")
+    console.log(voteIdx,proposals)
+    
+    setVoteIdx(voteIdx);
+    setProposals(proposals)
+    setProposalId(proposals.length+1)
+  }
   
-    const callApi = async () => {
-      // db안건 데이터 불러오기
-      // 랭크 불러오기
-      if(myAddress) {
-        console.log(userRank)
-      }
-    }
-
-    useEffect(()=>{
-      callApi();
-    },[userRank])
-
   const voteSubmit = async (e) => {
     e.preventDefault();
-    console.log(vote)
+    console.log(vote);
+
+    await submitVote(myAddress);
   }
 
   const changeSelected = (e) => {
@@ -51,31 +62,108 @@ function Voting() {
 
   const addProposal = async (e) => {
     e.preventDefault()
-    await newProposal("0xAc45689e82aE9F93ED325b9254fe42BB77bA7849");
-    setProposals([...proposals, proposal.value])
+    await newProposal(myAddress);
+    await axios.post("/vote/add",{proposalId, proposalContent : proposal.value ,voteIdx})
+    console.log(proposals)
+    await getCurrent()
+  }
+
+  useEffect(()=> {
+    getVotingPower();
+    getList();
+  },[myAddress])
+
+  const getVotingButtonProps = () => {
+    let value, onClick;
+    switch(voteStatus) {
+      case "0":
+        // beforeVote
+        value="투표시작"
+        onClick= async ()=>{
+          await startVote()
+          dispatch(nftAction.setVoteStatus())
+        }
+        break;
+
+      case "1":
+        // nowVote
+        value="투표종료"
+        onClick= async ()=>{
+          await endVote()
+          dispatch(nftAction.setVoteStatus())
+          // selectedProposal과 endDate 업데이트
+        }
+        break;
+
+      case "2":
+        // afterVote
+        value="투표초기화"
+        onClick= async ()=>{
+          await resetVote()
+          dispatch(nftAction.setVoteStatus())
+          // votes에 새로운 row 추가하고 (voteIdx는 새로운것 참조 proposals는 비움) => getCurrent실행
+        }
+        break;
+      default:
+        value="에러 발생"
+        onClick = async () => {}
+    }
+    return {
+      value,
+      onClick
+    }
+  }
+
+  const votingProps = getVotingButtonProps()
+
+  const ChangeVotingButton = ({value, onClick})=> {
+    return <Button as='input' type='button' variant="success" value={value} onClick={onClick}></Button>
   }
 
   return (
+    <>
     <div className="App">
+      <AlertModal {...customAlert} />
       <Form
         onSubmit={voteSubmit}
       >
         <div key={`inline-radio`} className="mb-3">
           {
-            proposals.map((label,index) => <Proposal key={index} label={label} index={index+1} changeSelected={changeSelected} />)
+            proposals.map((proposal,index) => <Proposal key={index} label={proposal.proposalContent} index={index+1} changeSelected={changeSelected} />)
           }
         </div>
         <button type='submit'>제출</button>
       </Form>
+
+      {/* contract owner이거나 userRank가 3이어야 안건 발의 가능 */}
+      {(isDeployer || userRank === 3)
+      ?
       <Form
-        onSubmit={addProposal}
+      onSubmit={addProposal}
       >
         <InputGroup className='mb-3'>
           <Form.Control type='text' {...proposal}/>
           <Button type='submit' variant='success'>Add proposal</Button>
         </InputGroup>
       </Form>
+      : null
+      }
+      <ChangeVotingButton {...votingProps} ></ChangeVotingButton>
+      <div>MY RANK : {userRank}</div>
+      <div>MY VOTING POWER (NFT COUNT) : {votingPower}  </div>
+      <div><h4>보팅 리스트</h4></div>
+      { voteList.length &&
+      voteList.map((vote,index)=>
+        <div key={index}>
+        <div>voteIdx : {vote.voteIdx}</div>
+        <div>startDate : {vote.startDate}</div>
+        <div>endData : {vote.endData}</div>
+        <div>selectedProposal : {vote.selectedProposal}</div>
+        </div>
+      )}
     </div>
+    
+    </>
   )
 }
 

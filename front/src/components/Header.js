@@ -6,10 +6,10 @@ import Logo from '../img/brownyLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
-import {tokenInstance, nftInstance, caver} from "configs";
-
+import { nftAction } from 'redux/actions/nftAction';
 import { background10 ,background13} from '../img/background';
-import { checkWhite, getUserRank } from 'api';
+import { getTokenBalance, useAlert } from 'api';
+import AlertModal from './AlertModal';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -20,7 +20,6 @@ const LogoContainer = styled.div`
     border: 1px solid black;
     margin-left: 1px;
 `
-
 const PFPContainer = styled.div`
   margin-left: 10px;
   font-size: 20px;
@@ -39,90 +38,89 @@ const PFPContainer = styled.div`
   }
 `
 const StyledInfo = styled.div`
+    width: 90%;
+    height: auto;
     background-color: white;
-    width: 105%;
-    margin-top: 7px;
-    position: relative;
-    border: 1px solid black;
-    border-radius: 8px;
-    padding: 6px 10px;
-    font-weight: bold;
+    margin-top: 5px;
+    transform: translate(17.5px, 0);
+    /* position: relative; */
+    /* border: 1px solid black; */
+    border-radius: 20px;
+    /* padding: 3px 0px; */
     line-height: 30px;
-    /* margin-right: 20px; */
-    /* background: white; */
     text-align: center;
     z-index: 3;
     opacity: 90%;
+    /* background: ; */
+
+    .header-white {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        background: white;
+        padding-top: 3px;
+        font-size: 19px;
+        font-weight: bold;
+        letter-spacing: 1.0px;
+        border-bottom: 3px solid gray;
+    }
+    .header-line {
+        /* background: green; */
+        /* margin: 3px 0; */
+        font-weight: 500;
+        font-size: 17px;
+    }
+    .header-address {
+        font-size: 13px;
+        text-align: center;
+        /* padding-right: 5px; */
+    }
 `
 
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer, isWhite } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh, isDeployer, isWhite, klayBalance,  btkBalance } = useSelector(state => state.nft);
 
-    const [address, setAddress] = useState(null);
-    const [balance, setBalance] = useState(0);
-    const [btkBalance, setBtkBalance] = useState(0);
+    const customAlert = useAlert();
 
-    const checkWhitelist = async () => {
-        if (myAddress) {
-            try {
-                const isWhite = await checkWhite(myAddress)
-                dispatch({ type : "CHECK_ISWHITELIST" , payload:isWhite })
-            }
-            catch (e) {
-                throw e
-            }
-        }
+    const setToken = (address) =>{
+        dispatch(nftAction.setToken(address))
     }
 
-    const weiToFixed = (wei) => {
-        const toKlay = caver.utils.convertFromPeb(wei);
-        const fixed = parseFloat(toKlay).toFixed(2);
-        return fixed;
+    const checkWhitelist = (address) => {
+         dispatch(nftAction.checkWhitelist(address));
     }
 
-    const setTokenBalance = async (address) => {
-        const weiBalance = await caver.klay.getBalance(address)
-        const fixedBalance = weiToFixed(weiBalance)
-        console.log(fixedBalance)
-        const weibtkBalance = await tokenInstance.balanceOf(address) //BigNumber 객체
-        const fixedbtkBalance = weiToFixed(weibtkBalance)
-
-        setBalance(fixedBalance)
-        setBtkBalance(fixedbtkBalance);
+    const setUserInfo = async (address) => {
+        if(address){
+            setToken(address)
+        }
+        dispatch(nftAction.setUserInfo(address));
     }
 
-    const setUserInfo = async () => {
-        if(myAddress){
-            setAddress(myAddress);
-            await setTokenBalance(myAddress)
-            const contractOwner = await nftInstance.methods.owner().call()
-            const isDeployer = caver.utils.toChecksumAddress(myAddress) === contractOwner
-            dispatch({type: 'CHECK_ISDEPLOYER', payload: isDeployer})
-            const userRank = await getUserRank(myAddress);
-            dispatch({type: "GET_USER_RANK", payload: userRank})
-        }
-        else dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
+    const setVoteStatus = () => {
+        dispatch(nftAction.setVoteStatus())
     }
 
-    const enableKikas = () => {
-        if(window.klaytn){
-            window.klaytn.enable()
-            dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
-        }
-        else {
-            alert("카이카스 설치 필요")
-            window.open("https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko")
-        }
+    const enableKaikas = () => {
+        dispatch(nftAction.enableKaikas(customAlert));
     }
 
     const copyAddress = () => {
-        navigator.clipboard.writeText(address)
+        navigator.clipboard.writeText(myAddress)
     }
 
     const showInfo = () => {
         dispatch({type: "MODAL_CLICK"})
+    }
+
+    const reset = () => {
+        closeModal();
+        resetCollection();
+    }
+
+    const resetCollection = () => {
+        dispatch({type: 'RESET_COLLECTION'})
     }
 
     const closeModal = () => {
@@ -130,8 +128,12 @@ const Header = () => {
     }
 
     useEffect(() => {
-        setUserInfo();
-    }, [myAddress,walletRefresh])
+        setUserInfo(myAddress);
+    }, [myAddress, walletRefresh])
+
+    useEffect(() => {
+        checkWhitelist(myAddress);
+    }, [myAddress])
 
     useEffect(()=>{
         if(window.klaytn) {
@@ -139,15 +141,15 @@ const Header = () => {
                 console.log(accounts[0])
                 sessionStorage.setItem('id', accounts[0]);
                 dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
-                setAddress(accounts[0]);
-                await setTokenBalance(accounts[0])
+                setToken(accounts[0])
             })
             window.klaytn.on('networkChanged', async function(network) {
                 console.log(network)
             })
         }
+        
+        setVoteStatus();
     },[])
-
     const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/voting'];
     const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Voting'];
 
@@ -159,11 +161,10 @@ const Header = () => {
         return data;
     })
 
-    useEffect(() => {
-        checkWhitelist();
-    }, [myAddress])
 
     return (
+        <>
+        <AlertModal {...customAlert} />
         <Navbar className="nav" expand="lg">
             <img src={background13} className="backG-img-left" />
             <img src={background13} className="backG-img-right" />
@@ -181,44 +182,44 @@ const Header = () => {
                 >
                     {pages.map((item, index) => 
                         <Link key={index}
-                            onClick={closeModal} 
+                            onClick={reset} 
                             className='nav-item' 
                             to={item.path}>
                             {item.text}</Link>
                     )}
 
-                    {isDeployer ? <Link onClick={closeModal} className='nav-item' to="/admin">Admin</Link> : null}
+                    {isDeployer ? <Link onClick={reset} className='nav-item' to="/admin">Admin</Link> : null}
                 </Nav>
                 {
-                address != null
+                myAddress
                 ? 
                 <div className="info-box">  
                     <PFPContainer
                         onClick={showInfo}
                     >
-                    {address.toString().slice(0,7)+'...'+address.toString().slice(-7)}
+                    {myAddress.slice(0,7)+'...'+myAddress.slice(-7)}
                     </PFPContainer>
                     {modalState && 
                         <StyledInfo>
-                        {isWhite ? 'WHITELIST' : 'NORMAL'}<br/>
-                        Copy Address
+                        <div className='header-white'>{isWhite ? 'WHITE' : 'NORMAL'}</div>
+                        {/* <div className='header-address'>Address
                         <FontAwesomeIcon 
                             className='copy-icon'
                             icon={faCopy} 
                             onClick={copyAddress}    
                         />
-                        <br />
-                        {balance + " KLAYS"}
-                        <br />
-                        {btkBalance + " BTK"}
+                        </div> */}
+                        <div className='header-line'>{klayBalance + " KLAY"}</div>
+                        <div className='header-line'>{btkBalance + " BTK"}</div>
                         </StyledInfo>
                     }
                 </div>
-                : <><Button className="mint-wal-connect-btn" variant="success" onClick={enableKikas}>지갑 연결하기</Button>{' '}</>
+                : <><Button className="mint-wal-connect-btn" variant="success" onClick={enableKaikas}>지갑 연결하기</Button>{' '}</>
                 }
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+        </>
     )
 }
 

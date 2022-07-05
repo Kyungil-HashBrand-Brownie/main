@@ -1,10 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react'
-import {Table, Button, Form, InputGroup, FormControl} from 'react-bootstrap'
+import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
 import { useSelector } from 'react-redux'
+import InputGroup from 'react-bootstrap/InputGroup'
+import FormControl from 'react-bootstrap/FormControl'
 import styled from 'styled-components'
+import { Row, Col } from 'react-bootstrap';
 import axios from 'axios'
+import Form from 'react-bootstrap/Form';
 import { trash , trash2 } from '../img'
-import { checkWhite, addWhite, removeSelectedWhites } from 'api'
+import { checkWhite, addWhite, removeSelectedWhites, useAlert } from 'api'
+import AlertModal from './AlertModal'
 
 const Trash = styled.div`
     width: 50px;
@@ -12,6 +18,7 @@ const Trash = styled.div`
 `
 
 const WhiteList = () => {
+    const customAlert = useAlert();
 
     const { myAddress } = useSelector(state => state.nft);
     const [list, setList] = useState([]);
@@ -51,7 +58,7 @@ const WhiteList = () => {
 
     const addWhitelist = async () => {
         if (await checkWhite(addInput.current)) {
-            return alert('이미 등록됨')
+            return customAlert.open('이미 등록됨')
         }
         const Sucs = await addWhite(addInput.current)
         console.log(Sucs)
@@ -65,7 +72,7 @@ const WhiteList = () => {
                     let result = res.data;
                     console.log(result)
                     if (result === "Success!") {
-                        alert("화이트리스트 설정 완료되었습니다!");
+                        customAlert.open("화이트리스트 설정 완료되었습니다!");
                     }
                     getWhiteList()
                 })
@@ -74,19 +81,24 @@ const WhiteList = () => {
 
 
     const delWhitelists = async (addressArr) => {
-        if(addressArr.length===0) return false
         const Del = await removeSelectedWhites(addressArr)
         if (Del.status) {
             const {data} = await axios.post('/white/deletelists',
                 addressArr
             )
             if (data === "Success!") {
-                alert("화이트리스트 제거 완료되었습니다!");
+                customAlert.open("화이트리스트 제거 완료되었습니다!");
             }
             getWhiteList()
         }
     }
 
+
+    const showWhitelist = async () => {
+        alert(await checkWhite(checkInput.current))
+    }
+
+    const [checkedA, setCheckedA] = useState(false);
 
     const checkData = (publicKey, checked) => {
         if (checked) {
@@ -104,6 +116,7 @@ const WhiteList = () => {
 
     return (
         <div>
+            <AlertModal {...customAlert} />
             <div className="Cont">
                 <h1>White List key</h1>
                 <div className='father'>
@@ -153,6 +166,7 @@ const WhiteList = () => {
                                             <Form.Check 
                                                 aria-label="option 1"
                                                 className='whitelistCheck'
+                                                // checked={checkedA}
                                                 onChange={(e) => checkData(item.publicKey, e.target.checked)}
                                             />
                                     }
