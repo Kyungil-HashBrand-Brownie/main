@@ -14,7 +14,6 @@ const Swap = () => {
     const dispatch = useDispatch();
 
     const [swap, setSwap] = useState(true);
-    const [input, setInput] = useState('');
     const [exchange, setExchange] = useState('exchange');
 
     const customAlert = useAlert();
@@ -41,7 +40,7 @@ const Swap = () => {
         }
 
         else {
-            if (value != '') {
+            if (value !== '') {
                 // if (swap) setExchange((Number(value) * 7.22).toFixed(2).toString() + ' ' + bool[swap])
                 if (swap) setExchange(parseInt(Number(value) * 7.22))
                 else setExchange(parseInt(Number(value) / 7.22))
@@ -78,10 +77,6 @@ const Swap = () => {
         }
     }
 
-    const checkInput = (e) => {
-        console.log(e.target.value);
-        setInput(e.target.value);
-    }
 
     console.log(exchange)
 
@@ -102,6 +97,7 @@ const Swap = () => {
                         {<img 
                         className={!swap ? 'browny-icon' : 'klay-icon'} 
                         src={!swap ? Browny1 : Klaytn}
+                        alt="이미지를 찾을 수 없습니다"
                         />}
                         {bool[!swap]}
                     </div>
@@ -114,6 +110,7 @@ const Swap = () => {
                         {<img 
                         className={swap ? 'browny-icon' : 'klay-icon'} 
                         src={!swap ? Klaytn : Browny1}
+                        alt="이미지를 찾을 수 없습니다"
                         />}{bool[swap]}
                     </div>
                 </div>
@@ -138,13 +135,13 @@ const Swap = () => {
                             <div className='swap-amount-token'>{bool[!swap]}</div>
                         </div>
                         
-                        <img className='swap-arrow' src={Arrow} />
+                        <img className='swap-arrow' src={Arrow} alt="이미지를 찾을 수 없습니다"/>
                         <div className='swap-input-flex'>
                             <input 
                             disabled
                             className='swap-amount-input'
                             placeholder='exchange'
-                            value={amountInput.current.value != '' ?  exchange : 'exchange'}
+                            value={amountInput.current.value !== '' ?  exchange : 'exchange'}
                             /> 
                             <div className='swap-amount-token'>{bool[swap]}</div>
                         </div>
@@ -153,7 +150,7 @@ const Swap = () => {
                         </div> */}
                     </div>
                 </div>
-                {exchange != 'exchange' &&
+                {exchange !== 'exchange' &&
                     <div className='swap-user-token-outer'>
                         <div className='swap-user-token-head-outer'>
                             <div className='swap-user-token-header'>거래 후 잔액</div>
