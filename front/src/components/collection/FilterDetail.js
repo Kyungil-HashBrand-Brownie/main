@@ -17,13 +17,8 @@ const FilterDetailOuter = styled.div`
     margin: 8px 0;
     border-top: 2px solid black;
     border-bottom: 2px solid black;
-    /* border-top-left-radius: 10px; */
-    /* border-bottom-right-radius: 10px; */
-    /* background: lightgrey; */
-    /* background: gray; */
     display: flex;
     justify-content: center;
-    /* margin: auto; */
     flex-wrap: wrap;
 `
 const FilterDetailBox = styled.div`
@@ -61,19 +56,14 @@ const FilterDetail = ({ parts }) => {
     const [check, setCheck] = useState(null);
 
     const changeCheck = (part) => {
-        // console.log(filterOption);
-        // console.log('part: ', part)
         if (parts == 'Back') parts = 'Background';
-        // console.log('parts: ', parts)
         let copy = _.cloneDeep(filterOption).map((item) => {
-            // console.log(item.id == parts)
             if (item.id == parts) {
                 if (item.opt == part) item.opt = null
                 else item.opt = part
             }
             return item
         })
-        // console.log(copy)
         if (check == part) {
             setCheck(null);
         }

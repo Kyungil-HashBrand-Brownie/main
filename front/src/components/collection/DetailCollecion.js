@@ -2,8 +2,6 @@ import React from 'react'
 import '../../scss/detailCollecion.css'
 import { nft1 } from '../../img/nft/'
 
-
-
 const DetailCollecion = () => {
   return (
     <div>

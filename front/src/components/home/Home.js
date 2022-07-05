@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import Arrow from '../../img/arrow.png';
 import { Container, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { Group2 } from '../../img';
+import { Group2 } from '../../img/browny';
 import D3 from './D3';
 import {
   StyledMainText, StyledSubText, StyledMintDate,
