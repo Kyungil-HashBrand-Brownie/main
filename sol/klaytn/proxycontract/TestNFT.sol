@@ -14,7 +14,7 @@ contract BrownyNFT is Initializable, ERC721Upgradeable {
     function initialize(string memory _name, string memory _symbol, string memory _ipfs) external initializer {
         __ERC721_init(_name, _symbol);
         // __Ownable_init();
-        setBaseURI(_ipfs);
+        ipfs = _ipfs;
         fileExtention = ".json";
     }
 
@@ -22,16 +22,7 @@ contract BrownyNFT is Initializable, ERC721Upgradeable {
         _safeMint(to, tokenId, "Test Minting");
     }
 
-    function randomMinting(address to) external {
-        uint256 tokenId = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender))) % 150;
-        _safeMint(to, tokenId, "Test Minting");
-    }
-
     // _baseURI - nft 발행시 참조할 ipfs 주소 
-    function setBaseURI(string memory _ipfs) internal returns (string memory) {
-        ipfs = _ipfs;
-        return ipfs;
-    }
     function _baseURI() internal view override returns (string memory) {
         return ipfs;
     }
