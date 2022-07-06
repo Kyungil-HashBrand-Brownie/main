@@ -15,19 +15,32 @@ const add = async (req, res)=> {
         }
         else {
             console.log("DB에 이미 유저정보 존재")
-            res.send(false)
+            res.send(true)
         }
     }
     catch(e) {
         console.log(e);
-        return e;
+        res.send(false)
+    }
+}
+
+const view = async (req, res)=> {
+    const {publicKey} = req.body;
+    try {
+        const [[result]] = await pool.query(`SELECT nickname FROM users where publicKey="${publicKey}"`);
+        const {nickname} = result;
+        res.send(nickname);
+    }
+    catch(e) {
+        console.log(e);
+        res.send(false)
     }
 }
 
 const modify = async (req, res)=> {
-    const {publicKey, nickName} = req.body;
-    const [result] = await pool.query(`UPDATE users SET nickName='${nickName}' WHERE publicKey="${publicKey}"`)
+    const {publicKey, nickname} = req.body;
+    const [result] = await pool.query(`UPDATE users SET nickname='${nickname}' WHERE publicKey="${publicKey}"`)
     console.log(result)
 }
 
-module.exports = { add, modify}
+module.exports = { add, view, modify}

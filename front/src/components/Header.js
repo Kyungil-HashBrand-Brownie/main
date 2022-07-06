@@ -80,13 +80,19 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer, isWhite, klayBalance,  btkBalance } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh, isDeployer, isWhite, klayBalance, btkBalance, nickname } = useSelector(state => state.nft);
 
     const customAlert = useAlert();
 
     const setToken = (address) =>{
         dispatch(nftAction.setToken(address))
     }
+
+    const setNickname = async (address) => {
+        const result = await axios.post("/user/view",{publicKey : address})
+        const nickname = result.data;
+        dispatch({type : "SET_NICKNAME", payload: nickname})
+}
 
     const checkWhitelist = (address) => {
          dispatch(nftAction.checkWhitelist(address));
@@ -95,8 +101,9 @@ const Header = () => {
     const setUserInfo = async (address) => {
         if(address){
             setToken(address)
+            setNickname(address)
+            dispatch(nftAction.setUserInfo(address));
         }
-        dispatch(nftAction.setUserInfo(address));
     }
 
     const setVoteStatus = () => {
@@ -212,6 +219,7 @@ const Header = () => {
                             onClick={copyAddress}    
                         />
                         </div> */}
+                        {nickname && <div className='header-line'>{nickname}</div>}
                         <div className='header-line'>{klayBalance + " KLAY"}</div>
                         <div className='header-line'>{btkBalance + " BTK"}</div>
                         </StyledInfo>
