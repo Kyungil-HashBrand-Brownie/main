@@ -1,5 +1,6 @@
-const tokenAddr = "0x2b726Dc42028A17031D33da6D39aF7dDE7eaE25c"
-const nftAddr = "0x9D00d30354420e4D0ac21D39a6Fd026b7D8a2F5f"
-const mintingAddr = "0xbF4732a2A147B39e008cA3733E0c0764f1AE37ff"
-const votingAddr = "0x6233010f04965E6a7929f44Fef312D67166bb3dd"
-export { tokenAddr, nftAddr, mintingAddr, votingAddr };
+const tokenAddr = "0x3DfCD274812697c8EE2C1bBA0C13Ec28EfB1D09c"
+const whitelistAddr = "0x1c88Afe32d3A512CADB20A13eb9846e561621cad"
+const nftAddr = "0xf2BA3ec38d1958Fe7bEeb3fE6A50CD6F3D737D5A"
+const mintingAddr = "0xA82e0801E7faE8feE4669Cb055DEe3f58d18fb24"
+const votingAddr = "0x42f2CccF3a38692c6551B9F2b4cF5a930B118207"
+export { tokenAddr, whitelistAddr, nftAddr, mintingAddr, votingAddr };

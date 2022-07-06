@@ -65,7 +65,7 @@ function App() {
           </>
         }
         {/* <Route path="/whitelist" element={<WhiteList/>} />  */}
-        <Route path='/detailcollection' element={<DetailCollecion />} />
+        <Route path='/detailcollection/:edition' element={<DetailCollecion />} />
         <Route path='*' element={<NoPage />} />
       </Routes>
     </div>

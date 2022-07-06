@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { CollectionMainOuter, CollectionHeader, CollectionBody, 
     CollectionRow, CollectionCardOuter, CollectionCard, CollectionCardDetail
 } from './collectionModule' 
+import { useNavigate } from 'react-router-dom'
 
 const CollectionCardImg = styled.div`
     width: 100%;
@@ -13,11 +14,19 @@ const CollectionCardImg = styled.div`
     background-size: cover;
 `
 
-const moveToDetailPage = (edi) => {
-    console.log(edi);
-}
+
+
+
 
 const CollectionMain = ({ data, row }) => {
+
+    const navigate = useNavigate('')
+
+    const moveToDetailPage = (edi) => {
+        console.log(edi);
+        navigate(`/detailcollection/${edi}`)
+    }
+
     return (
         <CollectionMainOuter>
             <CollectionHeader>Collections</CollectionHeader>
@@ -38,7 +47,8 @@ const CollectionMain = ({ data, row }) => {
                                     key={idx + 1000} 
                                     state={(index == row - 1) && data.slice(5 * index, 5 * index + 5).length != 5 ? false : true}
                                     onClick={() => moveToDetailPage(img.edition)}>
-                                    <CollectionCard>
+                                    
+                                    <CollectionCard >
                                         <CollectionCardImg image={`/image/images/${img.addr}`}>
                                         </CollectionCardImg>
                                         <CollectionCardDetail>

@@ -10,6 +10,7 @@ import { nftAction } from 'redux/actions/nftAction';
 import { background10 ,background13} from '../img/background';
 import { getTokenBalance, useAlert } from 'api';
 import AlertModal from './AlertModal';
+import axios from 'axios';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -140,8 +141,10 @@ const Header = () => {
             window.klaytn.on('accountsChanged', async function(accounts) {
                 console.log(accounts[0])
                 sessionStorage.setItem('id', accounts[0]);
+                // 카이카스 계정 정보 리덕스에 저장하는 부분
                 dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
                 setToken(accounts[0])
+                await axios.post("/user/add",{publicKey : accounts[0]})
             })
             window.klaytn.on('networkChanged', async function(network) {
                 console.log(network)

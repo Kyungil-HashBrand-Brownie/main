@@ -1,9 +1,11 @@
 .layout-container{
     background-color: white;
     display: grid;
-    gap: 1em;
+    gap: 4em;
     border: 1px solid lightgray;
+    
     border-radius: 20px;
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.75);
 
     /* 행 개수 1f 1fr 2행r */
     grid-template-columns: 1fr 1fr ;
@@ -15,15 +17,16 @@
 
 .detailImglNft-item1 {
     height: 80vh;
-    width: 70%;
-    background-color: lavender;
+    /* width: 70%; */
+    /* background-color: lavender; */
+    height: 100%;
     display: grid;
     grid-template-rows: 900px 1fr;
     text-align: center;
 }
 
 .detailImglNft-mainImg{
-    background-color: red
+    /* background-color: red */
 }
 
 .detailImglNft-mainImg img{
@@ -35,7 +38,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 20px;
-    background-color: rosybrown;
+    /* background-color: rosybrown; */
 }
 
 .detailImglNft-subImg_item{
@@ -50,9 +53,9 @@
 
 .detailImglNft-item2  {
     height: 70vh;
-    background-color: pink;
+    /* background-color: pink; */
     display: grid;
-    grid-template-rows: 1fr 2fr 500px;
+    grid-template-rows: 400px 2fr 500px;
     gap : 30px;
 
 }
@@ -60,21 +63,31 @@
 .detailImglNft-description_1{
     width: 100%;
     height: 15rem;
-    background-color: lawngreen;
+    /* background-color: lawngreen; */
 }
 
 .detailImglNft-description_2{
     width: 100%;
     height: 25rem;
-    background-color: firebrick;
+    /* background-color: firebrick; */
     font-size: 2em;
     font-weight: 100;
+}
+
+.detailTitle {
+    color: lightskyblue;
+    font-size: 3em;
+}
+
+.detail_OwnedBy{
+    color: green;
+    font-size: 2em;
 }
 
 .detailImglNft-description_3{
     width: 100%;
     height: 10rem;
-    background-color: lemonchiffon;
+    /* background-color: lemonchiffon; */
 }
 
 .div-section {
@@ -88,4 +101,83 @@
 .right-layout {
     display: flex;
     justify-content: flex-end;
+}
+
+@media only screen and ( max-width: 1300px ) {
+    .layout-container {
+        width: 1000px;
+        display: block;
+    }
+
+    .detailImglNft-item1 {
+      width: 800px;
+      display: block;
+    }
+    .detailImglNft-item2 {
+      width: 800px;
+      display: block;
+    }
+  }
+
+.btn-opensea {
+    width: 200px;
+    color: lightblue;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.buttons {
+    margin: 10%;
+    text-align: center;
+}
+
+.btn-hover {
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-opensea{
+    /* display: flex; */
+    /* justify-content: flex-end; */
+    left : 0;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+
+
+.btn-hover.color-5 {
+    background-image: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
+}
+
+.btn-hover.color-9 {
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
 }

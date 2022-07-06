@@ -1,6 +1,6 @@
 import { Form } from 'react-bootstrap';
 
-const Proposal = ({label, index, changeSelected}) => {
+const Proposal = ({label, index, onChange}) => {
     return(
         <Form.Check
             inline
@@ -9,7 +9,7 @@ const Proposal = ({label, index, changeSelected}) => {
             name="group"
             type="radio"
             // id={`inline-radio-${index}`}
-            onChange={changeSelected}
+            onChange={onChange}
           />
     )
 }
