@@ -6,7 +6,7 @@ export const CollectionMainOuter = styled.div`
     margin-left: 100px;
     width: 1300px;
     min-height: 160px;
-    background: white;
+    background: rgba(255, 255, 255, 0.56);
     border: 3px solid white;
     border-radius: 20px;
     margin-bottom: 20px;
@@ -30,7 +30,7 @@ export const CollectionRow = styled.div`
     display: flex;
     flex-direction: row;
     margin: 10px 0 15px 0;
-    /* background: lightgray; */
+    // background: lightgray;
     height: 300px;
     border-radius: 5px;
     align-items: center;
@@ -38,12 +38,12 @@ export const CollectionRow = styled.div`
 export const CollectionCardOuter = styled.div`
     width: 220px;
     height: 270px;
-    background: lightgray;
+    background: white;
     margin: 10px 10px;
     cursor: pointer;
-    border: 1px solid black;
+    border: 1px solid gray;
     border-radius: 10px;
-    box-shadow: brown 6px 5px;
+    box-shadow: pink 6px 5px;
     margin-bottom: 20px;
 
     &:hover {

@@ -26,7 +26,7 @@
 // }
 
 import { caver, nftInstance,  } from "configs";
-import { checkWhite, getTokenBalance, getUserRank, getVoteStatus } from "api";
+import { checkWhite, getContractOwner, getTokenBalance, getUserRank, getVoteStatus } from "api";
 
 function getReward(contract, stake, renewMine, renewStaked) {
 
@@ -56,12 +56,9 @@ const enableKaikas = (customAlert) => {
     return async (dispatch) => {
         if(window.klaytn){
             window.klaytn.enable()
-            // 카이카스 계정 정보 리덕스에 저장하는 부분
-            dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
         }
         else {
             customAlert.open(<a href="https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko" target="blank">카이카스 설치 필요</ a>)
-
         }
     }
 }
@@ -69,7 +66,7 @@ const enableKaikas = (customAlert) => {
 const setUserInfo =  (address) => {
     return async (dispatch) => {
         if(address){
-            const contractOwner = await nftInstance.methods.owner().call()
+            const contractOwner = await getContractOwner()
             const isDeployer = caver.utils.toChecksumAddress(address) === contractOwner
             dispatch({type: 'CHECK_ISDEPLOYER', payload: isDeployer})
             const userRank = await getUserRank(address);
@@ -107,6 +104,12 @@ const setToken = (address) => {
         dispatch({type: 'GET_TOKEN_BALANCE',payload: tokenBalance})
     }
 }
+
+
+const collectionData = async() =>{
+
+}
+
 
 export const nftAction = {
     getReward,

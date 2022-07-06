@@ -44,8 +44,20 @@ const allImages = async (req, res) => {
     res.send(data)
 }
 
+const getImage = async (req, res) => {
+    console.log(req.query);
+    console.log('params: ', req.params);
+    const { edi } = req.params;
+    const result = await pool.query(`select * from BrownyData where edition=${edi}`)
+    const data = result[0];
+    console.log('data: ', data);
+    res.send(data)
+
+}
+
 module.exports = {
     imagesKey,
     images,
     allImages,
+    getImage,
 }

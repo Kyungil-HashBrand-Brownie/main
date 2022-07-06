@@ -153,23 +153,26 @@ function Voting() {
             proposals.map((proposal,index) => <Proposal key={index} label={proposal.proposalContent} index={index+1} onChange={changeSelected} />)
           }
         </div>
-        <button type='submit'>제출</button>
+        <button type='submit'>투표</button>
       </Form>
 
       {/* contract owner이거나 userRank가 3이어야 안건 발의 가능 */}
       {(isDeployer || userRank === 3)
       ?
+      <>
       <Form
       onSubmit={addProposal}
       >
         <InputGroup className='mb-3'>
-          <Form.Control type='text' {...proposal}/>
+          <Form.Control type='text' {...proposal} required />
           <Button type='submit' variant='success'>Add proposal</Button>
         </InputGroup>
       </Form>
+      <ChangeVotingButton {...votingProps} ></ChangeVotingButton>
+      </>
       : null
       }
-      <ChangeVotingButton {...votingProps} ></ChangeVotingButton>
+      
       <div>MY RANK : {userRank}</div>
       <div>MY VOTING POWER (NFT COUNT) : {votingPower}  </div>
       <div><h4>보팅 리스트</h4></div>
