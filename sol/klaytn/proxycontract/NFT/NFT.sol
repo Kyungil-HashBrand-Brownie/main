@@ -131,7 +131,7 @@ contract BrownyNFT is Initializable, ERC721Upgradeable {
         } 
     }
 
-/* ============================ set func ============================*/
+/* ============================ external func ============================*/
     function safeMint(address to, uint256 tokenId, uint8 status) external {
         _safeMint(to, tokenId);
         ownNFTs[to].push(tokenId);
