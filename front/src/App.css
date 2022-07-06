@@ -117,11 +117,6 @@ body {
   margin-left: 5px;
 }
 
-.copy-icon:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-}
-
 .main-container {
   display: flex;
   /* flex-wrap: wrap; */
@@ -616,7 +611,7 @@ NftCard
 .nftlist-count-box {
   display: flex;
   /* flex-direction: row; */
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .nftlist-count-inner-box {
@@ -624,6 +619,10 @@ NftCard
   flex-direction: column;
   justify-content: flex-end;
   text-align: end;
+  font-size: 14px;
+  /* background-color: red; */
+  position: absolute;
+  transform: translate(-11.5rem, -4.3rem);
 }
 
 .nftlist-select-all-button:hover{
@@ -673,17 +672,18 @@ NftCard
   background-color: lightgray;
   opacity: 0.9;
   width: 100%;
+  height: 90%;
 }
 
 #stake-checkbox {
-  position: relative;
+  position: absolute;
   /* top: 70px; */
   /* right: -240px; */
   width: 35px;
   height: 35px;
   z-index: 2;
-  top: 20px;
-  left: 10px;
+  top: 52px;
+  left: 12px;
   margin-top: -19.0%;
   /* transform: translate(50%, 50%) */
 }
@@ -738,14 +738,16 @@ NftCard
     }
 
     .Ncard {
-        opacity: 0.9;
+        /* opacity: 0.9; */
         padding: .1875rem;
-        margin: .625rem;
+        margin: .325rem;
         margin-left: 1.6875rem;
         padding-top: 1.5625rem;
-        border-radius: 12.5rem;
+        background: rgb(232, 228, 200);
+        border-radius: 0.75rem;
         text-align: center;
         cursor: pointer;
+        height: 12.5rem;
         /* background: #4f86f7; */
         /* background: #464196  */
     }
@@ -756,7 +758,7 @@ NftCard
 
     .card:hover {
         opacity: 1;
-        transform :scale(1.1);
+        transform :scale(1.05);
     }
 
     .card:hover  button{
@@ -826,8 +828,8 @@ NftCard
     }
 
     .nftlist-id-box {
-        width: 5rem;
-        margin: .1875rem .25rem;
+        width: 4rem;
+        margin: .37rem .35rem;
         background: white;
         border-radius: 1.875rem;
         font-size: .9375rem;
@@ -842,7 +844,9 @@ NftCard
 
     .nftlist-header {
         font-size: 1.5625rem;
-        padding-left: 4.375rem;
+        /* padding-left: 4.375rem; */
+        /* position: absolute; */
+        /* transform: translate(-10rem, 0); */
         /* margin-bottom: 1.25rem; */
     }
     .nftlist-text {
@@ -874,7 +878,7 @@ NftCard
         display: flex;
         justify-content: center;
         text-align: center;
-        transform: translate(1.375rem, -2.0625rem);
+        transform: translate(0.825rem, -2.0625rem);
     }
 
     .nftlist-id-box:hover .overlay{
@@ -906,6 +910,9 @@ NftCard
 
     .nftlist-card-img {
         border-radius: 5rem;
+    }
+    .nftlist-card-detail {
+      margin-top: -0.7rem;
     }
 
     .no-display {
