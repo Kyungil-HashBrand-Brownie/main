@@ -1,11 +1,11 @@
 const pool = require("../../db")
 
 const list = async (req, res) => {
-    try{
-        const [result] = await pool.query(`SELECT * FROM votes`);
+    try{const tQuery = `SELECT voteIdx, selectedProposal, date_format(startDate, '%Y-%m-%d %H:%i') startDate, date_format(endDate, '%Y-%m-%d %H:%i') endDate FROM votes`
+        const [result] = await pool.query(tQuery);
         if(!result.length) {
             await pool.query("INSERT INTO votes VALUES ()")
-            const [data] = await pool.query(`SELECT * FROM votes`);
+            const [data] = await pool.query(tQuery);
             return res.send(data)
         }
         res.send(result);

@@ -1000,6 +1000,8 @@ MintCard
 }
 
 .nftlist-reward {
+  display: flex;
+  align-items: center;
   white-space: nowrap;
 }
 

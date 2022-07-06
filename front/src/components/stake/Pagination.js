@@ -23,12 +23,12 @@ const Button = styled.button`
     transform: translateY(-2px);
   }
   &[disabled] {
-    background: grey;
+    background: black;
     cursor: revert;
     transform: revert;
   }
   &[aria-current] {
-    background: deeppink;
+    background: tomato;
     font-weight: bold;
     cursor: revert;
     transform: revert;
