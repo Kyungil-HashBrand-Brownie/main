@@ -69,10 +69,11 @@ const Collection = () => {
         getData()
     }, [filterOption, sortOption])
 
+
     return (
         <CollectionOuter>
             <Sort />
-            <CollectionMain data={data} row={row}/>
+            <CollectionMain data={data} row={row} />
         </CollectionOuter>
     )
 }
