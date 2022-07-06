@@ -66,9 +66,9 @@ const resetVote = async ()=> {
     }
 }
 
-const submitVote = async (myAddress) => {
+const submitVote = async (myAddress, proposalId) => {
     try {
-        const encodedAbi = await votingContract.methods.voting().encodeABI()
+        const encodedAbi = await votingContract.methods.voting(Number(proposalId)).encodeABI() // radio의 value가 string이라 변환
         const result = await methodExecution(myAddress,encodedAbi)
         console.log(result)
         return result

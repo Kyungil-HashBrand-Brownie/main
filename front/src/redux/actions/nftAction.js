@@ -56,12 +56,9 @@ const enableKaikas = (customAlert) => {
     return async (dispatch) => {
         if(window.klaytn){
             window.klaytn.enable()
-            // 카이카스 계정 정보 리덕스에 저장하는 부분
-            dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
         }
         else {
             customAlert.open(<a href="https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko" target="blank">카이카스 설치 필요</ a>)
-
         }
     }
 }
