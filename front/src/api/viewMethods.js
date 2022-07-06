@@ -5,17 +5,17 @@ import { nftInstance, votingContract, whitelistInstance } from "configs";
 // NFT 컨트랙트의 배포자
 const getContractOwner = async() => await whitelistInstance.methods.owner().call();
 
-const nftNum = async () => await nftInstance.methods.nftNum().call();
+const nftNum = async () => await nftInstance.methods.checkMintedNormalNFTNum().call();
 
 const checkWhite = async(address) => await nftInstance.methods.isWhitelisted(address).call() ;
 
-const whitelistNftNum = async() => await nftInstance.methods.whitelistNftNum().call();
+const whitelistNftNum = async() => await nftInstance.methods.checkMintedWhitelistNFTNum().call();
 
 const getUserRank = async(from) => await nftInstance.methods.userRank().call({from});
 
-const getMintList = async() => await nftInstance.methods.mintedNFT().call();
+const getMintList = async() => await nftInstance.methods.checkMintedNftList().call();
 
-const getMyNFTs = async(from) => await nftInstance.methods.myNFTs().call({from});
+const getMyNFTs = async(from) => await nftInstance.methods.checkOwnNFTs().call({from});
 
 const getMyStaked = async(from) => await nftInstance.methods.checkStakedNFTs().call({from});
 
