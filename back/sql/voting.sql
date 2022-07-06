@@ -1,3 +1,5 @@
+use Browny;
+
 CREATE TABLE votes(  
     `voteIdx` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `selectedProposal` VARCHAR(255) DEFAULT "" NULL,
@@ -13,6 +15,15 @@ CREATE TABLE proposals(
     `voteCount` INT DEFAULT 0 NOT NULL,
     FOREIGN KEY (`voteIdx`) REFERENCES votes(voteIdx)
 );
+
+drop table proposals;
+drop table votes;
+
+select * from votes;
+select * from proposals;
+
+SELECT * FROM votes ORDER BY voteIdx DESC LIMIT 1;
+
 
 -- voting 페이지 렌더링할 때 현재 진행중인 voteIdx와 해당 voteIdx의 proposal 불러오기
 
