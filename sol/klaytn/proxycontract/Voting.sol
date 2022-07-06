@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "./NFT.sol";
+import "./NFT/NFT.sol";
 
 /*
 투표 
@@ -58,7 +58,7 @@ contract VoteContract {
 
     // 투표 권한 확인
     modifier onlyHolder() { 
-        require(brownyNFT.userRankEx(msg.sender) > 0, "You are not holder");
+        require(brownyNFT.userRank() > 0, "You are not holder");
         _;
     }
 
@@ -70,7 +70,7 @@ contract VoteContract {
 
     // 발의 권한 확인
     modifier permissionProposal() { 
-        require(brownyNFT.userRankEx(msg.sender) > 2 || msg.sender == owner, "You do not have permission");
+        require(brownyNFT.userRank() > 2 || msg.sender == owner, "You do not have permission");
         _;
     }
 
@@ -98,13 +98,14 @@ contract VoteContract {
 
     // 발의 끝 동시에 투표 시작 함수
     function endProposal() public isBeforeVote onlyOwner {
+        require(proposalCounts > 0, "No proposal");
         voteStatus = VoteStatus.nowVote;
     }
 
     // 투표 함수
     function voting(uint _proposalId) public alreadyVote isNowVote onlyHolder() {
         uint index = _proposalId - 1;
-        uint _votePower = brownyNFT.userNFTs(msg.sender).length;
+        uint _votePower = brownyNFT.checkOwnNFTs().length;
         voters[msg.sender].votedProposalId = _proposalId;
         voters[msg.sender].hasVotes = forHasVotes;
         voters[msg.sender].votePower = _votePower; 
