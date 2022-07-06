@@ -1,4 +1,4 @@
-import { mintingContract, mintingAddr, nftInstance, caver } from "configs";
+import { mintingContract, mintingAddr, nftInstance, whitelistInstance, caver } from "configs";
 import { getContractOwner } from "./viewMethods";
 
 
@@ -103,7 +103,7 @@ const whitelistMint = async (myAddress,count)=> {
 const addWhite = async (address) => {
     try{
         const contractOwner =await getContractOwner()
-        const result = await nftInstance.methods.add(address).send({ from: contractOwner, gas: 300000, value: 0 })
+        const result = await whitelistInstance.methods.add(address).send({ from: contractOwner, gas: 300000, value: 0 })
         return result
     } catch (error) {
         console.log(error)

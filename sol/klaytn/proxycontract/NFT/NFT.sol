@@ -131,7 +131,7 @@ contract BrownyNFT is Initializable, ERC721Upgradeable {
         } 
     }
 
-/* ============================ set func ============================*/
+/* ============================ external func ============================*/
     function safeMint(address to, uint256 tokenId, uint8 status) external {
         _safeMint(to, tokenId);
         ownNFTs[to].push(tokenId);
@@ -157,9 +157,12 @@ contract BrownyNFT is Initializable, ERC721Upgradeable {
         if(staked[_tokenId] == false) {
             staked[_tokenId] = true;
             numOwnerStakedNFT[_owner]++;
+            uint256 index = indexOf(ownNFTs[_owner], _tokenId);
+            remove(ownNFTs[_owner], index);
         } else if(staked[_tokenId] == true) {
             staked[_tokenId] = false;
             numOwnerStakedNFT[_owner]--;
+            ownNFTs[_owner].push(_tokenId);
         }
     }
 
@@ -181,5 +184,24 @@ contract BrownyNFT is Initializable, ERC721Upgradeable {
     function changeTime(uint256 tokenId, uint256 _time) external {
         require(isStaked(tokenId), "This is not staked NFT");
         vault[tokenId].timestamp = _time;
+    }
+
+    /* ============================ etc func ============================*/
+    function indexOf(uint256[] memory array, uint256 searchFor) private pure returns (uint256) {
+        for (uint256 i = 0; i < array.length; i++) {
+            if (array[i] == searchFor) {
+            return i;
+            }
+        }
+        return (2^256)-1; // not found
+    }
+
+    function remove(uint256[] storage array, uint256 index) private {
+        require(array.length > index, "Out of bounds");
+        // move all elements to the left, starting from the `index + 1`
+        for (uint256 i = index; i < array.length - 1; i++) {
+            array[i] = array[i+1];
+        }
+        array.pop(); // delete the last item
     }
 }
