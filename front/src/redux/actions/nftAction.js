@@ -105,6 +105,12 @@ const setToken = (address) => {
     }
 }
 
+
+const collectionData = async() =>{
+
+}
+
+
 export const nftAction = {
     getReward,
     enableKaikas,
