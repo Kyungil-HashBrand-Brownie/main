@@ -105,7 +105,7 @@ contract VoteContract {
     // 투표 함수
     function voting(uint _proposalId) public alreadyVote isNowVote onlyHolder() {
         uint index = _proposalId - 1;
-        uint _votePower = brownyNFT.checkOwnNFTs().length;
+        uint _votePower = (brownyNFT.checkOwnNFTs().length + brownyNFT.checkStakedNFTs().length);
         voters[msg.sender].votedProposalId = _proposalId;
         voters[msg.sender].hasVotes = forHasVotes;
         voters[msg.sender].votePower = _votePower; 
