@@ -164,7 +164,7 @@ function Voting() {
       onSubmit={addProposal}
       >
         <InputGroup className='mb-3'>
-          <Form.Control type='text' {...proposal}/>
+          <Form.Control type='text' {...proposal} required />
           <Button type='submit' variant='success'>Add proposal</Button>
         </InputGroup>
       </Form>
