@@ -26,7 +26,7 @@
 // }
 
 import { caver, nftInstance,  } from "configs";
-import { checkWhite, getTokenBalance, getUserRank, getVoteStatus } from "api";
+import { checkWhite, getContractOwner, getTokenBalance, getUserRank, getVoteStatus } from "api";
 
 function getReward(contract, stake, renewMine, renewStaked) {
 
@@ -66,7 +66,7 @@ const enableKaikas = (customAlert) => {
 const setUserInfo =  (address) => {
     return async (dispatch) => {
         if(address){
-            const contractOwner = await nftInstance.methods.owner().call()
+            const contractOwner = await getContractOwner()
             const isDeployer = caver.utils.toChecksumAddress(address) === contractOwner
             dispatch({type: 'CHECK_ISDEPLOYER', payload: isDeployer})
             const userRank = await getUserRank(address);

@@ -1,9 +1,9 @@
-import { nftInstance, votingContract } from "configs";
+import { nftInstance, votingContract, whitelistInstance } from "configs";
 
 // NFT instance view 함수
 
 // NFT 컨트랙트의 배포자
-const getContractOwner = async() => await nftInstance.methods.owner().call();
+const getContractOwner = async() => await whitelistInstance.methods.owner().call();
 
 const nftNum = async () => await nftInstance.methods.nftNum().call();
 
