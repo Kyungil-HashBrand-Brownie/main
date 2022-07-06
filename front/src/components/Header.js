@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../img/brownyLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
 import { nftAction } from 'redux/actions/nftAction';
@@ -11,6 +12,7 @@ import { background10 ,background13} from '../img/background';
 import { getTokenBalance, useAlert } from 'api';
 import AlertModal from './AlertModal';
 import axios from 'axios';
+import ChangeNicknameModal from './ChangeNicknameModal';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -83,15 +85,21 @@ const Header = () => {
     const { modalState, myAddress, walletRefresh, isDeployer, isWhite, klayBalance, btkBalance, nickname } = useSelector(state => state.nft);
 
     const customAlert = useAlert();
+    const changeNickname = useAlert();
 
     const setToken = (address) =>{
         dispatch(nftAction.setToken(address))
     }
 
     const setNickname = async (address) => {
-        const result = await axios.post("/user/view",{publicKey : address})
-        const nickname = result.data;
-        dispatch({type : "SET_NICKNAME", payload: nickname})
+        try {
+            const result = await axios.post("/user/view",{publicKey : address})
+            const nickname = result.data;
+            dispatch({type : "SET_NICKNAME", payload: nickname})
+        }
+        catch(e) {
+            console.log(e);
+        }
 }
 
     const checkWhitelist = (address) => {
@@ -102,8 +110,8 @@ const Header = () => {
         if(address){
             setToken(address)
             setNickname(address)
-            dispatch(nftAction.setUserInfo(address));
         }
+        dispatch(nftAction.setUserInfo(address));
     }
 
     const setVoteStatus = () => {
@@ -175,6 +183,7 @@ const Header = () => {
     return (
         <>
         <AlertModal {...customAlert} />
+        <ChangeNicknameModal {...changeNickname} setNickname={setNickname} />
         <Navbar className="nav" expand="lg">
             <img src={background13} className="backG-img-left" />
             <img src={background13} className="backG-img-right" />
@@ -219,7 +228,18 @@ const Header = () => {
                             onClick={copyAddress}    
                         />
                         </div> */}
-                        {nickname && <div className='header-line'>{nickname}</div>}
+                        
+                        <div className='header-line'>
+                            {nickname} 
+                            <FontAwesomeIcon 
+                                shake="3s"
+                                animation
+                                animation-duration 
+                                icon={faPenToSquare}
+                                className='change-nickname-icon'
+                                onClick={()=> changeNickname.open()}
+                            />
+                        </div>
                         <div className='header-line'>{klayBalance + " KLAY"}</div>
                         <div className='header-line'>{btkBalance + " BTK"}</div>
                         </StyledInfo>
