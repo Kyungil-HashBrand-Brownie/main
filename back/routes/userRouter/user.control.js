@@ -11,23 +11,48 @@ const add = async (req, res)=> {
         `)
         if(result.affectedRows) {
             console.log("DB에 유저정보 추가")
-            res.send(true)
+            res.send("success")
         }
         else {
             console.log("DB에 이미 유저정보 존재")
-            res.send(false)
+            res.send("exits")
         }
     }
     catch(e) {
         console.log(e);
-        return e;
+        res.send("fail")
     }
 }
 
-const modify = async (req, res)=> {
-    const {publicKey, nickName} = req.body;
-    const [result] = await pool.query(`UPDATE users SET nickName='${nickName}' WHERE publicKey="${publicKey}"`)
-    console.log(result)
+const view = async (req, res)=> {
+    const {publicKey} = req.body;
+    try {
+        const [[result]] = await pool.query(`SELECT nickname FROM users where publicKey="${publicKey}"`);
+        const {nickname} = result;
+        res.send(nickname);
+    }
+    catch(e) {
+        console.log(e);
+        res.send("fail")
+    }
 }
 
-module.exports = { add, modify}
+
+const modify = async (req, res)=> {
+    const {publicKey, nickname} = req.body;
+    try{
+        const [[check]] = await pool.query(`SELECT nickname FROM users where nickname="${nickname}"`);
+        if(check) return res.send("nickname already exists")
+        else {
+            const [result] = await pool.query(`UPDATE users SET nickname='${nickname}' WHERE publicKey="${publicKey}"`)
+            console.log(result)
+            res.send("success")
+        }
+    }
+    catch(e) {
+        console.log(e);
+        res.send("fail")
+    }
+}
+
+module.exports = { add, view, modify}

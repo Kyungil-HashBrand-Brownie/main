@@ -1,7 +1,7 @@
 CREATE TABLE users(  
     `idx` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `publicKey` VARCHAR(255) NOT NULL,
-    `nickName` VARCHAR(255) DEFAULT "nickname" NOT NULL
+    `nickname` VARCHAR(255) DEFAULT "nickname" NOT NULL
 );
 
 select * from users;
