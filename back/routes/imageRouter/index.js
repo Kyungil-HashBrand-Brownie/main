@@ -8,6 +8,6 @@ router.post('/images', imagesController.images)
 
 router.get('/images', imagesController.allImages)
 
-router.get('/image/:edi', imagesController.getImage)
+router.get('/api/image/:edi', imagesController.getImage)
 
 module.exports = router

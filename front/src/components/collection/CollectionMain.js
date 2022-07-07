@@ -49,7 +49,7 @@ const CollectionMain = ({ data, row }) => {
                                     onClick={() => moveToDetailPage(img.edition)}>
                                     
                                     <CollectionCard >
-                                        <CollectionCardImg image={`/image/images/${img.addr}`}>
+                                        <CollectionCardImg image={`/api/image/images/${img.addr}`}>
                                         </CollectionCardImg>
                                         <CollectionCardDetail>
                                             Browny#{img.edition}

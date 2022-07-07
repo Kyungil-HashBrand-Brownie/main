@@ -135,7 +135,7 @@ function NftCard({ bool }) {
         for (let i = 0; i != myBrownyNFTs.length; i++) {
             let metajson = {
                 id: `#${myBrownyNFTs[i]}`,
-                image: `/image/images/${dict[myBrownyNFTs[i]]}`,
+                image: `/api/image/images/${dict[myBrownyNFTs[i]]}`,
                 checked: false,
             }
             binaryArr.push(metajson)
@@ -144,7 +144,7 @@ function NftCard({ bool }) {
         let processedStakedNFTs = stakedNFTs.map((NFT) => {
             let data = {
                 id: `#${NFT}`,
-                image: `/image/images/${dict1[NFT]}`,
+                image: `/api/image/images/${dict1[NFT]}`,
                 checked: false,
             }
             return data;

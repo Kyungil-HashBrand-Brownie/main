@@ -15,7 +15,7 @@ const DetailCollecion = () => {
   const [collectionData, setCollectionData] = useState({});
 
   const getData = async () => {
-    let result = await axios.get(`/image/image/${params.edition}`);
+    let result = await axios.get(`/api/image/image/${params.edition}`);
     let data = result.data[0]; // 데이터 배열 형식을 객체로 바꾸기 위해서
     console.log(data);
 
@@ -33,17 +33,17 @@ const DetailCollecion = () => {
       <div className="layout-container">
         <div className="detailImglNft-item1">
           <div className="detailImglNft-mainImg">
-            <img src={`/image/images/${collectionData.addr}`} alt="subI1" />
+            <img src={`/api/image/images/${collectionData.addr}`} alt="subI1" />
           </div>
           <div className="detailImglNft-subImg">
             <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/image/images/${collectionData.addr}`} />
+              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
             </div>
             <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/image/images/${collectionData.addr}`} />
+              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
             </div>
             <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/image/images/${collectionData.addr}`} />
+              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
             </div>
           </div>
         </div>
