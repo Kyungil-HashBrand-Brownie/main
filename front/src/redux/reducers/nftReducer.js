@@ -20,6 +20,7 @@ let initialState = {
     isWhite: false,
     klayBalance: 0,
     btkBalance : 0,
+    nickname : "",
     
 
     // Collection
@@ -193,6 +194,12 @@ function nftReducer(state = initialState, action) {
                 ...state,
                 klayBalance : payload.KLAY,
                 btkBalance : payload.BTK
+            }
+
+        case "SET_NICKNAME" : 
+            return {
+                ...state,
+                nickname : payload
             }
 
         // Collection

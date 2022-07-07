@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../img/brownyLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
 import { nftAction } from 'redux/actions/nftAction';
@@ -11,6 +12,7 @@ import { background10 ,background13} from '../img/background';
 import { getTokenBalance, useAlert } from 'api';
 import AlertModal from './AlertModal';
 import axios from 'axios';
+import ChangeNicknameModal from './ChangeNicknameModal';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -67,6 +69,9 @@ const StyledInfo = styled.div`
     .header-line {
         /* background: green; */
         /* margin: 3px 0; */
+        display: flex;
+        justify-content: center;
+        align-items : center;
         font-weight: 500;
         font-size: 17px;
     }
@@ -80,13 +85,25 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer, isWhite, klayBalance,  btkBalance } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh, isDeployer, isWhite, klayBalance, btkBalance, nickname } = useSelector(state => state.nft);
 
     const customAlert = useAlert();
+    const changeNickname = useAlert();
 
     const setToken = (address) =>{
         dispatch(nftAction.setToken(address))
     }
+
+    const setNickname = async (address) => {
+        try {
+            const result = await axios.post("/user/view",{publicKey : address})
+            const nickname = result.data;
+            dispatch({type : "SET_NICKNAME", payload: nickname})
+        }
+        catch(e) {
+            console.log(e);
+        }
+}
 
     const checkWhitelist = (address) => {
          dispatch(nftAction.checkWhitelist(address));
@@ -95,6 +112,7 @@ const Header = () => {
     const setUserInfo = async (address) => {
         if(address){
             setToken(address)
+            setNickname(address)
         }
         dispatch(nftAction.setUserInfo(address));
     }
@@ -168,6 +186,7 @@ const Header = () => {
     return (
         <>
         <AlertModal {...customAlert} />
+        <ChangeNicknameModal {...changeNickname} setNickname={setNickname} />
         <Navbar className="nav" expand="lg">
             <img src={background13} className="backG-img-left" />
             <img src={background13} className="backG-img-right" />
@@ -212,6 +231,18 @@ const Header = () => {
                             onClick={copyAddress}    
                         />
                         </div> */}
+                        
+                        <div className='header-line'>
+                            {nickname} 
+                            <FontAwesomeIcon 
+                                shake="3s"
+                                animation
+                                animation-duration 
+                                icon={faPenToSquare}
+                                className='change-nickname-icon'
+                                onClick={()=> changeNickname.open()}
+                            />
+                        </div>
                         <div className='header-line'>{klayBalance + " KLAY"}</div>
                         <div className='header-line'>{btkBalance + " BTK"}</div>
                         </StyledInfo>
