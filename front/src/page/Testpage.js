@@ -16,6 +16,7 @@ import VoteDescription from 'components/vote/VoteDescription'
 import CommunityPostButton from 'components/vote/CommunityPostButton'
 import CommunityTopic from 'components/vote/CommunityTopic'
 import CommunityVoteTable from 'components/vote/CommunityVoteTable'
+import VoteDetail from 'components/vote/VoteDetail'
 
 const HomeBackImgPosition = styled.div`
     /* width: 100%;
@@ -53,6 +54,7 @@ const Testpage = () => {
         {/* <WhiteListMember /> */}
         {/* <Animation /> */}
         {/* <AlertModal /> */}
+        <VoteDetail />
         <MainHeader />
         <CommunityTopic />
         <VoteDescription />

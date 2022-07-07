@@ -3,13 +3,16 @@ import styled from 'styled-components'
 
 const DescriptionOuter = styled.div`
     display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
 `
 const Description = styled.div`
     background: lightgray;
     letter-spacing: 2.5px;
     padding: 20px;
+    font-size: 19px;
     border-radius: 30px;
-    width: 700px;
+    width: 1000px;
 `
 
 const VoteDescription = () => {
@@ -21,11 +24,9 @@ const VoteDescription = () => {
                 <br />  
                 <br />
 
-                1. 비방 욕설의 글은 삼가해주세요. <br />
-                2. 해당 글 Topic에 맞게 글 작성해주시기 바랍니다. <br />
-                3. 일주일에 한번 커뮤니티 안건이 등록됩니다. 각 안건당 투표는 한 번씩만 가능<br /> 
-                &nbsp;&nbsp;&nbsp;하며, 득표수에 따라 프로젝트의 방향성이 좌우되므로 신중하게 투표해주시기 <br />
-                &nbsp;&nbsp;&nbsp;바랍니다^^
+                <div>1. 비방/욕설의 글 절대금지! </div>
+                <div>2. 해당 글 Topic에 맞게 글 작성해주시기 바랍니다. </div>
+                <div>3. 일주일에 한번 커뮤니티 안건이 등록됩니다. 각 안건당 투표는 한 번씩만 가능 하며, 득표수에 따라 프로젝트의 방향성이 좌우되므로 신중하게 투표해주시기 바랍니다^^</div>
             </Description>
         </DescriptionOuter>
     )

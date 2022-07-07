@@ -8,47 +8,22 @@ import { footerImg } from 'img/footer';
 
 const Outer = styled.div`
     flex: 1;
-    height: 320px;
-    /* margin-bottom: 20px; */
     height: 120px;
-    /* padding-bottom: 20px; */
-    /* background: #F39798; */
-
-    display: flex;
+    background-image: url(${footerImg});
+    background-repeat: no-repeat;
+    background-size: cover;
     align-items: flex-end;
-    /* background: grey; */
-
-    /* position : relative; */
-    /* transform : translateY(-100%); */
-
+    /* background: pink; */
 `
 
 const Foot = styled.div`
-    /* background: blue; */
-    /* background: red; */
     display: flex;
-    /* bottom: 0px; */
-    /* top: 100px ; */
     align-items: center;
     height: 120px;
     width: 100%;
-    /* margin-top: 23px; */
     padding-left: 10%;
     padding-right: 10%;
-    /* background: #F39798; */
-    background-image: url(${footerImg});
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
 
-
-    /* background: gray; */
-    /* background-image: url(${footerImg}) ; */
-    /* background-repeat: no-repeat; */
-    /* background-size: 100% 100%; */
-    /* background-size: auto; */
-    /* padding-left: 10%; */
-    /* padding-right: 10%; */
-    
     img {
         width: 100%;
         height:  100%;
@@ -65,9 +40,10 @@ const Foot = styled.div`
         /* position: absolute; */
         /* margin-top: 30px; */
         /* margin-bottom: 30px; */
-        color: brown;
-        font-weight: 600;
-        font-size: 1vw;
+        color: black;
+        text-shadow: -2px -1px 6px white, 1rem 1rem 2em pink;
+        font-weight: 800;
+        font-size: 1.1vw;
         line-height: 16px;
         /* font-family: 'Walter Turncoat', cursive; */
         align-items: flex-start;
@@ -143,7 +119,8 @@ const Foot = styled.div`
 `
 
 const Footer = () => (
-    // <Outer>
+    <Outer>
+        <img className='foot-img' src={footerImg} alt='footer'/>
     <Foot>
         {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -181,6 +158,6 @@ const Footer = () => (
             </div>
         </div>
     </Foot>
-    // </Outer>
+    </Outer>
 )
 export default Footer;
