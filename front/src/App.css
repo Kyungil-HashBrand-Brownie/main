@@ -25,7 +25,7 @@ body {
 
 .wrapper {
   height: auto;
-  min-height: 939px;
+  min-height: 985px;
   bottom: 0px;
   font-family: "Yfont2";
   font-weight: 500;
@@ -917,7 +917,7 @@ NftCard
 
     .no-display {
         position: absolute;
-        transform: translate(3.4375rem, 24.0625rem);
+        transform: translate(3.4375rem, 19.0625rem);
     }
 
 
@@ -1132,4 +1132,23 @@ th {
   font-size: 14px;
   padding: 2px 5px;
   transform: translate(-122px, -10px);
+}
+
+/* footer */
+.foot-img {
+  color: rgb(214, 210, 210);
+  width: 102%;
+  height: 500px;
+  position: absolute;
+  /* flex: 1; */
+  /* width: 100%; */
+  /* background-color: yellow; */
+  transform: translate(0, -370px);
+  /* z-index: -2; */
+}
+
+.fContainer_right_content {
+  /* background-color: rgb(244, 200, 207,0.8); */
+  border-radius: 20px;
+  padding: 10px;
 }
