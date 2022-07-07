@@ -25,7 +25,7 @@ const Collection = () => {
     const navigate = useNavigate('')
 
     const getData = async () => {
-        let result = await axios.get('/image/images')
+        let result = await axios.get('/api/image/images')
         let _data = result.data;
         let _filterOption = _.cloneDeep(filterOption).filter(item => item.opt !== null)
 

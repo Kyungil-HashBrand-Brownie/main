@@ -96,7 +96,7 @@ const Header = () => {
 
     const setNickname = async (address) => {
         try {
-            const result = await axios.post("/user/view",{publicKey : address})
+            const result = await axios.post("/api/user/view",{publicKey : address})
             const nickname = result.data;
             dispatch({type : "SET_NICKNAME", payload: nickname})
         }
@@ -162,7 +162,7 @@ const Header = () => {
                 // 카이카스 계정 정보 리덕스에 저장하는 부분
                 dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
                 setToken(accounts[0])
-                await axios.post("/user/add",{publicKey : accounts[0]})
+                await axios.post("/api/user/add",{publicKey : accounts[0]})
             })
             window.klaytn.on('networkChanged', async function(network) {
                 console.log(network)

@@ -127,7 +127,7 @@ function NftCard({ bool }) {
 
         let dict;
         let dict1;
-        const result = await axios.post('/image/images', { myBrownyNFTs, stakedNFTs })
+        const result = await axios.post('/api/image/images', { myBrownyNFTs, stakedNFTs })
         dict = result.data.data;
         dict1 = result.data.data1;
 

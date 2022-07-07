@@ -37,7 +37,7 @@ function Voting() {
   }
 
   const getList = async () => {
-    const {data} = await axios.get("/vote/list");
+    const {data} = await axios.get("/api/vote/list");
     console.log(data);
     setVoteList(data);
 
@@ -45,7 +45,7 @@ function Voting() {
   }
 
   const getCurrent = async () => {
-    const {data:{voteIdx, proposals}} = await axios.get("/vote/current")
+    const {data:{voteIdx, proposals}} = await axios.get("/api/vote/current")
     console.log(voteIdx,proposals)
     
     setVoteIdx(voteIdx);
@@ -67,7 +67,7 @@ function Voting() {
   const addProposal = async (e) => {
     e.preventDefault()
     await newProposal(myAddress);
-    await axios.post("/vote/add",{proposalId, proposalContent : proposal.value ,voteIdx})
+    await axios.post("/api/vote/add",{proposalId, proposalContent : proposal.value ,voteIdx})
     await getCurrent()
   }
 
@@ -82,7 +82,7 @@ function Voting() {
     )
     console.log(result)
     let selectedProposalId = result.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0) + 1; // proposalId의 index는 1부터 시작하기 때문에 + 1
-    await axios.post("/vote/end",{voteIdx, selectedProposalId})
+    await axios.post("/api/vote/end",{voteIdx, selectedProposalId})
 
     getList(); // 종료된 것 바로 리스트에 반영
   }
@@ -91,7 +91,7 @@ function Voting() {
       await resetVote()
       dispatch(nftAction.setVoteStatus())
       // votes에 새로운 row 추가하고 (voteIdx는 새로운것 참조 proposals는 비움) => getList실행
-      const voteIdx = await axios.post("/vote/reset")
+      const voteIdx = await axios.post("/api/vote/reset")
       console.log(voteIdx)
       setVoteIdx(voteIdx)
       await getList()
