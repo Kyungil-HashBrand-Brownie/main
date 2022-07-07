@@ -15,12 +15,12 @@ const Cardjustify = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 
-        ${props => !props.bool && '56px'}; 
+        ${props => props.bool && '56px'}; 
 `
 const Main = styled.div`
     width: 31.25rem;    
     /* height: auto; */
-    min-height: 54.6875rem;
+    min-height: 43.6875rem;
     margin: .625rem;
     border: 
         ${props => !props.bool ? '.1875rem solid white'
@@ -46,7 +46,7 @@ function NftCard({ bool }) {
     let list = bool ? myNFTs : myStakedNFTs;
     let checkedList = list.filter((item) => item.checked);
 
-    const changeAllState = (checked) => {
+    const changeAllState = (checked, num) => {
         let newArr = list.sort((a, b) => a.id.slice(1) - b.id.slice(1))
         newArr = newArr.map((item, index) => {
             if (index >= (page - 1) * 4 && index < (page - 1) * 4 + 4) {
@@ -56,7 +56,7 @@ function NftCard({ bool }) {
         })
 
         let myClickState = bool ? { myNFTs: newArr } : { myStakedNFTs: newArr };
-        setInputCheck(!inputCheck);
+        num ? setInputCheck(!inputCheck) : setInputCheck(false);
         dispatch({ type: 'NFTCARD_CHANGE_ALL', payload: myClickState })
     }
 
@@ -166,7 +166,7 @@ function NftCard({ bool }) {
             <div className='nftcard-header'>
                 {bool ? 'My NFTs' : 'Staked NFTs'}
             </div>
-                    {(myNFTs.length > 0 || myStakedNFTs.length > 0) && bool &&
+                    {(myNFTs.length > 0 || myStakedNFTs.length > 0) && !bool &&
                         <Reward 
                             myAddress={myAddress}
                             myStakedNFTs={myStakedNFTs}
@@ -207,6 +207,7 @@ function NftCard({ bool }) {
                             total={list.length}
                             setInputCheck={setInputCheck}
                             inputCheck={inputCheck}
+                            changeAllState={changeAllState}
                         />
                     }
                 </Main>
