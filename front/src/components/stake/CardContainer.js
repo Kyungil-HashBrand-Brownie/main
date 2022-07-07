@@ -23,8 +23,10 @@ const CardContainer = ({ list, page, changeClickState }) => {
                             id='stake-checkbox'
                         />
                     }
-                    <div><Card.Img className='nftlist-card-img' style={{ width: '176px', height: '176px' }} onClick={() => changeClickState(item.id)} variant="top" src={item.image} /></div>
-                    <Card.Title >{item.id}</Card.Title>
+                    <div className='nftlist-card-detail'>
+                        <Card.Img className='nftlist-card-img' style={{ width: '160px', height: '160px' }} onClick={() => changeClickState(item.id)} variant="top" src={item.image} />
+                        <Card.Title >{item.id}</Card.Title>
+                    </div>
                 </Card>
             </div>
             })}

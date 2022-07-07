@@ -35,7 +35,7 @@ const Button = styled.button`
   }
 `;
 
-const PageButton = ({ total, page, setPage, setInputCheck }) => {
+const PageButton = ({ total, page, setPage, setInputCheck, changeAllState }) => {
     const numPages = Math.ceil(total / 4);
     const changeCheckState = () => {
         setInputCheck(false)
@@ -46,7 +46,8 @@ const PageButton = ({ total, page, setPage, setInputCheck }) => {
         <Nav>
             <Button onClick={() => {
                 setPage(page - 1)
-                changeCheckState();
+                // changeCheckState()
+                changeAllState(false, 0)
             }} disabled={page === 1}>
             &lt;
             </Button>
@@ -58,7 +59,8 @@ const PageButton = ({ total, page, setPage, setInputCheck }) => {
                 key={i + 1}
                 onClick={() => {
                     setPage(i + 1)
-                    changeCheckState();
+                    // changeCheckState()
+                    changeAllState(false, 0)
                 }}
                 aria-current={page === i + 1 ? "page" : null}
                 >
@@ -68,7 +70,8 @@ const PageButton = ({ total, page, setPage, setInputCheck }) => {
             }
             <Button onClick={() => {
                 setPage(page + 1)
-                changeCheckState();
+                // changeCheckState()
+                changeAllState(false, 0)
                 }} disabled={page === numPages}>
             &gt;
             </Button>
