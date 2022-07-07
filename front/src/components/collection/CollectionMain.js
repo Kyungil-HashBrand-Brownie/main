@@ -14,10 +14,6 @@ const CollectionCardImg = styled.div`
     background-size: cover;
 `
 
-
-
-
-
 const CollectionMain = ({ data, row }) => {
 
     const navigate = useNavigate('')
