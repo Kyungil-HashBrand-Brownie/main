@@ -69,6 +69,9 @@ const StyledInfo = styled.div`
     .header-line {
         /* background: green; */
         /* margin: 3px 0; */
+        display: flex;
+        justify-content: center;
+        align-items : center;
         font-weight: 500;
         font-size: 17px;
     }
