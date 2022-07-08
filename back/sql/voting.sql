@@ -2,6 +2,7 @@ use Browny;
 
 CREATE TABLE votes(  
     `voteIdx` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `voteSubject` VARCHAR(255) DEFAULT "" NULL,
     `selectedProposal` VARCHAR(255) DEFAULT "" NULL,
     `startDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     `endDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -11,7 +12,7 @@ CREATE TABLE votes(
 CREATE TABLE proposals(  
     `idx` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `proposalId` INT NOT NULL,
-    `proposalTitle` VARCHAR(255) NOT NULL,
+    `proposalLabel` VARCHAR(255) NOT NULL,
     `proposalContent` VARCHAR(255) NOT NULL,
     `nickname` VARCHAR(255) DEFAULT "ADMIN" NOT NULL,
     `voteIdx` INT NOT NULL,

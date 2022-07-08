@@ -154,7 +154,7 @@ const VoteDetail = () => {
                         <Form.Control
                             as="textarea"
                             className='vote-textarea'
-                            style={{ height: '20px' }}
+                            style={{ height: '20px', resize: 'none' }}
                             />
                         {/* <VoteDInput /> */}
                     </VoteDPart>
@@ -163,7 +163,7 @@ const VoteDetail = () => {
                             <Form.Control
                             as="textarea"
                             className='vote-textarea'
-                            style={{ height: '200px' }}
+                            style={{ height: '200px', resize: 'none' }}
                             />
                     </VoteDPart>
                     <VoteDPart>
@@ -172,7 +172,7 @@ const VoteDetail = () => {
                             as="textarea"
                             placeholder='안건을 입력해주세요'
                             className='vote-textarea'
-                            style={{ width: '700px', height: '40px' }}
+                            style={{ width: '700px', height: '40px', resize: 'none' }}
                             />
                             <button className='proposal-btn'>등록</button>
                     </VoteDPart>
