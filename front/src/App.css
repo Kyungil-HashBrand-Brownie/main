@@ -1148,6 +1148,7 @@ th {
   /* width: 100%; */
   /* background-color: yellow; */
   transform: translate(0, -370px);
+  z-index: -1;
   /* z-index: -2; */
 }
 
