@@ -4,7 +4,8 @@ CREATE TABLE votes(
     `voteIdx` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `selectedProposal` VARCHAR(255) DEFAULT "" NULL,
     `startDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    `endDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+    `endDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    `totalCount`INT DEFAULT 0 NULL
 );
 
 CREATE TABLE proposals(  
@@ -12,6 +13,7 @@ CREATE TABLE proposals(
     `proposalId` INT NOT NULL,
     `proposalTitle` VARCHAR(255) NOT NULL,
     `proposalContent` VARCHAR(255) NOT NULL,
+    `nickname` VARCHAR(255) DEFAULT "ADMIN" NOT NULL,
     `voteIdx` INT NOT NULL,
     `voteCount` INT DEFAULT 0 NOT NULL,
     FOREIGN KEY (`voteIdx`) REFERENCES votes(voteIdx)

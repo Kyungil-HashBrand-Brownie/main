@@ -6,3 +6,5 @@ const boardController = require('./board.control');
 router.get('/view',boardController.view);
 
 router.post('/write',boardController.writeAction);
+
+module.exports = router;

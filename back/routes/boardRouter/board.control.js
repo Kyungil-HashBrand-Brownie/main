@@ -11,7 +11,7 @@ const view = async (req, res) => {
     }
 }
 
-const writeAction = () => {
+const writeAction = async (req, res) => {
     const data = Object.values(req.body); // [...req.body]가 안먹혀서 [proposalTitle, proposalContent, nickname]로 바꾸기 위해
     try {
         const [result] = await pool.query(`INSERT INTO preProposals(proposalTitle, proposalContent, nickname) VALUES (?,?,?)`,data)
