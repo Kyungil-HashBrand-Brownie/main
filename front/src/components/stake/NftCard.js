@@ -127,7 +127,7 @@ function NftCard({ bool }) {
 
         let dict;
         let dict1;
-        const result = await axios.post('/image/images', { myBrownyNFTs, stakedNFTs })
+        const result = await axios.post('/api/image/images', { myBrownyNFTs, stakedNFTs })
         dict = result.data.data;
         dict1 = result.data.data1;
 
@@ -135,7 +135,7 @@ function NftCard({ bool }) {
         for (let i = 0; i != myBrownyNFTs.length; i++) {
             let metajson = {
                 id: `#${myBrownyNFTs[i]}`,
-                image: `/image/images/${dict[myBrownyNFTs[i]]}`,
+                image: `/api/image/images/${dict[myBrownyNFTs[i]]}`,
                 checked: false,
             }
             binaryArr.push(metajson)
@@ -144,7 +144,7 @@ function NftCard({ bool }) {
         let processedStakedNFTs = stakedNFTs.map((NFT) => {
             let data = {
                 id: `#${NFT}`,
-                image: `/image/images/${dict1[NFT]}`,
+                image: `/api/image/images/${dict1[NFT]}`,
                 checked: false,
             }
             return data;
@@ -166,15 +166,15 @@ function NftCard({ bool }) {
             <div className='nftcard-header'>
                 {bool ? 'My NFTs' : 'Staked NFTs'}
             </div>
-                    {(myNFTs.length > 0 || myStakedNFTs.length > 0) && !bool &&
-                        <Reward 
-                            myAddress={myAddress}
-                            myStakedNFTs={myStakedNFTs}
-                            nftInstance={nftInstance} 
-                            loading={loading}
-                        />
-                    }
-            <Cardjustify bool={bool}>
+                {(myNFTs.length > 0 || myStakedNFTs.length > 0) && !bool &&
+                    <Reward 
+                        myAddress={myAddress}
+                        myStakedNFTs={myStakedNFTs}
+                        nftInstance={nftInstance} 
+                        loading={loading}
+                    />
+                }
+            <Cardjustify bool={bool ? myNFTs.length ? bool : !bool : bool}>
                 <Main bool={bool}>
                     {list.length > 0 &&
                         <CardHead 

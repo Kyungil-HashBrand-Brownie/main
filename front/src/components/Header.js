@@ -9,7 +9,7 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
 import { nftAction } from 'redux/actions/nftAction';
 import { background10 ,background13} from '../img/background';
-import { getTokenBalance, useAlert } from 'api';
+import { enableKaikas, getTokenBalance, useAlert } from 'api';
 import AlertModal from './AlertModal';
 import axios from 'axios';
 import ChangeNicknameModal from './ChangeNicknameModal';
@@ -96,7 +96,7 @@ const Header = () => {
 
     const setNickname = async (address) => {
         try {
-            const result = await axios.post("/user/view",{publicKey : address})
+            const result = await axios.post("/api/user/view",{publicKey : address})
             const nickname = result.data;
             dispatch({type : "SET_NICKNAME", payload: nickname})
         }
@@ -121,8 +121,8 @@ const Header = () => {
         dispatch(nftAction.setVoteStatus())
     }
 
-    const enableKaikas = () => {
-        dispatch(nftAction.enableKaikas(customAlert));
+    const clickEnableKaikas = (customAlert) => {
+        enableKaikas(customAlert);
     }
 
     const copyAddress = () => {
@@ -162,7 +162,7 @@ const Header = () => {
                 // 카이카스 계정 정보 리덕스에 저장하는 부분
                 dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
                 setToken(accounts[0])
-                await axios.post("/user/add",{publicKey : accounts[0]})
+                await axios.post("/api/user/add",{publicKey : accounts[0]})
             })
             window.klaytn.on('networkChanged', async function(network) {
                 console.log(network)
@@ -171,8 +171,8 @@ const Header = () => {
         
         setVoteStatus();
     },[])
-    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/voting'];
-    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Voting'];
+    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/voting', '/community'];
+    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Voting', 'Community'];
 
     let pages = paths.map((path, index) => {
         let data = {
@@ -235,9 +235,7 @@ const Header = () => {
                         <div className='header-line'>
                             {nickname} 
                             <FontAwesomeIcon 
-                                shake="3s"
-                                animation
-                                animation-duration 
+                                shake
                                 icon={faPenToSquare}
                                 className='change-nickname-icon'
                                 onClick={()=> changeNickname.open()}
@@ -248,7 +246,7 @@ const Header = () => {
                         </StyledInfo>
                     }
                 </div>
-                : <><Button className="mint-wal-connect-btn" variant="success" onClick={enableKaikas}>지갑 연결하기</Button>{' '}</>
+                : <><Button className="mint-wal-connect-btn" variant="success" onClick={clickEnableKaikas}>지갑 연결하기</Button>{' '}</>
                 }
                 </Navbar.Collapse>
             </Container>

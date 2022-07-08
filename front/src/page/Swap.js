@@ -1,12 +1,13 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRightArrowLeft, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 import Klaytn from '../img/swap/klaytn.png';
 import Browny1 from '../img/swap/browny1.png';
 import Arrow from '../img/swap/arrowRight.png';
-import { getBtk, sellBtk, useAlert } from "api"
+import { addBTK, getBtk, sellBtk, useAlert } from "api"
 import AlertModal from 'components/AlertModal';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const Swap = () => {
     const bool = {false: 'KLAY', true: 'BTK'}
@@ -72,11 +73,38 @@ const Swap = () => {
         }
     }
 
+    const renderTooltip = (props) => (
+        <Tooltip id="button-tooltip" {...props}>
+          Add BTK to KAIKAS
+        </Tooltip>
+      );
+
     return (
         <div className='swap-box'>
             <AlertModal {...customAlert} />
             <div className='select-box'>
-                <div className='swap-header'>SWAP</div>
+                <div className='swap-header'>
+                    SWAP
+                    <OverlayTrigger
+                    placement="right"
+                    delay={{ show: 250, hide: 400 }}
+                    overlay={renderTooltip}
+                    >
+                    <div className='token-add-kaikas'>
+                    <FontAwesomeIcon 
+                        icon={faCirclePlus}
+                        className='add-BTK-icon'
+                        onClick={addBTK}
+                    />
+                    <img 
+                        className='browny-icon' 
+                        src={Browny1}
+                        alt="이미지를 찾을 수 없습니다"
+                    />
+                    </div>
+                    </OverlayTrigger>
+                </div>
+                
                 {myAddress && 
                     <div className='mywal-info-outer'>
                         <div className='mywal-info'>

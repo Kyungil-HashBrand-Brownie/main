@@ -9,7 +9,7 @@ function ChangeNicknameModal({ show, onHide, setNickname }) {
     const [alert, setAlert] = useState("")
 
     const clickChange = async ()=> {
-        const {data} = await axios.post("/user/modify",{publicKey:myAddress, nickname: nickInput.current.value})
+        const {data} = await axios.post("/api/user/modify",{publicKey:myAddress, nickname: nickInput.current.value})
         if(data === "success") {
             nickInput.current.value = ""
             setNickname(myAddress);
@@ -43,6 +43,7 @@ function ChangeNicknameModal({ show, onHide, setNickname }) {
                         aria-label="Recipient's username"
                         aria-describedby="basic-addon2"
                         onChange={()=>setAlert("")}
+                        autoFocus
                         // size='lg'
                         ref={nickInput}
                     />

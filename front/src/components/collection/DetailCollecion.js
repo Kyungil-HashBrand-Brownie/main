@@ -32,12 +32,12 @@ const DetailCollecion = () => {
   
   const [collectionData, setCollectionData] = useState({});
   const [collectionAlldata, setCollectionAllData] = useState(null);
-  const [positionMiddle, setPositionMiddle] = useState(parseInt(page));
+  const [positionMiddle, setPositionMiddle] = useState(parseInt(page < 3 ? 3 : page));
 
   console.log('pos: ', positionMiddle);
 
   const getData = async () => {
-    let result = await Promise.all([axios.get('/image/images'), axios.get(`/image/image/${page}`)])
+    let result = await Promise.all([axios.get('/api/image/images'), axios.get(`/api/image/image/${page}`)])
     // let result = await axios.get(`/image/image/${page}`);
     console.log(result)
     let data = result[1].data[0]; // 데이터 배열 형식을 객체로 바꾸기 위해서
@@ -70,17 +70,25 @@ const DetailCollecion = () => {
     // console.log(collectionData.edition)
   }
 
-  const firstButton_collection = () => {
-    // 총 데이터 개수 
+  // const firstButton_collection = () => {
+  //   // 총 데이터 개수 
 
-    console.log('first')
+  //   console.log('first')
 
+  // }
+
+  // const lastButton_collection = () => {
+  //   console.log('last')
+  // }
+
+  const selectCollection = () => {
+    // index 번호를 살려야 하는데 index
+    for( let i = 0; i <= collectionAlldata.length; i++ ) {
+      navigate('')
+      return i
+    }
+    
   }
-
-  const lastButton_collection = () => {
-    console.log('last')
-  }
-
 
 
   useEffect(() => {
@@ -94,17 +102,17 @@ const DetailCollecion = () => {
       <div className="layout-container">
         <div className="detailImglNft-item1">
           <div className="detailImglNft-mainImg">
-            <img src={`/image/images/${collectionData.addr}`} alt="subI1" />
+            <img src={`/api/image/images/${collectionData.addr}`} alt="subI1" />
           </div>
           <div className="detailImglNft-subImg">
             <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/image/images/${collectionData.addr}`} />
+              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
             </div>
             <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/image/images/${collectionData.addr}`} />
+              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
             </div>
             <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/image/images/${collectionData.addr}`} />
+              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
             </div>
           </div>
         </div>
@@ -114,7 +122,7 @@ const DetailCollecion = () => {
             <p> charactor : Browny , angel, 메타몽 </p>
             <div className="detail_OwnedBy"> Owned by #2ad355njnjnjn</div>
             <div className="btn-opensea">
-              <button class="btn-hover color-9">OPENSEA</button>
+              <button className="btn-hover color-9">OPENSEA</button>
             </div>
             <button className="btn-hover color-5" onClick={() =>preButton_collection()}>pre</button>
             <button className="btn-hover color-5" onClick={() =>nextButton_collection()}>next</button>
@@ -150,16 +158,26 @@ const DetailCollecion = () => {
           <div className="detailImglNft-description_3">상세 내용</div>
         </div>
         <div>
-        <button onClick={()=>setPositionMiddle(2)}>first</button>
-        <button onClick={()=>setPositionMiddle(positionMiddle - 5)}>pre</button>
+        <button onClick={()=>setPositionMiddle(3)}>first</button>
+        <button onClick={()=>setPositionMiddle(positionMiddle > 7 ? positionMiddle - 5 : 3)}>pre</button>
         all data
-        <button onClick={()=>setPositionMiddle(positionMiddle + 5)}>next</button>
-        <button onClick={()=>setPositionMiddle(146)}>last</button>
+        <button onClick={()=>setPositionMiddle(positionMiddle < 143 ? positionMiddle + 5 : 148)}>next</button>
+        <button onClick={()=>setPositionMiddle(148)}>last</button>
 
           <div>
           {
-            collectionAlldata!= null ? collectionAlldata.slice(positionMiddle-3, positionMiddle+2).map((item, idx) => <><img width='100px' key={idx} src={`/image/images/${item.addr}`} /></> )
-            : null
+            collectionAlldata!= null ? 
+            collectionAlldata.slice(positionMiddle-3, positionMiddle+2).map((item, idx) => 
+            <>
+            <img width='100px' onClick={() => { 
+              setPositionMiddle(item.edition < 3 ? 3 : item.edition < 149 ? item.edition : 148)
+              navigate(`/detailcollection/${item.edition}`)}}
+              // selectCollection()}
+              key={idx} src={`/api/image/images/${item.addr}`}
+            />
+              <div>{item.edition}</div>
+            </>)
+            : 'aaa'
           }
           </div>
         </div>
