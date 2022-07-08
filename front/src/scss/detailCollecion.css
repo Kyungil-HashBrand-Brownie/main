@@ -1,3 +1,13 @@
+body {
+    width: 100%;
+    /* height: 100%; */
+    overflow-x: hidden;
+    background: linear-gradient(90deg, #e9a667 0.52%, #f0e3a1 39.46%, #f0e3a1 70.47%, #e9a667 90%);
+  }
+  ::-webkit-scrollbar{
+      display : none;
+}
+  
 .layout-container{
     background-color: white;
     display: grid;
@@ -180,4 +190,18 @@
 .btn-hover.color-9 {
     background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
     box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+
+.ModalPosition{
+    top : 70%;    
+    width: 100%;
+  }
+
+
+.leadmoreButton{
+    position: fixed;
+    top: 80%;
+    right: 5%;
+    /* background: cyan; */
+    /* opacity: 0.8; */
 }
