@@ -35,7 +35,7 @@ const VoteCTRow = styled.div`
 const CommunityVoteTable = () => {
     return (
         <VoteCTable>
-            <VoteCTHeader>CommunityVoteTable</VoteCTHeader>
+            {/* <VoteCTHeader>CommunityVoteTable</VoteCTHeader> */}
             <VoteCTBody>
                 <VoteCTRow>
                     <VoteTableCard img={nft1} img1={Ani1}/>

@@ -3,12 +3,34 @@ import Form from 'react-bootstrap/Form'
 import styled from 'styled-components'
 import { nft1 } from 'img/nft'
 import VoteDescription from './VoteDescription'
+import CommunityTopic from './CommunityTopic'
 
 const VoteDOuter = styled.div`
+    display: flex;
+    width: 100%;
+    height: 100%;
+`
+
+const VoteDLeftOuter = styled.div`
+    position: absolute;
+    right: 1%;
+    top: 8%;
+    display: flex;
+    justify-content: center;
+    /* background: blue; */
+    width: 300px;
+    max-height: 120px;
+    margin-left: 5%;
+    margin-top: 5%;
+`
+
+const VoteDRightOuter = styled.div`
     /* display: flex; */
+    margin: auto;
     justify-content: center;
     /* flex-direction: column; */
-    background: red;
+    background: white;
+    padding-bottom: 30px;
     width: 1200px;
     min-height: 600px;
     border-radius: 20px;
@@ -53,6 +75,9 @@ const VoteDPart = styled.div`
     .vote-textarea {
         margin-left: 2%;
         width: 820px;
+    }
+    .proposal-btn {
+        margin-left: 1%;
     }
 `
 const VoteDType = styled.div`
@@ -112,6 +137,11 @@ const PageButton = styled.button`
 const VoteDetail = () => {
     return (
         <VoteDOuter>
+        <VoteDLeftOuter>
+            <CommunityTopic />
+        </VoteDLeftOuter>
+
+        <VoteDRightOuter>
             <VoteDHeaderOuter>
                 <VoteDHeader>글 작성하기</VoteDHeader>
             </VoteDHeaderOuter>
@@ -129,7 +159,7 @@ const VoteDetail = () => {
                         {/* <VoteDInput /> */}
                     </VoteDPart>
                     <VoteDPart>
-                        <VoteDType>안건내용 </VoteDType>
+                        <VoteDType>안건내용/<br />배경 </VoteDType>
                             <Form.Control
                             as="textarea"
                             className='vote-textarea'
@@ -137,10 +167,22 @@ const VoteDetail = () => {
                             />
                     </VoteDPart>
                     <VoteDPart>
+                        <VoteDType>안건</VoteDType>
+                            <Form.Control
+                            as="textarea"
+                            placeholder='안건을 입력해주세요'
+                            className='vote-textarea'
+                            style={{ width: '700px', height: '40px' }}
+                            />
+                            <button className='proposal-btn'>등록</button>
+                    </VoteDPart>
+                    <VoteDPart>
                         <VoteDType>파일 업로드 </VoteDType>
                         <VoteDArea>
-                            파일은 최대 3개까지 업로드 가능합니다.(10MB)
-                            {/* <VoteDButton></VoteDButton> */}
+                            <div>파일은 최대 3개까지 업로드 가능합니다.(10MB)</div>
+                            <input type='file' />
+                            <input type='file' />
+                            <input type='file' />
                         </VoteDArea>
                     </VoteDPart>
                     <VoteButtonDiv>
@@ -151,6 +193,7 @@ const VoteDetail = () => {
                     </ControlButton>
                 </VoteDMain>
             </VoteDMainOuter>
+        </VoteDRightOuter>
         </VoteDOuter>
     )
 }

@@ -1,16 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 const PostButton = styled.button`
-    border-radius: 5px;
-    &:hover {
-        background: lightgray;
-    }
+  float: right;
+  border-radius: 5px;
+  &:hover {
+      background: lightgray;
+  }
+  margin-bottom: 2px;
 `
 
 const CommunityPostButton = () => {
+  const navigate = useNavigate();
   return (
-    <PostButton>글 등록</PostButton>
+      <PostButton onClick={() => navigate('/votewrite')}>글 등록</PostButton>
   )
 }
 
