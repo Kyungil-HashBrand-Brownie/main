@@ -32,7 +32,7 @@ const DetailCollecion = () => {
   
   const [collectionData, setCollectionData] = useState({});
   const [collectionAlldata, setCollectionAllData] = useState(null);
-  const [positionMiddle, setPositionMiddle] = useState(parseInt(page));
+  const [positionMiddle, setPositionMiddle] = useState(parseInt(page < 3 ? 3 : page));
 
   console.log('pos: ', positionMiddle);
 
@@ -114,7 +114,7 @@ const DetailCollecion = () => {
             <p> charactor : Browny , angel, 메타몽 </p>
             <div className="detail_OwnedBy"> Owned by #2ad355njnjnjn</div>
             <div className="btn-opensea">
-              <button class="btn-hover color-9">OPENSEA</button>
+              <button className="btn-hover color-9">OPENSEA</button>
             </div>
             <button className="btn-hover color-5" onClick={() =>preButton_collection()}>pre</button>
             <button className="btn-hover color-5" onClick={() =>nextButton_collection()}>next</button>
@@ -158,8 +158,10 @@ const DetailCollecion = () => {
 
           <div>
           {
-            collectionAlldata!= null ? collectionAlldata.slice(positionMiddle-3, positionMiddle+2).map((item, idx) => <><img width='100px' key={idx} src={`/image/images/${item.addr}`} /></> )
-            : null
+            collectionAlldata!= null ? 
+            collectionAlldata.slice(positionMiddle-3, positionMiddle+2).map((item, idx) => 
+            <img width='100px' key={idx} src={`/api/image/images/${item.addr}`}  />)
+            : 'aaa'
           }
           </div>
         </div>
