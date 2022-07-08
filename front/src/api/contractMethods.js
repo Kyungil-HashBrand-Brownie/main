@@ -113,7 +113,7 @@ const addWhite = async (address) => {
 const removeWhite = async (address) => {
     try{
         const contractOwner =await getContractOwner()
-        const result = await nftInstance.methods.remove(address).send({ from: contractOwner, gas: 300000, value: 0 })
+        const result = await whitelistInstance.methods.remove(address).send({ from: contractOwner, gas: 300000, value: 0 })
         return result
     } catch (error) {
         console.log(error)
@@ -124,7 +124,7 @@ const removeWhite = async (address) => {
 const removeSelectedWhites = async (addressArr) => {
     try{
         const contractOwner =await getContractOwner()
-        const result = await nftInstance.methods.removeMany(addressArr).send({ from: contractOwner, gas: 300000, value: 0 })
+        const result = await whitelistInstance.methods.removeMany(addressArr).send({ from: contractOwner, gas: 300000, value: 0 })
         return result
     } catch (error) {
         console.log(error)

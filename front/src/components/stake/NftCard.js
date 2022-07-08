@@ -117,7 +117,7 @@ function NftCard({ bool }) {
 
     const checkNfts = async () => {
         getCurrentReward()
-        let myBrownyNFTs = await nftInstance.methods.checkOwnNFTs().call(
+        let myBrownyNFTs = await nftInstance.methods.ownTokens().call(
             { from: myAddress })
 
         let stakedNFTs = await nftInstance.methods.checkStakedNFTs().call(

@@ -188,7 +188,7 @@
 		"compilationTarget": {
 			"contracts/Whitelist/Whitelist.sol": "Whitelist"
 		},
-		"evmVersion": "london",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
