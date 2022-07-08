@@ -31,7 +31,7 @@ function Voting() {
   // 투표 상태 표시
   const [showVoteStatus, setShowVoteStatus] = useState("투표 시작 전")
 
-  const proposalTitle = useInput("")
+  const proposalLabel = useInput("")
   const proposalContent = useInput("")
 
   const getVotingPower = async () => {
@@ -70,7 +70,7 @@ function Voting() {
   const addProposal = async (e) => {
     e.preventDefault()
     await newProposal(myAddress);
-    await axios.post("/api/vote/add",{proposalId, proposalTitle:proposalTitle.value ,proposalContent : proposalContent.value ,voteIdx})
+    await axios.post("/api/vote/add",{proposalId, proposalLabel:proposalLabel.value ,proposalContent : proposalContent.value ,voteIdx})
     await getCurrent()
   }
 
@@ -192,7 +192,7 @@ function Voting() {
       >
         <InputGroup className="mb-3">
           <InputGroup.Text >Title</InputGroup.Text>
-          <Form.Control aria-label="Title" {...proposalTitle} required />
+          <Form.Control aria-label="Title" {...proposalLabel} required />
         </InputGroup>
         <InputGroup className="mb-3">
           <InputGroup.Text >Content</InputGroup.Text>
@@ -212,10 +212,11 @@ function Voting() {
       { voteList.length &&
       voteList.map((vote,index)=>
         <div key={index}>
-        <div>voteIdx : {vote.voteIdx}</div>
-        <div>startDate : {vote.startDate}</div>
-        <div>endDate : {vote.endDate}</div>
-        <div>selectedProposal : {vote.selectedProposal}</div>
+          <div>voteIdx : {vote.voteIdx}</div>
+          <div>voteSubject : {vote.voteSubject}</div>
+          <div>selectedProposal : {vote.selectedProposal}</div>
+          <div>startDate : {vote.startDate}</div>
+          <div>endDate : {vote.endDate}</div>
         </div>
       )}
     </div>
