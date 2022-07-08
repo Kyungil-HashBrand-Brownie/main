@@ -9,7 +9,7 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
 import { nftAction } from 'redux/actions/nftAction';
 import { background10 ,background13} from '../img/background';
-import { getTokenBalance, useAlert } from 'api';
+import { enableKaikas, getTokenBalance, useAlert } from 'api';
 import AlertModal from './AlertModal';
 import axios from 'axios';
 import ChangeNicknameModal from './ChangeNicknameModal';
@@ -121,8 +121,8 @@ const Header = () => {
         dispatch(nftAction.setVoteStatus())
     }
 
-    const enableKaikas = () => {
-        dispatch(nftAction.enableKaikas(customAlert));
+    const clickEnableKaikas = (customAlert) => {
+        enableKaikas(customAlert);
     }
 
     const copyAddress = () => {
@@ -235,9 +235,7 @@ const Header = () => {
                         <div className='header-line'>
                             {nickname} 
                             <FontAwesomeIcon 
-                                shake="3s"
-                                animation
-                                animation-duration 
+                                shake
                                 icon={faPenToSquare}
                                 className='change-nickname-icon'
                                 onClick={()=> changeNickname.open()}
@@ -248,7 +246,7 @@ const Header = () => {
                         </StyledInfo>
                     }
                 </div>
-                : <><Button className="mint-wal-connect-btn" variant="success" onClick={enableKaikas}>지갑 연결하기</Button>{' '}</>
+                : <><Button className="mint-wal-connect-btn" variant="success" onClick={clickEnableKaikas}>지갑 연결하기</Button>{' '}</>
                 }
                 </Navbar.Collapse>
             </Container>

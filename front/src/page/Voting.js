@@ -28,8 +28,11 @@ function Voting() {
   const [votingPower, setVotingPower] = useState(0);
   // 지난 투표를 포함한 전체 투표 리스트
   const [voteList, setVoteList] = useState([]);
+  // 투표 상태 표시
+  const [showVoteStatus, setShowVoteStatus] = useState("투표 시작 전")
 
-  const proposal = useInput("")
+  const proposalTitle = useInput("")
+  const proposalContent = useInput("")
 
   const getVotingPower = async () => {
     const myNFTs = await getMyNFTs(myAddress);
@@ -67,7 +70,7 @@ function Voting() {
   const addProposal = async (e) => {
     e.preventDefault()
     await newProposal(myAddress);
-    await axios.post("/api/vote/add",{proposalId, proposalContent : proposal.value ,voteIdx})
+    await axios.post("/api/vote/add",{proposalId, proposalTitle:proposalTitle.value ,proposalContent : proposalContent.value ,voteIdx})
     await getCurrent()
   }
 
@@ -102,7 +105,7 @@ function Voting() {
     getList();
   },[myAddress])
 
-  const getVotingButtonProps = () => {
+  const setVoteStatusButton = () => {
     let value, onClick;
     switch(voteStatus) {
       case "0":
@@ -135,11 +138,35 @@ function Voting() {
     }
   }
 
-  const votingProps = getVotingButtonProps()
+  const votingProps = setVoteStatusButton();
 
-  const ChangeVotingButton = ({value, onClick})=> {
+  const VoteStatusButton = ({value, onClick})=> {
     return <Button as='input' type='button' variant="success" value={value} onClick={onClick}></Button>
   }
+
+  const setShowVote = () => {
+    switch(voteStatus) {
+      case "0":
+        // beforeVote
+        setShowVoteStatus("투표 시작 전")
+        break;
+
+      case "1":
+        // nowVote
+        setShowVoteStatus("투표 진행 중")
+        break;
+
+      case "2":
+        // afterVote
+        setShowVoteStatus("투표 종료")
+        break;
+      default:
+    }
+  }
+
+  useEffect(()=> {
+    setShowVote();
+  },[voteStatus])
 
   return (
     <>
@@ -163,16 +190,22 @@ function Voting() {
       <Form
       onSubmit={addProposal}
       >
-        <InputGroup className='mb-3'>
-          <Form.Control type='text' {...proposal} required />
-          <Button type='submit' variant='success'>Add proposal</Button>
+        <InputGroup className="mb-3">
+          <InputGroup.Text >Title</InputGroup.Text>
+          <Form.Control aria-label="Title" {...proposalTitle} required />
         </InputGroup>
+        <InputGroup className="mb-3">
+          <InputGroup.Text >Content</InputGroup.Text>
+          <Form.Control aria-label="Content" {...proposalContent} required />
+        </InputGroup>
+        <Button type='submit' variant='success'>Add proposal</Button>
       </Form>
-      <ChangeVotingButton {...votingProps} ></ChangeVotingButton>
+      <br />
+      <VoteStatusButton {...votingProps} ></VoteStatusButton>
       </>
       : null
       }
-      
+      <div>투표상태 : {showVoteStatus}</div>
       <div>MY RANK : {userRank}</div>
       <div>MY VOTING POWER (NFT COUNT) : {votingPower}  </div>
       <div><h4>보팅 리스트</h4></div>

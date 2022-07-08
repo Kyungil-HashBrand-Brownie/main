@@ -7,3 +7,5 @@ export {newProposal, startVote, endVote, resetVote, submitVote} from "./votingMe
 export {pebToFixed, getTokenBalance} from "./utils"
 
 export {useAlert, useInput } from "./customHook"
+
+export {addBTK, enableKaikas} from "./kaikas"

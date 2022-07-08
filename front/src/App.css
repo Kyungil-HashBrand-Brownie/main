@@ -387,6 +387,7 @@ body {
 }
 
 .swap-header {
+  position: relative;
   font-weight: 600;
   font-size: 40px;
   margin-bottom: 10px;
@@ -594,6 +595,14 @@ body {
 .mywal-bal {
   font-size: 18px;
   margin-bottom: 2px;
+}
+
+.token-add-kaikas {
+  cursor: pointer;
+  position: absolute;
+  align-items: center;
+  bottom: 0px;
+  right: 10px;
 }
 
 /*Pagination*/
@@ -946,6 +955,14 @@ NftCard
 
 .change-nickname-icon {
   animation-duration: 3s;
+}
+
+.add-BTK-icon {
+  position: relative;
+  left: 9px;
+  bottom: 16px;
+  width: 13px;
+  height: 13px;
 }
 
 @keyframes slide {

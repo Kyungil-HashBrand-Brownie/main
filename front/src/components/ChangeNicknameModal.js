@@ -43,6 +43,7 @@ function ChangeNicknameModal({ show, onHide, setNickname }) {
                         aria-label="Recipient's username"
                         aria-describedby="basic-addon2"
                         onChange={()=>setAlert("")}
+                        autoFocus
                         // size='lg'
                         ref={nickInput}
                     />
