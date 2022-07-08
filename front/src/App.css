@@ -1073,7 +1073,7 @@ Collection
 /*Vote*/
 
 .vote-table {
-  width: 80%;
+  width: 100%;
   z-index: 4;
 }
 
@@ -1084,7 +1084,10 @@ Collection
 .table-title {
   display: flex;
   align-items: center;
-  width: 550px;
+  width: 100%;
+  /* background: yellow; */
+  padding-left: 4%;
+  font-size: 17px;
 }
 
 .table-writer {
@@ -1107,6 +1110,8 @@ Collection
 
  .title {
   cursor: pointer;
+  /* width: 700px; */
+  /* background-color: blue; */
  }
 
  .title:hover {
@@ -1116,15 +1121,22 @@ Collection
  td {
   padding: 0 10px;
   border-bottom: 1px solid lightgray;
+  font-size: 17px;
  }
 
-.table-view, .table-writer, .table-date, .title-flex {
+.table-view, .table-writer, .table-date {
   text-align: center;
   justify-content: center;
 }
+.title-flex {
+  padding-left: 30px;
+  /* background-color: red; */
+}
 
 th {
+  background-color: pink;
   border-bottom: 1px solid black;
+  font-size: 20px;
 }
 
 
@@ -1161,6 +1173,7 @@ th {
   width: 102%;
   height: 500px;
   position: absolute;
+  z-index: -1;
   /* flex: 1; */
   /* width: 100%; */
   /* background-color: yellow; */
