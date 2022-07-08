@@ -143,7 +143,7 @@ const DetailCollecion = () => {
 
       </div>
       }
-        <DetailCollectionModal collectionAlldata={collectionAlldata} page={page}/>
+        <DetailCollectionModal  collectionAlldata={collectionAlldata} page={page}/>
     </div>
 
   );

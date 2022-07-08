@@ -202,6 +202,75 @@ body {
     position: fixed;
     top: 80%;
     right: 5%;
+    /* box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+    transform: translateY(-0.25em); */
     /* background: cyan; */
     /* opacity: 0.8; */
+}
+
+
+
+.raise:hover, .raise:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+    transform: translateY(-0.25em);
+  }
+
+  .raise {
+    --color: #15dfbd;
+    --hover: #c260ff;
+  }
+
+  .but {
+    color: var(--color);
+    transition: 0.25s;
+    position: fixed;
+    top: 80%;
+    right: 12%;
+  }
+  .but:hover, .but:focus {
+    border-color: var(--hover);
+    color: #fff;
+  }
+
+  .but {
+    background: rgba(154, 189, 40, 0.321);
+    border: 2px solid;
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    line-height: 1;
+    margin: 0.5em;
+    
+  }
+.buttonA {
+    width: 40px;
+    height: 10px;
+    margin-left: 20px;
+    border: 1px solid black;
+    align-items: flex-start;
+}
+
+.buttonB {
+    width: 40px;
+    height: 10px;
+    margin-left: 20px;
+    display: flex;
+    text-align: center;
+    border: 1px solid black;
+    align-items: flex-end;
+}
+
+.arrowDetailLeft{
+    width: 40px;
+    height: 10px;
+    margin-left: 20px;
+    border: 1px solid black;
+    align-items: flex-start;
+}
+.arrowDetailRight{
+    width: 40px;
+    height: 10px;
+    margin-left: 20px;
+    border: 1px solid black;
+    align-items: flex-end;
 }
