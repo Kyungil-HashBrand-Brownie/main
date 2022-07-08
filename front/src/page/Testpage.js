@@ -19,7 +19,7 @@ import CommunityVoteTable from 'components/vote/CommunityVoteTable'
 import VoteDetail from 'components/vote/VoteDetail'
 import Community from './Community'
 import ClockTest from 'components/ClockTest'
-import SliderTest from 'components/SliderTest'
+import Slider from 'components/Slider'
 
 const HomeBackImgPosition = styled.div`
     /* width: 100%;
@@ -67,7 +67,7 @@ const Testpage = () => {
         {/* <VoteDetail /> */}
         {/* <Community /> */}
         {/* <ClockTest /> */}
-        <SliderTest />
+        <Slider />
     </div>
   )
 }
