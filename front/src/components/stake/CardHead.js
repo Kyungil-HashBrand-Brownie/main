@@ -20,7 +20,7 @@ const CardHead = ({bool, inputCheck, checkedList, transactNFT,
                 </div>
                 <div className='nftlist-count-inner-box'>
                     <div>total: {total}</div>
-                    <div>{bool ? 'staked' : 'unstaked'} : {current}</div>
+                    <div>{bool ? 'unstaked' : 'staked'} : {current}</div>
                 </div>
             </div>
             <div className='nftlist-box'>
