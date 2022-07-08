@@ -70,17 +70,25 @@ const DetailCollecion = () => {
     // console.log(collectionData.edition)
   }
 
-  const firstButton_collection = () => {
-    // 총 데이터 개수 
+  // const firstButton_collection = () => {
+  //   // 총 데이터 개수 
 
-    console.log('first')
+  //   console.log('first')
 
+  // }
+
+  // const lastButton_collection = () => {
+  //   console.log('last')
+  // }
+
+  const selectCollection = () => {
+    // index 번호를 살려야 하는데 index
+    for( let i = 0; i <= collectionAlldata.length; i++ ) {
+      navigate('')
+      return i
+    }
+    
   }
-
-  const lastButton_collection = () => {
-    console.log('last')
-  }
-
 
 
   useEffect(() => {
@@ -150,17 +158,25 @@ const DetailCollecion = () => {
           <div className="detailImglNft-description_3">상세 내용</div>
         </div>
         <div>
-        <button onClick={()=>setPositionMiddle(2)}>first</button>
-        <button onClick={()=>setPositionMiddle(positionMiddle - 5)}>pre</button>
+        <button onClick={()=>setPositionMiddle(3)}>first</button>
+        <button onClick={()=>setPositionMiddle(positionMiddle > 7 ? positionMiddle - 5 : 3)}>pre</button>
         all data
-        <button onClick={()=>setPositionMiddle(positionMiddle + 5)}>next</button>
-        <button onClick={()=>setPositionMiddle(146)}>last</button>
+        <button onClick={()=>setPositionMiddle(positionMiddle < 143 ? positionMiddle + 5 : 148)}>next</button>
+        <button onClick={()=>setPositionMiddle(148)}>last</button>
 
           <div>
           {
             collectionAlldata!= null ? 
             collectionAlldata.slice(positionMiddle-3, positionMiddle+2).map((item, idx) => 
-            <img width='100px' key={idx} src={`/api/image/images/${item.addr}`}  />)
+            <>
+            <img width='100px' onClick={() => { 
+              setPositionMiddle(item.edition < 3 ? 3 : item.edition < 149 ? item.edition : 148)
+              navigate(`/detailcollection/${item.edition}`)}}
+              // selectCollection()}
+              key={idx} src={`/api/image/images/${item.addr}`}
+            />
+              <div>{item.edition}</div>
+            </>)
             : 'aaa'
           }
           </div>
