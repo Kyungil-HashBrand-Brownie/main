@@ -52,16 +52,6 @@ function getReward(contract, stake, renewMine, renewStaked) {
     }
 }
 
-const enableKaikas = (customAlert) => {
-    return async (dispatch) => {
-        if(window.klaytn){
-            window.klaytn.enable()
-        }
-        else {
-            customAlert.open(<a href="https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko" target="blank">카이카스 설치 필요</ a>)
-        }
-    }
-}
 
 const setUserInfo =  (address) => {
     return async (dispatch) => {
@@ -118,7 +108,6 @@ const setToken = (address) => {
 
 export const nftAction = {
     getReward,
-    enableKaikas,
     setUserInfo,
     checkWhitelist,
     setVoteStatus,
