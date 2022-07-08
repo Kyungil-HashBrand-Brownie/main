@@ -20,6 +20,7 @@ import DetailCollecion from 'components/collection/DetailCollecion';
 import Community from 'page/Community';
 import VoteDetail from 'components/vote/VoteDetail';
 import PrivateRoute from 'route/PrivateRoute';
+import DifNetwork from 'page/DifNetwork';
 
 function App() {
   const {isDeployer} = useSelector(state=>state.nft)
@@ -66,8 +67,8 @@ function App() {
           </>
           :
           <>
-          <Route path='/swap' element={<div>테스트 네트워크가 아닙니다</div>}/>
-          <Route path='/nftlist' element={<div>테스트 네트워크가 아닙니다</div>}/>
+          <Route path='/swap' element={<DifNetwork />}/>
+          <Route path='/nftlist' element={<DifNetwork />}/>
           </>
         }
         {/* <Route path="/whitelist" element={<WhiteList/>} />  */}

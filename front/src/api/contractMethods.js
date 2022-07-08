@@ -132,4 +132,16 @@ const removeSelectedWhites = async (addressArr) => {
     }
 }
 
-export {methodExecution, getBtk, sellBtk, stakeNFTs, unstakeNFTs, claimReward, batchMint, whitelistMint,addWhite, removeWhite, removeSelectedWhites};
+export {
+    methodExecution,
+    getBtk,
+    sellBtk,
+    stakeNFTs,
+    unstakeNFTs,
+    claimReward,
+    batchMint,
+    whitelistMint,
+    addWhite,
+    removeWhite,
+    removeSelectedWhites,
+};

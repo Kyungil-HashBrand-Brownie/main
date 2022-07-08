@@ -33,4 +33,7 @@ const useInput = (defaultValue) => {
     }
   }
 
-export { useAlert, useInput }
+export { 
+  useAlert,
+  useInput,
+}

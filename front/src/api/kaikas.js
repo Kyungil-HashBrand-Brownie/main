@@ -1,6 +1,7 @@
 import { tokenAddr } from "configs"
 
 const addBTK = ()=> {
+  console.log("aaaaaa")
     window.klaytn.sendAsync(
         {
           method: 'wallet_watchAsset',
@@ -28,4 +29,7 @@ const enableKaikas = (customAlert) => {
     }
 }
 
-export {addBTK, enableKaikas}
+export {
+  addBTK,
+  enableKaikas,
+}

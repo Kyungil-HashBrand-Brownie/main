@@ -90,11 +90,11 @@ const Swap = () => {
                     delay={{ show: 250, hide: 400 }}
                     overlay={renderTooltip}
                     >
-                    <div className='token-add-kaikas'>
+                    <div onClick={addBTK} className='token-add-kaikas'>
                     <FontAwesomeIcon 
                         icon={faCirclePlus}
                         className='add-BTK-icon'
-                        onClick={addBTK}
+                        
                     />
                     <img 
                         className='browny-icon' 

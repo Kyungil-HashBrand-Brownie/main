@@ -1188,6 +1188,14 @@ th {
   padding: 10px;
 }
 
+/* noPage */
+.no-page {
+  position: relative;
+  top: 25rem;
+  display: flex;
+  justify-content: center;
+  font-size: 80px;
+}
 /*ClockTest*/
 /* Play with speed and easing of the animation */
 /* =========================================== */
