@@ -15,13 +15,13 @@ const Cardjustify = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 
-        ${props => props.bool && '56px'}; 
+        ${props => props.bool && '50px'}; 
 `
 const Main = styled.div`
     width: 31.25rem;    
     /* height: auto; */
-    min-height: 43.6875rem;
-    margin: .625rem;
+    min-height: 41.6875rem;
+    /* margin: .625rem; */
     border: 
         ${props => !props.bool ? '.1875rem solid white'
                                 : '.1875rem solid black'};
