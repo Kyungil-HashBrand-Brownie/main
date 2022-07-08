@@ -10,6 +10,7 @@ CREATE TABLE votes(
 CREATE TABLE proposals(  
     `idx` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `proposalId` INT NOT NULL,
+    `proposalTitle` VARCHAR(255) NOT NULL,
     `proposalContent` VARCHAR(255) NOT NULL,
     `voteIdx` INT NOT NULL,
     `voteCount` INT DEFAULT 0 NOT NULL,
