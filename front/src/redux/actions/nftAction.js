@@ -106,10 +106,14 @@ const setToken = (address) => {
 }
 
 
-const collectionData = async() =>{
+// const getDataCollecion = async () => {
+//     let result = await axios.get(`/image/image/${params.edition}`);
+//     let data = result.data[0]; // 데이터 배열 형식을 객체로 바꾸기 위해서
+//     console.log(data);
 
-}
-
+//     setCollectionData(data)
+//     console.log("addr",data.addr)
+//   };
 
 export const nftAction = {
     getReward,

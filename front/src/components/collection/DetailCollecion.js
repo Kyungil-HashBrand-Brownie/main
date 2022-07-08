@@ -1,49 +1,118 @@
 import React, { useEffect, useState } from "react";
 import "../../scss/detailCollecion.css";
 import { nft1 } from "../../img/nft/";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { nftAction } from "redux/actions/nftAction";
 /* 
     1. redux로 데이터 받기
 */
 
 const DetailCollecion = () => {
   let params = useParams();
-  console.log(params);
+  // 리렌더링 해야 해당 페이지로 간다.
+  let page = params.edition;
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  /* 
+    1. 현재 페이지 알기. params 알기 ,  내가 어떤 페이지를 보고 있는지.
+    2. 마지막 페이지 알기
+    3. 페이지에 근처 nft parmas띄우기
+    4.  animation css 
+
+    // total 페이지
+    // 내가 어떤페이지를 보고있는지
+    // 페이지 그룹
+  */
+
 
   
   const [collectionData, setCollectionData] = useState({});
+  const [collectionAlldata, setCollectionAllData] = useState(null);
+  const [positionMiddle, setPositionMiddle] = useState(parseInt(page < 3 ? 3 : page));
+
+  console.log('pos: ', positionMiddle);
 
   const getData = async () => {
-    let result = await axios.get(`/image/image/${params.edition}`);
-    let data = result.data[0]; // 데이터 배열 형식을 객체로 바꾸기 위해서
-    console.log(data);
+    let result = await Promise.all([axios.get('/api/image/images'), axios.get(`/api/image/image/${page}`)])
+    // let result = await axios.get(`/image/image/${page}`);
+    console.log(result)
+    let data = result[1].data[0]; // 데이터 배열 형식을 객체로 바꾸기 위해서
+    console.log("dataaaaaa" , data);
+    let allData = result[0].data.map(a => {
+      let d = {};
+      d.edition = a.edition;
+      d.addr= a.addr;
+      return d
+    }).sort((a,b) => parseInt(a.edition) - parseInt(b.edition))
+    console.log("all data " , allData)
+
 
     setCollectionData(data)
+    setCollectionAllData(allData)
     console.log("addr",data.addr)
+    // setPositionMiddele(data.)
   };
+
+  const preButton_collection = () => {
+    console.log("pre")
+
+    navigate(`/detailcollection/${collectionData.edition -1}`)
+  }
+
+  const nextButton_collection = () => {
+    console.log("next")
+    navigate(`/detailcollection/${collectionData.edition + 1}`)
+    // navigate(`/detailcollection/${collectionData.edition } `)
+    // console.log(collectionData.edition)
+  }
+
+  // const firstButton_collection = () => {
+  //   // 총 데이터 개수 
+
+  //   console.log('first')
+
+  // }
+
+  // const lastButton_collection = () => {
+  //   console.log('last')
+  // }
+
+  const selectCollection = () => {
+    // index 번호를 살려야 하는데 index
+    for( let i = 0; i <= collectionAlldata.length; i++ ) {
+      navigate('')
+      return i
+    }
+    
+  }
+
 
   useEffect(() => {
     getData();
-  }, []);
+    // dispatch(nftAction.getDataCollecion(collectionData))
+  }, [page]);
 
   return (
     <div>
-      {/* <button className="bubbly-button" onClick={() =>animateButton()}>Click me!</button> */}
+      {collectionData.addr &&
       <div className="layout-container">
         <div className="detailImglNft-item1">
           <div className="detailImglNft-mainImg">
-            <img src={`/image/images/${collectionData.addr}`} alt="subI1" />
+            <img src={`/api/image/images/${collectionData.addr}`} alt="subI1" />
           </div>
           <div className="detailImglNft-subImg">
             <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/image/images/${collectionData.addr}`} />
+              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
             </div>
             <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/image/images/${collectionData.addr}`} />
+              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
             </div>
             <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/image/images/${collectionData.addr}`} />
+              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
             </div>
           </div>
         </div>
@@ -53,9 +122,10 @@ const DetailCollecion = () => {
             <p> charactor : Browny , angel, 메타몽 </p>
             <div className="detail_OwnedBy"> Owned by #2ad355njnjnjn</div>
             <div className="btn-opensea">
-              <button class="btn-hover color-9">OPENSEA</button>
+              <button className="btn-hover color-9">OPENSEA</button>
             </div>
-            {/* <button className="btn-hover color-5">BUTTON</button> */}
+            <button className="btn-hover color-5" onClick={() =>preButton_collection()}>pre</button>
+            <button className="btn-hover color-5" onClick={() =>nextButton_collection()}>next</button>
           </div>
           <div className="detailImglNft-description_2">
             <div className="div-section">
@@ -87,8 +157,34 @@ const DetailCollecion = () => {
           </div>
           <div className="detailImglNft-description_3">상세 내용</div>
         </div>
+        <div>
+        <button onClick={()=>setPositionMiddle(3)}>first</button>
+        <button onClick={()=>setPositionMiddle(positionMiddle > 7 ? positionMiddle - 5 : 3)}>pre</button>
+        all data
+        <button onClick={()=>setPositionMiddle(positionMiddle < 143 ? positionMiddle + 5 : 148)}>next</button>
+        <button onClick={()=>setPositionMiddle(148)}>last</button>
+
+          <div>
+          {
+            collectionAlldata!= null ? 
+            collectionAlldata.slice(positionMiddle-3, positionMiddle+2).map((item, idx) => 
+            <>
+            <img width='100px' onClick={() => { 
+              setPositionMiddle(item.edition < 3 ? 3 : item.edition < 149 ? item.edition : 148)
+              navigate(`/detailcollection/${item.edition}`)}}
+              // selectCollection()}
+              key={idx} src={`/api/image/images/${item.addr}`}
+            />
+              <div>{item.edition}</div>
+            </>)
+            : 'aaa'
+          }
+          </div>
+        </div>
       </div>
+      }
     </div>
+
   );
 };
 
