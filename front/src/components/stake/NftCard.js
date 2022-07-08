@@ -166,15 +166,15 @@ function NftCard({ bool }) {
             <div className='nftcard-header'>
                 {bool ? 'My NFTs' : 'Staked NFTs'}
             </div>
-                    {(myNFTs.length > 0 || myStakedNFTs.length > 0) && !bool &&
-                        <Reward 
-                            myAddress={myAddress}
-                            myStakedNFTs={myStakedNFTs}
-                            nftInstance={nftInstance} 
-                            loading={loading}
-                        />
-                    }
-            <Cardjustify bool={bool}>
+                {(myNFTs.length > 0 || myStakedNFTs.length > 0) && !bool &&
+                    <Reward 
+                        myAddress={myAddress}
+                        myStakedNFTs={myStakedNFTs}
+                        nftInstance={nftInstance} 
+                        loading={loading}
+                    />
+                }
+            <Cardjustify bool={bool ? myNFTs.length ? bool : !bool : bool}>
                 <Main bool={bool}>
                     {list.length > 0 &&
                         <CardHead 
