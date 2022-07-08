@@ -79,6 +79,10 @@ contract BrownyNFT is Initializable, ERC721EnumerableUpgradeable {
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), fileExtention)) : "";
     }
 
+    function ownTokens() public view returns(uint256[] memory) {
+        return tokens(msg.sender);
+    }
+
     function isWhitelisted(address _address) public view returns(bool){
         return whitelist.isWhitelisted(_address);
     }
