@@ -85,7 +85,7 @@ contract Minting is Initializable {
     }
 
     modifier isStaked(uint256 tokenId) {
-        require(brownyNFT.isStaked(tokenId), "not staked tokenId");
+        require(brownyNFT.isStaked(tokenId), "not staked tokenId!!!");
         _;
     }
 
@@ -93,9 +93,8 @@ contract Minting is Initializable {
     function stake(uint256 tokenId) private {
         require(brownyNFT.ownerOf(tokenId) == msg.sender, "not your token");
         require(brownyNFT.isStaked(tokenId) == false, "already staked");
+        brownyNFT.stakedFunc(tokenId, uint256(block.timestamp), msg.sender);
         brownyNFT.transferFrom(msg.sender, address(brownyNFT), tokenId);
-        brownyNFT.setStake(tokenId, uint256(block.timestamp), msg.sender);
-        brownyNFT.stakedFunc(tokenId, msg.sender);
     }
     function stakeNFTs(uint256[] memory tokenId) external {
         for(uint i = 0; i < tokenId.length; i++) {
@@ -105,11 +104,10 @@ contract Minting is Initializable {
 
     // unstake function
     function unstake(uint256 tokenId) private isStaked(tokenId) {
-        require(brownyNFT.ownerOfStaking(tokenId) == msg.sender, "not an owner");
+        require(brownyNFT.ownerOfStaking(tokenId) == msg.sender, "not your token");
         claimed(tokenId);
+        brownyNFT.stakedFunc(tokenId, uint256(block.timestamp), msg.sender);
         brownyNFT.transferFrom(address(brownyNFT), msg.sender, tokenId);
-        brownyNFT.deleteStake(tokenId);
-        brownyNFT.stakedFunc(tokenId, msg.sender);
     }
     function unstakeNFTs(uint256[] memory tokenId) external {
         for(uint i = 0; i < tokenId.length; i++) {

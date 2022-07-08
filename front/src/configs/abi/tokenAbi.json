@@ -397,7 +397,7 @@
 			"kind": "user",
 			"methods": {
 				"tokenTransfer(address,address,uint256,uint256)": {
-					"notice": "f tokenTransfer BTK token transfer 함수  token 거래 함수에 사용하기 위한 용도"
+					"notice": "tokenTransfer BTK token transfer 함수  token 거래 함수에 사용하기 위한 용도"
 				}
 			},
 			"version": 1
@@ -407,7 +407,7 @@
 		"compilationTarget": {
 			"contracts/Token/Token.sol": "BrownyToken"
 		},
-		"evmVersion": "london",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -468,11 +468,11 @@
 			]
 		},
 		"contracts/Token/Token.sol": {
-			"keccak256": "0x3fcff54d731764dcbd5411fcf6a30d8e32e44b95b3d91ae59f130096ad6e8012",
+			"keccak256": "0x9a52b21459da65b859c066cbbaf599caf65e92a007f43f84e50f36f73e213700",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ac25449ca2076c67bef387cf2a71bbddbb23880c54b21dd22f49535ae6ffade5",
-				"dweb:/ipfs/QmUaHQ4UGF3kFQ7VYXa3AC7ZSDFGrpnapk5v2ho965yVhZ"
+				"bzz-raw://40888deab76e6be0cff3f6f57e0d980990009e0dfa48cfcda00a4b2f78383578",
+				"dweb:/ipfs/QmXBDV75bhAk4G7e4s85hM57Y6AoizWRj561yCGaz5L8zv"
 			]
 		}
 	},

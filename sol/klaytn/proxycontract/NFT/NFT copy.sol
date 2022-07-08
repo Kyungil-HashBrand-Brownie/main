@@ -2,13 +2,12 @@
 pragma solidity 0.8.10;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "../Whitelist/Whitelist.sol";
 
-contract BrownyNFT is Initializable, ERC721EnumerableUpgradeable {
+contract BrownyNFT is Initializable, ERC721Upgradeable {
     string ipfs = "";
     string public fileExtention = "";
     using Strings for uint256;
@@ -16,8 +15,10 @@ contract BrownyNFT is Initializable, ERC721EnumerableUpgradeable {
 
     Whitelist public whitelist;
 
+    // 유저가 민팅한 nft배열 
+    mapping(address => uint256[]) public ownNFTs;
     // 민팅된 전체 nft 배열
-    uint256[] private mintedNftList;
+    uint256[] mintedNftList;
 
     /** 
     * _tokenIdCounter - 전체 발행된 nft 수
@@ -42,7 +43,6 @@ contract BrownyNFT is Initializable, ERC721EnumerableUpgradeable {
     mapping(uint256 => bool) public staked;
     // address owner => uint staked nft num
     mapping(address => uint) public numOwnerStakedNFT;
-    mapping(address => uint[]) public ownerStakedNFT;
 
     function initialize(string memory _name, string memory _symbol, string memory _ipfs, address _whitelistCon) external initializer {
         __ERC721_init(_name, _symbol);
@@ -51,19 +51,8 @@ contract BrownyNFT is Initializable, ERC721EnumerableUpgradeable {
         whitelist = Whitelist(_whitelistCon);
     }
 
-    function safeMinting(address to, uint tokenId) private {
+    function safeMinting(address to, uint tokenId) external {
         _safeMint(to, tokenId, "Test Minting");
-        _beforeTokenTransfer(address(0), to, tokenId);
-    }
-
-    function tokens(address _owner) public view returns(uint256[] memory) {
-        uint256 _tokenCount = balanceOf(_owner);
-
-        uint256[] memory _tokens = new uint256[](_tokenCount);
-        for (uint256 i = 0; i < _tokenCount; i++) {
-            _tokens[i] = tokenOfOwnerByIndex(_owner, i);
-        }
-        return _tokens;
     }
 
 /* ============================ view func ============================*/
@@ -79,12 +68,12 @@ contract BrownyNFT is Initializable, ERC721EnumerableUpgradeable {
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), fileExtention)) : "";
     }
 
-    function ownTokens() public view returns(uint256[] memory) {
-        return tokens(msg.sender);
-    }
-
     function isWhitelisted(address _address) public view returns(bool){
         return whitelist.isWhitelisted(_address);
+    }
+
+    function checkOwnNFTs() public view returns(uint256[] memory){
+        return ownNFTs[tx.origin];
     }
 
     function checkMintedNftList() public view returns(uint256[] memory){
@@ -117,7 +106,15 @@ contract BrownyNFT is Initializable, ERC721EnumerableUpgradeable {
 
     // user가 staking한 nft 목록 확인
     function checkStakedNFTs() public view returns(uint256[] memory) {
-        return ownerStakedNFT[tx.origin];
+        uint256[] memory stakingList = new uint256[](numOwnerStakedNFT[tx.origin]);
+        uint index = 0;
+        for(uint256 i = 0; i < ownNFTs[tx.origin].length; i++) {
+            if(staked[ownNFTs[tx.origin][i]] == true) {
+                stakingList[index] = ownNFTs[tx.origin][i];
+                index++;
+            } 
+        }
+        return stakingList;
     }
 
     // 사용자의 tier
@@ -135,8 +132,9 @@ contract BrownyNFT is Initializable, ERC721EnumerableUpgradeable {
     }
 
 /* ============================ external func ============================*/
-    function safeMint(address to, uint256 tokenId, uint8 status) public {
+    function safeMint(address to, uint256 tokenId, uint8 status) external {
         _safeMint(to, tokenId);
+        ownNFTs[to].push(tokenId);
         mintedNftList.push(tokenId);
         if(status == 0) {
             _tokenIdCounter.increment();
@@ -155,23 +153,21 @@ contract BrownyNFT is Initializable, ERC721EnumerableUpgradeable {
         }
     }
 
-    function stakedFunc(uint256 _tokenId, uint256 _timestamp, address _owner) external {
+    function stakedFunc(uint256 _tokenId, address _owner) external {
         if(staked[_tokenId] == false) {
             staked[_tokenId] = true;
             numOwnerStakedNFT[_owner]++;
-            ownerStakedNFT[_owner].push(_tokenId);
-            setStake( _tokenId, _timestamp, _owner);
+            uint256 index = indexOf(ownNFTs[_owner], _tokenId);
+            remove(ownNFTs[_owner], index);
         } else if(staked[_tokenId] == true) {
             staked[_tokenId] = false;
             numOwnerStakedNFT[_owner]--;
-            uint256 index = indexOf(ownerStakedNFT[_owner], _tokenId);
-            remove(ownerStakedNFT[_owner], index);
-            deleteStake(_tokenId);
+            ownNFTs[_owner].push(_tokenId);
         }
     }
 
     // struct Stake change 함수
-    function setStake(uint256 _tokenId, uint256 _timestamp, address _owner) private {
+    function setStake(uint256 _tokenId, uint256 _timestamp, address _owner) external {
         vault[_tokenId] = Stake({
             owner: _owner,
             tokenId: _tokenId,
@@ -180,7 +176,7 @@ contract BrownyNFT is Initializable, ERC721EnumerableUpgradeable {
     }
 
     // struct Stake delete 함수
-    function deleteStake(uint256 _tokenId) private {
+    function deleteStake(uint256 _tokenId) external {
         delete vault[_tokenId];
     }
 
