@@ -17,6 +17,9 @@ import NoPage from 'page/NoPage';
 import Collection from 'page/Collection';
 import Voting from 'page/Voting';
 import DetailCollecion from 'components/collection/DetailCollecion';
+import Community from 'page/Community';
+import VoteDetail from 'components/vote/VoteDetail';
+import PrivateRoute from 'route/PrivateRoute';
 
 function App() {
   const {isDeployer} = useSelector(state=>state.nft)
@@ -46,6 +49,9 @@ function App() {
         <Route path="/test" element={<Testpage />} />
         <Route path='/collection' element={<Collection />} />
         <Route path='/voting' element={<Voting />} />
+        <Route path='/community' element={<Community />} />
+        <Route path='/votewrite' element={<VoteDetail />} />
+        <Route path='/community/:id' element={<PrivateRoute />} />
         {
           isBaobab
           ?

@@ -17,6 +17,7 @@ import CommunityPostButton from 'components/vote/CommunityPostButton'
 import CommunityTopic from 'components/vote/CommunityTopic'
 import CommunityVoteTable from 'components/vote/CommunityVoteTable'
 import VoteDetail from 'components/vote/VoteDetail'
+import Community from './Community'
 
 const HomeBackImgPosition = styled.div`
     /* width: 100%;
@@ -54,13 +55,15 @@ const Testpage = () => {
         {/* <WhiteListMember /> */}
         {/* <Animation /> */}
         {/* <AlertModal /> */}
-        <VoteDetail />
-        <MainHeader />
+        {/* <VoteDetail /> */}
+        {/* <MainHeader />
         <CommunityTopic />
         <VoteDescription />
         <CommunityPostButton />
         <CommunityTable />
-        <CommunityVoteTable />
+        <CommunityVoteTable /> */}
+        {/* <VoteDetail /> */}
+        <Community />
     </div>
   )
 }
