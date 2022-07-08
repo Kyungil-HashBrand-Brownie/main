@@ -27,9 +27,13 @@ const DetailCollectionModal = ({collectionAlldata,page}) => {
 
     return (
         <>
-            <Button variant="primary" onClick={() => setShow(true)} className="leadmoreButton">
+            {/* <Button variant="primary" onClick={() => setShow(true)} className="leadmoreButton">
             Lead More NFT
-            </Button>
+            </Button> */}
+            <button onClick={() => setShow(true)} class="but raise">
+                More<br />NFT
+            </button>
+
     
             {/* <ModalPosition> */}
             <Modal
@@ -41,12 +45,12 @@ const DetailCollectionModal = ({collectionAlldata,page}) => {
             className='ModalPosition'
             >
                 <Modal.Body>
-                <div>
-                        <button onClick={()=>setPositionMiddle(3)}>first</button>
-                        <button onClick={()=>setPositionMiddle(positionMiddle > 7 ? positionMiddle - 5 : 3)}>pre</button>
+                <div >
+                        <button className='arrowDetailLeft' onClick={()=>setPositionMiddle(3)}>first</button>
+                        <button className='arrowDetailLeft' onClick={()=>setPositionMiddle(positionMiddle > 7 ? positionMiddle - 5 : 3)}>pre</button>
                         all data
-                        <button onClick={()=>setPositionMiddle(positionMiddle < 143 ? positionMiddle + 5 : 148)}>next</button>
-                        <button onClick={()=>setPositionMiddle(148)}>last</button>
+                        <button className='arrowDetailRight' onClick={()=>setPositionMiddle(positionMiddle < 143 ? positionMiddle + 5 : 148)}>next</button>
+                        <button className='arrowDetailRight' onClick={()=>setPositionMiddle(148)}>last</button>
                 </div>
                 <Slider {...settings}>
                 {
