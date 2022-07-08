@@ -15,7 +15,7 @@ const getUserRank = async(from) => await nftInstance.methods.userRank().call({fr
 
 const getMintList = async() => await nftInstance.methods.checkMintedNftList().call();
 
-const getMyNFTs = async(from) => await nftInstance.methods.tokens().call({from});
+const getMyNFTs = async(from) => await nftInstance.methods.ownTokens().call({from});
 
 const getMyStaked = async(from) => await nftInstance.methods.checkStakedNFTs().call({from});
 

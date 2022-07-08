@@ -359,6 +359,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "ownTokens",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -954,11 +967,11 @@
 			]
 		},
 		"contracts/NFT/NFT.sol": {
-			"keccak256": "0x1c94caa6fc4fc6874a487d1169df102088d7787b653e9e28f455828d1f4cf12c",
+			"keccak256": "0x25a9513c84b905ea883feeb5ec765d00e857591662b0cc119d710b7da5d489c2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ff0cf0702b34a2737bc90a7ae02d9f248e2d513dca959106a9386ec5dd62c462",
-				"dweb:/ipfs/QmenD82813vEoGUPTiehyZM2rdEMwXobsq7pfShykPVC2c"
+				"bzz-raw://262fc0cb89b10c4412ec0d65b2c00ad3b6beb8fd884563b1e0564ed9fa020338",
+				"dweb:/ipfs/QmdxaivWgdQCx42BW1HuXQRAjEioJy4WUyaV9vmZKRinkY"
 			]
 		},
 		"contracts/Whitelist/Whitelist.sol": {
