@@ -48,7 +48,6 @@ const FilterDetailBox = styled.div`
 const FilterDetail = ({ parts }) => {
     const dispatch = useDispatch();
     const { filterOption } = useSelector(state => state.nft);
-    console.log()
     let partOptions = new Array(partsCount[parts]).fill(0).map((item, index) => {
         if (parts == 'Background') parts = 'Back' 
         return parts + (index+1)

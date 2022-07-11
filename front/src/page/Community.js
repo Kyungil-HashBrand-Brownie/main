@@ -13,10 +13,7 @@ const VoteDOuter = styled.div`
     height: 100%;
 `
 const CommunityMainOuter = styled.div`
-    /* display: flex; */
     margin: auto;
-    /* justify-content: center; */
-    /* flex-direction: column; */
     background: white;
     width: 1200px;
     min-height: 600px;
@@ -28,7 +25,6 @@ const CommunitySide = styled.div`
     top: 8%;
     display: flex;
     justify-content: center;
-    /* background: blue; */
     width: 300px;
     max-height: 120px;
     margin-left: 5%;
@@ -45,7 +41,7 @@ const Community = ({ id }) => {
             <CommunityMainOuter>
                 <MainHeader />
                 <VoteDescription />
-                <CommunityPostButton />
+                <CommunityPostButton state={state}/>
                 {!state 
                 ? <CommunityTable />
                 : <CommunityVoteTable />

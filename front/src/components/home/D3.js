@@ -5,12 +5,11 @@ const D3 = () => {
   return (
     <div>
         <div className="stage">
-            <div className="layer"></div>
-            <div className="layer"></div>
-            <div className="layer"></div>
-            <div className="layer"></div>
-            <div className="layer"></div>
-            <div className="layer"></div>
+            {new Array(6).fill(0).map((id, index) => 
+            <div 
+              key={index}
+              className='layer' />
+            )}
           </div>
     </div>
   )

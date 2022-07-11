@@ -1,9 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
+import VoteDetail from 'components/vote/VoteDetail'
 
-const VoteWrite = () => {
+const VoteWrite = ({ id }) => {
     return (
-        <VoteDetail />
+        <VoteDetail id={id} />
     )
 }
 

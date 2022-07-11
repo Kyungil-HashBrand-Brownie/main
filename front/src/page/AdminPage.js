@@ -4,8 +4,6 @@ import QuitVote from '../components/QuitVote'
 import EarthVote from '../components/EarthVote'
 import WhiteListMember from '../components/WhiteListMember'
 import { useState } from 'react'
-// import QuitVote from '../components/QuitVote'
-
 
 const AdminPage = () => {
   const [click, setClick] = useState(0);

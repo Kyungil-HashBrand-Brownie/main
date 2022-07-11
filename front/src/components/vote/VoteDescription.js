@@ -1,19 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
-
-const DescriptionOuter = styled.div`
-    display: flex;
-    justify-content: center;
-    margin-bottom: 50px;
-`
-const Description = styled.div`
-    background: lightgray;
-    letter-spacing: 2.5px;
-    padding: 20px;
-    font-size: 19px;
-    border-radius: 30px;
-    width: 1000px;
-`
+import { DescriptionOuter, Description } from './voteModule'
 
 const VoteDescription = () => {
     return (
