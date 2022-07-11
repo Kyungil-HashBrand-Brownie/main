@@ -40,6 +40,19 @@ const VoteDetail = ({ id }) => {
         state: false,
     }])
 
+    const handleSubmit = async (e)=> {
+        e.preventDefault();
+        let proposals = [];
+        let proposalGroup = e.target.title
+        proposalGroup.forEach((proposal)=>proposals.push(proposal.value))
+        console.log(proposals)
+        // const title = e.target.Title.value
+        // const content = e.target.Content.value
+        // const proposals = e.target.proposals.value
+        // const data = {title, content, proposals, nickname}
+        // await axios.post('/api/community/write',data)
+    }
+
     const addProposal = (proposal) => {
         let compareIdx = counter[counter.length - 1].id
         if (proposal.id == compareIdx) {

@@ -12,4 +12,6 @@ router.post('/end', voteController.endAction);
 
 router.post('/reset', voteController.resetAction);
 
+router.put('/subject', voteController.modifyAction);
+
 module.exports = router
