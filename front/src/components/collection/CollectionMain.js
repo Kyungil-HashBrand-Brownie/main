@@ -1,9 +1,10 @@
 import React from 'react'
 import _ from 'lodash'
 import styled from 'styled-components'
-import { CollectionMainOuter, CollectionHeader, CollectionBody, 
+import {
+    CollectionMainOuter, CollectionHeader, CollectionBody,
     CollectionRow, CollectionCardOuter, CollectionCard, CollectionCardDetail
-} from './collectionModule' 
+} from './collectionModule'
 import { useNavigate } from 'react-router-dom'
 
 const CollectionCardImg = styled.div`
@@ -26,24 +27,24 @@ const CollectionMain = ({ data, row }) => {
     return (
         <CollectionMainOuter>
             <CollectionHeader>Collections</CollectionHeader>
-            { data !== null && 
+            {data !== null &&
                 <div className='collection-info-outer'>
                     <div className='collection-info-box'>total: {data.length} / 150</div>
                 </div>
             }
             <CollectionBody>
-                    { data !== null &&  
-                    new Array(row).fill(0).map((item, index) => 
-                        <CollectionRow 
+                {data !== null &&
+                    new Array(row).fill(0).map((item, index) =>
+                        <CollectionRow
                             key={index}
-                            // className={(index == row - 1) && data.slice(5*index, 5*index+5).length != 5 ? 'collection-last-row' : undefined}
+                        // className={(index == row - 1) && data.slice(5*index, 5*index+5).length != 5 ? 'collection-last-row' : undefined}
                         >
-                            {data.slice(5*index, 5*index+5).map((img, idx) => 
-                                <CollectionCardOuter 
-                                    key={idx + 1000} 
+                            {data.slice(5 * index, 5 * index + 5).map((img, idx) =>
+                                <CollectionCardOuter
+                                    key={idx + 1000}
                                     state={(index == row - 1) && data.slice(5 * index, 5 * index + 5).length != 5 ? false : true}
                                     onClick={() => moveToDetailPage(img.edition)}>
-                                    
+
                                     <CollectionCard >
                                         <CollectionCardImg image={`/api/image/images/${img.addr}`}>
                                         </CollectionCardImg>

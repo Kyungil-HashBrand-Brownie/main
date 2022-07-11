@@ -15,9 +15,6 @@ const CardHead = ({bool, inputCheck, checkedList, transactNFT,
                 </button>
             </div>
             <div className='nftlist-count-box'>
-                {/* <div className='nftlist-header'>
-                    <i>{bool ? 'Stakelist' : 'Unstakelist'}</i>
-                </div> */}
                 <div className='nftlist-count-inner-box'>
                     <div>total: {total}</div>
                     <div>{bool ? 'unstaked' : 'staked'} : {current}</div>

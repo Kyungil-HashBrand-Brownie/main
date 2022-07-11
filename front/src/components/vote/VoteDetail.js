@@ -4,108 +4,12 @@ import styled from 'styled-components'
 import { nft1 } from 'img/nft'
 import VoteDescription from './VoteDescription'
 import CommunityTopic from './CommunityTopic'
+import {
+    VoteDOuter, VoteDLeftOuter, VoteDRightOuter, VoteDHeaderOuter,
+    VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
+    VoteDArea, VoteButtonDiv, VoteButton, ControlButton, PageButton
+} from './voteModule'
 
-const VoteDOuter = styled.div`
-    display: flex;
-    width: 100%;
-    height: 100%;
-`
-
-const VoteDLeftOuter = styled.div`
-    position: absolute;
-    right: 1%;
-    top: 8%;
-    display: flex;
-    justify-content: center;
-    /* background: blue; */
-    width: 300px;
-    max-height: 120px;
-    margin-left: 5%;
-    margin-top: 5%;
-`
-
-const VoteDRightOuter = styled.div`
-    /* display: flex; */
-    margin: auto;
-    justify-content: center;
-    /* flex-direction: column; */
-    background: white;
-    padding-bottom: 30px;
-    width: 1200px;
-    min-height: 600px;
-    border-radius: 20px;
-`
-const VoteDHeaderOuter = styled.div`
-    display: flex;
-    /* background: green; */
-    justify-content: center;
-    margin-bottom: 30px;
-`
-const VoteDHeader = styled.div`
-    width: 20%;
-    font-size: 30px;
-    text-align: center;
-    /* background: blue; */
-`
-const VoteDMainOuter = styled.div`
-    display: flex;
-    justify-content: center;
-    /* background: yellow; */
-    min-height: 500px;
-    margin-top: 30px;
-`
-const VoteDMain = styled.div`
-    width: 95%;
-    /* background: white; */
-    background: linear-gradient(orange 0%, orange 4.89%, white 35%, white 90.9%);
-    border: 4mm ridge rgba(211, 220, 50, .6);
-    /* background: rgb(223, 215, 215); */
-    border-radius: 10px;
-`
-const VoteDPart = styled.div`
-    margin: auto;
-    display: flex;
-    width: 90%;
-    /* background: blue; */
-    min-height: 50px;
-    align-items: center;
-    margin-top: 10px;
-    /* background: rgb(223, 215, 215); */
-
-    .vote-textarea {
-        margin-left: 2%;
-        width: 820px;
-    }
-    .proposal-btn {
-        margin-left: 1%;
-    }
-`
-const VoteDType = styled.div`
-    margin-left: 1%;
-    width: 11%;
-    height: 100%;
-    font-size: 20px;
-    border-radius: 3px;
-    /* background: white; */
-    text-align: center;
-`
-const VoteDArea = styled.div`
-    width: 80%;
-    margin-left: 2%;
-    /* background: purple; */
-`
-const VoteButtonDiv = styled.div`
-    /* background: blue; */
-    width: 25%;
-    margin: auto;
-    text-align: center;
-`
-const VoteButton = styled.button`
-    width: 160px;
-    font-size: 18px;
-    border-radius: 3px;
-    margin-top: 30px;
-`
 const VoteTCBodyImg = styled.div`
     width: 150px;
     height: 150px;
@@ -122,78 +26,67 @@ const VoteTCBodyImg = styled.div`
         transform: scale(1.06);
     }
 `
-const ControlButton = styled.div`
-    width: 25%;
-    margin: auto;
-    text-align: center;
-`
-const PageButton = styled.button`
-    width: 160px;
-    font-size: 18px;
-    margin-top: 10px;
-    border-radius: 3px;
-`
 
 const VoteDetail = () => {
     return (
         <VoteDOuter>
-        <VoteDLeftOuter>
-            <CommunityTopic />
-        </VoteDLeftOuter>
+            <VoteDLeftOuter>
+                <CommunityTopic />
+            </VoteDLeftOuter>
 
-        <VoteDRightOuter>
-            <VoteDHeaderOuter>
-                <VoteDHeader>글 작성하기</VoteDHeader>
-            </VoteDHeaderOuter>
-            <VoteDescription />
-            <VoteDMainOuter>
-                <VoteDMain>
-                    <VoteTCBodyImg img={nft1}/>
-                    <VoteDPart>
-                        <VoteDType>안건제목 </VoteDType>
-                        <Form.Control
-                            as="textarea"
-                            className='vote-textarea'
-                            style={{ height: '20px', resize: 'none' }}
-                            />
-                        {/* <VoteDInput /> */}
-                    </VoteDPart>
-                    <VoteDPart>
-                        <VoteDType>안건내용/<br />배경 </VoteDType>
+            <VoteDRightOuter>
+                <VoteDHeaderOuter>
+                    <VoteDHeader>글 작성하기</VoteDHeader>
+                </VoteDHeaderOuter>
+                <VoteDescription />
+                <VoteDMainOuter>
+                    <VoteDMain>
+                        <VoteTCBodyImg img={nft1} />
+                        <VoteDPart>
+                            <VoteDType>안건제목 </VoteDType>
                             <Form.Control
-                            as="textarea"
-                            className='vote-textarea'
-                            style={{ height: '200px', resize: 'none' }}
+                                as="textarea"
+                                className='vote-textarea'
+                                style={{ height: '20px', resize: 'none' }}
                             />
-                    </VoteDPart>
-                    <VoteDPart>
-                        <VoteDType>안건</VoteDType>
+                            {/* <VoteDInput /> */}
+                        </VoteDPart>
+                        <VoteDPart>
+                            <VoteDType>안건내용/<br />배경 </VoteDType>
                             <Form.Control
-                            as="textarea"
-                            placeholder='안건을 입력해주세요'
-                            className='vote-textarea'
-                            style={{ width: '700px', height: '40px', resize: 'none' }}
+                                as="textarea"
+                                className='vote-textarea'
+                                style={{ height: '200px', resize: 'none' }}
+                            />
+                        </VoteDPart>
+                        <VoteDPart>
+                            <VoteDType>안건</VoteDType>
+                            <Form.Control
+                                as="textarea"
+                                placeholder='안건을 입력해주세요'
+                                className='vote-textarea'
+                                style={{ width: '700px', height: '40px', resize: 'none' }}
                             />
                             <button className='proposal-btn'>등록</button>
-                    </VoteDPart>
-                    <VoteDPart>
-                        <VoteDType>파일 업로드 </VoteDType>
-                        <VoteDArea>
-                            <div>파일은 최대 3개까지 업로드 가능합니다.(10MB)</div>
-                            <input type='file' />
-                            <input type='file' />
-                            <input type='file' />
-                        </VoteDArea>
-                    </VoteDPart>
-                    <VoteButtonDiv>
-                        <VoteButton>등록하기</VoteButton>
-                    </VoteButtonDiv>
-                    <ControlButton>
-                        <PageButton>이전화면</PageButton>
-                    </ControlButton>
-                </VoteDMain>
-            </VoteDMainOuter>
-        </VoteDRightOuter>
+                        </VoteDPart>
+                        <VoteDPart>
+                            <VoteDType>파일 업로드 </VoteDType>
+                            <VoteDArea>
+                                <div>파일은 최대 3개까지 업로드 가능합니다.(10MB)</div>
+                                <input type='file' />
+                                <input type='file' />
+                                <input type='file' />
+                            </VoteDArea>
+                        </VoteDPart>
+                        <VoteButtonDiv>
+                            <VoteButton>등록하기</VoteButton>
+                        </VoteButtonDiv>
+                        <ControlButton>
+                            <PageButton>이전화면</PageButton>
+                        </ControlButton>
+                    </VoteDMain>
+                </VoteDMainOuter>
+            </VoteDRightOuter>
         </VoteDOuter>
     )
 }
