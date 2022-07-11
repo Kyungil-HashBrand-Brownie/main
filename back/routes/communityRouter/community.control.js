@@ -12,9 +12,9 @@ const view = async (req, res) => {
 }
 
 const writeAction = async (req, res) => {
-    const data = Object.values(req.body); // [...req.body]가 안먹혀서 [proposalLabel, proposalContent, nickname]로 바꾸기 위해
+    const data = Object.values(req.body); // [...req.body]가 안먹혀서 [proposalTitle, proposalContent, proposalLabel, nickname]로 바꾸기 위해
     try {
-        const [result] = await pool.query(`INSERT INTO preProposals(proposalLabel, proposalContent, nickname) VALUES (?,?,?)`,data)
+        const [result] = await pool.query(`INSERT INTO preProposals(proposalTitle, proposalContent, proposalLabel, nickname) VALUES (?,?,?,?)`,data)
         res.send(result);
     }
     catch(e) {
