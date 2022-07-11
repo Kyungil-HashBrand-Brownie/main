@@ -136,7 +136,7 @@ const VoteDetail = ({ id }) => {
                                         <Form.Control
                                             disabled={item.state ? true : false}
                                             as="textarea"
-                                            placeholder='안건을 입력해주세요'
+                                            placeholder='안건을 등록해주세요'
                                             name='text'
                                             className='vote-text'
                                             style={{ width: '770px', height: '40px', resize: 'none' }}

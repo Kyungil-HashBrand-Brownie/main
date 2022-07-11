@@ -79,6 +79,8 @@ export const VoteDPart = styled.div`
         margin-left: 1%;
         width: 70px;
         height: 30px;
+        border: 2px solid orange;
+        border-radius: 3px;
     }
     .proposal-del-div {
         width: 70px;
@@ -97,6 +99,9 @@ export const VoteDPart = styled.div`
         transform: scale(1.05);
         background: rgb(212, 201, 201);
     }
+    .proposal-input {
+        margin-bottom: 30px;
+    }
 `
 export const VoteDType = styled.div`
     margin-left: 1%;
@@ -114,12 +119,14 @@ export const VoteButtonDiv = styled.div`
     width: 25%;
     margin: auto;
     text-align: center;
+    /* background: red; */
+    margin-top: 30px;
 `
 export const VoteButton = styled.button`
     width: 160px;
     font-size: 18px;
     border-radius: 3px;
-    margin-top: 30px;
+    border: 2px solid orange;
 
     &:hover {
         transform: scale(1.05);
@@ -130,12 +137,14 @@ export const ControlButton = styled.div`
     width: 25%;
     margin: auto;
     text-align: center;
+    margin-bottom: 20px;
 `
 export const PageButton = styled.button`
     width: 160px;
     font-size: 18px;
     margin-top: 10px;
     border-radius: 3px;
+    border: 2px solid orange;
 
     &:hover {
         transform: scale(1.05);
