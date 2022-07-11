@@ -4,9 +4,18 @@ import Modal from 'react-bootstrap/Modal'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Slider from "react-slick";
+// import { faCamera } from "@fortawesome/free-regular-svg-icons";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAnglesLeft , faAngleLeft , faAngleRight  , faAnglesRight} from "@fortawesome/free-solid-svg-icons";
+// import { faAnglesLeft } from "@fortawesome/free-solid-svg-icons";
+// import { faAnglesLeft } from "@fortawesome/fontawesome-svg-core";
+// import { faAnglesLeft } from "@fortawesome/free-solid-svg-icons";
+// import { fa-solid} from "@fortawesome/free-solid-svg-icons"
 
 
-const DetailCollectionModal = ({collectionAlldata,page}) => {
+
+const DetailCollectionModal = ({collectionAlldata,page,bool}) => {
     const navigate = useNavigate()
     const [show, setShow] = useState(false);
     const [positionMiddle, setPositionMiddle] = useState(parseInt(page < 3 ? 3 : page));
@@ -44,16 +53,29 @@ const DetailCollectionModal = ({collectionAlldata,page}) => {
             size="xl"
             className='ModalPosition'
             >
-                <Modal.Body>
-                <div >
-                        <button className='arrowDetailLeft' onClick={()=>setPositionMiddle(3)}>first</button>
-                        <button className='arrowDetailLeft' onClick={()=>setPositionMiddle(positionMiddle > 7 ? positionMiddle - 5 : 3)}>pre</button>
-                        all data
-                        <button className='arrowDetailRight' onClick={()=>setPositionMiddle(positionMiddle < 143 ? positionMiddle + 5 : 148)}>next</button>
-                        <button className='arrowDetailRight' onClick={()=>setPositionMiddle(148)}>last</button>
+                <Modal.Body className='modal-body'>
+                <div className="modal_content_postion" >
+                        <div className='addf1'>
+                            all data
+                        </div>
+                        <button className='button arrowDetailLeft absLL fill' onClick={()=>setPositionMiddle(3)}>            
+                            <FontAwesomeIcon icon={faAnglesLeft} />
+                        </button>
+                        <button className='button arrowDetailLeft absLeft fill' onClick={()=>setPositionMiddle(positionMiddle > 7 ? positionMiddle - 5 : 3)}>
+                            <FontAwesomeIcon icon={faAngleLeft} />
+                        </button>
+
+                        <button className='button arrowDetailRight absRight fill' onClick={()=>setPositionMiddle(positionMiddle < 143 ? positionMiddle + 5 : 148)}>
+                            <FontAwesomeIcon icon={faAngleRight} />
+                        </button>
+                        <button className='button arrowDetailRight absRR fill' onClick={()=>setPositionMiddle(148)}>
+                            <FontAwesomeIcon icon={faAnglesRight} />
+                        </button>
                 </div>
+                <div>
                 <Slider {...settings}>
                 {
+                    // bool === !bool {
                     collectionAlldata!= null ? 
                     collectionAlldata.slice(positionMiddle-3, positionMiddle+2).map((item, idx) => 
                     <>
@@ -66,9 +88,13 @@ const DetailCollectionModal = ({collectionAlldata,page}) => {
                     #{item.edition}
                     </>
                     )
+                
                     : null
+                // }
                 }
+            {/* :null */}
                 </Slider>
+                </div>
                 </Modal.Body>   
 
                 </Modal>
