@@ -41,7 +41,7 @@ const Community = ({ id }) => {
             <CommunityMainOuter>
                 <MainHeader />
                 <VoteDescription />
-                <CommunityPostButton />
+                <CommunityPostButton state={state}/>
                 {!state 
                 ? <CommunityTable />
                 : <CommunityVoteTable />

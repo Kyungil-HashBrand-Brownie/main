@@ -60,8 +60,41 @@ export const VoteDPart = styled.div`
         margin-left: 2%;
         width: 820px;
     }
+    .vote-text {
+        margin-left: 2%;
+    }
+    .proposal {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-left: 3px;
+    }
+    .proposal-form {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        margin-top: 5px;
+    }
     .proposal-btn {
         margin-left: 1%;
+        width: 70px;
+        height: 30px;
+    }
+    .proposal-del-div {
+        width: 70px;
+        height: 30px;
+        margin-left: 1%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .proposal-del {
+        width: 23px;
+        height: 23px;
+        cursor: pointer;
+    }
+    .proposal-btn:hover, .proposal-del:hover {
+        transform: scale(1.05);
     }
 `
 export const VoteDType = styled.div`
