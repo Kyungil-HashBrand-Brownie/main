@@ -11,8 +11,6 @@ const CardContainer = ({ list, page, changeClickState }) => {
                     className="Ncard"
                     style={{
                         width: '192px',
-                        // index1%4 == 0 ? "#fc518d" : index1%4 == 1 ? "orange" 
-                        // : index1%4 == 2 ? "#3cb346" : "#FAFA33"
                     }}>
                     {
                         !item.checked ?

@@ -1,15 +1,10 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
-import Table from 'react-bootstrap/Table';
 
 const CommunityTable = () => {
     return (
-        // <Table striped bordered hover size='sm'
-        //     className='vote-table'
-        // >
         <>
-        {/* <div>전체글보기</div> */}
         <table className='vote-table'>
         <thead className='vote-table-header'>
             <tr>

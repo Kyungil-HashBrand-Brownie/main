@@ -32,28 +32,21 @@ const DetailCollecion = () => {
   const [collectionData, setCollectionData] = useState({});
   const [collectionAlldata, setCollectionAllData] = useState(null);
   const [positionMiddle, setPositionMiddle] = useState(parseInt(page < 3 ? 3 : page));
-  // const [testData, settestData] = useState(1)
-
-  console.log('pos: ', positionMiddle);
 
   const getData = async () => {
     let result = await Promise.all([axios.get('/api/image/images'), axios.get(`/api/image/image/${page}`)])
     // let result = await axios.get(`/image/image/${page}`);
-    console.log(result)
+    // console.log(result)
     let data = result[1].data[0]; // 데이터 배열 형식을 객체로 바꾸기 위해서
-    console.log("dataaaaaa" , data);
     let allData = result[0].data.map(a => {
-      let d = {};
-      d.edition = a.edition;
-      d.addr= a.addr;
-      return d
+      return {edition: a.edition, addr: a.addr};
     }).sort((a,b) => parseInt(a.edition) - parseInt(b.edition))
     console.log("all data " , allData)
 
 
     setCollectionData(data)
     setCollectionAllData(allData)
-    console.log("addr",data.addr)
+    // console.log("addr",data.addr)
     // setPositionMiddele(data.)
   };
 
@@ -69,8 +62,6 @@ const DetailCollecion = () => {
     // navigate(`/detailcollection/${collectionData.edition } `)
     // console.log(collectionData.edition)
   }
-
-
 
   useEffect(() => {
     
