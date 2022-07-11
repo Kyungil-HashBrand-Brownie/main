@@ -15,7 +15,7 @@ const CommunityPostButton = ({ state }) => {
   const navigate = useNavigate();
   return (
       <PostButton onClick={() => 
-        state ? navigate('/write/1') : navigate('/write/0')}>글 등록</PostButton>
+        state ? navigate('/write/0') : navigate('/write/1')}>글 등록</PostButton>
   )
 }
 
