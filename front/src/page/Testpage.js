@@ -67,7 +67,8 @@ const Testpage = () => {
         {/* <VoteDetail /> */}
         {/* <Community /> */}
         {/* <ClockTest /> */}
-        <Slider />
+        {/* <Slider /> */}
+        {/* <SlideTest /> */}
     </div>
   )
 }

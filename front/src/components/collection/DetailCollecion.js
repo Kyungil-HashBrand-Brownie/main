@@ -93,13 +93,15 @@ const DetailCollecion = () => {
         <div className="detailImglNft-item2">
           <div className="detailImglNft-description_1">
             <div className="detailTitle"> Browny # {collectionData.edition} </div>
-            <p> charactor : Browny , angel, 메타몽 </p>
+            <p> charactor : normal Browny  </p>
             <div className="detail_OwnedBy"> Owned by #2ad355njnjnjn</div>
             <div className="btn-opensea">
-              <button className="btn-hover color-9">OPENSEA</button>
+              {/* <button className="btn-hover color-9">OPENSEA</button> */}
             </div>
-            <button className="btn-hover color-5" onClick={() =>preButton_collection()}>pre</button>
-            <button className="btn-hover color-5" onClick={() =>nextButton_collection()}>next</button>
+            <div className="asdbfhf">
+              <button className="btn-hover color-9" onClick={() =>preButton_collection()}>pre</button>
+              <button className="btn-hover color-9" onClick={() =>nextButton_collection()}>next</button>
+            </div>
           </div>
           <div className="detailImglNft-description_2">
             <div className="div-section">
