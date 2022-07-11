@@ -5,6 +5,7 @@ import { nft1 } from 'img/nft'
 import VoteDescription from './VoteDescription'
 import CommunityTopic from './CommunityTopic'
 import Delete from '../../img/vote/delete.png'
+import _ from 'lodash'
 import {
     VoteDOuter, VoteDLeftOuter, VoteDRightOuter, VoteDHeaderOuter,
     VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
@@ -36,45 +37,44 @@ const VoteDetail = ({ id }) => {
     const [counter, setCounter] = useState([{
         id: 0,
         content: '',
+        state: false,
     }])
 
-    const handleSubmit = async (e)=> {
-        e.preventDefault();
-        let proposals = [];
-        let proposalGroup = e.target.title
-        proposalGroup.forEach((proposal)=>proposals.push(proposal.value))
-        console.log(proposals)
-        // const title = e.target.Title.value
-        // const content = e.target.Content.value
-        // const proposals = e.target.proposals.value
-        // const data = {title, content, proposals, nickname}
-        // await axios.post('/api/community/write',data)
-    }
-
-    const addProposal = (idx) => {
-        let compareIdx = counter.length - 1
-        if (idx == compareIdx) {
-            let doc = document.querySelectorAll('.vote-text')
-            if (doc[compareIdx].value == '') alert('안건을 입력해 주세요.')
+    const addProposal = (proposal) => {
+        let compareIdx = counter[counter.length - 1].id
+        if (proposal.id == compareIdx) {
+            if (proposal.content == '') alert('안건을 입력해 주세요.')
             else {
-                let newArr = [...counter]
-                newArr[idx] = 1
-                newArr.push(0)
+                let newArr = _.cloneDeep(counter)
+                newArr = newArr.map(item => {
+                    if (item.id == compareIdx) {
+                        item.state = true
+                    }
+                    return item
+                })
+                newArr.push({
+                        id: compareIdx + 1,
+                        content: '',
+                        state: false,
+                })
                 setCounter(newArr)
             }
         }
     }
 
-    const delProposal = (idx) => {
-        console.log(idx)
-        // let newArr = [...counter].slice(0, idx).concat([...counter].slice(idx+1));
-        // console.log(newArr)
-        // console.log(counter)
-        // setCounter(newArr)
+    const delProposal = (item) => {
+        let newArr = _.cloneDeep(counter);
+        newArr = newArr.filter((arr) => arr.id != item.id)
+        setCounter(newArr)
     } 
 
-    const proposalContent = (e, item, idx) => {
+    const proposalContent = (e, item) => {
         let data = {...item, content: e.target.value};
+        let newArr = _.cloneDeep(counter).map((arr) => {
+            if (arr.id == item.id) return data;
+            return arr
+        })
+        setCounter(newArr)
     }
 
     return (
@@ -121,16 +121,18 @@ const VoteDetail = ({ id }) => {
                                             key={index}
                                         >
                                         <Form.Control
+                                            disabled={item.state ? true : false}
                                             as="textarea"
                                             placeholder='안건을 입력해주세요'
                                             name='text'
                                             className='vote-text'
                                             style={{ width: '770px', height: '40px', resize: 'none' }}
-                                            onChange={(e) => {proposalContent(e, item, index)}}
+                                            value={item.content}
+                                            onChange={(e) => {proposalContent(e, item)}}
                                         />
-                                        {item == 0 ? 
+                                        {!item.state ? 
                                             <button 
-                                                onClick={() => addProposal(index)}
+                                                onClick={() => addProposal(item)}
                                                 className='proposal-btn'>
                                                 등록
                                             </button>
@@ -138,7 +140,7 @@ const VoteDetail = ({ id }) => {
                                             <img 
                                             className='proposal-del'
                                             src={Delete} 
-                                            onClick={() => delProposal(index)}
+                                            onClick={() => delProposal(item)}
                                             />
                                         </div>
                                         }
@@ -146,7 +148,7 @@ const VoteDetail = ({ id }) => {
                                     )}
                                     </div>
                                 </VoteDPart>
-                                <VoteDPart>
+                                {/* <VoteDPart>
                                     <VoteDType>파일 업로드 </VoteDType>
                                     <VoteDArea>
                                         <div>파일은 최대 3개까지 업로드 가능합니다.(10MB)</div>
@@ -154,7 +156,7 @@ const VoteDetail = ({ id }) => {
                                         <input type='file' />
                                         <input type='file' />
                                     </VoteDArea>
-                                </VoteDPart>
+                                </VoteDPart> */}
                             </>
                         }
                         <VoteButtonDiv>
