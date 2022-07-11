@@ -10,6 +10,8 @@ import {
     VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
     VoteDArea, VoteButtonDiv, VoteButton, ControlButton, PageButton
 } from './voteModule'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
 
 const VoteTCBodyImg = styled.div`
     width: 150px;
@@ -29,10 +31,26 @@ const VoteTCBodyImg = styled.div`
 `
 
 const VoteDetail = ({ id }) => {
+    const {nickname} = useSelector(state => state.nft);
+
     const [counter, setCounter] = useState([{
         id: 0,
         content: '',
     }])
+
+    const handleSubmit = async (e)=> {
+        e.preventDefault();
+        let proposals = [];
+        let proposalGroup = e.target.title
+        proposalGroup.forEach((proposal)=>proposals.push(proposal.value))
+        console.log(proposals)
+        // const title = e.target.Title.value
+        // const content = e.target.Content.value
+        // const proposals = e.target.proposals.value
+        // const data = {title, content, proposals, nickname}
+        // await axios.post('/api/community/write',data)
+    }
+
     const addProposal = (idx) => {
         let compareIdx = counter.length - 1
         if (idx == compareIdx) {
@@ -73,12 +91,14 @@ const VoteDetail = ({ id }) => {
                 <VoteDMainOuter>
                     <VoteDMain>
                         <VoteTCBodyImg img={nft1} />
+                        <Form onSubmit={handleSubmit}>
                         <VoteDPart>
                             <VoteDType>제목</VoteDType>
                             <Form.Control
                                 as="textarea"
                                 className='vote-textarea'
                                 style={{ height: '20px', resize: 'none'}}
+                                name='title'
                             />
                         </VoteDPart>
                         <VoteDPart>
@@ -87,6 +107,7 @@ const VoteDetail = ({ id }) => {
                                 as="textarea"
                                 className='vote-textarea'
                                 style={{ height: '200px', resize: 'none' }}
+                                name='content'
                             />
                         </VoteDPart>
                         {id == 0 &&
@@ -139,6 +160,7 @@ const VoteDetail = ({ id }) => {
                         <VoteButtonDiv>
                             <VoteButton>등록하기</VoteButton>
                         </VoteButtonDiv>
+                        </Form>
                         <ControlButton>
                             <PageButton>이전화면</PageButton>
                         </ControlButton>
