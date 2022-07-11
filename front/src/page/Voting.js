@@ -17,7 +17,7 @@ function Voting() {
 
  
   // 현재 선택된 안건 번호
-  const [currentProposal, setCurrentProposal] = useState(0);
+  const [currentProposal, setCurrentProposal] = useState(1);
   // voteIdx에 해당하는 안건들
   const [proposals, setProposals] = useState([]);
   // addProposal 했을 때 추가되는 id
@@ -34,14 +34,6 @@ function Voting() {
   const proposalLabel = useInput("")
   const proposalContent = useInput("")
 
-  const voteSubjectInput = useRef("")
-
-  const updateSubject = async (e) => {
-    e.preventDefault();
-    const voteSubject = voteSubjectInput.current.value;
-    await axios.put('/api/vote/subject',{voteSubject, voteIdx})
-    await getList()
-  }
 
   const getVotingPower = async () => {
     const myNFTs = await getMyNFTs(myAddress);
@@ -109,16 +101,13 @@ function Voting() {
   }
 
   const clickResetVote = async () => {
-      const voteSubject = voteSubjectInput.current.value;
-      if(voteSubject){
-        await resetVote()
-        dispatch(nftAction.setVoteStatus())
-        // votes에 새로운 row 추가하고 (voteIdx는 새로운것 참조 proposals는 비움) => getList실행
-        const voteIdx = await axios.post("/api/vote/reset")
-        console.log(voteIdx)
-        setVoteIdx(voteIdx)
-        await getList()
-      }
+    await resetVote()
+    dispatch(nftAction.setVoteStatus())
+    // votes에 새로운 row 추가하고 (voteIdx는 새로운것 참조 proposals는 비움) => getList실행
+    const voteIdx = await axios.post("/api/vote/reset")
+    console.log(voteIdx)
+    setVoteIdx(voteIdx)
+    await getList()
   }
 
   useEffect(()=> {
@@ -222,13 +211,6 @@ function Voting() {
         <Button type='submit' variant='success'>Add proposal</Button>
       </Form>
       <br />
-      <Form onSubmit={updateSubject}>
-      <InputGroup className='mb-3'>
-        <InputGroup.Text >VoteSubject</InputGroup.Text>
-        <Form.Control ref={voteSubjectInput} aria-label="VoteSubject" required />
-        <Button type='submit' variant="success">주제변경</Button>
-      </InputGroup>
-      </Form>
       <VoteStatusButton {...votingProps} ></VoteStatusButton>
       </>
       : null
