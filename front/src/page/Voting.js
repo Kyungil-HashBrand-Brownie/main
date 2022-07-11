@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import Proposal from 'components/Proposal';
@@ -34,6 +34,15 @@ function Voting() {
   const proposalLabel = useInput("")
   const proposalContent = useInput("")
 
+  const voteSubjectInput = useRef("")
+
+  const updateSubject = async (e) => {
+    e.preventDefault();
+    const voteSubject = voteSubjectInput.current.value;
+    await axios.put('/api/vote/subject',{voteSubject, voteIdx})
+    await getList()
+  }
+
   const getVotingPower = async () => {
     const myNFTs = await getMyNFTs(myAddress);
     setVotingPower(myNFTs.length)
@@ -48,11 +57,11 @@ function Voting() {
   }
 
   const getCurrent = async () => {
-    const {data:{voteIdx, proposals}} = await axios.get("/api/vote/current")
-    console.log(voteIdx,proposals)
+    const {data:{voteSubject, voteIdx, proposals}} = await axios.get("/api/vote/current")
+    console.log(voteSubject, voteIdx,proposals)
     
     setVoteIdx(voteIdx);
-    setProposals(proposals)
+    setProposals(proposals);
     setProposalId(proposals.length+1)
   }
   
@@ -69,10 +78,19 @@ function Voting() {
 
   const addProposal = async (e) => {
     e.preventDefault()
-    await newProposal(myAddress);
-    await axios.post("/api/vote/add",{proposalId, proposalLabel:proposalLabel.value ,proposalContent : proposalContent.value ,voteIdx})
-    await getCurrent()
+    try {
+      const result = await newProposal(myAddress);
+      if(result.status){
+        await axios.post("/api/vote/add",{proposalId, proposalLabel:proposalLabel.value ,proposalContent : proposalContent.value ,voteIdx})
+        await getCurrent()
+      }
+    }
+    catch (e){
+      console.log(e)
+      return e
+    }
   }
+
 
   const clickEndVote = async ()=>{
     await endVote()
@@ -91,13 +109,16 @@ function Voting() {
   }
 
   const clickResetVote = async () => {
-      await resetVote()
-      dispatch(nftAction.setVoteStatus())
-      // votes에 새로운 row 추가하고 (voteIdx는 새로운것 참조 proposals는 비움) => getList실행
-      const voteIdx = await axios.post("/api/vote/reset")
-      console.log(voteIdx)
-      setVoteIdx(voteIdx)
-      await getList()
+      const voteSubject = voteSubjectInput.current.value;
+      if(voteSubject){
+        await resetVote()
+        dispatch(nftAction.setVoteStatus())
+        // votes에 새로운 row 추가하고 (voteIdx는 새로운것 참조 proposals는 비움) => getList실행
+        const voteIdx = await axios.post("/api/vote/reset")
+        console.log(voteIdx)
+        setVoteIdx(voteIdx)
+        await getList()
+      }
   }
 
   useEffect(()=> {
@@ -201,6 +222,13 @@ function Voting() {
         <Button type='submit' variant='success'>Add proposal</Button>
       </Form>
       <br />
+      <Form onSubmit={updateSubject}>
+      <InputGroup className='mb-3'>
+        <InputGroup.Text >VoteSubject</InputGroup.Text>
+        <Form.Control ref={voteSubjectInput} aria-label="VoteSubject" required />
+        <Button type='submit' variant="success">주제변경</Button>
+      </InputGroup>
+      </Form>
       <VoteStatusButton {...votingProps} ></VoteStatusButton>
       </>
       : null

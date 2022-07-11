@@ -1,13 +1,9 @@
 const pool = require("../../db")
 
 const list = async (req, res) => {
-    try{const tQuery = `SELECT voteIdx, selectedProposal, date_format(startDate, '%Y-%m-%d %H:%i') startDate, date_format(endDate, '%Y-%m-%d %H:%i') endDate FROM votes`
+    try{const tQuery = `SELECT voteIdx, selectedProposal, date_format(startDate, '%Y-%m-%d %H:%i') startDate, date_format(endDate, '%Y-%m-%d %H:%i') endDate, voteSubject, voteContent, totalCount FROM votes`
         const [result] = await pool.query(tQuery);
-        if(!result.length) {
-            await pool.query("INSERT INTO votes VALUES ()")
-            const [data] = await pool.query(tQuery);
-            return res.send(data)
-        }
+        
         res.send(result);
     }
     catch (e) {
@@ -20,9 +16,9 @@ const list = async (req, res) => {
 const current = async (req, res) => {
     try {
         const [[result]] = await pool.query("SELECT * FROM votes ORDER BY voteIdx DESC LIMIT 1;");
-        const {voteIdx} = result
+        const {voteSubject, voteIdx} = result
         const [proposals] = await pool.query(`SELECT * FROM proposals WHERE voteIdx=${voteIdx}`)
-        res.json({voteIdx, proposals})
+        res.json({voteSubject, voteIdx, proposals})
     }
     catch (e) {
         console.log(e);
@@ -74,10 +70,23 @@ const resetAction = async (req, res) => {
     }
 }
 
+const modifyAction = async (req, res) => {
+    const {voteSubject, voteIdx} = req.body;
+    try {
+        const [result] =  await pool.query(`UPDATE votes SET voteSubject='${voteSubject}' WHERE voteIdx="${voteIdx}"`);
+        res.send(result.insertId.toString())
+    }
+    catch(e){
+        console.log(e);
+        res.send(e);
+    }
+}
+
 module.exports = {
     list,
     current,
     addAction,
     endAction,
-    resetAction
+    resetAction,
+    modifyAction
 }
