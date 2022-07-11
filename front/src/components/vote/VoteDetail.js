@@ -141,15 +141,6 @@ const VoteDetail = ({ id }) => {
                                     )}
                                     </div>
                                 </VoteDPart>
-                                {/* <VoteDPart>
-                                    <VoteDType>파일 업로드 </VoteDType>
-                                    <VoteDArea>
-                                        <div>파일은 최대 3개까지 업로드 가능합니다.(10MB)</div>
-                                        <input type='file' />
-                                        <input type='file' />
-                                        <input type='file' />
-                                    </VoteDArea>
-                                </VoteDPart> */}
                             </>
                         }
                         <VoteButtonDiv>

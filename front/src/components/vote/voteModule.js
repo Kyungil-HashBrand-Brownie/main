@@ -95,6 +95,7 @@ export const VoteDPart = styled.div`
     }
     .proposal-btn:hover, .proposal-del:hover {
         transform: scale(1.05);
+        background: rgb(212, 201, 201);
     }
 `
 export const VoteDType = styled.div`
@@ -119,6 +120,11 @@ export const VoteButton = styled.button`
     font-size: 18px;
     border-radius: 3px;
     margin-top: 30px;
+
+    &:hover {
+        transform: scale(1.05);
+        background: rgb(212, 201, 201);
+    }
 `
 export const ControlButton = styled.div`
     width: 25%;
@@ -130,6 +136,11 @@ export const PageButton = styled.button`
     font-size: 18px;
     margin-top: 10px;
     border-radius: 3px;
+
+    &:hover {
+        transform: scale(1.05);
+        background: rgb(212, 201, 201);
+    }
 `
 
 /* VoteDescription */
