@@ -9,8 +9,6 @@ import Footer from './components/Footer'
 import AdminPage from './page/AdminPage';
 import Testpage from './page/Testpage';
 import { useDispatch, useSelector } from 'react-redux';
-import LeftImg3 from './img/chocolate/choco3.png';
-import RightImg from './img/chocolate/choco4.png';
 import Swap from './page/Swap';
 import NftList from './page/NftList';
 import NoPage from 'page/NoPage';
@@ -20,6 +18,7 @@ import DetailCollecion from 'components/collection/DetailCollecion';
 import Community from 'page/Community';
 import VoteDetail from 'components/vote/VoteDetail';
 import PrivateRoute from 'route/PrivateRoute';
+import WriteRoute from 'route/WriteRoute';
 import DifNetwork from 'page/DifNetwork';
 
 function App() {
@@ -51,7 +50,7 @@ function App() {
         <Route path='/collection' element={<Collection />} />
         <Route path='/voting' element={<Voting />} />
         <Route path='/community' element={<Community />} />
-        <Route path='/votewrite' element={<VoteDetail />} />
+        <Route path='/write/:id' element={<WriteRoute />} />
         <Route path='/community/:id' element={<PrivateRoute />} />
         {
           isBaobab

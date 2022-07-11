@@ -5,7 +5,9 @@ import { TopicOuter, TopicHeader, Topic } from './voteModule'
 const CommunityTopic = ({ setState }) => {
     const navigate = useNavigate();
     const changeState = (state) => {
-        if (window.location.href == 'http://localhost:3000/votewrite') {
+        if (window.location.href == 'http://localhost:3000/write/0' || 
+            window.location.href == 'http://localhost:3000/write/1'
+        ) {
             let page = state ? 'vote' : 'default'
             navigate(`/community/${page}`)
         }
