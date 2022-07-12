@@ -9,14 +9,17 @@ import Footer from './components/Footer'
 import AdminPage from './page/AdminPage';
 import Testpage from './page/Testpage';
 import { useDispatch, useSelector } from 'react-redux';
-import LeftImg3 from './img/chocolate/choco3.png';
-import RightImg from './img/chocolate/choco4.png';
 import Swap from './page/Swap';
 import NftList from './page/NftList';
 import NoPage from 'page/NoPage';
 import Collection from 'page/Collection';
 import Voting from 'page/Voting';
 import DetailCollecion from 'components/collection/DetailCollecion';
+import Community from 'page/Community';
+import VoteDetail from 'components/vote/VoteDetail';
+import PrivateRoute from 'route/PrivateRoute';
+import WriteRoute from 'route/WriteRoute';
+import DifNetwork from 'page/DifNetwork';
 
 function App() {
   const {isDeployer} = useSelector(state=>state.nft)
@@ -46,6 +49,9 @@ function App() {
         <Route path="/test" element={<Testpage />} />
         <Route path='/collection' element={<Collection />} />
         <Route path='/voting' element={<Voting />} />
+        <Route path='/community' element={<Community />} />
+        <Route path='/write/:id' element={<WriteRoute />} />
+        <Route path='/community/:id' element={<PrivateRoute />} />
         {
           isBaobab
           ?
@@ -60,8 +66,8 @@ function App() {
           </>
           :
           <>
-          <Route path='/swap' element={<div>테스트 네트워크가 아닙니다</div>}/>
-          <Route path='/nftlist' element={<div>테스트 네트워크가 아닙니다</div>}/>
+          <Route path='/swap' element={<DifNetwork />}/>
+          <Route path='/nftlist' element={<DifNetwork />}/>
           </>
         }
         {/* <Route path="/whitelist" element={<WhiteList/>} />  */}

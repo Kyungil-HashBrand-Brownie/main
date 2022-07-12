@@ -1,52 +1,23 @@
 import React from 'react'
-import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
+import { TopicOuter, TopicHeader, Topic } from './voteModule'
 
-const TopicOuter = styled.div`
-    width: 6%;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    border-radius: 4px;
-    background: white;
-
-`
-const TopicHeader = styled.div`
-    text-align: center;
-    border-bottom: 2px solid black;
-    /* background: rgb(233, 201, 178); */
-`
-const TopicFlex = styled.div`
-    display: flex;
-    /* justify-content: center; */
-    flex-direction: column;
-    background: green;
-`
-const Topic = styled.div`
-    padding-left: 15px;
-    width: 70%;
-    /* font-weight: bold; */
-    text-align: justify;
-    margin: 0 auto;
-    cursor: pointer;
-    
-
-    &:hover {
-        transform: scale(1.1);
-        border-radius: 10px;
-        background: lightgray;
+const CommunityTopic = ({ setState }) => {
+    const navigate = useNavigate();
+    const changeState = (state) => {
+        if (window.location.href == 'http://localhost:3000/write/0' || 
+            window.location.href == 'http://localhost:3000/write/1'
+        ) {
+            let page = state ? 'vote' : 'default'
+            navigate(`/community/${page}`)
+        }
+        else setState(state)
     }
-`
-
-
-const CommunityTopic = () => {
     return (
         <TopicOuter>
             <TopicHeader>Topic</TopicHeader>
-            {/* <TopicFlex> */}
-                <Topic>- NFT</Topic>
-                <Topic>- Vote</Topic>
-                <Topic>- 기타</Topic>
-            {/* </TopicFlex> */}
+            <Topic onClick={() => changeState(1)}>- Vote</Topic>
+            <Topic onClick={() => changeState(0)}>- 기타</Topic>
         </TopicOuter>
     )
 }

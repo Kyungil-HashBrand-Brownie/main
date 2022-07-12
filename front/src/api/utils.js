@@ -20,4 +20,7 @@ const getTokenBalance = async (address) => {
 }
 
 
-export {pebToFixed, getTokenBalance}
+export {
+    pebToFixed,
+    getTokenBalance,
+}

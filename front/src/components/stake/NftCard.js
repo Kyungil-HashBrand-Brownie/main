@@ -15,13 +15,11 @@ const Cardjustify = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 
-        ${props => !props.bool && '56px'}; 
+        ${props => props.bool && '50px'}; 
 `
 const Main = styled.div`
     width: 31.25rem;    
-    /* height: auto; */
-    min-height: 54.6875rem;
-    margin: .625rem;
+    min-height: 41.6875rem;
     border: 
         ${props => !props.bool ? '.1875rem solid white'
                                 : '.1875rem solid black'};
@@ -30,9 +28,6 @@ const Main = styled.div`
     background: 
         ${props => props.bool ? '#F5FADB' 
                                 : 'radial-gradient(transparent, #854207)'};
-    /* background: radial-gradient(transparent, #FFF9F9); */
-    /* background: linear-gradient(to right, #d78034 0%, transparent 50%, #d78034 100%); */
-    /* background: #6e3503; */
 `
 
 function NftCard({ bool }) {
@@ -46,7 +41,7 @@ function NftCard({ bool }) {
     let list = bool ? myNFTs : myStakedNFTs;
     let checkedList = list.filter((item) => item.checked);
 
-    const changeAllState = (checked) => {
+    const changeAllState = (checked, num) => {
         let newArr = list.sort((a, b) => a.id.slice(1) - b.id.slice(1))
         newArr = newArr.map((item, index) => {
             if (index >= (page - 1) * 4 && index < (page - 1) * 4 + 4) {
@@ -56,7 +51,7 @@ function NftCard({ bool }) {
         })
 
         let myClickState = bool ? { myNFTs: newArr } : { myStakedNFTs: newArr };
-        setInputCheck(!inputCheck);
+        num ? setInputCheck(!inputCheck) : setInputCheck(false);
         dispatch({ type: 'NFTCARD_CHANGE_ALL', payload: myClickState })
     }
 
@@ -115,45 +110,31 @@ function NftCard({ bool }) {
         dispatch(nftAction.getReward(nftInstance, myStakedNFTs));
     }
 
+    const processData = (_dict, _data) => {
+        return _data.map((NFT) => {
+            return {
+                id: `#${NFT}`,
+                image: `/api/image/images/${_dict.find(a => a.id == NFT).addr}`,
+                checked: false,
+            }
+        })
+    }
+
     const checkNfts = async () => {
         getCurrentReward()
-        let myBrownyNFTs = await nftInstance.methods.checkOwnNFTs().call(
+        let myBrownyNFTs = await nftInstance.methods.ownTokens().call(
             { from: myAddress })
 
         let stakedNFTs = await nftInstance.methods.checkStakedNFTs().call(
             { from: myAddress })
 
-        myBrownyNFTs = myBrownyNFTs.filter((item) => !stakedNFTs.includes(item));
+        const result = await axios.post('/api/image/images', { myBrownyNFTs, stakedNFTs })
+        let dict = result.data;
 
-        let dict;
-        let dict1;
-        const result = await axios.post('/image/images', { myBrownyNFTs, stakedNFTs })
-        dict = result.data.data;
-        dict1 = result.data.data1;
+        let processedMyNFTs = processData(dict, myBrownyNFTs)
+        let processedStakedNFTs = processData(dict, stakedNFTs)
 
-        let binaryArr = [];
-        for (let i = 0; i != myBrownyNFTs.length; i++) {
-            let metajson = {
-                id: `#${myBrownyNFTs[i]}`,
-                image: `/image/images/${dict[myBrownyNFTs[i]]}`,
-                checked: false,
-            }
-            binaryArr.push(metajson)
-        }
-
-        let processedStakedNFTs = stakedNFTs.map((NFT) => {
-            let data = {
-                id: `#${NFT}`,
-                image: `/image/images/${dict1[NFT]}`,
-                checked: false,
-            }
-            return data;
-        })
-        myBrownyNFTs = binaryArr.filter((item) => {
-            if (stakedNFTs.indexOf(item.id.slice(1)) < 0) return item
-        })
-
-        dispatch({ type: "NFTCARD_MYNFTS", payload: { myNFTs: myBrownyNFTs, myStakedNFTs: processedStakedNFTs } })
+        dispatch({ type: "NFTCARD_MYNFTS", payload: { myNFTs: processedMyNFTs, myStakedNFTs: processedStakedNFTs } })
     }
 
     useEffect(() => {
@@ -166,15 +147,15 @@ function NftCard({ bool }) {
             <div className='nftcard-header'>
                 {bool ? 'My NFTs' : 'Staked NFTs'}
             </div>
-                    {(myNFTs.length > 0 || myStakedNFTs.length > 0) && bool &&
-                        <Reward 
-                            myAddress={myAddress}
-                            myStakedNFTs={myStakedNFTs}
-                            nftInstance={nftInstance} 
-                            loading={loading}
-                        />
-                    }
-            <Cardjustify bool={bool}>
+                {(myNFTs.length > 0 || myStakedNFTs.length > 0) && !bool &&
+                    <Reward 
+                        myAddress={myAddress}
+                        myStakedNFTs={myStakedNFTs}
+                        nftInstance={nftInstance} 
+                        loading={loading}
+                    />
+                }
+            <Cardjustify bool={bool ? myNFTs.length ? bool : !bool : bool}>
                 <Main bool={bool}>
                     {list.length > 0 &&
                         <CardHead 
@@ -207,6 +188,7 @@ function NftCard({ bool }) {
                             total={list.length}
                             setInputCheck={setInputCheck}
                             inputCheck={inputCheck}
+                            changeAllState={changeAllState}
                         />
                     }
                 </Main>

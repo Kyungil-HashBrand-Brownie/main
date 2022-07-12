@@ -163,7 +163,7 @@
 		"compilationTarget": {
 			"contracts/Voting.sol": "VoteContract"
 		},
-		"evmVersion": "london",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -213,6 +213,22 @@
 			"urls": [
 				"bzz-raw://1723de5ae414f210db039b19e6487c19c2d643483c9be7c445cf481a80c199d2",
 				"dweb:/ipfs/QmcBLbmPdZsNngYhA1KDadNUqQZoGACytFWuUH74RC4AXC"
+			]
+		},
+		"@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol": {
+			"keccak256": "0x57b5ece16a9e4c511c619921d4e085487147df8b6e56dfc3e6858f63f4a1b2d2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://33f390cc112ac1529f85a47bb339226a3fc1127992423c6f54594d936f7e0b99",
+				"dweb:/ipfs/QmVrcP3B2M9r3kkMEjW5Wk8XTjvu5ccAa5DSXP4rUgfsJJ"
+			]
+		},
+		"@openzeppelin/contracts-upgradeable/token/ERC721/extensions/IERC721EnumerableUpgradeable.sol": {
+			"keccak256": "0xf1870306db8391db9cf14b41be0da76857a88df0e5c623d2b2338fb30a3bd5ff",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://466149e3f8e96b81781b18dbb7b00a20d7172ddee599ef9d51b64c7e78ddfb1d",
+				"dweb:/ipfs/QmTvLPy7ZF2Vm7JLSrknWm1Z2fyVaNhoXY2RFcRkmSKFAe"
 			]
 		},
 		"@openzeppelin/contracts-upgradeable/token/ERC721/extensions/IERC721MetadataUpgradeable.sol": {
@@ -344,19 +360,19 @@
 			]
 		},
 		"contracts/NFT/NFT.sol": {
-			"keccak256": "0x2c3632e204b10fefe8ccba0ad198775ec4e4ffe260a1a6c3b11fc7b8f99f900a",
+			"keccak256": "0x1c94caa6fc4fc6874a487d1169df102088d7787b653e9e28f455828d1f4cf12c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a7474ff1dfeb619700905bfbed4189d61a2edef5e06d5b997b560a5ab9928348",
-				"dweb:/ipfs/QmQ9vaGk6hP3A31YzS9DXeHT2sEEqj9fTr12MM1oz5grKJ"
+				"bzz-raw://ff0cf0702b34a2737bc90a7ae02d9f248e2d513dca959106a9386ec5dd62c462",
+				"dweb:/ipfs/QmenD82813vEoGUPTiehyZM2rdEMwXobsq7pfShykPVC2c"
 			]
 		},
 		"contracts/Voting.sol": {
-			"keccak256": "0xda1571ef7ec1575a8db4d19b15b2a5546bc8d6d81f2edf51a7a507ae77d95422",
+			"keccak256": "0x04c4047995e13c90dc88aa3e76a6e554cc3f6573bbb35d72fd8cb9e942107e26",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bd5798e8e42f44a55e26bb566b7f0e73301c137ae886ca6969a603200626c1bd",
-				"dweb:/ipfs/QmbX3WLyGMGMu9bPDUkSgb7uggzRJds9YB4dYeMcLr2zNa"
+				"bzz-raw://5afbe9eac6dcdbc83125355dcf062f9534b8fd157e4d7c73c66c34233f007b2a",
+				"dweb:/ipfs/QmfSW8JZWvnuX5RmXyZucDFMf8DpFiUTDRHdVRe585dumB"
 			]
 		},
 		"contracts/Whitelist/Whitelist.sol": {

@@ -15,7 +15,7 @@ const getUserRank = async(from) => await nftInstance.methods.userRank().call({fr
 
 const getMintList = async() => await nftInstance.methods.checkMintedNftList().call();
 
-const getMyNFTs = async(from) => await nftInstance.methods.checkOwnNFTs().call({from});
+const getMyNFTs = async(from) => await nftInstance.methods.ownTokens().call({from});
 
 const getMyStaked = async(from) => await nftInstance.methods.checkStakedNFTs().call({from});
 
@@ -25,4 +25,15 @@ const getVoteStatus = async() => await votingContract.methods.voteStatus().call(
 
 const getVoteCount = async(index) => await votingContract.methods.numberOfVotes(index-1).call();
 
-export {getContractOwner, nftNum, checkWhite, whitelistNftNum, getUserRank, getMintList, getMyNFTs, getMyStaked, getVoteStatus, getVoteCount};
+export {
+    getContractOwner,
+    nftNum,
+    checkWhite,
+    whitelistNftNum,
+    getUserRank,
+    getMintList,
+    getMyNFTs,
+    getMyStaked,
+    getVoteStatus,
+    getVoteCount,
+};

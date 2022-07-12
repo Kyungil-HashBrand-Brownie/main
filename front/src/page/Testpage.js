@@ -15,6 +15,11 @@ import MainHeader from 'components/MainHeader'
 import VoteDescription from 'components/vote/VoteDescription'
 import CommunityPostButton from 'components/vote/CommunityPostButton'
 import CommunityTopic from 'components/vote/CommunityTopic'
+import CommunityVoteTable from 'components/vote/CommunityVoteTable'
+import VoteDetail from 'components/vote/VoteDetail'
+import Community from './Community'
+import ClockTest from 'components/ClockTest'
+import Slider from 'components/Slider'
 
 const HomeBackImgPosition = styled.div`
     /* width: 100%;
@@ -52,11 +57,18 @@ const Testpage = () => {
         {/* <WhiteListMember /> */}
         {/* <Animation /> */}
         {/* <AlertModal /> */}
-        <MainHeader />
+        {/* <VoteDetail /> */}
+        {/* <MainHeader />
         <CommunityTopic />
         <VoteDescription />
         <CommunityPostButton />
         <CommunityTable />
+        <CommunityVoteTable /> */}
+        {/* <VoteDetail /> */}
+        {/* <Community /> */}
+        {/* <ClockTest /> */}
+        {/* <Slider /> */}
+        {/* <SlideTest /> */}
     </div>
   )
 }

@@ -1,19 +1,14 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
-import Table from 'react-bootstrap/Table';
 
 const CommunityTable = () => {
     return (
-        // <Table striped bordered hover size='sm'
-        //     className='vote-table'
-        // >
         <>
-        <div>전체글보기</div>
-        <div className='vote-table'>
+        <table className='vote-table'>
         <thead className='vote-table-header'>
             <tr>
-            <th className='table-title title-flex'>글제목</th>
+            <th className='title-flex'>글제목</th>
             <th className='table-writer'>작성자</th>
             <th className='table-date'>작성일</th>
             <th className='table-view'>조회수</th>
@@ -48,7 +43,7 @@ const CommunityTable = () => {
             <td className='table-view'>1991</td>
             </tr>
         </tbody>
-        </div>
+        </table>
         </>
     )
 }

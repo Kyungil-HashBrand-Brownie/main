@@ -52,16 +52,6 @@ function getReward(contract, stake, renewMine, renewStaked) {
     }
 }
 
-const enableKaikas = (customAlert) => {
-    return async (dispatch) => {
-        if(window.klaytn){
-            window.klaytn.enable()
-        }
-        else {
-            customAlert.open(<a href="https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=ko" target="blank">카이카스 설치 필요</ a>)
-        }
-    }
-}
 
 const setUserInfo =  (address) => {
     return async (dispatch) => {
@@ -93,6 +83,7 @@ const checkWhitelist = (address) => {
 const setVoteStatus = () => {
     return async (dispatch) => {
         const voteStatus = await getVoteStatus()
+        // beforeVote : 0 , nowVote : 1, afterVote : 2
         dispatch({type:"SET_VOTE_STATUS", payload : voteStatus})
     }
 }
@@ -106,14 +97,17 @@ const setToken = (address) => {
 }
 
 
-const collectionData = async() =>{
+// const getDataCollecion = async () => {
+//     let result = await axios.get(`/image/image/${params.edition}`);
+//     let data = result.data[0]; // 데이터 배열 형식을 객체로 바꾸기 위해서
+//     console.log(data);
 
-}
-
+//     setCollectionData(data)
+//     console.log("addr",data.addr)
+//   };
 
 export const nftAction = {
     getReward,
-    enableKaikas,
     setUserInfo,
     checkWhitelist,
     setVoteStatus,

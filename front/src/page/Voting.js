@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import Proposal from 'components/Proposal';
@@ -17,7 +17,7 @@ function Voting() {
 
  
   // 현재 선택된 안건 번호
-  const [currentProposal, setCurrentProposal] = useState(0);
+  const [currentProposal, setCurrentProposal] = useState(1);
   // voteIdx에 해당하는 안건들
   const [proposals, setProposals] = useState([]);
   // addProposal 했을 때 추가되는 id
@@ -28,8 +28,12 @@ function Voting() {
   const [votingPower, setVotingPower] = useState(0);
   // 지난 투표를 포함한 전체 투표 리스트
   const [voteList, setVoteList] = useState([]);
+  // 투표 상태 표시
+  const [showVoteStatus, setShowVoteStatus] = useState("투표 시작 전")
 
-  const proposal = useInput("")
+  const proposalLabel = useInput("")
+  const proposalContent = useInput("")
+
 
   const getVotingPower = async () => {
     const myNFTs = await getMyNFTs(myAddress);
@@ -37,7 +41,7 @@ function Voting() {
   }
 
   const getList = async () => {
-    const {data} = await axios.get("/vote/list");
+    const {data} = await axios.get("/api/vote/list");
     console.log(data);
     setVoteList(data);
 
@@ -45,11 +49,11 @@ function Voting() {
   }
 
   const getCurrent = async () => {
-    const {data:{voteIdx, proposals}} = await axios.get("/vote/current")
-    console.log(voteIdx,proposals)
+    const {data:{voteSubject, voteIdx, proposals}} = await axios.get("/api/vote/current")
+    console.log(voteSubject, voteIdx,proposals)
     
     setVoteIdx(voteIdx);
-    setProposals(proposals)
+    setProposals(proposals);
     setProposalId(proposals.length+1)
   }
   
@@ -66,10 +70,19 @@ function Voting() {
 
   const addProposal = async (e) => {
     e.preventDefault()
-    await newProposal(myAddress);
-    await axios.post("/vote/add",{proposalId, proposalContent : proposal.value ,voteIdx})
-    await getCurrent()
+    try {
+      const result = await newProposal(myAddress);
+      if(result.status){
+        await axios.post("/api/vote/add",{proposalId, proposalLabel:proposalLabel.value ,proposalContent : proposalContent.value ,voteIdx})
+        await getCurrent()
+      }
+    }
+    catch (e){
+      console.log(e)
+      return e
+    }
   }
+
 
   const clickEndVote = async ()=>{
     await endVote()
@@ -82,19 +95,19 @@ function Voting() {
     )
     console.log(result)
     let selectedProposalId = result.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0) + 1; // proposalId의 index는 1부터 시작하기 때문에 + 1
-    await axios.post("/vote/end",{voteIdx, selectedProposalId})
+    await axios.post("/api/vote/end",{voteIdx, selectedProposalId})
 
     getList(); // 종료된 것 바로 리스트에 반영
   }
 
   const clickResetVote = async () => {
-      await resetVote()
-      dispatch(nftAction.setVoteStatus())
-      // votes에 새로운 row 추가하고 (voteIdx는 새로운것 참조 proposals는 비움) => getList실행
-      const voteIdx = await axios.post("/vote/reset")
-      console.log(voteIdx)
-      setVoteIdx(voteIdx)
-      await getList()
+    await resetVote()
+    dispatch(nftAction.setVoteStatus())
+    // votes에 새로운 row 추가하고 (voteIdx는 새로운것 참조 proposals는 비움) => getList실행
+    const voteIdx = await axios.post("/api/vote/reset")
+    console.log(voteIdx)
+    setVoteIdx(voteIdx)
+    await getList()
   }
 
   useEffect(()=> {
@@ -102,7 +115,7 @@ function Voting() {
     getList();
   },[myAddress])
 
-  const getVotingButtonProps = () => {
+  const setVoteStatusButton = () => {
     let value, onClick;
     switch(voteStatus) {
       case "0":
@@ -135,11 +148,35 @@ function Voting() {
     }
   }
 
-  const votingProps = getVotingButtonProps()
+  const votingProps = setVoteStatusButton();
 
-  const ChangeVotingButton = ({value, onClick})=> {
+  const VoteStatusButton = ({value, onClick})=> {
     return <Button as='input' type='button' variant="success" value={value} onClick={onClick}></Button>
   }
+
+  const setShowVote = () => {
+    switch(voteStatus) {
+      case "0":
+        // beforeVote
+        setShowVoteStatus("투표 시작 전")
+        break;
+
+      case "1":
+        // nowVote
+        setShowVoteStatus("투표 진행 중")
+        break;
+
+      case "2":
+        // afterVote
+        setShowVoteStatus("투표 종료")
+        break;
+      default:
+    }
+  }
+
+  useEffect(()=> {
+    setShowVote();
+  },[voteStatus])
 
   return (
     <>
@@ -163,26 +200,33 @@ function Voting() {
       <Form
       onSubmit={addProposal}
       >
-        <InputGroup className='mb-3'>
-          <Form.Control type='text' {...proposal} required />
-          <Button type='submit' variant='success'>Add proposal</Button>
+        <InputGroup className="mb-3">
+          <InputGroup.Text >Title</InputGroup.Text>
+          <Form.Control aria-label="Title" {...proposalLabel} required />
         </InputGroup>
+        <InputGroup className="mb-3">
+          <InputGroup.Text >Content</InputGroup.Text>
+          <Form.Control aria-label="Content" {...proposalContent} required />
+        </InputGroup>
+        <Button type='submit' variant='success'>Add proposal</Button>
       </Form>
-      <ChangeVotingButton {...votingProps} ></ChangeVotingButton>
+      <br />
+      <VoteStatusButton {...votingProps} ></VoteStatusButton>
       </>
       : null
       }
-      
+      <div>투표상태 : {showVoteStatus}</div>
       <div>MY RANK : {userRank}</div>
       <div>MY VOTING POWER (NFT COUNT) : {votingPower}  </div>
       <div><h4>보팅 리스트</h4></div>
       { voteList.length &&
       voteList.map((vote,index)=>
         <div key={index}>
-        <div>voteIdx : {vote.voteIdx}</div>
-        <div>startDate : {vote.startDate}</div>
-        <div>endDate : {vote.endDate}</div>
-        <div>selectedProposal : {vote.selectedProposal}</div>
+          <div>voteIdx : {vote.voteIdx}</div>
+          <div>voteSubject : {vote.voteSubject}</div>
+          <div>selectedProposal : {vote.selectedProposal}</div>
+          <div>startDate : {vote.startDate}</div>
+          <div>endDate : {vote.endDate}</div>
         </div>
       )}
     </div>

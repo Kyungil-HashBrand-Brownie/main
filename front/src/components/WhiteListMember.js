@@ -33,7 +33,7 @@ const WhiteList = () => {
 
     const getWhiteList = async () => {
         try {
-            const { data } = await axios.get("/white/whitelist")
+            const { data } = await axios.get("/api/white/whitelist")
             setList(data)
         }
         catch (e) {
@@ -63,7 +63,7 @@ const WhiteList = () => {
         const Sucs = await addWhite(addInput.current)
         console.log(Sucs)
         if (Sucs.status === true) {
-            await axios.post('/white/whitelist',
+            await axios.post('/api/white/whitelist',
                 {
                     data: { from: addInput.current, status: Sucs.status },
                 })
@@ -83,7 +83,7 @@ const WhiteList = () => {
     const delWhitelists = async (addressArr) => {
         const Del = await removeSelectedWhites(addressArr)
         if (Del.status) {
-            const {data} = await axios.post('/white/deletelists',
+            const {data} = await axios.post('/api/white/deletelists',
                 addressArr
             )
             if (data === "Success!") {

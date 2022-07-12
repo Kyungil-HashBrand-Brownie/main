@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../img/brownyLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
 import { nftAction } from 'redux/actions/nftAction';
 import { background10 ,background13} from '../img/background';
-import { getTokenBalance, useAlert } from 'api';
+import { enableKaikas, getTokenBalance, useAlert } from 'api';
 import AlertModal from './AlertModal';
 import axios from 'axios';
+import ChangeNicknameModal from './ChangeNicknameModal';
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -67,6 +69,9 @@ const StyledInfo = styled.div`
     .header-line {
         /* background: green; */
         /* margin: 3px 0; */
+        display: flex;
+        justify-content: center;
+        align-items : center;
         font-weight: 500;
         font-size: 17px;
     }
@@ -80,13 +85,25 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer, isWhite, klayBalance,  btkBalance } = useSelector(state => state.nft);
+    const { modalState, myAddress, walletRefresh, isDeployer, isWhite, klayBalance, btkBalance, nickname } = useSelector(state => state.nft);
 
     const customAlert = useAlert();
+    const changeNickname = useAlert();
 
     const setToken = (address) =>{
         dispatch(nftAction.setToken(address))
     }
+
+    const setNickname = async (address) => {
+        try {
+            const result = await axios.post("/api/user/view",{publicKey : address})
+            const nickname = result.data;
+            dispatch({type : "SET_NICKNAME", payload: nickname})
+        }
+        catch(e) {
+            console.log(e);
+        }
+}
 
     const checkWhitelist = (address) => {
          dispatch(nftAction.checkWhitelist(address));
@@ -95,6 +112,7 @@ const Header = () => {
     const setUserInfo = async (address) => {
         if(address){
             setToken(address)
+            setNickname(address)
         }
         dispatch(nftAction.setUserInfo(address));
     }
@@ -103,8 +121,8 @@ const Header = () => {
         dispatch(nftAction.setVoteStatus())
     }
 
-    const enableKaikas = () => {
-        dispatch(nftAction.enableKaikas(customAlert));
+    const clickEnableKaikas = (customAlert) => {
+        enableKaikas(customAlert);
     }
 
     const copyAddress = () => {
@@ -144,7 +162,7 @@ const Header = () => {
                 // 카이카스 계정 정보 리덕스에 저장하는 부분
                 dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: accounts[0]});
                 setToken(accounts[0])
-                await axios.post("/user/add",{publicKey : accounts[0]})
+                await axios.post("/api/user/add",{publicKey : accounts[0]})
             })
             window.klaytn.on('networkChanged', async function(network) {
                 console.log(network)
@@ -153,8 +171,8 @@ const Header = () => {
         
         setVoteStatus();
     },[])
-    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/voting'];
-    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Voting'];
+    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/voting', '/community'];
+    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Voting', 'Community'];
 
     let pages = paths.map((path, index) => {
         let data = {
@@ -168,6 +186,7 @@ const Header = () => {
     return (
         <>
         <AlertModal {...customAlert} />
+        <ChangeNicknameModal {...changeNickname} setNickname={setNickname} />
         <Navbar className="nav" expand="lg">
             <img src={background13} className="backG-img-left" />
             <img src={background13} className="backG-img-right" />
@@ -212,12 +231,22 @@ const Header = () => {
                             onClick={copyAddress}    
                         />
                         </div> */}
+                        
+                        <div className='header-line'>
+                            {nickname} 
+                            <FontAwesomeIcon 
+                                shake
+                                icon={faPenToSquare}
+                                className='change-nickname-icon'
+                                onClick={()=> changeNickname.open()}
+                            />
+                        </div>
                         <div className='header-line'>{klayBalance + " KLAY"}</div>
                         <div className='header-line'>{btkBalance + " BTK"}</div>
                         </StyledInfo>
                     }
                 </div>
-                : <><Button className="mint-wal-connect-btn" variant="success" onClick={enableKaikas}>지갑 연결하기</Button>{' '}</>
+                : <><Button className="mint-wal-connect-btn" variant="success" onClick={clickEnableKaikas}>지갑 연결하기</Button>{' '}</>
                 }
                 </Navbar.Collapse>
             </Container>
