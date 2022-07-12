@@ -15,10 +15,13 @@ const list = async (req, res) => {
 
 const current = async (req, res) => {
     try {
-        const [[result]] = await pool.query("SELECT * FROM votes ORDER BY voteIdx DESC LIMIT 1;");
-        const {voteSubject, voteIdx} = result
-        const [proposals] = await pool.query(`SELECT * FROM proposals WHERE voteIdx=${voteIdx}`)
-        res.json({voteSubject, voteIdx, proposals})
+        const [result] = await pool.query("SELECT * FROM votes ORDER BY voteIdx DESC LIMIT 1;");
+        if(result.length){
+            const {voteSubject, voteIdx} = result
+            const [proposals] = await pool.query(`SELECT * FROM proposals WHERE voteIdx=${voteIdx}`)
+            res.json({voteSubject, voteIdx, proposals})
+        }
+        else res.json({voteSubject:"", voteIdx:0, proposals:[]})
     }
     catch (e) {
         console.log(e);
@@ -70,17 +73,6 @@ const resetAction = async (req, res) => {
     }
 }
 
-const modifyAction = async (req, res) => {
-    const {voteSubject, voteIdx} = req.body;
-    try {
-        const [result] =  await pool.query(`UPDATE votes SET voteSubject='${voteSubject}' WHERE voteIdx="${voteIdx}"`);
-        res.send(result.insertId.toString())
-    }
-    catch(e){
-        console.log(e);
-        res.send(e);
-    }
-}
 
 module.exports = {
     list,
@@ -88,5 +80,4 @@ module.exports = {
     addAction,
     endAction,
     resetAction,
-    modifyAction
 }
