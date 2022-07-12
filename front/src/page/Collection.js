@@ -10,6 +10,11 @@ import styled from 'styled-components'
 const CollectionOuter = styled.div`
     display: flex;
     justify-content: center;
+
+    @media screen and (max-width: 900px) {
+        width: 50%;
+         margin-left:500px;
+    }
 `
 
 const Collection = () => {
