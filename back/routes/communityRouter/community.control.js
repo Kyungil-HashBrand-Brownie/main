@@ -3,7 +3,13 @@ const pool = require("../../db")
 const view = async (req, res) => {
     try {
         const [result] = await pool.query("SELECT * FROM voteCommunity;")
-        res.send(result);
+        const data = []
+        for(let i=0; i< result.length/2; i++){
+            let coupledArr = result.slice(i*2, (i*2)+2)
+            data.push(coupledArr)
+        }
+        console.log(data)
+        res.send(data);
     }
     catch(e) {
         console.log(e);
