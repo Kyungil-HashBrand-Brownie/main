@@ -22,6 +22,7 @@ import CommunityWriteRoute from 'route/CommunityWriteRoute';
 import DifNetwork from 'page/DifNetwork';
 import CommunityRead from 'components/vote/CommunityRead';
 import CommunityReadRoute from 'route/CommunityReadRoute';
+import CommunityApproval from 'components/vote/CommunityApproval';
 
 function App() {
   const {isDeployer} = useSelector(state=>state.nft)
@@ -61,7 +62,10 @@ function App() {
           <>
             {isDeployer
             ?
+            <>
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/community/approval/:id" element={<CommunityApproval />} />
+            </>
             : null
             }
             <Route path="/swap" element={<Swap />} />

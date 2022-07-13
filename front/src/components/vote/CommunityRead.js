@@ -60,11 +60,11 @@ const CommunityRead = () => {
     const customAlert = useAlert();
 
     const movePage = () => {
-        navigate(-1);
+        type == 'vote' ? navigate('/community/vote') : navigate('/community/default')
     }
 
     const moveApproval = ()=> {
-        navigate('/community/approval')
+        navigate(`/community/approval/${id}`)
     }
 
 
