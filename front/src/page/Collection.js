@@ -10,12 +10,16 @@ import styled from 'styled-components'
 const CollectionOuter = styled.div`
     display: flex;
     justify-content: center;
+
 `
+
 
 const Collection = () => {
     const [data, setData] = useState(null);
     const [row, setRow] = useState(0);
     const { sortOption, filterOption } = useSelector(state => state.nft);
+
+    const [test, setTest] = useState("<Sort></Sort>")
 
     const getData = async () => {
         let result = await axios.get('/api/image/images')

@@ -7,4 +7,6 @@ router.get('/view',communityController.view);
 
 router.post('/write',communityController.writeAction);
 
+router.post('/voteWrite',communityController.voteWriteAction);
+
 module.exports = router;

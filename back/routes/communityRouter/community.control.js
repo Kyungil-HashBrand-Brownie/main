@@ -2,7 +2,7 @@ const pool = require("../../db")
 
 const view = async (req, res) => {
     try {
-        const [result] = await pool.query("SELECT * FROM preProposals;")
+        const [result] = await pool.query("SELECT * FROM voteCommunity;")
         res.send(result);
     }
     catch(e) {
@@ -12,9 +12,10 @@ const view = async (req, res) => {
 }
 
 const writeAction = async (req, res) => {
-    const data = Object.values(req.body); // [...req.body]가 안먹혀서 [proposalTitle, proposalContent, proposalLabel, nickname]로 바꾸기 위해
+    const data = Object.values(req.body);
+    console.log(data)
     try {
-        const [result] = await pool.query(`INSERT INTO preProposals(proposalTitle, proposalContent, proposalLabel, nickname) VALUES (?,?,?,?)`,data)
+        const [result] = await pool.query(`INSERT INTO community(title, content, nickname) VALUES (?,?,?)`,data)
         res.send(result);
     }
     catch(e) {
@@ -23,4 +24,24 @@ const writeAction = async (req, res) => {
     }
 }
 
-module.exports = {view, writeAction};
+const voteWriteAction = async (req, res) => {
+    const {title, content, proposals, nickname} = req.body;
+    const data = [title, content, JSON.stringify(proposals), nickname]
+    console.log(data)
+    try {
+        const [result] = await pool.query(`INSERT INTO voteCommunity(title, content, proposals, nickname) VALUES (?,?,?,?)`,data)
+        res.send(result);
+    }
+    catch(e) {
+        console.log(e);
+        res.send("fail")
+    }
+}
+
+
+
+module.exports = {
+    view,
+     writeAction,
+     voteWriteAction
+    };

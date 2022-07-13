@@ -387,7 +387,7 @@ body {
     opacity:1;
   }
   
-  .fade:hover {
+  .fade:hover.ModalPosition {
     border: 0px #fff solid;
     -webkit-transform: scale(1.04,1.04);
     -webkit-transition: border 0.3s ease-out;
