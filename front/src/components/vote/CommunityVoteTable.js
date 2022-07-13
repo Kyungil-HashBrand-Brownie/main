@@ -8,7 +8,7 @@ import axios from 'axios'
 const CommunityVoteTable = () => {
     const [data, setData] = useState(null);
     const getData = async () => {
-        let result = await axios.get('/api/community/view');
+        let result = await axios.get('/api/community/view/vote');
         // console.log('data: ', result.data);
         setData(result.data);
     }

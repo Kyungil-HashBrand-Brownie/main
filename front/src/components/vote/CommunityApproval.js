@@ -63,7 +63,7 @@ const CommunityRead = () => {
         navigate(-1);
     }
 
-    const moveApproval = ()=> {
+    const submitApporoval = ()=> {
         navigate('/community/approval')
     }
 
@@ -88,7 +88,6 @@ const CommunityRead = () => {
                         <VoteDPart>
                             <VoteDType>제목</VoteDType>
                             <Form.Control
-                                readOnly
                                 as="textarea"
                                 className='vote-textarea'
                                 style={{ height: '20px', resize: 'none'}}
@@ -99,7 +98,6 @@ const CommunityRead = () => {
                         <VoteDPart>
                             <VoteDType>내용</VoteDType>
                             <Form.Control
-                                readOnly
                                 as="textarea"
                                 className='vote-textarea'
                                 style={{ height: '200px', resize: 'none' }}
@@ -117,7 +115,6 @@ const CommunityRead = () => {
                                             key={index}
                                         >
                                         <Form.Control
-                                            readOnly
                                             as="textarea"
                                             value={item}
                                             name='proposal'
@@ -133,16 +130,7 @@ const CommunityRead = () => {
                         <ControlButton>
                             <PageButton onClick={movePage}>이전화면</PageButton>
                         </ControlButton>
-                        {
-                            isDeployer && type === 'vote' 
-                            ?
-                            <ControlButton>
-                                <PageButton onClick={moveApproval}>승인하기</PageButton>
-                            </ControlButton>
-                            :null
-                        }
-                        
-                    </VoteDMain>  
+                    </VoteDMain>
                 </VoteDMainOuter>
             </VoteDRightOuter>
         </VoteDOuter>
