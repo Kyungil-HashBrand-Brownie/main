@@ -6,6 +6,9 @@ const view = async (req, res) => {
         const data = []
         for(let i=0; i< result.length/2; i++){
             let coupledArr = result.slice(i*2, (i*2)+2)
+            if (coupledArr.length == 1) {
+                coupledArr.push({title: '', content:'', nickname: '', state: ''})
+            }
             data.push(coupledArr)
         }
         console.log(data)
