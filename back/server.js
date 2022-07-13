@@ -3,6 +3,7 @@ const app = express();
 const router = require("./routes")
 const cors = require('cors')
 
+app.use(express.static("./public"))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())

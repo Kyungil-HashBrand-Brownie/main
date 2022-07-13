@@ -9,4 +9,6 @@ router.post('/write',communityController.writeAction);
 
 router.post('/voteWrite',communityController.voteWriteAction);
 
+router.post('/upload',communityController.uploadAction)
+
 module.exports = router;

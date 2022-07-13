@@ -20,6 +20,7 @@ import VoteDetail from 'components/vote/VoteDetail'
 import Community from './Community'
 import ClockTest from 'components/ClockTest'
 import Slider from 'components/Slider'
+import FileUpload from './FileUpload'
 
 const HomeBackImgPosition = styled.div`
     /* width: 100%;
@@ -69,6 +70,7 @@ const Testpage = () => {
         {/* <ClockTest /> */}
         {/* <Slider /> */}
         {/* <SlideTest /> */}
+        <FileUpload />
     </div>
   )
 }
