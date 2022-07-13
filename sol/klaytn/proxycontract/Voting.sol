@@ -5,11 +5,11 @@ import "./NFT/NFT.sol";
 
 /*
 투표 
-nft 보유량에 따른 등급제로 투표가중치
-보유량 - 등급 - 투표가중치
-1 - 브론즈  - 1
-5 - 실버    - 2
-10 - 골드   - 3
+nft 홀더만 투표 가능
+보유량  - 등급
+1      - 브론즈  
+5      - 실버   
+10     - 골드  
 */
 contract VoteContract {
     address private owner;  // 주인
@@ -91,9 +91,14 @@ contract VoteContract {
     }
 
     // 발의 함수
-    function newProposal() public isBeforeVote permissionProposal() { 
+    function newProposal() public isBeforeVote permissionProposal { 
         proposals[proposalCounts] = Proposal(proposalCounts + 1, 0);
         proposalCounts++;
+    }
+    function newProposals(uint _n) public isBeforeVote permissionProposal { 
+        for(uint i = 0; i < _n; i++) {
+            newProposal();
+        }
     }
 
     // 발의 끝 동시에 투표 시작 함수
@@ -101,11 +106,13 @@ contract VoteContract {
         require(proposalCounts > 0, "No proposal");
         voteStatus = VoteStatus.nowVote;
     }
-
+    function viewVotePower() public view returns(uint256) {
+        return (brownyNFT.balanceOf(tx.origin) + brownyNFT.checkStakedNFTs().length);
+    }
     // 투표 함수
-    function voting(uint _proposalId) public alreadyVote isNowVote onlyHolder() {
+    function voting(uint _proposalId) public alreadyVote isNowVote onlyHolder {
         uint index = _proposalId - 1;
-        uint _votePower = (brownyNFT.checkOwnNFTs().length + brownyNFT.checkStakedNFTs().length);
+        uint _votePower = (brownyNFT.balanceOf(tx.origin) + brownyNFT.checkStakedNFTs().length);
         voters[msg.sender].votedProposalId = _proposalId;
         voters[msg.sender].hasVotes = forHasVotes;
         voters[msg.sender].votePower = _votePower; 
