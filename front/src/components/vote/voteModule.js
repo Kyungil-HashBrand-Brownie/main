@@ -202,7 +202,8 @@ export const VoteTCUser = styled.div`
 export const VoteTCState = styled.div`
     position: absolute;
     font-weight: bold;
-    transform: translate(348px, -35px);
+    transform: translate(310px, -35px);
+    background: yellow;
 `
 export const VoteTCBodyOuter = styled.div`
     display: flex;

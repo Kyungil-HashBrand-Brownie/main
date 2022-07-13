@@ -9,7 +9,6 @@ const CommunityVoteTable = () => {
     const [data, setData] = useState(null);
     const getData = async () => {
         let result = await axios.get('/api/community/view');
-        // console.log('data: ', result.data);
         setData(result.data);
     }
 
@@ -22,18 +21,10 @@ const CommunityVoteTable = () => {
             <VoteCTBody>
                 {data?.map((item, index) => 
                     <VoteCTRow key={index}>
-                        {item.map(data => 
-                            <VoteTableCard key={data.content} data={data} img={nft1} img1={Ani1} id={1}/>)}
+                        {item.map((data, idx) => 
+                            <VoteTableCard key={data.content} data={data} img={nft1} img1={Ani1} id={index*2 + idx + 1}/>)}
                     </VoteCTRow>
                 )}
-                {/* <VoteCTRow>
-                    <VoteTableCard img={nft1} img1={Ani1} id={1}/>
-                    <VoteTableCard img={nft2} img1={Ani2} id={2}/>
-                </VoteCTRow>
-                <VoteCTRow>
-                    <VoteTableCard img={nft3} img1={Ani3} id={3}/>
-                    <VoteTableCard img={nft4} img1={Apro} id={4}/>
-                </VoteCTRow> */}
             </VoteCTBody>
         </VoteCTable>
     )
