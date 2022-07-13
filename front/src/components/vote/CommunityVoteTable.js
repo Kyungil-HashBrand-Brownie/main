@@ -9,12 +9,12 @@ const CommunityVoteTable = () => {
         <VoteCTable>
             <VoteCTBody>
                 <VoteCTRow>
-                    <VoteTableCard img={nft1} img1={Ani1} />
-                    <VoteTableCard img={nft2} img1={Ani2} />
+                    <VoteTableCard img={nft1} img1={Ani1} id={1}/>
+                    <VoteTableCard img={nft2} img1={Ani2} id={2}/>
                 </VoteCTRow>
                 <VoteCTRow>
-                    <VoteTableCard img={nft3} img1={Ani3} />
-                    <VoteTableCard img={nft4} img1={Apro} />
+                    <VoteTableCard img={nft3} img1={Ani3} id={3}/>
+                    <VoteTableCard img={nft4} img1={Apro} id={4}/>
                 </VoteCTRow>
             </VoteCTBody>
         </VoteCTable>

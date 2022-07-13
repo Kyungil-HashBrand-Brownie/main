@@ -6,7 +6,8 @@ const CommunityTopic = ({ setState }) => {
     const navigate = useNavigate();
     const changeState = (state) => {
         if (window.location.href == 'http://localhost:3000/write/0' || 
-            window.location.href == 'http://localhost:3000/write/1'
+            window.location.href == 'http://localhost:3000/write/1' ||
+            window.location.href.startsWith('http://localhost:3000/community/read/')  
         ) {
             let page = state ? 'vote' : 'default'
             navigate(`/community/${page}`)
@@ -16,8 +17,8 @@ const CommunityTopic = ({ setState }) => {
     return (
         <TopicOuter>
             <TopicHeader>Topic</TopicHeader>
-            <Topic onClick={() => changeState(1)}>- Vote</Topic>
-            <Topic onClick={() => changeState(0)}>- 기타</Topic>
+            <Topic onClick={() => changeState(0)}>Board</Topic>
+            <Topic onClick={() => changeState(1)}>Vote</Topic>
         </TopicOuter>
     )
 }
