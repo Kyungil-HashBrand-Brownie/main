@@ -10,16 +10,4 @@ let store = createStore(
     composeWithDevTools(applyMiddleware(thunk))
 );
 
-// const persistConfig = {
-// key: 'root',
-// storage,
-// };
-
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-// let store = createStore(
-//     persistedReducer,
-//     composeWithDevTools(applyMiddleware(thunk))
-// );
-
 export default store;
