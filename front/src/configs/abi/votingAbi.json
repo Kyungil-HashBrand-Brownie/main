@@ -73,6 +73,19 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "_n",
+						"type": "uint256"
+					}
+				],
+				"name": "newProposals",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "_index",
 						"type": "uint256"
 					}
@@ -98,6 +111,19 @@
 			{
 				"inputs": [],
 				"name": "viewVoteCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "viewVotePower",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -163,7 +189,7 @@
 		"compilationTarget": {
 			"contracts/Voting.sol": "VoteContract"
 		},
-		"evmVersion": "istanbul",
+		"evmVersion": "london",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -360,19 +386,19 @@
 			]
 		},
 		"contracts/NFT/NFT.sol": {
-			"keccak256": "0x1c94caa6fc4fc6874a487d1169df102088d7787b653e9e28f455828d1f4cf12c",
+			"keccak256": "0x25a9513c84b905ea883feeb5ec765d00e857591662b0cc119d710b7da5d489c2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ff0cf0702b34a2737bc90a7ae02d9f248e2d513dca959106a9386ec5dd62c462",
-				"dweb:/ipfs/QmenD82813vEoGUPTiehyZM2rdEMwXobsq7pfShykPVC2c"
+				"bzz-raw://262fc0cb89b10c4412ec0d65b2c00ad3b6beb8fd884563b1e0564ed9fa020338",
+				"dweb:/ipfs/QmdxaivWgdQCx42BW1HuXQRAjEioJy4WUyaV9vmZKRinkY"
 			]
 		},
 		"contracts/Voting.sol": {
-			"keccak256": "0x04c4047995e13c90dc88aa3e76a6e554cc3f6573bbb35d72fd8cb9e942107e26",
+			"keccak256": "0xd6b1a2c994a410dcbf4b70c45c7e1b959bc159c55428663bc677443cacf3a471",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5afbe9eac6dcdbc83125355dcf062f9534b8fd157e4d7c73c66c34233f007b2a",
-				"dweb:/ipfs/QmfSW8JZWvnuX5RmXyZucDFMf8DpFiUTDRHdVRe585dumB"
+				"bzz-raw://88504c1c0d59a2e5c179a6ac1351aac434f60350a4550ed261bce1ddbc8031a8",
+				"dweb:/ipfs/QmUTfY4Y8nfPMPQvz5FcqaMRvE7zSVEDTU917iqrQGeFRK"
 			]
 		},
 		"contracts/Whitelist/Whitelist.sol": {
