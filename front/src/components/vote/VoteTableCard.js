@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import {
     VoteTCardOuter, VoteTCHeader, VoteTCContent, VoteTCUser, VoteTCState, VoteTCBodyOuter,
     VoteTCBody, VoteTCBodyHeader, VoteTCBodyTitle, VoteTCBodyVoteCount,
@@ -26,9 +27,13 @@ const VoteTCBodyImg = styled.div`
         ${props => props.img && `url(${props.img})`};
 `
 
-const VoteTableCard = ({ img, img1 }) => {
+const VoteTableCard = ({ img, img1, id }) => {
+    const navigate = useNavigate();
+
     return (
-        <VoteTCardOuter>
+        <VoteTCardOuter
+            onClick={() => {navigate(`/community/read/vote/${id}`)}}
+        >
             <VoteTCHeader>
                 <VoteTCImage img={img}></VoteTCImage>
                 <VoteTCContent>

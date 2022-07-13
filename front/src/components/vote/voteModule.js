@@ -176,6 +176,11 @@ export const VoteTCardOuter = styled.div`
     width: 530px;
     margin: auto;
     margin-top: 10px;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.03);
+    }
 `
 export const VoteTCHeader = styled.div`
     height: 100px;
@@ -252,13 +257,15 @@ export const TopicOuter = styled.div`
     background: white;
     display: flex;
     flex-direction: column;
-    border-radius: 4px;
+    border-radius: 15px;
     background: white;
 `
 export const TopicHeader = styled.div`
     text-align: center;
     border-bottom: 2px solid black;
     font-size: 20px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     font-weight: bold;
     background: pink;
 `
@@ -268,6 +275,7 @@ export const Topic = styled.div`
     border-radius: 10px;
     padding: 0px 15px;
     margin: auto;
+    text-align: center;
     cursor: pointer;
     
     &:hover {
