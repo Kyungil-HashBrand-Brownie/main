@@ -167,6 +167,7 @@ const VoteDetail = ({ id }) => {
                                         />
                                         {!item.state ? 
                                             <button 
+                                                type='button'
                                                 onClick={() => addProposal(item)}
                                                 className='proposal-btn'>
                                                 등록
