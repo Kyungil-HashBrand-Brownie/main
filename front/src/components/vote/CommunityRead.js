@@ -38,39 +38,30 @@ const CommunityRead = () => {
     const navigate = useNavigate();
     const { type, id } = useParams();
 
-    const customAlert = useAlert();
-
-    const { nickname } = useSelector(state => state.nft);
-
-    const handleSubmit = async (e)=> {
-        e.preventDefault();
-        const title = e.target.title.value
-        const content = e.target.content.value
-        let proposalGroup = e.target.proposal
-        if(proposalGroup){
-            let proposals = [];
-            if(proposalGroup.length) {
-                proposalGroup.forEach((proposal)=> {
-                    if(proposal.value) proposals.push(proposal.value)
-                })
-                console.log(proposals)
-                
-                const data = {title, content, proposals, nickname}
-                await axios.post('/api/community/voteWrite',data)
-            }
-            else {
-                customAlert.open("1개 이상 안건을 등록해주세요")
-            }
-        }
-        else{
-            const data = {title, content, nickname}
-            await axios.post('/api/community/write',data)
-        }
+    const [data, setData] = useState({
+        title:"",
+        content:"",
+        proposals:[],
+        state:""
+    });
+    const getData = async () => {
+        let result = await axios.get(`http://localhost:4000/api/community/read/${type}/${id}`);
+        console.log(result)
+        // console.log('data: ', result.data);
+        setData(result.data);
     }
+
+    useEffect(() => {
+        getData();
+    }, [])
+
+    const customAlert = useAlert();
 
     const movePage = () => {
         type == 'vote' ? navigate('/community/vote') : navigate('/community/default')
     }
+
+    console.log(data.content)
 
     return (
         <>
@@ -88,7 +79,7 @@ const CommunityRead = () => {
                 <VoteDMainOuter>
                     <VoteDMain>
                         <VoteTCBodyImg img={nft1} />
-                        <Form onSubmit={handleSubmit}>
+                        <Form>
                         <VoteDPart>
                             <VoteDType>제목</VoteDType>
                             <Form.Control
@@ -97,6 +88,7 @@ const CommunityRead = () => {
                                 className='vote-textarea'
                                 style={{ height: '20px', resize: 'none'}}
                                 name='title'
+                                value={data.title}
                             />
                         </VoteDPart>
                         <VoteDPart>
@@ -107,34 +99,31 @@ const CommunityRead = () => {
                                 className='vote-textarea'
                                 style={{ height: '200px', resize: 'none' }}
                                 name='content'
+                                value={data.content}
                             />
                         </VoteDPart>
-                        {/* {id == 0 && */}
-                            {/* <> */}
                             { type == 'vote' &&
                                 <VoteDPart>
                                     <VoteDType>안건</VoteDType>
                                     <div className='proposal'>
-                                    {/* {counter.map((item, index) =>  */}
+                                    {data.proposals.map((item, index) => 
                                         <div 
                                             className='proposal-form'
-                                            // key={index}
+                                            key={index}
                                         >
                                         <Form.Control
                                             readOnly
                                             as="textarea"
-                                            placeholder='안건'
+                                            value={item}
                                             name='proposal'
                                             className='vote-text'
                                             style={{ width: '837px', height: '40px', resize: 'none' }}
                                         />
                                         </div>
-                                    {/* )} */}
+                                     )}
                                     </div>
                                 </VoteDPart>
                             }
-                            {/* </> */}
-                        {/* } */}
                         </Form>
                         <ControlButton>
                             <PageButton onClick={movePage}>이전화면</PageButton>

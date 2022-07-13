@@ -20,6 +20,20 @@ const view = async (req, res) => {
     }
 }
 
+const read = async (req, res) => {
+    const {type, idx} = req.params;
+    console.log(type)
+    try {
+        const [[result]] = await pool.query(`SELECT * FROM voteCommunity WHERE idx=${idx};`);
+        result.proposals = JSON.parse(result.proposals);
+        res.send(result);
+    }
+    catch(e) {
+        console.log(e);
+        res.send("fail")
+    }
+}
+
 const writeAction = async (req, res) => {
     const data = Object.values(req.body);
     console.log(data)
@@ -51,6 +65,7 @@ const voteWriteAction = async (req, res) => {
 
 module.exports = {
     view,
-     writeAction,
-     voteWriteAction
+    writeAction,
+    voteWriteAction,
+    read
     };
