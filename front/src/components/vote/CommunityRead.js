@@ -46,10 +46,10 @@ const CommunityRead = () => {
         proposals:[],
         state:""
     });
+
     const getData = async () => {
         let result = await axios.get(`http://localhost:4000/api/community/read/${type}/${id}`);
-        console.log(result)
-        // console.log('data: ', result.data);
+        console.log('result: ', result);
         setData(result.data);
     }
 
@@ -122,7 +122,7 @@ const CommunityRead = () => {
                                             value={item}
                                             name='proposal'
                                             className='vote-text'
-                                            style={{ width: '837px', height: '40px', resize: 'none' }}
+                                            style={{ width: '820px', height: '40px', resize: 'none' }}
                                         />
                                         </div>
                                      )}
