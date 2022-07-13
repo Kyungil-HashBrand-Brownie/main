@@ -18,8 +18,10 @@ import DetailCollecion from 'components/collection/DetailCollecion';
 import Community from 'page/Community';
 import VoteDetail from 'components/vote/VoteDetail';
 import PrivateRoute from 'route/PrivateRoute';
-import WriteRoute from 'route/WriteRoute';
+import CommunityWriteRoute from 'route/CommunityWriteRoute';
 import DifNetwork from 'page/DifNetwork';
+import CommunityRead from 'components/vote/CommunityRead';
+import CommunityReadRoute from 'route/CommunityReadRoute';
 
 function App() {
   const {isDeployer} = useSelector(state=>state.nft)
@@ -50,8 +52,9 @@ function App() {
         <Route path='/collection' element={<Collection />} />
         <Route path='/voting' element={<Voting />} />
         <Route path='/community' element={<Community />} />
-        <Route path='/write/:id' element={<WriteRoute />} />
         <Route path='/community/:id' element={<PrivateRoute />} />
+        <Route path='/community/read/:type/:id' element={<CommunityReadRoute />} />
+        <Route path='/write/:id' element={<CommunityWriteRoute />} />
         {
           isBaobab
           ?

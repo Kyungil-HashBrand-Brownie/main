@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import styled from 'styled-components'
 import { nft1 } from 'img/nft'
 import VoteDescription from './VoteDescription'
 import CommunityTopic from './CommunityTopic'
-import Delete from '../../img/vote/delete.png'
 import _ from 'lodash'
+import { useNavigate } from 'react-router-dom'
 import {
     VoteDOuter, VoteDLeftOuter, VoteDRightOuter, VoteDHeaderOuter,
     VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
-    VoteDArea, VoteButtonDiv, VoteButton, ControlButton, PageButton
+    ControlButton, PageButton
 } from './voteModule'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
@@ -33,16 +34,13 @@ const VoteTCBodyImg = styled.div`
     }
 `
 
-const VoteDetail = ({ id }) => {
+const CommunityRead = () => {
+    const navigate = useNavigate();
+    const { type, id } = useParams();
+
     const customAlert = useAlert();
 
-    const {nickname} = useSelector(state => state.nft);
-
-    const [counter, setCounter] = useState([{
-        id: 0,
-        content: '',
-        state: false,
-    }])
+    const { nickname } = useSelector(state => state.nft);
 
     const handleSubmit = async (e)=> {
         e.preventDefault();
@@ -68,44 +66,10 @@ const VoteDetail = ({ id }) => {
             const data = {title, content, nickname}
             await axios.post('/api/community/write',data)
         }
-        
     }
 
-    const addProposal = (proposal) => {
-        let compareIdx = counter[counter.length - 1].id
-        if (proposal.id == compareIdx) {
-            if (proposal.content == '') customAlert.open('안건을 입력해 주세요.')
-            else {
-                let newArr = _.cloneDeep(counter)
-                newArr = newArr.map(item => {
-                    if (item.id == compareIdx) {
-                        item.state = true
-                    }
-                    return item
-                })
-                newArr.push({
-                        id: compareIdx + 1,
-                        content: '',
-                        state: false,
-                })
-                setCounter(newArr)
-            }
-        }
-    }
-
-    const delProposal = (item) => {
-        let newArr = _.cloneDeep(counter);
-        newArr = newArr.filter((arr) => arr.id != item.id)
-        setCounter(newArr)
-    } 
-
-    const proposalContent = (e, item) => {
-        let data = {...item, content: e.target.value};
-        let newArr = _.cloneDeep(counter).map((arr) => {
-            if (arr.id == item.id) return data;
-            return arr
-        })
-        setCounter(newArr)
+    const movePage = () => {
+        type == 'vote' ? navigate('/community/vote') : navigate('/community/default')
     }
 
     return (
@@ -118,7 +82,7 @@ const VoteDetail = ({ id }) => {
 
             <VoteDRightOuter>
                 <VoteDHeaderOuter>
-                    <VoteDHeader>글 작성하기</VoteDHeader>
+                    <VoteDHeader>게시판</VoteDHeader>
                 </VoteDHeaderOuter>
                 <VoteDescription />
                 <VoteDMainOuter>
@@ -128,70 +92,52 @@ const VoteDetail = ({ id }) => {
                         <VoteDPart>
                             <VoteDType>제목</VoteDType>
                             <Form.Control
+                                readOnly
                                 as="textarea"
                                 className='vote-textarea'
                                 style={{ height: '20px', resize: 'none'}}
                                 name='title'
-                                required
                             />
                         </VoteDPart>
                         <VoteDPart>
                             <VoteDType>내용</VoteDType>
                             <Form.Control
+                                readOnly
                                 as="textarea"
                                 className='vote-textarea'
                                 style={{ height: '200px', resize: 'none' }}
                                 name='content'
-                                required
                             />
                         </VoteDPart>
-                        {id == 0 &&
-                            <>
+                        {/* {id == 0 && */}
+                            {/* <> */}
+                            { type == 'vote' &&
                                 <VoteDPart>
                                     <VoteDType>안건</VoteDType>
                                     <div className='proposal'>
-                                    {counter.map((item, index) => 
+                                    {/* {counter.map((item, index) =>  */}
                                         <div 
                                             className='proposal-form'
-                                            key={index}
+                                            // key={index}
                                         >
                                         <Form.Control
-                                            disabled={item.state ? true : false}
+                                            readOnly
                                             as="textarea"
-                                            placeholder='안건을 입력해주세요'
+                                            placeholder='안건'
                                             name='proposal'
                                             className='vote-text'
-                                            style={{ width: '770px', height: '40px', resize: 'none' }}
-                                            value={item.content}
-                                            onChange={(e) => {proposalContent(e, item)}}
+                                            style={{ width: '837px', height: '40px', resize: 'none' }}
                                         />
-                                        {!item.state ? 
-                                            <button 
-                                                type='button'
-                                                onClick={() => addProposal(item)}
-                                                className='proposal-btn'>
-                                                등록
-                                            </button>
-                                        : <div className='proposal-del-div'>
-                                            <img 
-                                            className='proposal-del'
-                                            src={Delete} 
-                                            onClick={() => delProposal(item)}
-                                            />
                                         </div>
-                                        }
-                                        </div>
-                                    )}
+                                    {/* )} */}
                                     </div>
                                 </VoteDPart>
-                            </>
-                        }
-                        <VoteButtonDiv>
-                            <VoteButton>등록하기</VoteButton>
-                        </VoteButtonDiv>
+                            }
+                            {/* </> */}
+                        {/* } */}
                         </Form>
                         <ControlButton>
-                            <PageButton>이전화면</PageButton>
+                            <PageButton onClick={movePage}>이전화면</PageButton>
                         </ControlButton>
                     </VoteDMain>
                 </VoteDMainOuter>
@@ -201,4 +147,4 @@ const VoteDetail = ({ id }) => {
     )
 }
 
-export default VoteDetail
+export default CommunityRead

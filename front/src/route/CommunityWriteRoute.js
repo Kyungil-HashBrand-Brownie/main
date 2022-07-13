@@ -3,7 +3,7 @@ import VoteWrite from 'page/VoteWrite'
 import NoPage from 'page/NoPage'
 import { useParams } from 'react-router-dom'
 
-const WriteRoute = () => {
+const CommunityWriteRoute = () => {
     let { id } = useParams();
     return ( ['0', '1'].includes(id)
     ? <VoteWrite id={id} />
@@ -11,4 +11,4 @@ const WriteRoute = () => {
     )
 }
 
-export default WriteRoute
+export default CommunityWriteRoute
