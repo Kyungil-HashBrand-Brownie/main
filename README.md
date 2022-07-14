@@ -42,209 +42,293 @@
 
 ```
 front
-│  .gitignore
-│  jsconfig.json
-│  package-lock.json
-│  package.json
-│  README.md
-│
-├─public
-│      index.html
-│
-└─src
-    │  App.css
-    │  App.js
-    │  index.css
-    │  index.js
-    │
-    ├─api
-    │      contractMethods.js
-    │      index.js
-    │
-    ├─components
-    │      EarthVote.js
-    │      Footer.js
-    │      Header.js
-    │      HomeImgCard.js
-    │      MintCard.js
-    │      NftCard.js
-    │      Pagination.js
-    │      PreSale.js
-    │      Profile.js
-    │      QuitMint.js
-    │      QuitVote.js
-    │      SlideShow.js
-    │      StakingList.js
-    │      WhiteListMember.js
-    │      WhiteSale.js
-    │
-    ├─configs
-    │      contractAbi.json
-    │      contractAddr.js
-    │      contractInstance.js
-    │      index.js
-    │
-    ├─img
-    │  │  ani1.png
-    │  │  ani2.png
-    │  │  ani3.png
-    │  │  Apro.png
-    │  │  arrow.png
-    │  │  baking.png
-    │  │  baking2.png
-    │  │  baking3.png
-    │  │  browny1.png
-    │  │  browny10.png
-    │  │  browny2.png
-    │  │  browny3.jpg
-    │  │  browny4.jpg
-    │  │  browny5.jpg
-    │  │  browny6.jpg
-    │  │  browny7.png
-    │  │  browny8.png
-    │  │  browny9.png
-    │  │  brownyLogo.png
-    │  │  check.png
-    │  │  Ellipse1.png
-    │  │  EP1.png
-    │  │  EP2.png
-    │  │  EP3.png
-    │  │  Epro.png
-    │  │  exit.png
-    │  │  free.png
-    │  │  Group1.png
-    │  │  Group2.png
-    │  │  img1.png
-    │  │  index.js
-    │  │  KP1.png
-    │  │  KP2.png
-    │  │  KP3.png
-    │  │  Kpro1.png
-    │  │  logo.png
-    │  │  ModalAni1.png
-    │  │  ModalKpro.png
-    │  │  profile1.png
-    │  │  trash.png
-    │  │  white.png
-    │  │
-    │  ├─background
-    │  │      back12.png
-    │  │      back13.png
-    │  │      background1.jpg
-    │  │      background10.png
-    │  │      background11.png
-    │  │      background2.jpg
-    │  │      background3.jpg
-    │  │      background4.jpg
-    │  │      background5.jpg
-    │  │      background6.jpg
-    │  │      background7.jpg
-    │  │      background8.jpg
-    │  │      index.js
-    │  │
-    │  ├─chocolate
-    │  │      choco1.png
-    │  │      choco2.png
-    │  │      choco3.png
-    │  │      choco4.png
-    │  │
-    │  ├─eye
-    │  │      Eye1.png
-    │  │
-    │  ├─footer
-    │  │      disc.png
-    │  │      inst.png
-    │  │      kakao.png
-    │  │      kakao1.png
-    │  │      kakao2.png
-    │  │      kakao3.jpg
-    │  │      kakao4.jpg
-    │  │      tele.png
-    │  │      twit.png
-    │  │
-    │  ├─mint
-    │  │      fireplace.png
-    │  │
-    │  ├─nft
-    │  │      1.png
-    │  │      10.png
-    │  │      11.png
-    │  │      12.png
-    │  │      13.png
-    │  │      14.png
-    │  │      15.png
-    │  │      16.png
-    │  │      2.png
-    │  │      3.png
-    │  │      4.png
-    │  │      5.png
-    │  │      6.png
-    │  │      7.png
-    │  │      8.png
-    │  │      9.png
-    │  │      index.js
-    │  │
-    │  ├─stake
-    │  │      cancel.png
-    │  │
-    │  └─swap
-    │          arrowRight.png
-    │          browny.png
-    │          browny1.png
-    │          klaytn.png
-    │
-    ├─page
-    │      AdminPage.js
-    │      HomePage.js
-    │      Mint.js
-    │      NftList.js
-    │      Swap.js
-    │      Testpage.js
-    │      WhiteList.js
-    │
-    └─redux
-        │  store.js
-        │
-        ├─actions
-        │      nftAction.js
-        │
-        └─reducers
-                index.js
-                nftReducer.js
+├─ .env
+├─ config-overrides.js
+├─ jsconfig.json
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ BLogo.ico
+│  ├─ BLogo.png
+│  └─ index.html
+├─ README.md
+└─ src
+   ├─ api
+   │  ├─ contractMethods.js
+   │  ├─ customHook.js
+   │  ├─ index.js
+   │  ├─ kaikas.js
+   │  ├─ utils.js
+   │  ├─ viewMethods.js
+   │  └─ votingMethods.js
+   ├─ App.css
+   ├─ App.js
+   ├─ components
+   │  ├─ AlertModal.js
+   │  ├─ Animation.js
+   │  ├─ ChangeNicknameModal.js
+   │  ├─ ClockTest.js
+   │  ├─ collection
+   │  │  ├─ CollectionMain.js
+   │  │  ├─ collectionModule.js
+   │  │  ├─ DetailCollecion.js
+   │  │  ├─ DetailCollectionModal.js
+   │  │  ├─ Filter.js
+   │  │  ├─ FilterDetail.js
+   │  │  ├─ Sort.js
+   │  │  └─ SortTop.js
+   │  ├─ EarthVote.js
+   │  ├─ Footer.js
+   │  ├─ Header.js
+   │  ├─ home
+   │  │  ├─ D3.js
+   │  │  ├─ Home.js
+   │  │  ├─ HomeImgCard.js
+   │  │  ├─ HomeImgCardMain.js
+   │  │  ├─ HomeImgCardSide.js
+   │  │  ├─ homeModule.js
+   │  │  ├─ SlideShow.js
+   │  │  ├─ Team.js
+   │  │  ├─ TeamCard.js
+   │  │  └─ Viliage.js
+   │  ├─ MainHeader.js
+   │  ├─ mint
+   │  │  ├─ MintCard.js
+   │  │  └─ PreSale.js
+   │  ├─ Profile.js
+   │  ├─ Proposal.js
+   │  ├─ QuitMint.js
+   │  ├─ QuitVote.js
+   │  ├─ Slider.js
+   │  ├─ SlideTest.js
+   │  ├─ stake
+   │  │  ├─ CardContainer.js
+   │  │  ├─ CardHead.js
+   │  │  ├─ NftCard.js
+   │  │  ├─ Pagination.js
+   │  │  └─ Reward.js
+   │  ├─ swap
+   │  │  ├─ SwapBody.js
+   │  │  ├─ SwapFooter.js
+   │  │  └─ SwapHeader.js
+   │  ├─ vote
+   │  │  ├─ CommunityApproval.js
+   │  │  ├─ CommunityPostButton.js
+   │  │  ├─ CommunityRead.js
+   │  │  ├─ CommunityTable.js
+   │  │  ├─ CommunityTopic.js
+   │  │  ├─ CommunityVoteTable.js
+   │  │  ├─ ImageSelect.js
+   │  │  ├─ VoteDescription.js
+   │  │  ├─ VoteDetail.js
+   │  │  ├─ voteModule.js
+   │  │  └─ VoteTableCard.js
+   │  └─ WhiteListMember.js
+   ├─ configs
+   │  ├─ abi
+   │  │  ├─ index.js
+   │  │  ├─ mintingAbi.json
+   │  │  ├─ nftAbi.json
+   │  │  ├─ tokenAbi.json
+   │  │  ├─ votingAbi.json
+   │  │  └─ whitelistAbi.json
+   │  ├─ caverjs.js
+   │  ├─ contractAddress.js
+   │  ├─ contractInstance.js
+   │  └─ index.js
+   ├─ font
+   │  ├─ Y 너만을 비춤체_매뉴얼.pdf
+   │  ├─ Y1.otf
+   │  └─ Y2.ttf
+   ├─ img
+   │  ├─ arrow.png
+   │  ├─ background
+   │  │  ├─ back12.png
+   │  │  ├─ back13.png
+   │  │  ├─ background1.jpg
+   │  │  ├─ background10.png
+   │  │  ├─ background11.png
+   │  │  ├─ background2.jpg
+   │  │  ├─ background3.jpg
+   │  │  ├─ background4.jpg
+   │  │  ├─ background5.jpg
+   │  │  ├─ background6.jpg
+   │  │  ├─ background7.jpg
+   │  │  ├─ background8.jpg
+   │  │  └─ index.js
+   │  ├─ browny
+   │  │  ├─ browny10.png
+   │  │  ├─ browny6.jpg
+   │  │  ├─ browny7.png
+   │  │  ├─ browny8.png
+   │  │  ├─ browny9.png
+   │  │  ├─ group1.png
+   │  │  ├─ group2.png
+   │  │  ├─ img1.png
+   │  │  └─ index.js
+   │  ├─ brownyLogo.png
+   │  ├─ check.png
+   │  ├─ exit.png
+   │  ├─ footer
+   │  │  ├─ disc.png
+   │  │  ├─ footer.png
+   │  │  ├─ index.js
+   │  │  ├─ inst.png
+   │  │  ├─ kakao1.png
+   │  │  ├─ kakao2.png
+   │  │  ├─ tele.png
+   │  │  └─ twit.png
+   │  ├─ index.js
+   │  ├─ main1.jpg
+   │  ├─ main2.jpg
+   │  ├─ main3.jpg
+   │  ├─ mint
+   │  │  ├─ background7.png
+   │  │  └─ fireplace.png
+   │  ├─ nft
+   │  │  ├─ 1.png
+   │  │  ├─ 10.png
+   │  │  ├─ 11.png
+   │  │  ├─ 12.png
+   │  │  ├─ 13.png
+   │  │  ├─ 14.png
+   │  │  ├─ 15.png
+   │  │  ├─ 16.png
+   │  │  ├─ 2.png
+   │  │  ├─ 3.png
+   │  │  ├─ 4.png
+   │  │  ├─ 5.png
+   │  │  ├─ 6.png
+   │  │  ├─ 7.png
+   │  │  ├─ 8.png
+   │  │  ├─ 9.png
+   │  │  └─ index.js
+   │  ├─ stake
+   │  │  ├─ cancel.png
+   │  │  └─ check.png
+   │  ├─ swap
+   │  │  ├─ arrowRight.png
+   │  │  ├─ browny1.png
+   │  │  └─ klaytn.png
+   │  ├─ trash.png
+   │  ├─ trash2.png
+   │  ├─ viliage.png
+   │  ├─ viliage2.jpeg
+   │  └─ vote
+   │     ├─ delete.png
+   │     ├─ detail
+   │     │  ├─ Epro.png
+   │     │  ├─ index.js
+   │     │  ├─ Kpro1.png
+   │     │  ├─ ModalAni1.png
+   │     │  └─ ModalKpro.png
+   │     └─ organizations
+   │        ├─ Ani1.png
+   │        ├─ Ani2.png
+   │        ├─ Ani3.png
+   │        ├─ Apro.png
+   │        ├─ Ep1.png
+   │        ├─ Ep2.png
+   │        ├─ Ep3.png
+   │        ├─ index.js
+   │        ├─ Kp1.png
+   │        ├─ Kp2.png
+   │        └─ Kp3.png
+   ├─ index.js
+   ├─ page
+   │  ├─ AdminPage.js
+   │  ├─ Collection.js
+   │  ├─ Community.js
+   │  ├─ DifNetwork.js
+   │  ├─ HomePage.js
+   │  ├─ index.js
+   │  ├─ Mint.js
+   │  ├─ NftList.js
+   │  ├─ NoPage.js
+   │  ├─ Swap.js
+   │  ├─ Testpage.js
+   │  ├─ VoteWrite.js
+   │  ├─ Voting.js
+   │  └─ WhiteList.js
+   ├─ redux
+   │  ├─ actions
+   │  │  └─ nftAction.js
+   │  ├─ reducers
+   │  │  ├─ index.js
+   │  │  └─ nftReducer.js
+   │  └─ store.js
+   ├─ route
+   │  ├─ CommunityReadRoute.js
+   │  ├─ CommunityWriteRoute.js
+   │  ├─ index.js
+   │  └─ PrivateRoute.js
+   ├─ scss
+   │  ├─ detailCollecion.css
+   │  └─ style.css
+   └─ styles
+      ├─ slider.css
+      └─ stopwatch.css
 ```
 
 ### Backend
 
 ```
 back
-│  .gitignore
-│  db.js
-│  package-lock.json
-│  package.json
-│  server.js
-│
-└─routes
-        index.js
-        mint.js
+├─ .env
+├─ db.js
+├─ package-lock.json
+├─ package.json
+├─ routes
+│  ├─ communityRouter
+│  │  ├─ community.control.js
+│  │  └─ index.js
+│  ├─ imageRouter
+│  │  ├─ images.control.js
+│  │  ├─ index.js
+│  │  └─ s3.js
+│  ├─ index.js
+│  ├─ userRouter
+│  │  ├─ index.js
+│  │  └─ user.control.js
+│  ├─ voteRouter
+│  │  ├─ index.js
+│  │  └─ vote.control.js
+│  └─ whiteRouter
+│     ├─ index.js
+│     └─ white.control.js
+├─ server.js
+└─ sql
+   ├─ community.sql
+   ├─ users.sql
+   ├─ voting.sql
+   └─ whitelist.sql
 
 ```
 
 ### BlockChain
 ```
 sol
-├─eth
-│      Minting.sol
-│      Staking.sol
-│      Token.sol
-│      Whitelist.sol
-│
-└─klaytn
-        Minting.sol
-        Staking.sol
-        Token.sol
-        Trading.sol
-        Voting.sol
-        Whitelist.sol
+└─ proxycontract
+   ├─ Minting
+   │  ├─ Minting.sol
+   │  ├─ MintingBeacon.sol
+   │  └─ MintingFactory.sol
+   ├─ NFT
+   │  ├─ NFT copy.sol
+   │  ├─ NFT.sol
+   │  ├─ NFTBeacon.sol
+   │  └─ NFTFactory.sol
+   ├─ NormalListTokenId.sol
+   ├─ Token
+   │  ├─ Token.sol
+   │  ├─ TokenBeacon.sol
+   │  └─ TokenFactory.sol
+   ├─ Voting.sol
+   ├─ Whitelist
+   │  ├─ Whitelist.sol
+   │  ├─ WhitelistBeacon.sol
+   │  └─ WhitelistFactory.sol
+   └─ WhiteListTokenId.sol
 
 ```
 
@@ -253,4 +337,3 @@ sol
 - Github
 - Notion
 - Discord
-
