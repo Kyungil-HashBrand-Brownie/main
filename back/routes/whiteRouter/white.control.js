@@ -27,20 +27,6 @@ const whitelistPost = async (req, res) => {
     }
 }
 
-const deletelist = async (req, res) => {
-    //화이트리스트 db에서 삭제
-    const publicKey = req.body.data.from
-    const isValid = req.body.data.status
-    if (isValid === true) {
-        console.log('PublicKey!')
-        await pool.query(`DELETE FROM whitelist where publicKey = '${publicKey}'`)
-        res.send('Success!')
-    } else {
-        console.log('PublicKey is false')
-        console.log('----------------------')
-        res.send('failed')
-    }
-}
 
 const deleteSelectedList = async (req, res) => {
     //화이트리스트 db에서 여러개 삭제
@@ -54,6 +40,5 @@ const deleteSelectedList = async (req, res) => {
 module.exports = {
     whitelist,
     whitelistPost,
-    deletelist,
     deleteSelectedList
 }
