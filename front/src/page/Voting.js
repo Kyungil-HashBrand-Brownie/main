@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import Proposal from 'components/Proposal';
@@ -6,8 +6,6 @@ import axios from "axios"
 import { endVote, getMyNFTs, getVoteCount, newProposal, resetVote, startVote, submitVote, useAlert, useInput } from 'api';
 import { nftAction } from 'redux/actions/nftAction';
 import AlertModal from 'components/AlertModal';
-
-
 
 function Voting() {
   const customAlert = useAlert();
@@ -17,7 +15,7 @@ function Voting() {
 
  
   // 현재 선택된 안건 번호
-  const [currentProposal, setCurrentProposal] = useState(0);
+  const [currentProposal, setCurrentProposal] = useState(1);
   // voteIdx에 해당하는 안건들
   const [proposals, setProposals] = useState([]);
   // addProposal 했을 때 추가되는 id
@@ -31,8 +29,9 @@ function Voting() {
   // 투표 상태 표시
   const [showVoteStatus, setShowVoteStatus] = useState("투표 시작 전")
 
-  const proposalTitle = useInput("")
+  const proposalLabel = useInput("")
   const proposalContent = useInput("")
+
 
   const getVotingPower = async () => {
     const myNFTs = await getMyNFTs(myAddress);
@@ -48,11 +47,11 @@ function Voting() {
   }
 
   const getCurrent = async () => {
-    const {data:{voteIdx, proposals}} = await axios.get("/api/vote/current")
-    console.log(voteIdx,proposals)
+    const {data:{voteSubject, voteIdx, proposals}} = await axios.get("/api/vote/current")
+    console.log(voteSubject, voteIdx,proposals)
     
     setVoteIdx(voteIdx);
-    setProposals(proposals)
+    setProposals(proposals);
     setProposalId(proposals.length+1)
   }
   
@@ -69,10 +68,19 @@ function Voting() {
 
   const addProposal = async (e) => {
     e.preventDefault()
-    await newProposal(myAddress);
-    await axios.post("/api/vote/add",{proposalId, proposalTitle:proposalTitle.value ,proposalContent : proposalContent.value ,voteIdx})
-    await getCurrent()
+    try {
+      const result = await newProposal(myAddress);
+      if(result.status){
+        await axios.post("/api/vote/add",{proposalId, proposalLabel:proposalLabel.value ,proposalContent : proposalContent.value ,voteIdx})
+        await getCurrent()
+      }
+    }
+    catch (e){
+      console.log(e)
+      return e
+    }
   }
+
 
   const clickEndVote = async ()=>{
     await endVote()
@@ -91,13 +99,13 @@ function Voting() {
   }
 
   const clickResetVote = async () => {
-      await resetVote()
-      dispatch(nftAction.setVoteStatus())
-      // votes에 새로운 row 추가하고 (voteIdx는 새로운것 참조 proposals는 비움) => getList실행
-      const voteIdx = await axios.post("/api/vote/reset")
-      console.log(voteIdx)
-      setVoteIdx(voteIdx)
-      await getList()
+    await resetVote()
+    dispatch(nftAction.setVoteStatus())
+    // votes에 새로운 row 추가하고 (voteIdx는 새로운것 참조 proposals는 비움) => getList실행
+    const voteIdx = await axios.post("/api/vote/reset")
+    console.log(voteIdx)
+    setVoteIdx(voteIdx)
+    await getList()
   }
 
   useEffect(()=> {
@@ -177,6 +185,7 @@ function Voting() {
       >
         <div key={`inline-radio`} className="mb-3">
           {
+            proposals.length &&
             proposals.map((proposal,index) => <Proposal key={index} label={proposal.proposalContent} index={index+1} onChange={changeSelected} />)
           }
         </div>
@@ -192,7 +201,7 @@ function Voting() {
       >
         <InputGroup className="mb-3">
           <InputGroup.Text >Title</InputGroup.Text>
-          <Form.Control aria-label="Title" {...proposalTitle} required />
+          <Form.Control aria-label="Title" {...proposalLabel} required />
         </InputGroup>
         <InputGroup className="mb-3">
           <InputGroup.Text >Content</InputGroup.Text>
@@ -212,10 +221,11 @@ function Voting() {
       { voteList.length &&
       voteList.map((vote,index)=>
         <div key={index}>
-        <div>voteIdx : {vote.voteIdx}</div>
-        <div>startDate : {vote.startDate}</div>
-        <div>endDate : {vote.endDate}</div>
-        <div>selectedProposal : {vote.selectedProposal}</div>
+          <div>voteIdx : {vote.voteIdx}</div>
+          <div>voteSubject : {vote.voteSubject}</div>
+          <div>selectedProposal : {vote.selectedProposal}</div>
+          <div>startDate : {vote.startDate}</div>
+          <div>endDate : {vote.endDate}</div>
         </div>
       )}
     </div>

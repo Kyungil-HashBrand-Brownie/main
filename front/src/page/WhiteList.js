@@ -1,7 +1,5 @@
 import React, { useState, useRef } from 'react';
 import styled from "styled-components";
-import Logo from '../img/logo.png';
-import axios from 'axios';
 import Exit from '../img/exit.png';
 
 const StyledBody = styled.div`
@@ -45,7 +43,7 @@ const StyledModalExit = styled.img`
 
 const WhiteList = () => {
     const uploadImg = useRef(0);
-    const [image, setImage] = useState(Logo);
+    // const [image, setImage] = useState(Logo);
 
     const onUploadImg = async (e) => {
         const formData = new FormData();
@@ -69,7 +67,7 @@ const WhiteList = () => {
                 <StyledModalExit src={Exit} alt="modal exit" />
             </div>
             <div>
-                <StyledWhiteListImg src={image} alt="upload img"/>
+                {/* <StyledWhiteListImg src={image} alt="upload img"/> */}
                 <input ref={uploadImg} type='file'
                     className='upload-img'
                     accept='image/*' name='file'

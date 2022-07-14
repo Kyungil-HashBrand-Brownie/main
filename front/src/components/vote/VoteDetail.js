@@ -1,111 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import styled from 'styled-components'
 import { nft1 } from 'img/nft'
 import VoteDescription from './VoteDescription'
 import CommunityTopic from './CommunityTopic'
+import Delete from '../../img/vote/delete.png'
+import _ from 'lodash'
+import {
+    VoteDOuter, VoteDLeftOuter, VoteDRightOuter, VoteDHeaderOuter,
+    VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
+    VoteDArea, VoteButtonDiv, VoteButton, ControlButton, PageButton
+} from './voteModule'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
+import { useAlert } from 'api'
+import AlertModal from 'components/AlertModal'
 
-const VoteDOuter = styled.div`
-    display: flex;
-    width: 100%;
-    height: 100%;
-`
-
-const VoteDLeftOuter = styled.div`
-    position: absolute;
-    right: 1%;
-    top: 8%;
-    display: flex;
-    justify-content: center;
-    /* background: blue; */
-    width: 300px;
-    max-height: 120px;
-    margin-left: 5%;
-    margin-top: 5%;
-`
-
-const VoteDRightOuter = styled.div`
-    /* display: flex; */
-    margin: auto;
-    justify-content: center;
-    /* flex-direction: column; */
-    background: white;
-    padding-bottom: 30px;
-    width: 1200px;
-    min-height: 600px;
-    border-radius: 20px;
-`
-const VoteDHeaderOuter = styled.div`
-    display: flex;
-    /* background: green; */
-    justify-content: center;
-    margin-bottom: 30px;
-`
-const VoteDHeader = styled.div`
-    width: 20%;
-    font-size: 30px;
-    text-align: center;
-    /* background: blue; */
-`
-const VoteDMainOuter = styled.div`
-    display: flex;
-    justify-content: center;
-    /* background: yellow; */
-    min-height: 500px;
-    margin-top: 30px;
-`
-const VoteDMain = styled.div`
-    width: 95%;
-    /* background: white; */
-    background: linear-gradient(orange 0%, orange 4.89%, white 35%, white 90.9%);
-    border: 4mm ridge rgba(211, 220, 50, .6);
-    /* background: rgb(223, 215, 215); */
-    border-radius: 10px;
-`
-const VoteDPart = styled.div`
-    margin: auto;
-    display: flex;
-    width: 90%;
-    /* background: blue; */
-    min-height: 50px;
-    align-items: center;
-    margin-top: 10px;
-    /* background: rgb(223, 215, 215); */
-
-    .vote-textarea {
-        margin-left: 2%;
-        width: 820px;
-    }
-    .proposal-btn {
-        margin-left: 1%;
-    }
-`
-const VoteDType = styled.div`
-    margin-left: 1%;
-    width: 11%;
-    height: 100%;
-    font-size: 20px;
-    border-radius: 3px;
-    /* background: white; */
-    text-align: center;
-`
-const VoteDArea = styled.div`
-    width: 80%;
-    margin-left: 2%;
-    /* background: purple; */
-`
-const VoteButtonDiv = styled.div`
-    /* background: blue; */
-    width: 25%;
-    margin: auto;
-    text-align: center;
-`
-const VoteButton = styled.button`
-    width: 160px;
-    font-size: 18px;
-    border-radius: 3px;
-    margin-top: 30px;
-`
 const VoteTCBodyImg = styled.div`
     width: 150px;
     height: 150px;
@@ -122,79 +32,172 @@ const VoteTCBodyImg = styled.div`
         transform: scale(1.06);
     }
 `
-const ControlButton = styled.div`
-    width: 25%;
-    margin: auto;
-    text-align: center;
-`
-const PageButton = styled.button`
-    width: 160px;
-    font-size: 18px;
-    margin-top: 10px;
-    border-radius: 3px;
-`
 
-const VoteDetail = () => {
+const VoteDetail = ({ id }) => {
+    const customAlert = useAlert();
+
+    const {nickname} = useSelector(state => state.nft);
+
+    const [counter, setCounter] = useState([{
+        id: 0,
+        content: '',
+        state: false,
+    }])
+
+    const handleSubmit = async (e)=> {
+        e.preventDefault();
+        const title = e.target.title.value
+        const content = e.target.content.value
+        let proposalGroup = e.target.proposal
+        if(proposalGroup){
+            let proposals = [];
+            if(proposalGroup.length) {
+                proposalGroup.forEach((proposal)=> {
+                    if(proposal.value) proposals.push(proposal.value)
+                })
+                console.log(proposals)
+                
+                const data = {title, content, proposals, nickname}
+                await axios.post('/api/community/voteWrite',data)
+            }
+            else {
+                customAlert.open("1개 이상 안건을 등록해주세요")
+            }
+        }
+        else{
+            const data = {title, content, nickname}
+            await axios.post('/api/community/write',data)
+        }
+        
+    }
+
+    const addProposal = (proposal) => {
+        let compareIdx = counter[counter.length - 1].id
+        if (proposal.id == compareIdx) {
+            if (proposal.content == '') customAlert.open('안건을 입력해 주세요.')
+            else {
+                let newArr = _.cloneDeep(counter)
+                newArr = newArr.map(item => {
+                    if (item.id == compareIdx) {
+                        item.state = true
+                    }
+                    return item
+                })
+                newArr.push({
+                        id: compareIdx + 1,
+                        content: '',
+                        state: false,
+                })
+                setCounter(newArr)
+            }
+        }
+    }
+
+    const delProposal = (item) => {
+        let newArr = _.cloneDeep(counter);
+        newArr = newArr.filter((arr) => arr.id != item.id)
+        setCounter(newArr)
+    } 
+
+    const proposalContent = (e, item) => {
+        let data = {...item, content: e.target.value};
+        let newArr = _.cloneDeep(counter).map((arr) => {
+            if (arr.id == item.id) return data;
+            return arr
+        })
+        setCounter(newArr)
+    }
+
     return (
+        <>
+        <AlertModal {...customAlert}/>
         <VoteDOuter>
-        <VoteDLeftOuter>
-            <CommunityTopic />
-        </VoteDLeftOuter>
+            <VoteDLeftOuter>
+                <CommunityTopic />
+            </VoteDLeftOuter>
 
-        <VoteDRightOuter>
-            <VoteDHeaderOuter>
-                <VoteDHeader>글 작성하기</VoteDHeader>
-            </VoteDHeaderOuter>
-            <VoteDescription />
-            <VoteDMainOuter>
-                <VoteDMain>
-                    <VoteTCBodyImg img={nft1}/>
-                    <VoteDPart>
-                        <VoteDType>안건제목 </VoteDType>
-                        <Form.Control
-                            as="textarea"
-                            className='vote-textarea'
-                            style={{ height: '20px' }}
-                            />
-                        {/* <VoteDInput /> */}
-                    </VoteDPart>
-                    <VoteDPart>
-                        <VoteDType>안건내용/<br />배경 </VoteDType>
+            <VoteDRightOuter>
+                <VoteDHeaderOuter>
+                    <VoteDHeader>글 작성하기</VoteDHeader>
+                </VoteDHeaderOuter>
+                <VoteDescription />
+                <VoteDMainOuter>
+                    <VoteDMain>
+                        <VoteTCBodyImg img={nft1} />
+                        <Form onSubmit={handleSubmit}>
+                        <VoteDPart>
+                            <VoteDType>제목</VoteDType>
                             <Form.Control
-                            as="textarea"
-                            className='vote-textarea'
-                            style={{ height: '200px' }}
+                                as="textarea"
+                                className='vote-textarea'
+                                style={{ height: '20px', resize: 'none'}}
+                                name='title'
+                                required
                             />
-                    </VoteDPart>
-                    <VoteDPart>
-                        <VoteDType>안건</VoteDType>
+                        </VoteDPart>
+                        <VoteDPart>
+                            <VoteDType>내용</VoteDType>
                             <Form.Control
-                            as="textarea"
-                            placeholder='안건을 입력해주세요'
-                            className='vote-textarea'
-                            style={{ width: '700px', height: '40px' }}
+                                as="textarea"
+                                className='vote-textarea'
+                                style={{ height: '200px', resize: 'none' }}
+                                name='content'
+                                required
                             />
-                            <button className='proposal-btn'>등록</button>
-                    </VoteDPart>
-                    <VoteDPart>
-                        <VoteDType>파일 업로드 </VoteDType>
-                        <VoteDArea>
-                            <div>파일은 최대 3개까지 업로드 가능합니다.(10MB)</div>
-                            <input type='file' />
-                            <input type='file' />
-                            <input type='file' />
-                        </VoteDArea>
-                    </VoteDPart>
-                    <VoteButtonDiv>
-                        <VoteButton>등록하기</VoteButton>
-                    </VoteButtonDiv>
-                    <ControlButton>
-                        <PageButton>이전화면</PageButton>
-                    </ControlButton>
-                </VoteDMain>
-            </VoteDMainOuter>
-        </VoteDRightOuter>
+                        </VoteDPart>
+                        {id == 0 &&
+                            <>
+                                <VoteDPart>
+                                    <VoteDType>안건</VoteDType>
+                                    <div className='proposal'>
+                                    {counter.map((item, index) => 
+                                        <div 
+                                            className='proposal-form'
+                                            key={index}
+                                        >
+                                        <Form.Control
+                                            disabled={item.state ? true : false}
+                                            as="textarea"
+                                            placeholder='안건을 입력해주세요'
+                                            name='proposal'
+                                            className='vote-text'
+                                            style={{ width: '770px', height: '40px', resize: 'none' }}
+                                            value={item.content}
+                                            onChange={(e) => {proposalContent(e, item)}}
+                                        />
+                                        {!item.state ? 
+                                            <button 
+                                                type='button'
+                                                onClick={() => addProposal(item)}
+                                                className='proposal-btn'>
+                                                등록
+                                            </button>
+                                        : <div className='proposal-del-div'>
+                                            <img 
+                                            className='proposal-del'
+                                            src={Delete} 
+                                            onClick={() => delProposal(item)}
+                                            />
+                                        </div>
+                                        }
+                                        </div>
+                                    )}
+                                    </div>
+                                </VoteDPart>
+                            </>
+                        }
+                        <VoteButtonDiv>
+                            <VoteButton>등록하기</VoteButton>
+                        </VoteButtonDiv>
+                        </Form>
+                        <ControlButton>
+                            <PageButton>이전화면</PageButton>
+                        </ControlButton>
+                    </VoteDMain>
+                </VoteDMainOuter>
+            </VoteDRightOuter>
         </VoteDOuter>
+        </>
     )
 }
 

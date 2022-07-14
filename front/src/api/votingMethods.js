@@ -78,4 +78,10 @@ const submitVote = async (myAddress, proposalId) => {
     }
 }
 
-export {newProposal, startVote, endVote, resetVote, submitVote}
+export {
+    newProposal,
+    startVote,
+    endVote,
+    resetVote,
+    submitVote,
+}

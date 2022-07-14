@@ -1,13 +1,9 @@
 const pool = require("../../db")
 
 const list = async (req, res) => {
-    try{const tQuery = `SELECT voteIdx, selectedProposal, date_format(startDate, '%Y-%m-%d %H:%i') startDate, date_format(endDate, '%Y-%m-%d %H:%i') endDate FROM votes`
+    try{const tQuery = `SELECT voteIdx, selectedProposal, date_format(startDate, '%Y-%m-%d %H:%i') startDate, date_format(endDate, '%Y-%m-%d %H:%i') endDate, voteSubject, voteContent, totalCount FROM votes`
         const [result] = await pool.query(tQuery);
-        if(!result.length) {
-            await pool.query("INSERT INTO votes VALUES ()")
-            const [data] = await pool.query(tQuery);
-            return res.send(data)
-        }
+        
         res.send(result);
     }
     catch (e) {
@@ -19,10 +15,13 @@ const list = async (req, res) => {
 
 const current = async (req, res) => {
     try {
-        const [[result]] = await pool.query("SELECT * FROM votes ORDER BY voteIdx DESC LIMIT 1;");
-        const {voteIdx} = result
-        const [proposals] = await pool.query(`SELECT * FROM proposals WHERE voteIdx=${voteIdx}`)
-        res.json({voteIdx, proposals})
+        const [result] = await pool.query("SELECT * FROM votes ORDER BY voteIdx DESC LIMIT 1;");
+        if(result.length){
+            const {voteSubject, voteIdx} = result
+            const [proposals] = await pool.query(`SELECT * FROM proposals WHERE voteIdx=${voteIdx}`)
+            res.json({voteSubject, voteIdx, proposals})
+        }
+        else res.json({voteSubject:"", voteIdx:0, proposals:[]})
     }
     catch (e) {
         console.log(e);
@@ -34,8 +33,8 @@ const addAction = async (req,res) => {
     try {
         // object에서 value만 array로 
         const data = Object.values(req.body)
-        console.log(data) // [proposalId value, proposalTitle value, proposalContent value ,voteIdx value]
-        const result = await pool.query(`INSERT INTO proposals(proposalId, proposalTitle, proposalContent ,voteIdx, voteCount) VALUES (?, ?, ?, ?, 0)`, data);
+        console.log(data) // [proposalId value, proposalLabel value, proposalContent value ,voteIdx value]
+        const result = await pool.query(`INSERT INTO proposals(proposalId, proposalLabel, proposalContent ,voteIdx, voteCount) VALUES (?, ?, ?, ?, 0)`, data);
         res.send(result)
     }
     catch (e) {
@@ -74,10 +73,11 @@ const resetAction = async (req, res) => {
     }
 }
 
+
 module.exports = {
     list,
     current,
     addAction,
     endAction,
-    resetAction
+    resetAction,
 }

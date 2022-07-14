@@ -14,7 +14,6 @@ const Filter = () => {
     const { filterOpenState, filterOption } = useSelector(state => state.nft)
 
     const changeSelect = (data) => {
-        // console.log(filterOption);
         console.log(data)
         let copyFilterOption = _.cloneDeep(filterOption).map(item => {
             if (data.click) {

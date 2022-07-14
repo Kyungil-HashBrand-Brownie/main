@@ -1,25 +1,24 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import Home from './page/HomePage';
-import Mint from './page/Mint';
 import Header from './components/Header';
 import Footer from './components/Footer'
-import AdminPage from './page/AdminPage';
-import Testpage from './page/Testpage';
-import { useDispatch, useSelector } from 'react-redux';
-import LeftImg3 from './img/chocolate/choco3.png';
-import RightImg from './img/chocolate/choco4.png';
-import Swap from './page/Swap';
-import NftList from './page/NftList';
-import NoPage from 'page/NoPage';
-import Collection from 'page/Collection';
-import Voting from 'page/Voting';
-import DetailCollecion from 'components/collection/DetailCollecion';
-import Community from 'page/Community';
-import VoteDetail from 'components/vote/VoteDetail';
-import PrivateRoute from 'route/PrivateRoute';
+import DetailCollecion from './components/collection/DetailCollecion';
+import { PrivateRoute, CommunityWriteRoute, CommunityReadRoute} from './route';
+import { Home, Mint, AdminPage, Testpage, 
+  Swap, NoPage, NftList, Collection, 
+  Voting, DifNetwork, Community } from './page'
+
+const paths = ['/', '/mint', '/test', '/collection', '/voting',
+  '/community', '/community/:id', '/community/read/:type/:id',
+  '/write/:id', '/detailcollection/:edition', '*']
+  
+const elements = [<Home />, <Mint />, <Testpage />, <Collection />, 
+  <Voting />, <Community />, <PrivateRoute />, <CommunityReadRoute />,
+  <CommunityWriteRoute />, <DetailCollecion />, <NoPage />
+]
 
 function App() {
   const {isDeployer} = useSelector(state=>state.nft)
@@ -44,14 +43,7 @@ function App() {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/mint" element={<Mint />} />
-        <Route path="/test" element={<Testpage />} />
-        <Route path='/collection' element={<Collection />} />
-        <Route path='/voting' element={<Voting />} />
-        <Route path='/community' element={<Community />} />
-        <Route path='/votewrite' element={<VoteDetail />} />
-        <Route path='/community/:id' element={<PrivateRoute />} />
+        {paths.map((path, index) => <Route key={path} path={path} element={elements[index]} />)}
         {
           isBaobab
           ?
@@ -66,13 +58,10 @@ function App() {
           </>
           :
           <>
-          <Route path='/swap' element={<div>테스트 네트워크가 아닙니다</div>}/>
-          <Route path='/nftlist' element={<div>테스트 네트워크가 아닙니다</div>}/>
+          <Route path='/swap' element={<DifNetwork />}/>
+          <Route path='/nftlist' element={<DifNetwork />}/>
           </>
         }
-        {/* <Route path="/whitelist" element={<WhiteList/>} />  */}
-        <Route path='/detailcollection/:edition' element={<DetailCollecion />} />
-        <Route path='*' element={<NoPage />} />
       </Routes>
     </div>
     <Footer />

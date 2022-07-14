@@ -19,32 +19,10 @@ import CommunityVoteTable from 'components/vote/CommunityVoteTable'
 import VoteDetail from 'components/vote/VoteDetail'
 import Community from './Community'
 import ClockTest from 'components/ClockTest'
-import SliderTest from 'components/SliderTest'
+import Slider from 'components/Slider'
 
-const HomeBackImgPosition = styled.div`
-    /* width: 100%;
-    height: 500px;
-    background-image: url(${viliage2});
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center; 
-    z-index: -2; */
-`
-const TestMain = styled.div`
-  z-index:4;
 
-  .test-aa {
-  }
-`
 
-const DDiv = styled.div`
-  width: 100%;
-  height: 400px;
-  background-color: black;
-  /* z-index: 4px; */
-  opacity: 0.5;
-`
 const Testpage = () => {
 
   return (
@@ -67,7 +45,8 @@ const Testpage = () => {
         {/* <VoteDetail /> */}
         {/* <Community /> */}
         {/* <ClockTest /> */}
-        <SliderTest />
+        {/* <Slider /> */}
+        {/* <SlideTest /> */}
     </div>
   )
 }

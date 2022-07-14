@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import {nftInstance} from "configs";
 import { batchMint, checkWhite, nftNum, useAlert, whitelistMint, whitelistNftNum } from 'api';
 import AlertModal from 'components/AlertModal';
 
@@ -26,9 +25,6 @@ const StyledMain = styled.div`
 
 const StyledDiv = styled.div`
     padding: 0.375rem 0;
-    font-size: 1rem;
-    color: green;
-    line-height: 1.5;
     margin-bottom: 30px;
     margin-left: 
         ${props => props.price == 50 ? '10px' : 0} ;
@@ -69,13 +65,13 @@ const PreSale = ({ amount, img, price, title }) => {
     }
 
     const preMint = async () => {
-        if(!myAddress){
+        if (!myAddress) {
             return customAlert.open("지갑을 먼저 연결해주세요")
         }
-        const result = await batchMint(myAddress,count)
+        const result = await batchMint(myAddress, count)
         console.log(result)
-        if(result.status){
-            dispatch({type: "WALLET_REFRESH"})
+        if (result.status) {
+            dispatch({ type: "WALLET_REFRESH" })
             customAlert.open("해당 지갑 주소로 민팅되었습니다!");
         }
         else customAlert.open("transaction fail")
@@ -84,7 +80,7 @@ const PreSale = ({ amount, img, price, title }) => {
     }
 
     const whiteMint = async () => {
-        const result = await whitelistMint(myAddress,count)
+        const result = await whitelistMint(myAddress, count)
         if (result.status) {
             dispatch({ type: "WALLET_REFRESH" })
             customAlert.open("해당 지갑 주소로 민팅되었습니다!");
@@ -95,7 +91,7 @@ const PreSale = ({ amount, img, price, title }) => {
     }
 
     // 전체 민팅 갯수
-    const getMintCnt = async ()=> {
+    const getMintCnt = async () => {
         const PreCount = await nftNum()
         setPreCount(PreCount)
         const WhiteCount = await whitelistNftNum()
@@ -106,7 +102,7 @@ const PreSale = ({ amount, img, price, title }) => {
         getMintCnt()
     }, [])
 
-    
+
     return (
         <div className="freelist">
             <AlertModal {...customAlert} />
@@ -115,44 +111,43 @@ const PreSale = ({ amount, img, price, title }) => {
                     <h2 className="mint-title">{title}</h2>
                 </div>
                 {(price == 50 || isWhite)
-                ?
-                <>
-                <div className='mint-img-container'>
-                    <StyledDiv price={price}>
-                        <img src={img} style={{ width: price==1 ? 220 : 187, height: 220 }} />
-                    </StyledDiv>
-                </div>
-                <div className='mint-count-box'>
-                    <StyledButton onClick={() => countMinus()}>  - </StyledButton>
-                    <span>Mint : {count}</span>
-                    <StyledButton onClick={() => countAdd()}> +</StyledButton>
-                </div>
-                <Container className="mint-info-box">
-                    <Row className='mint-info-row'>
-                        <Col><i>Price</i></Col>
-                        <Col>{price} BTK</Col>
-                    </Row>
-                    <Row className='mint-info-row'>
-                        <Col><i>Per transaction</i></Col>
-                        <Col className='mint-text'>최대 5 개</Col>
-                    </Row>
-                    <Row className='mint-info-row'>
-                        <Col><i>Amount</i></Col>
-                        <Col>{amount == '/30' ? whiteCount + amount : PreCount + amount}</Col>
-                    </Row>
-                </Container>
-                <br />
-                <Button 
-                    className="mint-wal-connect-btn" 
-                    variant="success" 
-                    onClick={price==50 ? preMint : whiteMint}>
-                    Mint
-                </Button>
-                </>
-                :
-                <Container className="not-whitelist">
-                    <div>화이트리스트가 아닙니다</div>
-                </Container>
+                    ?
+                    <>
+                        <div className='mint-img-container'>
+                            <StyledDiv price={price}>
+                                <img src={img} style={{ width: price == 1 ? 220 : 187, height: 220 }} />
+                            </StyledDiv>
+                        </div>
+                        <div className='mint-count-box'>
+                            <StyledButton onClick={() => countMinus()}>  - </StyledButton>
+                            <span>Mint : {count}</span>
+                            <StyledButton onClick={() => countAdd()}> +</StyledButton>
+                        </div>
+                        <Container className="mint-info-box">
+                            <Row className='mint-info-row'>
+                                <Col><i>Price</i></Col>
+                                <Col>{price} BTK</Col>
+                            </Row>
+                            <Row className='mint-info-row'>
+                                <Col><i>Per transaction</i></Col>
+                                <Col className='mint-text'>최대 5 개</Col>
+                            </Row>
+                            <Row className='mint-info-row'>
+                                <Col><i>Amount</i></Col>
+                                <Col>{amount == '/30' ? whiteCount + amount : PreCount + amount}</Col>
+                            </Row>
+                        </Container>
+                        <Button
+                            className="mint-wal-connect-btn"
+                            variant="success"
+                            onClick={price == 50 ? preMint : whiteMint}>
+                            Mint
+                        </Button>
+                    </>
+                    :
+                    <Container className="not-whitelist">
+                        <div>화이트리스트가 아닙니다</div>
+                    </Container>
                 }
             </StyledMain>
         </div>
