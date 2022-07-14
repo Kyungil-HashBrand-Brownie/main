@@ -171,8 +171,8 @@ const Header = () => {
         
         setVoteStatus();
     },[])
-    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/voting', '/community'];
-    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Voting', 'Community'];
+    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/community'];
+    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Community'];
 
     let pages = paths.map((path, index) => {
         let data = {
