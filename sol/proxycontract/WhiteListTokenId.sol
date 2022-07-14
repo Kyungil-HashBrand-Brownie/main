@@ -2,7 +2,7 @@
 pragma solidity ^0.8.4;
 
 contract WhiteListTokenId {
-    uint256[30] numberArr;
+    uint256[25] numberArr;
     function setArray(uint256 _startNumber) public {
         for(uint256 i = 0; i < numberArr.length; i++) {
             numberArr[i] = (_startNumber + i);
@@ -16,7 +16,7 @@ contract WhiteListTokenId {
             numberArr[i] = temp;
         }
     }
-    function show() public view returns(uint256[30] memory) {
+    function show() public view returns(uint256[25] memory) {
         return numberArr;
     }
     function showId(uint256 _index) public view returns(uint256) {
