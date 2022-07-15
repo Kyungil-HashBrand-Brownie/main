@@ -20,8 +20,10 @@ const elements = [<Home />, <Mint />, <Testpage />, <Collection />,
   <CommunityWriteRoute />, <DetailCollecion />, <NoPage />
 ]
 
+// asdfnjkasdnfkjnasdkjfn;kasdjn;kjdsan
+
 function App() {
-  const {isDeployer} = useSelector(state=>state.nft)
+  const {isDeployer} = useSelector(state=>state.main)
 
   const [isBaobab,setIsBaobab] = useState(false)
 

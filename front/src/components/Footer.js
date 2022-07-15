@@ -4,7 +4,7 @@ import twit from "../img/footer/twit.png"
 import disc from "../img/footer/disc.png"
 import inst from "../img/footer/inst.png"
 import tele from "../img/footer/tele.png"
-import { footerImg } from 'img/footer';
+import  footerImg  from '../img/footer/footer.png';
 
 const Outer = styled.div`
     flex: 1;
