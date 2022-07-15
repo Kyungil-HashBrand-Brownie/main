@@ -15,11 +15,14 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useAlert } from 'api'
 import AlertModal from 'components/AlertModal'
+import { useNavigate } from 'react-router-dom'
 
 const VoteDetail = ({ id }) => {
     const customAlert = useAlert();
 
     const {nickname} = useSelector(state => state.main);
+
+    const navigate = useNavigate();
 
     const [counter, setCounter] = useState([{
         id: 0,
@@ -32,11 +35,11 @@ const VoteDetail = ({ id }) => {
         const title = e.target.title.value
         const content = e.target.content.value
         let proposalGroup = e.target.proposal
-        if(proposalGroup){
+        if(id === "0"){ //vote category
             let proposals = [];
             if(proposalGroup.length) {
                 proposalGroup.forEach((proposal)=> {
-                    if(proposal.value) proposals.push(proposal.value)
+                    if(proposal.value) proposals.push(proposal.value);
                 })
                 console.log(proposals)
                 
@@ -47,8 +50,8 @@ const VoteDetail = ({ id }) => {
                 customAlert.open("1개 이상 안건을 등록해주세요")
             }
         }
-        else{
-            const data = {title, content, nickname}
+        else{ //board category
+            const data = {title, content, nickname};
             await axios.post('/api/community/write',data)
         }
         
@@ -91,6 +94,9 @@ const VoteDetail = ({ id }) => {
         setCounter(newArr)
     }
 
+    const movePage = () => {
+        navigate(-1);
+    }
     return (
         <>
         <AlertModal {...customAlert}/>
@@ -108,73 +114,73 @@ const VoteDetail = ({ id }) => {
                     <VoteDMain>
                         <VoteTCBodyImg img={nft1} />
                         <Form onSubmit={handleSubmit}>
-                        <VoteDPart>
-                            <VoteDType>제목</VoteDType>
-                            <Form.Control
-                                as="textarea"
-                                className='vote-textarea'
-                                style={{ height: '20px', resize: 'none'}}
-                                name='title'
-                                required
-                            />
-                        </VoteDPart>
-                        <VoteDPart>
-                            <VoteDType>내용</VoteDType>
-                            <Form.Control
-                                as="textarea"
-                                className='vote-textarea'
-                                style={{ height: '200px', resize: 'none' }}
-                                name='content'
-                                required
-                            />
-                        </VoteDPart>
-                        {id == 0 &&
-                            <>
-                                <VoteDPart>
-                                    <VoteDType>안건</VoteDType>
-                                    <div className='proposal'>
-                                    {counter.map((item, index) => 
-                                        <div 
-                                            className='proposal-form'
-                                            key={index}
-                                        >
-                                        <Form.Control
-                                            disabled={item.state ? true : false}
-                                            as="textarea"
-                                            placeholder='안건을 입력해주세요'
-                                            name='proposal'
-                                            className='vote-text'
-                                            style={{ width: '770px', height: '40px', resize: 'none' }}
-                                            value={item.content}
-                                            onChange={(e) => {proposalContent(e, item)}}
-                                        />
-                                        {!item.state ? 
-                                            <button 
-                                                type='button'
-                                                onClick={() => addProposal(item)}
-                                                className='proposal-btn'>
-                                                등록
-                                            </button>
-                                        : <div className='proposal-del-div'>
-                                            <img 
-                                            className='proposal-del'
-                                            src={Delete} 
-                                            onClick={() => delProposal(item)}
+                            <VoteDPart>
+                                <VoteDType>제목</VoteDType>
+                                <Form.Control
+                                    as="textarea"
+                                    className='vote-textarea'
+                                    style={{ height: '20px', resize: 'none'}}
+                                    name='title'
+                                    required
+                                />
+                            </VoteDPart>
+                            <VoteDPart>
+                                <VoteDType>내용</VoteDType>
+                                <Form.Control
+                                    as="textarea"
+                                    className='vote-textarea'
+                                    style={{ height: '200px', resize: 'none' }}
+                                    name='content'
+                                    required
+                                />
+                            </VoteDPart>
+                            {id == 0 &&
+                                <>
+                                    <VoteDPart>
+                                        <VoteDType>안건</VoteDType>
+                                        <div className='proposal'>
+                                        {counter.map((item, index) => 
+                                            <div 
+                                                className='proposal-form'
+                                                key={index}
+                                            >
+                                            <Form.Control
+                                                disabled={item.state ? true : false}
+                                                as="textarea"
+                                                placeholder='안건을 입력해주세요'
+                                                name='proposal'
+                                                className='vote-text'
+                                                style={{ width: '770px', height: '40px', resize: 'none' }}
+                                                value={item.content}
+                                                onChange={(e) => {proposalContent(e, item)}}
                                             />
+                                            {!item.state ? 
+                                                <button 
+                                                    type='button'
+                                                    onClick={() => addProposal(item)}
+                                                    className='proposal-btn'>
+                                                    등록
+                                                </button>
+                                            : <div className='proposal-del-div'>
+                                                <img
+                                                className='proposal-del'
+                                                src={Delete}
+                                                onClick={() => delProposal(item)}
+                                                />
+                                            </div>
+                                            }
+                                            </div>
+                                        )}
                                         </div>
-                                        }
-                                        </div>
-                                    )}
-                                    </div>
-                                </VoteDPart>
-                            </>
-                        }
-                        <VoteButtonDiv>
-                            <VoteButton>등록하기</VoteButton>
-                        </VoteButtonDiv>
+                                    </VoteDPart>
+                                </>
+                            }
+                            <VoteButtonDiv>
+                                <VoteButton type='submit'>등록하기</VoteButton>
+                            </VoteButtonDiv>
                         </Form>
                         <ControlButton>
-                            <PageButton>이전화면</PageButton>
+                            <PageButton type='button' onClick={movePage}>이전화면</PageButton>
                         </ControlButton>
                     </VoteDMain>
                 </VoteDMainOuter>

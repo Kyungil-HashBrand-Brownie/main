@@ -1,36 +1,61 @@
 const pool = require("../../db")
 
 const view = async (req, res) => {
-    try {
-        const [result] = await pool.query("SELECT * FROM voteCommunity;")
-        const data = []
-        for(let i=0; i< result.length/2; i++){
-            let coupledArr = result.slice(i*2, (i*2)+2)
-            if (coupledArr.length == 1) {
-                coupledArr.push({title: '', content:'', nickname: '', state: ''})
+    const {type} = req.params;
+    if(type === "vote") {
+        try {
+            const [result] = await pool.query("SELECT * FROM voteCommunity;")
+            const data = []
+            for(let i=0; i< result.length/2; i++){
+                let coupledArr = result.slice(i*2, (i*2)+2)
+                if (coupledArr.length == 1) {
+                    coupledArr.push({title: '', content:'', nickname: '', state: ''})
+                }
+                data.push(coupledArr)
             }
-            data.push(coupledArr)
+            console.log(data)
+            res.send(data);
         }
-        console.log(data)
-        res.send(data);
+        catch(e) {
+            console.log(e);
+            res.send("fail")
+        }
     }
-    catch(e) {
-        console.log(e);
-        res.send("fail")
+    else if(type === "board") {
+        try {
+            const [result] = await pool.query("SELECT * FROM community")
+            res.send(result);
+        }
+        catch(e) {
+            console.log(e);
+            res.send("fail")
+        }
     }
 }
 
 const read = async (req, res) => {
     const {type, idx} = req.params;
     console.log(type)
-    try {
-        const [[result]] = await pool.query(`SELECT * FROM voteCommunity WHERE idx=${idx};`);
-        result.proposals = JSON.parse(result.proposals);
-        res.send(result);
+    if(type === "vote") {
+        try {
+            const [[result]] = await pool.query(`SELECT * FROM voteCommunity WHERE idx=${idx};`);
+            result.proposals = JSON.parse(result.proposals);
+            res.send(result);
+        }
+        catch(e) {
+            console.log(e);
+            res.send("fail")
+        }
     }
-    catch(e) {
-        console.log(e);
-        res.send("fail")
+    else if(type === "board") {
+        try {
+            const [[result]] = await pool.query(`SELECT * FROM community WHERE idx=${idx}`)
+            res.send(result);
+        }
+        catch(e) {
+            console.log(e);
+            res.send("fail")
+        }
     }
 }
 
@@ -38,7 +63,7 @@ const writeAction = async (req, res) => {
     const data = Object.values(req.body);
     console.log(data)
     try {
-        const [result] = await pool.query(`INSERT INTO community(title, content, nickname) VALUES (?,?,?)`,data)
+        const [result] = await pool.query(`INSERT INTO community(title, content, nickname) VALUES (?,?,?)`, data);
         res.send(result);
     }
     catch(e) {

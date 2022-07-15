@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import styled from 'styled-components'
@@ -11,6 +11,7 @@ import Form from 'react-bootstrap/Form';
 import { trash , trash2 } from '../img'
 import { checkWhite, addWhite, removeSelectedWhites, useAlert } from 'api'
 import AlertModal from './AlertModal'
+import { nftAction } from 'redux/actions/nftAction'
 
 const Trash = styled.div`
     width: 50px;
@@ -19,6 +20,7 @@ const Trash = styled.div`
 
 const WhiteList = () => {
     const customAlert = useAlert();
+    const dispatch = useDispatch();
 
     const { myAddress } = useSelector(state => state.nft);
     const [list, setList] = useState([]);
@@ -26,10 +28,6 @@ const WhiteList = () => {
     const [deleteList, setDeleteList] = useState([]);
 
     const addInput = useRef("")
-    const delInput = useRef("")
-    const checkInput = useRef("")
-
-    // console.log(list);
 
     const getWhiteList = async () => {
         try {
@@ -45,14 +43,13 @@ const WhiteList = () => {
         console.log(deleteList)
 
         console.log(checkDelete) // false
-        // let data = document.query
         if (!checkDelete) setDeleteList([])
         else delWhitelists(deleteList)
-        setCheckDelete(!checkDelete)      // console.log(data)
+        setCheckDelete(!checkDelete)
     }
 
     useEffect(() => {
-        getWhiteList()
+        getWhiteList();
     }, [])
 
 
@@ -74,6 +71,7 @@ const WhiteList = () => {
                     if (result === "Success!") {
                         customAlert.open("화이트리스트 설정 완료되었습니다!");
                     }
+                    dispatch(nftAction.checkWhitelist(myAddress));
                     getWhiteList()
                 })
         }
@@ -88,17 +86,13 @@ const WhiteList = () => {
             )
             if (data === "Success!") {
                 customAlert.open("화이트리스트 제거 완료되었습니다!");
+                dispatch(nftAction.checkWhitelist(myAddress));
             }
             getWhiteList()
         }
     }
 
 
-    const showWhitelist = async () => {
-        alert(await checkWhite(checkInput.current))
-    }
-
-    const [checkedA, setCheckedA] = useState(false);
 
     const checkData = (publicKey, checked) => {
         if (checked) {

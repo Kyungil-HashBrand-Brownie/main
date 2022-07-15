@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const CommunityTable = () => {
     const navigate = useNavigate();
+
+    const [data, setData] = useState(null);
+
+    const getData = async () => {
+        let result = await axios.get('/api/community/view/board');
+        // console.log('data: ', result.data);
+        setData(result.data);
+    }
+
+    useEffect(()=> {
+        getData();
+    })
+
 
     return (
         <>
@@ -18,45 +32,24 @@ const CommunityTable = () => {
             </tr>
         </thead>
         <tbody className='vote-table-header'>
-            <tr>
-            <td className='table-title'>
-                <FontAwesomeIcon className='table-icon' icon={faCircle} />
-                <div 
-                    className='title'
-                    onClick={() => navigate('/community/read/board/1')}
-                >보팅하기싫다
-                </div>
-            </td>
-            <td className='table-writer'>NJH</td>
-            <td className='table-date'>2022.7.4</td>
-            <td className='table-view'>333</td>
-            </tr>
-            <tr>
-            <td className='table-title'>
-                <FontAwesomeIcon className='table-icon' icon={faCircle} />
-                <div 
-                    className='title'
-                    onClick={() => navigate('/community/read/board/2')}
-                >빨리 위빠사나 가고싶다
-                </div>
-            </td>
-            <td className='table-writer'>PSJ</td>
-            <td className='table-date'>2022.7.3</td>
-            <td className='table-view'>1</td>
-            </tr>
-            <tr>
-            <td className='table-title'>
-                <FontAwesomeIcon className='table-icon' icon={faCircle} />
-                <div 
-                    className='title'
-                    onClick={() => navigate('/community/read/board/3')}
-                >홍대 클럽 가고싶다
-                </div>
-            </td>
-            <td className='table-writer'>WSJ</td>
-            <td className='table-date'>2022.7.2</td>
-            <td className='table-view'>1991</td>
-            </tr>
+            {
+                data?.map((item, index) => 
+                <tr>
+                <td className='table-title'>
+                    <FontAwesomeIcon className='table-icon' icon={faCircle} />
+                    <div 
+                        className='title'
+                        onClick={() => navigate(`/community/read/board/${item.idx}`)}
+                    >{item.title}
+                    </div>
+                </td>
+                <td className='table-writer'>{item.nickname}</td>
+                <td className='table-date'>2022.7.4</td>
+                <td className='table-view'>333</td>
+                </tr>
+                )
+            }
+            
         </tbody>
         </table>
         </>
