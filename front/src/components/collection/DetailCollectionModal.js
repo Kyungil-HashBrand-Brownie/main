@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal'
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import Slider from "react-slick";
-// import { faCamera } from "@fortawesome/free-regular-svg-icons";
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesLeft , faAngleLeft , faAngleRight  , faAnglesRight} from "@fortawesome/free-solid-svg-icons";
-// import { faAnglesLeft } from "@fortawesome/free-solid-svg-icons";
-// import { faAnglesLeft } from "@fortawesome/fontawesome-svg-core";
-// import { faAnglesLeft } from "@fortawesome/free-solid-svg-icons";
-// import { fa-solid} from "@fortawesome/free-solid-svg-icons"
 
 
 
@@ -19,7 +11,6 @@ const DetailCollectionModal = ({collectionAlldata,page,bool}) => {
     const navigate = useNavigate()
     const [show, setShow] = useState(false);
     const [positionMiddle, setPositionMiddle] = useState(parseInt(page < 3 ? 3 : page));
-    // console.log("hey"  , collectionAlldata)
 
     const settings = {
         dots: true,
@@ -36,15 +27,10 @@ const DetailCollectionModal = ({collectionAlldata,page,bool}) => {
 
     return (
         <>
-            {/* <Button variant="primary" onClick={() => setShow(true)} className="leadmoreButton">
-            Lead More NFT
-            </Button> */}
             <button onClick={() => setShow(true)} className="but raise">
                 More<br />NFT
             </button>
 
-    
-            {/* <ModalPosition> */}
             <Modal
             show={show}
             onHide={() => setShow(false)}
@@ -90,15 +76,12 @@ const DetailCollectionModal = ({collectionAlldata,page,bool}) => {
                     )
                 
                     : null
-                // }
                 }
-            {/* :null */}
                 </Slider>
                 </div>
                 </Modal.Body>   
 
                 </Modal>
-            {/* </ModalPosition> */}
         </>
     );
   }
