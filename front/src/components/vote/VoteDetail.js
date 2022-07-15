@@ -9,29 +9,12 @@ import _ from 'lodash'
 import {
     VoteDOuter, VoteDLeftOuter, VoteDRightOuter, VoteDHeaderOuter,
     VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
-    VoteDArea, VoteButtonDiv, VoteButton, ControlButton, PageButton
+    VoteTCBodyImg, VoteButtonDiv, VoteButton, ControlButton, PageButton
 } from './voteModule'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useAlert } from 'api'
 import AlertModal from 'components/AlertModal'
-
-const VoteTCBodyImg = styled.div`
-    width: 150px;
-    height: 150px;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 50%;
-    background-size: cover;
-    background-image:
-        ${props => props.img && `url(${props.img})`};
-    cursor: pointer;
-
-    &:hover {
-        transform: scale(1.06);
-    }
-`
 
 const VoteDetail = ({ id }) => {
     const customAlert = useAlert();

@@ -24,7 +24,7 @@ const CommunityTable = () => {
                 <div 
                     className='title'
                     onClick={() => navigate('/community/read/board/1')}
-                >보팅 ㅈㄴ하기싫네
+                >보팅하기싫다
                 </div>
             </td>
             <td className='table-writer'>NJH</td>
@@ -50,7 +50,7 @@ const CommunityTable = () => {
                 <div 
                     className='title'
                     onClick={() => navigate('/community/read/board/3')}
-                >홍대 클럽 아그자아
+                >홍대 클럽 가고싶다
                 </div>
             </td>
             <td className='table-writer'>WSJ</td>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
-import styled from 'styled-components'
 import { nft1 } from 'img/nft'
 import VoteDescription from './VoteDescription'
 import CommunityTopic from './CommunityTopic'
@@ -10,29 +9,11 @@ import { useNavigate } from 'react-router-dom'
 import {
     VoteDOuter, VoteDLeftOuter, VoteDRightOuter, VoteDHeaderOuter,
     VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
-    ControlButton, PageButton
+    ControlButton, PageButton, VoteTCBodyImg
 } from './voteModule'
-import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useAlert } from 'api'
 import AlertModal from 'components/AlertModal'
-
-const VoteTCBodyImg = styled.div`
-    width: 150px;
-    height: 150px;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 50%;
-    background-size: cover;
-    background-image:
-        ${props => props.img && `url(${props.img})`};
-    cursor: pointer;
-
-    &:hover {
-        transform: scale(1.06);
-    }
-`
 
 const CommunityRead = () => {
     const navigate = useNavigate();
@@ -47,7 +28,7 @@ const CommunityRead = () => {
 
     const getData = async () => {
         let result = await axios.get(`http://localhost:4000/api/community/read/${type}/${id}`);
-        console.log('result: ', result);
+        // console.log('result: ', result);
         setData(result.data);
     }
 

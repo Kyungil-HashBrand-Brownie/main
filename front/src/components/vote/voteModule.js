@@ -1,6 +1,23 @@
 import styled from 'styled-components'
 
-/* VoteDetail */
+/* CommunityRead */
+export const VoteTCBodyImg = styled.div`
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    background-size: cover;
+    background-image:
+        ${props => props.img && `url(${props.img})`};
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.06);
+    }
+`
+
 export const VoteDOuter = styled.div`
     display: flex;
     width: 100%;

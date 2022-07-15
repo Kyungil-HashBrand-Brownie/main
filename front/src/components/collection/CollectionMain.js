@@ -1,26 +1,16 @@
 import React from 'react'
-import _ from 'lodash'
-import styled from 'styled-components'
 import {
-    CollectionMainOuter, CollectionHeader, CollectionBody,
+    CollectionCardImg, CollectionMainOuter, CollectionHeader, CollectionBody,
     CollectionRow, CollectionCardOuter, CollectionCard, CollectionCardDetail
 } from './collectionModule'
 import { useNavigate } from 'react-router-dom'
-
-const CollectionCardImg = styled.div`
-    width: 100%;
-    height: 200px;
-    background-image: url(
-        ${(props) => props.image && props.image});
-    background-size: cover;
-`
 
 const CollectionMain = ({ data, row }) => {
 
     const navigate = useNavigate('')
 
     const moveToDetailPage = (edi) => {
-        console.log(edi);
+        // console.log(edi);
         navigate(`/detailcollection/${edi}`)
     }
 
