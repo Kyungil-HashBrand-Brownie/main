@@ -85,7 +85,8 @@ const StyledInfo = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer, isWhite, klayBalance, btkBalance, nickname } = useSelector(state => state.nft);
+    const {  myAddress} = useSelector(state => state.nft);
+    const { modalState , walletRefresh , isDeployer , isWhite, klayBalance, btkBalance , nickname } = useSelector(state => state.main)
 
     const customAlert = useAlert();
     const changeNickname = useAlert();

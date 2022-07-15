@@ -11,7 +11,8 @@ import { FilterOuter, FilterInner, FilterHeader, FilterMain,
 
 const Filter = () => {
     const dispatch = useDispatch();
-    const { filterOpenState, filterOption } = useSelector(state => state.nft)
+    // const { filterOpenState, filterOption } = useSelector(state => state.nft)
+    const { filterOpenState, filterOption } = useSelector(state => state.main)
 
     const changeSelect = (data) => {
         console.log(data)

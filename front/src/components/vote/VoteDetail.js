@@ -36,7 +36,7 @@ const VoteTCBodyImg = styled.div`
 const VoteDetail = ({ id }) => {
     const customAlert = useAlert();
 
-    const {nickname} = useSelector(state => state.nft);
+    const {nickname} = useSelector(state => state.main);
 
     const [counter, setCounter] = useState([{
         id: 0,

@@ -17,7 +17,8 @@ const CollectionOuter = styled.div`
 const Collection = () => {
     const [data, setData] = useState(null);
     const [row, setRow] = useState(0);
-    const { sortOption, filterOption } = useSelector(state => state.nft);
+    // const { sortOption, filterOption } = useSelector(state => state.nft);
+    const { sortOption, filterOption } = useSelector(state => state.main);
 
     const [test, setTest] = useState("<Sort></Sort>")
 
