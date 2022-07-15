@@ -14,7 +14,8 @@ const partsCount = {
 
 const FilterDetail = ({ parts }) => {
     const dispatch = useDispatch();
-    const { filterOption } = useSelector(state => state.nft);
+    // const { filterOption } = useSelector(state => state.nft);
+    const { filterOption } = useSelector(state => state.main);
     let partOptions = new Array(partsCount[parts]).fill(0).map((item, index) => {
         if (parts == 'Background') parts = 'Back' 
         return parts + (index+1)

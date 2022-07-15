@@ -21,7 +21,7 @@ const DetailCollecion = () => {
   let params = useParams();
   // 리렌더링 해야 해당 페이지로 간다.
   let page = params.edition;
-  const { loading } = useSelector(state => state.nft);
+  const { loading } = useSelector(state => state.main);
 
   // let [page, setPage] = useState(params.edition) 
 
@@ -38,10 +38,10 @@ const DetailCollecion = () => {
     // let result = await axios.get(`/image/image/${page}`);
     // console.log(result)
     let data = result[1].data[0]; // 데이터 배열 형식을 객체로 바꾸기 위해서
-    let allData = result[0].data.map(a => {
-      return {edition: a.edition, addr: a.addr};
+    let allData = result[0].data.map((item, index) => {
+      return {edition: item.edition, addr: item.addr};
     }).sort((a,b) => parseInt(a.edition) - parseInt(b.edition))
-    console.log("all data " , allData)
+    // console.log("all data " , allData)
 
 
     setCollectionData(data)
@@ -71,7 +71,7 @@ const DetailCollecion = () => {
 
   return (
     <div>
-      <ClipLoader loading={loading} css={override} size={20} />
+      {/* <ClipLoader loading={loading} css={override} size={20} /> */}
       {collectionData.addr &&
       <div className="layout-container">
         <div className="detailImglNft-item1">

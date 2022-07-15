@@ -25,8 +25,8 @@ const LogoContainer = styled.div`
 
 const Header = () => {
     const dispatch = useDispatch();
-    const { modalState, myAddress, walletRefresh, isDeployer, 
-        isWhite, klayBalance, btkBalance, nickname } = useSelector(state => state.nft);
+    const { myAddress } = useSelector(state => state.nft);
+    const { modalState, walletRefresh, isDeployer, isWhite, klayBalance, btkBalance, nickname } = useSelector(state => state.main)
 
     const customAlert = useAlert();
     const changeNickname = useAlert();
@@ -107,8 +107,8 @@ const Header = () => {
         setVoteStatus();
     }, [])
 
-    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/voting', '/community'];
-    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Voting', 'Community'];
+    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/community'];
+    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Community'];
 
     let pages = paths.map((path, index) => {
         return {
@@ -147,8 +147,8 @@ const Header = () => {
                         </Nav>
                         {
                             myAddress
-                                ? <UserBar 
-                                    showInfo={showInfo} myAddress={myAddress} 
+                                ? <UserBar
+                                    showInfo={showInfo} myAddress={myAddress}
                                     modalState={modalState} isWhite={isWhite}
                                     nickname={nickname} changeNickname={changeNickname}
                                     klayBalance={klayBalance} btkBalance={btkBalance}

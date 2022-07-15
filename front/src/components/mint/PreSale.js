@@ -49,7 +49,8 @@ const StyledButton = styled.button`
 const PreSale = ({ amount, img, price, title }) => {
     const customAlert = useAlert()
     const dispatch = useDispatch();
-    const { myAddress, isWhite } = useSelector(state => state.nft);
+    const { myAddress } = useSelector(state => state.nft);
+    const { isWhite } = useSelector(state => state.main);
 
     const [count, setCount] = useState(1)
     const [PreCount, setPreCount] = useState(0);
