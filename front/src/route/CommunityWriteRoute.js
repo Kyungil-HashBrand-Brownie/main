@@ -1,14 +1,14 @@
 import React from 'react'
+import { Navigate, useParams } from 'react-router-dom'
 import VoteWrite from 'page/VoteWrite'
-import NoPage from 'page/NoPage'
-import { useParams } from 'react-router-dom'
 
-const WriteRoute = () => {
+const CommunityWriteRoute = () => {
     let { id } = useParams();
+    
     return ( ['0', '1'].includes(id)
     ? <VoteWrite id={id} />
-    : <NoPage />
+    : <Navigate to='/nopage' />
     )
 }
 
-export default WriteRoute
+export default CommunityWriteRoute

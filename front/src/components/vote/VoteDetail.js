@@ -13,6 +13,8 @@ import {
 } from './voteModule'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
+import { useAlert } from 'api'
+import AlertModal from 'components/AlertModal'
 
 const VoteTCBodyImg = styled.div`
     width: 150px;
@@ -32,6 +34,8 @@ const VoteTCBodyImg = styled.div`
 `
 
 const VoteDetail = ({ id }) => {
+    const customAlert = useAlert();
+
     const {nickname} = useSelector(state => state.nft);
 
     const [counter, setCounter] = useState([{
@@ -42,21 +46,35 @@ const VoteDetail = ({ id }) => {
 
     const handleSubmit = async (e)=> {
         e.preventDefault();
-        let proposals = [];
-        let proposalGroup = e.target.title
-        proposalGroup.forEach((proposal)=>proposals.push(proposal.value))
-        console.log(proposals)
-        // const title = e.target.Title.value
-        // const content = e.target.Content.value
-        // const proposals = e.target.proposals.value
-        // const data = {title, content, proposals, nickname}
-        // await axios.post('/api/community/write',data)
+        const title = e.target.title.value
+        const content = e.target.content.value
+        let proposalGroup = e.target.proposal
+        if(proposalGroup){
+            let proposals = [];
+            if(proposalGroup.length) {
+                proposalGroup.forEach((proposal)=> {
+                    if(proposal.value) proposals.push(proposal.value)
+                })
+                console.log(proposals)
+                
+                const data = {title, content, proposals, nickname}
+                await axios.post('/api/community/voteWrite',data)
+            }
+            else {
+                customAlert.open("1개 이상 안건을 등록해주세요")
+            }
+        }
+        else{
+            const data = {title, content, nickname}
+            await axios.post('/api/community/write',data)
+        }
+        
     }
 
     const addProposal = (proposal) => {
         let compareIdx = counter[counter.length - 1].id
         if (proposal.id == compareIdx) {
-            if (proposal.content == '') alert('안건을 입력해 주세요.')
+            if (proposal.content == '') customAlert.open('안건을 입력해 주세요.')
             else {
                 let newArr = _.cloneDeep(counter)
                 newArr = newArr.map(item => {
@@ -91,6 +109,8 @@ const VoteDetail = ({ id }) => {
     }
 
     return (
+        <>
+        <AlertModal {...customAlert}/>
         <VoteDOuter>
             <VoteDLeftOuter>
                 <CommunityTopic />
@@ -112,6 +132,7 @@ const VoteDetail = ({ id }) => {
                                 className='vote-textarea'
                                 style={{ height: '20px', resize: 'none'}}
                                 name='title'
+                                required
                             />
                         </VoteDPart>
                         <VoteDPart>
@@ -121,6 +142,7 @@ const VoteDetail = ({ id }) => {
                                 className='vote-textarea'
                                 style={{ height: '200px', resize: 'none' }}
                                 name='content'
+                                required
                             />
                         </VoteDPart>
                         {id == 0 &&
@@ -137,7 +159,7 @@ const VoteDetail = ({ id }) => {
                                             disabled={item.state ? true : false}
                                             as="textarea"
                                             placeholder='안건을 입력해주세요'
-                                            name='text'
+                                            name='proposal'
                                             className='vote-text'
                                             style={{ width: '770px', height: '40px', resize: 'none' }}
                                             value={item.content}
@@ -145,6 +167,7 @@ const VoteDetail = ({ id }) => {
                                         />
                                         {!item.state ? 
                                             <button 
+                                                type='button'
                                                 onClick={() => addProposal(item)}
                                                 className='proposal-btn'>
                                                 등록
@@ -161,15 +184,6 @@ const VoteDetail = ({ id }) => {
                                     )}
                                     </div>
                                 </VoteDPart>
-                                {/* <VoteDPart>
-                                    <VoteDType>파일 업로드 </VoteDType>
-                                    <VoteDArea>
-                                        <div>파일은 최대 3개까지 업로드 가능합니다.(10MB)</div>
-                                        <input type='file' />
-                                        <input type='file' />
-                                        <input type='file' />
-                                    </VoteDArea>
-                                </VoteDPart> */}
                             </>
                         }
                         <VoteButtonDiv>
@@ -183,6 +197,7 @@ const VoteDetail = ({ id }) => {
                 </VoteDMainOuter>
             </VoteDRightOuter>
         </VoteDOuter>
+        </>
     )
 }
 

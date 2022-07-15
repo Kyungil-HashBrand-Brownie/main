@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import {
     VoteTCardOuter, VoteTCHeader, VoteTCContent, VoteTCUser, VoteTCState, VoteTCBodyOuter,
     VoteTCBody, VoteTCBodyHeader, VoteTCBodyTitle, VoteTCBodyVoteCount,
@@ -26,24 +27,34 @@ const VoteTCBodyImg = styled.div`
         ${props => props.img && `url(${props.img})`};
 `
 
-const VoteTableCard = ({ img, img1 }) => {
+const VoteTableCard = ({ data, img, img1, id }) => {
+    const navigate = useNavigate();
+    // console.log('data: ', data)
+    const {title, content, nickname, state} = data;
+    // console.log('id: ', id)
+
     return (
-        <VoteTCardOuter>
+        <VoteTCardOuter
+            style={{visibility: content=='' ? 'hidden' : 'visible'}}
+            // onClick={() => {console.log(id)}}
+            onClick={() => {navigate(`/community/read/vote/${id}`)}}
+        >
             <VoteTCHeader>
                 <VoteTCImage img={img}></VoteTCImage>
                 <VoteTCContent>
-                    <VoteTCUser><i>Username</i></VoteTCUser>
-                    <VoteTCState>완료</VoteTCState>
+                    <VoteTCUser><i>{nickname}</i></VoteTCUser>
+                    <VoteTCState>{state}</VoteTCState>
                 </VoteTCContent>
             </VoteTCHeader>
             <VoteTCBodyOuter>
                 <VoteTCBody>
                     <VoteTCBodyHeader>
-                        <VoteTCBodyTitle>투표 주제 </VoteTCBodyTitle>
-                        <VoteTCBodyVoteCount> 153 Vote</VoteTCBodyVoteCount>
+                        <VoteTCBodyTitle>{title} </VoteTCBodyTitle>
+                        {state !== '승인 대기 중' && <VoteTCBodyVoteCount> 153 Vote</VoteTCBodyVoteCount>}
                     </VoteTCBodyHeader>
                     <VoteTCBodyMain>
-                        <VoteTCBodyContent>투표 내용 설명~</VoteTCBodyContent>
+                        <VoteTCBodyContent>{content}</VoteTCBodyContent>
+                        {/* <VoteTCImage img={img}></VoteTCImage> */}
                         <VoteTCBodyImg img={img1}></VoteTCBodyImg>
                     </VoteTCBodyMain>
                 </VoteTCBody>

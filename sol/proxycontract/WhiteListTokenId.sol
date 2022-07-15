@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-contract NormalListTokenId {
-    uint256[120] numberArr;
+contract WhiteListTokenId {
+    uint256[25] numberArr;
     function setArray(uint256 _startNumber) public {
         for(uint256 i = 0; i < numberArr.length; i++) {
             numberArr[i] = (_startNumber + i);
@@ -16,7 +16,7 @@ contract NormalListTokenId {
             numberArr[i] = temp;
         }
     }
-    function show() public view returns(uint256[120] memory) {
+    function show() public view returns(uint256[25] memory) {
         return numberArr;
     }
     function showId(uint256 _index) public view returns(uint256) {

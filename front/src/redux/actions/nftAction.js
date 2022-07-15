@@ -10,7 +10,7 @@
 //             let [
 //                 /* 함수 */
 //              ] = await Promise.all([/* 함수 */])
-            
+
 //             dispatch({
 //                 type: "/* '보낼 메세지' */",
 //                 payload: {
@@ -25,53 +25,55 @@
 // }
 // }
 
-import { caver, nftInstance,  } from "configs";
+import { caver, nftInstance, } from "configs";
 import { checkWhite, getContractOwner, getTokenBalance, getUserRank, getVoteStatus } from "api";
 
-function getReward(contract, stake, renewMine, renewStaked) {
+function getReward(contract, stake) {
 
     return async (dispatch) => {
         let reward = 0;
-        // console.log('there')
-        // console.log(stake)
-        // console.log(contract)
 
         try {
-            dispatch({type: 'LOADING_START'})
+            dispatch({ type: 'LOADING_START' })
             for (let i = 0; i < stake.length; i++) {
-                let whenStaked = await contract.methods.whenStaked(stake[i].id.slice(1)).call();            
+                let whenStaked = await contract.methods.whenStaked(stake[i].id.slice(1)).call();
                 let currentTimestamp = parseInt(+ new Date() / 1000);
                 reward += (currentTimestamp - whenStaked);
-                // console.log('reward: ', reward);
             }
-            dispatch({type: 'GET_REWARD_SUCCESS', payload: reward })
-        } catch(error) {
+            dispatch({ type: 'GET_REWARD_SUCCESS', payload: reward })
+        } catch (error) {
             console.log(error);
-            dispatch({type: 'GET_REWARD_FAILURE'})
+            dispatch({ type: 'GET_REWARD_FAILURE' })
         }
     }
 }
 
 
-const setUserInfo =  (address) => {
+const setUserInfo = (address) => {
+
     return async (dispatch) => {
-        if(address){
-            const contractOwner = await getContractOwner()
-            const isDeployer = caver.utils.toChecksumAddress(address) === contractOwner
-            dispatch({type: 'CHECK_ISDEPLOYER', payload: isDeployer})
-            const userRank = await getUserRank(address);
-            dispatch({type: "GET_USER_RANK", payload: userRank})
+        try {
+            if (address) {
+                const contractOwner = await getContractOwner()
+                const isDeployer = caver.utils.toChecksumAddress(address) === contractOwner
+                dispatch({ type: 'CHECK_ISDEPLOYER', payload: isDeployer })
+                const userRank = await getUserRank(address);
+                dispatch({ type: "GET_USER_RANK", payload: userRank })
+            }
+            else dispatch({ type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress });
+        } catch (e) {
+            console.log(e)
         }
-        else dispatch({type: 'ADDRESS_CHANGE_SUCCESS', payload: window.klaytn.selectedAddress});
     }
 }
 
 const checkWhitelist = (address) => {
+
     return async (dispatch) => {
         if (address) {
             try {
                 const isWhite = await checkWhite(address)
-                dispatch({ type : "CHECK_ISWHITELIST" , payload:isWhite })
+                dispatch({ type: "CHECK_ISWHITELIST", payload: isWhite })
             }
             catch (e) {
                 throw e
@@ -81,18 +83,28 @@ const checkWhitelist = (address) => {
 }
 
 const setVoteStatus = () => {
+    
     return async (dispatch) => {
-        const voteStatus = await getVoteStatus()
-        // beforeVote : 0 , nowVote : 1, afterVote : 2
-        dispatch({type:"SET_VOTE_STATUS", payload : voteStatus})
+        try {
+            const voteStatus = await getVoteStatus()
+            // beforeVote : 0 , nowVote : 1, afterVote : 2
+            dispatch({ type: "SET_VOTE_STATUS", payload: voteStatus })
+        }
+        catch (e) {
+            console.log(e)
+        }
     }
 }
 
 const setToken = (address) => {
     return async (dispatch) => {
-        const tokenBalance = await getTokenBalance(address)
+        try {
+            const tokenBalance = await getTokenBalance(address)
 
-        dispatch({type: 'GET_TOKEN_BALANCE',payload: tokenBalance})
+            dispatch({ type: 'GET_TOKEN_BALANCE', payload: tokenBalance })
+        } catch (e) {
+            console.log(e)
+        }
     }
 }
 

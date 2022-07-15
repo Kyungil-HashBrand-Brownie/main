@@ -11,6 +11,11 @@ export const CollectionMainOuter = styled.div`
     border-radius: 20px;
     margin-bottom: 20px;
     transform: translate(10%, 0);
+
+    @media screen and (max-width: 1500px) {
+        max-width: 100%;
+        margin-left:16% ;
+    }
 `
 export const CollectionHeader = styled.div`
     text-align: center;
@@ -34,6 +39,10 @@ export const CollectionRow = styled.div`
     height: 300px;
     border-radius: 5px;
     align-items: center;
+    /* @media screen and (max-width: 700px) {
+        display: none;
+        margin-left:100px;
+    } */
 `
 export const CollectionCardOuter = styled.div`
     width: 220px;
@@ -157,6 +166,12 @@ export const SortOuter = styled.div `
     border-radius: 10px;
     background: rgb(241, 149, 165);
     box-shadow: white 7px 10px 7px;
+
+    @media screen and (max-width: 1800px) {
+        max-width: 15%;
+
+    }
+
 `
 export const SortHeader = styled.div`
     margin-left: 10px;

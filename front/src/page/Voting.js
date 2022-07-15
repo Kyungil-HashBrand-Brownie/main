@@ -7,8 +7,6 @@ import { endVote, getMyNFTs, getVoteCount, newProposal, resetVote, startVote, su
 import { nftAction } from 'redux/actions/nftAction';
 import AlertModal from 'components/AlertModal';
 
-
-
 function Voting() {
   const customAlert = useAlert();
 
@@ -187,6 +185,7 @@ function Voting() {
       >
         <div key={`inline-radio`} className="mb-3">
           {
+            proposals.length &&
             proposals.map((proposal,index) => <Proposal key={index} label={proposal.proposalContent} index={index+1} onChange={changeSelected} />)
           }
         </div>

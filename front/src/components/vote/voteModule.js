@@ -79,6 +79,8 @@ export const VoteDPart = styled.div`
         margin-left: 1%;
         width: 70px;
         height: 30px;
+        border: 2px solid orange;
+        border-radius: 3px;
     }
     .proposal-del-div {
         width: 70px;
@@ -95,6 +97,10 @@ export const VoteDPart = styled.div`
     }
     .proposal-btn:hover, .proposal-del:hover {
         transform: scale(1.05);
+        background: rgb(212, 201, 201);
+    }
+    .proposal-input {
+        margin-bottom: 30px;
     }
 `
 export const VoteDType = styled.div`
@@ -113,23 +119,37 @@ export const VoteButtonDiv = styled.div`
     width: 25%;
     margin: auto;
     text-align: center;
+    /* background: red; */
+    margin-top: 30px;
 `
 export const VoteButton = styled.button`
     width: 160px;
     font-size: 18px;
     border-radius: 3px;
-    margin-top: 30px;
+    border: 2px solid orange;
+
+    &:hover {
+        transform: scale(1.05);
+        background: rgb(212, 201, 201);
+    }
 `
 export const ControlButton = styled.div`
     width: 25%;
     margin: auto;
     text-align: center;
+    margin-bottom: 20px;
 `
 export const PageButton = styled.button`
     width: 160px;
     font-size: 18px;
     margin-top: 10px;
     border-radius: 3px;
+    border: 2px solid orange;
+
+    &:hover {
+        transform: scale(1.05);
+        background: rgb(212, 201, 201);
+    }
 `
 
 /* VoteDescription */
@@ -156,6 +176,11 @@ export const VoteTCardOuter = styled.div`
     width: 530px;
     margin: auto;
     margin-top: 10px;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.03);
+    }
 `
 export const VoteTCHeader = styled.div`
     height: 100px;
@@ -177,7 +202,8 @@ export const VoteTCUser = styled.div`
 export const VoteTCState = styled.div`
     position: absolute;
     font-weight: bold;
-    transform: translate(348px, -35px);
+    transform: translate(310px, -35px);
+    background: yellow;
 `
 export const VoteTCBodyOuter = styled.div`
     display: flex;
@@ -232,13 +258,15 @@ export const TopicOuter = styled.div`
     background: white;
     display: flex;
     flex-direction: column;
-    border-radius: 4px;
+    border-radius: 15px;
     background: white;
 `
 export const TopicHeader = styled.div`
     text-align: center;
     border-bottom: 2px solid black;
     font-size: 20px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     font-weight: bold;
     background: pink;
 `
@@ -248,6 +276,7 @@ export const Topic = styled.div`
     border-radius: 10px;
     padding: 0px 15px;
     margin: auto;
+    text-align: center;
     cursor: pointer;
     
     &:hover {
