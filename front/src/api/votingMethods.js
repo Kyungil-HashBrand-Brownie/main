@@ -1,4 +1,4 @@
-import { mintingContract, votingAddr, nftInstance, caver, votingContract } from "configs";
+import { votingAddr, caver, votingContract } from "configs";
 import { getContractOwner } from "./viewMethods";
 
 const methodExecution = async (from,encodedAbi,amount=0) =>{

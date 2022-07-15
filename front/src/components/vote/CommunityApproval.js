@@ -34,9 +34,9 @@ const VoteTCBodyImg = styled.div`
     }
 `
 
-const CommunityRead = () => {
+const CommunityApproval = () => {
     const navigate = useNavigate();
-    const { type, id } = useParams();
+    const { id } = useParams();
 
     const {isDeployer} = useSelector(state => state.nft);
 
@@ -46,10 +46,10 @@ const CommunityRead = () => {
         proposals:[],
         state:""
     });
-
     const getData = async () => {
-        let result = await axios.get(`http://localhost:4000/api/community/read/${type}/${id}`);
-        console.log('result: ', result);
+        let result = await axios.get(`http://localhost:4000/api/community/read/vote/${id}`);
+        console.log(result)
+        // console.log('data: ', result.data);
         setData(result.data);
     }
 
@@ -60,11 +60,11 @@ const CommunityRead = () => {
     const customAlert = useAlert();
 
     const movePage = () => {
-        type == 'vote' ? navigate('/community/vote') : navigate('/community/default')
+        navigate(-1);
     }
 
-    const moveApproval = ()=> {
-        navigate(`/community/approval/${id}`)
+    const submitApporoval = ()=> {
+        
     }
 
 
@@ -78,17 +78,15 @@ const CommunityRead = () => {
 
             <VoteDRightOuter>
                 <VoteDHeaderOuter>
-                    <VoteDHeader>게시판</VoteDHeader>
+                    <VoteDHeader>안건 승인</VoteDHeader>
                 </VoteDHeaderOuter>
-                <VoteDescription />
                 <VoteDMainOuter>
                     <VoteDMain>
                         <VoteTCBodyImg img={nft1} />
-                        <Form>
+                        <Form onSubmit={submitApporoval}>
                         <VoteDPart>
                             <VoteDType>제목</VoteDType>
                             <Form.Control
-                                readOnly
                                 as="textarea"
                                 className='vote-textarea'
                                 style={{ height: '20px', resize: 'none'}}
@@ -99,7 +97,6 @@ const CommunityRead = () => {
                         <VoteDPart>
                             <VoteDType>내용</VoteDType>
                             <Form.Control
-                                readOnly
                                 as="textarea"
                                 className='vote-textarea'
                                 style={{ height: '200px', resize: 'none' }}
@@ -107,7 +104,6 @@ const CommunityRead = () => {
                                 value={data.content}
                             />
                         </VoteDPart>
-                            { type == 'vote' &&
                                 <VoteDPart>
                                     <VoteDType>안건</VoteDType>
                                     <div className='proposal'>
@@ -117,32 +113,21 @@ const CommunityRead = () => {
                                             key={index}
                                         >
                                         <Form.Control
-                                            readOnly
                                             as="textarea"
                                             value={item}
                                             name='proposal'
                                             className='vote-text'
-                                            style={{ width: '820px', height: '40px', resize: 'none' }}
+                                            style={{ width: '837px', height: '40px', resize: 'none' }}
                                         />
                                         </div>
                                      )}
                                     </div>
                                 </VoteDPart>
-                            }
                         </Form>
                         <ControlButton>
                             <PageButton onClick={movePage}>이전화면</PageButton>
                         </ControlButton>
-                        {
-                            isDeployer && type === 'vote' 
-                            ?
-                            <ControlButton>
-                                <PageButton onClick={moveApproval}>승인하기</PageButton>
-                            </ControlButton>
-                            :null
-                        }
-                        
-                    </VoteDMain>  
+                    </VoteDMain>
                 </VoteDMainOuter>
             </VoteDRightOuter>
         </VoteDOuter>
@@ -150,4 +135,4 @@ const CommunityRead = () => {
     )
 }
 
-export default CommunityRead
+export default CommunityApproval
