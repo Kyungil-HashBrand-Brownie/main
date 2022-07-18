@@ -9,5 +9,6 @@ import Collection from './Collection';
 import Voting from './Voting';
 import DifNetwork from './DifNetwork';
 import Community from './Community';
+import VoteWrite from './VoteWrite';
 
-export { Home, Mint, AdminPage, Testpage, Swap, NoPage, NftList, Collection, Voting, DifNetwork, Community}
+export { Home, Mint, AdminPage, Testpage, Swap, NoPage, NftList, Collection, Voting, DifNetwork, Community, VoteWrite}

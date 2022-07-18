@@ -20,6 +20,7 @@ import VoteDetail from 'components/vote/VoteDetail'
 import Community from './Community'
 import ClockTest from 'components/ClockTest'
 import Slider from 'components/Slider'
+import Test from 'components/Test'
 
 
 
@@ -27,6 +28,7 @@ const Testpage = () => {
 
   return (
     <div>
+        <Test />
         {/* <EarthVote /> */}
         {/* <QuitVote /> */}
         {/* <SlideShow /> */}
