@@ -16,7 +16,7 @@ const HomeImgCardSide = ({ getData, setClick }) => {
                     }}
                     onClick={() => setClick(item.id)}>
                     <h1>{item.num}</h1>
-                    <h2>{item.header}</h2>
+                    <h2 className={index == 0 ? 'tapestry-side-header1' : 'tapestry-side-header2'}>{item.header}</h2>
                 </div>
             )}
         </>
