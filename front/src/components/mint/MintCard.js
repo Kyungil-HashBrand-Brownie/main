@@ -36,17 +36,6 @@ const Style_Mint_div = styled.div`
 const MintCard = () => {  
     return (
       <>
-      {/* <Style_Mint_div 
-          style={{ 
-            position: "absolute", 
-          // width: "100%", height: "120%", 
-          // top: "5%", left: "10%", 
-          zIndex: "-2" 
-        }} 
-          // src='https://www.google.com/imgres?imgurl=https%3A%2F%2Fthumbs.dreamstime.com%2Fb%2Fbaking-buns-oven-vector-image-tray-which-lie-hot-68181559.jpg&imgrefurl=https%3A%2F%2Fwww.dreamstime.com%2Fstock-illustration-baking-buns-oven-vector-image-tray-which-lie-hot-image68181559&tbnid=vYdHEH5_NKaxTM&vet=12ahUKEwiP5amco-H4AhWLypQKHTroBxYQMygAegUIARDGAQ..i&docid=KFCQZUMUwxo5OM&w=800&h=800&hl=ko&safe=images&ved=2ahUKEwiP5amco-H4AhWLypQKHTroBxYQMygAegUIARDGAQ'
-          // src={Main1}
-      src={mintBackground}
-      /> */}
         <img src={mintBackground} className="styled_mint_card"/>
         <div className='MintCard'>
         <Container className="mint-container">
