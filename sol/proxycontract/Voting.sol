@@ -15,9 +15,9 @@ contract VoteContract {
     address private owner;  // 주인
     // 투표상태
     enum VoteStatus {
-        beforeVote, // 안건 발의 중
-        nowVote,    // 투표 중
-        afterVote   // 투표 끝
+        beforeVote, // 안건 발의 중, 투표 전
+        nowVote    // 투표 중
+        // afterVote   // 투표 끝
     }  
 
     VoteStatus public voteStatus;
@@ -68,6 +68,15 @@ contract VoteContract {
         _;
     }
 
+    // 투표했나 확인
+    function checkVote() public view returns(bool) {
+        if(voters[msg.sender].hasVotes != forHasVotes) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     // 발의 권한 확인
     modifier permissionProposal() { 
         require(brownyNFT.userRank() > 2 || msg.sender == owner, "You do not have permission");
@@ -85,13 +94,13 @@ contract VoteContract {
         _;
     }
     // 투표 끝 이야?
-    modifier isAfterVote {
-        require(voteStatus == VoteStatus.afterVote, "Voting not finished");
-        _;
-    }
+    // modifier isAfterVote {
+    //     require(voteStatus == VoteStatus.afterVote, "Voting not finished");
+    //     _;
+    // }
 
     // 발의 함수
-    function newProposal() public isBeforeVote permissionProposal { 
+    function newProposal() private isBeforeVote permissionProposal { 
         proposals[proposalCounts] = Proposal(proposalCounts + 1, 0);
         proposalCounts++;
     }
@@ -137,13 +146,14 @@ contract VoteContract {
         return proposals[_index].votedCounts;
     }
 
-    // 투표 끝 함수 
-    function endVote() public onlyOwner isNowVote {
-        voteStatus = VoteStatus.afterVote;
-    }
+    // // 투표 끝 함수 
+    // function endVote() public onlyOwner isNowVote {
+    //     voteStatus = VoteStatus.afterVote;
+    //     restartVote();
+    // }
 
-    // 투표 재시작
-    function restartVote() public onlyOwner isAfterVote {
+    // 투표 끝 & 초기화
+    function endVote() public onlyOwner isNowVote {
         for(uint i = 0; i < proposalCounts; i++){
             delete proposals[i];
         }

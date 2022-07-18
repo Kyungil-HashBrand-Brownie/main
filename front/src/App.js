@@ -9,15 +9,15 @@ import DetailCollecion from './components/collection/DetailCollecion';
 import { PrivateRoute, CommunityWriteRoute, CommunityReadRoute} from './route';
 import { Home, Mint, AdminPage, Testpage, 
   Swap, NoPage, NftList, Collection, 
-  Voting, DifNetwork, Community, VoteWrite } from './page'
+  DifNetwork, Community, VoteWrite } from './page'
 import CommunityApproval from 'components/vote/CommunityApproval';
 
-const paths = ['/', '/mint', '/test', '/collection', '/voting',
+const paths = ['/', '/mint', '/test', '/collection',
   '/community', '/community/:id', '/community/read/:type/:id',
   '/write', '/detailcollection/:edition', '*']
   
 const elements = [<Home />, <Mint />, <Testpage />, <Collection />, 
-  <Voting />, <Community />, <PrivateRoute />, <CommunityReadRoute />,
+  <Community />, <PrivateRoute />, <CommunityReadRoute />,
   <VoteWrite />, <DetailCollecion />, <NoPage />
 ]
 

@@ -50,6 +50,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "checkVote",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "endProposal",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -58,13 +71,6 @@
 			{
 				"inputs": [],
 				"name": "endVote",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "newProposal",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -99,13 +105,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "restartVote",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -394,11 +393,11 @@
 			]
 		},
 		"contracts/Voting.sol": {
-			"keccak256": "0xd6b1a2c994a410dcbf4b70c45c7e1b959bc159c55428663bc677443cacf3a471",
+			"keccak256": "0x6553a622b5f181a036f9ba2996a5d7898a660b03b9407a8d1023844fa2b028e8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://88504c1c0d59a2e5c179a6ac1351aac434f60350a4550ed261bce1ddbc8031a8",
-				"dweb:/ipfs/QmUTfY4Y8nfPMPQvz5FcqaMRvE7zSVEDTU917iqrQGeFRK"
+				"bzz-raw://bb4d4864848054bb9c5f2de57673a98340c4fa25fba16dd242223f3287729b74",
+				"dweb:/ipfs/QmVP7ki6WXw9rrpFxk3teCVNmL2G3JcoHVCG9cENM7WKpD"
 			]
 		},
 		"contracts/Whitelist/Whitelist.sol": {

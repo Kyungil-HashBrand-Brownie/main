@@ -12,15 +12,18 @@ import {
     ControlButton, PageButton, VoteTCBodyImg
 } from './voteModule'
 import axios from 'axios'
-import { useAlert } from 'api'
+import { checkVote, getMyNFTs, getMyStaked, submitVote, useAlert } from 'api'
 import AlertModal from 'components/AlertModal'
+import Proposal from 'components/Proposal'
+import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 
 const CommunityRead = () => {
     const navigate = useNavigate();
     const { type, id } = useParams();
     console.log('type: ', type)
 
-    const {isDeployer} = useSelector(state => state.nft);
+    const {isDeployer} = useSelector(state => state.main);
+    const {voteStatus, myAddress} = useSelector(state => state.nft);
 
     const [data, setData] = useState({
         title:"",
@@ -28,6 +31,16 @@ const CommunityRead = () => {
         proposals:[],
         state:""
     });
+
+    const [hasVote, setHasVote] = useState(false);
+    const [currentProposal, setCurrentProposal] = useState(1);
+    const [votingPower, setVotingPower] = useState(0);
+    
+    const getVotingPower = async () => {
+        const myNFTs = await getMyNFTs(myAddress);
+        const myStaked = await getMyStaked(myAddress)
+        setVotingPower(myNFTs.length + myStaked.length)
+    }
 
     const getData = async () => {
         let result = await axios.get(`http://localhost:4000/api/community/read/${type}/${id}`);
@@ -48,6 +61,36 @@ const CommunityRead = () => {
         navigate(`/community/approval/${id}`)
     }
 
+    const changeSelected = (e) => {
+        console.log(e.target.value)
+        setCurrentProposal(e.target.value)
+    }
+
+
+    const getHasVote = async () => {
+        const result = await checkVote();
+        setHasVote(result)
+        console.log(result)
+    }
+
+
+    useEffect(()=> {
+        getHasVote();
+        getVotingPower();
+      },[myAddress])
+
+    const voteSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await submitVote(myAddress ,currentProposal);
+            await axios.post('/api/community/vote', {currentProposal, votingPower})
+        }
+        catch (e) {
+            console.log(e)
+            return e
+        }
+      }
+
 
     return (
         <>
@@ -61,6 +104,7 @@ const CommunityRead = () => {
                 <VoteDMainOuter>
                     <VoteDMain>
                         <VoteTCBodyImg img={nft1} />
+                        <div>{data.state}</div>
                         <Form>
                         <VoteDPart>
                             <VoteDType>제목</VoteDType>
@@ -93,6 +137,9 @@ const CommunityRead = () => {
                                             className='proposal-form'
                                             key={index}
                                         >
+                                        {
+                                            data.state==="투표 진행 중" && <Proposal key={index} index={index+1} onChange={changeSelected} />
+                                        }
                                         <Form.Control
                                             readOnly
                                             as="textarea"
@@ -107,15 +154,34 @@ const CommunityRead = () => {
                                 </VoteDPart>
                             }
                         </Form>
+                        {
+                        data.state==="투표 진행 중" &&
+                            <ControlButton>
+                                {!hasVote 
+                                ? 
+                                <>
+                                    <PageButton onClick={voteSubmit}>투표하기</PageButton>
+                                    <div>My Voting Power : {votingPower}</div>
+                                </>
+                                : <div>이미 투표했습니다</div>
+                                } 
+                            </ControlButton>
+                        }
                         <ControlButton>
                             <PageButton onClick={movePage}>이전화면</PageButton>
                         </ControlButton>
                         {
-                            isDeployer && type === 'vote' 
+                            isDeployer && type === 'vote' && data.state=="승인 대기 중"
                             ?
-                            <ControlButton>
-                                <PageButton onClick={moveApproval}>승인하기</PageButton>
-                            </ControlButton>
+                                voteStatus==='0'
+                                ?
+                                <ControlButton>
+                                    <PageButton onClick={moveApproval}>승인하기</PageButton>
+                                </ControlButton>
+                                :
+                                <ControlButton>
+                                    이전 투표 진행중
+                                </ControlButton>
                             :null
                         }
                         

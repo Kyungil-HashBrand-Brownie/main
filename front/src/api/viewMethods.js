@@ -25,6 +25,8 @@ const getVoteStatus = async() => await votingContract.methods.voteStatus().call(
 
 const getVoteCount = async(index) => await votingContract.methods.numberOfVotes(index-1).call();
 
+const checkVote = async() => await votingContract.methods.checkVote().call();
+
 export {
     getContractOwner,
     nftNum,
@@ -36,4 +38,5 @@ export {
     getMyStaked,
     getVoteStatus,
     getVoteCount,
+    checkVote,
 };
