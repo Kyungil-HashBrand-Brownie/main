@@ -20,7 +20,6 @@ import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 const CommunityRead = () => {
     const navigate = useNavigate();
     const { type, id } = useParams();
-    console.log('type: ', type)
 
     const {isDeployer} = useSelector(state => state.main);
     const {voteStatus, myAddress} = useSelector(state => state.nft);
@@ -44,6 +43,7 @@ const CommunityRead = () => {
 
     const getData = async () => {
         let result = await axios.get(`http://localhost:4000/api/community/read/${type}/${id}`);
+        console.log(result)
         setData(result.data);
     }
 
@@ -68,15 +68,17 @@ const CommunityRead = () => {
 
 
     const getHasVote = async () => {
-        const result = await checkVote();
+        const result = await checkVote(myAddress);
         setHasVote(result)
         console.log(result)
     }
 
 
     useEffect(()=> {
-        getHasVote();
-        getVotingPower();
+        if(myAddress){
+            getHasVote();
+            getVotingPower();
+        }
       },[myAddress])
 
     const voteSubmit = async (e) => {

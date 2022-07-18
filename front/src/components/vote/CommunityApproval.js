@@ -117,7 +117,7 @@ const CommunityApproval = () => {
         let proposals = [];
         
         proposalGroup.forEach((proposal)=> {
-            if(proposal.value) proposals.push(proposal.value);
+            proposals.push(proposal.value);
         })
         console.log(proposals)
         try {
@@ -133,10 +133,6 @@ const CommunityApproval = () => {
             console.log(e)
             return e
           }
-        
-        
-        
-        
         
     }
 
@@ -202,7 +198,7 @@ const CommunityApproval = () => {
                                                 disabled={item.state ? true : false}
                                                 as="textarea"
                                                 placeholder='안건을 입력해주세요'
-                                                name='proposal'
+                                                name={item.state ? 'proposal' : 'addProposal'}
                                                 className='vote-text'
                                                 style={{ width: '770px', height: '40px', resize: 'none' }}
                                                 value={item.content}
@@ -228,7 +224,7 @@ const CommunityApproval = () => {
                                     </div>
                                 </VoteDPart>
                             <ControlButton>
-                                <PageButton onClick={movePage}>이전화면</PageButton>
+                                <PageButton type='button' onClick={movePage}>이전화면</PageButton>
                             </ControlButton>
                             <ControlButton>
                                 <PageButton type='submit'>저장 후 투표 시작</PageButton>

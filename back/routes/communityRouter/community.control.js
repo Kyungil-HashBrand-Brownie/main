@@ -13,7 +13,6 @@ const view = async (req, res) => {
                 }
                 data.push(coupledArr)
             }
-            console.log(data)
             res.send(data);
         }
         catch(e) {
@@ -75,7 +74,6 @@ const writeAction = async (req, res) => {
 const voteWriteAction = async (req, res) => {
     const {title, content, proposals, nickname} = req.body;
     const data = [title, content, JSON.stringify(proposals), nickname]
-    console.log(data)
     try {
         const [result] = await pool.query(`INSERT INTO voteCommunity(title, content, proposals, nickname) VALUES (?,?,?,?)`,data)
         res.send(result);
@@ -90,7 +88,6 @@ const approveAction = async (req, res) => {
     const {title, content, proposals, id, state} = req.body;
     const voteCounts = Array(proposals.length).fill(0)
     const data = [title, content, JSON.stringify(proposals), state, JSON.stringify(voteCounts), id]
-    console.log(data)
     try {
         const [result] = await pool.query(`UPDATE voteCommunity SET title = (?), content = (?), proposals = (?), state = (?), voteCounts=(?) WHERE idx=(?)`,data)
         res.send(result);
@@ -105,7 +102,6 @@ const voteAction = async (req, res) => {
     const {currentProposal, votingPower} = req.body;
     try {
         const [[result]] = await pool.query(`SELECT voteCounts FROM voteCommunity WHERE state="투표 진행 중";`);
-        console.log(result)
         const countsArr = JSON.parse(result.voteCounts);
         console.log(countsArr)
         console.log("currentProposalId : ", currentProposal)
