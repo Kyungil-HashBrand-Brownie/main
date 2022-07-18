@@ -15,4 +15,6 @@ router.post('/approve',communityController.approveAction);
 
 router.get('/endVote', communityController.endVote)
 
+router.post('/vote', communityController.voteAction)
+
 module.exports = router;

@@ -22,7 +22,7 @@ const CommunityVoteTable = () => {
                 {data?.map((item, index) => 
                     <VoteCTRow key={index}>
                         {item.map((data, idx) => 
-                            <VoteTableCard key={data.content} data={data} img={nft1} img1={Ani1} id={index*2 + idx + 1}/>)}
+                            <VoteTableCard key={data.idx} data={data} img={nft1} img1={Ani1} id={index*2 + idx + 1}/>)}
                     </VoteCTRow>
                 )}
             </VoteCTBody>

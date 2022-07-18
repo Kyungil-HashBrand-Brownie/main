@@ -18,13 +18,12 @@ const ExitVote = ()=> {
         //   )
         //   console.log(result)
         //   let selectedProposalId = result.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0) + 1; // proposalId의 index는 1부터 시작하기 때문에 + 1
-        //   await axios.post("/api/vote/end",{voteIdx, selectedProposalId})
 
 
-        // await endVote()
-        // dispatch(nftAction.setVoteStatus())
+        await endVote()
+        dispatch(nftAction.setVoteStatus())
 
-        // axios.post()
+        await axios.get('/api/community/endVote')
       }
 
 

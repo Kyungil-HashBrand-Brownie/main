@@ -18,7 +18,14 @@ const VoteTCImage = styled.div`
 
 const VoteTableCard = ({ data, img, img1, id }) => {
     const navigate = useNavigate();
-    const {title, content, nickname, state} = data;
+    const {title, content, nickname, state, voteCounts} = data;
+    let sum;
+    
+    if(voteCounts){
+        const countsArr = JSON.parse(voteCounts)
+        sum = countsArr.reduce((a, b)=> a + b )
+    }
+    
 
     return (
         <VoteTCardOuter
@@ -36,7 +43,7 @@ const VoteTableCard = ({ data, img, img1, id }) => {
                 <VoteTCBody>
                     <VoteTCBodyHeader>
                         <VoteTCBodyTitle>{title} </VoteTCBodyTitle>
-                        {state !== '승인 대기 중' && <VoteTCBodyVoteCount> 153 Vote</VoteTCBodyVoteCount>}
+                        {state !== '승인 대기 중' && <VoteTCBodyVoteCount> {sum}</VoteTCBodyVoteCount>}
                     </VoteTCBodyHeader>
                     <VoteTCBodyMain>
                         <VoteTCBodyContent>{content}</VoteTCBodyContent>
