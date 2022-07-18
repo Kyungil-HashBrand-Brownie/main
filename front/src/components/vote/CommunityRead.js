@@ -3,11 +3,10 @@ import { useParams } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import { nft1 } from 'img/nft'
 import VoteDescription from './VoteDescription'
-import CommunityTopic from './CommunityTopic'
 import _ from 'lodash'
 import { useNavigate } from 'react-router-dom'
 import {
-    VoteDOuter, VoteDLeftOuter, VoteDRightOuter, VoteDHeaderOuter,
+    VoteDOuter, VoteDRightOuter, VoteDHeaderOuter,
     VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
     ControlButton, PageButton, VoteTCBodyImg
 } from './voteModule'
@@ -28,7 +27,6 @@ const CommunityRead = () => {
 
     const getData = async () => {
         let result = await axios.get(`http://localhost:4000/api/community/read/${type}/${id}`);
-        // console.log('result: ', result);
         setData(result.data);
     }
 
@@ -39,7 +37,7 @@ const CommunityRead = () => {
     const customAlert = useAlert();
 
     const movePage = () => {
-        type == 'vote' ? navigate('/community/vote') : navigate('/community/default')
+        navigate('/community')
     }
 
     console.log(data.content)
@@ -48,10 +46,6 @@ const CommunityRead = () => {
         <>
         <AlertModal {...customAlert}/>
         <VoteDOuter>
-            <VoteDLeftOuter>
-                <CommunityTopic />
-            </VoteDLeftOuter>
-
             <VoteDRightOuter>
                 <VoteDHeaderOuter>
                     <VoteDHeader>게시판</VoteDHeader>

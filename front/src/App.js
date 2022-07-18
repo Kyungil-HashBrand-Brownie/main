@@ -9,18 +9,16 @@ import DetailCollecion from './components/collection/DetailCollecion';
 import { PrivateRoute, CommunityWriteRoute, CommunityReadRoute} from './route';
 import { Home, Mint, AdminPage, Testpage, 
   Swap, NoPage, NftList, Collection, 
-  Voting, DifNetwork, Community } from './page'
+  Voting, DifNetwork, Community, VoteWrite } from './page'
 
 const paths = ['/', '/mint', '/test', '/collection', '/voting',
   '/community', '/community/:id', '/community/read/:type/:id',
-  '/write/:id', '/detailcollection/:edition', '*']
+  '/write', '/detailcollection/:edition', '*']
   
 const elements = [<Home />, <Mint />, <Testpage />, <Collection />, 
   <Voting />, <Community />, <PrivateRoute />, <CommunityReadRoute />,
-  <CommunityWriteRoute />, <DetailCollecion />, <NoPage />
+  <VoteWrite />, <DetailCollecion />, <NoPage />
 ]
-
-// asdfnjkasdnfkjnasdkjfn;kasdjn;kjdsan
 
 function App() {
   const {isDeployer} = useSelector(state=>state.main)

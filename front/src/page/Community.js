@@ -30,22 +30,15 @@ const CommunitySide = styled.div`
     margin-left: 5%;
     margin-top: 5%;
 `
-const Community = ({ id }) => {
-    const [state, setState] = useState(id ? id == 'vote' ? true : false : false);
+const Community = () => {
 
     return (
         <VoteDOuter>
-            <CommunitySide>
-                <CommunityTopic setState={setState}/>
-            </CommunitySide>
             <CommunityMainOuter>
                 <MainHeader />
                 <VoteDescription />
-                <CommunityPostButton state={state}/>
-                {!state 
-                ? <CommunityTable />
-                : <CommunityVoteTable />
-                }
+                <CommunityPostButton />
+                <CommunityVoteTable />
             </CommunityMainOuter>
         </VoteDOuter>
     )

@@ -11,11 +11,10 @@ const PostButton = styled.button`
   margin-bottom: 2px;
 `
 
-const CommunityPostButton = ({ state }) => {
+const CommunityPostButton = () => {
   const navigate = useNavigate();
   return (
-      <PostButton onClick={() => 
-        state ? navigate('/write/0') : navigate('/write/1')}>글 등록</PostButton>
+      <PostButton onClick={() => navigate('/write')}>글 등록</PostButton>
   )
 }
 

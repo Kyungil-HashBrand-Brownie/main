@@ -19,7 +19,7 @@ const CollectionMain = ({ data, row }) => {
             <CollectionHeader>Collections</CollectionHeader>
             {data !== null &&
                 <div className='collection-info-outer'>
-                    <div className='collection-info-box'>total: {data.length} / 150</div>
+                    <div className='collection-info-box'>total: {data.length} / 200</div>
                 </div>
             }
             <CollectionBody>

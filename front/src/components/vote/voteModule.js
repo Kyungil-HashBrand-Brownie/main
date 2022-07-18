@@ -190,13 +190,13 @@ export const Description = styled.div`
 export const VoteTCardOuter = styled.div`
     display: flex;
     flex-direction: column;
-    width: 530px;
+    width: 430px;
     margin: auto;
     margin-top: 10px;
     cursor: pointer;
 
     &:hover {
-        transform: scale(1.03);
+        transform: scale(1.02);
     }
 `
 export const VoteTCHeader = styled.div`
@@ -219,7 +219,7 @@ export const VoteTCUser = styled.div`
 export const VoteTCState = styled.div`
     position: absolute;
     font-weight: bold;
-    transform: translate(310px, -35px);
+    transform: translate(230px, -35px);
     background: yellow;
 `
 export const VoteTCBodyOuter = styled.div`
@@ -259,13 +259,12 @@ export const VoteTCBodyMain = styled.div`
 export const VoteTCBodyContent = styled.div`
     margin-left: 2%;
     margin-top: 1%;
-    width: 70%;
+    width: 95%;
     height: 92%;
+    padding: 4px 8px;
     text-align: justify;
     border: 2px solid green;
-    border-bottom: none;
-    border-right: none;
-    border-top-left-radius: 8px;
+    border-radius: 8px;
 `
 
 /* CommunityTopic */
