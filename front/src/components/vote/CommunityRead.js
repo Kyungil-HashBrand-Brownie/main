@@ -19,7 +19,7 @@ const CommunityRead = () => {
     const navigate = useNavigate();
     const { type, id } = useParams();
 
-    const {isDeployer} = useSelector(state => state.nft);
+    const {isDeployer} = useSelector(state => state.main);
 
     const [data, setData] = useState({
         title:"",
