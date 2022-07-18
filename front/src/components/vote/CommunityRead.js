@@ -20,6 +20,7 @@ import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 const CommunityRead = () => {
     const navigate = useNavigate();
     const { type, id } = useParams();
+    console.log('type: ', type)
 
     const {isDeployer} = useSelector(state => state.main);
     const {voteStatus, myAddress} = useSelector(state => state.nft);

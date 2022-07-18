@@ -57,6 +57,12 @@
     height: 20px;
 }
 
+@media (max-width: 1000px) {
+    
+}
+
+
+
 /* Footer */
 
 .foot-img {

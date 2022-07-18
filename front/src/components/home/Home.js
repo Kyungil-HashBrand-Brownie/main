@@ -15,7 +15,7 @@ const Home = () => {
   let deadline = useRef();
   let timer = useRef(null);
 
-  let deadlineDate = new Date('July 22, 2022 00:00:00').getTime();
+  let deadlineDate = new Date('July 22, 2022 10:00:00').getTime();
   let now = new Date().getTime();
   let t = deadlineDate - now;
   let day = Math.floor((t % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
@@ -46,7 +46,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    deadline = new Date('July 22, 2022 00:00:00').getTime();
+    deadline = new Date('July 22, 2022 10:00:00').getTime();
     timer.current = setInterval(count, 1000);
   }, [])
 
@@ -64,7 +64,7 @@ const Home = () => {
         </StyledMintDate>
       </div>
       <Container className='main-container'>
-        <Col className="main-col">
+        <Col className="main-col1">
           <StyledMainText><D3 /></StyledMainText>
           <StyledSubText>The Best nft Collections <br />You Can Get</StyledSubText>
           <StyledButton onClick={moveToMint}>
@@ -74,7 +74,7 @@ const Home = () => {
             </div>
           </StyledButton>
         </Col>
-        <Col className="main-img-col">
+        <Col className="main-img-col1">
           <StyledBrownyAbove src={Group2} alt="browny-above" />
         </Col>
       </Container>
