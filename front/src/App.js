@@ -10,6 +10,7 @@ import { PrivateRoute, CommunityWriteRoute, CommunityReadRoute} from './route';
 import { Home, Mint, AdminPage, Testpage, 
   Swap, NoPage, NftList, Collection, 
   Voting, DifNetwork, Community, VoteWrite } from './page'
+import CommunityApproval from 'components/vote/CommunityApproval';
 
 const paths = ['/', '/mint', '/test', '/collection', '/voting',
   '/community', '/community/:id', '/community/read/:type/:id',
