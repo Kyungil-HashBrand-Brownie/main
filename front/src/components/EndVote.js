@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap"
 import { useDispatch } from "react-redux"
 import { nftAction } from "redux/actions/nftAction"
 
-const ExitVote = ()=> {
+const EndVote = ()=> {
     const dispatch = useDispatch()
 
     const clickEndVote = async () => {
@@ -32,4 +32,4 @@ const ExitVote = ()=> {
     )
 }
 
-export default ExitVote
+export default EndVote

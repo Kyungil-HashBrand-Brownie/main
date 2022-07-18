@@ -25,7 +25,7 @@ const getVoteStatus = async() => await votingContract.methods.voteStatus().call(
 
 const getVoteCount = async(index) => await votingContract.methods.numberOfVotes(index-1).call();
 
-const checkVote = async() => await votingContract.methods.checkVote().call();
+const checkVote = async(from) => await votingContract.methods.checkVote().call({from});
 
 export {
     getContractOwner,
