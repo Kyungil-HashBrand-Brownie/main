@@ -86,11 +86,37 @@ const voteWriteAction = async (req, res) => {
     }
 }
 
+const approveAction = async (req, res) => {
+    const {title, content, proposals, id, state} = req.body;
+    const data = [title, content, JSON.stringify(proposals), state, id]
+    console.log(data)
+    try {
+        const [result] = await pool.query(`UPDATE voteCommunity SET title = (?), content = (?), proposals = (?), state = (?) WHERE idx=(?)`,data)
+        res.send(result);
+    }
+    catch(e) {
+        console.log(e);
+        res.send("fail")
+    }
+}
+
+const endVote = async (req, res) => {
+    try {
+        const [result] = await pool.query(`UPDATE voteCommunity SET state = "투표 종료" WHERE state="투표 진행 중"`,data)
+
+    }
+    catch(e) {
+        console.log(e);
+        res.send("fail")
+    }
+}
 
 
 module.exports = {
     view,
     writeAction,
     voteWriteAction,
-    read
+    read,
+    approveAction,
+    endVote
     };

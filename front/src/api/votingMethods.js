@@ -53,18 +53,6 @@ const endVote = async ()=> {
     }
 }
 
-const resetVote = async ()=> {
-    try {
-        const contractOwner = await getContractOwner()
-        const encodedAbi = await votingContract.methods.restartVote().encodeABI()
-        const result = await methodExecution(contractOwner,encodedAbi)
-        console.log(result)
-        return result
-    } catch (error) {
-        console.log(error)
-        return error
-    }
-}
 
 const submitVote = async (myAddress, proposalId) => {
     try {
@@ -82,6 +70,5 @@ export {
     newProposals,
     startVote,
     endVote,
-    resetVote,
     submitVote,
 }
