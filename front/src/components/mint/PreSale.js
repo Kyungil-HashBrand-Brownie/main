@@ -54,6 +54,8 @@ const StyledButton = styled.button`
     color: white;
     background-color: #361500;
     margin: 0 6px;
+
+
     @media screen and (max-width: 765px) {
         width: 40px;
         height: 40px;
