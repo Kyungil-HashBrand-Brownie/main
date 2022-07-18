@@ -193,13 +193,6 @@ body {
     border-bottom: 1px solid black;
   }
 
-  .mint-wal-connect-btn {
-    position: absolute;
-    left: 43%;
-    top: -50px;
-    /* transform: translate(0, -2055px); */
-    /* transform: translate(15%, -650%); */
-  }
 }
 
 @media (max-width: 700px) {
@@ -308,7 +301,7 @@ body {
   }
 
   .mint-wal-connect-btn{
-    margin: 0;
+    top: -20px;
     /* margin: 20px 0 10px 0; */
     padding: 0px 0px;
     /* padding: 3px 3px; */
