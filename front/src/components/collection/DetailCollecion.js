@@ -27,6 +27,8 @@ const DetailCollecion = () => {
 
   const [collectionData, setCollectionData] = useState({});
   const [collectionAlldata, setCollectionAllData] = useState(null);
+  console.log("alldata" , collectionAlldata)
+  console.log("Default data" , collectionData)
 
   const getData = async () => {
     let result = await Promise.all([axios.get('/api/image/images'), axios.get(`/api/image/image/${page}`)])
@@ -101,14 +103,14 @@ const DetailCollecion = () => {
               </div>
             </div>
             <div className="div-section">
-              <div className="left-layout">Eye : </div>
+              <div className="left-layout">Hat : </div>
               <div className="right-layout">
-                {collectionData.Eye}
+                {collectionData.Hat}
               </div>
             </div>
             <div className="div-section">
-              <div className="left-layout">Mouth :  </div>
-              <div className="right-layout">{collectionData.Mouth} </div>
+              <div className="left-layout">Face :  </div>
+              <div className="right-layout">{collectionData.Face} </div>
             </div>
             <div className="div-section">
               <div className="left-layout">Item :  </div>

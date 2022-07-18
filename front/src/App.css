@@ -24,6 +24,7 @@ body {
   line-height: 1.6;
 }
 
+
 .backG-left-img {
   position: absolute;
   width: 15%;
@@ -70,9 +71,17 @@ body {
 }
 
 .mint-container {
+  /* background-color: rgb(26, 126, 213); */
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  align-items: center;
+  
 }
+
+
+
 
 .mintdate-container {
   display: flex;
@@ -209,10 +218,112 @@ body {
   }
 }
 
-.FreeSale {
-  margin-right: 30%;
-  margin-left: 0%;
+.PreSale {
+  margin: auto;
+
 }
+
+.WhiteSale{
+  margin: auto;
+
+}
+
+/* MintCard */
+.MintCard {
+  margin-top: 5%;
+  /* display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  grid-gap: 15px; */
+  /* flex-wrap: nowrap; */
+  /* background: url("./img/mint/background7.jpg");
+  background-repeat: no-repeat;
+  background-size: cover; */
+  
+  /* display: grid;
+  grid-template-columns: 200px 200px */
+}
+
+.styled_mint_card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: "5%"; 
+  left: "10%";
+  z-index: -2;
+}
+
+
+@media screen and (max-width: 765px) {
+  .PreSale{
+    width: 320px;
+    display: flex;
+    text-align: center;
+    margin: auto;
+  }
+
+  .WhiteSale{
+    width: 320px;
+    display: flex;
+    text-align: center;
+    margin: auto;
+  }
+  .mint-title-box {
+    margin-top: 20px;
+    /* border-bottom: 3px solid black;
+    margin-bottom: 20px; */
+    height: 43px;
+  }
+
+  .mint-img-container {
+    width: 220px;
+    /* height: 232px; */
+    height: 2320px;
+    /* background-color: white; */
+    /* background-color: black; */
+    /* margin-bottom: 20px; */
+    /* border-radius: 8px; */
+  }
+
+  .mint-info-box{
+      width: 320px;
+      display: none;
+      height: 300px;
+
+  }
+
+  .mint-count-box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* margin-top: -20px; */
+  }
+
+  .mint-title-box{
+    margin-top: 10px;
+    border-bottom: 3px solid black;
+    /* margin-bottom: 20px; */
+    /* height: 43px; */
+  }
+
+  .mint-wal-connect-btn{
+    margin: 0;
+    /* margin: 20px 0 10px 0; */
+    padding: 0px 0px;
+    /* padding: 3px 3px; */
+    width: 100px;
+  }
+
+  .mint-container{
+    /* background-color:pink; */
+    /* flex-wrap: wrap; */
+  }
+}
+
+
+
+
 
 .profile-inner {
   width: 80%;
@@ -246,7 +357,8 @@ body {
   align-items: center;
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  
 }
 .mint-info-row {
   margin-bottom: 10px;
@@ -350,22 +462,46 @@ body {
 }
 
 .mb-3{
-  width: 50%;
+  width: 100%;
+  display: flex;
+  text-align: center;
 }
-.Cont{
+
+
+
+/* admin page */
+.admin_mainContainer{
   text-align: center;
   margin: 10px;
+  width: 100%;
 }
+
+.admin_title{
+  width: 100%;
+  margin-top: 40px;
+  font-size: 90px;
+}
+
+.admin_InputSize {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  width: 800px;
+  /* width: 100%; */
+  position: relative;
+}
+
+.admin_add_input{
+  width: 2000px;
+}
+.table-whitelistkey{
+  width: 100%;
+}
+
 
 .cardnft{
   width: 100%;
   height: 100%;
-}
-
-.father{
-  display: flex;
-  justify-content: center;
-
 }
 
 .CardGroup{
@@ -974,10 +1110,9 @@ NftCard
   }
 }
 
-/* MintCard */
-.MintCard {
-  margin-top: 5%;
-}
+
+
+
 /* the slides */
 @media (max-width: 800px) {
   .slick-slider {

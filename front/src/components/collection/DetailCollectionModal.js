@@ -51,10 +51,10 @@ const DetailCollectionModal = ({collectionAlldata,page,bool}) => {
                             <FontAwesomeIcon icon={faAngleLeft} />
                         </button>
 
-                        <button className='button arrowDetailRight absRight fill' onClick={()=>setPositionMiddle(positionMiddle < 143 ? positionMiddle + 5 : 148)}>
+                        <button className='button arrowDetailRight absRight fill' onClick={()=>setPositionMiddle(positionMiddle < 193 ? positionMiddle + 5 : 198)}>
                             <FontAwesomeIcon icon={faAngleRight} />
                         </button>
-                        <button className='button arrowDetailRight absRR fill' onClick={()=>setPositionMiddle(148)}>
+                        <button className='button arrowDetailRight absRR fill' onClick={()=>setPositionMiddle(198)}>
                             <FontAwesomeIcon icon={faAnglesRight} />
                         </button>
                 </div>
@@ -66,7 +66,7 @@ const DetailCollectionModal = ({collectionAlldata,page,bool}) => {
                     collectionAlldata.slice(positionMiddle-3, positionMiddle+2).map((item, idx) => 
                     <>
                     <img width='200px' alt="" onClick={() => { 
-                    setPositionMiddle(item.edition < 3 ? 3 : item.edition < 149 ? item.edition : 148)
+                    setPositionMiddle(item.edition < 3 ? 3 : item.edition < 199 ? item.edition : 198)
                     navigate(`/detailcollection/${item.edition}`)}}
                     // selectCollection()}
                     src={`/api/image/images/${item.addr}`}
