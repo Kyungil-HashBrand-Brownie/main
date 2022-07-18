@@ -9,7 +9,8 @@ import AlertModal from 'components/AlertModal';
 // 리팩터링 - 코드를 단순화하는 작업 불필요한 중복요소들을 제거
 const StyledMain = styled.div`
     width: 320px;
-    min-height: 620px;
+    /* min-height: 620px; */
+    height: 620px;
     font-size: 1rem;
     line-height: 1.5;
     border-radius: 0.25rem;
@@ -21,6 +22,12 @@ const StyledMain = styled.div`
     flex-wrap: wrap;
     justify-content:center;
     background: rgb(243, 224, 224);
+
+    @media screen and (max-width: 765px) {
+        width: 320px;
+        height: 420px;
+
+    }
 `;
 
 const StyledDiv = styled.div`
@@ -29,6 +36,10 @@ const StyledDiv = styled.div`
     margin-left: 
         ${props => props.price == 50 ? '10px' : 0} ;
     border-radius: 8px;
+    @media screen and (max-width: 765px) {
+        /* background-color: black ; */
+        width: 220px;
+    }
     
 `;
 
@@ -43,6 +54,11 @@ const StyledButton = styled.button`
     color: white;
     background-color: #361500;
     margin: 0 6px;
+    @media screen and (max-width: 765px) {
+        width: 40px;
+        height: 40px;
+        margin: auto;
+    }
 `;
 
 
