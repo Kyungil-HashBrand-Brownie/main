@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useAlert } from 'api'
 import AlertModal from 'components/AlertModal'
+import { useNavigate } from 'react-router-dom'
 
 const VoteDetail = () => {
     const navigate = useNavigate();
@@ -37,11 +38,11 @@ const VoteDetail = () => {
         const title = e.target.title.value
         const content = e.target.content.value
         let proposalGroup = e.target.proposal
-        if(proposalGroup){
+        if(id === "0"){ //vote category
             let proposals = [];
             if(proposalGroup.length) {
                 proposalGroup.forEach((proposal)=> {
-                    if(proposal.value) proposals.push(proposal.value)
+                    if(proposal.value) proposals.push(proposal.value);
                 })
                 console.log(proposals)
                 
@@ -52,8 +53,8 @@ const VoteDetail = () => {
                 customAlert.open("1개 이상 안건을 등록해주세요")
             }
         }
-        else{
-            const data = {title, content, nickname}
+        else{ //board category
+            const data = {title, content, nickname};
             await axios.post('/api/community/write',data)
         }
         
@@ -116,6 +117,9 @@ const VoteDetail = () => {
         setCounter(newArr)
     }
 
+    const movePage = () => {
+        navigate(-1);
+    }
     return (
         <>
         <AlertModal {...customAlert}/>

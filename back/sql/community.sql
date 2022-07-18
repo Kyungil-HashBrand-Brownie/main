@@ -5,7 +5,7 @@ CREATE TABLE voteCommunity (
     `proposals` VARCHAR(255) NOT NULL,
     `nickname` VARCHAR(255) NOT NULL,
     `state` VARCHAR(255) DEFAULT "승인 대기 중" NOT NULL,
-    `totalCount`INT DEFAULT 0 NULL
+    `voteCounts`INT DEFAULT "" NULL
 );
 
 CREATE TABLE community (
@@ -16,3 +16,4 @@ CREATE TABLE community (
 );
 
 select * from voteCommunity;
+select * from community;

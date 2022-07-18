@@ -50,7 +50,10 @@ function App() {
           <>
             {isDeployer
             ?
+            <>
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/community/approval/:id" element={<CommunityApproval />} />
+            </>
             : null
             }
             <Route path="/swap" element={<Swap />} />

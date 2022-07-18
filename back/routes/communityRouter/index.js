@@ -3,7 +3,7 @@ const router = express.Router();
 const communityController = require('./community.control');
 
 
-router.get('/view',communityController.view);
+router.get('/view/:type',communityController.view);
 
 router.get('/read/:type/:idx', communityController.read)
 
