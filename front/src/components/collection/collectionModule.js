@@ -2,14 +2,22 @@ import styled from 'styled-components'
 
 /* CollectionMain */
 
+export const CollectionCardImg = styled.div`
+    width: 100%;
+    height: 200.003px;
+    background-image: url(
+        ${(props) => props.image && props.image});
+    background-size: cover;
+`
+
 export const CollectionMainOuter = styled.div`
-    margin-left: 100px;
-    width: 1300px;
-    min-height: 160px;
+    margin-left: 99.998px;
+    width: 1299.997px;
+    min-height: 159.998px;
     background: rgba(255, 255, 255, 0.56);
     border: 3px solid white;
-    border-radius: 20px;
-    margin-bottom: 20px;
+    border-radius: 20.002px;
+    margin-bottom: 20.002px;
     transform: translate(10%, 0);
 
     @media screen and (max-width: 1500px) {
@@ -26,7 +34,7 @@ export const CollectionBody = styled.div`
 
     display: flex;
     transform: translate(3.5%, 0);
-    min-height: 250px;
+    min-height: 249.997px;
     margin-top: 30px;
     border-radius: 15px;
     flex-wrap: wrap;
@@ -34,26 +42,26 @@ export const CollectionBody = styled.div`
 export const CollectionRow = styled.div`
     display: flex;
     flex-direction: row;
-    margin: 10px 0 15px 0;
+    margin: 9.998px 0 15px 0;
     // background: lightgray;
     height: 300px;
-    border-radius: 5px;
+    border-radius: 5.003px;
     align-items: center;
-    /* @media screen and (max-width: 700px) {
+    /* @media screen and (max-width: 699.997px) {
         display: none;
-        margin-left:100px;
+        margin-left:99.998px;
     } */
 `
 export const CollectionCardOuter = styled.div`
-    width: 220px;
+    width: 219.997px;
     height: 270px;
     background: white;
-    margin: 10px 10px;
+    margin: 9.998px 9.998px;
     cursor: pointer;
-    border: 1px solid gray;
-    border-radius: 10px;
-    box-shadow: pink 6px 5px;
-    margin-bottom: 20px;
+    border: 0.998px solid gray;
+    border-radius: 9.998px;
+    box-shadow: pink 6px 5.003px;
+    margin-bottom: 20.002px;
 
     &:hover {
         transform: scale(1.05);
@@ -67,15 +75,15 @@ export const CollectionCardOuter = styled.div`
     }
 `
 export const CollectionCard = styled.div`
-    width: 200px;
-    height: 250px;
+    width: 200.003px;
+    height: 249.997px;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 9.998px;
 `
 export const CollectionCardDetail = styled.div`
     width: 100%;
-    height: 40px;
-    margin-top: 5px;
+    height: 39.998px;
+    margin-top: 5.003px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,49 +92,49 @@ export const CollectionCardDetail = styled.div`
 /* Filter */
 
 export const FilterOuter = styled.div`
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 20.002px;
+    margin-bottom: 20.002px;
 `
 export const FilterInner = styled.div`
     width: 300px;
     height: 90%;
 `
 export const FilterHeader = styled.div`
-    margin-left: 10px;
+    margin-left: 9.998px;
     font-size: 30px;
     font-weight: bold;
 `
 export const FilterMain = styled.div `
     width: 80%;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 9.998px;
     background: white;
     display: flex;
-    border-radius: 20px;
+    border-radius: 20.002px;
     justify-content: center;
     align-items: center;
 `
 export const FilterText = styled.div`
     background: pink;
-    border-radius: 10px;
+    border-radius: 9.998px;
     width: 90px;
-    padding: 0 10px;
+    padding: 0 9.998px;
 `
 export const FilterSubHeader = styled.div`
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 9.998px;
+    margin-top: 9.998px;
 `
 export const FilterOption = styled.div`
     width: 90%;
-    height: 40px;
+    height: 39.998px;
     font-size: 18px;
-    margin: 0 15px 1px;
+    margin: 0 15px 0.998px;
     cursor: pointer;
     display: flex;
     align-items: center;
 
     &:hover {
-        font-size: 20px;
+        font-size: 20.002px;
     }
 `
 export const FilterContentBox = styled.div`
@@ -151,6 +159,41 @@ export const FilterContent = styled.div`
     }
 `
 
+/* FilterDetail */
+
+export const FilterDetailOuter = styled.div`
+    width: 100%;
+    margin: 8.002px 0;
+    border-top: 2.002px solid black;
+    border-bottom: 2.002px solid black;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+`
+export const FilterDetailBox = styled.div`
+    margin: auto;
+    background: white;
+    min-width: 
+        ${props => props.info.includes('Background') ? '150px' : '120px'};
+    margin-top: 6px; 
+    margin-bottom: 3.998px; 
+    text-align: center;
+    cursor: pointer;
+    background: rgb(151, 223, 220);  
+    border-radius: 9.998px; 
+
+    &:hover {
+        transform: scale(1.03)
+    }
+
+    img {
+        position: absolute;
+        width: 20.002px;
+        height: 20.002px;
+        transform: translate(-27.998px, 3px);
+    }
+`
+
 /* Sort */
 
 export const SortOuter = styled.div `
@@ -158,14 +201,14 @@ export const SortOuter = styled.div `
     left: 2%;
     top: 13%;
     margin-left: 30px;
-    margin-top: 50px;
-    width: 350px;
+    margin-top: 50.002px;
+    width: 350.002px;
     height: auto;
-    min-height: 700px;
+    min-height: 699.997px;
     border: 3px solid white;
-    border-radius: 10px;
+    border-radius: 9.998px;
     background: rgb(241, 149, 165);
-    box-shadow: white 7px 10px 7px;
+    box-shadow: white 6.997px 9.998px 6.997px;
 
     @media screen and (max-width: 1800px) {
         max-width: 15%;
@@ -174,7 +217,7 @@ export const SortOuter = styled.div `
 
 `
 export const SortHeader = styled.div`
-    margin-left: 10px;
+    margin-left: 9.998px;
     margin-top: 3px;
     font-size: 30px;
     font-weight: bold;
@@ -187,32 +230,32 @@ export const SortTopHeader = styled.div`
 `
 export const SortTopText = styled.div`
     background: pink;
-    border-radius: 10px;
-    width: 80px;
-    padding: 0 10px;
+    border-radius: 9.998px;
+    width: 80.002px;
+    padding: 0 9.998px;
 `
 export const SortTopOuter = styled.div`
     width: 80%;
     margin: auto;
-    margin-top: 10px;
-    height: 190px;
+    margin-top: 9.998px;
+    height: 189.998px;
     background: white;
     display: flex;
-    border-radius: 20px;
+    border-radius: 20.002px;
     justify-content: center;
     align-items: center;
 `
 export const SortTopInner = styled.div`
     width: 300px;
-    height: 170px;
+    height: 170.002px;
 `
 export const SortOption = styled.div`
-    height: 40px;
+    height: 39.998px;
     font-size: 18px;
-    margin: 0 15px 1px;
+    margin: 0 15px 0.998px;
     cursor: pointer;
 
     &:hover {
-        font-size: 20px;
+        font-size: 20.002px;
     }
 `

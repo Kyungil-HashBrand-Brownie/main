@@ -9,19 +9,17 @@ import DetailCollecion from './components/collection/DetailCollecion';
 import { PrivateRoute, CommunityWriteRoute, CommunityReadRoute} from './route';
 import { Home, Mint, AdminPage, Testpage, 
   Swap, NoPage, NftList, Collection, 
-  DifNetwork, Community } from './page'
+  DifNetwork, Community, VoteWrite } from './page'
 import CommunityApproval from 'components/vote/CommunityApproval';
 
 const paths = ['/', '/mint', '/test', '/collection',
   '/community', '/community/:id', '/community/read/:type/:id',
-  '/write/:id', '/detailcollection/:edition', '*']
+  '/write', '/detailcollection/:edition', '*']
   
 const elements = [<Home />, <Mint />, <Testpage />, <Collection />, 
   <Community />, <PrivateRoute />, <CommunityReadRoute />,
-  <CommunityWriteRoute />, <DetailCollecion />, <NoPage />
+  <VoteWrite />, <DetailCollecion />, <NoPage />
 ]
-
-// asdfnjkasdnfkjnasdkjfn;kasdjn;kjdsan
 
 function App() {
   const {isDeployer} = useSelector(state=>state.main)

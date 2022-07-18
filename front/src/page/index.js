@@ -8,5 +8,6 @@ import NftList from './NftList';
 import Collection from './Collection';
 import DifNetwork from './DifNetwork';
 import Community from './Community';
+import VoteWrite from './VoteWrite';
 
-export { Home, Mint, AdminPage, Testpage, Swap, NoPage, NftList, Collection, DifNetwork, Community}
+export { Home, Mint, AdminPage, Testpage, Swap, NoPage, NftList, Collection, DifNetwork, Community, VoteWrite}
