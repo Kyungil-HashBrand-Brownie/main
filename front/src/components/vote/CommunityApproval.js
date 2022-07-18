@@ -120,11 +120,13 @@ const CommunityApproval = () => {
             if(proposal.value) proposals.push(proposal.value);
         })
         console.log(proposals)
-        console.log(myAddress)
         try {
             const result = await newProposals(myAddress,proposals.length);
             if(result.status){
-              // await axios.post("/api/vote/add",{})
+                await startVote();
+                dispatch(nftAction.setVoteStatus())
+                const data = {title, content, proposals, id, state : "투표 진행 중"};
+                await axios.post('/api/community/approve',data)
             }
           }
           catch (e){
@@ -132,11 +134,9 @@ const CommunityApproval = () => {
             return e
           }
         
-        // const data = {title, content, proposals}
-        // await axios.post('/api/community/voteWrite',data)
         
-        // await startVote();
-        dispatch(nftAction.setVoteStatus())
+        
+        
         
     }
 
@@ -145,10 +145,6 @@ const CommunityApproval = () => {
         <>
         <AlertModal {...customAlert}/>
         <VoteDOuter>
-            <VoteDLeftOuter>
-                <CommunityTopic />
-            </VoteDLeftOuter>
-
             <VoteDRightOuter>
                 <VoteDHeaderOuter>
                     <VoteDHeader>안건 승인</VoteDHeader>

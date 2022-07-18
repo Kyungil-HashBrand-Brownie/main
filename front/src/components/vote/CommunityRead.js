@@ -14,12 +14,15 @@ import {
 import axios from 'axios'
 import { useAlert } from 'api'
 import AlertModal from 'components/AlertModal'
+import Proposal from 'components/Proposal'
+import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 
 const CommunityRead = () => {
     const navigate = useNavigate();
     const { type, id } = useParams();
 
     const {isDeployer} = useSelector(state => state.main);
+    const {voteStatus} = useSelector(state => state.nft);
 
     const [data, setData] = useState({
         title:"",
@@ -27,6 +30,9 @@ const CommunityRead = () => {
         proposals:[],
         state:""
     });
+
+    const [radioValue, setRadioValue] = useState('2');
+    const [currentProposal, setCurrentProposal] = useState(1);
 
     const getData = async () => {
         let result = await axios.get(`http://localhost:4000/api/community/read/${type}/${id}`);
@@ -47,6 +53,15 @@ const CommunityRead = () => {
         navigate(`/community/approval/${id}`)
     }
 
+    const changeSelected = (e) => {
+        console.log(e.target.value)
+        setCurrentProposal(e.target.value)
+    }
+
+    const voteSubmit = (e) => {
+        e.preventDefault();
+    }
+
 
     return (
         <>
@@ -60,7 +75,8 @@ const CommunityRead = () => {
                 <VoteDMainOuter>
                     <VoteDMain>
                         <VoteTCBodyImg img={nft1} />
-                        <Form>
+                        <div>{data.state}</div>
+                        <Form onSubmit={voteSubmit}>
                         <VoteDPart>
                             <VoteDType>제목</VoteDType>
                             <Form.Control
@@ -69,7 +85,7 @@ const CommunityRead = () => {
                                 className='vote-textarea'
                                 style={{ height: '20px', resize: 'none'}}
                                 name='title'
-                                value={data.title}
+                                value={data.title}ZZZ
                             />
                         </VoteDPart>
                         <VoteDPart>
@@ -92,6 +108,9 @@ const CommunityRead = () => {
                                             className='proposal-form'
                                             key={index}
                                         >
+                                        {
+                                            data.state==="투표 진행 중" && <Proposal key={index} index={index+1} onChange={changeSelected} />
+                                        }
                                         <Form.Control
                                             readOnly
                                             as="textarea"
@@ -110,11 +129,17 @@ const CommunityRead = () => {
                             <PageButton onClick={movePage}>이전화면</PageButton>
                         </ControlButton>
                         {
-                            isDeployer && type === 'vote' 
+                            isDeployer && type === 'vote' && data.state=="승인 대기 중"
                             ?
-                            <ControlButton>
-                                <PageButton onClick={moveApproval}>승인하기</PageButton>
-                            </ControlButton>
+                                voteStatus==='0'
+                                ?
+                                <ControlButton>
+                                    <PageButton onClick={moveApproval}>승인하기</PageButton>
+                                </ControlButton>
+                                :
+                                <ControlButton>
+                                    이전 투표 진행중
+                                </ControlButton>
                             :null
                         }
                         
