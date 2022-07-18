@@ -189,7 +189,7 @@
 		"compilationTarget": {
 			"contracts/Voting.sol": "VoteContract"
 		},
-		"evmVersion": "london",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -242,11 +242,11 @@
 			]
 		},
 		"@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol": {
-			"keccak256": "0x57b5ece16a9e4c511c619921d4e085487147df8b6e56dfc3e6858f63f4a1b2d2",
+			"keccak256": "0x56035505d62f05f5e5040532b749ab25237f6dd87c7a514614acda96af996751",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://33f390cc112ac1529f85a47bb339226a3fc1127992423c6f54594d936f7e0b99",
-				"dweb:/ipfs/QmVrcP3B2M9r3kkMEjW5Wk8XTjvu5ccAa5DSXP4rUgfsJJ"
+				"bzz-raw://2d52f1b153a61d092665ec00e90ee28f0cbad717577ddea0b2864c47e155abd3",
+				"dweb:/ipfs/QmS881RSVGWcfXeWpivX1ChoG1ucEvgbHkcHah4YkMpfgE"
 			]
 		},
 		"@openzeppelin/contracts-upgradeable/token/ERC721/extensions/IERC721EnumerableUpgradeable.sol": {
@@ -386,11 +386,11 @@
 			]
 		},
 		"contracts/NFT/NFT.sol": {
-			"keccak256": "0x25a9513c84b905ea883feeb5ec765d00e857591662b0cc119d710b7da5d489c2",
+			"keccak256": "0x064e1b8b65b139eccd2d88f68066253d468e0b381c464a5e24f6a30a1121a395",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://262fc0cb89b10c4412ec0d65b2c00ad3b6beb8fd884563b1e0564ed9fa020338",
-				"dweb:/ipfs/QmdxaivWgdQCx42BW1HuXQRAjEioJy4WUyaV9vmZKRinkY"
+				"bzz-raw://9430dbcb461d08e40c3d486f0183624c8da851229564fdbad2c8700bdc8e7621",
+				"dweb:/ipfs/QmUVpeQq4KSho39cRc81PLGB2btShmLH8eJoAVWXztdhSu"
 			]
 		},
 		"contracts/Voting.sol": {

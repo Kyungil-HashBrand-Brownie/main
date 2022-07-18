@@ -9,19 +9,20 @@ import DetailCollecion from './components/collection/DetailCollecion';
 import { PrivateRoute, CommunityWriteRoute, CommunityReadRoute} from './route';
 import { Home, Mint, AdminPage, Testpage, 
   Swap, NoPage, NftList, Collection, 
-  Voting, DifNetwork, Community } from './page'
+  Voting, DifNetwork, Community, VoteWrite } from './page'
+import CommunityApproval from 'components/vote/CommunityApproval';
 
 const paths = ['/', '/mint', '/test', '/collection', '/voting',
   '/community', '/community/:id', '/community/read/:type/:id',
-  '/write/:id', '/detailcollection/:edition', '*']
+  '/write', '/detailcollection/:edition', '*']
   
 const elements = [<Home />, <Mint />, <Testpage />, <Collection />, 
   <Voting />, <Community />, <PrivateRoute />, <CommunityReadRoute />,
-  <CommunityWriteRoute />, <DetailCollecion />, <NoPage />
+  <VoteWrite />, <DetailCollecion />, <NoPage />
 ]
 
 function App() {
-  const {isDeployer} = useSelector(state=>state.nft)
+  const {isDeployer} = useSelector(state=>state.main)
 
   const [isBaobab,setIsBaobab] = useState(false)
 
@@ -50,7 +51,10 @@ function App() {
           <>
             {isDeployer
             ?
+            <>
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/community/approval/:id" element={<CommunityApproval />} />
+            </>
             : null
             }
             <Route path="/swap" element={<Swap />} />

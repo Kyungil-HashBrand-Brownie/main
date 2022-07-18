@@ -1061,6 +1061,7 @@ th {
   width: 102%;
   height: 500px;
   position: absolute;
+  /* bottom: 20px; */
   z-index: -1;
   transform: translate(0, -370px);
   z-index: -1;

@@ -19,7 +19,7 @@ const DetailCollectionModal = ({collectionAlldata,page,bool}) => {
     const navigate = useNavigate()
     const [show, setShow] = useState(false);
     const [positionMiddle, setPositionMiddle] = useState(parseInt(page < 3 ? 3 : page));
-    console.log("hey"  , collectionAlldata)
+    // console.log("hey"  , collectionAlldata)
 
     const settings = {
         dots: true,
@@ -39,7 +39,7 @@ const DetailCollectionModal = ({collectionAlldata,page,bool}) => {
             {/* <Button variant="primary" onClick={() => setShow(true)} className="leadmoreButton">
             Lead More NFT
             </Button> */}
-            <button onClick={() => setShow(true)} class="but raise">
+            <button onClick={() => setShow(true)} className="but raise">
                 More<br />NFT
             </button>
 
@@ -83,7 +83,7 @@ const DetailCollectionModal = ({collectionAlldata,page,bool}) => {
                     setPositionMiddle(item.edition < 3 ? 3 : item.edition < 149 ? item.edition : 148)
                     navigate(`/detailcollection/${item.edition}`)}}
                     // selectCollection()}
-                    key={idx} src={`/api/image/images/${item.addr}`}
+                    src={`/api/image/images/${item.addr}`}
                     />
                     #{item.edition}
                     </>

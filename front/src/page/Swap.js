@@ -48,7 +48,8 @@ const Swap = () => {
         }
     }
 
-    const { myAddress, klayBalance, btkBalance } = useSelector(state => state.nft);
+    const { myAddress} = useSelector(state => state.nft);
+    const { klayBalance, btkBalance } = useSelector(state => state.main);
 
     const swapToken = async () => {
         let amount = amountInput.current.value
