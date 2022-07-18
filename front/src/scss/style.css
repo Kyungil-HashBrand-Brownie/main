@@ -1,23 +1,15 @@
 @import url('//fonts.googleapis.com/css?family=Pacifico&text=Pure');
 @import url('//fonts.googleapis.com/css?family=Roboto:700&text=css');
 @import url('//fonts.googleapis.com/css?family=Kaushan+Script&text=!');
-/* body{
-  min-height: 450px;
-  height: 100vh;
-  margin: 0;
-  background:radial-gradient(circle, darken(dodgerblue, 10%),#1f4f96, #1b2949, #000);
-} */
+
 .stage{
   height:300px;
   width: 500px;
   color: rgba(168, 84, 35, 0.895);
-  /* margin: auto; */
-  /* top: 0; right: 0; bottom: 0; left: -10%; */
   transform: translate(-30px, -30px);
   perspective: 9999px;
   transform-style: preserve-3d;
   padding-top: 80px;
-  /* background: black; */
 }
 .layer{
   width: 100%;
@@ -26,7 +18,6 @@
   position: absolute;
   transform-style: preserve-3d;
   animation: ಠ_ಠ 3s infinite alternate ease-in-out -4.5s;
-  /* animation-iteration-count: 10; */
   animation-fill-mode: forwards;
   transform: rotateY(20deg) rotateX(42deg) translateZ(0);
 }

@@ -66,10 +66,10 @@ body {
 
 .not-whitelist {
   margin-top: -50px;
+  color:rgb(26, 126, 213)
 }
 
 .mint-container {
-  background-color: rgb(26, 126, 213);
   width: 100%;
   display: flex;
 }
@@ -77,16 +77,13 @@ body {
 .mintdate-container {
   display: flex;
   justify-content: center;
+  /* background: red; */
+  margin-top: 50px;
 }
 
 
 .profile-inner {
   width: 80%;
-}
-
-.mint-wal-connect-btn {
-  margin: 20px 0 10px 0;
-  padding: 3px 3px;
 }
 
 .main-team-img-box {
@@ -102,6 +99,7 @@ body {
 
 .main-container {
   display: flex;
+  /* background-color: red; */
 }
 
 .main-team-container {
@@ -114,22 +112,42 @@ body {
 
 .main-col {
   position: relative;
+  /* background-color: blue; */
+}
+
+.main-col1 {
+  position: relative;
+  /* background-color: blue; */
+}
+
+@media( max-width: 992px) {
+  .main-col1 {
+    justify-content: center;
+  }
 }
 
 .main-img-col {
   display: flex;
   flex-direction: row;
-  margin-left: 30px;
+  margin: auto;
+  color: #52a2fe
+  /* margin-left: 30px; */
+  /* background-color: green; */
 }
 
-@media (max-width: 1300px) {
+.main-img-col1 {
+  margin: auto;
+  /* margin-left: 30px; */
+  /* background-color: grey; */
+}
+
+@media (max-width: 1200px) {
   .main-img-col {
     display: flex;
-    flex-direction: column;
   }
 }
 
-@media (max-width: 970px) {
+@media (max-width: 992px) {
   ::-webkit-scrollbar {
     display: none;
   }
@@ -142,20 +160,52 @@ body {
   .main-img-col {
     margin-top: 120px;
   }
+
+  .info-box {
+    left: 37%;
+    width: 220px;
+    transform: translate(0, -75px);
+  }
+
+  .navbar-collapse , .collapse , .show {
+    position: absolute;
+    width: 100%;
+    top: 80%;
+  }
+
   .nav-item {
-    background: white;
+    width: 15%;
+    right: -70%;
+    transform: translate(520%, 0);
+    margin-bottom: 1px;
+    font-size: 2vw;
+    background-color: rgba(244, 201, 201, 0.9);
     border-radius: 20px;
     border-bottom: 1px solid black;
   }
-  .info-box {
+
+  .mint-wal-connect-btn {
     position: absolute;
-    margin-right: 25%;
-    width: 260px;
-    bottom: 10px;
-    right: 0; 
-    text-align: center;
-    font-size: 13px;
-    transform: translate(150px, 0px);
+    left: 43%;
+    top: -50px;
+    /* transform: translate(0, -2055px); */
+    /* transform: translate(15%, -650%); */
+  }
+}
+
+@media (max-width: 700px) {
+  .nav-item {
+    transform: translate(515%, 0);
+  }
+}
+
+@media (max-width: 550px) {
+  .nav-item {
+    transform: translate(500%, 0);
+  }
+
+  .info-box {
+    width: 170px;
   }
 }
 
@@ -176,7 +226,7 @@ body {
   flex-direction: column;
   padding: 10px 10px;
   padding-top: 30px;
-  height:200px;
+  height: 200px;
   z-index: 99;
 }
 
@@ -237,7 +287,9 @@ body {
 }
 
 .nav {
-  background: "pink";
+  /* background: pink; */
+  /* display: flex; */
+  /* justify-content: center; */
 }
 
 .nav-item {
@@ -246,9 +298,10 @@ body {
   margin-left: 30px;
   display: flex;
   font-weight: bolder;
-  font-size: 20px;
+  /* font-size: 1.3vw; */
   text-align: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .upload-img {
@@ -833,9 +886,14 @@ NftCard
 
 /*main slide animation*/
 
+.slick-track {
+  justify-content: center;
+  margin: auto;
+}
+
 .slidediv {
   font-size: 7em;
-  width: 350px;
+  /* width: 350px; */
   font-family: sans-serif;
   position: relative;
   top: 30px;
@@ -845,6 +903,16 @@ NftCard
   text-shadow: 
     4px 4px 0px #d5d5d5, 
     7px 7px 0px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 990px) {
+  .slidediv {
+    margin: auto;
+    padding-left: 20px;
+    font-size: 5rem;
+    /* transform: translate(300px, 0); */
+    /* background: red; */
+  }
 }
 
 .refresh-reward-icon, .change-nickname-icon{
@@ -911,9 +979,21 @@ NftCard
   margin-top: 5%;
 }
 /* the slides */
-.slick-slide {
-  /* margin: 0 10px; */
+@media (max-width: 800px) {
+  .slick-slider {
+    width: 190px;
+    margin: auto;
+  }
 }
+
+@media (max-width: 768px) {
+  .slick-slider {
+    width: 145px;
+    margin: auto;
+  }
+}
+
+
 /* the parent */
 .slick-list {
   height: 450px;

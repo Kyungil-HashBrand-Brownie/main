@@ -33,9 +33,8 @@ const Footer = () => (
             <div className="fContainer">
                 <div className="fContainer_left">
                     <div className="fContainer_left_content">
-                        BROWNY PROJECT<br />
-                        A browny day keeps the frownies away
-                        <br />
+                        <div>BROWNY PROJECT</div>
+                        <div>A browny day keeps the frownies away</div>
                     </div>
                 </div>
                 <div className="fContainer_right">

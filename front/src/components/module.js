@@ -2,39 +2,47 @@ import styled from 'styled-components'
 
 /* Header */
 export const PFPContainer = styled.div`
-  margin-left: 10px;
-  font-size: 20px;
+  /* margin-left: 10px; */
+  /* font-size: 1.1rem; */
   padding: 2px 10px;
   border: 3px solid;
   border-radius: 20px;
   background-color: #198754;
   border-color: #198754;
   letter-spacing: -1px;
-  padding: 1px 20px;
+  text-align: center;
+  /* padding: 1px 20px; */
   cursor: pointer;
   color: white;
   &:hover{  
     transform: scale(1.1);
+  }
+
+  @media(max-width: 550px) {
+    font-size: 13px;
   }
 `
 export const StyledInfo = styled.div`
     width: 90%;
     height: auto;
     background-color: white;
+    margin: auto;
     margin-top: 5px;
-    transform: translate(17.5px, 0);
+    /* transform: translate(17.5px, 0); */
     border-radius: 20px;
     line-height: 30px;
     text-align: center;
     z-index: 3;
     opacity: 90%;
+    /* margin-right: 10px; */
+    /* margin: auto; */
 
     .header-white {
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         background: white;
         padding-top: 3px;
-        font-size: 19px;
+        /* font-size: 19px; */
         font-weight: bold;
         letter-spacing: 1.0px;
         border-bottom: 3px solid gray;
@@ -44,11 +52,11 @@ export const StyledInfo = styled.div`
         justify-content: center;
         align-items : center;
         font-weight: 500;
-        font-size: 17px;
+        /* font-size: 17px; */
     }
-    .header-address {
+
+    @media(max-width: 550px) {
         font-size: 13px;
-        text-align: center;
     }
 `
 
@@ -75,7 +83,7 @@ export const Foot = styled.div`
         color: black;
         text-shadow: -2px -1px 6px white, 1rem 1rem 2em pink;
         font-weight: 800;
-        font-size: 1.1vw;
+        font-size: 17px;
         line-height: 16px;
         align-items: flex-start;
         justify-content: space-between;
@@ -94,7 +102,9 @@ export const Foot = styled.div`
     }
     .fContainer_left{
         display: flex;
+        /* background: red; */
     }
+
     /* LEFT */
     .fContainer_left_content {
         margin-right: 30px;
@@ -122,7 +132,36 @@ export const Foot = styled.div`
     /* 반응형 */
     @media (max-width: 768px) {
         .fContainer {
-            display: block;
+            line-height: 10px;
+        }
+        .fContainer_left_content {
+            line-height: 30px;
+        }
+        .sns_logo {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    @media (max-width: 550px) {
+        .fContainer{
+            font-size: 14px;
+        }
+        .fContainer_left_content {
+            line-height: 24px;
+        }
+        .sns_logo{
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    @media (max-width: 424px) {
+        .fContainer{
+            font-size: 11px;
+        }
+        .fContainer_left_content {
+            line-height: 22px;
         }
     }
 `

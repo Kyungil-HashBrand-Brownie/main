@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -10,7 +10,7 @@ const data = NFTs.map((item, index) => {
   let d = {};
   d.id = index;
   d.img = item;
-  d.caption = `Cute browny${index}`;
+  d.caption = `Browny${index}`;
   return d;
 })
 
@@ -63,7 +63,7 @@ const SlideShow = () => {
     <SliderPosition>
       {mapping.map((mapItem, index) =>
         <Slider {...mapItem} key={index}>
-          {data.map(item => {
+          {data.slice(12*index, 12*index + 12).map(item => {
             return (
                 <ImageContainer key={item.caption}>
                   <Image onClick={() => navigate('/mint')} src={item.img} />

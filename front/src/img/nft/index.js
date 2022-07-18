@@ -14,7 +14,30 @@ import nft13 from './13.png'
 import nft14 from './14.png'
 import nft15 from './15.png'
 import nft16 from './16.png'
+import nft17 from './17.png'
+import nft18 from './18.png'
+import nft19 from './19.png'
+import nft20 from './20.png'
+import nft21 from './21.png'
+import nft22 from './22.png'
+import nft23 from './23.png'
+import nft24 from './24.png'
+import nft25 from './25.png'
+import nft26 from './26.png'
+import nft27 from './27.png'
+import nft28 from './28.png'
+import nft29 from './29.png'
+import nft30 from './30.png'
+import nft31 from './31.png'
+import nft32 from './32.png'
+import nft33 from './33.png'
+import nft34 from './34.png'
+import nft35 from './35.png'
+import nft36 from './36.png'
 
-let NFTs = [nft1, nft2, nft3, nft4, nft5, nft6, nft7, nft8, nft9, nft10, nft11, nft12, nft13, nft14];
+let NFTs = [nft1, nft2, nft3, nft4, nft5, nft6, nft7, nft8, nft9, nft10, nft11, nft12, 
+    nft13, nft14, nft15, nft16, nft17, nft18, nft19, nft20, nft21, nft22, nft23, nft24,
+    nft25, nft26, nft27, nft28, nft29, nft30, nft31, nft32, nft33, nft34, nft35, nft36
+];
 export { nft1, nft2, nft3, nft4, nft5, nft6, nft7, nft8, nft9, nft10, nft11, nft12, nft13, nft14, nft15, nft16 }
 export { NFTs }

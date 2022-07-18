@@ -18,6 +18,7 @@ import AlertModal from 'components/AlertModal'
 const CommunityRead = () => {
     const navigate = useNavigate();
     const { type, id } = useParams();
+    console.log('type: ', type)
 
     const {isDeployer} = useSelector(state => state.nft);
 
