@@ -1,6 +1,22 @@
 import styled from 'styled-components'
 
 /* CommunityRead */
+export const VoteReadState = styled.div`
+    position: absolute;
+    top: 43%;
+    right: 23%;
+`
+export const VoteTCReadImg = styled.div`
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    background-size: cover;
+    background-image:
+        ${props => props.img && `url(${props.img})`};
+`
 export const VoteTCBodyImg = styled.div`
     width: 150px;
     height: 150px;
@@ -17,7 +33,6 @@ export const VoteTCBodyImg = styled.div`
         transform: scale(1.06);
     }
 `
-
 export const VoteDOuter = styled.div`
     display: flex;
     width: 100%;
@@ -51,6 +66,7 @@ export const VoteDHeaderOuter = styled.div`
 export const VoteDHeader = styled.div`
     width: 20%;
     font-size: 30px;
+    margin-top: 20px;
     text-align: center;
 `
 export const VoteDMainOuter = styled.div`
@@ -174,7 +190,7 @@ export const PageButton = styled.button`
 export const DescriptionOuter = styled.div`
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 `
 export const Description = styled.div`
     background: lightgray;

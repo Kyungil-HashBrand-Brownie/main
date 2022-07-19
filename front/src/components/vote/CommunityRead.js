@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import {
     VoteDOuter, VoteDRightOuter, VoteDHeaderOuter,
     VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
-    ControlButton, PageButton, VoteTCBodyImg, VoteButtonDiv, VoteButton
+    ControlButton, PageButton, VoteTCReadImg, VoteButtonDiv, VoteButton, VoteReadState
 } from './voteModule'
 import axios from 'axios'
 import { checkVote, getMyNFTs, getMyStaked, submitVote, useAlert } from 'api'
@@ -104,8 +104,8 @@ const CommunityRead = () => {
                     <VoteDescription />
                     <VoteDMainOuter>
                         <VoteDMain>
-                            <VoteTCBodyImg img={nft1} />
-                            <div>{data.state}</div>
+                            <VoteTCReadImg img={nft1} />
+                            <VoteReadState>{data.state}</VoteReadState>
                             <Form>
                                 <VoteDPart>
                                     <VoteDType>제목</VoteDType>

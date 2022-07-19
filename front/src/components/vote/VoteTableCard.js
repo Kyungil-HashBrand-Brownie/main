@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import {
-    VoteTCardOuter, VoteTCHeader, VoteTCContent, VoteTCUser, VoteTCState, VoteTCBodyOuter,
+    VoteTCardOuter, VoteTCContent, VoteTCUser, VoteTCState, VoteTCBodyOuter,
     VoteTCBody, VoteTCBodyHeader, VoteTCBodyTitle, VoteTCBodyVoteCount,
     VoteTCBodyMain, VoteTCBodyContent, VoteTCBodyProfile
 } from './voteModule'
@@ -16,16 +16,17 @@ const VoteTCImage = styled.div`
         ${props => props.img && `url(${props.img})`};
 `
 
-const VoteTableCard = ({ data, img, img1, id }) => {
+const VoteTableCard = ({ data, id }) => {
     const navigate = useNavigate();
-    const {title, content, nickname, state, voteCounts} = data;
+    const {title, content, nickname, state, voteCounts, imgURI} = data;
+    console.log(imgURI);
+    
     let sum;
     
     if(voteCounts){
         const countsArr = JSON.parse(voteCounts)
         sum = countsArr.reduce((a, b)=> a + b )
     }
-    
 
     return (
         <VoteTCardOuter
@@ -44,7 +45,7 @@ const VoteTableCard = ({ data, img, img1, id }) => {
                     <VoteTCBodyMain>
                         <VoteTCBodyContent>{content}</VoteTCBodyContent>
                         <VoteTCBodyProfile>
-                            <VoteTCImage img={img}></VoteTCImage>
+                            <VoteTCImage img={imgURI}></VoteTCImage>
                             <VoteTCUser><i>{nickname}</i></VoteTCUser>
                         </VoteTCBodyProfile>
                     </VoteTCBodyMain>

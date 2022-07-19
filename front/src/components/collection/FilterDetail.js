@@ -5,7 +5,7 @@ import { Check } from '../../img'
 import { FilterDetailOuter, FilterDetailBox } from './collectionModule'
 
 const Background = [
-    'Iceberg', 'Desert', 'Grand Canyon', 'Cream', 'Winter',
+    'Iceberg', 'Desert', 'GC', 'Cream', 'Winter',
     'NorthPole', 'Forest', 'Sea', 'Sky',
 ]
 
@@ -14,8 +14,8 @@ const Body = ['BrownBody', 'PinkBody', 'RedBody', 'GreenBody']
 const Face = ['LivelyFace', 'SmileFace', 'PlayfulFace', 'MadFace', 'AngryFace']
 
 const Hat = [
-    'WhiteHat', 'StrawHat ', 'DumbHat', 'NewVilageHat',
-    'PuffypermHair', 'MarineHat', 'BeanieHat']
+    'WhiteHat', 'StrawHat ', 'DumbHat', 'NewVillage',
+    'Puffyperm', 'MarineHat', 'BeanieHat']
 
 const Item = ['NoWar', 'NoKillAnimal', 'NoPlastic', 'NoSmoking', 'Earth']
 
@@ -36,11 +36,15 @@ const FilterDetail = ({ parts }) => {
 const [check, setCheck] = useState(null);
 
 const changeCheck = (part) => {
+    let _part = part;
     if (parts == 'Back') parts = 'Background';
+    if (part == 'GC') _part = 'Grand Canyon';
+    else if (part == 'NewVillage') _part = 'NewVilageHat';
+    else if (part == 'Puffyperm') _part = 'PuffypermHair';
     let copy = _.cloneDeep(filterOption).map((item) => {
         if (item.id == parts) {
-            if (item.opt == part) item.opt = null
-            else item.opt = part
+            if (item.opt == _part) item.opt = null
+            else item.opt = _part
         }
         return item
     })
@@ -63,7 +67,7 @@ return (
                     info={part}
                     onClick={() => changeCheck(part)}
                 >
-                    {check == part && <img src={Check} />}
+                    {check == part && <img className='filter-check' src={Check} />}
                     {part}
                 </FilterDetailBox>)
         }

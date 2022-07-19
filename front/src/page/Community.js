@@ -7,6 +7,7 @@ import CommunityVoteTable from 'components/vote/CommunityVoteTable'
 import VoteDescription from 'components/vote/VoteDescription'
 import CommunityTable from 'components/vote/CommunityTable'
 import { useSelector } from 'react-redux'
+import Pagination from 'components/vote/Pagination'
 
 const VoteDOuter = styled.div`
     display: flex;

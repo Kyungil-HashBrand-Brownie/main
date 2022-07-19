@@ -13,7 +13,6 @@ const CollectionOuter = styled.div`
 
 `
 
-
 const Collection = () => {
     const [data, setData] = useState(null);
     const [row, setRow] = useState(0);
