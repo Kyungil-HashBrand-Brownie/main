@@ -96,8 +96,10 @@ const VoteDetail = () => {
     }
 
     useEffect(() => {
-        action();
-    }, [])
+        if(myAddress){
+            action();
+        }
+    }, [myAddress])
 
     return (
         <>
