@@ -252,7 +252,8 @@ body {
 
 /* MintCard */
 .MintCard {
-  padding-top: 5%;
+  /* background: blue; */
+  padding: 3.5% 0%;
   /* margin-top: 5%; */
   /* display: grid;
   grid-template-columns: repeat(2, 1fr);
