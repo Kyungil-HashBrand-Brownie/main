@@ -4,6 +4,7 @@ import QuitVote from '../components/QuitVote'
 import EarthVote from '../components/EarthVote'
 import WhiteListMember from '../components/WhiteListMember'
 import { useState } from 'react'
+import ExitVote from 'components/EndVote'
 
 const AdminPage = () => {
   const [click, setClick] = useState(0);
@@ -14,12 +15,13 @@ const AdminPage = () => {
 
   return (
       <>
-        <button className='admin-outer-box' onClick={()=>click1(0)}>화이트키</button>
+        {/* <button className='admin-outer-box' onClick={()=>click1(0)}>화이트키</button>
         <button className='admin-outer-box' onClick={()=>click1(1)}>mint</button>
-        <button className='admin-outer-box' onClick={()=>click1(2)}>자선단체 </button>
+        <button className='admin-outer-box' onClick={()=>click1(2)}>자선단체 </button> */}
 
         {
-          click == 0 ? <WhiteListMember /> : click == 1 ? <QuitMint /> : <QuitVote/>
+          // click == 0 ? <WhiteListMember /> : click == 1 ? <QuitMint /> : <QuitVote/>
+          click == 0 ? <WhiteListMember /> : click == 1 ? <QuitMint /> : <ExitVote />
         }
 
           {/* <EarthVote /> */}

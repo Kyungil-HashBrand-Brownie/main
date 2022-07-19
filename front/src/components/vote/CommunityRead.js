@@ -1,42 +1,28 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
-import styled from 'styled-components'
 import { nft1 } from 'img/nft'
 import VoteDescription from './VoteDescription'
-import CommunityTopic from './CommunityTopic'
 import _ from 'lodash'
 import { useNavigate } from 'react-router-dom'
 import {
-    VoteDOuter, VoteDLeftOuter, VoteDRightOuter, VoteDHeaderOuter,
+    VoteDOuter, VoteDRightOuter, VoteDHeaderOuter,
     VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
-    ControlButton, PageButton
+    ControlButton, PageButton, VoteTCBodyImg
 } from './voteModule'
-import { useSelector } from 'react-redux'
 import axios from 'axios'
-import { useAlert } from 'api'
+import { checkVote, getMyNFTs, getMyStaked, submitVote, useAlert } from 'api'
 import AlertModal from 'components/AlertModal'
-
-const VoteTCBodyImg = styled.div`
-    width: 150px;
-    height: 150px;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 50%;
-    background-size: cover;
-    background-image:
-        ${props => props.img && `url(${props.img})`};
-    cursor: pointer;
-
-    &:hover {
-        transform: scale(1.06);
-    }
-`
+import Proposal from 'components/Proposal'
+import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 
 const CommunityRead = () => {
     const navigate = useNavigate();
     const { type, id } = useParams();
+
+    const {isDeployer} = useSelector(state => state.main);
+    const {voteStatus, myAddress} = useSelector(state => state.nft);
 
     const [data, setData] = useState({
         title:"",
@@ -45,9 +31,19 @@ const CommunityRead = () => {
         state:""
     });
 
+    const [hasVote, setHasVote] = useState(false);
+    const [currentProposal, setCurrentProposal] = useState(1);
+    const [votingPower, setVotingPower] = useState(0);
+    
+    const getVotingPower = async () => {
+        const myNFTs = await getMyNFTs(myAddress);
+        const myStaked = await getMyStaked(myAddress)
+        setVotingPower(myNFTs.length + myStaked.length)
+    }
+
     const getData = async () => {
         let result = await axios.get(`http://localhost:4000/api/community/read/${type}/${id}`);
-        console.log('result: ', result);
+        console.log(result)
         setData(result.data);
     }
 
@@ -58,19 +54,50 @@ const CommunityRead = () => {
     const customAlert = useAlert();
 
     const movePage = () => {
-        type == 'vote' ? navigate('/community/vote') : navigate('/community/default')
+        navigate('/community')
     }
 
-    console.log(data.content)
+    const moveApproval = ()=> {
+        navigate(`/community/approval/${id}`)
+    }
+
+    const changeSelected = (e) => {
+        console.log(e.target.value)
+        setCurrentProposal(e.target.value)
+    }
+
+
+    const getHasVote = async () => {
+        const result = await checkVote(myAddress);
+        setHasVote(result)
+        console.log(result)
+    }
+
+
+    useEffect(()=> {
+        if(myAddress){
+            getHasVote();
+            getVotingPower();
+        }
+      },[myAddress])
+
+    const voteSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await submitVote(myAddress ,currentProposal);
+            await axios.post('/api/community/vote', {currentProposal, votingPower})
+        }
+        catch (e) {
+            console.log(e)
+            return e
+        }
+      }
+
 
     return (
         <>
         <AlertModal {...customAlert}/>
         <VoteDOuter>
-            <VoteDLeftOuter>
-                <CommunityTopic />
-            </VoteDLeftOuter>
-
             <VoteDRightOuter>
                 <VoteDHeaderOuter>
                     <VoteDHeader>게시판</VoteDHeader>
@@ -79,6 +106,7 @@ const CommunityRead = () => {
                 <VoteDMainOuter>
                     <VoteDMain>
                         <VoteTCBodyImg img={nft1} />
+                        <div>{data.state}</div>
                         <Form>
                         <VoteDPart>
                             <VoteDType>제목</VoteDType>
@@ -111,6 +139,9 @@ const CommunityRead = () => {
                                             className='proposal-form'
                                             key={index}
                                         >
+                                        {
+                                            data.state==="투표 진행 중" && <Proposal key={index} index={index+1} onChange={changeSelected} />
+                                        }
                                         <Form.Control
                                             readOnly
                                             as="textarea"
@@ -125,10 +156,38 @@ const CommunityRead = () => {
                                 </VoteDPart>
                             }
                         </Form>
+                        {
+                        data.state==="투표 진행 중" &&
+                            <ControlButton>
+                                {!hasVote 
+                                ? 
+                                <>
+                                    <PageButton onClick={voteSubmit}>투표하기</PageButton>
+                                    <div>My Voting Power : {votingPower}</div>
+                                </>
+                                : <div>이미 투표했습니다</div>
+                                } 
+                            </ControlButton>
+                        }
                         <ControlButton>
                             <PageButton onClick={movePage}>이전화면</PageButton>
                         </ControlButton>
-                    </VoteDMain>
+                        {
+                            isDeployer && type === 'vote' && data.state=="승인 대기 중"
+                            ?
+                                voteStatus==='0'
+                                ?
+                                <ControlButton>
+                                    <PageButton onClick={moveApproval}>승인하기</PageButton>
+                                </ControlButton>
+                                :
+                                <ControlButton>
+                                    이전 투표 진행중
+                                </ControlButton>
+                            :null
+                        }
+                        
+                    </VoteDMain>  
                 </VoteDMainOuter>
             </VoteDRightOuter>
         </VoteDOuter>

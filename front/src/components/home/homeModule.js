@@ -1,46 +1,76 @@
-import styled, { keyframes, css } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { viliage2 } from '../../img'
-import { Main1, Main2, Main3 } from '../../img'
+import { Main2} from '../../img'
 
 /* Home */
 
 export const StyledMainText = styled.div`
   position: relative;
   top: 0%;
-  width: 360px;
   height: 120px;
   font-weight: bold;
   font-size: 84px;
   color: black;
-  left: 5%;
+  left: 7%;
 
-  @media (max-width: 970px) {
-    margin-top: 50px;
+  @media (max-width: 992px) {
+    margin-top: 10px;
+    margin-left: 12%;
   }
+
+  @media (max-width: 776px) {
+    margin-left: 5%;
+  }
+
+  @media (max-width: 540px) {
+    .layer:after {
+      font-size: 120px;
+      margin: auto;
+    }
+    margin: auto;
+  }
+
 `
 export const StyledSubText = styled.div`
   position: relative;
   top: 20%;
   width: 540px;
-  height: 105px;
+  /* height: 105px; */
   color: black;
-  font-size: 43px;
-  left: 5%;
+  font-size: 36px;
+  padding-left: 5%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  /* left: 5%; */
+  /* background: pink; */
 
-  @media (max-width: 970px) {
-    margin-top: 60px;
+  @media (max-width: 992px) {
+    margin-top: 120px;
+    margin-left: 12%;
+    /* position: static; */
+  }
+
+  @media (max-width: 776px) {
+    margin-left: 5%;
+  }
+
+  @media (max-width: 540px) {
+    width: 450px;
+    margin: auto;
+    margin-top: 120px;
+    font-size: 30px;
   }
 `
 export const StyledMintDate = styled.div`
-  position: relative;
-  top: 40px;
-  border: 5px solid rgb(31, 162, 31);
+  /* position: relative; */
+  /* top: 40px; */
+  border: 8px solid rgb(26, 126, 213);
   border-radius: 10px;
-  padding: 10px 0px;
+  padding: 8px 0px;
   text-align: center;
   font-weight: bolder;
   font-size: larger;
-  width: 300px;
+  width: 270px;
   background: white;
 `
 export const DisplayAnimation = keyframes`
@@ -67,10 +97,26 @@ export const StyledBrownyAbove = styled.img`
   animation-iteration-count: 1;
   // background-color: lightcyan;
   border-radius: 20px;
+
+  @media (max-width: 540px) {
+    text-align: center;
+    width: 450px;
+    left: -5%;
+  }
+
+  @media (max-width: 776px) {
+    left: -8%;
+    width: 480px;
+  }
+
+  @media (max-width: 992px) {
+    left: -7%;
+    margin-top: 80px;
+  }
 `
 export const StyledButton = styled.div`
   position: relative;
-  top: 50%;
+  top: 45%;
   display: flex;
   justify-content: center;
   align-items: center; 
@@ -85,9 +131,18 @@ export const StyledButton = styled.div`
     transform: scale(1.05);
   }
 
-  @media (max-width: 970px) {
+  @media (max-width: 992px) {
     margin-top: 150px;
-    margin-left: 30px;
+    margin-left: 20%;
+  }
+
+  @media (max-width: 776px) {
+    margin-left: 13%;
+  }
+
+  @media (max-width: 540px) {
+    margin: auto;
+    margin-top: 150px;
   }
 `
 export const StyledArrow = styled.img`
@@ -99,20 +154,26 @@ export const StyledArrow = styled.img`
 
 export const StyleHomeImgCard = styled.div`
     width:100% ;
-    background-color: #CDF0EA;
+    background-color: rgb(249, 245, 240, 0.9);
     height: 500px;
     display: flex;
     justify-content: center;
     position: relative;
     margin-top:50px;
+    opacity: 0.9;
+
+    .blue-num {
+      text-align: center;
+      margin-top: 5px;
+      font-size: 40px;
+    }
     .backColor{
       background-color: #F6C6EA;
-      width:70% ;
-      height: 340px;
+      width: 70% ;
+      height: 380px;
       display: flex;
-      margin-top: 150px;
-      margin-bottom: 10px;
       border-radius: 30px;
+      margin-top: 80px;
     }
     .back{
       background-color: #F6C6EA;
@@ -123,49 +184,57 @@ export const StyleHomeImgCard = styled.div`
       margin-bottom: 10px;
       border-radius: 30px;
     }
-    .backColor{
-      background-color: #F6C6EA;
-      width:70% ;
-      height: 340px;
-      display: flex;
-      margin-top: 150px;
-      margin-bottom: 10px;
-      border-radius: 30px;
-    }
+
     .box_vertical {
+      margin-top: 30px;
       writing-mode: vertical-lr;
       cursor: alias;
     }
     .box_vertical2 {
       background-color: #FAF4B7;
-      height:400px ;
+      height:440px ;
       color: black;
-      margin-top: -60px;
-      border-top-left-radius: 30px;
+      margin-top: -35px;
+      border-radius: 30px;
+      /* border-top-left-radius: 30px;
       border-top-right-radius: 30px;
+      border-bottom-left-radius: 30px; */
     }
     .box_vertical2 h2{
         writing-mode: vertical-lr;
     }
+    .tapestry-header0 {
+      letter-spacing: 1px;
+      /* background: white; */
+      border-radius: 20px;
+      padding: 10px 2px;
+    }
+    .tapestry-side-header1 {
+      margin-top: 40px;
+      letter-spacing: 1px;
+    }
+    .tapestry-side-header2 {
+      margin-top: 60px;
+      letter-spacing: 1px;
+    }
+
     .box_vertical2:hover {
-      height: 410px;
-      margin-top: -70px;
-      transform: scale(1.0);
+      /* height: 410px; */
+      margin-top: -60px;
+      /* transform: scale(1.0); */
       cursor: alias;
     }
     .box_vertical3 {
-      height:450px ;
+      height:470px ;
       background-color: #F9F9F9;
-      margin-top: -110px;
-      border-top-left-radius: 30px;
-      border-top-right-radius: 30px;
-      border-bottom-right-radius: 30px;
+      margin-top: -65px;
+      border-radius: 30px;
     }
 
     .box_vertical3:hover {
-      height: 460px;
-      margin-top: -120px;
-      transform: scale(1.0);
+      /* height: 460px; */
+      margin-top: -90px;
+      /* transform: scale(1.0); */
       cursor: alias;
     }
     
@@ -177,12 +246,130 @@ export const StyleHomeImgCard = styled.div`
       width: 600px;
       height: 350px;
       position: relative;
-      margin-top: -50px;
+      margin-top: -30px;
     };
 
-    /* .grid-template{
-      grid-template-rows: repeat(3, minmax(100px, auto));
-    } */
+    .tapestry-header {
+      margin-top: 9px;
+      font-size: 35px;
+    }
+    .tapestry-subheader {
+      padding-left: 5px;
+      font-size: 20px;
+    }
+    .grid-template {
+      padding-left: 5px;
+      margin-top: 10px;
+      font-size: 18px;
+    }
+    .tapestry-span {
+      color: blue;
+      font-weight: bold;
+    }
+
+    @media (max-width: 1715px) {
+      .tapestry-header {
+        font-size: 30px;
+      }
+      .tapestry-subheader {
+        font-size: 18px;
+      }
+      .grid-template {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 1560px) {
+      .tapestry-header {
+        font-size: 26px;
+      }
+      .tapestry-subheader {
+        font-size: 17px;
+      }
+      .grid-template {
+        font-size: 15px;
+      }
+    }
+
+    @media (max-width: 1497px) {
+      .grid-template { 
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 1174px) {
+      .grid-template {
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 1090px) {
+      .grid-template {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 1005px) {
+      .backColor {
+        width: 95%;
+      }
+      .grid-template {
+        font-size: 15px;
+      }
+    }
+    
+    @media (max-width: 954px) {
+      .grid-template {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 844px) {
+      .grid-template {
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 784px) {
+      .tapestry-main {
+        width: 400px;
+      }
+      .home_img {
+        width: 150px;
+        height: 200px;
+        margin-top: 50px;
+      }
+      .box_vertical2 {
+        width: 50px;
+      }
+      .box_vertical3 {
+        width: 60px;
+      }
+      .blue {
+        width: 80px;
+      }
+      .box_vertical {
+        padding-top: 10px;
+      }
+      .grid-template {
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 606px) {
+      .home_img {
+        display: none;
+      }
+      .grid-template {
+        font-size: 14px;
+      }
+    }
+    
+    @media (max-width: 536px) {
+      .grid-template {
+        font-size: 13px;
+      }
+    }
 `
 
 /* SlideShow */
@@ -190,7 +377,7 @@ export const StyleHomeImgCard = styled.div`
 export const ImageContainer = styled.div`
     position: relative;
     color: white;
-    margin: 10px;
+    /* margin: 10px; */
     margin-top: 10px;
     margin-bottom:10px;
   `
@@ -205,11 +392,16 @@ export const BottomLeft = styled.div`
     font-size: 5px;
     bottom: 8px;
     left: 16px;
+    color: black;
+    background: white;
+    border-radius: 5px;
   `
 export const SliderPosition = styled.div`
     display:flex ;
     text-align: center;
-    width: 700px;
+    /* margin: auto; */
+    justify-content: center;
+    /* width: 700px; */
     /* box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 70px 04px */
                   /* inset rgba(0, 0, 0, 0.45) 0px 25px 20px -20px; */
     box-shadow: 0px 15px 15px -10px rgba(0, 0, 0, 0.45),
@@ -223,6 +415,14 @@ export const SliderPosition = styled.div`
     }
     .slick-prev{
       display: none;
+    }
+
+    @media (max-width: 800px) {
+      width: 600px;
+    }
+
+    @media (max-width: 768px) {
+      width: 450px;
     }
   `
 
@@ -239,8 +439,10 @@ export const TeamBrowny = styled.div `
 `
 export const TeamText = styled.div `
     text-align: center;
-    font-size: 40px;
+    font-size: 80px;
+    font-weight: light;
     margin: 40px 0;
+    text-shadow: 2px 2px 2px white;
 `
 
 /* TeamCard */
@@ -251,6 +453,14 @@ export const Img = styled.img `
     border-top-right-radius: 300px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+
+    @media (max-width: 1540px) {
+      width: 200px;
+      border-top-left-radius: 200px;
+      border-top-right-radius: 200px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
 `
 export const TeamImgOuter = styled.div`
     margin: auto;
@@ -262,17 +472,29 @@ export const TeamImgOuter = styled.div`
     cursor: pointer;
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.03);
+    }
+
+    @media (max-width: 1540px) {
+      margin-bottom: 10px;
     }
 `
 export const TeamInfoName = styled.div`
     font-size: 24px;
     text-align: center;
+
+    @media (max-width: 1540px) {
+      font-size: 12px;
+    }
 `
 export const TeamInfoPos = styled.div`
     font-weight: bold;
     font-size: 30px;
     text-align: center;
+
+    @media (max-width: 1540px) {
+      font-size: 15px;
+    }
 `
 
 /* Village */

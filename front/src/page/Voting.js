@@ -11,7 +11,7 @@ function Voting() {
   const customAlert = useAlert();
 
   const dispatch = useDispatch();
-  const {myAddress, userRank, isDeployer, voteStatus} = useSelector(state=>state.nft);
+  const {myAddress, userRank, isDeployer, voteStatus} = useSelector(state=>state.main);
 
  
   // 현재 선택된 안건 번호

@@ -5,14 +5,11 @@ CREATE TABLE voteCommunity (
     `proposals` VARCHAR(255) NOT NULL,
     `nickname` VARCHAR(255) NOT NULL,
     `state` VARCHAR(255) DEFAULT "승인 대기 중" NOT NULL,
-    `totalCount`INT DEFAULT 0 NULL
-);
-
-CREATE TABLE community (
-    `idx` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `title` VARCHAR(255) NOT NULL,
-    `content` VARCHAR(255) NOT NULL,
-    `nickname` VARCHAR(255) NOT NULL
+    `voteCounts`VARCHAR(255) DEFAULT "" NULL,
+    `selectedProposal` VARCHAR(255) DEFAULT "" NULL
 );
 
 select * from voteCommunity;
+
+drop table voteCommunity;
+

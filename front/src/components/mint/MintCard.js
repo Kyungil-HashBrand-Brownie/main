@@ -1,9 +1,10 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import PreSale from './PreSale'
-import mintBackground from "../../img/mint/background7.png"
+import mintBackground from "../../img/mint/background7.jpg"
 import { Main1, Main2, Main3 } from '../../img';
 import { PreBrowny, WhiteBrowny } from '../../img/browny';
+import styled from 'styled-components';
 
 let preSaleProps = {
   title: 'Pre-Sale',
@@ -19,29 +20,37 @@ let whiteSaleProps = {
   amount: '/30',
 }
 
+const Style_Mint_div = styled.div`
+  width: 100%;
+  height: 100%;
+  /* position: "absolute"; */
+  /* background-color: black; */
+  /* bottom: -00px; */
+  position: "absolute";
+
+
+`
+
+
 
 const MintCard = () => {  
     return (
       <>
-      <img 
-          style={{ position: "absolute", width: "80%", height: "88%", top: "5%", left: "10%", zIndex: "-2" }} 
-          // src='https://www.google.com/imgres?imgurl=https%3A%2F%2Fthumbs.dreamstime.com%2Fb%2Fbaking-buns-oven-vector-image-tray-which-lie-hot-68181559.jpg&imgrefurl=https%3A%2F%2Fwww.dreamstime.com%2Fstock-illustration-baking-buns-oven-vector-image-tray-which-lie-hot-image68181559&tbnid=vYdHEH5_NKaxTM&vet=12ahUKEwiP5amco-H4AhWLypQKHTroBxYQMygAegUIARDGAQ..i&docid=KFCQZUMUwxo5OM&w=800&h=800&hl=ko&safe=images&ved=2ahUKEwiP5amco-H4AhWLypQKHTroBxYQMygAegUIARDGAQ'
-          // src={Main1}
-      src={mintBackground} 
-      
-      />
-      <Container className='MintCard'>
-          <Row>
-            <Col className='FreeSale' xs={{span:4, offset:2 }}> 
-              <PreSale 
-                {...preSaleProps}/> 
-            </Col>
-            <Col className='WhiteSale' xs={{span:4 }}> 
-              <PreSale 
-               {...whiteSaleProps}/> 
+        <img src={mintBackground} className="styled_mint_card"/>
+        <div className='MintCard'>
+        <Container className="mint-container">
+              <Col className='PreSale' xs={{span:4, offset:2 }}> 
+                <PreSale 
+                  {...preSaleProps}/> 
+              {/* </div> */}
               </Col>
-          </Row>
+              <Col className='WhiteSale' xs={{span:4 }}> 
+                <PreSale 
+                {...whiteSaleProps}/> 
+              {/* </div> */}
+              </Col>
         </Container>
+        </div>
       </>
     )
 }

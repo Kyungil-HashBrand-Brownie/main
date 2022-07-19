@@ -1,25 +1,28 @@
 import React, { useState } from 'react'
-import { Img1 } from '../../img/browny';
 import styled from 'styled-components';
 import { StyleHomeImgCard } from './homeModule';
 import HomeImgCardMain from './HomeImgCardMain';
 import HomeImgCardSide from './HomeImgCardSide';
+import { nft1, nft2, nft3 } from '../../img/nft'
 
 const datas = [
   {
     id: 0,
     num: '01',
-    header: 'heading',
+    header: 'Creation',
+    img: nft1,
   },
   {
     id: 1,
     num: '02',
-    header: 'rabel',
+    header: 'Vision',
+    img: nft2,
   },
   {
     id: 2,
     num: '03',
-    header: 'rabel'
+    header: 'Enjoyment',
+    img: nft3,
   }]
 
 const ImgDivCard = styled.img`
@@ -32,6 +35,11 @@ const ImgDivCard = styled.img`
       '5px solid #F9F9F9'
       : "5px solid #F6C6EA"
   };
+
+  /* @media (max-width: 784px) {
+    width: 80%;
+    height: 80%;
+  } */
 `
 
 const HomeImgCard = () => {
@@ -43,33 +51,30 @@ const HomeImgCard = () => {
   let frontData = datas.find(item => item.id === click)
 
   return (
-    <div>
-
       <StyleHomeImgCard >
         <div className="backColor"
           style={{
             backgroundColor:
               click === 1 ?
-                "#FAF4B7"
+                "#52a2fe"
                 : click === 2 ?
-                  "#F9F9F9"
-                  : "#F6C6EA"
+                  "rgb(242, 142, 70)"
+                  : "#fe6652"
 
           }}>
           <div className="blue">
-            <h2>{frontData.num}</h2>
+            <div className='blue-num'>{frontData.num}</div>
             <div className="box_vertical" onClick={() => setClick(frontData.id)}>
-              <h2>{frontData.header}</h2>
+              <h2 className='tapestry-header0'>{frontData.header}</h2>
             </div>
           </div>
           <div className="home_img" >
-            <ImgDivCard src={Img1} alt="hi" click={click} />
+            <ImgDivCard src={frontData.img} alt="hi" click={click} />
           </div>
           <HomeImgCardMain click={click} />
           <HomeImgCardSide getData={getData} setClick={setClick} />
         </div>
       </StyleHomeImgCard>
-    </div>
   )
 }
 

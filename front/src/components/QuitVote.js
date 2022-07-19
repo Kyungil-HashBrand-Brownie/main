@@ -10,7 +10,7 @@ import Card from 'react-bootstrap/Card'
 const QuitVote = () => {
     
     // const dispatch = useDispatch();
-    const {countAnimal , countKid, countMinority, countTotal} = useSelector(state =>state.nft);
+    // const {countAnimal , countKid, countMinority, countTotal} = useSelector(state =>state.nft);
 
     // const voteHandlerAni = () => {
     //     dispatch({type: "VOTE_INCREMENT" , payload: {countAnimal: countAnimal +1 } });
@@ -26,17 +26,17 @@ const QuitVote = () => {
 
 
 
-    const beforeArr = ["countAnimal", "countKid", "countMin"];
-    const sortArr = [["countAnimal", countAnimal], ["countKid", countKid], ["countMin", countMinority]].sort((a,b) => b[1] - a[1]) // [["countKid, 4], 2, 0]   
-                    .map((ele) => ele[0]) // ele = ["countKid", 4] => ["countKid", "countAnimal", "countMin"];
-    const finalArr = beforeArr.map((ele) => 
-        sortArr.indexOf(ele) + 1    
-    )
+    // const beforeArr = ["countAnimal", "countKid", "countMin"];
+    // const sortArr = [["countAnimal", countAnimal], ["countKid", countKid], ["countMin", countMinority]].sort((a,b) => b[1] - a[1]) // [["countKid, 4], 2, 0]   
+    //                 .map((ele) => ele[0]) // ele = ["countKid", 4] => ["countKid", "countAnimal", "countMin"];
+    // const finalArr = beforeArr.map((ele) => 
+    //     sortArr.indexOf(ele) + 1    
+    // )
     
 
-    const percentlArr = [countAnimal, countKid, countMinority].map((ele) =>
-        ele / countTotal * 100
-    )
+    // const percentlArr = [countAnimal, countKid, countMinority].map((ele) =>
+    //     ele / countTotal * 100
+    // )
 
 
   return (
@@ -59,23 +59,23 @@ const QuitVote = () => {
                 <tbody>
                     <tr>
                         <td>집계 현황</td>
-                        <td>{countAnimal}</td>
+                        {/* <td>{countAnimal}</td>
                         <td>{countKid}</td>
                         <td>{countMinority}</td>
-                        <td>{countTotal}</td>
+                        <td>{countTotal}</td> */}
                     </tr>
                     <tr>
                         <td>%</td>
-                        {
+                        {/* {
                             percentlArr.map((item,index) => <td key={index} >{Math.floor(item)} %</td>)
-                        }
+                        } */}
                         <td>100%</td>
                     </tr>
                     <tr>
                         <td>투표 순위</td>
-                        {
+                        {/* {
                             finalArr.map((item, index) => <td key={index}>  {item } </td>)
-                        }
+                        } */}
                     </tr>
                 </tbody>
             </Table>

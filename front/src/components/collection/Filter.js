@@ -9,9 +9,12 @@ import { FilterOuter, FilterInner, FilterHeader, FilterMain,
     FilterText, FilterSubHeader, FilterOption, FilterContentBox, FilterContent
 } from './collectionModule'
 
+const partsLen = [9, 4, 5, 4, 5];
+
 const Filter = () => {
     const dispatch = useDispatch();
-    const { filterOpenState, filterOption } = useSelector(state => state.nft)
+    // const { filterOpenState, filterOption } = useSelector(state => state.nft)
+    const { filterOpenState, filterOption } = useSelector(state => state.main)
 
     const changeSelect = (data) => {
         console.log(data)
@@ -46,7 +49,7 @@ const Filter = () => {
                 <div key={index}>
                     <FilterContent onClick={() => changeSelect(data)}>
                         <FilterOption key={index}>
-                            {data.id}    
+                            {data.id} ({partsLen[index]})
                         </FilterOption>
                         <FontAwesomeIcon 
                             className='arrow-icon'

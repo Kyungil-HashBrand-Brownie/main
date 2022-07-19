@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../scss/detailCollecion.css";
 import { nft1 } from "../../img/nft/";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { nftAction } from "redux/actions/nftAction";
@@ -21,33 +21,25 @@ const DetailCollecion = () => {
   let params = useParams();
   // 리렌더링 해야 해당 페이지로 간다.
   let page = params.edition;
-  const { loading } = useSelector(state => state.nft);
 
-  // let [page, setPage] = useState(params.edition) 
-
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
 
   const [collectionData, setCollectionData] = useState({});
   const [collectionAlldata, setCollectionAllData] = useState(null);
-  const [positionMiddle, setPositionMiddle] = useState(parseInt(page < 3 ? 3 : page));
+  console.log("alldata" , collectionAlldata)
+  console.log("Default data" , collectionData)
 
   const getData = async () => {
     let result = await Promise.all([axios.get('/api/image/images'), axios.get(`/api/image/image/${page}`)])
-    // let result = await axios.get(`/image/image/${page}`);
-    // console.log(result)
     let data = result[1].data[0]; // 데이터 배열 형식을 객체로 바꾸기 위해서
-    let allData = result[0].data.map(a => {
-      return {edition: a.edition, addr: a.addr};
+    let allData = result[0].data.map((item, index) => {
+      return {edition: item.edition, addr: item.addr};
     }).sort((a,b) => parseInt(a.edition) - parseInt(b.edition))
-    console.log("all data " , allData)
 
 
     setCollectionData(data)
     setCollectionAllData(allData)
-    // console.log("addr",data.addr)
-    // setPositionMiddele(data.)
   };
 
   const preButton_collection = () => {
@@ -59,19 +51,17 @@ const DetailCollecion = () => {
   const nextButton_collection = () => {
     console.log("next")
     navigate(`/detailcollection/${collectionData.edition + 1}`)
-    // navigate(`/detailcollection/${collectionData.edition } `)
-    // console.log(collectionData.edition)
+
   }
 
   useEffect(() => {
-    
+
     getData();
-    // dispatch(nftAction.getDataCollecion(collectionData))
   }, [page]);
 
   return (
     <div>
-      <ClipLoader loading={loading} css={override} size={20} />
+      {/* <ClipLoader loading={loading} css={override} size={20} /> */}
       {collectionData.addr &&
       <div className="layout-container">
         <div className="detailImglNft-item1">
@@ -113,14 +103,14 @@ const DetailCollecion = () => {
               </div>
             </div>
             <div className="div-section">
-              <div className="left-layout">Eye : </div>
+              <div className="left-layout">Hat : </div>
               <div className="right-layout">
-                {collectionData.Eye}
+                {collectionData.Hat}
               </div>
             </div>
             <div className="div-section">
-              <div className="left-layout">Mouth :  </div>
-              <div className="right-layout">{collectionData.Mouth} </div>
+              <div className="left-layout">Face :  </div>
+              <div className="right-layout">{collectionData.Face} </div>
             </div>
             <div className="div-section">
               <div className="left-layout">Item :  </div>
