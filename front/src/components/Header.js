@@ -25,19 +25,19 @@ const WalletButton = styled.button`
         position: absolute;
         top: -40px;
         left: 41%;
-    }
+    };
 
-    @media (max-width: 865px) {;
+    @media (max-width: 865px) {
         left: 40%;
-    }
+    };
 
-    @media (max-width: 720px) {;
+    @media (max-width: 720px) {
         left: 39%;
-    }
+    };
 
-    @media (max-width: 620px) {;
+    @media (max-width: 620px) {
         left: 36%;
-    }
+    };
 
 `
 

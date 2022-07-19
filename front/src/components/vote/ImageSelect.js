@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import axios from 'axios'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleLeft , faAngleRight} from "@fortawesome/free-solid-svg-icons"
 
@@ -39,9 +38,7 @@ const ImgContainer = styled.img`
     }
 `
 
-
-const ImageSelect = ({ image, myImage, setMyImage }) => {
-    const dispatch = useDispatch();
+const ImageSelect = ({ image, setMyImage, closeModal }) => {
     const { imgModalState } = useSelector(state => state.main);
     const [page, setPage] = useState(0);
     
@@ -56,7 +53,7 @@ const ImageSelect = ({ image, myImage, setMyImage }) => {
 
     const changeImg = (addr) => {
         setMyImage(addr);
-        dispatch({type: 'IMG_CLOSE'});
+        closeModal();
     }
 
     return (
@@ -98,12 +95,6 @@ const ImageSelect = ({ image, myImage, setMyImage }) => {
                     }
                 })
                 }
-                {/* <ImgContainer src={`/api/image/images/${image[0].addr}`}/>
-                <ImgContainer src={`/api/image/images/${image[0].addr}`}/>
-                <ImgContainer src={`/api/image/images/${image[0].addr}`}/>
-                <ImgContainer src={`/api/image/images/${image[0].addr}`}/> */}
-                {/* <ImgContainer src={`/api/image/images/${image[0].addr}`}/> */}
-                {/* <ImgContainer src={`/api/image/images/${image[0].addr}`}/> */}
             </ImgOuter>
         </WriteImgContainer>
         : null
