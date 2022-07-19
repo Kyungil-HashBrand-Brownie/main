@@ -23,7 +23,7 @@ const CardContainer = ({ list, page, changeClickState }) => {
                     }
                     <div className='nftlist-card-detail'>
                         <Card.Img className='nftlist-card-img' style={{ width: '160px', height: '160px' }} onClick={() => changeClickState(item.id)} variant="top" src={item.image} />
-                        <Card.Title >{item.id}</Card.Title>
+                        <Card.Title >{'#' + (parseInt(item.id.split('#')[1]) + 1)}</Card.Title>
                     </div>
                 </Card>
             </div>

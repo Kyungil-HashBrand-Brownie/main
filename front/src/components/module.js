@@ -2,8 +2,6 @@ import styled from 'styled-components'
 
 /* Header */
 export const PFPContainer = styled.div`
-  /* margin-left: 10px; */
-  /* font-size: 1.1rem; */
   padding: 2px 10px;
   border: 3px solid;
   border-radius: 20px;
@@ -11,7 +9,6 @@ export const PFPContainer = styled.div`
   border-color: #198754;
   letter-spacing: -1px;
   text-align: center;
-  /* padding: 1px 20px; */
   cursor: pointer;
   color: white;
   &:hover{  

@@ -211,6 +211,18 @@ body {
   }
 }
 
+@media (max-width: 865px) {
+  .info-box {
+    left: 36%;
+  }
+}
+
+@media (max-width: 780px) {
+  .info-box {
+    left: 34%;
+  }
+}
+
 .PreSale {
   margin: auto;
 
@@ -280,10 +292,7 @@ body {
   }
 
   .mint-info-box{
-      width: 320px;
       display: none;
-      height: 300px;
-
   }
 
   .mint-count-box{
@@ -301,22 +310,12 @@ body {
   }
 
   .mint-wal-connect-btn{
-    top: -20px;
     /* margin: 20px 0 10px 0; */
-    padding: 0px 0px;
     /* padding: 3px 3px; */
     width: 100px;
-  }
-
-  .mint-container{
-    /* background-color:pink; */
-    /* flex-wrap: wrap; */
+    margin-bottom: 10px;
   }
 }
-
-
-
-
 
 .profile-inner {
   width: 80%;
@@ -365,6 +364,7 @@ body {
 }
 .mint-info-box {
   margin: 0px 15px;
+  height: 140px;
   font-weight: 600;
   background: white;
   border-radius: 30px;
