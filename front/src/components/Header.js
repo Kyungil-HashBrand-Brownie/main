@@ -107,8 +107,8 @@ const Header = () => {
         setVoteStatus();
     }, [])
 
-    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/community'];
-    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Community'];
+    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/staking', '/community'];
+    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Staking', 'Community'];
 
     let pages = paths.map((path, index) => {
         return {
