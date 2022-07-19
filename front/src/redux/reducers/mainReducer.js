@@ -9,7 +9,7 @@ let initialState = {
     klayBalance: 0,
     btkBalance : 0,
     nickname : "",
-    
+    imgModalState: false,
 
     // Collection
     sortOption: 0,
@@ -37,6 +37,19 @@ function nftReducer(state = initialState, action) {
     let { type, payload } = action
 
     switch (type) {
+        // Write Image Modal
+        case 'IMG_OPEN':
+            return {
+                ...state,
+                imgModalState: true,
+            }
+
+        case 'IMG_CLOSE':
+            return {
+                ...state,
+                imgModalState: false,
+            }
+
         case "MODAL_CLICK":
             return {
                 ...state,

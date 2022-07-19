@@ -14,7 +14,7 @@ const imagesKey = (req, res) => {
 
 const images = async (req, res) => {
     let { myBrownyNFTs, stakedNFTs } = req.body
-    let data = myBrownyNFTs.concat(stakedNFTs);
+    let data = stakedNFTs !== undefined ? myBrownyNFTs.concat(stakedNFTs) : myBrownyNFTs;
     //더미데이터 컨트렉트 재구성시 다시 설정해야함
     const result = await pool.query('select * from BrownyTable')
     data = data.map((item) => result[0].find( id => id.edition == parseInt(item) + 1))

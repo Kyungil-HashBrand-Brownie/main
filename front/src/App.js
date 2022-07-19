@@ -6,7 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer'
 import DetailCollecion from './components/collection/DetailCollecion';
-import { PrivateRoute, CommunityWriteRoute, CommunityReadRoute} from './route';
+import { PrivateRoute, CommunityReadRoute} from './route';
 import { Home, Mint, AdminPage, Testpage, 
   Swap, NoPage, NftList, Collection, 
   DifNetwork, Community, VoteWrite } from './page'

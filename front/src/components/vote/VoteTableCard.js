@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import {
     VoteTCardOuter, VoteTCHeader, VoteTCContent, VoteTCUser, VoteTCState, VoteTCBodyOuter,
     VoteTCBody, VoteTCBodyHeader, VoteTCBodyTitle, VoteTCBodyVoteCount,
-    VoteTCBodyMain, VoteTCBodyContent
+    VoteTCBodyMain, VoteTCBodyContent, VoteTCBodyProfile
 } from './voteModule'
 
 const VoteTCImage = styled.div`
-    width: 20%;
-    height: 100%;
+    width: 100%;
+    height: 80%;
     border-radius: 100%;
     background-size: cover;
     background-image: 
@@ -32,21 +32,21 @@ const VoteTableCard = ({ data, img, img1, id }) => {
             style={{visibility: content=='' ? 'hidden' : 'visible'}}
             onClick={() => {navigate(`/community/read/vote/${id}`)}}
         >
-            <VoteTCHeader>
-                <VoteTCImage img={img}></VoteTCImage>
-                <VoteTCContent>
-                    <VoteTCUser><i>{nickname}</i></VoteTCUser>
-                    <VoteTCState>{state}</VoteTCState>
-                </VoteTCContent>
-            </VoteTCHeader>
+            <VoteTCContent>
+                <VoteTCState state={state}>{state}</VoteTCState>
+            </VoteTCContent>
             <VoteTCBodyOuter>
                 <VoteTCBody>
                     <VoteTCBodyHeader>
-                        <VoteTCBodyTitle>{title} </VoteTCBodyTitle>
-                        {state !== '승인 대기 중' && <VoteTCBodyVoteCount> {sum}</VoteTCBodyVoteCount>}
+                        <VoteTCBodyTitle>{title}</VoteTCBodyTitle>
+                        {state !== '승인 대기 중' && <VoteTCBodyVoteCount> {sum} Votes</VoteTCBodyVoteCount>}
                     </VoteTCBodyHeader>
                     <VoteTCBodyMain>
                         <VoteTCBodyContent>{content}</VoteTCBodyContent>
+                        <VoteTCBodyProfile>
+                            <VoteTCImage img={img}></VoteTCImage>
+                            <VoteTCUser><i>{nickname}</i></VoteTCUser>
+                        </VoteTCBodyProfile>
                     </VoteTCBodyMain>
                 </VoteTCBody>
             </VoteTCBodyOuter>
