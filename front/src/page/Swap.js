@@ -8,6 +8,7 @@ import AlertModal from 'components/AlertModal';
 import SwapHeader from 'components/swap/SwapHeader';
 import SwapBody from 'components/swap/SwapBody';
 import SwapFooter from 'components/swap/SwapFooter';
+import ImgComponent from 'components/ImgComponent';
 
 const Swap = () => {
     const bool = { false: 'KLAY', true: 'BTK' }
@@ -72,6 +73,8 @@ const Swap = () => {
     }
 
     return (
+        <>
+        <ImgComponent />
         <div className='swap-box'>
             <AlertModal {...customAlert} />
             <div className='select-box'>
@@ -101,6 +104,7 @@ const Swap = () => {
                 <SwapFooter swapToken={swapToken} />
             </div>
         </div>
+        </>
     )
 }
 

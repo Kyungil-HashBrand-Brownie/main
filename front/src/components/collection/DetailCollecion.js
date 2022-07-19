@@ -9,6 +9,7 @@ import DetailCollectionModal from "./DetailCollectionModal";
 import styled from "styled-components";
 import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/react";
+import ImgComponent from "components/ImgComponent";
 
 
 const override = css`
@@ -70,6 +71,7 @@ const DetailCollecion = () => {
 
   return (
     <div>
+      <ImgComponent />
       {/* <ClipLoader loading={loading} css={override} size={20} /> */}
       {collectionData.addr &&
       <div className="layout-container">
