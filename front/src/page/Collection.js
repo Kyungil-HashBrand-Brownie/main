@@ -6,6 +6,7 @@ import axios from 'axios'
 import Sort from 'components/collection/Sort'
 import CollectionMain from 'components/collection/CollectionMain'
 import styled from 'styled-components'
+import ImgComponent from 'components/ImgComponent';
 
 const CollectionOuter = styled.div`
     display: flex;
@@ -63,10 +64,13 @@ const Collection = () => {
     }, [filterOption, sortOption])
 
     return (
+        <>
+        <ImgComponent />
         <CollectionOuter>
             <Sort />
             <CollectionMain data={data} row={row} />
         </CollectionOuter>
+        </>
     )
 }
 

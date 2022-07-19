@@ -6,8 +6,8 @@ const options = ['All(default)', 'Not Minted', 'Minted'];
 
 const SortTop = () => {
     const dispatch = useDispatch()
-    // const { sortOption } = useSelector(state => state.nft)
     const { sortOption } = useSelector(state => state.main)
+
 
     const changeOption = (idx) => {
         dispatch({'type': 'CHANGE_SORT_OPTION', payload: idx})

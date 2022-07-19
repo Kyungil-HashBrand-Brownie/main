@@ -8,6 +8,7 @@ import VoteDescription from 'components/vote/VoteDescription'
 import CommunityTable from 'components/vote/CommunityTable'
 import { useSelector } from 'react-redux'
 import Pagination from 'components/vote/Pagination'
+import ImgComponent from 'components/ImgComponent'
 
 const VoteDOuter = styled.div`
     display: flex;
@@ -35,6 +36,8 @@ const CommunitySide = styled.div`
 const Community = () => {
     const {userRank, isDeployer} = useSelector(state => state.main)
     return (
+        <>
+        <ImgComponent />
         <VoteDOuter>
             <CommunityMainOuter>
                 <MainHeader />
@@ -45,6 +48,7 @@ const Community = () => {
                 <CommunityVoteTable />
             </CommunityMainOuter>
         </VoteDOuter>
+        </>
     )
 }
 
