@@ -2,7 +2,6 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import PreSale from './PreSale'
 import mintBackground from "../../img/mint/background7.jpg"
-import { Main1, Main2, Main3 } from '../../img';
 import { PreBrowny, WhiteBrowny } from '../../img/browny';
 import styled from 'styled-components';
 
@@ -23,15 +22,8 @@ let whiteSaleProps = {
 const Style_Mint_div = styled.div`
   width: 100%;
   height: 100%;
-  /* position: "absolute"; */
-  /* background-color: black; */
-  /* bottom: -00px; */
   position: "absolute";
-
-
 `
-
-
 
 const MintCard = () => {  
     return (

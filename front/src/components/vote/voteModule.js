@@ -192,7 +192,7 @@ export const VoteTCardOuter = styled.div`
     flex-direction: column;
     width: 430px;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 60px;
     cursor: pointer;
 
     &:hover {
@@ -206,28 +206,32 @@ export const VoteTCHeader = styled.div`
     border-bottom: 3px solid black;
 `
 export const VoteTCContent = styled.div`
-    display: flex;
+    display: flex-end;
     align-items: center;
-    padding-left: 30px;
-    width: 80%;
-    height: 100%;
+    width: 100%;
 `
 export const VoteTCUser = styled.div`
-    font-size: 35px;
+    font-size: 15px;
     text-shadow: 0 0 1em blue, 0 0 0.2em pink;
+    text-align: center;
 `
 export const VoteTCState = styled.div`
-    position: absolute;
+    /* position: absolute; */
     font-weight: bold;
-    transform: translate(230px, -35px);
-    background: yellow;
+    float: right;
+    border-radius: 10px;
+    padding: 0px 5px;
+    background: 
+        ${props => props.state === '투표 종료' ? 'coral'
+                    : props.state === '승인 대기 중' ? 'yellow' 
+                    : 'green'
+        };
 `
 export const VoteTCBodyOuter = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     height: 230px;
-    margin-top: 20px;
 `
 export const VoteTCBody = styled.div`
     width: 98%;
@@ -259,12 +263,18 @@ export const VoteTCBodyMain = styled.div`
 export const VoteTCBodyContent = styled.div`
     margin-left: 2%;
     margin-top: 1%;
-    width: 95%;
+    width: 67%;
     height: 92%;
     padding: 4px 8px;
     text-align: justify;
     border: 2px solid green;
     border-radius: 8px;
+`
+export const VoteTCBodyProfile = styled.div`
+    width: 27%;
+    /* border: 2px solid green; */
+    margin: auto;
+    height: 140px;
 `
 
 /* CommunityTopic */
