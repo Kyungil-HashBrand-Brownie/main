@@ -90,7 +90,7 @@ const Header = () => {
         dispatch(nftAction.setVoteStatus())
     }
 
-    const clickEnableKaikas = (customAlert) => {
+    const clickEnableKaikas = () => {
         enableKaikas(customAlert);
     }
 
