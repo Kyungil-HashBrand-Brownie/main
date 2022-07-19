@@ -164,16 +164,16 @@ export const StyleHomeImgCard = styled.div`
 
     .blue-num {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 5px;
+      font-size: 40px;
     }
     .backColor{
       background-color: #F6C6EA;
-      width:70% ;
-      height: 340px;
+      width: 70% ;
+      height: 380px;
       display: flex;
-      margin-top: 150px;
-      margin-bottom: 10px;
       border-radius: 30px;
+      margin-top: 80px;
     }
     .back{
       background-color: #F6C6EA;
@@ -184,25 +184,17 @@ export const StyleHomeImgCard = styled.div`
       margin-bottom: 10px;
       border-radius: 30px;
     }
-    .backColor{
-      background-color: #F6C6EA;
-      width:70% ;
-      height: 340px;
-      display: flex;
-      margin-top: 150px;
-      margin-bottom: 10px;
-      border-radius: 30px;
-    }
+
     .box_vertical {
-      margin-top: 70px;
+      margin-top: 30px;
       writing-mode: vertical-lr;
       cursor: alias;
     }
     .box_vertical2 {
       background-color: #FAF4B7;
-      height:420px ;
+      height:440px ;
       color: black;
-      margin-top: -60px;
+      margin-top: -35px;
       border-radius: 30px;
       /* border-top-left-radius: 30px;
       border-top-right-radius: 30px;
@@ -211,23 +203,38 @@ export const StyleHomeImgCard = styled.div`
     .box_vertical2 h2{
         writing-mode: vertical-lr;
     }
+    .tapestry-header0 {
+      letter-spacing: 1px;
+      /* background: white; */
+      border-radius: 20px;
+      padding: 10px 2px;
+    }
+    .tapestry-side-header1 {
+      margin-top: 40px;
+      letter-spacing: 1px;
+    }
+    .tapestry-side-header2 {
+      margin-top: 60px;
+      letter-spacing: 1px;
+    }
+
     .box_vertical2:hover {
-      height: 410px;
-      margin-top: -70px;
-      transform: scale(1.0);
+      /* height: 410px; */
+      margin-top: -60px;
+      /* transform: scale(1.0); */
       cursor: alias;
     }
     .box_vertical3 {
-      height:450px ;
+      height:470px ;
       background-color: #F9F9F9;
-      margin-top: -90px;
+      margin-top: -65px;
       border-radius: 30px;
     }
 
     .box_vertical3:hover {
-      height: 460px;
-      margin-top: -120px;
-      transform: scale(1.0);
+      /* height: 460px; */
+      margin-top: -90px;
+      /* transform: scale(1.0); */
       cursor: alias;
     }
     
@@ -239,9 +246,130 @@ export const StyleHomeImgCard = styled.div`
       width: 600px;
       height: 350px;
       position: relative;
-      margin-top: -50px;
+      margin-top: -30px;
     };
 
+    .tapestry-header {
+      margin-top: 9px;
+      font-size: 35px;
+    }
+    .tapestry-subheader {
+      padding-left: 5px;
+      font-size: 20px;
+    }
+    .grid-template {
+      padding-left: 5px;
+      margin-top: 10px;
+      font-size: 18px;
+    }
+    .tapestry-span {
+      color: blue;
+      font-weight: bold;
+    }
+
+    @media (max-width: 1715px) {
+      .tapestry-header {
+        font-size: 30px;
+      }
+      .tapestry-subheader {
+        font-size: 18px;
+      }
+      .grid-template {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 1560px) {
+      .tapestry-header {
+        font-size: 26px;
+      }
+      .tapestry-subheader {
+        font-size: 17px;
+      }
+      .grid-template {
+        font-size: 15px;
+      }
+    }
+
+    @media (max-width: 1497px) {
+      .grid-template { 
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 1174px) {
+      .grid-template {
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 1090px) {
+      .grid-template {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 1005px) {
+      .backColor {
+        width: 95%;
+      }
+      .grid-template {
+        font-size: 15px;
+      }
+    }
+    
+    @media (max-width: 954px) {
+      .grid-template {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 844px) {
+      .grid-template {
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 784px) {
+      .tapestry-main {
+        width: 400px;
+      }
+      .home_img {
+        width: 150px;
+        height: 200px;
+        margin-top: 50px;
+      }
+      .box_vertical2 {
+        width: 50px;
+      }
+      .box_vertical3 {
+        width: 60px;
+      }
+      .blue {
+        width: 80px;
+      }
+      .box_vertical {
+        padding-top: 10px;
+      }
+      .grid-template {
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 606px) {
+      .home_img {
+        display: none;
+      }
+      .grid-template {
+        font-size: 14px;
+      }
+    }
+    
+    @media (max-width: 536px) {
+      .grid-template {
+        font-size: 13px;
+      }
+    }
 `
 
 /* SlideShow */
