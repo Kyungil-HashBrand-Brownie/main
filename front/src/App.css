@@ -20,7 +20,8 @@ body {
 .wrapper {
   /* height: auto; */
   position: relative;
-  min-height: 78vh;
+  min-height: 88vh;
+  /* background-color: black; */
   /* position: absolute; */
   /* margin-top: 10%; */
   /* background: red; */
@@ -31,6 +32,14 @@ body {
   /* margin: 0 auto; */
   /* line-height: 1.6; */
 }
+
+@media screen and (min-width: 1830px) {
+  .wrapper {
+    min-height: 1100px;
+  }
+}
+
+
 
 
 .backG-left-img {
@@ -1295,6 +1304,8 @@ th {
   z-index: -1;
   transform: translate(0, -370px);
   z-index: -1;
+  /* border-bottom: 10px solid pink; */
+
 }
 
 .fContainer_right_content {

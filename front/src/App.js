@@ -42,9 +42,10 @@ function App() {
 
   return (
     <>
+          <div className='wrapper'>
+
       <Header />
 
-      <div className='wrapper'>
         <Routes>
           {paths.map((path, index) => <Route key={path} path={path} element={elements[index]} />)}
           {
