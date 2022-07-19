@@ -1261,16 +1261,19 @@ th {
   padding-top: 10px;
   font-size: 16px;
   background-color: rgb(243, 237, 237);
+  font-weight: 600;
 }
 .modal-footer {
   display: flex;
   align-items: center;
   max-height: 40px;
+  /* background: red; */
+  text-align: center;
 }
 .modal-btn {
   font-size: 14px;
   padding: 2px 5px;
-  transform: translate(-122px, -10px);
+  transform: translate(-136px, -10px);
 }
 
 /* footer */
