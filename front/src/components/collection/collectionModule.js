@@ -11,18 +11,20 @@ export const CollectionCardImg = styled.div`
 `
 
 export const CollectionMainOuter = styled.div`
-    margin-left: 99.998px;
+    /* margin-left: 99.998px; */
+    /* margin-left: 8%; */
+    margin-left: 100px;
     width: 1299.997px;
     min-height: 159.998px;
     background: rgba(255, 255, 255, 0.56);
     border: 3px solid white;
     border-radius: 20.002px;
     margin-bottom: 20.002px;
+    /* transform: translate(10%, 0); */
     transform: translate(10%, 0);
 
     @media screen and (max-width: 1500px) {
-        max-width: 100%;
-        margin-left:16% ;
+        margin-left: -200px;
     }
 `
 export const CollectionHeader = styled.div`
@@ -202,16 +204,23 @@ export const SortOuter = styled.div `
     top: 13%;
     margin-left: 30px;
     margin-top: 50.002px;
-    width: 350.002px;
+    /* width: 350.002px; */
+    width: 15%;
+    /* width: 250px; */
+    /* width: 230px; */
     height: auto;
+    /* min-height: 699.997px; */
     min-height: 699.997px;
     border: 3px solid white;
     border-radius: 9.998px;
     background: rgb(241, 149, 165);
     box-shadow: white 6.997px 9.998px 6.997px;
 
-    @media screen and (max-width: 1800px) {
-        max-width: 15%;
+    @media screen and (max-width: 1500px) {
+        /* max-width: 5%; */
+        /* width: 180px; */
+        display: none ;
+
 
     }
 

@@ -8,7 +8,7 @@ import Footer from './components/Footer'
 import DetailCollecion from './components/collection/DetailCollecion';
 import { PrivateRoute, CommunityReadRoute} from './route';
 import { Home, Mint, AdminPage, Testpage, 
-  Swap, NoPage, NftList, Collection, 
+  Swap, NoPage, Staking, Collection, 
   DifNetwork, Community, VoteWrite } from './page'
 import CommunityApproval from 'components/vote/CommunityApproval';
 
@@ -58,12 +58,12 @@ function App() {
             : null
             }
             <Route path="/swap" element={<Swap />} />
-            <Route path="/nftlist" element={<NftList />} />
+            <Route path="/staking" element={<Staking />} />
           </>
           :
           <>
           <Route path='/swap' element={<DifNetwork />}/>
-          <Route path='/nftlist' element={<DifNetwork />}/>
+          <Route path='/staking' element={<DifNetwork />}/>
           </>
         }
       </Routes>

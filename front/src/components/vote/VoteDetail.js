@@ -71,6 +71,7 @@ const VoteDetail = () => {
             // const data = {title, content, nickname};
             // await axios.post('/api/community/write',data)
         // }
+        customAlert.open("성공적으로 등록 되었습니다.")
         
     }
 

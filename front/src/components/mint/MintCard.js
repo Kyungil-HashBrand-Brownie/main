@@ -9,14 +9,14 @@ let preSaleProps = {
   title: 'Pre-Sale',
   img: PreBrowny,
   price: 50,
-  amount: '/120',
+  amount: '/175',
 }
 
 let whiteSaleProps = {
   title: 'White-Sale',
   img: WhiteBrowny,
   price: 25,
-  amount: '/30',
+  amount: '/25',
 }
 
 const Style_Mint_div = styled.div`

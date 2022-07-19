@@ -6,6 +6,7 @@ import CommunityTopic from 'components/vote/CommunityTopic'
 import CommunityVoteTable from 'components/vote/CommunityVoteTable'
 import VoteDescription from 'components/vote/VoteDescription'
 import CommunityTable from 'components/vote/CommunityTable'
+import { useSelector } from 'react-redux'
 
 const VoteDOuter = styled.div`
     display: flex;
@@ -31,13 +32,15 @@ const CommunitySide = styled.div`
     margin-top: 5%;
 `
 const Community = () => {
-
+    const {userRank, isDeployer} = useSelector(state => state.main)
     return (
         <VoteDOuter>
             <CommunityMainOuter>
                 <MainHeader />
                 <VoteDescription />
-                <CommunityPostButton />
+                {(isDeployer || userRank === 3) &&
+                    <CommunityPostButton />
+                }
                 <CommunityVoteTable />
             </CommunityMainOuter>
         </VoteDOuter>
