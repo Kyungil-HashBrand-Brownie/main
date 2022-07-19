@@ -28,8 +28,10 @@ const view = async (req, res)=> {
     const {publicKey} = req.body;
     try {
         const [[result]] = await pool.query(`SELECT nickname FROM users where publicKey="${publicKey}"`);
-        const {nickname} = result;
-        res.send(nickname);
+        if(result) {
+            const {nickname} = result;
+            res.send(nickname);
+        }
     }
     catch(e) {
         console.log(e);
