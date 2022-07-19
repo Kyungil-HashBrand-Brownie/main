@@ -24,7 +24,7 @@ export const CollectionMainOuter = styled.div`
     transform: translate(10%, 0);
 
     @media screen and (max-width: 1500px) {
-        margin-left: 180px;
+        margin-left: -200px;
     }
 `
 export const CollectionHeader = styled.div`
@@ -216,9 +216,10 @@ export const SortOuter = styled.div `
     background: rgb(241, 149, 165);
     box-shadow: white 6.997px 9.998px 6.997px;
 
-    @media screen and (max-width: 1300px) {
+    @media screen and (max-width: 1500px) {
         /* max-width: 5%; */
-        width: 180px;
+        /* width: 180px; */
+        display: none ;
 
 
     }
