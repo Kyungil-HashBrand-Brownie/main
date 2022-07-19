@@ -108,6 +108,13 @@ body {
     margin: 10px;
 }
 
+.div-section-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  margin-top: 50px;
+
+}
+
 .right-layout {
     display: flex;
     justify-content: flex-end;
@@ -139,11 +146,7 @@ body {
     box-sizing: border-box;
 } */
 
-.asdbfhf {
-  display: flex;
-  /* background-color: black; */
-  /* text-align: center; */
-}
+
 
 /* .buttons {
     margin: 10%;

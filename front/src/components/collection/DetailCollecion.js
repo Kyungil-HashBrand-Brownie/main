@@ -97,9 +97,14 @@ const DetailCollecion = () => {
             <div className="btn-opensea">
               {/* <button className="btn-hover color-9">OPENSEA</button> */}
             </div>
-            <div className="asdbfhf">
-              <button className="btn-hover color-9" onClick={() =>preButton_collection()}>pre</button>
-              <button className="btn-hover color-9" onClick={() =>nextButton_collection()}>next</button>
+            <div className="div-section-two">
+
+              <div className="left-layout">              
+                <button className="btn-hover color-9" onClick={() =>preButton_collection()}>pre</button>
+              </div>
+              <div className="right-layout">
+                <button className="btn-hover color-9" onClick={() =>nextButton_collection()}>next</button>
+              </div>
             </div>
           </div>
           <div className="detailImglNft-description_2">
