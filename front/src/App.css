@@ -1,7 +1,10 @@
 body {
+  /* background: yellow; */
   width: 100%;
+  height: 100%;
+  font-family: "Yfont2";
   overflow-x: hidden;
-  background: linear-gradient(90deg, #e9a667 0.52%, #f0e3a1 39.46%, #f0e3a1 70.47%, #e9a667 90%);
+  /* background: linear-gradient(90deg, #e9a667 0.52%, #f0e3a1 39.46%, #f0e3a1 70.47%, #e9a667 90%); */
 }
 
 /* 폰트 */
@@ -15,13 +18,18 @@ body {
 }
 
 .wrapper {
-  height: auto;
-  min-height: 985px;
-  bottom: 0px;
-  font-family: "Yfont2";
-  font-weight: 500;
-  margin: 0 auto;
-  line-height: 1.6;
+  /* height: auto; */
+  position: relative;
+  min-height: 78vh;
+  /* position: absolute; */
+  /* margin-top: 10%; */
+  /* background: red; */
+  /* min-height: 90%; */
+  /* bottom: 0px; */
+  /* font-family: "Yfont2";
+  font-weight: 500; */
+  /* margin: 0 auto; */
+  /* line-height: 1.6; */
 }
 
 
@@ -235,7 +243,8 @@ body {
 
 /* MintCard */
 .MintCard {
-  margin-top: 5%;
+  padding-top: 5%;
+  /* margin-top: 5%; */
   /* display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
