@@ -24,6 +24,7 @@ body {
   line-height: 1.6;
 }
 
+
 .backG-left-img {
   position: absolute;
   width: 15%;
@@ -66,27 +67,32 @@ body {
 
 .not-whitelist {
   margin-top: -50px;
+  color:rgb(26, 126, 213)
 }
 
 .mint-container {
-  background-color: rgb(26, 126, 213);
+  /* background-color: rgb(26, 126, 213); */
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  align-items: center;
+  
 }
+
+
+
 
 .mintdate-container {
   display: flex;
   justify-content: center;
+  /* background: red; */
+  margin-top: 50px;
 }
 
 
 .profile-inner {
   width: 80%;
-}
-
-.mint-wal-connect-btn {
-  margin: 20px 0 10px 0;
-  padding: 3px 3px;
 }
 
 .main-team-img-box {
@@ -102,6 +108,7 @@ body {
 
 .main-container {
   display: flex;
+  /* background-color: red; */
 }
 
 .main-team-container {
@@ -114,22 +121,42 @@ body {
 
 .main-col {
   position: relative;
+  /* background-color: blue; */
+}
+
+.main-col1 {
+  position: relative;
+  /* background-color: blue; */
+}
+
+@media( max-width: 992px) {
+  .main-col1 {
+    justify-content: center;
+  }
 }
 
 .main-img-col {
   display: flex;
   flex-direction: row;
-  margin-left: 30px;
+  margin: auto;
+  color: #52a2fe
+  /* margin-left: 30px; */
+  /* background-color: green; */
 }
 
-@media (max-width: 1300px) {
+.main-img-col1 {
+  margin: auto;
+  /* margin-left: 30px; */
+  /* background-color: grey; */
+}
+
+@media (max-width: 1200px) {
   .main-img-col {
     display: flex;
-    flex-direction: column;
   }
 }
 
-@media (max-width: 970px) {
+@media (max-width: 992px) {
   ::-webkit-scrollbar {
     display: none;
   }
@@ -142,27 +169,154 @@ body {
   .main-img-col {
     margin-top: 120px;
   }
+
+  .info-box {
+    left: 37%;
+    width: 220px;
+    transform: translate(0, -75px);
+  }
+
+  .navbar-collapse , .collapse , .show {
+    position: absolute;
+    width: 100%;
+    top: 80%;
+  }
+
   .nav-item {
-    background: white;
+    width: 15%;
+    right: -70%;
+    transform: translate(520%, 0);
+    margin-bottom: 1px;
+    font-size: 2vw;
+    background-color: rgba(244, 201, 201, 0.9);
     border-radius: 20px;
     border-bottom: 1px solid black;
   }
-  .info-box {
-    position: absolute;
-    margin-right: 25%;
-    width: 260px;
-    bottom: 10px;
-    right: 0; 
-    text-align: center;
-    font-size: 13px;
-    transform: translate(150px, 0px);
+
+}
+
+@media (max-width: 700px) {
+  .nav-item {
+    transform: translate(515%, 0);
   }
 }
 
-.FreeSale {
-  margin-right: 30%;
-  margin-left: 0%;
+@media (max-width: 550px) {
+  .nav-item {
+    transform: translate(500%, 0);
+  }
+
+  .info-box {
+    width: 170px;
+  }
 }
+
+.PreSale {
+  margin: auto;
+
+}
+
+.WhiteSale{
+  margin: auto;
+
+}
+
+/* MintCard */
+.MintCard {
+  margin-top: 5%;
+  /* display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  grid-gap: 15px; */
+  /* flex-wrap: nowrap; */
+  /* background: url("./img/mint/background7.jpg");
+  background-repeat: no-repeat;
+  background-size: cover; */
+  
+  /* display: grid;
+  grid-template-columns: 200px 200px */
+}
+
+.styled_mint_card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: "5%"; 
+  left: "10%";
+  z-index: -2;
+}
+
+
+@media screen and (max-width: 765px) {
+  .PreSale{
+    width: 320px;
+    display: flex;
+    text-align: center;
+    margin: auto;
+  }
+
+  .WhiteSale{
+    width: 320px;
+    display: flex;
+    text-align: center;
+    margin: auto;
+  }
+  .mint-title-box {
+    margin-top: 20px;
+    /* border-bottom: 3px solid black;
+    margin-bottom: 20px; */
+    height: 43px;
+  }
+
+  .mint-img-container {
+    width: 220px;
+    /* height: 232px; */
+    height: 2320px;
+    /* background-color: white; */
+    /* background-color: black; */
+    /* margin-bottom: 20px; */
+    /* border-radius: 8px; */
+  }
+
+  .mint-info-box{
+      width: 320px;
+      display: none;
+      height: 300px;
+
+  }
+
+  .mint-count-box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* margin-top: -20px; */
+  }
+
+  .mint-title-box{
+    margin-top: 10px;
+    border-bottom: 3px solid black;
+    /* margin-bottom: 20px; */
+    /* height: 43px; */
+  }
+
+  .mint-wal-connect-btn{
+    top: -20px;
+    /* margin: 20px 0 10px 0; */
+    padding: 0px 0px;
+    /* padding: 3px 3px; */
+    width: 100px;
+  }
+
+  .mint-container{
+    /* background-color:pink; */
+    /* flex-wrap: wrap; */
+  }
+}
+
+
+
+
 
 .profile-inner {
   width: 80%;
@@ -176,7 +330,7 @@ body {
   flex-direction: column;
   padding: 10px 10px;
   padding-top: 30px;
-  height:200px;
+  height: 200px;
   z-index: 99;
 }
 
@@ -196,7 +350,8 @@ body {
   align-items: center;
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  
 }
 .mint-info-row {
   margin-bottom: 10px;
@@ -237,7 +392,9 @@ body {
 }
 
 .nav {
-  background: "pink";
+  /* background: pink; */
+  /* display: flex; */
+  /* justify-content: center; */
 }
 
 .nav-item {
@@ -246,9 +403,10 @@ body {
   margin-left: 30px;
   display: flex;
   font-weight: bolder;
-  font-size: 20px;
+  /* font-size: 1.3vw; */
   text-align: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .upload-img {
@@ -297,22 +455,46 @@ body {
 }
 
 .mb-3{
-  width: 50%;
+  width: 100%;
+  display: flex;
+  text-align: center;
 }
-.Cont{
+
+
+
+/* admin page */
+.admin_mainContainer{
   text-align: center;
   margin: 10px;
+  width: 100%;
 }
+
+.admin_title{
+  width: 100%;
+  margin-top: 40px;
+  font-size: 90px;
+}
+
+.admin_InputSize {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  width: 800px;
+  /* width: 100%; */
+  position: relative;
+}
+
+.admin_add_input{
+  width: 2000px;
+}
+.table-whitelistkey{
+  width: 100%;
+}
+
 
 .cardnft{
   width: 100%;
   height: 100%;
-}
-
-.father{
-  display: flex;
-  justify-content: center;
-
 }
 
 .CardGroup{
@@ -833,9 +1015,14 @@ NftCard
 
 /*main slide animation*/
 
+.slick-track {
+  justify-content: center;
+  margin: auto;
+}
+
 .slidediv {
   font-size: 7em;
-  width: 350px;
+  /* width: 350px; */
   font-family: sans-serif;
   position: relative;
   top: 30px;
@@ -845,6 +1032,16 @@ NftCard
   text-shadow: 
     4px 4px 0px #d5d5d5, 
     7px 7px 0px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 990px) {
+  .slidediv {
+    margin: auto;
+    padding-left: 20px;
+    font-size: 5rem;
+    /* transform: translate(300px, 0); */
+    /* background: red; */
+  }
 }
 
 .refresh-reward-icon, .change-nickname-icon{
@@ -906,14 +1103,25 @@ NftCard
   }
 }
 
-/* MintCard */
-.MintCard {
-  margin-top: 5%;
-}
+
+
+
 /* the slides */
-.slick-slide {
-  /* margin: 0 10px; */
+@media (max-width: 800px) {
+  .slick-slider {
+    width: 190px;
+    margin: auto;
+  }
 }
+
+@media (max-width: 768px) {
+  .slick-slider {
+    width: 145px;
+    margin: auto;
+  }
+}
+
+
 /* the parent */
 .slick-list {
   height: 450px;

@@ -18,7 +18,7 @@ const VoteDetail = () => {
     const navigate = useNavigate();
     const customAlert = useAlert();
 
-    const {nickname} = useSelector(state => state.main);
+    const {nickname, isDeployer} = useSelector(state => state.main);
 
     const [counter, setCounter] = useState([{
         id: 0,
@@ -166,7 +166,7 @@ const VoteDetail = () => {
                                     placeholder={`안건 ${index + 1}`}
                                     name='proposal'
                                     className='vote-text'
-                                    style={{ width: '840px', height: '40px', resize: 'none' }}
+                                    style={{ width: '810px', height: '40px', resize: 'none' }}
                                     value={item.content}
                                     onChange={(e) => {proposalContent(e, item)}}
                                 />

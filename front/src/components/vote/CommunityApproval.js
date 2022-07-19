@@ -12,10 +12,13 @@ import {
     VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
     ControlButton, PageButton
 } from './voteModule'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { useAlert } from 'api'
+import { newProposals, startVote, useAlert } from 'api'
 import AlertModal from 'components/AlertModal'
+import Delete from '../../img/vote/delete.png'
+import { nftAction } from 'redux/actions/nftAction'
+
 
 const VoteTCBodyImg = styled.div`
     width: 150px;
@@ -38,19 +41,64 @@ const CommunityApproval = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const {isDeployer} = useSelector(state => state.nft);
+    const dispatch = useDispatch();
+    const {myAddress} = useSelector(state => state.nft);
 
-    const [data, setData] = useState({
-        title:"",
-        content:"",
-        proposals:[],
-        state:""
-    });
+    const [title, setTitle] = useState("")
+    const [content, setContent] = useState("")
+    const [proposals, setProposals] = useState([])
+    const [state, setState] = useState("")
+
+    const [counter, setCounter] = useState([{
+        id: 0,
+        content: '',
+        state: false,
+    }])
+
+    const addProposal = (proposal) => {
+        let compareIdx = counter[counter.length - 1].id
+        if (proposal.id == compareIdx) {
+            if (proposal.content == '') customAlert.open('안건을 입력해 주세요.')
+            else {
+                let newArr = _.cloneDeep(counter)
+                newArr = newArr.map(item => {
+                    if (item.id == compareIdx) {
+                        item.state = true
+                    }
+                    return item
+                })
+                newArr.push({
+                        id: compareIdx + 1,
+                        content: '',
+                        state: false,
+                })
+                setCounter(newArr)
+            }
+        }
+    }
+
+    const delProposal = (item) => {
+        let newArr = _.cloneDeep(counter);
+        newArr = newArr.filter((arr) => arr.id != item.id)
+        setCounter(newArr)
+    } 
+
+    const proposalContent = (e, item) => {
+        let data = {...item, content: e.target.value};
+        let newArr = _.cloneDeep(counter).map((arr) => {
+            if (arr.id == item.id) return data;
+            return arr
+        })
+        setCounter(newArr)
+    }
+
+
     const getData = async () => {
-        let result = await axios.get(`http://localhost:4000/api/community/read/vote/${id}`);
-        console.log(result)
-        // console.log('data: ', result.data);
-        setData(result.data);
+        let {data} = await axios.get(`http://localhost:4000/api/community/read/vote/${id}`);
+        setTitle(data.title)
+        setContent(data.content)
+        setState(data.state)
+        setProposals(data.proposals)
     }
 
     useEffect(() => {
@@ -63,7 +111,28 @@ const CommunityApproval = () => {
         navigate(-1);
     }
 
-    const submitApporoval = ()=> {
+    const submitApporoval = async (e)=> {
+        e.preventDefault();
+        let proposalGroup = e.target.proposal
+        let proposals = [];
+        
+        proposalGroup.forEach((proposal)=> {
+            proposals.push(proposal.value);
+        })
+        console.log(proposals)
+        try {
+            const result = await newProposals(myAddress,proposals.length);
+            if(result.status){
+                await startVote();
+                dispatch(nftAction.setVoteStatus())
+                const data = {title, content, proposals, id, state : "투표 진행 중"};
+                await axios.post('/api/community/approve',data)
+            }
+          }
+          catch (e){
+            console.log(e)
+            return e
+          }
         
     }
 
@@ -72,10 +141,6 @@ const CommunityApproval = () => {
         <>
         <AlertModal {...customAlert}/>
         <VoteDOuter>
-            <VoteDLeftOuter>
-                <CommunityTopic />
-            </VoteDLeftOuter>
-
             <VoteDRightOuter>
                 <VoteDHeaderOuter>
                     <VoteDHeader>안건 승인</VoteDHeader>
@@ -83,6 +148,7 @@ const CommunityApproval = () => {
                 <VoteDMainOuter>
                     <VoteDMain>
                         <VoteTCBodyImg img={nft1} />
+                        <div>{state}</div>
                         <Form onSubmit={submitApporoval}>
                         <VoteDPart>
                             <VoteDType>제목</VoteDType>
@@ -91,7 +157,8 @@ const CommunityApproval = () => {
                                 className='vote-textarea'
                                 style={{ height: '20px', resize: 'none'}}
                                 name='title'
-                                value={data.title}
+                                value={title}
+                                onChange={(e)=>setTitle(e.target.value)}
                             />
                         </VoteDPart>
                         <VoteDPart>
@@ -101,13 +168,14 @@ const CommunityApproval = () => {
                                 className='vote-textarea'
                                 style={{ height: '200px', resize: 'none' }}
                                 name='content'
-                                value={data.content}
+                                value={content}
+                                onChange={(e)=>setContent(e.target.value)}
                             />
                         </VoteDPart>
                                 <VoteDPart>
                                     <VoteDType>안건</VoteDType>
                                     <div className='proposal'>
-                                    {data.proposals.map((item, index) => 
+                                    {proposals.map((item, index) => 
                                         <div 
                                             className='proposal-form'
                                             key={index}
@@ -121,12 +189,47 @@ const CommunityApproval = () => {
                                         />
                                         </div>
                                      )}
+                                     {counter.map((item, index) => 
+                                            <div 
+                                                className='proposal-form'
+                                                key={index}
+                                            >
+                                            <Form.Control
+                                                disabled={item.state ? true : false}
+                                                as="textarea"
+                                                placeholder='안건을 입력해주세요'
+                                                name={item.state ? 'proposal' : 'addProposal'}
+                                                className='vote-text'
+                                                style={{ width: '770px', height: '40px', resize: 'none' }}
+                                                value={item.content}
+                                                onChange={(e) => {proposalContent(e, item)}}
+                                            />
+                                            {!item.state ? 
+                                                <button 
+                                                    type='button'
+                                                    onClick={() => addProposal(item)}
+                                                    className='proposal-btn'>
+                                                    등록
+                                                </button>
+                                            : <div className='proposal-del-div'>
+                                                <img
+                                                className='proposal-del'
+                                                src={Delete}
+                                                onClick={() => delProposal(item)}
+                                                />
+                                            </div>
+                                            }
+                                            </div>
+                                        )}
                                     </div>
                                 </VoteDPart>
+                            <ControlButton>
+                                <PageButton type='button' onClick={movePage}>이전화면</PageButton>
+                            </ControlButton>
+                            <ControlButton>
+                                <PageButton type='submit'>저장 후 투표 시작</PageButton>
+                            </ControlButton>
                         </Form>
-                        <ControlButton>
-                            <PageButton onClick={movePage}>이전화면</PageButton>
-                        </ControlButton>
                     </VoteDMain>
                 </VoteDMainOuter>
             </VoteDRightOuter>

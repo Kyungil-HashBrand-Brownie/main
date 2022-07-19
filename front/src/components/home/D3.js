@@ -3,7 +3,7 @@ import "../../scss/style.css";
 
 const D3 = () => {
   return (
-    <div>
+    // <div>
         <div className="stage">
             {new Array(6).fill(0).map((id, index) => 
             <div 
@@ -11,7 +11,7 @@ const D3 = () => {
               className='layer' />
             )}
           </div>
-    </div>
+    // </div>
   )
 }
 
