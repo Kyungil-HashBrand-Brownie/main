@@ -53,26 +53,24 @@ const VoteDetail = () => {
         const content = e.target.content.value
         let proposalGroup = e.target.proposal
         // if(id === "0"){ //vote category
-            let proposals = [];
-            if(proposalGroup.length) {
-                proposalGroup.forEach((proposal)=> {
-                    if(proposal.value) proposals.push(proposal.value);
-                })
-                console.log(proposals)
-                
-                const data = {title, content, proposals, nickname}
-                await axios.post('/api/community/voteWrite',data)
-            }
-            else {
-                customAlert.open("1개 이상 안건을 등록해주세요")
-            }
+        let proposals = [];
+        proposalGroup.forEach((proposal)=> {
+            if(proposal.value) proposals.push(proposal.value);
+        })
+        if (proposals.length) {
+            const data = {title, content, proposals, nickname}
+            await axios.post('/api/community/voteWrite', data)
+            customAlert.open("성공적으로 등록 되었습니다!")
+        }
+        else {
+            customAlert.open("1개 이상 안건을 등록해주세요!")
+        }
         // }
         // else{ //board category
             // const data = {title, content, nickname};
             // await axios.post('/api/community/write',data)
         // }
-        customAlert.open("성공적으로 등록 되었습니다.")
-        
+        // movePage();
     }
 
     const proposalContent = (e, item) => {
@@ -86,6 +84,15 @@ const VoteDetail = () => {
 
     const openModal = () => {
         if (!imgModalState) dispatch({type: 'IMG_OPEN'})
+    }
+
+    const closeModal = () => {
+        dispatch({type: 'IMG_CLOSE'});
+    }
+
+    const movePage = () => {
+        closeModal();
+        navigate('/community')
     }
 
     useEffect(() => {
@@ -111,9 +118,9 @@ const VoteDetail = () => {
                         />
                         <ImageSelect 
                             image={image} 
-                            setImage={setImage}
                             myImage={myImage}
                             setMyImage={setMyImage}
+                            closeModal={closeModal}
                         />
                         <Form onSubmit={handleSubmit}>
                         <VoteDPart>
@@ -163,7 +170,7 @@ const VoteDetail = () => {
                         </VoteButtonDiv>
                         </Form>
                         <ControlButton>
-                            <PageButton onClick={() => navigate('/community')}>이전화면</PageButton>
+                            <PageButton onClick={movePage}>이전화면</PageButton>
                         </ControlButton>
                     </VoteDMain>
                     }

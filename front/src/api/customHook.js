@@ -1,14 +1,19 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const useAlert = () => {
+    const navigate = useNavigate();
     const [show, setShow] = useState(false);
     const [content, setContent] = useState("")
 
-    const onHide = () => setShow(false)
+    const onHide = (content) =>{
+      setShow(false)
+      let location = 'http://localhost:3000/write'
+      if (content.includes('성공') && window.location.href === location) navigate('/community')
+    }
 
     const open = (alertContent) => {
         setContent(alertContent)
-
         setShow(true)
     }
 
