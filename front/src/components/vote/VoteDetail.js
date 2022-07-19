@@ -13,6 +13,10 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useAlert } from 'api'
 import AlertModal from 'components/AlertModal'
+import Button from 'react-bootstrap/Button';
+
+
+
 
 const VoteDetail = () => {
     const navigate = useNavigate();
@@ -56,6 +60,7 @@ const VoteDetail = () => {
             // const data = {title, content, nickname};
             // await axios.post('/api/community/write',data)
         // }
+        customAlert.open("성공적으로 등록 되었습니다.")
         
     }
 

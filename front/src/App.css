@@ -1008,7 +1008,7 @@ NftCard
     }
 
     .no-display {
-        position: absolute;
+        /* position: absolute; */
         transform: translate(3.4375rem, 19.0625rem);
     }
 
