@@ -60,7 +60,7 @@ const VoteDetail = () => {
                 })
                 console.log(proposals)
                 
-                const data = {title, content, proposals, nickname}
+                const data = {title, content, proposals, nickname, myImage}
                 await axios.post('/api/community/voteWrite',data)
             }
             else {

@@ -4,11 +4,10 @@ CREATE TABLE voteCommunity (
     `content` VARCHAR(255) NOT NULL,
     `proposals` VARCHAR(255) NOT NULL,
     `nickname` VARCHAR(255) NOT NULL,
+    `imgURI` VARCHAR(255) NOT NULL,
     `state` VARCHAR(255) DEFAULT "승인 대기 중" NOT NULL,
     `voteCounts`VARCHAR(255) DEFAULT "" NULL,
-    `selectedProposal` VARCHAR(255) DEFAULT "" NULL,
-    FOREIGN KEY (`nickname`) REFERENCES users(nickname)
-    ON UPDATE CASCADE
+    `selectedProposal` VARCHAR(255) DEFAULT "" NULL
 );
 
 select * from voteCommunity;
