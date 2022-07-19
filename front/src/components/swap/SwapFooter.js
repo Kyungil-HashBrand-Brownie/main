@@ -11,7 +11,7 @@ const SwapFooter = ({ swapToken }) => {
                 <button
                     className='swap-button'
                     onClick={swapToken}
-                    type='button'>Submit</button>
+                    type='button'>SWAP</button>
             </div>
         </>
     )

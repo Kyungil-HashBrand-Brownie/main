@@ -54,24 +54,21 @@ const Swap = () => {
     const swapToken = async () => {
         let amount = amountInput.current.value
         let status;
-        if (Number(amount)) {
-            if (swap) {
-                const result = await getBtk(myAddress, amount)
-                status = result.status
-            }
-            else {
-                const result = await sellBtk(myAddress, amount)
-                status = result.status
-            }
-            if (status) {
-                customAlert.open('스왑완료');
-                dispatch({ type: "WALLET_REFRESH" })
-            }
-            else customAlert.open("오류 발생")
+        if (swap) {
+            const result = await getBtk(myAddress, amount)
+            status = result.status
         }
         else {
-            customAlert.open("숫자를 입력해주세요")
+            const result = await sellBtk(myAddress, amount)
+            status = result.status
         }
+        if (status) {
+            customAlert.open('스왑완료');
+            amountInput.current.value = '';
+            setExchange('exchange');
+            dispatch({ type: "WALLET_REFRESH" })
+        }
+        else customAlert.open("오류 발생")
     }
 
     return (
