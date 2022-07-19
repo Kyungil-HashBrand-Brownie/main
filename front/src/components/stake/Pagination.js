@@ -34,7 +34,7 @@ const Button = styled.button`
   }
 `;
 
-const PageButton = ({ total, page, setPage, setInputCheck, changeAllState }) => {
+const PageButton = ({ total, page, setPage, changeAllState }) => {
     const numPages = Math.ceil(total / 4);
 
     return (

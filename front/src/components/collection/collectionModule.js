@@ -31,6 +31,7 @@ export const CollectionHeader = styled.div`
     text-align: center;
     font-size: 45px;
     font-weight: bold;
+    margin-top: 20px;
 `
 export const CollectionBody = styled.div`
 
@@ -192,7 +193,7 @@ export const FilterDetailBox = styled.div`
         position: absolute;
         width: 20.002px;
         height: 20.002px;
-        transform: translate(-27.998px, 3px);
+        transform: translate(-23px, 3px);
     }
 `
 
@@ -205,7 +206,7 @@ export const SortOuter = styled.div `
     margin-left: 30px;
     margin-top: 50.002px;
     /* width: 350.002px; */
-    width: 15%;
+    width: 20%;
     /* width: 250px; */
     /* width: 230px; */
     height: auto;
