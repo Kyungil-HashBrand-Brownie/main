@@ -58,7 +58,7 @@ const VoteDetail = () => {
             if(proposal.value) proposals.push(proposal.value);
         })
         if (proposals.length) {
-            const data = {title, content, proposals, nickname}
+            const data = {title, content, proposals, nickname, myImage}
             await axios.post('/api/community/voteWrite', data)
             customAlert.open("성공적으로 등록 되었습니다!")
         }
