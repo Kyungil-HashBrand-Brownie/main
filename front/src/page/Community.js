@@ -96,8 +96,10 @@ const Community = () => {
     }
 
     useEffect(() => {
-        action();
-    }, [])
+        if(myAddress){
+            action();
+        }
+    }, [myAddress])
 
     return (
         <>
