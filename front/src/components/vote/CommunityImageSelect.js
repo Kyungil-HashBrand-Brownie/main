@@ -1,34 +1,29 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleLeft , faAngleRight} from "@fortawesome/free-solid-svg-icons"
 
 const WriteImgContainer = styled.div`
-    position: absolute;
-    width: 400px;
-    height: 200px;
+    /* width: 200px; */
+    display: flex;
     background: lightgray;
-    border: 2px solid black;
+    border: 1px solid pink;
     border-radius: 20px;
-    top: 40%;
-    right: 23%;
+    margin: 5px 0;
+    align-items: center;
+    justify-content: center;
 `
 const ImgOuter = styled.div`
     width: 95%;
-    height: 94%;
     background: white;
-    margin: auto;
-    margin-top: 1.5%;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
 `
-
 const ImgContainer = styled.img`
-    width: 80px;
+    width: 44px;
     margin: auto;
     border-radius: 10px;
     cursor: pointer;
@@ -38,49 +33,52 @@ const ImgContainer = styled.img`
     }
 `
 
-const ImageSelect = ({ image, setMyImage, closeModal }) => {
-    const { imgModalState } = useSelector(state => state.main);
+const CommunityImageSelect = ({image, setMyImage}) => {
     const [page, setPage] = useState(0);
     
     const movePageLeft = () => {
+        console.log(page)
+        console.log(image)
         if (page > 0) setPage(page - 1)
     }
     
     const movePageRight = () => {
-        let totalPage = Math.ceil(image.length / 8)
+        console.log(page)
+        console.log(image)
+        let totalPage = Math.ceil(image.length / 4)
         if (page < totalPage - 1) setPage(page + 1)
     }
 
     const changeImg = (addr) => {
         setMyImage(addr);
-        closeModal();
     }
 
     return (
         <>
-        { image != null && imgModalState 
+        { image != null
         ?
         <WriteImgContainer>
             <button 
-                className='button arrowDetailLeft1 fill'
+                className='arrowDetailLeft2'
                 onClick={movePageLeft}
             >
+
                 <FontAwesomeIcon icon={faAngleLeft} />
             </button>
             <button 
-                className='button arrowDetailRight1 fill'
+                className='arrowDetailRight2'
                 onClick={movePageRight}
             >
                 <FontAwesomeIcon icon={faAngleRight} />
             </button>
             <ImgOuter>
-                {new Array(Math.ceil(image.slice(8*page, 8*page + 8).length/8)*8).fill(0).map((item, index) => {
-                    if (index < image.slice(8*page, 8*page + 8).length) {
+                {new Array(Math.ceil(image.slice(4*page, 4*page + 4).length/4)*4).fill(0).map((item, index) => {
+                    if (index < image.slice(4*page, 4*page + 4).length) {
                         return (
                             <ImgContainer 
                                 key={index}
-                                src={`/api/image/images/${image[8*page +index].addr}`}
-                                onClick={() => changeImg(`/api/image/images/${image[8*page + index].addr}`)}
+                                src={`/api/image/images/${image[4*page + index].addr}`}
+                                onClick={() => changeImg(`/api/image/images/${image[4*page +index].addr}`)}
                             />
                         )
                     }
@@ -103,4 +101,4 @@ const ImageSelect = ({ image, setMyImage, closeModal }) => {
     )
 }
 
-export default ImageSelect
+export default CommunityImageSelect
