@@ -491,11 +491,13 @@ body {
 .admin_title{
   width: 100%;
   margin-top: 40px;
-  font-size: 90px;
+  font-size: 70px;
+  margin-bottom: 60px;
 }
 
 .admin_InputSize {
   margin: auto;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   width: 800px;
@@ -1292,7 +1294,7 @@ th {
 .modal-btn {
   font-size: 14px;
   padding: 2px 5px;
-  transform: translate(-136px, -10px);
+  transform: translate(-133px, -10px);
 }
 
 /* footer */
