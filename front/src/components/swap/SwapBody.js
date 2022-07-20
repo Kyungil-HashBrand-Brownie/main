@@ -68,7 +68,7 @@ const SwapBody = ({ swap, Browny1, Klaytn, bool, swapChange, checkValidation,
                         <div>
                             KLAY: {klayBalance + ' => '}
                             {
-                                !swap ? (Number(klayBalance) + Number(exchange) - 0.023).toFixed(2) : (Number(klayBalance) - Number(amountInput.current.value) - 0.023).toFixed(2)
+                                !swap ? (Number(klayBalance) + Number(exchange)).toFixed(2) : (Number(klayBalance) - Number(amountInput.current.value)).toFixed(2)
                             }
                         </div>
                         <div>
