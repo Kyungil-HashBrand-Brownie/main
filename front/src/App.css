@@ -1,7 +1,10 @@
 body {
+  /* background: yellow; */
   width: 100%;
+  height: 100%;
+  font-family: "Yfont2";
   overflow-x: hidden;
-  background: linear-gradient(90deg, #e9a667 0.52%, #f0e3a1 39.46%, #f0e3a1 70.47%, #e9a667 90%);
+  /* background: linear-gradient(90deg, #e9a667 0.52%, #f0e3a1 39.46%, #f0e3a1 70.47%, #e9a667 90%); */
 }
 
 /* 폰트 */
@@ -15,15 +18,15 @@ body {
 }
 
 .wrapper {
-  height: auto;
-  min-height: 985px;
-  bottom: 0px;
-  font-family: "Yfont2";
-  font-weight: 500;
-  margin: 0 auto;
-  line-height: 1.6;
+  position: relative;
+  min-height: 88vh;
 }
 
+@media screen and (min-width: 1830px) {
+  .wrapper {
+    min-height: 1100px;
+  }
+}
 
 .backG-left-img {
   position: absolute;
@@ -211,6 +214,18 @@ body {
   }
 }
 
+@media (max-width: 865px) {
+  .info-box {
+    left: 36%;
+  }
+}
+
+@media (max-width: 780px) {
+  .info-box {
+    left: 34%;
+  }
+}
+
 .PreSale {
   margin: auto;
 
@@ -223,7 +238,9 @@ body {
 
 /* MintCard */
 .MintCard {
-  margin-top: 5%;
+  /* background: blue; */
+  padding: 3.5% 0%;
+  /* margin-top: 5%; */
   /* display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
@@ -280,10 +297,7 @@ body {
   }
 
   .mint-info-box{
-      width: 320px;
       display: none;
-      height: 300px;
-
   }
 
   .mint-count-box{
@@ -301,22 +315,12 @@ body {
   }
 
   .mint-wal-connect-btn{
-    top: -20px;
     /* margin: 20px 0 10px 0; */
-    padding: 0px 0px;
     /* padding: 3px 3px; */
     width: 100px;
-  }
-
-  .mint-container{
-    /* background-color:pink; */
-    /* flex-wrap: wrap; */
+    margin-bottom: 10px;
   }
 }
-
-
-
-
 
 .profile-inner {
   width: 80%;
@@ -365,6 +369,7 @@ body {
 }
 .mint-info-box {
   margin: 0px 15px;
+  height: 140px;
   font-weight: 600;
   background: white;
   border-radius: 30px;
@@ -472,11 +477,13 @@ body {
 .admin_title{
   width: 100%;
   margin-top: 40px;
-  font-size: 90px;
+  font-size: 70px;
+  margin-bottom: 60px;
 }
 
 .admin_InputSize {
   margin: auto;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   width: 800px;
@@ -1008,8 +1015,18 @@ NftCard
     }
 
     .no-display {
-        position: absolute;
-        transform: translate(3.4375rem, 19.0625rem);
+        /* position: absolute; */
+        /* transform: translate(3.4375rem, 19.0625rem); */
+        /* 좌우로 정렬 */
+        display: flex;
+        /* 밑으로 버튼 내리기 */
+        flex-direction: column;
+        /*  위 아래 정렬*/
+        justify-content: center;
+        /* 왼쪽 오른쪽 정렬 */
+        align-items: center;
+        margin: auto;
+        height: 70vh;
     }
 
 
@@ -1251,16 +1268,19 @@ th {
   padding-top: 10px;
   font-size: 16px;
   background-color: rgb(243, 237, 237);
+  font-weight: 600;
 }
 .modal-footer {
   display: flex;
   align-items: center;
   max-height: 40px;
+  /* background: red; */
+  text-align: center;
 }
 .modal-btn {
   font-size: 14px;
   padding: 2px 5px;
-  transform: translate(-122px, -10px);
+  transform: translate(-133px, -10px);
 }
 
 /* footer */
@@ -1273,6 +1293,8 @@ th {
   z-index: -1;
   transform: translate(0, -370px);
   z-index: -1;
+  /* border-bottom: 10px solid pink; */
+
 }
 
 .fContainer_right_content {

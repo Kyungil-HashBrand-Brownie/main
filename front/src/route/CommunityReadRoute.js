@@ -5,7 +5,7 @@ import CommunityRead from 'components/vote/CommunityRead'
 const CommunityReadRoute = () => {
     let { type } = useParams();
     
-    return ( ['board', 'vote'].includes(type)
+    return ( type == 'vote'
     ? <CommunityRead />
     : <Navigate to='/nopage' />
     )

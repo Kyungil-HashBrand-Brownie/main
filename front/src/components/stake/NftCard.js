@@ -177,7 +177,8 @@ function NftCard({ bool }) {
                                 changeClickState={changeClickState}
                             />
                             : <div className='no-display'>
-                                <h1>Nothing to display</h1>
+                                {/* <div className="">Nothing to display</div> */}
+                                <h1>Nothing <br/> to display</h1>
                             </div>
                         }
                     </div>

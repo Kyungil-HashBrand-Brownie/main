@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Nav, Button, Navbar, Container } from 'react-bootstrap';
+import { Nav, Navbar, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { enableKaikas, getTokenBalance, useAlert } from 'api';
@@ -12,6 +12,34 @@ import UserBar from './UserBar';
 import Logo from '../img/brownyLogo.png';
 import { background13 } from '../img/background';
 import { closeModal } from './testDispatch';
+
+const WalletButton = styled.button`
+    width: 150px;
+    background: #198754;
+    border: none;
+    color: white;
+    padding: 3px;
+    border-radius: 4px;
+
+    @media (max-width: 992px) {
+        position: absolute;
+        top: -40px;
+        left: 41%;
+    };
+
+    @media (max-width: 865px) {
+        left: 40%;
+    };
+
+    @media (max-width: 720px) {
+        left: 39%;
+    };
+
+    @media (max-width: 620px) {
+        left: 36%;
+    };
+
+`
 
 const LogoContainer = styled.div`
     background-image: url(${Logo});
@@ -62,7 +90,7 @@ const Header = () => {
         dispatch(nftAction.setVoteStatus())
     }
 
-    const clickEnableKaikas = (customAlert) => {
+    const clickEnableKaikas = () => {
         enableKaikas(customAlert);
     }
 
@@ -78,10 +106,6 @@ const Header = () => {
     const resetCollection = () => {
         dispatch({ type: 'RESET_COLLECTION' })
     }
-
-    // const closeModal = () => {
-    //     dispatch({ type: "MODAL_CLOSE" })
-    // }
 
     useEffect(() => {
         setUserInfo(myAddress);
@@ -107,8 +131,8 @@ const Header = () => {
         setVoteStatus();
     }, [])
 
-    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/nftlist', '/community'];
-    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Nftlist', 'Community'];
+    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/staking', '/community'];
+    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Staking', 'Community'];
 
     let pages = paths.map((path, index) => {
         return {
@@ -153,7 +177,8 @@ const Header = () => {
                                     nickname={nickname} changeNickname={changeNickname}
                                     klayBalance={klayBalance} btkBalance={btkBalance}
                                 />
-                                : <><Button className="mint-wal-connect-btn" variant="success" onClick={clickEnableKaikas}>지갑 연결하기</Button>{' '}</>
+                                : <WalletButton onClick={clickEnableKaikas}>지갑 연결하기</WalletButton>
+                                // <><Button className="mint-wal-connect-btn" variant="success" onClick={clickEnableKaikas}>지갑 연결하기</Button>{' '}</>
                         }
                     </Navbar.Collapse>
                 </Container>

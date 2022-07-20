@@ -9,9 +9,10 @@ let initialState = {
     klayBalance: 0,
     btkBalance : 0,
     nickname : "",
-    
+    imgModalState: false,
 
     // Collection
+    mintCount: null,
     sortOption: 0,
     filterOpenState: [
         { id: 'Background', click: false },
@@ -37,6 +38,19 @@ function nftReducer(state = initialState, action) {
     let { type, payload } = action
 
     switch (type) {
+        // Write Image Modal
+        case 'IMG_OPEN':
+            return {
+                ...state,
+                imgModalState: true,
+            }
+
+        case 'IMG_CLOSE':
+            return {
+                ...state,
+                imgModalState: false,
+            }
+
         case "MODAL_CLICK":
             return {
                 ...state,
@@ -114,6 +128,12 @@ function nftReducer(state = initialState, action) {
             }
 
         // Collection
+        case 'MINT_COUNT' : 
+            return {
+                ...state,
+                mintCount: payload
+            }
+
         case 'CHANGE_SORT_OPTION' : 
             return {
                 ...state,

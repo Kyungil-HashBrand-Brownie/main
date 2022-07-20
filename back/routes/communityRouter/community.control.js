@@ -72,10 +72,10 @@ const writeAction = async (req, res) => {
 }
 
 const voteWriteAction = async (req, res) => {
-    const {title, content, proposals, nickname} = req.body;
-    const data = [title, content, JSON.stringify(proposals), nickname]
+    const {title, content, proposals, nickname, myImage} = req.body;
+    const data = [title, content, JSON.stringify(proposals), nickname, myImage]
     try {
-        const [result] = await pool.query(`INSERT INTO voteCommunity(title, content, proposals, nickname) VALUES (?,?,?,?)`,data)
+        const [result] = await pool.query(`INSERT INTO voteCommunity(title, content, proposals, nickname, imgURI) VALUES (?,?,?,?,?)`,data)
         res.send(result);
     }
     catch(e) {

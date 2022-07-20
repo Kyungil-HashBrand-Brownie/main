@@ -24,6 +24,7 @@ const Outer = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     align-items: flex-end;
+
 `
 
 const Footer = () => (

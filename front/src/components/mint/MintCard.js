@@ -10,14 +10,14 @@ let preSaleProps = {
   title: 'Pre-Sale',
   img: PreBrowny,
   price: 50,
-  amount: '/120',
+  amount: '/175',
 }
 
 let whiteSaleProps = {
   title: 'White-Sale',
   img: WhiteBrowny,
   price: 25,
-  amount: '/30',
+  amount: '/25',
 }
 
 const Style_Mint_div = styled.div`
@@ -27,8 +27,6 @@ const Style_Mint_div = styled.div`
   /* background-color: black; */
   /* bottom: -00px; */
   position: "absolute";
-
-
 `
 
 
@@ -36,7 +34,7 @@ const Style_Mint_div = styled.div`
 const MintCard = () => {  
     return (
       <>
-        <img src={mintBackground} className="styled_mint_card"/>
+        {/* <img src={mintBackground} className="styled_mint_card"/> */}
         <div className='MintCard'>
         <Container className="mint-container">
               <Col className='PreSale' xs={{span:4, offset:2 }}> 

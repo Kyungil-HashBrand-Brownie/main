@@ -1,7 +1,8 @@
 import React from 'react'
 import {
     CollectionCardImg, CollectionMainOuter, CollectionHeader, CollectionBody,
-    CollectionRow, CollectionCardOuter, CollectionCard, CollectionCardDetail
+    CollectionRow, CollectionCardOuter, CollectionCard, CollectionCardDetail,
+    CollectionNoItem
 } from './collectionModule'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,7 +11,6 @@ const CollectionMain = ({ data, row }) => {
     const navigate = useNavigate('')
 
     const moveToDetailPage = (edi) => {
-        // console.log(edi);
         navigate(`/detailcollection/${edi}`)
     }
 
@@ -24,6 +24,7 @@ const CollectionMain = ({ data, row }) => {
             }
             <CollectionBody>
                 {data !== null &&
+                    data.length > 0 ?
                     new Array(row).fill(0).map((item, index) =>
                         <CollectionRow
                             key={index}
@@ -45,7 +46,9 @@ const CollectionMain = ({ data, row }) => {
                                 </CollectionCardOuter>
                             )}
                         </CollectionRow>
-                    )}
+                    )
+                : <CollectionNoItem>No Item</CollectionNoItem>
+                }
             </CollectionBody>
         </CollectionMainOuter>
     )

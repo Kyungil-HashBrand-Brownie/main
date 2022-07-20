@@ -2,10 +2,13 @@ import React from 'react'
 import NftCard from '../components/stake/NftCard'
 import { Col } from 'react-bootstrap'
 import Slider from 'components/Slider'
+import ImgComponent from 'components/ImgComponent'
 
-const NftList = () => {
+const Staking = () => {
   return (
-    // <Slider />
+    <>
+    <ImgComponent />
+    {/* // <Slider /> */}
     <div className='stake-outer-box'>
       <Col>
         <NftCard bool={true}/>
@@ -14,7 +17,8 @@ const NftList = () => {
         <NftCard bool={false}/>
       </Col>
     </div>
+    </>
   )
 }
 
-export default NftList
+export default Staking

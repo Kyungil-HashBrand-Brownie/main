@@ -3,7 +3,9 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
 const PostButton = styled.button`
-  float: right;
+  position: absolute;
+  right: 24%;
+  top: 36%;
   border-radius: 5px;
   &:hover {
       background: lightgray;

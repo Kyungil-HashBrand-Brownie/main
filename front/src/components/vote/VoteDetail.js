@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
-import { nft1 } from 'img/nft'
+import { nftInstance } from 'configs'
 import VoteDescription from './VoteDescription'
 import { useNavigate } from 'react-router-dom'
 import _ from 'lodash'
@@ -9,16 +9,19 @@ import {
     VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
     VoteTCBodyImg, VoteButtonDiv, VoteButton, ControlButton, PageButton
 } from './voteModule'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import { useAlert } from 'api'
 import AlertModal from 'components/AlertModal'
+import ImageSelect from './ImageSelect'
 
 const VoteDetail = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const customAlert = useAlert();
 
-    const {nickname, isDeployer} = useSelector(state => state.main);
+    const { nickname, isDeployer, imgModalState } = useSelector(state => state.main);
+    const { myAddress } = useSelector(state => state.nft);
 
     const [counter, setCounter] = useState([{
         id: 0,
@@ -30,7 +33,19 @@ const VoteDetail = () => {
         id: 2,
         content: ''
     }
-])
+    ])
+    const [image, setImage] = useState(null);
+    const [myImage, setMyImage] = useState(null)
+
+    const action = async () => {
+        let myBrownyNFTs = await nftInstance.methods.ownTokens().call(
+            { from: myAddress })
+        let dummy = [];
+        const result = await axios.post('/api/image/images', { myBrownyNFTs, dummy })
+        let data = result.data;
+        setImage(data);
+        setMyImage(`/api/image/images/${data[0].addr}`)
+    }
 
     const handleSubmit = async (e)=> {
         e.preventDefault();
@@ -38,74 +53,25 @@ const VoteDetail = () => {
         const content = e.target.content.value
         let proposalGroup = e.target.proposal
         // if(id === "0"){ //vote category
-            let proposals = [];
-            if(proposalGroup.length) {
-                proposalGroup.forEach((proposal)=> {
-                    if(proposal.value) proposals.push(proposal.value);
-                })
-                console.log(proposals)
-                
-                const data = {title, content, proposals, nickname}
-                await axios.post('/api/community/voteWrite',data)
-            }
-            else {
-                customAlert.open("1개 이상 안건을 등록해주세요")
-            }
+        let proposals = [];
+        proposalGroup.forEach((proposal)=> {
+            if(proposal.value) proposals.push(proposal.value);
+        })
+        if (proposals.length) {
+            const data = {title, content, proposals, nickname, myImage}
+            await axios.post('/api/community/voteWrite', data)
+            customAlert.open("성공적으로 등록 되었습니다!")
+        }
+        else {
+            customAlert.open("1개 이상 안건을 등록해주세요!")
+        }
         // }
         // else{ //board category
             // const data = {title, content, nickname};
             // await axios.post('/api/community/write',data)
         // }
-        
+        // movePage();
     }
-
-    const addProposal = (proposal) => {
-        let compareIdx = counter[counter.length - 1].id
-        if (counter.length == 4) {
-            alert('안건은 최대 3개까지 등록할 수 있습니다.')
-        }
-        else {
-            if (proposal.id == compareIdx) {
-                if (proposal.content == '') customAlert.open('안건을 입력해 주세요.')
-                else {
-                    let newArr = _.cloneDeep(counter)
-                    newArr = newArr.map(item => {
-                        if (item.id == compareIdx) {
-                            item.state = true
-                        }
-                        return item
-                    })
-                    if (counter.length !== 3) {
-                        newArr.push({
-                                id: compareIdx + 1,
-                                content: '',
-                                state: false,
-                        })
-                    }
-                    setCounter(newArr)
-                }
-            }
-        } 
-    }
-
-    const delProposal = (item) => {
-        console.log(item)
-        console.log(counter)
-        let newArr = _.cloneDeep(counter);
-        newArr = newArr.filter((arr) => arr.id != item.id)
-        
-        if (newArr.length == 0 || counter.length == 3) {
-            let compareIdx = counter[counter.length - 1].id
-    
-            newArr.push({
-                id: compareIdx + 1,
-                content: '',
-                state: false,
-            })
-        }
-
-        setCounter(newArr)
-    } 
 
     const proposalContent = (e, item) => {
         let data = {...item, content: e.target.value};
@@ -116,9 +82,25 @@ const VoteDetail = () => {
         setCounter(newArr)
     }
 
-    const movePage = () => {
-        navigate(-1);
+    const openModal = () => {
+        if (!imgModalState) dispatch({type: 'IMG_OPEN'})
     }
+
+    const closeModal = () => {
+        dispatch({type: 'IMG_CLOSE'});
+    }
+
+    const movePage = () => {
+        closeModal();
+        navigate('/community')
+    }
+
+    useEffect(() => {
+        if(myAddress){
+            action();
+        }
+    }, [myAddress])
+
     return (
         <>
         <AlertModal {...customAlert}/>
@@ -129,8 +111,19 @@ const VoteDetail = () => {
                 </VoteDHeaderOuter>
                 <VoteDescription />
                 <VoteDMainOuter>
+                    {image != null &&
+                    
                     <VoteDMain>
-                        <VoteTCBodyImg img={nft1} />
+                        <VoteTCBodyImg 
+                            img={myImage} 
+                            onClick={openModal}
+                        />
+                        <ImageSelect 
+                            image={image} 
+                            myImage={myImage}
+                            setMyImage={setMyImage}
+                            closeModal={closeModal}
+                        />
                         <Form onSubmit={handleSubmit}>
                         <VoteDPart>
                             <VoteDType>제목</VoteDType>
@@ -179,9 +172,10 @@ const VoteDetail = () => {
                         </VoteButtonDiv>
                         </Form>
                         <ControlButton>
-                            <PageButton onClick={() => navigate('/community')}>이전화면</PageButton>
+                            <PageButton onClick={movePage}>이전화면</PageButton>
                         </ControlButton>
                     </VoteDMain>
+                    }
                 </VoteDMainOuter>
             </VoteDRightOuter>
         </VoteDOuter>
