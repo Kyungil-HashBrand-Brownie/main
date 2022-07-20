@@ -42,7 +42,7 @@ const CommunityRead = () => {
     }
 
     const getData = async () => {
-        let result = await axios.get(`http://localhost:4000/api/community/read/${type}/${id}`);
+        let result = await axios.get(`/api/community/read/${type}/${id}`);
         console.log(result)
         setData(result.data);
     }
