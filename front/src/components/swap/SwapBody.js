@@ -40,7 +40,7 @@ const SwapBody = ({ swap, Browny1, Klaytn, bool, swapChange, checkValidation,
                     <div className='swap-input-flex'>
                         <input
                             className='swap-amount-input'
-                            placeholder='amount'
+                            placeholder='1'
                             onChange={checkValidation}
                             ref={amountInput}
                         />
@@ -52,14 +52,14 @@ const SwapBody = ({ swap, Browny1, Klaytn, bool, swapChange, checkValidation,
                         <input
                             disabled
                             className='swap-amount-input'
-                            placeholder='exchange'
-                            value={amountInput.current.value !== '' ? exchange : 'exchange'}
+                            placeholder={swap ? 7.22 : 0.14}
+                            value={amountInput.current.value !== '' ? exchange : swap ? 7.22 : 0.14}
                         />
                         <div className='swap-amount-token'>{bool[swap]}</div>
                     </div>
                 </div>
             </div>
-            {(exchange !== 'exchange') &&
+            {/* {(exchange !== 'exchange') &&
                 <div className='swap-user-token-outer'>
                     <div className='swap-user-token-head-outer'>
                         <div className='swap-user-token-header'>거래 후 잔액</div>
@@ -79,7 +79,7 @@ const SwapBody = ({ swap, Browny1, Klaytn, bool, swapChange, checkValidation,
                         </div>
                     </div>
                 </div>
-            }
+            } */}
         </>
     )
 }

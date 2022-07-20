@@ -166,6 +166,7 @@ export const StyleHomeImgCard = styled.div`
       text-align: center;
       margin-top: 5px;
       font-size: 40px;
+      color: white;
     }
     .backColor{
       background-color: #F6C6EA;
@@ -205,6 +206,7 @@ export const StyleHomeImgCard = styled.div`
     }
     .tapestry-header0 {
       letter-spacing: 1px;
+      color: white;
       /* background: white; */
       border-radius: 20px;
       padding: 10px 2px;

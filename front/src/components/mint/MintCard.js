@@ -7,14 +7,14 @@ import { PreBrowny, WhiteBrowny } from '../../img/browny';
 import styled from 'styled-components';
 
 let preSaleProps = {
-  title: 'Pre-Sale',
+  title: 'PreSale',
   img: PreBrowny,
   price: 50,
   amount: '/175',
 }
 
 let whiteSaleProps = {
-  title: 'White-Sale',
+  title: 'WhiteSale',
   img: WhiteBrowny,
   price: 25,
   amount: '/25',

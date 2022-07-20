@@ -39,10 +39,10 @@ const DetailCollectionModal = ({collectionAlldata,page,bool}) => {
             size="xl"
             className='ModalPosition'
             >
-                <Modal.Body className='modal-body'>
+                <Modal.Body className='collectionmodal-body'>
                 <div className="modal_content_postion" >
                         <div className='addf1'>
-                            all data
+                            #{positionMiddle - 2} ~ #{positionMiddle + 2}
                         </div>
                         <button className='button arrowDetailLeft absLL fill' onClick={()=>setPositionMiddle(3)}>            
                             <FontAwesomeIcon icon={faAnglesLeft} />
@@ -64,17 +64,18 @@ const DetailCollectionModal = ({collectionAlldata,page,bool}) => {
                     // bool === !bool {
                     collectionAlldata!= null ? 
                     collectionAlldata.slice(positionMiddle-3, positionMiddle+2).map((item, idx) => 
-                    <>
-                    <img width='200px' alt="" onClick={() => { 
+                    <div className='modal-collection-box' key={idx}>
+                    <img
+                    className='modal-collection-img' 
+                    alt="" onClick={() => { 
                     setPositionMiddle(item.edition < 3 ? 3 : item.edition < 199 ? item.edition : 198)
                     navigate(`/detailcollection/${item.edition}`)}}
                     // selectCollection()}
                     src={`/api/image/images/${item.addr}`}
                     />
-                    #{item.edition}
-                    </>
+                    <div className='modal-collection-detail'>#{item.edition}</div>
+                    </div>
                     )
-                
                     : null
                 }
                 </Slider>

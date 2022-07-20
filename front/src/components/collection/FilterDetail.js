@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import _ from 'lodash'
-import { Check } from '../../img'
 import { FilterDetailOuter, FilterDetailBox } from './collectionModule'
 
 const Background = [
@@ -31,9 +30,9 @@ const FilterDetail = ({ parts }) => {
     const dispatch = useDispatch();
     const { filterOption } = useSelector(state => state.main);
     let partOptions = data[parts];
-    // let checked = filterOption.find((item) => item.opt !== null);
+    let checked = filterOption.find((item) => item.id === parts);
 
-    const [check, setCheck] = useState(null);
+    const [check, setCheck] = useState(checked.opt);
     // console.log('check: ', check)
 
     const changeCheck = (part) => {
@@ -55,6 +54,7 @@ const FilterDetail = ({ parts }) => {
         else {
             setCheck(part)
         }
+        console.log(filterOption)
         dispatch({ type: 'CHANGE_FILTER_OPTION_STATE', payload: copy })
     }
 
@@ -67,8 +67,9 @@ const FilterDetail = ({ parts }) => {
                         key={index}
                         info={part}
                         onClick={() => changeCheck(part)}
+                        state={check === part}
                     >
-                        {check == part && <img className='filter-check' src={Check} />}
+                        {/* {check == part && <img className='filter-check' src={Check} />} */}
                         {part}
                     </FilterDetailBox>)
             }
