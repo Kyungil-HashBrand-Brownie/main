@@ -12,6 +12,7 @@ let initialState = {
     imgModalState: false,
 
     // Collection
+    mintCount: null,
     sortOption: 0,
     filterOpenState: [
         { id: 'Background', click: false },
@@ -127,6 +128,12 @@ function nftReducer(state = initialState, action) {
             }
 
         // Collection
+        case 'MINT_COUNT' : 
+            return {
+                ...state,
+                mintCount: payload
+            }
+
         case 'CHANGE_SORT_OPTION' : 
             return {
                 ...state,

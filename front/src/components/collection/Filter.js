@@ -37,7 +37,7 @@ const Filter = () => {
 
     return (
       <FilterOuter>
-          <FilterHeader>Filter</FilterHeader>
+          <FilterHeader>Parts</FilterHeader>
           <FilterMain>
             <FilterInner>
               <FilterSubHeader>

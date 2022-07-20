@@ -10,6 +10,7 @@ const Proposal = ({label, index, onChange}) => {
             type="radio"
             // id={`inline-radio-${index}`}
             onChange={onChange}
+            style={{marginLeft: '20px'}}
           />
     )
 }

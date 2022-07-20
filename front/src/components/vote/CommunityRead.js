@@ -115,7 +115,7 @@ const CommunityRead = () => {
                                         className='vote-textarea'
                                         style={{ height: '20px', resize: 'none' }}
                                         name='title'
-                                        value={data.title}
+                                        defaultValue={data.title}
                                     />
                                 </VoteDPart>
                                 <VoteDPart>
@@ -126,7 +126,7 @@ const CommunityRead = () => {
                                         className='vote-textarea'
                                         style={{ height: '200px', resize: 'none' }}
                                         name='content'
-                                        value={data.content}
+                                        defaultValue={data.content}
                                     />
                                 </VoteDPart>
                                 {type == 'vote' &&
@@ -138,17 +138,17 @@ const CommunityRead = () => {
                                                     className='proposal-form'
                                                     key={index}
                                                 >
-                                                    {
-                                                        data.state === "투표 진행 중" && <Proposal key={index} index={index + 1} onChange={changeSelected} />
-                                                    }
                                                     <Form.Control
                                                         readOnly
                                                         as="textarea"
-                                                        value={item}
+                                                        defaultValue={item}
                                                         name='proposal'
                                                         className='vote-text'
-                                                        style={{ width: '820px', height: '40px', resize: 'none' }}
-                                                    />
+                                                        style={{ width: '800px', height: '40px', resize: 'none' }}
+                                                        />
+                                                    {
+                                                        data.state === "투표 진행 중" && <Proposal key={index} index={index + 1} onChange={changeSelected} />
+                                                    }
                                                 </div>
                                             )}
                                         </div>
@@ -161,8 +161,8 @@ const CommunityRead = () => {
                                     {!hasVote
                                         ?
                                         <>
-                                            <VoteButton onClick={voteSubmit}>투표하기</VoteButton>
                                             <div>My Voting Power : {votingPower}</div>
+                                            <VoteButton onClick={voteSubmit}>투표하기</VoteButton>
                                         </>
                                         : <div>이미 투표했습니다</div>
                                     }

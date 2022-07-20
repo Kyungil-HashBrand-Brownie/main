@@ -6,7 +6,7 @@ import { SortOuter, SortHeader } from './collectionModule'
 const Sort = () => {
     return (
         <SortOuter>
-            <SortHeader>Sort</SortHeader>
+            <SortHeader>Minted</SortHeader>
             <SortTop/>
             <Filter/>
         </SortOuter>

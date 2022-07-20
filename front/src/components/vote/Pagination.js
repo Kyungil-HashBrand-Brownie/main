@@ -2,10 +2,14 @@ import React from 'react';
 import styled from 'styled-components'
 
 const Nav = styled.nav`
+  position: absolute;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  bottom: 3%;
+  left: 47.5%;
+  /* justify-content: center; */
+  /* align-items: center; */
   gap: 4px;
+  /* margin-top: 70px; */
 `;
 
 const Button = styled.button`
@@ -48,7 +52,7 @@ const Pagination = ({ total, page, setPage }) => {
     return (
         <Nav>
             <Button onClick={movePageLeft} disabled={page === 1}>&lt;</Button>
-            {   total &&
+            {total &&
                 Array(numPages)
                     .fill()
                     .map((_, i) => (

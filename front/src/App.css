@@ -18,19 +18,8 @@ body {
 }
 
 .wrapper {
-  /* height: auto; */
   position: relative;
   min-height: 88vh;
-  /* background-color: black; */
-  /* position: absolute; */
-  /* margin-top: 10%; */
-  /* background: red; */
-  /* min-height: 90%; */
-  /* bottom: 0px; */
-  /* font-family: "Yfont2";
-  font-weight: 500; */
-  /* margin: 0 auto; */
-  /* line-height: 1.6; */
 }
 
 @media screen and (min-width: 1830px) {
@@ -38,9 +27,6 @@ body {
     min-height: 1100px;
   }
 }
-
-
-
 
 .backG-left-img {
   position: absolute;

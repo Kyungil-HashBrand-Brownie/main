@@ -66,6 +66,7 @@ export const VoteDHeaderOuter = styled.div`
 export const VoteDHeader = styled.div`
     width: 20%;
     font-size: 30px;
+    font-weight: bold;
     margin-top: 20px;
     text-align: center;
 `
@@ -240,7 +241,7 @@ export const VoteTCState = styled.div`
     background: 
         ${props => props.state === '투표 종료' ? 'coral'
                     : props.state === '승인 대기 중' ? 'yellow' 
-                    : 'green'
+                    : 'lightgreen'
         };
 `
 export const VoteTCBodyOuter = styled.div`

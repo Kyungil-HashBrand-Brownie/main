@@ -13,8 +13,8 @@ const HomeImgCardMain = ({ click }) => {
                             <span className='tapestry-span'>(Get)</span>
                             고유의 브라우니 NFT를 소유하세요!<br />
                             <span className='tapestry-span'>(Interact & Vote)</span>
-                            유저는 브라우니를 소유함과 동시에 자동으로 저희만의 거버넌스(보팅) 시스템에 등록됩니다.  
-                            투표는 환경과 관련된 주제로 진행되며, 투표를 통해 벌어들인 모든 수익금은 해당 주제에 기부됩니다. 
+                            브라우니 NFT 홀더가 되면 자동으로 저희만의 거버넌스(보팅) 시스템에 등록됩니다.  
+                            투표는 환경과 관련된 주제로 진행되며, 투표를 통해 벌어들인 수익금의 일부는 해당 주제에 기부됩니다. 
                             저희 커뮤니티에서 투표권을 행사하고, 환경에 대한 다양한 정보도 공유해보세요!<br />
                             <span className='tapestry-span'>(Entitle)</span>
                             유저 등급에 따라 차등 권리가 부여됩니다. 골드 등급 이상은 커뮤니티 의견을 종합하여 
