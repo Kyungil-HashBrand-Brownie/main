@@ -1018,15 +1018,20 @@ NftCard
         /* position: absolute; */
         /* transform: translate(3.4375rem, 19.0625rem); */
         /* 좌우로 정렬 */
-        display: flex;
         /* 밑으로 버튼 내리기 */
-        flex-direction: column;
+        /* flex-direction: column; */
         /*  위 아래 정렬*/
-        justify-content: center;
+        /* justify-content: center; */
         /* 왼쪽 오른쪽 정렬 */
+        display: flex;
         align-items: center;
+        justify-content: center;
         margin: auto;
-        height: 70vh;
+        height: 15vh;
+        width: 90%;
+        margin-top: 47%;
+        background: white;
+        border-radius: 40px;
     }
 
 

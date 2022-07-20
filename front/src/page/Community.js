@@ -88,8 +88,9 @@ const Community = () => {
     const action = async () => {
         let myBrownyNFTs = await nftInstance.methods.ownTokens().call(
             { from: myAddress })
-        let dummy = [];
-        const result = await axios.post('/api/image/images', { myBrownyNFTs, dummy })
+        let stakedNFTs = await nftInstance.methods.checkStakedNFTs().call(
+            { from: myAddress })
+        const result = await axios.post('/api/image/images', { myBrownyNFTs, stakedNFTs })
         let data = result.data;
         setImage(data);
         setMyImage(`/api/image/images/${data[0].addr}`)

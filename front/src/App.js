@@ -15,11 +15,11 @@ import {
 } from './page'
 import CommunityApproval from 'components/vote/CommunityApproval';
 
-const paths = ['/', '/mint', '/test', '/collection',
+const paths = ['/test', '/collection',
   '/community', '/community/:id', '/community/read/:type/:id',
   '/write', '/detailcollection/:edition', '*']
 
-const elements = [<Home />, <Mint />, <Testpage />, <Collection />,
+const elements = [<Testpage />, <Collection />,
 <Community />, <PrivateRoute />, <CommunityReadRoute />,
 <VoteWrite />, <DetailCollecion />, <NoPage />
 ]
@@ -35,6 +35,7 @@ const Wrapper = styled.div`
 
 function App() {
   const { isDeployer } = useSelector(state => state.main)
+  const { myAddress } = useSelector(state => state.nft);
 
   const [isBaobab, setIsBaobab] = useState(false)
 
@@ -54,10 +55,15 @@ function App() {
     <>
       <Wrapper>
 
-      <Header />
+        <Header />
 
         <Routes>
-          {paths.map((path, index) => <Route key={path} path={path} element={elements[index]} />)}
+          <Route path="/" element={<Home />} />
+          <Route path="/mint" element={<Mint />} />
+
+          {myAddress != '' &&
+            paths.map((path, index) => <Route key={path} path={path} element={elements[index]} />)
+          }
           {
             isBaobab
               ?

@@ -47,7 +47,7 @@ const CollectionMain = ({ data, row }) => {
                             )}
                         </CollectionRow>
                     )
-                : <CollectionNoItem>No Item</CollectionNoItem>
+                : <CollectionNoItem>No Item to display</CollectionNoItem>
                 }
             </CollectionBody>
         </CollectionMainOuter>
