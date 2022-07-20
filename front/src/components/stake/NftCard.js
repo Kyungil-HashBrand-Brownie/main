@@ -178,7 +178,7 @@ function NftCard({ bool }) {
                             />
                             : <div className='no-display'>
                                 {/* <div className="">Nothing to display</div> */}
-                                <h1>Nothing <br/> to display</h1>
+                                <h1>No Items to display</h1>
                             </div>
                         }
                     </div>

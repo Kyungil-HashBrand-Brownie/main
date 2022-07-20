@@ -97,6 +97,9 @@ export const VoteDPart = styled.div`
     .vote-text {
         margin-left: 2%;
     }
+    .selected {
+        background: lightblue;
+    }
     .proposal {
         display: flex;
         flex-direction: column;

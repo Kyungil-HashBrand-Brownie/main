@@ -16,7 +16,7 @@ const Filter = () => {
     const { filterOpenState, filterOption } = useSelector(state => state.main)
 
     const changeSelect = (data) => {
-        console.log(data)
+        // console.log(data)
         let copyFilterOption = _.cloneDeep(filterOption).map(item => {
             if (data.click) {
                 if (item.id == data.id) item.opt = null;
@@ -30,6 +30,8 @@ const Filter = () => {
             }
             return item
         });
+        // console.log(copyFilterOption)
+        // console.log(copy)
         
         dispatch({type: 'CHANGE_FILTER_OPTION_STATE', payload: copyFilterOption});
         dispatch({type:'CHANGE_FILTER_STATE', payload: copy});
