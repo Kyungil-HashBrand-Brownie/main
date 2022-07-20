@@ -194,7 +194,7 @@ export const FilterDetailOuter = styled.div`
 `
 export const FilterDetailBox = styled.div`
     margin: auto;
-    background: white;
+    /* background: white; */
     /* min-width:  */
         /* ${props => props.info.includes('Background') ? '150px' : '120px'}; */
     margin-top: 6px; 
@@ -202,7 +202,8 @@ export const FilterDetailBox = styled.div`
     text-align: center;
     cursor: pointer;
     font-size: 16px;
-    background: rgb(151, 223, 220);  
+    background: 
+        ${props => props.state ? 'rgb(151, 223, 220)' : 'lightgray'};  
     border-radius: 9.998px; 
     padding: 0 5px;
 
@@ -210,12 +211,12 @@ export const FilterDetailBox = styled.div`
         transform: scale(1.03)
     }
 
-    img {
+    /* img {
         position: absolute;
         width: 20.002px;
         height: 20.002px;
         transform: translate(0, -12px);
-    }
+    } */
 `
 
 /* Sort */

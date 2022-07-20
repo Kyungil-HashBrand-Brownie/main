@@ -44,12 +44,16 @@ const CommunityRead = () => {
 
     let selected = data.voteCounts ? JSON.parse(data.voteCounts).map(i => parseInt(i)) : null;
     let selectedIndex = 0; 
+    let start = 0;
     if (selected !== null) {
         selected.forEach((s, index) => {
-            if (s > selectedIndex) s = index
+            if (start < s)  {
+                selectedIndex = index;
+                start = s;
+            }
         })
     }
-
+    // console.log(selected);
     // console.log('selectedIndex: ', selectedIndex)
 
     const [hasVote, setHasVote] = useState(false);
@@ -125,7 +129,7 @@ const CommunityRead = () => {
                     <VoteDMainOuter>
                         <VoteDMain>
                             <VoteTCReadImg img={nft1} />
-                            <VoteReadState>{data.state}</VoteReadState>
+                            <VoteReadState state={data.state}>{data.state}</VoteReadState>
                             <Form>
                                 <VoteDPart>
                                     <VoteDType>제목</VoteDType>

@@ -27,7 +27,7 @@ const HomeImgCardMain = ({ click }) => {
                             <div className='tapestry-header'>스테이킹, 토큰스왑 즐거움이 두 배!</div>
                             <b className='tapestry-subheader'>Entertainer Browny</b>
                             <div className='grid-template'>
-                                브라우니 토큰으로 다양한 환경 살리기 캠패인에 참여해보세요!<br />
+                                브라우니 토큰으로 다양한 환경 살리기 캠페인에 참여해보세요!<br />
                                 소유한 브라우니 NFT들을 저희 뱅킹(체인)에 예치하면 스테이킹 보상이 제공됩니다.<br />
                                 브라우니 팀은 자체 토큰을 보다 다양한 분야에 (렌탈, 패션 마케팅) 활용하는 계획을 세우고 있습니다. <br />
                                 유저들에게 최대한의 즐거움을 주는 방식으로 확장성을 넓혀가겠습니다!!

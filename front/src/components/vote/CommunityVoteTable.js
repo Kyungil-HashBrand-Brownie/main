@@ -9,6 +9,7 @@ const CommunityVoteTable = () => {
     const [page, setPage] = useState(1);
     const getData = async () => {
         let result = await axios.get('/api/community/view/vote');
+        console.log(result.data);
         setData(result.data);
     }
 

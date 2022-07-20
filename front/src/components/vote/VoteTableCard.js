@@ -40,7 +40,7 @@ const VoteTableCard = ({ data, id }) => {
                 <VoteTCBody>
                     <VoteTCBodyHeader>
                         <VoteTCBodyTitle>{title}</VoteTCBodyTitle>
-                        {state !== '승인 대기 중' && <VoteTCBodyVoteCount> {sum} Votes</VoteTCBodyVoteCount>}
+                        {state !== '승인 대기 중' && <VoteTCBodyVoteCount> <i>{sum} Votes</i></VoteTCBodyVoteCount>}
                     </VoteTCBodyHeader>
                     <VoteTCBodyMain>
                         <VoteTCBodyContent>{content}</VoteTCBodyContent>

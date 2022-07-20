@@ -17,12 +17,12 @@ const Filter = () => {
 
     const changeSelect = (data) => {
         // console.log(data)
-        let copyFilterOption = _.cloneDeep(filterOption).map(item => {
-            if (data.click) {
-                if (item.id == data.id) item.opt = null;
-            }
-            return item
-        })
+        // let copyFilterOption = _.cloneDeep(filterOption).map(item => {
+        //     if (data.click) {
+        //         if (item.id == data.id) item.opt = null;
+        //     }
+        //     return item
+        // })
         
         let copy = _.cloneDeep(filterOpenState).map((item) => {
             if (item.id === data.id) {
@@ -33,7 +33,7 @@ const Filter = () => {
         // console.log(copyFilterOption)
         // console.log(copy)
         
-        dispatch({type: 'CHANGE_FILTER_OPTION_STATE', payload: copyFilterOption});
+        // dispatch({type: 'CHANGE_FILTER_OPTION_STATE', payload: copyFilterOption});
         dispatch({type:'CHANGE_FILTER_STATE', payload: copy});
     } 
 
