@@ -10,7 +10,6 @@ const CollectionMain = ({ data, row }) => {
     const navigate = useNavigate('')
 
     const moveToDetailPage = (edi) => {
-        // console.log(edi);
         navigate(`/detailcollection/${edi}`)
     }
 

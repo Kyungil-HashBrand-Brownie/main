@@ -334,6 +334,8 @@ export const VoteCTable = styled.div`
     width: 1200px;
     height: 800px;
     background: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 `
 export const VoteCTBody = styled.div`
     width: 100%;
