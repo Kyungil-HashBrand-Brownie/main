@@ -94,7 +94,7 @@ const CommunityApproval = () => {
 
 
     const getData = async () => {
-        let {data} = await axios.get(`http://localhost:4000/api/community/read/vote/${id}`);
+        let {data} = await axios.get(`/api/community/read/vote/${id}`);
         setTitle(data.title)
         setContent(data.content)
         setState(data.state)
