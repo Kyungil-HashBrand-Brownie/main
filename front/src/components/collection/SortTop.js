@@ -6,8 +6,8 @@ const options = ['All(default)', 'Not Minted', 'Minted'];
 
 const SortTop = () => {
     const dispatch = useDispatch()
-    const { sortOption } = useSelector(state => state.main)
-
+    const { sortOption, mintCount } = useSelector(state => state.main)
+    let count = [200, 200 - mintCount, mintCount]
 
     const changeOption = (idx) => {
         dispatch({'type': 'CHANGE_SORT_OPTION', payload: idx})
@@ -17,7 +17,7 @@ const SortTop = () => {
         <SortTopOuter>
             <SortTopInner>
                 <SortTopHeader>
-                    <SortTopText>Sort By</SortTopText>
+                    <SortTopText>Filter By</SortTopText>
                 </SortTopHeader>
                 {options.map((option, index) => 
                             <SortOption 
@@ -25,7 +25,7 @@ const SortTop = () => {
                                 onClick={() => changeOption(index)}
                             >
                                 <span className={sortOption == index ? 'toggle' : undefined}>
-                                    {option}
+                                    {option}&nbsp;({count[index]})
                                 </span>
                             </SortOption>
                 )}

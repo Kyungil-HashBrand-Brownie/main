@@ -11,7 +11,7 @@ const WriteImgContainer = styled.div`
     background: lightgray;
     border: 2px solid black;
     border-radius: 20px;
-    top: 40%;
+    top: 33%;
     right: 23%;
 `
 const ImgOuter = styled.div`

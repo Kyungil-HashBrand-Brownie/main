@@ -13,15 +13,18 @@ export const CollectionCardImg = styled.div`
 export const CollectionMainOuter = styled.div`
     /* margin-left: 99.998px; */
     /* margin-left: 8%; */
-    margin-left: 100px;
+    /* margin-left: 100px; */
     width: 1299.997px;
     min-height: 159.998px;
     background: rgba(255, 255, 255, 0.56);
     border: 3px solid white;
     border-radius: 20.002px;
-    margin-bottom: 20.002px;
+    position: relative;
+    top: 8%;
+    left: 28%;
+    /* margin-bottom: 20.002px; */
     /* transform: translate(10%, 0); */
-    transform: translate(10%, 0);
+    /* transform: translate(30%, -5.7%); */
 
     @media screen and (max-width: 1500px) {
         margin-left: -200px;
@@ -90,6 +93,18 @@ export const CollectionCardDetail = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+`
+export const CollectionNoItem = styled.div`
+    display: flex;
+    background: white;
+    margin: auto;
+    font-size: 30px;
+    width: 90%;
+    margin-left: 18px;
+    border-radius: 40px;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
 `
 
 /* Filter */
@@ -176,8 +191,8 @@ export const FilterDetailOuter = styled.div`
 export const FilterDetailBox = styled.div`
     margin: auto;
     background: white;
-    min-width: 
-        ${props => props.info.includes('Background') ? '150px' : '120px'};
+    /* min-width:  */
+        /* ${props => props.info.includes('Background') ? '150px' : '120px'}; */
     margin-top: 6px; 
     margin-bottom: 3.998px; 
     text-align: center;
@@ -193,7 +208,7 @@ export const FilterDetailBox = styled.div`
         position: absolute;
         width: 20.002px;
         height: 20.002px;
-        transform: translate(-23px, 3px);
+        transform: translate(0, -15px);
     }
 `
 
@@ -202,15 +217,11 @@ export const FilterDetailBox = styled.div`
 export const SortOuter = styled.div `
     position: absolute;
     left: 2%;
-    top: 13%;
-    margin-left: 30px;
+    top: 40px;
+    /* margin-left: 30px; */
     margin-top: 50.002px;
-    /* width: 350.002px; */
     width: 20%;
-    /* width: 250px; */
-    /* width: 230px; */
-    height: auto;
-    /* min-height: 699.997px; */
+
     min-height: 699.997px;
     border: 3px solid white;
     border-radius: 9.998px;
@@ -241,7 +252,7 @@ export const SortTopHeader = styled.div`
 export const SortTopText = styled.div`
     background: pink;
     border-radius: 9.998px;
-    width: 80.002px;
+    width: 90px;
     padding: 0 9.998px;
 `
 export const SortTopOuter = styled.div`

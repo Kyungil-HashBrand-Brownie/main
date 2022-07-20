@@ -15,6 +15,8 @@ const CollectionOuter = styled.div`
 `
 
 const Collection = () => {
+    const dispatch = useDispatch();
+
     const [data, setData] = useState(null);
     const [row, setRow] = useState(0);
     // const { sortOption, filterOption } = useSelector(state => state.nft);
@@ -45,11 +47,11 @@ const Collection = () => {
                 break;
             case 1:
                 _data = _data.filter(item =>
-                    !minted.includes(item.edition))
+                    !minted.includes(item.edition-1))
                 break;
             case 2:
                 _data = _data.filter(item =>
-                    minted.includes(item.edition))
+                    minted.includes(item.edition-1))
                 break;
             default:
                 break;
@@ -57,6 +59,7 @@ const Collection = () => {
         _data = _data.sort((a, b) => a.edition - b.edition)
         setRow(Math.ceil(_data.length / 5));
         setData(_data);
+        dispatch({type: 'MINT_COUNT', payload: minted.length})
     }
 
     useEffect(() => {
@@ -66,10 +69,10 @@ const Collection = () => {
     return (
         <>
         <ImgComponent />
-        <CollectionOuter>
+        {/* <CollectionOuter> */}
             <Sort />
             <CollectionMain data={data} row={row} />
-        </CollectionOuter>
+        {/* </CollectionOuter> */}
         </>
     )
 }

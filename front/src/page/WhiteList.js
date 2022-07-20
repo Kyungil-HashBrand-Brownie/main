@@ -7,10 +7,8 @@ const StyledBody = styled.div`
     height: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 40px;
-    
+    margin-top: 40px;    
 `
-
 const StyledOuter = styled.div`
     width: 350px;
     height: 420px;
@@ -19,7 +17,6 @@ const StyledOuter = styled.div`
     justify-content: center;
     /* opacity: 94%; */
 `
-
 const StyledWhiteListDiv = styled.div`
     width: 280px;
     height: 400px;
@@ -28,7 +25,6 @@ const StyledWhiteListDiv = styled.div`
     border: 2px solid black;
     border-radius: 5px;
 `
-
 const StyledWhiteListImg = styled.img`
     width: 200px;
     height: 200px;

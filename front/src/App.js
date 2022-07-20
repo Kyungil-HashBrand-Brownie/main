@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import styled from 'styled-components'
 import './App.css';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -23,6 +24,15 @@ const elements = [<Home />, <Mint />, <Testpage />, <Collection />,
 <VoteWrite />, <DetailCollecion />, <NoPage />
 ]
 
+const Wrapper = styled.div`
+  position: relative;
+  min-height: 88vh;
+
+  @media screen and (min-width: 1830px) {
+      min-height: 1100px;
+  }
+`
+
 function App() {
   const { isDeployer } = useSelector(state => state.main)
 
@@ -42,7 +52,7 @@ function App() {
 
   return (
     <>
-          <div className='wrapper'>
+      <Wrapper>
 
       <Header />
 
@@ -70,7 +80,7 @@ function App() {
               </>
           }
         </Routes>
-      </div>
+      </Wrapper>
       <Footer />
     </>
   );
