@@ -163,7 +163,7 @@ const PreSale = ({ amount, img, price, title }) => {
                             </Row>
                             <Row className='mint-info-row'>
                                 <Col><i>Amount</i></Col>
-                                <Col>{amount == '/30' ? whiteCount + amount : PreCount + amount}</Col>
+                                <Col>{amount == '/25' ? whiteCount + amount : PreCount + amount}</Col>
                             </Row>
                         </Container>
                         <MintButton
