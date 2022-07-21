@@ -16,7 +16,7 @@ const VoteTCImage = styled.div`
         ${props => props.img && `url(${props.img})`};
 `
 
-const VoteTableCard = ({ data, id }) => {
+const VoteTableCard = ({ data }) => {
     const navigate = useNavigate();
     const {title, content, nickname, state, voteCounts, imgURI} = data;
     console.log(imgURI);
@@ -31,7 +31,7 @@ const VoteTableCard = ({ data, id }) => {
     return (
         <VoteTCardOuter
             style={{visibility: content=='' ? 'hidden' : 'visible'}}
-            onClick={() => {navigate(`/community/read/vote/${id}`)}}
+            onClick={() => {navigate(`/community/read/vote/${data.idx}`)}}
         >
             <VoteTCContent>
                 <VoteTCState state={state}>{state}</VoteTCState>
