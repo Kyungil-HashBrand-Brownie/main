@@ -30,7 +30,7 @@ const UserBar = ({ showInfo, myAddress, modalState, isWhite,
                         />
                     </div>
                     <div className='header-line thick'><i><img className='header-klay' style={{width: '25px'}} src={Klaytn} alt='klaytn'/>&nbsp;{klayBalance}</i></div>
-                    <div className='header-line thick'><i><img style={{width: '30px'}} src={Browny1} alt='btk'/>&nbsp;{btkBalance.split('.')[0]+'.'+btkBalance.split('.')[1].slice(0,2)}</i></div>
+                    <div className='header-line thick'><i><img className='header-btk' style={{width: '30px'}} src={Browny1} alt='btk'/>&nbsp;{btkBalance.split('.')[0]+'.'+btkBalance.split('.')[1].slice(0,2)}</i></div>
                 </StyledInfo>
             }
         </div>
