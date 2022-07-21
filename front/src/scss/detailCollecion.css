@@ -95,7 +95,7 @@ body {
 .detailTitle {
     color: rgba(125, 48, 4, 0.895);
     font-size: 2.5em;
-    margin: 0 33px;
+    /* margin: 0 33px; */
     font-weight: bold;
     /* background-color: #04befe; */
 }
@@ -131,6 +131,7 @@ body {
   /* flex-direction: row; */
   align-items: center;
   justify-content: center;
+  padding-left: 3%;
   /* display: grid; */
   /* grid-template-columns: 1fr 1fr ; */
   /* margin-top: 50px; */
@@ -142,19 +143,25 @@ body {
     justify-content: flex-end;
 }
 
-@media only screen and ( max-width: 1300px ) {
+@media only screen and ( max-width: 1500px ) {
+
+    .detailImglNft-description_2{
+      margin-top: 10%;
+    }
+
     .layout-container {
         width: 1000px;
-        display: block;
+        display: flex;
+        flex-direction: column;
     }
 
     .detailImglNft-item1 {
       width: 800px;
-      display: block;
+      display: flex;
     }
     .detailImglNft-item2 {
       width: 800px;
-      display: block;
+      display: flex;
     }
   }
 

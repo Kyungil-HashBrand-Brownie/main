@@ -51,7 +51,7 @@ const Swap = () => {
 
         else {
             if (value !== '') {
-                if (swap) setExchange(value * 7.22.toFixed(4))
+                if (swap) setExchange((value * 7.22).toFixed(2))
                 else setExchange((value / 7.22).toFixed(2))
             }
             else {

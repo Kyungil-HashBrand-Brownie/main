@@ -79,26 +79,9 @@ const DetailCollecion = () => {
           {/* <div className="detailImglNft-mainImg"> */}
             <img src={`/api/image/images/${collectionData.addr}`} alt="subI1" />
           {/* </div> */}
-          {/* <div className="detailImglNft-subImg">
-            <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
-            </div>
-            <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
-            </div>
-            <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
-            </div>
-          </div> */}
         </div>
         <div className="detailImglNft-item2">
           <div className="detailImglNft-description_1">
-            {/* <div className="detailTitle"> Browny #<i>{collectionData.edition}</i> </div> */}
-            {/* <p> 용감한 브라우니  </p> */}
-            {/* <div className="detail_OwnedBy"> --DNA-- #{collectionData.addr}</div> */}
-            {/* <div className="btn-opensea"> */}
-              {/* <button className="btn-hover color-9">OPENSEA</button> */}
-            {/* </div> */}
             <div className="div-section-two">
 
               <div className="left-layout">              
