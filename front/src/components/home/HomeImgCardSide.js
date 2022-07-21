@@ -9,10 +9,10 @@ const HomeImgCardSide = ({ getData, setClick }) => {
                     style={{
                         backgroundColor:
                             item.id === 1 ?
-                                "#52a2fe"
-                                : item.id === 2 ?
-                                    "rgb(242, 142, 70)"
-                                    : "#fe6652"
+                            "#ABC9FF"
+                            : item.id === 2 ?
+                            "#FF8B8B"
+                                    :"#EB4747"
                     }}
                     onClick={() => setClick(item.id)}>
                     <h1>{item.num}</h1>
