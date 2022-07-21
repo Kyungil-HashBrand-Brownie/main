@@ -32,17 +32,18 @@ const StyledMain = styled.div`
 
 const StyledDiv = styled.div`
     padding: 0.375rem 0;
-    margin-bottom: 30px;
+    padding-top: 
+        ${props => props.price == 50 ? '25px' : '0'};
+    padding-right:
+        ${props => props.price == 50 ? '20px' : '0'};
     margin-left: 
-        ${props => props.price == 50 ? '10px' : 0} ;
+        ${props => props.price == 50 ? '10px' : 0};
     border-radius: 8px;
     @media screen and (max-width: 765px) {
-        /* background-color: black ; */
         width: 220px;
     }
     
 `;
-
 const StyledButton = styled.button`
     width: 40px;
     height: 40px;
@@ -62,6 +63,15 @@ const StyledButton = styled.button`
         margin: auto;
     }
 `;
+const MintButton = styled.button`
+    border: none;
+    border-radius: 10px;
+    background: #198754;
+    color: white;
+    padding: 0px 10px;
+    height: 40px;
+    margin: 10px 0;
+`
 
 
 const PreSale = ({ amount, img, price, title }) => {
@@ -134,7 +144,7 @@ const PreSale = ({ amount, img, price, title }) => {
                     <>
                         <div className='mint-img-container'>
                             <StyledDiv price={price}>
-                                <img src={img} style={{ width: price == 1 ? 220 : 187, height: 220 }} />
+                                <img src={img} style={{ width: price == 25 ? 220 : 157, height: price == 25 ? 230 : 200 }} />
                             </StyledDiv>
                         </div>
                         <div className='mint-count-box'>
@@ -153,15 +163,14 @@ const PreSale = ({ amount, img, price, title }) => {
                             </Row>
                             <Row className='mint-info-row'>
                                 <Col><i>Amount</i></Col>
-                                <Col>{amount == '/30' ? whiteCount + amount : PreCount + amount}</Col>
+                                <Col>{amount == '/25' ? whiteCount + amount : PreCount + amount}</Col>
                             </Row>
                         </Container>
-                        <Button
-                            className="mint-wal-connect-btn"
-                            variant="success"
-                            onClick={price == 50 ? preMint : whiteMint}>
+                        <MintButton
+                            onClick={price == 50 ? preMint : whiteMint}
+                        >
                             Mint
-                        </Button>
+                        </MintButton>
                     </>
                     :
                     <Container className="not-whitelist">

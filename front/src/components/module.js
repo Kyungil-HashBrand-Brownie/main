@@ -2,8 +2,6 @@ import styled from 'styled-components'
 
 /* Header */
 export const PFPContainer = styled.div`
-  /* margin-left: 10px; */
-  /* font-size: 1.1rem; */
   padding: 2px 10px;
   border: 3px solid;
   border-radius: 20px;
@@ -11,7 +9,6 @@ export const PFPContainer = styled.div`
   border-color: #198754;
   letter-spacing: -1px;
   text-align: center;
-  /* padding: 1px 20px; */
   cursor: pointer;
   color: white;
   &:hover{  
@@ -38,22 +35,29 @@ export const StyledInfo = styled.div`
     /* margin: auto; */
 
     .header-white {
+        background: rgb(100,149,237);
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
-        background: white;
+        /* background: white; */
         padding-top: 3px;
         /* font-size: 19px; */
         font-weight: bold;
-        letter-spacing: 1.0px;
+        /* letter-spacing: 1.0px; */
         border-bottom: 3px solid gray;
     }
     .header-line {
         display: flex;
         justify-content: center;
         align-items : center;
-        font-weight: 500;
+        font-weight: bold;
         /* font-size: 17px; */
     }
+    .header-btk {
+        transform: translateX(-5px);
+    }
+    /* .thick {
+        font-weight: bold;
+    } */
 
     @media(max-width: 550px) {
         font-size: 13px;

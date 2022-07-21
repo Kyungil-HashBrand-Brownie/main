@@ -8,13 +8,14 @@ import AlertModal from 'components/AlertModal';
 import SwapHeader from 'components/swap/SwapHeader';
 import SwapBody from 'components/swap/SwapBody';
 import SwapFooter from 'components/swap/SwapFooter';
+import ImgComponent from 'components/ImgComponent';
 
 const Swap = () => {
     const bool = { false: 'KLAY', true: 'BTK' }
     const dispatch = useDispatch();
 
     const [swap, setSwap] = useState(true);
-    const [exchange, setExchange] = useState('exchange');
+    const [exchange, setExchange] = useState('7.22');
 
     const customAlert = useAlert();
 
@@ -25,26 +26,38 @@ const Swap = () => {
         amountInput.current.value = '';
     }
 
+    const resetChange = () => {
+        if(swap) setExchange('7.22');
+        else setExchange('0.14');
+    }
+
     const checkValidation = () => {
         let value = amountInput.current.value;
-        let re = /[^0-9]/g;
+        let re = /[^0-9.]/g;
         if (re.test(value)) {
             customAlert.open('숫자를 입력해 주세요!');
             amountInput.current.value = '';
-            setExchange('exchange');
+            resetChange();
         }
         else if (Number(value) > 10000) {
             customAlert.open('최대 거래 수량 초과 \n ')
             amountInput.current.value = '';
-            setExchange('exchange');
+            resetChange();
+        }
+        else if (value.startsWith('.')) {
+            customAlert.open('잘못된 입력입니다.');
+            resetChange();
         }
 
         else {
             if (value !== '') {
-                if (swap) setExchange(parseInt(Number(value) * 7.22))
-                else setExchange(parseInt(Number(value) / 7.22))
+                if (swap) setExchange((value * 7.22).toFixed(2))
+                else setExchange((value / 7.22).toFixed(2))
             }
-            else setExchange('exchange')
+            else {
+                if(swap) setExchange('7.22');
+                else setExchange('0.14');
+            }
         }
     }
 
@@ -54,27 +67,39 @@ const Swap = () => {
     const swapToken = async () => {
         let amount = amountInput.current.value
         let status;
-        if (Number(amount)) {
-            if (swap) {
+        if (swap) {
+            if (amount < klayBalance) {
                 const result = await getBtk(myAddress, amount)
                 status = result.status
             }
             else {
+                return customAlert.open('잔액 부족')
+            }
+        }
+        else {
+            if (amount < btkBalance) {
                 const result = await sellBtk(myAddress, amount)
                 status = result.status
             }
-            if (status) {
-                customAlert.open('스왑완료');
-                dispatch({ type: "WALLET_REFRESH" })
+            else {
+                return customAlert.open('잔액 부족')
             }
-            else customAlert.open("오류 발생")
+        }
+        if (status) {
+            customAlert.open('스왑완료');
+            amountInput.current.value = '';
+            setExchange('exchange');
+            dispatch({ type: "WALLET_REFRESH" })
         }
         else {
-            customAlert.open("숫자를 입력해주세요")
+            if (myAddress === undefined) customAlert.open("지갑을 먼저 연결해주세요!")
+            else customAlert.open("오류 발생")
         }
     }
 
     return (
+        <>
+        <ImgComponent />
         <div className='swap-box'>
             <AlertModal {...customAlert} />
             <div className='select-box'>
@@ -104,6 +129,7 @@ const Swap = () => {
                 <SwapFooter swapToken={swapToken} />
             </div>
         </div>
+        </>
     )
 }
 

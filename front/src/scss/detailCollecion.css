@@ -28,20 +28,24 @@ body {
 .detailImglNft-item1 {
     height: 80vh;
     /* width: 70%; */
-    /* background-color: lavender; */
+    background-color: lavender;
     height: 100%;
-    display: grid;
-    grid-template-rows: 900px 1fr;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* grid-template-rows: 900px 1fr; */
+    /* text-align: center; */
 }
 
 .detailImglNft-mainImg{
-    /* background-color: red */
+    background-color: red;
+    display: flex;
+    justify-content: center;
 }
 
-.detailImglNft-mainImg img{
-    width: 100%;
-    height: 100%;
+.detailImglNft-item1 img{
+    width: 85%;
+    height: 85%;
 }
 
 .detailImglNft-subImg{
@@ -63,20 +67,24 @@ body {
 
 .detailImglNft-item2  {
     height: 70vh;
+    display: flex;
+    flex-direction: column;
     /* background-color: pink; */
-    display: grid;
-    grid-template-rows: 400px 2fr 500px;
-    gap : 30px;
+    /* display: grid; */
+    /* grid-template-rows: 400px 2fr 500px; */
+    /* gap : 30px; */
 
 }
 
 .detailImglNft-description_1{
     width: 100%;
-    height: 15rem;
+    height: 5rem;
+    /* height: 5rem; */
     /* background-color: lawngreen; */
 }
 
 .detailImglNft-description_2{
+    margin-top: 30%;
     width: 100%;
     height: 25rem;
     /* background-color: firebrick; */
@@ -85,8 +93,11 @@ body {
 }
 
 .detailTitle {
-    color: lightskyblue;
-    font-size: 3em;
+    color: rgba(125, 48, 4, 0.895);
+    font-size: 2.5em;
+    /* margin: 0 33px; */
+    font-weight: bold;
+    /* background-color: #04befe; */
 }
 
 .detail_OwnedBy{
@@ -107,25 +118,50 @@ body {
     border-top: 1px solid lightgray;
     margin: 10px;
 }
+.left-layoutP {
+  /* margin-top: 6px; */
+  text-align: center;
+  /* border-right: 1px solid lightgray; */
+  padding-right: 30px;
+}
+
+.div-section-two {
+  /* margin-left: 20px; */
+  display: flex;
+  /* flex-direction: row; */
+  align-items: center;
+  justify-content: center;
+  padding-left: 3%;
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr ; */
+  /* margin-top: 50px; */
+  /* background-color: red; */
+}
 
 .right-layout {
     display: flex;
     justify-content: flex-end;
 }
 
-@media only screen and ( max-width: 1300px ) {
+@media only screen and ( max-width: 1500px ) {
+
+    .detailImglNft-description_2{
+      margin-top: 10%;
+    }
+
     .layout-container {
         width: 1000px;
-        display: block;
+        display: flex;
+        flex-direction: column;
     }
 
     .detailImglNft-item1 {
       width: 800px;
-      display: block;
+      display: flex;
     }
     .detailImglNft-item2 {
       width: 800px;
-      display: block;
+      display: flex;
     }
   }
 
@@ -139,11 +175,7 @@ body {
     box-sizing: border-box;
 } */
 
-.asdbfhf {
-  display: flex;
-  /* background-color: black; */
-  /* text-align: center; */
-}
+
 
 /* .buttons {
     margin: 10%;
@@ -229,8 +261,8 @@ body {
   .but {
     color: var(--color);
     transition: 0.25s;
-    position: fixed;
-    top: 80%;
+    position: absolute;
+    top: 83%;
     right: 12%;
   }
   .but:hover, .but:focus {
@@ -270,7 +302,7 @@ body {
     position: relative;
     /* display: grid; */
     /* top: 70%; */
-    left: -20%;
+    left: 10%;
     width: 50px;
     height: 50px;
     margin-left: 20px;
@@ -279,7 +311,26 @@ body {
     background-color: lightblue;
     z-index: 2;
 }
+.arrowDetailLeft1{
+  transform: translate(-18px, 70px);
+  width: 30px;
+  height: 30px;
+  background-color: lightblue;
+  z-index: 2;
+}
+.arrowDetailLeft2{
+  transform: translate(-120px, 0);
+  position: absolute;
+  width: 20px;
+  height: 30px;
+  background-color: lightblue;
+  z-index: 2;
+  border: none;
+}
+
 .arrowDetailRight{
+    position: relative;
+    left: 20%;
     width: 50px;
     height: 50px;
     margin-left: 20px;
@@ -287,10 +338,26 @@ body {
     background-color: lightblue;
     align-items: flex-end;
 }
+.arrowDetailRight1{
+  transform: translate(380px, 70px);
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  background-color: lightblue;
+}
+.arrowDetailRight2{
+  transform: translate(120px, 0);
+  position: absolute;
+  width: 20px;
+  height: 30px;
+  background-color: lightblue;
+  border: none;
+}
 
 .modal_content_postion{
     display: flex;
     text-align: center;
+    padding-top: 7%;
     /* align-items: center; */
 }
 
@@ -301,37 +368,59 @@ body {
 
 .absLL{
     position: absolute;
-    top: 120px;
-    left: -15%;
+    top: 156px;
+    left: -6.3%;
 }
 
 .absLeft {
     position: absolute;
-    top: 120px;
-    left: -16%;
+    top: 156px;
+    left: -2%;
     /* background-color: black; */
 }
+.modal-collection-box {
+  display: flex;
+  justify-content: center;
+  /* background-color: cadetblue; */
+  flex-direction: column;
+  /* width: 190px; */
+}
+.modal-collection-img {
+  margin: auto;
+  cursor: pointer;
+  width: 190px;
+  border-radius: 10%;
+}
+.modal-collection-img:hover {
+  width: 205px;
+}
+.modal-collection-detail {
+  text-align: center;
+  background-color: #04befe;
+  width: 100px;
+  margin: auto;
+  border-radius: 10px;
+}
+
 .addf1{
   /* width: 100; */
 }
 
 .absRight {
     position: absolute;
-    top: 120px;
-    left: 79%;
+    top: 156px;
+    left: 94%;
     /* background-color: black; */
 }
 
 .absRR {
     position: absolute;
-    top: 120px;
-    left: 78%;
+    top: 156px;
+    left: 98.3%;
 }
 
-
-
 .button {
-    position: relative;
+    position: absolute;
     display:block;
     height: 45px;
     /* padding: 5px 5px; */
@@ -345,11 +434,11 @@ body {
     overflow:hidden;
     z-index: 1;
     cursor: pointer;
-    transition:         0.08s ease-in;
+    /* transition:         0.08s ease-in;
     -o-transition:      0.08s ease-in;
     -ms-transition:     0.08s ease-in;
     -moz-transition:    0.08s ease-in;
-    -webkit-transition: 0.08s ease-in;
+    -webkit-transition: 0.08s ease-in; */
   }
   
   .fill:hover {

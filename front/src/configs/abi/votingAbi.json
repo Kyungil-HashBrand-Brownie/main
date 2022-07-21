@@ -63,6 +63,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "checkVoteWhich",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "endProposal",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -393,11 +406,11 @@
 			]
 		},
 		"contracts/Voting.sol": {
-			"keccak256": "0x6553a622b5f181a036f9ba2996a5d7898a660b03b9407a8d1023844fa2b028e8",
+			"keccak256": "0xaff32e449c699fcc19e8b274371a02d83e6a240978d98f9e268bbf5d4f478660",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bb4d4864848054bb9c5f2de57673a98340c4fa25fba16dd242223f3287729b74",
-				"dweb:/ipfs/QmVP7ki6WXw9rrpFxk3teCVNmL2G3JcoHVCG9cENM7WKpD"
+				"bzz-raw://e77d1efa5fc8536be6cc0b8de7bab69ce04e64054452473671d934ded3210000",
+				"dweb:/ipfs/QmeySkBjczx1w5hzQiTnFy9ueLrYXUZED8SGSVMw5hAs1J"
 			]
 		},
 		"contracts/Whitelist/Whitelist.sol": {

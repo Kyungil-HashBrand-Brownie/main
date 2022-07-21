@@ -12,12 +12,12 @@ import { trash , trash2 } from '../img'
 import { checkWhite, addWhite, removeSelectedWhites, useAlert } from 'api'
 import AlertModal from './AlertModal'
 import { nftAction } from 'redux/actions/nftAction'
+import EndVote from './EndVote'
 
 const Trash = styled.div`
     width: 50px;
     cursor: pointer;
 `
-
 const AdminPage_LayOut = styled.div`
     /* 좌우로 정렬 */
     display: flex;
@@ -34,7 +34,7 @@ const AdminPage_LayOut = styled.div`
     /* background-color: red ; */
     margin: auto ;
     background-color: white;
-    opacity: 0.8;
+    /* opacity: 0.84; */
     border-radius: 20px;
 `
 
@@ -46,10 +46,12 @@ const WhiteList = () => {
     const [list, setList] = useState([]);
     const [checkDelete, setCheckDelete] = useState(false);
     const [deleteList, setDeleteList] = useState([]);
+    const [input, setInput] = useState('');
 
     const addInput = useRef("")
 
     const getWhiteList = async () => {
+        console.log('getWhite')
         try {
             const { data } = await axios.get("/api/white/whitelist")
             setList(data)
@@ -60,59 +62,64 @@ const WhiteList = () => {
     }
 
     const buttonDelete = () => {
-        console.log(deleteList)
+        // console.log(deleteList)
 
-        console.log(checkDelete) // false
-        if (!checkDelete) setDeleteList([])
+        // console.log(checkDelete) // false
+        if (!checkDelete) {
+            setDeleteList([])
+            setCheckDelete(!checkDelete)
+        }
         else delWhitelists(deleteList)
-        setCheckDelete(!checkDelete)
     }
 
     useEffect(() => {
         getWhiteList();
     }, [])
 
-
     const addWhitelist = async () => {
         if (await checkWhite(addInput.current)) {
+            setInput('');
             return customAlert.open('이미 등록됨')
         }
         const Sucs = await addWhite(addInput.current)
-        console.log(Sucs)
+        // console.log(Sucs)
         if (Sucs.status === true) {
             await axios.post('/api/white/whitelist',
                 {
                     data: { from: addInput.current, status: Sucs.status },
                 })
                 .then((res) => {
-                    console.log(res);
+                    // console.log(res);
                     let result = res.data;
-                    console.log(result)
+                    // console.log(result)
                     if (result === "Success!") {
                         customAlert.open("화이트리스트 설정 완료되었습니다!");
                     }
                     dispatch(nftAction.checkWhitelist(myAddress));
                     getWhiteList()
+                    setInput('')
                 })
         }
     }
 
-
     const delWhitelists = async (addressArr) => {
-        const Del = await removeSelectedWhites(addressArr)
-        if (Del.status) {
-            const {data} = await axios.post('/api/white/deletelists',
-                addressArr
-            )
-            if (data === "Success!") {
-                customAlert.open("화이트리스트 제거 완료되었습니다!");
-                dispatch(nftAction.checkWhitelist(myAddress));
-            }
-            getWhiteList()
+        if (addressArr.length) {
+            try {
+                const Del = await removeSelectedWhites(addressArr)
+                if (Del.status) {
+                    const {data} = await axios.post('/api/white/deletelists',
+                        addressArr
+                    )
+                    if (data === "Success!") {
+                        customAlert.open("화이트리스트 제거 완료되었습니다!");
+                        dispatch(nftAction.checkWhitelist(myAddress));
+                        setCheckDelete(!checkDelete)
+                    }
+                    getWhiteList()
+                }
+            } catch(e) {console.log(e)}
         }
     }
-
-
 
     const checkData = (publicKey, checked) => {
         if (checked) {
@@ -124,8 +131,6 @@ const WhiteList = () => {
             let copy = deleteList.filter((item) => item !== publicKey);
             setDeleteList(copy)
         }
-
-
     }
 
     return (
@@ -136,15 +141,18 @@ const WhiteList = () => {
                     <div className="admin_title">White List key</div>
                     <div className='admin_InputSize'>
                         <InputGroup className="mb-3" >
-                            {/* <div width="100%"> */}
                             <FormControl
                                 // className="Input_Gruop"
                                 placeholder="White List"
                                 aria-label="Recipient's username"
                                 aria-describedby="basic-addon2"
                                 size='lg'
-                                onChange={(e) => addInput.current = e.target.value}
+                                onChange={(e) => {
+                                    addInput.current = e.target.value
+                                    setInput(e.target.value)
+                                }}
                                 className='admin_add_input'
+                                value={input}
                             />
                             <Button variant="outline-secondary" id="button-addon2" onClick={addWhitelist}>
                                 Add
@@ -194,6 +202,7 @@ const WhiteList = () => {
                     </tbody>
                 </Table>
             </div>
+            <EndVote />
         </AdminPage_LayOut>
 
     )

@@ -37,14 +37,14 @@ const CardHead = ({bool, inputCheck, checkedList, transactNFT,
                         {checkedList.length > 0 ?
                             checkedList.map((item) =>
                                 <div className='nftlist-id-box' key={item.id}>
-                                    {item.id}
+                                    #{parseInt(item.id.slice(1)) + 1}
                                     <div className='overlay'>
                                         <img src={Cancel}
                                             onClick={() => changeClickState(item.id)}
                                             className='nftlist-cancel' />
                                     </div>
                                 </div>)
-                            : <div className='nftlist-text'>Select an item from below!</div>
+                            : <div className='nftlist-text'>Select items from below!</div>
                         }
                     </div>
                 </div>

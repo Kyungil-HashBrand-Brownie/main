@@ -154,18 +154,22 @@ export const StyledArrow = styled.img`
 
 export const StyleHomeImgCard = styled.div`
     width:100% ;
-    background-color: rgb(249, 245, 240, 0.9);
+    /* background-color: rgb(249, 245, 240, 0.9); */
+    /* background-image: url(${viliage2}); */
+    background-repeat: no-repeat ;
+    background-size: cover ;
     height: 500px;
     display: flex;
     justify-content: center;
     position: relative;
     margin-top:50px;
-    opacity: 0.9;
+    /* opacity: 0.4; */
 
     .blue-num {
       text-align: center;
       margin-top: 5px;
       font-size: 40px;
+      color: white;
     }
     .backColor{
       background-color: #F6C6EA;
@@ -174,6 +178,7 @@ export const StyleHomeImgCard = styled.div`
       display: flex;
       border-radius: 30px;
       margin-top: 80px;
+      
     }
     .back{
       background-color: #F6C6EA;
@@ -205,6 +210,7 @@ export const StyleHomeImgCard = styled.div`
     }
     .tapestry-header0 {
       letter-spacing: 1px;
+      color: white;
       /* background: white; */
       border-radius: 20px;
       padding: 10px 2px;
@@ -259,12 +265,20 @@ export const StyleHomeImgCard = styled.div`
     }
     .grid-template {
       padding-left: 5px;
-      margin-top: 10px;
+      margin-top: 20px;
       font-size: 18px;
+      background: white;
+      border-radius: 20px;
+      padding: 0 5px;
+      height: 260px;
+      display: table-cell;
+      vertical-align: middle;
+      /* align-items: center; */
     }
     .tapestry-span {
-      color: blue;
+      color: rgb(2, 165, 2);
       font-weight: bold;
+      font-size: 24px;
     }
 
     @media (max-width: 1715px) {
@@ -272,6 +286,9 @@ export const StyleHomeImgCard = styled.div`
         font-size: 30px;
       }
       .tapestry-subheader {
+        font-size: 18px;
+      }
+      .tapestry-span {
         font-size: 18px;
       }
       .grid-template {
@@ -289,10 +306,16 @@ export const StyleHomeImgCard = styled.div`
       .grid-template {
         font-size: 15px;
       }
+      .tapestry-span {
+        font-size: 17px;
+      }
     }
 
     @media (max-width: 1497px) {
       .grid-template { 
+        font-size: 14px;
+      }
+      .tapestry-span {
         font-size: 14px;
       }
     }
@@ -309,7 +332,7 @@ export const StyleHomeImgCard = styled.div`
       }
     }
 
-    @media (max-width: 1005px) {
+    @media (max-width: 1015px) {
       .backColor {
         width: 95%;
       }
@@ -352,15 +375,25 @@ export const StyleHomeImgCard = styled.div`
         padding-top: 10px;
       }
       .grid-template {
-        font-size: 13px;
+        font-size: 15px;
+      }
+      .tapestry-span {
+        font-size: 15px;
       }
     }
 
-    @media (max-width: 606px) {
+    @media (max-width: 695px) {
+      .backColor {
+        /* height: 400px; */
+      }
+
       .home_img {
         display: none;
       }
       .grid-template {
+        font-size: 14px;
+      }
+      .tapestry-span {
         font-size: 14px;
       }
     }
@@ -439,8 +472,8 @@ export const TeamBrowny = styled.div `
 `
 export const TeamText = styled.div `
     text-align: center;
-    font-size: 80px;
-    font-weight: light;
+    font-size: 65px;
+    font-weight: 10;
     margin: 40px 0;
     text-shadow: 2px 2px 2px white;
 `

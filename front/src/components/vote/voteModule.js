@@ -1,6 +1,30 @@
 import styled from 'styled-components'
 
 /* CommunityRead */
+export const VoteReadState = styled.div`
+    position: absolute;
+    border-radius: 10px;
+    padding: 4px 10px;
+    font-weight: bold;
+    top: 43%;
+    right: 23%;
+    background: 
+        ${props => props.state === '투표 종료' ? 'coral'
+                    : props.state === '승인 대기 중' ? 'yellow' 
+                    : 'lightgreen'
+        };
+`
+export const VoteTCReadImg = styled.div`
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    background-size: cover;
+    background-image:
+        ${props => props.img && `url(${props.img})`};
+`
 export const VoteTCBodyImg = styled.div`
     width: 150px;
     height: 150px;
@@ -17,7 +41,6 @@ export const VoteTCBodyImg = styled.div`
         transform: scale(1.06);
     }
 `
-
 export const VoteDOuter = styled.div`
     display: flex;
     width: 100%;
@@ -51,6 +74,8 @@ export const VoteDHeaderOuter = styled.div`
 export const VoteDHeader = styled.div`
     width: 20%;
     font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
     text-align: center;
 `
 export const VoteDMainOuter = styled.div`
@@ -79,6 +104,9 @@ export const VoteDPart = styled.div`
     }
     .vote-text {
         margin-left: 2%;
+    }
+    .selected {
+        background: lightblue;
     }
     .proposal {
         display: flex;
@@ -174,7 +202,7 @@ export const PageButton = styled.button`
 export const DescriptionOuter = styled.div`
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 `
 export const Description = styled.div`
     background: lightgray;
@@ -192,7 +220,7 @@ export const VoteTCardOuter = styled.div`
     flex-direction: column;
     width: 430px;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 60px;
     cursor: pointer;
 
     &:hover {
@@ -206,28 +234,32 @@ export const VoteTCHeader = styled.div`
     border-bottom: 3px solid black;
 `
 export const VoteTCContent = styled.div`
-    display: flex;
+    display: flex-end;
     align-items: center;
-    padding-left: 30px;
-    width: 80%;
-    height: 100%;
+    width: 100%;
 `
 export const VoteTCUser = styled.div`
-    font-size: 35px;
+    font-size: 15px;
     text-shadow: 0 0 1em blue, 0 0 0.2em pink;
+    text-align: center;
 `
 export const VoteTCState = styled.div`
-    position: absolute;
+    /* position: absolute; */
     font-weight: bold;
-    transform: translate(230px, -35px);
-    background: yellow;
+    float: right;
+    border-radius: 13px;
+    padding: 2px 10px;
+    background: 
+        ${props => props.state === '투표 종료' ? 'coral'
+                    : props.state === '승인 대기 중' ? 'yellow' 
+                    : 'lightgreen'
+        };
 `
 export const VoteTCBodyOuter = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     height: 230px;
-    margin-top: 20px;
 `
 export const VoteTCBody = styled.div`
     width: 98%;
@@ -241,16 +273,23 @@ export const VoteTCBodyHeader = styled.div`
     width: 100%;
     height: 30%;
     background: pink;
+    border-bottom: 1px solid black;
 `
 export const VoteTCBodyTitle = styled.div`
-    width: 70%;
-    font-size: 30px;
+    width: 68%;
+    font-size: 24px;
+    /* background: red; */
+    display: flex;
+    word-break: break-all;
     margin-left: 10px;
+    font-weight: bold;
 `
 export const VoteTCBodyVoteCount = styled.div`
     width: 25%;
-    font-size: 23px;
+    font-size: 18px;
     margin-left: 2%;
+    text-align: center;
+    /* color: white; */
 `
 export const VoteTCBodyMain = styled.div`
     display: flex;
@@ -259,12 +298,21 @@ export const VoteTCBodyMain = styled.div`
 export const VoteTCBodyContent = styled.div`
     margin-left: 2%;
     margin-top: 1%;
-    width: 95%;
+    width: 67%;
     height: 92%;
-    padding: 4px 8px;
+    padding: 6px 8px;
     text-align: justify;
-    border: 2px solid green;
+    word-break: break-all;
+    /* border-right: 2px solid green; */
+    background: rgb(223, 213, 213, 0.3);
+    /* border: 4px solid green; */
     border-radius: 8px;
+`
+export const VoteTCBodyProfile = styled.div`
+    width: 27%;
+    /* border: 2px solid green; */
+    margin: auto;
+    height: 140px;
 `
 
 /* CommunityTopic */
@@ -308,6 +356,8 @@ export const VoteCTable = styled.div`
     width: 1200px;
     height: 800px;
     background: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 `
 export const VoteCTBody = styled.div`
     width: 100%;

@@ -22,12 +22,12 @@ const Main = styled.div`
     min-height: 41.6875rem;
     border: 
         ${props => !props.bool ? '.1875rem solid white'
-                                : '.1875rem solid black'};
+        : '.1875rem solid black'};
     border-radius: 2.5rem;
     padding: .625rem .625rem;
     background: 
-        ${props => props.bool ? '#F5FADB' 
-                                : 'radial-gradient(transparent, #854207)'};
+        ${props => props.bool ? '#F5FADB'
+        : 'radial-gradient(transparent, #854207)'};
 `
 
 function NftCard({ bool }) {
@@ -65,7 +65,7 @@ function NftCard({ bool }) {
             return li
         })
 
-        let click = bool ? { myNFTs: newArr } : {myStakedNFTs: newArr };
+        let click = bool ? { myNFTs: newArr } : { myStakedNFTs: newArr };
         dispatch({ type: 'NFTCARD_CLICK', payload: click });
     }
 
@@ -75,9 +75,9 @@ function NftCard({ bool }) {
 
         if (nftIdArr.length > 0) {
             try {
-                const result = bool ? await stakeNFTs(myAddress, nftIdArr) 
-                                    : await unstakeNFTs(myAddress, nftIdArr)
-                
+                const result = bool ? await stakeNFTs(myAddress, nftIdArr)
+                    : await unstakeNFTs(myAddress, nftIdArr)
+
                 if (result.status) {
                     let changedNFTs = list.filter((item) => item.checked).map((item) => {
                         item.checked = false;
@@ -85,15 +85,16 @@ function NftCard({ bool }) {
                     })
 
                     let data = bool ? { myNFTs: renewMyNFTs, myStakedNFTs: myStakedNFTs.concat(changedNFTs) }
-                                    : { myNFTs: myNFTs.concat(changedNFTs), myStakedNFTs: renewMyNFTs }
+                        : { myNFTs: myNFTs.concat(changedNFTs), myStakedNFTs: renewMyNFTs }
 
                     dispatch({ type: 'NFTCARD_TRANSACT', payload: data })
                     dispatch({ type: "WALLET_REFRESH" })
 
                     if (bool) customAlert.open("스테이킹 성공");
                     else customAlert.open("선택한 NFT가 정상적으로 unstaking 되었습니다.");
+                    // setInputCheck(false);
                 }
-                
+
                 else customAlert.open("transaction fail")
 
             } catch (e) {
@@ -139,26 +140,29 @@ function NftCard({ bool }) {
 
     useEffect(() => {
         if (bool) checkNfts()
+        setInputCheck(false)
     }, [myAddress, myStakedNFTs.length, page])
 
     return (
         <div className='nftlist-outer'>
             <AlertModal {...customAlert} />
-            <div className='nftcard-header'>
+            <div className={bool ? myNFTs.length > 0 ? 'nftcard-header' : 'nftcard-header nft-none'
+                : 'nftcard-header'
+            }>
                 {bool ? 'My NFTs' : 'Staked NFTs'}
             </div>
-                {(myNFTs.length > 0 || myStakedNFTs.length > 0) && !bool &&
-                    <Reward 
-                        myAddress={myAddress}
-                        myStakedNFTs={myStakedNFTs}
-                        nftInstance={nftInstance} 
-                        loading={loading}
-                    />
-                }
+            {(myNFTs.length > 0 || myStakedNFTs.length > 0) && !bool &&
+                <Reward
+                    myAddress={myAddress}
+                    myStakedNFTs={myStakedNFTs}
+                    nftInstance={nftInstance}
+                    loading={loading}
+                />
+            }
             <Cardjustify bool={bool ? myNFTs.length ? bool : !bool : bool}>
                 <Main bool={bool}>
                     {list.length > 0 &&
-                        <CardHead 
+                        <CardHead
                             bool={bool}
                             checkedList={checkedList}
                             inputCheck={inputCheck}
@@ -166,18 +170,19 @@ function NftCard({ bool }) {
                             changeClickState={changeClickState}
                             changeAllState={changeAllState}
                             total={myNFTs.length + myStakedNFTs.length}
-                            current={bool? myNFTs.length : myStakedNFTs.length}
+                            current={bool ? myNFTs.length : myStakedNFTs.length}
                         />
                     }
                     <div className='InnerMain'>
                         {list.length > 0
-                            ? <CardContainer 
+                            ? <CardContainer
                                 list={list}
                                 page={page}
                                 changeClickState={changeClickState}
                             />
                             : <div className='no-display'>
-                                <h1>Nothing to display</h1>
+                                {/* <div className="">Nothing to display</div> */}
+                                <h1>No Item to display</h1>
                             </div>
                         }
                     </div>

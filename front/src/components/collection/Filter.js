@@ -13,17 +13,16 @@ const partsLen = [9, 4, 5, 4, 5];
 
 const Filter = () => {
     const dispatch = useDispatch();
-    // const { filterOpenState, filterOption } = useSelector(state => state.nft)
     const { filterOpenState, filterOption } = useSelector(state => state.main)
 
     const changeSelect = (data) => {
-        console.log(data)
-        let copyFilterOption = _.cloneDeep(filterOption).map(item => {
-            if (data.click) {
-                if (item.id == data.id) item.opt = null;
-            }
-            return item
-        })
+        // console.log(data)
+        // let copyFilterOption = _.cloneDeep(filterOption).map(item => {
+        //     if (data.click) {
+        //         if (item.id == data.id) item.opt = null;
+        //     }
+        //     return item
+        // })
         
         let copy = _.cloneDeep(filterOpenState).map((item) => {
             if (item.id === data.id) {
@@ -31,14 +30,16 @@ const Filter = () => {
             }
             return item
         });
+        // console.log(copyFilterOption)
+        // console.log(copy)
         
-        dispatch({type: 'CHANGE_FILTER_OPTION_STATE', payload: copyFilterOption});
+        // dispatch({type: 'CHANGE_FILTER_OPTION_STATE', payload: copyFilterOption});
         dispatch({type:'CHANGE_FILTER_STATE', payload: copy});
     } 
 
     return (
       <FilterOuter>
-          <FilterHeader>Filter</FilterHeader>
+          <FilterHeader>Parts</FilterHeader>
           <FilterMain>
             <FilterInner>
               <FilterSubHeader>

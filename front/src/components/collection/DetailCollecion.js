@@ -9,6 +9,7 @@ import DetailCollectionModal from "./DetailCollectionModal";
 import styled from "styled-components";
 import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/react";
+import ImgComponent from "components/ImgComponent";
 
 
 const override = css`
@@ -27,8 +28,8 @@ const DetailCollecion = () => {
 
   const [collectionData, setCollectionData] = useState({});
   const [collectionAlldata, setCollectionAllData] = useState(null);
-  console.log("alldata" , collectionAlldata)
-  console.log("Default data" , collectionData)
+  // console.log("alldata" , collectionAlldata)
+  // console.log("Default data" , collectionData)
 
   const getData = async () => {
     let result = await Promise.all([axios.get('/api/image/images'), axios.get(`/api/image/image/${page}`)])
@@ -37,6 +38,8 @@ const DetailCollecion = () => {
       return {edition: item.edition, addr: item.addr};
     }).sort((a,b) => parseInt(a.edition) - parseInt(b.edition))
 
+    console.log("ㅇㅁㅅㅁ", data)
+
 
     setCollectionData(data)
     setCollectionAllData(allData)
@@ -44,14 +47,21 @@ const DetailCollecion = () => {
 
   const preButton_collection = () => {
     console.log("pre")
-
-    navigate(`/detailcollection/${collectionData.edition -1}`)
+    if (parseInt(collectionData.edition) <= 10 ) {
+      navigate(`/detailcollection/1`)
+    } else{
+      navigate(`/detailcollection/${collectionData.edition -1}`)
+    }
   }
 
   const nextButton_collection = () => {
     console.log("next")
-    navigate(`/detailcollection/${collectionData.edition + 1}`)
 
+    if (parseInt(collectionData.edition) >= 200 ) {
+      navigate(`/detailcollection/200`)
+    } else{
+      navigate(`/detailcollection/${collectionData.edition + 1}`)
+    }
   }
 
   useEffect(() => {
@@ -61,67 +71,57 @@ const DetailCollecion = () => {
 
   return (
     <div>
+      <ImgComponent />
       {/* <ClipLoader loading={loading} css={override} size={20} /> */}
       {collectionData.addr &&
       <div className="layout-container">
         <div className="detailImglNft-item1">
-          <div className="detailImglNft-mainImg">
+          {/* <div className="detailImglNft-mainImg"> */}
             <img src={`/api/image/images/${collectionData.addr}`} alt="subI1" />
-          </div>
-          <div className="detailImglNft-subImg">
-            <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
-            </div>
-            <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
-            </div>
-            <div className="detailImglNft-subImg_item">
-              <img alt="subI1" src={`/api/image/images/${collectionData.addr}`} />
-            </div>
-          </div>
+          {/* </div> */}
         </div>
         <div className="detailImglNft-item2">
           <div className="detailImglNft-description_1">
-            <div className="detailTitle"> Browny # {collectionData.edition} </div>
-            <p> charactor : normal Browny  </p>
-            <div className="detail_OwnedBy"> Owned by #2ad355njnjnjn</div>
-            <div className="btn-opensea">
-              {/* <button className="btn-hover color-9">OPENSEA</button> */}
-            </div>
-            <div className="asdbfhf">
-              <button className="btn-hover color-9" onClick={() =>preButton_collection()}>pre</button>
-              <button className="btn-hover color-9" onClick={() =>nextButton_collection()}>next</button>
+            <div className="div-section-two">
+
+              <div className="left-layout">              
+                <button className="btn-hover color-9" onClick={() =>preButton_collection()}>pre</button>
+              </div>
+              <div className="detailTitle"> Browny #<i>{collectionData.edition}</i> </div>
+              <div className="right-layout">
+                <button className="btn-hover color-9" onClick={() =>nextButton_collection()}>next</button>
+              </div>
             </div>
           </div>
           <div className="detailImglNft-description_2">
             <div className="div-section">
-              <div className="left-layout">
-                  Body : 
+              <div className="left-layoutP">
+                  Body  
                 </div>
               <div className="right-layout">
-                {collectionData.Body}
+                <i>{collectionData.Body}</i>
               </div>
             </div>
             <div className="div-section">
-              <div className="left-layout">Hat : </div>
+              <div className="left-layoutP">Hat</div>
               <div className="right-layout">
-                {collectionData.Hat}
+                <i>{collectionData.Hat}</i>
               </div>
             </div>
             <div className="div-section">
-              <div className="left-layout">Face :  </div>
-              <div className="right-layout">{collectionData.Face} </div>
+              <div className="left-layoutP">Face</div>
+              <div className="right-layout"><i>{collectionData.Face}</i></div>
             </div>
             <div className="div-section">
-              <div className="left-layout">Item :  </div>
-              <div className="right-layout">{collectionData.Item} </div>
+              <div className="left-layoutP">Item</div>
+              <div className="right-layout"><i>{collectionData.Item}</i></div>
             </div>
             <div className="div-section">
-              <div className="left-layout">Background : </div>
-              <div className="right-layout">{collectionData.Back} </div>
+              <div className="left-layoutP">Background</div>
+              <div className="right-layout"><i>{collectionData.Back}</i></div>
             </div>
           </div>
-          <div className="detailImglNft-description_3">상세 내용</div>
+          {/* <div className="detailImglNft-description_3">상세 내용</div> */}
         </div>
 
       </div>

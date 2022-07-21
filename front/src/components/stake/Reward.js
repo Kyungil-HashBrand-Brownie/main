@@ -8,6 +8,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/react";
 
 const override = css`
+/* display: flex; */
   border-color: black;
   margin: 0rem 1.42rem 0rem 1.4rem;
 `;
@@ -39,7 +40,11 @@ const Reward = ({ myAddress, myStakedNFTs, nftInstance, loading }) => {
                 />
                     total reward : &nbsp;
                     <ClipLoader loading={loading} css={override} size={20} />
-                    {!loading &&<>{(reward / 10000).toFixed(4)}</>} BTK
+                    {!loading &&<>{
+                        (reward / 10000).toFixed(4).split('.')[1] === '0000'
+                        ? parseInt(reward / 10000)
+                        : (reward / 10000).toFixed(4)
+                    }</>} BTK
                 <button 
                     className='reward-button'
                     onClick={clickClaim}

@@ -3,14 +3,12 @@ import { useParams } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import styled from 'styled-components'
 import { nft1 } from 'img/nft'
-import VoteDescription from './VoteDescription'
-import CommunityTopic from './CommunityTopic'
 import _ from 'lodash'
 import { useNavigate } from 'react-router-dom'
 import {
-    VoteDOuter, VoteDLeftOuter, VoteDRightOuter, VoteDHeaderOuter,
+    VoteDOuter, VoteDRightOuter, VoteDHeaderOuter,
     VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
-    ControlButton, PageButton
+    ControlButton, PageButton, VoteButton, VoteButtonDiv, VoteTCReadImg
 } from './voteModule'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
@@ -36,6 +34,15 @@ const VoteTCBodyImg = styled.div`
         transform: scale(1.06);
     }
 `
+const VoteStatus = styled.div`
+    position: absolute;
+    border-radius: 10px;
+    padding: 4px 10px;
+    font-weight: bold;
+    top: 24%;
+    right: 23%;
+    background: yellow;
+`
 
 const CommunityApproval = () => {
     const navigate = useNavigate();
@@ -48,6 +55,7 @@ const CommunityApproval = () => {
     const [content, setContent] = useState("")
     const [proposals, setProposals] = useState([])
     const [state, setState] = useState("")
+    const [image, setImage] = useState("")
 
     const [counter, setCounter] = useState([{
         id: 0,
@@ -94,11 +102,13 @@ const CommunityApproval = () => {
 
 
     const getData = async () => {
-        let {data} = await axios.get(`http://localhost:4000/api/community/read/vote/${id}`);
+        let {data} = await axios.get(`/api/community/read/vote/${id}`);
+        console.log('data: ', data);
         setTitle(data.title)
         setContent(data.content)
         setState(data.state)
         setProposals(data.proposals)
+        setImage(data.imgURI)
     }
 
     useEffect(() => {
@@ -119,14 +129,20 @@ const CommunityApproval = () => {
         proposalGroup.forEach((proposal)=> {
             proposals.push(proposal.value);
         })
-        console.log(proposals)
+        // console.log(proposals)
         try {
             const result = await newProposals(myAddress,proposals.length);
             if(result.status){
-                await startVote();
-                dispatch(nftAction.setVoteStatus())
-                const data = {title, content, proposals, id, state : "투표 진행 중"};
-                await axios.post('/api/community/approve',data)
+                const voteStartResult = await startVote();
+                if (voteStartResult.status) {
+                    dispatch(nftAction.setVoteStatus())
+                    const data = {title, content, proposals, id, state : "투표 진행 중"};
+                    await axios.post('/api/community/approve',data)
+                    customAlert.open('안건이 승인되었습니다!')
+                }
+                else {
+                    customAlert.open('transaction fail')
+                }
             }
           }
           catch (e){
@@ -147,8 +163,8 @@ const CommunityApproval = () => {
                 </VoteDHeaderOuter>
                 <VoteDMainOuter>
                     <VoteDMain>
-                        <VoteTCBodyImg img={nft1} />
-                        <div>{state}</div>
+                        <VoteTCReadImg img={image} />
+                        <VoteStatus state={state}>{state}</VoteStatus>
                         <Form onSubmit={submitApporoval}>
                         <VoteDPart>
                             <VoteDType>제목</VoteDType>
@@ -223,11 +239,11 @@ const CommunityApproval = () => {
                                         )}
                                     </div>
                                 </VoteDPart>
+                            <VoteButtonDiv>
+                                <VoteButton type='submit'>저장 후 투표 시작</VoteButton>
+                            </VoteButtonDiv>
                             <ControlButton>
                                 <PageButton type='button' onClick={movePage}>이전화면</PageButton>
-                            </ControlButton>
-                            <ControlButton>
-                                <PageButton type='submit'>저장 후 투표 시작</PageButton>
                             </ControlButton>
                         </Form>
                     </VoteDMain>
