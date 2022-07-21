@@ -23,7 +23,7 @@ const CommunityVoteTable = () => {
                 {data!=null && data.slice(2*page-2, 2*page).map((item, index) => 
                     <VoteCTRow key={index}>
                         {item.map((data, idx) => 
-                            <VoteTableCard key={data.idx+1000} data={data} id={index*2 + idx + 1}/>)}
+                            <VoteTableCard key={data.idx + 1000} data={data} id={page * 4 - 4 + 2 * index + idx + 1} />)}
                     </VoteCTRow>
                 )}
             </VoteCTBody>
