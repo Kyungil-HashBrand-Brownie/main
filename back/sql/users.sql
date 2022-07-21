@@ -1,3 +1,5 @@
+use Browny;
+
 CREATE TABLE users(  
     `idx` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `publicKey` VARCHAR(255) NOT NULL,
@@ -12,5 +14,7 @@ INSERT INTO users (publicKey)
 	SELECT "${publicKey}" FROM DUAL -- 넣을 값
 WHERE NOT EXISTS 
 	(SELECT publicKey FROM users WHERE publicKey="${publicKey}"); -- 들어있는지 확인하는 값
+
+update users set nickname="nickname" where idx=3;
 
 drop table users;
