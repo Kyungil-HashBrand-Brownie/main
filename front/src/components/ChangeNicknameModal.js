@@ -2,21 +2,33 @@ import axios from "axios";
 import { useRef, useState } from "react";
 import { Button, Form, FormControl, InputGroup, Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { useAlert } from 'api';
 
 function ChangeNicknameModal({ show, onHide, setNickname }) {
     const {myAddress} = useSelector(state=> state.nft)
     const nickInput = useRef("")
     const [alert, setAlert] = useState("")
 
+    const reset = () => {
+        setAlert('');
+        onHide();
+    }
+
     const clickChange = async ()=> {
-        const {data} = await axios.post("/api/user/modify",{publicKey:myAddress, nickname: nickInput.current.value})
-        if(data === "success") {
-            nickInput.current.value = ""
-            setNickname(myAddress);
-            onHide();
+        if (nickInput.current.value==='') {
+            setAlert('Invalid nickname!')
         }
-        else if(data === "nickname already exists"){
-            setAlert("nickname already exists")
+
+        else {
+            const {data} = await axios.post("/api/user/modify",{publicKey:myAddress, nickname: nickInput.current.value})
+            if(data === "success") {
+                nickInput.current.value = ""
+                setNickname(myAddress);
+                onHide();
+            }
+            else if(data === "nickname already exists"){
+                setAlert("Nickname already exists!")
+            }
         }
 
     }
@@ -30,13 +42,13 @@ function ChangeNicknameModal({ show, onHide, setNickname }) {
             backdrop="static"
             className='alert-modal'
         >
-            <Modal.Header closeButton className='modal-header'>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Change Nickname
+            <Modal.Header className='modal-header'>
+                <Modal.Title id="contained-modal-title-vcenter" style={{fontSize: "20px"}}>
+                    Nickname
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className='modal-body'>
-                <Form.Group >
+                <Form.Group style={{display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
                     <InputGroup>
                     <FormControl
                         placeholder="Enter your nickname"
@@ -47,15 +59,20 @@ function ChangeNicknameModal({ show, onHide, setNickname }) {
                         // size='lg'
                         ref={nickInput}
                     />
-                    <Button variant="outline-secondary" onClick={clickChange} >
+                    <Button variant="outline-secondary" onClick={clickChange} style={{marginLeft: '10px'}}>
                         Change
                     </Button>
                     </InputGroup>
-                    <Form.Label>{alert}</Form.Label>
+                    <Form.Label style={{margin: 'auto', fontWeight:'300', marginTop: '4px' ,marginLeft: '10px', color: 'red'}}>
+                        <b>{alert}</b>
+                    </Form.Label>
                 </Form.Group>
             </Modal.Body>
             <Modal.Footer className='modal-footer'>
-                <Button className='modal-btn' onClick={onHide}>Close</Button>
+                <Button 
+                className='modal-btn' 
+                onClick={reset} 
+                style={{transform: 'translate(-142px, -10px)'}}>Close</Button>
             </Modal.Footer>
         </Modal>
     );

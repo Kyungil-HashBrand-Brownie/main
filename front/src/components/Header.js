@@ -19,7 +19,8 @@ const WalletButton = styled.button`
     border: none;
     color: white;
     padding: 3px;
-    border-radius: 4px;
+    border-radius: 20px;
+    transform: translate(-20px, -5px);
 
     @media (max-width: 992px) {
         position: absolute;
@@ -40,7 +41,6 @@ const WalletButton = styled.button`
     };
 
 `
-
 const LogoContainer = styled.div`
     background-image: url(${Logo});
     width: 130px;
@@ -131,8 +131,8 @@ const Header = () => {
         setVoteStatus();
     }, [])
 
-    const paths = ['/', '/mint', '/collection', '/test', '/swap', '/staking', '/community'];
-    const texts = ['Home', 'Mint', 'Collection', 'Testpage', 'Swap', 'Staking', 'Community'];
+    const paths = ['/staking', '/collection', '/community'];
+    const texts = ['Staking', 'Collection', 'Community'];
 
     let pages = paths.map((path, index) => {
         return {
@@ -159,14 +159,19 @@ const Header = () => {
                             // style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            {pages.map((item, index) =>
+                            <Link onClick={reset} className='nav-item' to='/'>Home</Link>
+                            <Link onClick={reset} className='nav-item' to='/swap'>Swap</Link>
+                            <Link onClick={reset} className='nav-item' to='/mint'>Mint</Link>
+
+                            {myAddress!==undefined &&
+                            pages.map((item, index) =>
                                 <Link key={index}
                                     onClick={reset}
                                     className='nav-item'
                                     to={item.path}>
                                     {item.text}</Link>
-                            )}
-
+                            )
+                            }
                             {isDeployer ? <Link onClick={reset} className='nav-item' to="/admin">Admin</Link> : null}
                         </Nav>
                         {

@@ -110,12 +110,12 @@ export const CollectionNoItem = styled.div`
 /* Filter */
 
 export const FilterOuter = styled.div`
-    margin-top: 20.002px;
+    margin-top: 15.002px;
     margin-bottom: 20.002px;
 `
 export const FilterInner = styled.div`
     width: 300px;
-    height: 90%;
+    /* height: 90%; */
 `
 export const FilterHeader = styled.div`
     margin-left: 9.998px;
@@ -145,14 +145,14 @@ export const FilterSubHeader = styled.div`
 export const FilterOption = styled.div`
     width: 90%;
     height: 39.998px;
-    font-size: 18px;
-    margin: 0 15px 0.998px;
+    font-size: 16px;
+    margin: 0 10px 0.998px;
     cursor: pointer;
     display: flex;
     align-items: center;
 
     &:hover {
-        font-size: 20.002px;
+        font-size: 18.002px;
     }
 `
 export const FilterContentBox = styled.div`
@@ -163,6 +163,8 @@ export const FilterContentBox = styled.div`
 export const FilterContent = styled.div`
     display: flex;
     align-items: center;
+    /* background:red; */
+    height: 35px;
 
     .arrow-icon {
         position: relative;
@@ -187,29 +189,34 @@ export const FilterDetailOuter = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    padding-bottom: 4px;
+    /* background: red; */
 `
 export const FilterDetailBox = styled.div`
     margin: auto;
-    background: white;
+    /* background: white; */
     /* min-width:  */
         /* ${props => props.info.includes('Background') ? '150px' : '120px'}; */
     margin-top: 6px; 
-    margin-bottom: 3.998px; 
+    /* margin-bottom: 3.998px;  */
     text-align: center;
     cursor: pointer;
-    background: rgb(151, 223, 220);  
+    font-size: 16px;
+    background: 
+        ${props => props.state ? 'rgb(151, 223, 220)' : 'lightgray'};  
     border-radius: 9.998px; 
+    padding: 0 5px;
 
     &:hover {
         transform: scale(1.03)
     }
 
-    img {
+    /* img {
         position: absolute;
         width: 20.002px;
         height: 20.002px;
-        transform: translate(0, -15px);
-    }
+        transform: translate(0, -12px);
+    } */
 `
 
 /* Sort */
@@ -217,12 +224,12 @@ export const FilterDetailBox = styled.div`
 export const SortOuter = styled.div `
     position: absolute;
     left: 2%;
-    top: 40px;
+    top: 60px;
     /* margin-left: 30px; */
     margin-top: 50.002px;
     width: 20%;
 
-    min-height: 699.997px;
+    /* min-height: 699.997px; */
     border: 3px solid white;
     border-radius: 9.998px;
     background: rgb(241, 149, 165);
@@ -268,15 +275,15 @@ export const SortTopOuter = styled.div`
 `
 export const SortTopInner = styled.div`
     width: 300px;
-    height: 170.002px;
+    /* height: 170.002px; */
 `
 export const SortOption = styled.div`
     height: 39.998px;
-    font-size: 18px;
+    font-size: 16px;
     margin: 0 15px 0.998px;
     cursor: pointer;
 
     &:hover {
-        font-size: 20.002px;
+        font-size: 18.002px;
     }
 `

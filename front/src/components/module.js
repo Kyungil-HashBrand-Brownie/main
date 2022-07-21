@@ -35,22 +35,26 @@ export const StyledInfo = styled.div`
     /* margin: auto; */
 
     .header-white {
+        background: rgb(100,149,237);
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
-        background: white;
+        /* background: white; */
         padding-top: 3px;
         /* font-size: 19px; */
         font-weight: bold;
-        letter-spacing: 1.0px;
+        /* letter-spacing: 1.0px; */
         border-bottom: 3px solid gray;
     }
     .header-line {
         display: flex;
         justify-content: center;
         align-items : center;
-        font-weight: 500;
+        font-weight: bold;
         /* font-size: 17px; */
     }
+    /* .thick {
+        font-weight: bold;
+    } */
 
     @media(max-width: 550px) {
         font-size: 13px;

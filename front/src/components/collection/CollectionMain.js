@@ -1,4 +1,6 @@
 import React from 'react'
+import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 import {
     CollectionCardImg, CollectionMainOuter, CollectionHeader, CollectionBody,
     CollectionRow, CollectionCardOuter, CollectionCard, CollectionCardDetail,
@@ -6,9 +8,33 @@ import {
 } from './collectionModule'
 import { useNavigate } from 'react-router-dom'
 
-const CollectionMain = ({ data, row }) => {
+const Filterinfo = styled.div`
+    /* background: red; */
+    display: flex;
+    padding-left: 4%;
+    transform: translate(0, 25px);
+    flex-wrap: wrap;
+    width: 35%;
+`
+const Filtered = styled.div`
+    /* margin: auto; */
+    margin: 0 3px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    background: rgb(151, 223, 220);
+    border-radius: 10px; 
+    padding: 0 5px;
+    margin-bottom: 5px;
+`
+const sortedBy = ['All(default)', 'Not Minted', 'Minted'];
 
-    const navigate = useNavigate('')
+const CollectionMain = ({ data, row }) => {
+    const { filterOption, sortOption } = useSelector(state => state.main);
+    console.log(filterOption, sortOption);
+    const navigate = useNavigate('');
+
+    let filteredBy = filterOption.filter(item => item.opt!==null);
 
     const moveToDetailPage = (edi) => {
         navigate(`/detailcollection/${edi}`)
@@ -17,11 +43,17 @@ const CollectionMain = ({ data, row }) => {
     return (
         <CollectionMainOuter>
             <CollectionHeader>Collections</CollectionHeader>
+
             {data !== null &&
                 <div className='collection-info-outer'>
                     <div className='collection-info-box'>total: {data.length} / 200</div>
                 </div>
             }
+            <Filterinfo>
+                <Filtered >{sortedBy[sortOption]}</Filtered>
+                {filteredBy.map(item => <Filtered index={item.opt}>{item.opt}</Filtered>) }
+            </Filterinfo>
+
             <CollectionBody>
                 {data !== null &&
                     data.length > 0 ?
@@ -47,7 +79,7 @@ const CollectionMain = ({ data, row }) => {
                             )}
                         </CollectionRow>
                     )
-                : <CollectionNoItem>No Item</CollectionNoItem>
+                : <CollectionNoItem>No Item to display</CollectionNoItem>
                 }
             </CollectionBody>
         </CollectionMainOuter>

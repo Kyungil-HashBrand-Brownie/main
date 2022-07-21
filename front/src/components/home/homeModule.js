@@ -166,6 +166,7 @@ export const StyleHomeImgCard = styled.div`
       text-align: center;
       margin-top: 5px;
       font-size: 40px;
+      color: white;
     }
     .backColor{
       background-color: #F6C6EA;
@@ -205,6 +206,7 @@ export const StyleHomeImgCard = styled.div`
     }
     .tapestry-header0 {
       letter-spacing: 1px;
+      color: white;
       /* background: white; */
       border-radius: 20px;
       padding: 10px 2px;
@@ -259,11 +261,18 @@ export const StyleHomeImgCard = styled.div`
     }
     .grid-template {
       padding-left: 5px;
-      margin-top: 10px;
+      margin-top: 20px;
       font-size: 18px;
+      background: white;
+      border-radius: 20px;
+      padding: 0 5px;
+      height: 260px;
+      display: table-cell;
+      vertical-align: middle;
+      /* align-items: center; */
     }
     .tapestry-span {
-      color: blue;
+      color: rgb(2, 165, 2);
       font-weight: bold;
       font-size: 24px;
     }

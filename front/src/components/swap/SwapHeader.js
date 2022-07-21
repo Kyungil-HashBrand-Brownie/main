@@ -39,8 +39,8 @@ const SwapHeader = ({ addBTK, Browny1, myAddress, klayBalance, btkBalance }) => 
             <div className='mywal-info-outer'>
                 <div className='mywal-info'>
                     <div className='mywal-header'>보유량</div>
-                    <div className='mywal-bal'>{klayBalance} KLAY</div>
-                    <div className='mywal-bal'>{btkBalance} BTK</div>
+                    <div className='mywal-bal'><b><i>{klayBalance} KLAY</i></b></div>
+                    <div className='mywal-bal'><b><i>{btkBalance.slice(0, btkBalance.indexOf('.')+3)} BTK</i></b></div>
                 </div>
             </div>
         }

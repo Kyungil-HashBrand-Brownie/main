@@ -3,8 +3,16 @@ import styled from 'styled-components'
 /* CommunityRead */
 export const VoteReadState = styled.div`
     position: absolute;
+    border-radius: 10px;
+    padding: 4px 10px;
+    font-weight: bold;
     top: 43%;
     right: 23%;
+    background: 
+        ${props => props.state === '투표 종료' ? 'coral'
+                    : props.state === '승인 대기 중' ? 'yellow' 
+                    : 'lightgreen'
+        };
 `
 export const VoteTCReadImg = styled.div`
     width: 150px;
@@ -96,6 +104,9 @@ export const VoteDPart = styled.div`
     }
     .vote-text {
         margin-left: 2%;
+    }
+    .selected {
+        background: lightblue;
     }
     .proposal {
         display: flex;
@@ -236,8 +247,8 @@ export const VoteTCState = styled.div`
     /* position: absolute; */
     font-weight: bold;
     float: right;
-    border-radius: 10px;
-    padding: 0px 5px;
+    border-radius: 13px;
+    padding: 2px 10px;
     background: 
         ${props => props.state === '투표 종료' ? 'coral'
                     : props.state === '승인 대기 중' ? 'yellow' 
@@ -262,16 +273,23 @@ export const VoteTCBodyHeader = styled.div`
     width: 100%;
     height: 30%;
     background: pink;
+    border-bottom: 1px solid black;
 `
 export const VoteTCBodyTitle = styled.div`
-    width: 70%;
-    font-size: 30px;
+    width: 68%;
+    font-size: 24px;
+    /* background: red; */
+    display: flex;
+    word-break: break-all;
     margin-left: 10px;
+    font-weight: bold;
 `
 export const VoteTCBodyVoteCount = styled.div`
     width: 25%;
-    font-size: 23px;
+    font-size: 18px;
     margin-left: 2%;
+    text-align: center;
+    /* color: white; */
 `
 export const VoteTCBodyMain = styled.div`
     display: flex;
@@ -282,9 +300,12 @@ export const VoteTCBodyContent = styled.div`
     margin-top: 1%;
     width: 67%;
     height: 92%;
-    padding: 4px 8px;
+    padding: 6px 8px;
     text-align: justify;
-    border: 2px solid green;
+    word-break: break-all;
+    /* border-right: 2px solid green; */
+    background: rgb(223, 213, 213, 0.3);
+    /* border: 4px solid green; */
     border-radius: 8px;
 `
 export const VoteTCBodyProfile = styled.div`

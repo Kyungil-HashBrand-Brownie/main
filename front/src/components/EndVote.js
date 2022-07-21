@@ -1,4 +1,4 @@
-import { endVote, resetVote } from "api"
+import { endVote } from "api"
 import axios from "axios"
 import { Button } from "react-bootstrap"
 import { useDispatch } from "react-redux"

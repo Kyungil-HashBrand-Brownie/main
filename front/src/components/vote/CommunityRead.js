@@ -6,6 +6,7 @@ import { nft1 } from 'img/nft'
 import VoteDescription from './VoteDescription'
 import _ from 'lodash'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import {
     VoteDOuter, VoteDRightOuter, VoteDHeaderOuter,
     VoteDHeader, VoteDMainOuter, VoteDMain, VoteDPart, VoteDType,
@@ -15,7 +16,17 @@ import axios from 'axios'
 import { checkVote, getMyNFTs, getMyStaked, submitVote, useAlert } from 'api'
 import AlertModal from 'components/AlertModal'
 import Proposal from 'components/Proposal'
-import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
+import Selected from '../../img/vote/selected.png'
+
+const VoteCount = styled.div`
+    position: absolute;
+    left: 73%;
+`
+const SelectedProImg = styled.img`
+    position: absolute;
+    left: 27.8%;
+    width: 80px;
+`
 
 const CommunityRead = () => {
     const navigate = useNavigate();
@@ -31,6 +42,20 @@ const CommunityRead = () => {
         state: ""
     });
 
+    let selected = data.voteCounts ? JSON.parse(data.voteCounts).map(i => parseInt(i)) : null;
+    let selectedIndex = 0; 
+    let start = 0;
+    if (selected !== null) {
+        selected.forEach((s, index) => {
+            if (start < s)  {
+                selectedIndex = index;
+                start = s;
+            }
+        })
+    }
+    // console.log(selected);
+    // console.log('selectedIndex: ', selectedIndex)
+
     const [hasVote, setHasVote] = useState(false);
     const [currentProposal, setCurrentProposal] = useState(1);
     const [votingPower, setVotingPower] = useState(0);
@@ -42,7 +67,7 @@ const CommunityRead = () => {
     }
 
     const getData = async () => {
-        let result = await axios.get(`http://localhost:4000/api/community/read/${type}/${id}`);
+        let result = await axios.get(`/api/community/read/${type}/${id}`);
         console.log(result)
         setData(result.data);
     }
@@ -72,7 +97,6 @@ const CommunityRead = () => {
         setHasVote(result)
         console.log(result)
     }
-
 
     useEffect(() => {
         if (myAddress) {
@@ -105,7 +129,7 @@ const CommunityRead = () => {
                     <VoteDMainOuter>
                         <VoteDMain>
                             <VoteTCReadImg img={nft1} />
-                            <VoteReadState>{data.state}</VoteReadState>
+                            <VoteReadState state={data.state}>{data.state}</VoteReadState>
                             <Form>
                                 <VoteDPart>
                                     <VoteDType>제목</VoteDType>
@@ -143,11 +167,14 @@ const CommunityRead = () => {
                                                         as="textarea"
                                                         defaultValue={item}
                                                         name='proposal'
-                                                        className='vote-text'
+                                                        className={data.state !== '투표 종료' ? 'vote-text' : (data.state === '투표 종료' && index == selectedIndex) ? 'vote-text selected' : 'vote-text'}
                                                         style={{ width: '800px', height: '40px', resize: 'none' }}
                                                         />
+                                                    {(data.state === '투표 종료' && index == selectedIndex) && <SelectedProImg src={Selected} alt='proposal-selected'/>}
                                                     {
-                                                        data.state === "투표 진행 중" && <Proposal key={index} index={index + 1} onChange={changeSelected} />
+                                                        data.state === "투표 진행 중" ? <Proposal key={index} index={index + 1} onChange={changeSelected} />
+                                                       : data.state === '투표 종료' ? <VoteCount key={index}>{JSON.parse(data.voteCounts)[index]} Votes</VoteCount> 
+                                                       : null
                                                     }
                                                 </div>
                                             )}

@@ -12,6 +12,7 @@ import { trash , trash2 } from '../img'
 import { checkWhite, addWhite, removeSelectedWhites, useAlert } from 'api'
 import AlertModal from './AlertModal'
 import { nftAction } from 'redux/actions/nftAction'
+import EndVote from './EndVote'
 
 const Trash = styled.div`
     width: 50px;
@@ -201,6 +202,7 @@ const WhiteList = () => {
                     </tbody>
                 </Table>
             </div>
+            <EndVote />
         </AdminPage_LayOut>
 
     )

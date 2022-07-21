@@ -44,7 +44,7 @@ const CardHead = ({bool, inputCheck, checkedList, transactNFT,
                                             className='nftlist-cancel' />
                                     </div>
                                 </div>)
-                            : <div className='nftlist-text'>Select an item from below!</div>
+                            : <div className='nftlist-text'>Select items from below!</div>
                         }
                     </div>
                 </div>
