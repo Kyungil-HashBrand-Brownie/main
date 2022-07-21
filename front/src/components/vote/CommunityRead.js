@@ -109,8 +109,10 @@ const CommunityRead = () => {
         if (votingPower) {
             try {
                 let result = await submitVote(myAddress, currentProposal);
-                await axios.post('/api/community/vote', { currentProposal, votingPower })
-                if (result.status) customAlert.open('성공적으로 투표되었습니다!')
+                if (result.status) {
+                    await axios.post('/api/community/vote', { currentProposal, votingPower })
+                    customAlert.open('성공적으로 투표되었습니다!')
+                }
                 else customAlert.open('트랜잭션 에러')
             }
             catch (e) {
