@@ -34,7 +34,7 @@ const HomePage = () => {
         <Home />
         <Viliage />
         <Container className='main-container'>
-          <Col>
+          <Col className='slide-col'>
             <div className="slidediv">
               Love <br /> Your Browny
             </div>
