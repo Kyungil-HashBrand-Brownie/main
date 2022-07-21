@@ -146,11 +146,10 @@ contract VoteContract {
         return proposals[_index].votedCounts;
     }
 
-    // // 투표 끝 함수 
-    // function endVote() public onlyOwner isNowVote {
-    //     voteStatus = VoteStatus.afterVote;
-    //     restartVote();
-    // }
+    // 투표 누구에게 했나 확인 함수 
+    function checkVoteWhich() public view returns(uint256) {
+        return voters[msg.sender].votedProposalId;
+    }
 
     // 투표 끝 & 초기화
     function endVote() public onlyOwner isNowVote {

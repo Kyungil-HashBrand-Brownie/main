@@ -9,7 +9,13 @@ const useAlert = () => {
     const onHide = (content) =>{
       setShow(false)
       let location = 'http://localhost:3000/write'
-      if (content.includes('성공') && window.location.href === location) navigate('/community')
+      let voteLocation = 'http://localhost:3000/community/read/vote'
+      if (content.includes('성공') && 
+        (window.location.href === location 
+          || window.location.href.startsWith(voteLocation))) navigate('/community')
+      else if (content === '안건이 승인되었습니다!') {
+        navigate('/community')
+      }
     }
 
     const open = (alertContent) => {

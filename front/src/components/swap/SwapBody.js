@@ -40,7 +40,7 @@ const SwapBody = ({ swap, Browny1, Klaytn, bool, swapChange, checkValidation,
                     <div className='swap-input-flex'>
                         <input
                             className='swap-amount-input'
-                            placeholder='1'
+                            placeholder='1.00'
                             onChange={checkValidation}
                             ref={amountInput}
                         />
