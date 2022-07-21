@@ -136,7 +136,7 @@ const Community = () => {
                         </UserDiv>
                         <UserDiv>
                             <UserLeft>USERRANK: </UserLeft>
-                            <UserRight>{rank[userRank]}</UserRight>
+                            <UserRight>{image.length ? rank[userRank] : 'UNRANK'}</UserRight>
                         </UserDiv>
                     </UserInfoBox>
                 </CommunitySide >

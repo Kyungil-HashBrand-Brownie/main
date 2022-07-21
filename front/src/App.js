@@ -60,8 +60,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/mint" element={<Mint />} />
+          <Route path="*" element={<NoPage />} />
 
-          {myAddress != '' &&
+          {myAddress !== undefined &&
             paths.map((path, index) => <Route key={path} path={path} element={elements[index]} />)
           }
           {

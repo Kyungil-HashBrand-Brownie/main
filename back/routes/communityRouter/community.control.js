@@ -5,6 +5,7 @@ const view = async (req, res) => {
     if(type === "vote") {
         try {
             const [result] = await pool.query("SELECT * FROM voteCommunity;")
+            result.reverse()
             const data = []
             for(let i=0; i< result.length/2; i++){
                 let coupledArr = result.slice(i*2, (i*2)+2)

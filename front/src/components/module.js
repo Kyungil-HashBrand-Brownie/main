@@ -52,6 +52,9 @@ export const StyledInfo = styled.div`
         font-weight: bold;
         /* font-size: 17px; */
     }
+    .header-btk {
+        transform: translateX(-5px);
+    }
     /* .thick {
         font-weight: bold;
     } */
