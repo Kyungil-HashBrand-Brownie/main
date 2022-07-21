@@ -23,11 +23,11 @@ const EndVote = ()=> {
 
         try {
             let result = await endVote()
-            dispatch(nftAction.setVoteStatus())
-            await axios.get('/api/community/endVote')
             console.log('result: ', result)
             if (result.status) {
                 customAlert.open('투표가 종료되었습니다!')
+                await axios.get('/api/community/endVote')
+                dispatch(nftAction.setVoteStatus())
             }
             else {
                 customAlert.open('진행중인 투표가 없습니다.')
