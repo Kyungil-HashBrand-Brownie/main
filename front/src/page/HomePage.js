@@ -11,19 +11,19 @@ const HomePage = () => {
 
     window.addEventListener('scroll', function() {
       let value = window.scrollY;
-      console.log(value)
+      // console.log(value)
       let loc = window.location.href;
       if (loc == 'http://localhost:3000/') {
         // if ((value > 1800 && value < 1820) || (value < 930 && value > 900)) {
           if((value > 1900 || value <750) ) {
           // mainText[0].style.animation ='disappear 1s ease-out forwards';
           mainText[0].style.animation ='disappear 1s ease-out forwards';
-          console.log("사라진다")
+          // console.log("사라진다")
         } else if(value >750 && value < 1900) {
           mainText[0].style.animation='slide 1s ease-out';
-          console.log("나타난다")
+          // console.log("나타난다")
         } else {
-          console.log('빈공간')
+          // console.log('빈공간')
           return;
         }
       }
