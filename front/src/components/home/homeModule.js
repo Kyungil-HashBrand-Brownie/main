@@ -154,13 +154,16 @@ export const StyledArrow = styled.img`
 
 export const StyleHomeImgCard = styled.div`
     width:100% ;
-    background-color: rgb(249, 245, 240, 0.9);
+    /* background-color: rgb(249, 245, 240, 0.9); */
+    /* background-image: url(${viliage2}); */
+    background-repeat: no-repeat ;
+    background-size: cover ;
     height: 500px;
     display: flex;
     justify-content: center;
     position: relative;
     margin-top:50px;
-    opacity: 0.9;
+    /* opacity: 0.4; */
 
     .blue-num {
       text-align: center;
@@ -175,6 +178,7 @@ export const StyleHomeImgCard = styled.div`
       display: flex;
       border-radius: 30px;
       margin-top: 80px;
+      
     }
     .back{
       background-color: #F6C6EA;

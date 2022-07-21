@@ -34,7 +34,6 @@ export const CollectionHeader = styled.div`
     text-align: center;
     font-size: 45px;
     font-weight: bold;
-    margin-top: 20px;
 `
 export const CollectionBody = styled.div`
 

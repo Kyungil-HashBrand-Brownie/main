@@ -12,7 +12,7 @@ const VoteTCImage = styled.div`
     height: 80%;
     border-radius: 100%;
     background-size: cover;
-    background-image: 
+    : 
         ${props => props.img && `url(${props.img})`};
 `
 
