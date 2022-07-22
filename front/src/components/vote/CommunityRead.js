@@ -25,7 +25,7 @@ const Vote_End_Button = styled.div`
     padding: 4px 10px;
     font-weight: bold;
     top: 42%;
-    left: 20%;
+    left: 22%;
 `
 
 const VoteCount = styled.div`
