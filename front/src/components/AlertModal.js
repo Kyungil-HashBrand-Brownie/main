@@ -21,7 +21,7 @@ function AlertModal({show, content, onHide}) {
           <Modal.Footer className='modal-footer'>
             <Button className='modal-btn' onClick={() => onHide(content)}>Close</Button>
           </Modal.Footer>
-        </Modal>
+        </Modal>  
     );
   }
   
