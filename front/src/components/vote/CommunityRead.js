@@ -17,6 +17,16 @@ import { checkVote, getMyNFTs, getMyStaked, submitVote, useAlert } from 'api'
 import AlertModal from 'components/AlertModal'
 import Proposal from 'components/Proposal'
 import Selected from '../../img/vote/selected.png'
+import EndVote from 'components/EndVote'
+
+const Vote_End_Button = styled.div`
+    position: absolute;
+    border-radius: 10px;
+    padding: 4px 10px;
+    font-weight: bold;
+    top: 42%;
+    left: 20%;
+`
 
 const VoteCount = styled.div`
     position: absolute;
@@ -138,6 +148,14 @@ const CommunityRead = () => {
                         <VoteDMain>
                             <VoteTCReadImg img={data.imgURI} />
                             <VoteReadState state={data.state}>{data.state}</VoteReadState>
+                            {
+                                
+                                data.state === '투표 진행 중' && isDeployer ?
+                                <Vote_End_Button>
+                                    <EndVote />
+                                </Vote_End_Button>
+                                : null
+                            }
                             <Form>
                                 <VoteDPart>
                                     <VoteDType>제목</VoteDType>

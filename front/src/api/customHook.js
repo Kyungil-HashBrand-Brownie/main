@@ -13,7 +13,7 @@ const useAlert = () => {
       if (content.includes('성공') && 
         (window.location.href === location 
           || window.location.href.startsWith(voteLocation))) navigate('/community')
-      else if (content === '안건이 승인되었습니다!') {
+      else if (content === '안건이 승인되었습니다!'|| content === '투표가 종료되었습니다!' ) {
         navigate('/community')
       }
     }
