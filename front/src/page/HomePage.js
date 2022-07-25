@@ -14,8 +14,8 @@ const HomePage = () => {
       // console.log(value)
       if (window.location.pathname === '/') {
         // if ((value > 1800 && value < 1820) || (value < 930 && value > 900)) {
-          if((value > 1900 || value <750) ) {
           // mainText[0].style.animation ='disappear 1s ease-out forwards';
+        if ((value > 1800 && value < 1820) || (value < 930 && value > 900)) {
           mainText[0].style.animation ='disappear 1s ease-out forwards';
           // console.log("사라진다")
         } else if(value >750 && value < 1900) {

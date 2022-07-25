@@ -5,11 +5,11 @@ import { TopicOuter, TopicHeader, Topic } from './voteModule'
 const CommunityTopic = ({ setState }) => {
     const navigate = useNavigate();
     const changeState = (state) => {
-        if (window.location.pathname == '/write/0' || 
-            window.location.pathname == '/write/1' ||
-            window.location.pathname === '/community/read/'  
+        if (window.location.pathname.startsWith('/write') || 
+            window.location.pathname.startsWith('/community/read/')  
         ) {
             let page = state ? 'vote' : 'default'
+            console.log(page)
             navigate(`/community/${page}`)
         }
         else setState(state)
