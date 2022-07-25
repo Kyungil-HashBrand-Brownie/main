@@ -163,7 +163,7 @@ const Header = () => {
                             <Link onClick={reset} className='nav-item' to='/swap'>Swap</Link>
                             <Link onClick={reset} className='nav-item' to='/mint'>Mint</Link>
 
-                            {myAddress!==undefined &&
+                            {myAddress &&
                             pages.map((item, index) =>
                                 <Link key={index}
                                     onClick={reset}
@@ -183,7 +183,6 @@ const Header = () => {
                                     klayBalance={klayBalance} btkBalance={btkBalance}
                                 />
                                 : <WalletButton onClick={clickEnableKaikas}>지갑 연결하기</WalletButton>
-                                // <><Button className="mint-wal-connect-btn" variant="success" onClick={clickEnableKaikas}>지갑 연결하기</Button>{' '}</>
                         }
                     </Navbar.Collapse>
                 </Container>

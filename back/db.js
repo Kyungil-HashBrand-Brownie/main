@@ -1,5 +1,5 @@
 const mysql = require("mysql2/promise"); // object
-require('dotenv').config()
+require('dotenv').config();
 
 const user = process.env.AWS_USER
 const host = process.env.AWS_HOST

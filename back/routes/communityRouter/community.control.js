@@ -21,16 +21,6 @@ const view = async (req, res) => {
             res.send("fail")
         }
     }
-    else if(type === "board") {
-        try {
-            const [result] = await pool.query("SELECT * FROM community")
-            res.send(result);
-        }
-        catch(e) {
-            console.log(e);
-            res.send("fail")
-        }
-    }
 }
 
 const read = async (req, res) => {
@@ -46,29 +36,6 @@ const read = async (req, res) => {
             console.log(e);
             res.send("fail")
         }
-    }
-    else if(type === "board") {
-        try {
-            const [[result]] = await pool.query(`SELECT * FROM community WHERE idx=${idx}`)
-            res.send(result);
-        }
-        catch(e) {
-            console.log(e);
-            res.send("fail")
-        }
-    }
-}
-
-const writeAction = async (req, res) => {
-    const data = Object.values(req.body);
-    console.log(data)
-    try {
-        const [result] = await pool.query(`INSERT INTO community(title, content, nickname) VALUES (?,?,?)`, data);
-        res.send(result);
-    }
-    catch(e) {
-        console.log(e);
-        res.send("fail")
     }
 }
 
@@ -87,15 +54,15 @@ const voteWriteAction = async (req, res) => {
 
 const approveAction = async (req, res) => {
     const {title, content, proposals, id, state} = req.body;
-    const voteCounts = Array(proposals.length).fill(0)
-    const data = [title, content, JSON.stringify(proposals), state, JSON.stringify(voteCounts), id]
+    const voteCounts = Array(proposals.length).fill(0);
+    const data = [title, content, JSON.stringify(proposals), state, JSON.stringify(voteCounts), id];
     try {
-        const [result] = await pool.query(`UPDATE voteCommunity SET title = (?), content = (?), proposals = (?), state = (?), voteCounts=(?) WHERE idx=(?)`,data)
+        const [result] = await pool.query(`UPDATE voteCommunity SET title = (?), content = (?), proposals = (?), state = (?), voteCounts=(?) WHERE idx=(?)`, data);
         res.send(result);
     }
     catch(e) {
         console.log(e);
-        res.send("fail")
+        res.send("fail");
     }
 }
 
@@ -104,21 +71,17 @@ const voteAction = async (req, res) => {
     try {
         const [[result]] = await pool.query(`SELECT voteCounts FROM voteCommunity WHERE state="투표 진행 중";`);
         const countsArr = JSON.parse(result.voteCounts);
-        console.log(countsArr)
-        console.log("currentProposalId : ", currentProposal)
-        console.log("typeof currentProposal : ",typeof  currentProposal)
-        console.log("votingPower : ",votingPower)
-        console.log("typeof votingPower : ",typeof votingPower)
+        console.log(countsArr);
         countsArr[Number(currentProposal)-1] += Number(votingPower);
-        console.log("updated!",countsArr)
-        const newData = JSON.stringify(countsArr)
+        console.log("vote Count updated!",countsArr);
+        const newData = JSON.stringify(countsArr);
 
-        const [data] = await pool.query(`UPDATE voteCommunity SET voteCounts="${newData}" WHERE state="투표 진행 중"`)
-        res.send(result);
+        const [data] = await pool.query(`UPDATE voteCommunity SET voteCounts="${newData}" WHERE state="투표 진행 중"`);
+        res.send(success);
     }
     catch(e) {
         console.log(e);
-        res.send("fail")
+        res.send("fail");
     }
 }
 
@@ -142,7 +105,6 @@ const endVote = async (req, res) => {
 
 module.exports = {
     view,
-    writeAction,
     voteWriteAction,
     read,
     approveAction,

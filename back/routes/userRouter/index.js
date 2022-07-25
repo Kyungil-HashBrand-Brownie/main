@@ -8,5 +8,4 @@ router.post('/view', userController.view)
 
 router.post('/modify', userController.modify)
 
-
 module.exports = router

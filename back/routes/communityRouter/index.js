@@ -7,8 +7,6 @@ router.get('/view/:type',communityController.view);
 
 router.get('/read/:type/:idx', communityController.read)
 
-router.post('/write',communityController.writeAction);
-
 router.post('/voteWrite',communityController.voteWriteAction);
 
 router.post('/approve',communityController.approveAction);

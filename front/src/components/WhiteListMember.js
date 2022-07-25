@@ -92,7 +92,7 @@ const WhiteList = () => {
                     // console.log(res);
                     let result = res.data;
                     // console.log(result)
-                    if (result === "Success!") {
+                    if (result === "success") {
                         customAlert.open("화이트리스트 설정 완료되었습니다!");
                     }
                     dispatch(nftAction.checkWhitelist(myAddress));
@@ -110,7 +110,7 @@ const WhiteList = () => {
                     const {data} = await axios.post('/api/white/deletelists',
                         addressArr
                     )
-                    if (data === "Success!") {
+                    if (data === "success") {
                         customAlert.open("화이트리스트 제거 완료되었습니다!");
                         dispatch(nftAction.checkWhitelist(myAddress));
                         setCheckDelete(!checkDelete)
