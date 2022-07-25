@@ -15,7 +15,7 @@ const Swap = () => {
     const dispatch = useDispatch();
 
     const [swap, setSwap] = useState(true);
-    const [exchange, setExchange] = useState('exchange');
+    const [exchange, setExchange] = useState('7.22');
 
     const customAlert = useAlert();
 
@@ -26,25 +26,32 @@ const Swap = () => {
         amountInput.current.value = '';
     }
 
+    const resetChange = () => {
+        if(swap) setExchange('7.22');
+        else setExchange('0.14');
+    }
+
     const checkValidation = () => {
         let value = amountInput.current.value;
-        let re = /[^0-9]/g;
+        let re = /[^0-9.]/g;
         if (re.test(value)) {
             customAlert.open('숫자를 입력해 주세요!');
             amountInput.current.value = '';
-            if(swap) setExchange('7.22');
-            else setExchange('0.14');
+            resetChange();
         }
         else if (Number(value) > 10000) {
             customAlert.open('최대 거래 수량 초과 \n ')
             amountInput.current.value = '';
-            if(swap) setExchange('7.22');
-            else setExchange('0.14');
+            resetChange();
+        }
+        else if (value.startsWith('.')) {
+            customAlert.open('잘못된 입력입니다.');
+            resetChange();
         }
 
         else {
             if (value !== '') {
-                if (swap) setExchange(value * 7.22.toFixed(4))
+                if (swap) setExchange((value * 7.22).toFixed(2))
                 else setExchange((value / 7.22).toFixed(2))
             }
             else {

@@ -5,9 +5,9 @@ import { TopicOuter, TopicHeader, Topic } from './voteModule'
 const CommunityTopic = ({ setState }) => {
     const navigate = useNavigate();
     const changeState = (state) => {
-        if (window.location.href == 'http://localhost:3000/write/0' || 
-            window.location.href == 'http://localhost:3000/write/1' ||
-            window.location.href.startsWith('http://localhost:3000/community/read/')  
+        if (window.location.pathname == '/write/0' || 
+            window.location.pathname == '/write/1' ||
+            window.location.pathname === '/community/read/'  
         ) {
             let page = state ? 'vote' : 'default'
             navigate(`/community/${page}`)

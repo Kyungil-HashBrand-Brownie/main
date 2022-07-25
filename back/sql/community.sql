@@ -14,5 +14,7 @@ CREATE TABLE voteCommunity (
 
 select * from voteCommunity;
 
+delete from voteCommunity where idx=4;
+
 drop table voteCommunity;
 

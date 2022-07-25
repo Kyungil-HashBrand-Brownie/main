@@ -142,7 +142,9 @@ body {
   display: flex;
   flex-direction: row;
   margin: auto;
-  color: #52a2fe
+  color: #52a2fe;
+  /* background: #52a2fe; */
+  opacity: 0.8;
   /* margin-left: 30px; */
   /* background-color: green; */
 }
@@ -1060,19 +1062,33 @@ NftCard
   justify-content: center;
   margin: auto;
 }
+.slide-col {
+  background: white;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 150px;
+  border-bottom-left-radius: 150px;
+}
 
 .slidediv {
   font-size: 7em;
   /* width: 350px; */
   font-family: sans-serif;
   position: relative;
-  top: 30px;
+  /* top: 30px; */
   /* visibility: hidden; */
   animation: slide 2s ease-out;
   letter-spacing: .05em;
   text-shadow: 
     4px 4px 0px #d5d5d5, 
     7px 7px 0px rgba(0, 0, 0, 0.2);
+}
+@media (min-width: 1400px) {
+  .slidediv {
+    margin-left: 15%;
+  }
 }
 
 @media (max-width: 990px) {
@@ -1082,6 +1098,9 @@ NftCard
     font-size: 5rem;
     /* transform: translate(300px, 0); */
     /* background: red; */
+  }
+  .slide-col {
+    border-radius: 150px;
   }
 }
 
@@ -1141,6 +1160,12 @@ NftCard
 
   .bakingImg1 img{
     flex-direction: column;
+  }
+}
+
+@media (max-width: 767px) {
+  .slidediv {
+    margin-left: 20%;
   }
 }
 

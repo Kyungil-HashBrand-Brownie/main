@@ -15,7 +15,7 @@ const Home = () => {
   let deadline = useRef();
   let timer = useRef(null);
 
-  let deadlineDate = new Date('July 22, 2022 10:00:00').getTime();
+  let deadlineDate = new Date('July 29, 2022 10:00:00').getTime();
   let now = new Date().getTime();
   let t = deadlineDate - now;
   let day = Math.floor((t % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
@@ -46,7 +46,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    deadline = new Date('July 22, 2022 10:00:00').getTime();
+    deadline = new Date('July 29, 2022 10:00:00').getTime();
     timer.current = setInterval(count, 1000);
   }, [])
 
@@ -54,7 +54,7 @@ const Home = () => {
     <>
       <div className='mintdate-container'>
         <StyledMintDate>
-          <span>민팅 까지 남은 시간</span><br />
+          <span>민팅 종료까지 시간</span><br />
           <span>
             {state.day < 10 ? `0${state.day}` : state.day}D
             &nbsp;{state.hours < 10 ? `0${state.hours}` : state.hours}h

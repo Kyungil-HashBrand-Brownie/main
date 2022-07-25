@@ -4,6 +4,7 @@ import { StyleHomeImgCard } from './homeModule';
 import HomeImgCardMain from './HomeImgCardMain';
 import HomeImgCardSide from './HomeImgCardSide';
 import { nft1, nft2, nft3 } from '../../img/nft'
+import { viliage2 } from 'img';
 
 const datas = [
   {
@@ -30,16 +31,31 @@ const ImgDivCard = styled.img`
       height: 100%;
       border-radius: 30px;
       border: ${props => props.click === 1 ?
-    '5px solid #FAF4B7'
+    '5px solid #ABC9FF'
     : props.click === 2 ?
-      '5px solid #F9F9F9'
-      : "5px solid #F6C6EA"
+      '5px solid #FF8B8B'
+      : "5px solid #EB4747"
   };
+
 
   /* @media (max-width: 784px) {
     width: 80%;
     height: 80%;
   } */
+`
+
+const BackImg_viliage = styled.div`
+  position:absolute ;
+  width:100% ;
+  /* background-color: coral ; */
+  z-index: -1;
+  transform: translateY(-30px);
+  
+  img {
+    width: 100%;
+    height: 600px ;
+    opacity: 0.35;
+  }
 `
 
 const HomeImgCard = () => {
@@ -52,14 +68,17 @@ const HomeImgCard = () => {
 
   return (
       <StyleHomeImgCard >
+        <BackImg_viliage >
+          <img src={viliage2} />
+        </BackImg_viliage>
         <div className="backColor"
           style={{
             backgroundColor:
               click === 1 ?
-                "#52a2fe"
+                "#ABC9FF"
                 : click === 2 ?
-                  "rgb(242, 142, 70)"
-                  : "#fe6652"
+                  "#FF8B8B"
+                  : "#EB4747"
 
           }}>
           <div className="blue">

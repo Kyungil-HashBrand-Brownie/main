@@ -5,6 +5,7 @@ const view = async (req, res) => {
     if(type === "vote") {
         try {
             const [result] = await pool.query("SELECT * FROM voteCommunity;")
+            result.reverse()
             const data = []
             for(let i=0; i< result.length/2; i++){
                 let coupledArr = result.slice(i*2, (i*2)+2)
@@ -130,7 +131,7 @@ const endVote = async (req, res) => {
         const selectedProposal = proposalsArr[selectedProposalIdx];
 
         await pool.query(`UPDATE voteCommunity SET state = "투표 종료", selectedProposal="${selectedProposal}" WHERE state="투표 진행 중"`)
-
+        res.send("success");
     }
     catch(e) {
         console.log(e);

@@ -17,6 +17,16 @@ import { checkVote, getMyNFTs, getMyStaked, submitVote, useAlert } from 'api'
 import AlertModal from 'components/AlertModal'
 import Proposal from 'components/Proposal'
 import Selected from '../../img/vote/selected.png'
+import EndVote from 'components/EndVote'
+
+const Vote_End_Button = styled.div`
+    position: absolute;
+    border-radius: 10px;
+    padding: 4px 10px;
+    font-weight: bold;
+    top: 42%;
+    left: 22%;
+`
 
 const VoteCount = styled.div`
     position: absolute;
@@ -68,7 +78,6 @@ const CommunityRead = () => {
 
     const getData = async () => {
         let result = await axios.get(`/api/community/read/${type}/${id}`);
-        console.log(result)
         setData(result.data);
     }
 
@@ -107,13 +116,22 @@ const CommunityRead = () => {
 
     const voteSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await submitVote(myAddress, currentProposal);
-            await axios.post('/api/community/vote', { currentProposal, votingPower })
+        if (votingPower) {
+            try {
+                let result = await submitVote(myAddress, currentProposal);
+                if (result.status) {
+                    await axios.post('/api/community/vote', { currentProposal, votingPower })
+                    customAlert.open('성공적으로 투표되었습니다!')
+                }
+                else customAlert.open('트랜잭션 에러')
+            }
+            catch (e) {
+                console.log(e)
+                return e
+            }
         }
-        catch (e) {
-            console.log(e)
-            return e
+        else {
+            customAlert.open('NFT를 한 개 이상 소유해야합니다!')
         }
     }
 
@@ -128,8 +146,16 @@ const CommunityRead = () => {
                     <VoteDescription />
                     <VoteDMainOuter>
                         <VoteDMain>
-                            <VoteTCReadImg img={nft1} />
+                            <VoteTCReadImg img={data.imgURI} />
                             <VoteReadState state={data.state}>{data.state}</VoteReadState>
+                            {
+                                
+                                data.state === '투표 진행 중' && isDeployer ?
+                                <Vote_End_Button>
+                                    <EndVote />
+                                </Vote_End_Button>
+                                : null
+                            }
                             <Form>
                                 <VoteDPart>
                                     <VoteDType>제목</VoteDType>
@@ -188,7 +214,7 @@ const CommunityRead = () => {
                                     {!hasVote
                                         ?
                                         <>
-                                            <div>My Voting Power : {votingPower}</div>
+                                            <div>Voting Power : {votingPower}</div>
                                             <VoteButton onClick={voteSubmit}>투표하기</VoteButton>
                                         </>
                                         : <div>이미 투표했습니다</div>
