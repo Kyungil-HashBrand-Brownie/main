@@ -19,7 +19,7 @@
 
 **Frontend**
 - Visual Studio Code
-- caver
+- caver.js
 
 
 ## ✔ 프로젝트 파일 구조  - Blockchain part
