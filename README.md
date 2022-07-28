@@ -6,7 +6,7 @@
 경일게임 아카데미 블록체인4기 기업 협약 프로젝트 - BROWNY NFT
 </br>
 
-## 🥯 BROWNY 주요 기술
+## 🥯 BROWNY 주요 기술 
 ---
 
 **Backend - Express.js**
@@ -15,8 +15,8 @@
 - MariaDB
 
 **BlockChain - klaytn**
-- Solidity 0.8.4
-- openzeppelin/contracts
+- Solidity
+- openzeppelin
 - KLAYTN - IDE
 
 **Storage**
@@ -318,16 +318,16 @@ sol
    │  ├─ NFT.sol
    │  ├─ NFTBeacon.sol
    │  └─ NFTFactory.sol
-   ├─ NormalListTokenId.sol
    ├─ Token
    │  ├─ Token.sol
    │  ├─ TokenBeacon.sol
    │  └─ TokenFactory.sol
-   ├─ Voting.sol
    ├─ Whitelist
    │  ├─ Whitelist.sol
    │  ├─ WhitelistBeacon.sol
    │  └─ WhitelistFactory.sol
+   ├─ Voting.sol
+   ├─ NormalListTokenId.sol
    └─ WhiteListTokenId.sol
 
 ```
@@ -337,3 +337,4 @@ sol
 - Github
 - Notion
 - Discord
+- Slack
