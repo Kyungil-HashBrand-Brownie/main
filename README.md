@@ -25,7 +25,6 @@
 ## ✔ 프로젝트 파일 구조  - Blockchain part
 ---
 ### Frontend
-
 ```
 front
 └─ src
@@ -67,15 +66,14 @@ sol
    ├─ Voting.sol
    ├─ NormalListTokenId.sol
    └─ WhiteListTokenId.sol
-
 ```
 
-### ✔ 협업 툴
+### 협업 툴
 - Github
 - Notion
 - Slack
 
-## Blockchain part - 노진형
+## 🥞 Blockchain part - 노진형
 smart contract를 전담하였습니다. 모든 contract code는 sol 폴더에서 확인이 가능합니다. 
 프론트 파트에서 klaytn baobab 노드, 즉 contract와 통신하기 위해서 caver.js를 사용하였으며 front/src/configs에서 확인이 가능합니다.
 
