@@ -76,7 +76,7 @@ sol
 ## 🥞 Blockchain part - 노진형
 smart contract를 전담하였습니다. 모든 contract code는 sol 폴더에서 확인이 가능합니다. 
 프론트 파트에서 klaytn baobab 노드, 즉 contract와 통신하기 위해서 caver.js를 사용하였으며 front/src/configs에서 확인이 가능합니다.
----
+
 ### NFT && Tokne
 erc20 기반 자체 토큰 생성과 erc721 기반 자체 nft 생성을 하였으며 그 코드들은 각각 token, nft 폴더에 있습니다.
 본래는 ERC20.sol, ERC721.sol을 상속받아 작성했지만 beacon proxy 방식의 upgradeable smart contract로 작성하기 위하여 
