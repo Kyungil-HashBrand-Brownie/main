@@ -6,6 +6,7 @@ Front end 박승재
 1. Css 및 기본 폴더 구조를 작업 하였습니다.
 2. UI / UX 디자인 작업을 했습니다.
 3. NFT를 위한 Asset을 구성 하였습니다.
+4. API 연결
 
 
 
@@ -13,9 +14,10 @@ Front end 박승재
 
 Components
 =============
-1. Componet을 페이지 별로 구성을 하였으며 
+1. 쉽게 접근을 위해 페이지 별로 Componets 구성을 하였습니다.
 2. UI / UX 디자인 작업을 했습니다.
 3. NFT를 위한 Asset을 구성 하였습니다.
+4. Iamge들은 import를 편하게 하기 위해 페이지 각각의 index에 담아 관리를 하였습니다
 5. 코드 순은 이렇습니다.
 ./page/collection/ <br/>
 ./components/collection/CollectionMain/ <br/>
