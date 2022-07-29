@@ -288,3 +288,143 @@ View 영역의 항목을 그대로 붙여넣거나 HTML 내보내기 등으로 �
 링크 예: Markdown 설명
 P.S.
 최근에는 Notion 을 조금씩 사용중이다. Notion 에서 작성한 문서는 Atom(https://atom.io/), Visual Studio Code(https://code.visualstudio.com/), Notepad++(https://notepad-plus-plus.org/)텍스트 편집기에 복붙(복사하고 붙여넣기)하면 마크다운문법으로 작성된 문장이 기입되고 이지윅 에디터를 제공하는 웹에디터에 붙여넣기 하면 거의 완벽한 형태로 복사된다. 그래서 애용중이다.
+
+
+###### front end 폴더 구조
+
+
+
+├── front/
+│   ├── README.md
+│   ├── config-overrides.js
+│   ├── jsconfig.json
+│   ├── node_modules/
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public/
+│   └── src
+         ├── App.css
+         ├── App.js
+         ├── api
+         │   ├── contractMethods.js
+         │   ├── customHook.js
+         │   ├── index.js
+         │   ├── kaikas.js
+         │   ├── utils.js
+         │   ├── viewMethods.js
+         │   └── votingMethods.js
+         ├── components
+         │   ├── AlertModal.js
+         │   ├── Animation.js
+         │   ├── ChangeNicknameModal.js
+         │   ├── ClockTest.js
+         │   ├── EarthVote.js
+         │   ├── EndVote.js
+         │   ├── Footer.js
+         │   ├── Header.js
+         │   ├── ImgComponent.js
+         │   ├── MainHeader.js
+         │   ├── Profile.js
+         │   ├── Proposal.js
+         │   ├── QuitMint.js
+         │   ├── QuitVote.js
+         │   ├── SlideTest.js
+         │   ├── Slider.js
+         │   ├── Test.js
+         │   ├── UserBar.js
+         │   ├── WhiteListMember.js
+         │   ├── collection
+         │   │   ├── CollectionMain.js
+         │   │   ├── DetailCollecion.js
+         │   │   ├── DetailCollectionModal.js
+         │   │   ├── Filter.js
+         │   │   ├── FilterDetail.js
+         │   │   ├── Sort.js
+         │   │   ├── SortTop.js
+         │   │   └── collectionModule.js
+         │   ├── home
+         │   │   ├── D3.js
+         │   │   ├── Home.js
+         │   │   ├── HomeImgCard.js
+         │   │   ├── HomeImgCardMain.js
+         │   │   ├── HomeImgCardSide.js
+         │   │   ├── SlideShow.js
+         │   │   ├── Team.js
+         │   │   ├── TeamCard.js
+         │   │   ├── Viliage.js
+         │   │   └── homeModule.js
+         │   ├── mint
+         │   │   ├── MintCard.js
+         │   │   └── PreSale.js
+         │   ├── module.js
+         │   ├── stake
+         │   │   ├── CardContainer.js
+         │   │   ├── CardHead.js
+         │   │   ├── NftCard.js
+         │   │   ├── Pagination.js
+         │   │   └── Reward.js
+         │   ├── swap
+         │   │   ├── SwapBody.js
+         │   │   ├── SwapFooter.js
+         │   │   └── SwapHeader.js
+         │   ├── testDispatch.js
+         │   └── vote
+         │       ├── CommunityApproval.js
+         │       ├── CommunityImageSelect.js
+         │       ├── CommunityPostButton.js
+         │       ├── CommunityRead.js
+         │       ├── CommunityTable.js
+         │       ├── CommunityTopic.js
+         │       ├── CommunityVoteTable.js
+         │       ├── ImageSelect.js
+         │       ├── Pagination.js
+         │       ├── VoteDescription.js
+         │       ├── VoteDetail.js
+         │       ├── VoteTableCard.js
+         │       └── voteModule.js
+         ├── configs
+         │   ├── abi
+         │   │   ├── index.js
+         │   │   ├── mintingAbi.json
+         │   │   ├── nftAbi.json
+         │   │   ├── tokenAbi.json
+         │   │   ├── votingAbi.json
+         │   │   └── whitelistAbi.json
+         │   ├── caverjs.js
+         │   ├── contractAddress.js
+         │   ├── contractInstance.js
+         │   └── index.js
+         ├── page
+         │   ├── AdminPage.js
+         │   ├── Collection.js
+         │   ├── Community.js
+         │   ├── DifNetwork.js
+         │   ├── HomePage.js
+         │   ├── Mint.js
+         │   ├── NoPage.js
+         │   ├── Staking.js
+         │   ├── Swap.js
+         │   ├── Testpage.js
+         │   ├── VoteWrite.js
+         │   ├── WhiteList.js
+         │   └── index.js
+         ├── redux
+         │   ├── actions
+         │   │   └── nftAction.js
+         │   ├── reducers
+         │   │   ├── index.js
+         │   │   ├── mainReducer.js
+         │   │   └── nftReducer.js
+         │   └── store.js
+         ├── route
+         │   ├── CommunityReadRoute.js
+         │   ├── CommunityWriteRoute.js
+         │   ├── PrivateRoute.js
+         │   └── index.js
+         ├── scss
+         │   ├── detailCollecion.css
+         │   └── style.css
+         └── styles
+            ├── main.css
+            ├── slider.css
+            └── stopwatch.css
