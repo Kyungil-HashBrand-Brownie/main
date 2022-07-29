@@ -36,20 +36,13 @@ const ImgDivCard = styled.img`
       '5px solid #FF8B8B'
       : "5px solid #EB4747"
   };
-
-
-  /* @media (max-width: 784px) {
-    width: 80%;
-    height: 80%;
-  } */
 `
 
-const BackImg_viliage = styled.div`
+const BackImgViliage = styled.div`
   position:absolute ;
   width:100% ;
-  /* background-color: coral ; */
   z-index: -1;
-  transform: translateY(-30px);
+  transform: translateY(-0px);
   
   img {
     width: 100%;
@@ -68,9 +61,9 @@ const HomeImgCard = () => {
 
   return (
       <StyleHomeImgCard >
-        <BackImg_viliage >
-          <img src={viliage2} />
-        </BackImg_viliage>
+        <BackImgViliage >
+          <img src={viliage2} alt=""/>
+        </BackImgViliage>
         <div className="backColor"
           style={{
             backgroundColor:

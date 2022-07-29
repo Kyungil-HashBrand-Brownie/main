@@ -37,13 +37,13 @@ const FilterDetail = ({ parts }) => {
 
     const changeCheck = (part) => {
         let _part = part;
-        if (parts == 'Back') parts = 'Background';
-        if (part == 'GC') _part = 'Grand Canyon';
-        else if (part == 'NewVillage') _part = 'NewVilageHat';
-        else if (part == 'Puffyperm') _part = 'PuffypermHair';
+        if (parts === 'Back') parts = 'Background';
+        if (part === 'GC') _part = 'Grand Canyon';
+        else if (part === 'NewVillage') _part = 'NewVilageHat';
+        else if (part === 'Puffyperm') _part = 'PuffypermHair';
         let copy = _.cloneDeep(filterOption).map((item) => {
-            if (item.id == parts) {
-                if (item.opt == _part) item.opt = null
+            if (item.id === parts) {
+                if (item.opt === _part) item.opt = null
                 else item.opt = _part
             }
             return item
