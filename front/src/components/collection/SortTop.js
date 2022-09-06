@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SortTopOuter, SortTopInner, SortTopHeader, SortTopText, SortOption } from './collectionModule'
 
@@ -9,9 +9,9 @@ const SortTop = () => {
     const { sortOption, mintCount } = useSelector(state => state.main)
     let count = [200, 200 - mintCount, mintCount]
 
-    const changeOption = (idx) => {
+    const changeOption = useCallback((idx) => {
         dispatch({'type': 'CHANGE_SORT_OPTION', payload: idx})
-    } 
+    },[dispatch]) 
 
     return (
         <SortTopOuter>

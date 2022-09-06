@@ -12,24 +12,14 @@ import { css } from "@emotion/react";
 import ImgComponent from "components/ImgComponent";
 
 
-const override = css`
-  border-color: black;
-  margin: 0rem 1.42rem 0rem 1.4rem;
-`;
-
-
 const DetailCollecion = () => {
   let params = useParams();
   // 리렌더링 해야 해당 페이지로 간다.
   let page = params.edition;
-
   const navigate = useNavigate();
-
 
   const [collectionData, setCollectionData] = useState({});
   const [collectionAlldata, setCollectionAllData] = useState(null);
-  // console.log("alldata" , collectionAlldata)
-  // console.log("Default data" , collectionData)
 
   const getData = async () => {
     let result = await Promise.all([axios.get('/api/image/images'), axios.get(`/api/image/image/${page}`)])
@@ -37,9 +27,6 @@ const DetailCollecion = () => {
     let allData = result[0].data.map((item, index) => {
       return {edition: item.edition, addr: item.addr};
     }).sort((a,b) => parseInt(a.edition) - parseInt(b.edition))
-
-    console.log("ㅇㅁㅅㅁ", data)
-
 
     setCollectionData(data)
     setCollectionAllData(allData)
@@ -56,7 +43,6 @@ const DetailCollecion = () => {
 
   const nextButton_collection = () => {
     console.log("next")
-
     if (parseInt(collectionData.edition) >= 200 ) {
       navigate(`/detailcollection/200`)
     } else{
@@ -65,20 +51,16 @@ const DetailCollecion = () => {
   }
 
   useEffect(() => {
-
     getData();
   }, [page]);
 
   return (
     <div>
       <ImgComponent />
-      {/* <ClipLoader loading={loading} css={override} size={20} /> */}
       {collectionData.addr &&
       <div className="layout-container">
         <div className="detailImglNft-item1">
-          {/* <div className="detailImglNft-mainImg"> */}
             <img src={`/api/image/images/${collectionData.addr}`} alt="subI1" />
-          {/* </div> */}
         </div>
         <div className="detailImglNft-item2">
           <div className="detailImglNft-description_1">

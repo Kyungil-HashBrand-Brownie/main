@@ -42,7 +42,7 @@ const EndVote = ()=> {
     return (
         <>
         <AlertModal {...customAlert} />
-        <Button onClick={clickEndVote}>투표 리셋</Button>
+        <Button onClick={clickEndVote} variant="danger">투표 종료하기</Button>
         </>
     )
 }

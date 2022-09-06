@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import {
@@ -36,9 +36,9 @@ const CollectionMain = ({ data, row }) => {
 
     let filteredBy = filterOption.filter(item => item.opt!==null);
 
-    const moveToDetailPage = (edi) => {
+    const moveToDetailPage = useCallback((edi) => {
         navigate(`/detailcollection/${edi}`)
-    }
+    },[navigate])
 
     return (
         <CollectionMainOuter>

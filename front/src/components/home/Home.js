@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 import Arrow from '../../img/arrow.png';
 import { Container, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -41,9 +41,9 @@ const Home = () => {
     }
   }
 
-  const moveToMint = () => {
+  const moveToMint = useCallback(() => {
     navigate('/mint');
-  }
+  },[navigate])
 
   useEffect(() => {
     deadline = new Date('July 29, 2022 10:00:00').getTime();

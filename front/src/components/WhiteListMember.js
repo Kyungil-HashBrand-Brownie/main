@@ -202,7 +202,6 @@ const WhiteList = () => {
                     </tbody>
                 </Table>
             </div>
-            <EndVote />
         </AdminPage_LayOut>
 
     )
