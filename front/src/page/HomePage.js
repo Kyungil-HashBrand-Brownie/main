@@ -12,8 +12,7 @@ const HomePage = () => {
     window.addEventListener('scroll', function() {
       let value = window.scrollY;
       // console.log(value)
-      let loc = window.location.href;
-      if (loc == 'http://localhost:3000/') {
+      if (window.location.pathname === '/') {
         // if ((value > 1800 && value < 1820) || (value < 930 && value > 900)) {
           if((value > 1900 || value <750) ) {
           // mainText[0].style.animation ='disappear 1s ease-out forwards';
