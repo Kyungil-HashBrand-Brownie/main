@@ -1,171 +1,340 @@
-<img src="https://github.com/Kyungil-HashBrand-Brownie/main/blob/feature_njh/docs/images/title.png" width="100%" height="700px" title="" alt="RubberDuck"></img><br/>
+# 🥨 BROWNY NFT
+![타이틀이미지](docs/images/title.png)
+
+## 🧇 프로젝트 진행 기간
+2022.06.02 ~ 예정 없음
+경일게임 아카데미 블록체인4기 기업 협약 프로젝트 - BROWNY NFT
+</br>
+
+## 🥯 BROWNY 주요 기술
+---
+
+**Backend - Express.js**
+- Visual Studio Code
+- Node.js 16.14
+- MariaDB
+
+**BlockChain - klaytn**
+- Solidity 0.8.4
+- openzeppelin/contracts
+- KLAYTN - IDE
+
+**Storage**
+- IPFS
+- IPFS-Cluster
+
+**Frontend**
+- React
+- Redux
+- Web3.js
+- FIGMA
+- caver
+
+**Environment**
+- GCP VM INSTANCE
+- PM2
+- GCP SQL
 
 
-Front end 박승재
-=============
-1. Css 및 기본 폴더 구조를 작업 하였습니다.
-2. UI / UX 디자인 작업을 했습니다.
-3. NFT를 위한 Asset을 구성 하였습니다.
-4. API 연결
+## ✔ 프로젝트 파일 구조
+---
+### Frontend
 
+```
+front
+├─ .env
+├─ config-overrides.js
+├─ jsconfig.json
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ BLogo.ico
+│  ├─ BLogo.png
+│  └─ index.html
+├─ README.md
+└─ src
+   ├─ api
+   │  ├─ contractMethods.js
+   │  ├─ customHook.js
+   │  ├─ index.js
+   │  ├─ kaikas.js
+   │  ├─ utils.js
+   │  ├─ viewMethods.js
+   │  └─ votingMethods.js
+   ├─ App.css
+   ├─ App.js
+   ├─ components
+   │  ├─ AlertModal.js
+   │  ├─ Animation.js
+   │  ├─ ChangeNicknameModal.js
+   │  ├─ ClockTest.js
+   │  ├─ collection
+   │  │  ├─ CollectionMain.js
+   │  │  ├─ collectionModule.js
+   │  │  ├─ DetailCollecion.js
+   │  │  ├─ DetailCollectionModal.js
+   │  │  ├─ Filter.js
+   │  │  ├─ FilterDetail.js
+   │  │  ├─ Sort.js
+   │  │  └─ SortTop.js
+   │  ├─ EarthVote.js
+   │  ├─ Footer.js
+   │  ├─ Header.js
+   │  ├─ home
+   │  │  ├─ D3.js
+   │  │  ├─ Home.js
+   │  │  ├─ HomeImgCard.js
+   │  │  ├─ HomeImgCardMain.js
+   │  │  ├─ HomeImgCardSide.js
+   │  │  ├─ homeModule.js
+   │  │  ├─ SlideShow.js
+   │  │  ├─ Team.js
+   │  │  ├─ TeamCard.js
+   │  │  └─ Viliage.js
+   │  ├─ MainHeader.js
+   │  ├─ mint
+   │  │  ├─ MintCard.js
+   │  │  └─ PreSale.js
+   │  ├─ Profile.js
+   │  ├─ Proposal.js
+   │  ├─ QuitMint.js
+   │  ├─ QuitVote.js
+   │  ├─ Slider.js
+   │  ├─ SlideTest.js
+   │  ├─ stake
+   │  │  ├─ CardContainer.js
+   │  │  ├─ CardHead.js
+   │  │  ├─ NftCard.js
+   │  │  ├─ Pagination.js
+   │  │  └─ Reward.js
+   │  ├─ swap
+   │  │  ├─ SwapBody.js
+   │  │  ├─ SwapFooter.js
+   │  │  └─ SwapHeader.js
+   │  ├─ vote
+   │  │  ├─ CommunityApproval.js
+   │  │  ├─ CommunityPostButton.js
+   │  │  ├─ CommunityRead.js
+   │  │  ├─ CommunityTable.js
+   │  │  ├─ CommunityTopic.js
+   │  │  ├─ CommunityVoteTable.js
+   │  │  ├─ ImageSelect.js
+   │  │  ├─ VoteDescription.js
+   │  │  ├─ VoteDetail.js
+   │  │  ├─ voteModule.js
+   │  │  └─ VoteTableCard.js
+   │  └─ WhiteListMember.js
+   ├─ configs
+   │  ├─ abi
+   │  │  ├─ index.js
+   │  │  ├─ mintingAbi.json
+   │  │  ├─ nftAbi.json
+   │  │  ├─ tokenAbi.json
+   │  │  ├─ votingAbi.json
+   │  │  └─ whitelistAbi.json
+   │  ├─ caverjs.js
+   │  ├─ contractAddress.js
+   │  ├─ contractInstance.js
+   │  └─ index.js
+   ├─ font
+   │  ├─ Y 너만을 비춤체_매뉴얼.pdf
+   │  ├─ Y1.otf
+   │  └─ Y2.ttf
+   ├─ img
+   │  ├─ arrow.png
+   │  ├─ background
+   │  │  ├─ back12.png
+   │  │  ├─ back13.png
+   │  │  ├─ background1.jpg
+   │  │  ├─ background10.png
+   │  │  ├─ background11.png
+   │  │  ├─ background2.jpg
+   │  │  ├─ background3.jpg
+   │  │  ├─ background4.jpg
+   │  │  ├─ background5.jpg
+   │  │  ├─ background6.jpg
+   │  │  ├─ background7.jpg
+   │  │  ├─ background8.jpg
+   │  │  └─ index.js
+   │  ├─ browny
+   │  │  ├─ browny10.png
+   │  │  ├─ browny6.jpg
+   │  │  ├─ browny7.png
+   │  │  ├─ browny8.png
+   │  │  ├─ browny9.png
+   │  │  ├─ group1.png
+   │  │  ├─ group2.png
+   │  │  ├─ img1.png
+   │  │  └─ index.js
+   │  ├─ brownyLogo.png
+   │  ├─ check.png
+   │  ├─ exit.png
+   │  ├─ footer
+   │  │  ├─ disc.png
+   │  │  ├─ footer.png
+   │  │  ├─ index.js
+   │  │  ├─ inst.png
+   │  │  ├─ kakao1.png
+   │  │  ├─ kakao2.png
+   │  │  ├─ tele.png
+   │  │  └─ twit.png
+   │  ├─ index.js
+   │  ├─ main1.jpg
+   │  ├─ main2.jpg
+   │  ├─ main3.jpg
+   │  ├─ mint
+   │  │  ├─ background7.png
+   │  │  └─ fireplace.png
+   │  ├─ nft
+   │  │  ├─ 1.png
+   │  │  ├─ 10.png
+   │  │  ├─ 11.png
+   │  │  ├─ 12.png
+   │  │  ├─ 13.png
+   │  │  ├─ 14.png
+   │  │  ├─ 15.png
+   │  │  ├─ 16.png
+   │  │  ├─ 2.png
+   │  │  ├─ 3.png
+   │  │  ├─ 4.png
+   │  │  ├─ 5.png
+   │  │  ├─ 6.png
+   │  │  ├─ 7.png
+   │  │  ├─ 8.png
+   │  │  ├─ 9.png
+   │  │  └─ index.js
+   │  ├─ stake
+   │  │  ├─ cancel.png
+   │  │  └─ check.png
+   │  ├─ swap
+   │  │  ├─ arrowRight.png
+   │  │  ├─ browny1.png
+   │  │  └─ klaytn.png
+   │  ├─ trash.png
+   │  ├─ trash2.png
+   │  ├─ viliage.png
+   │  ├─ viliage2.jpeg
+   │  └─ vote
+   │     ├─ delete.png
+   │     ├─ detail
+   │     │  ├─ Epro.png
+   │     │  ├─ index.js
+   │     │  ├─ Kpro1.png
+   │     │  ├─ ModalAni1.png
+   │     │  └─ ModalKpro.png
+   │     └─ organizations
+   │        ├─ Ani1.png
+   │        ├─ Ani2.png
+   │        ├─ Ani3.png
+   │        ├─ Apro.png
+   │        ├─ Ep1.png
+   │        ├─ Ep2.png
+   │        ├─ Ep3.png
+   │        ├─ index.js
+   │        ├─ Kp1.png
+   │        ├─ Kp2.png
+   │        └─ Kp3.png
+   ├─ index.js
+   ├─ page
+   │  ├─ AdminPage.js
+   │  ├─ Collection.js
+   │  ├─ Community.js
+   │  ├─ DifNetwork.js
+   │  ├─ HomePage.js
+   │  ├─ index.js
+   │  ├─ Mint.js
+   │  ├─ NftList.js
+   │  ├─ NoPage.js
+   │  ├─ Swap.js
+   │  ├─ Testpage.js
+   │  ├─ VoteWrite.js
+   │  ├─ Voting.js
+   │  └─ WhiteList.js
+   ├─ redux
+   │  ├─ actions
+   │  │  └─ nftAction.js
+   │  ├─ reducers
+   │  │  ├─ index.js
+   │  │  └─ nftReducer.js
+   │  └─ store.js
+   ├─ route
+   │  ├─ CommunityReadRoute.js
+   │  ├─ CommunityWriteRoute.js
+   │  ├─ index.js
+   │  └─ PrivateRoute.js
+   ├─ scss
+   │  ├─ detailCollecion.css
+   │  └─ style.css
+   └─ styles
+      ├─ slider.css
+      └─ stopwatch.css
+```
 
+### Backend
 
+```
+back
+├─ .env
+├─ db.js
+├─ package-lock.json
+├─ package.json
+├─ routes
+│  ├─ communityRouter
+│  │  ├─ community.control.js
+│  │  └─ index.js
+│  ├─ imageRouter
+│  │  ├─ images.control.js
+│  │  ├─ index.js
+│  │  └─ s3.js
+│  ├─ index.js
+│  ├─ userRouter
+│  │  ├─ index.js
+│  │  └─ user.control.js
+│  ├─ voteRouter
+│  │  ├─ index.js
+│  │  └─ vote.control.js
+│  └─ whiteRouter
+│     ├─ index.js
+│     └─ white.control.js
+├─ server.js
+└─ sql
+   ├─ community.sql
+   ├─ users.sql
+   ├─ voting.sql
+   └─ whitelist.sql
 
+```
 
+### BlockChain
+```
+sol
+└─ proxycontract
+   ├─ Minting
+   │  ├─ Minting.sol
+   │  ├─ MintingBeacon.sol
+   │  └─ MintingFactory.sol
+   ├─ NFT
+   │  ├─ NFT copy.sol
+   │  ├─ NFT.sol
+   │  ├─ NFTBeacon.sol
+   │  └─ NFTFactory.sol
+   ├─ NormalListTokenId.sol
+   ├─ Token
+   │  ├─ Token.sol
+   │  ├─ TokenBeacon.sol
+   │  └─ TokenFactory.sol
+   ├─ Voting.sol
+   ├─ Whitelist
+   │  ├─ Whitelist.sol
+   │  ├─ WhitelistBeacon.sol
+   │  └─ WhitelistFactory.sol
+   └─ WhiteListTokenId.sol
 
-Components
-=============
-1. 쉽게 접근을 위해 페이지 별로 Componets 구성을 하였습니다.
-2. UI / UX 디자인 작업을 했습니다.
-3. NFT를 위한 Asset을 구성 하였습니다.
-4. Iamge들은 import를 편하게 하기 위해 페이지 각각의 index에 담아 관리를 하였습니다
-5. 코드 순은 이렇습니다.
-./page/collection/ <br/>
-./components/collection/CollectionMain/ <br/>
-./redux/actions/nftAction.js <br/>
-./redux/reducers/mainReducer.js<br/>
-./redux/reducers/nftReducer.js<br/>
+```
 
+## ✔ 협업 툴
+---
+- Github
+- Notion
+- Discord
 
-
----------------------------------------
-
-
-###### front end 폴더 구조
-
-
-```bash
-├── front/
-│   ├── README.md
-│   ├── config-overrides.js
-│   ├── jsconfig.json
-│   ├── node_modules/
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── public/
-│   └── src
-         ├── App.css
-         ├── App.js
-         ├── api
-         │   ├── contractMethods.js
-         │   ├── customHook.js
-         │   ├── index.js
-         │   ├── kaikas.js
-         │   ├── utils.js
-         │   ├── viewMethods.js
-         │   └── votingMethods.js
-         ├── components
-         │   ├── AlertModal.js
-         │   ├── Animation.js
-         │   ├── ChangeNicknameModal.js
-         │   ├── ClockTest.js
-         │   ├── EarthVote.js
-         │   ├── EndVote.js
-         │   ├── Footer.js
-         │   ├── Header.js
-         │   ├── ImgComponent.js
-         │   ├── MainHeader.js
-         │   ├── Profile.js
-         │   ├── Proposal.js
-         │   ├── QuitMint.js
-         │   ├── QuitVote.js
-         │   ├── SlideTest.js
-         │   ├── Slider.js
-         │   ├── Test.js
-         │   ├── UserBar.js
-         │   ├── WhiteListMember.js
-         │   ├── collection
-         │   │   ├── CollectionMain.js
-         │   │   ├── DetailCollecion.js
-         │   │   ├── DetailCollectionModal.js
-         │   │   ├── Filter.js
-         │   │   ├── FilterDetail.js
-         │   │   ├── Sort.js
-         │   │   ├── SortTop.js
-         │   │   └── collectionModule.js
-         │   ├── home
-         │   │   ├── D3.js
-         │   │   ├── Home.js
-         │   │   ├── HomeImgCard.js
-         │   │   ├── HomeImgCardMain.js
-         │   │   ├── HomeImgCardSide.js
-         │   │   ├── SlideShow.js
-         │   │   ├── Team.js
-         │   │   ├── TeamCard.js
-         │   │   ├── Viliage.js
-         │   │   └── homeModule.js
-         │   ├── mint
-         │   │   ├── MintCard.js
-         │   │   └── PreSale.js
-         │   ├── module.js
-         │   ├── stake
-         │   │   ├── CardContainer.js
-         │   │   ├── CardHead.js
-         │   │   ├── NftCard.js
-         │   │   ├── Pagination.js
-         │   │   └── Reward.js
-         │   ├── swap
-         │   │   ├── SwapBody.js
-         │   │   ├── SwapFooter.js
-         │   │   └── SwapHeader.js
-         │   ├── testDispatch.js
-         │   └── vote
-         │       ├── CommunityApproval.js
-         │       ├── CommunityImageSelect.js
-         │       ├── CommunityPostButton.js
-         │       ├── CommunityRead.js
-         │       ├── CommunityTable.js
-         │       ├── CommunityTopic.js
-         │       ├── CommunityVoteTable.js
-         │       ├── ImageSelect.js
-         │       ├── Pagination.js
-         │       ├── VoteDescription.js
-         │       ├── VoteDetail.js
-         │       ├── VoteTableCard.js
-         │       └── voteModule.js
-         ├── configs
-         │   ├── abi
-         │   │   ├── index.js
-         │   │   ├── mintingAbi.json
-         │   │   ├── nftAbi.json
-         │   │   ├── tokenAbi.json
-         │   │   ├── votingAbi.json
-         │   │   └── whitelistAbi.json
-         │   ├── caverjs.js
-         │   ├── contractAddress.js
-         │   ├── contractInstance.js
-         │   └── index.js
-         ├── page
-         │   ├── AdminPage.js
-         │   ├── Collection.js
-         │   ├── Community.js
-         │   ├── DifNetwork.js
-         │   ├── HomePage.js
-         │   ├── Mint.js
-         │   ├── NoPage.js
-         │   ├── Staking.js
-         │   ├── Swap.js
-         │   ├── Testpage.js
-         │   ├── VoteWrite.js
-         │   ├── WhiteList.js
-         │   └── index.js
-         ├── redux
-         │   ├── actions
-         │   │   └── nftAction.js
-         │   ├── reducers
-         │   │   ├── index.js
-         │   │   ├── mainReducer.js
-         │   │   └── nftReducer.js
-         │   └── store.js
-         ├── route
-         │   ├── CommunityReadRoute.js
-         │   ├── CommunityWriteRoute.js
-         │   ├── PrivateRoute.js
-         │   └── index.js
-         ├── scss
-         │   ├── detailCollecion.css
-         │   └── style.css
-         └── styles
-            ├── main.css
-            ├── slider.css
-            └── stopwatch.css
